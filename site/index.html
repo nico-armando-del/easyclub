@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta_title">EasyClub — La plateforme tout-en-un des associations sportives et culturelles</title>
+<meta name="description" data-i18n-content="meta_description" content="Pas un logiciel de plus : votre propre plateforme à votre image. Inscriptions 100 % en ligne, paiements automatiques sur votre compte, site web et boutique. 100 % des cotisations encaissées avant le premier cours.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233DDC97'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%230F3D2A' text-anchor='middle'%3EEC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAFAF7;
+  --ink:#0E1116;
+  --mint:#3DDC97;
+  --mint-dark:#0F3D2A;
+  --mint-deep:#0F6B47;
+  --gray:#6E6E66;
+  --sand:#E8E6DE;
+  --lavender:#C9C4F2;
+  --white:#FFFFFF;
+  --radius:22px;
+  --shadow-soft:0 20px 60px rgba(14,17,22,.08);
+  --shadow-deep:0 30px 80px rgba(14,17,22,.14);
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --font-head:'Bricolage Grotesque',system-ui,sans-serif;
+  --font-body:'Satoshi','Poppins',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:1rem;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--font-head);font-weight:700;line-height:1.12;letter-spacing:-0.02em}
+.num{font-family:var(--font-head);font-weight:700;font-feature-settings:'tnum'}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:6px}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-body);font-weight:700;font-size:1rem;
+  padding:14px 28px;border-radius:999px;border:none;cursor:pointer;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s ease;
+  white-space:nowrap;
+}
+.btn-mint{background:var(--mint);color:var(--mint-dark)}
+.btn-mint:hover{transform:scale(1.03);box-shadow:0 12px 36px rgba(61,220,151,.35)}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-outline:hover{transform:scale(1.03);background:rgba(14,17,22,.04)}
+.btn-outline-light{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn-ghost{background:transparent;color:var(--ink);font-weight:500;padding:14px 18px}
+.btn-ghost:hover{color:var(--mint-deep)}
+
+/* ---------- Navbar ---------- */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,250,247,.85);
+  border-bottom:1px solid transparent;
+  transition:backdrop-filter .3s ease,border-color .3s ease,background .3s ease;
+}
+.nav.scrolled{
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--sand);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.wordmark{font-family:var(--font-head);font-weight:700;font-size:1.4rem;letter-spacing:-0.02em}
+.wordmark em{font-style:normal;color:inherit}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-weight:500;font-size:.95rem;color:var(--gray);transition:color .2s ease}
+.nav-links a:hover{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.nav-actions .btn{padding:11px 22px;font-size:.95rem}
+.lang-switch{display:flex;gap:2px;background:var(--sand);border-radius:8px;padding:2px}
+.lang-switch button{border:none;background:none;padding:5px 9px;font-size:.78rem;font-weight:600;font-family:var(--font-body);color:var(--gray);border-radius:6px;cursor:pointer;transition:all .2s ease;line-height:1}
+.lang-switch button[aria-pressed="true"]{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.nav-toggle svg{display:block}
+
+/* ---------- Hero ---------- */
+.hero{padding:84px 0 40px;text-align:center}
+.hero h1{
+  font-size:clamp(2.5rem,6.2vw,4.6rem);
+  max-width:880px;margin:0 auto 24px;
+}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(28px)}
+.loaded .hero h1 .w{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.hl{
+  position:relative;display:inline-block;white-space:nowrap;
+}
+.hl::after{
+  content:'';position:absolute;left:-2px;right:-2px;bottom:.06em;height:.34em;
+  background:var(--mint);border-radius:6px;z-index:-1;opacity:.85;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .8s var(--ease) .6s;
+}
+.loaded .hl::after{transform:scaleX(1)}
+.hero-sub{
+  max-width:700px;margin:0 auto 36px;color:var(--gray);font-size:1.15rem;
+}
+.hero-sub strong{color:var(--ink);font-weight:700}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:72px}
+
+/* ---------- Dashboard mockup ---------- */
+.dash-wrap{
+  opacity:0;transform:translateY(36px) scale(.97);
+}
+.loaded .dash-wrap{
+  opacity:1;transform:none;
+  transition:opacity .9s var(--ease) .35s,transform .9s var(--ease) .35s;
+}
+.dash{
+  background:var(--white);border:1px solid var(--sand);border-radius:24px;
+  box-shadow:var(--shadow-deep);overflow:hidden;text-align:left;
+  display:grid;grid-template-columns:220px 1fr;
+  max-width:1020px;margin:0 auto;
+}
+.dash-side{
+  background:var(--cream);border-right:1px solid var(--sand);
+  padding:22px 14px;display:flex;flex-direction:column;gap:2px;
+}
+.dash-side .wordmark{font-size:1.05rem;padding:0 12px 18px}
+.dash-nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:12px;font-size:.86rem;font-weight:500;color:var(--gray);
+}
+.dash-nav-item svg{flex:none}
+.dash-nav-item.active{background:var(--white);color:var(--ink);box-shadow:0 4px 14px rgba(14,17,22,.06);font-weight:700}
+.dash-main{padding:26px 28px}
+.dash-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+.dash-head h3{font-size:1.1rem}
+.dash-season{font-size:.78rem;color:var(--gray);background:var(--cream);border:1px solid var(--sand);border-radius:999px;padding:5px 12px}
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.stat{
+  border:1px solid var(--sand);border-radius:16px;padding:16px 18px;background:var(--white);
+}
+.stat.mint{background:var(--mint);border-color:var(--mint)}
+.stat .label{font-size:.74rem;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.stat.mint .label{color:var(--mint-dark)}
+.stat .value{font-size:1.7rem}
+.stat.mint .value{color:var(--mint-dark)}
+.dash-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.dash-table caption{text-align:left;font-family:var(--font-head);font-weight:600;font-size:.92rem;padding-bottom:10px}
+.dash-table th{
+  text-align:left;font-weight:500;color:var(--gray);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;
+  padding:8px 10px;border-bottom:1px solid var(--sand);
+}
+.dash-table td{padding:11px 10px;border-bottom:1px solid var(--sand)}
+.dash-table tr:last-child td{border-bottom:none}
+.badge{
+  display:inline-block;padding:3px 11px;border-radius:999px;font-size:.74rem;font-weight:700;
+}
+.badge.paid{background:rgba(61,220,151,.18);color:var(--mint-deep)}
+.badge.pending{background:rgba(245,158,11,.14);color:#92600A}
+.badge.split{background:rgba(201,196,242,.35);color:#4A4290}
+
+/* ---------- Sports strip ---------- */
+.sports{padding:64px 0 80px;text-align:center}
+.sports p{color:var(--gray);font-size:.95rem;margin-bottom:26px}
+.sports-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.sports-row figure{margin:0}
+.sports-row img{
+  width:104px;height:104px;object-fit:cover;border-radius:18px;
+  border:1px solid var(--sand);box-shadow:var(--shadow-soft);
+  transition:transform .25s var(--ease);
+}
+.sports-row img:hover{transform:translateY(-4px)}
+.sports-row figcaption{font-size:.74rem;color:var(--gray);margin-top:8px;font-weight:500}
+
+/* ---------- Sections common ---------- */
+.section{padding:104px 0}
+.kicker{
+  display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mint-deep);background:rgba(61,220,151,.14);border-radius:999px;padding:6px 14px;margin-bottom:18px;
+}
+.kicker.lav{color:#4A4290;background:rgba(201,196,242,.35)}
+.section h2{font-size:clamp(1.9rem,4vw,2.9rem);max-width:760px;margin-bottom:16px}
+.section .lead{color:var(--gray);font-size:1.1rem;max-width:620px}
+
+/* ---------- Pain (dark) ---------- */
+.dark{
+  background:var(--ink);color:#fff;position:relative;overflow:hidden;
+}
+.dark .glow{
+  position:absolute;width:680px;height:680px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,220,151,.22) 0%,transparent 65%);
+  top:-280px;right:-180px;pointer-events:none;
+}
+.dark .kicker{color:var(--mint);background:rgba(61,220,151,.12)}
+.dark .lead{color:rgba(255,255,255,.65)}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.pain-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:34px 30px;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+}
+.pain-card:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.pain-card .num{font-size:2.4rem;color:var(--mint);display:block;margin-bottom:12px}
+.pain-card h3{font-size:1.15rem;margin-bottom:8px}
+.pain-card p{color:rgba(255,255,255,.6);font-size:.95rem}
+
+/* ---------- Features bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;margin-top:56px}
+.feature{
+  background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);
+  padding:32px 30px;box-shadow:var(--shadow-soft);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+}
+.feature:hover{transform:translateY(-4px);box-shadow:var(--shadow-deep)}
+.feature.span3{grid-column:span 3}
+.feature.span2{grid-column:span 2}
+.feature.span4{grid-column:span 4}
+.icon-tile{
+  width:48px;height:48px;border-radius:14px;background:rgba(61,220,151,.16);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--mint-deep);
+}
+.feature h3{font-size:1.18rem;margin-bottom:8px}
+.feature p{color:var(--gray);font-size:.95rem}
+.tag{
+  display:inline-block;margin-top:14px;font-size:.74rem;font-weight:700;
+  background:rgba(201,196,242,.35);color:#4A4290;border-radius:999px;padding:4px 12px;
+}
+
+/* ---------- Boutique ---------- */
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;margin-top:56px}
+.shop-photo{
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-soft);min-height:380px;
+}
+.shop-photo img{width:100%;height:100%;object-fit:cover}
+.shop-card{
+  background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);
+  padding:48px 44px;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;justify-content:center;
+}
+.shop-card h3{font-size:1.7rem;margin-bottom:14px}
+.shop-card p{color:var(--gray);margin-bottom:22px}
+.shop-list{list-style:none;display:grid;gap:12px}
+.shop-list li{display:flex;align-items:center;gap:12px;font-weight:500;font-size:.97rem}
+.shop-list svg{flex:none;color:var(--mint-deep)}
+
+/* ---------- Pricing ---------- */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;align-items:center}
+.price-card{
+  background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);
+  padding:40px 34px;box-shadow:var(--shadow-soft);position:relative;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+  display:flex;flex-direction:column;
+}
+.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-deep)}
+.price-card.featured{
+  border:2px solid var(--mint);transform:scale(1.045);z-index:1;
+  box-shadow:0 30px 80px rgba(61,220,151,.18);
+}
+.price-card.featured:hover{transform:scale(1.045) translateY(-4px)}
+.price-badge{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--mint);color:var(--mint-dark);font-size:.76rem;font-weight:700;
+  border-radius:999px;padding:5px 16px;white-space:nowrap;
+}
+.price-card h3{font-size:1.2rem;margin-bottom:18px}
+.price-pct{font-size:clamp(3rem,5vw,4.2rem);line-height:1;letter-spacing:-0.03em}
+.price-sub{color:var(--gray);font-size:.9rem;margin:10px 0 26px}
+.price-list{list-style:none;display:grid;gap:11px;margin-bottom:30px;flex:1}
+.price-list li{display:flex;gap:10px;align-items:flex-start;font-size:.93rem}
+.price-list svg{flex:none;margin-top:3px;color:var(--mint-deep)}
+.price-card .btn{width:100%}
+.price-foot{text-align:center;color:var(--gray);font-size:.86rem;margin-top:32px}
+
+/* ---------- Anti-comparison ---------- */
+.versus{
+  background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);
+  box-shadow:var(--shadow-soft);padding:56px 48px;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;
+}
+.versus h2{font-size:clamp(1.5rem,3vw,2.1rem)}
+.versus ul{list-style:none;display:grid;gap:16px}
+.versus li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.versus svg{flex:none;margin-top:4px;color:var(--mint-deep)}
+.versus li span small{display:block;font-weight:400;color:var(--gray);font-size:.9rem}
+
+/* ---------- Split feature ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:48px}
+.split.rev .split-visual{order:2}
+.split-text h2{margin-bottom:16px}
+.split-text .lead{margin-bottom:28px}
+.checklist{list-style:none;display:grid;gap:16px}
+.checklist li{display:flex;gap:13px;align-items:flex-start;font-weight:600}
+.checklist li svg{flex:none;margin-top:2px;color:var(--mint-deep)}
+.checklist li small{display:block;font-weight:400;color:var(--gray);font-size:.92rem;margin-top:2px}
+.flowcard{background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);box-shadow:var(--shadow-deep);padding:14px 24px}
+.flowcard h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);font-weight:600;padding:14px 0 6px}
+.flow-step{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--sand)}
+.flow-step:last-child{border-bottom:none}
+.flow-num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--sand);color:var(--gray);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:.8rem}
+.flow-step.done .flow-num{background:var(--mint);border-color:var(--mint);color:var(--mint-dark)}
+.flow-body{flex:1}
+.flow-body strong{display:block;font-weight:700;font-size:.95rem}
+.flow-body span{font-size:.84rem;color:var(--gray)}
+.flow-tick{flex:none;color:var(--mint-deep)}
+
+/* ---------- Ownership (dark) ---------- */
+.own-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.own-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:32px 28px;transition:transform .25s var(--ease)}
+.own-card:hover{transform:translateY(-4px)}
+.own-card .icon-tile{background:rgba(61,220,151,.16);color:var(--mint)}
+.own-card h3{font-size:1.12rem;margin-bottom:8px}
+.own-card p{color:rgba(255,255,255,.62);font-size:.93rem}
+.own-card strong{color:#fff}
+
+/* ---------- Comparison ---------- */
+.compare{margin-top:48px;background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);box-shadow:var(--shadow-soft);overflow-x:auto}
+.compare table{width:100%;border-collapse:collapse;min-width:520px}
+.compare th,.compare td{padding:17px 22px;text-align:left;border-bottom:1px solid var(--sand);font-size:.95rem}
+.compare thead th{font-family:var(--font-head);font-size:1rem;font-weight:700}
+.compare thead th.us{color:var(--mint-deep)}
+.compare tbody td:first-child{font-weight:600}
+.compare td.us,.compare th.us{background:rgba(61,220,151,.07);text-align:center}
+.compare td.them,.compare th.them{text-align:center;color:var(--gray)}
+.compare tr:last-child td{border-bottom:none}
+.compare .yes{color:var(--mint-deep);font-weight:700}
+
+/* ---------- Custom band ---------- */
+.custom-band{
+  margin-top:32px;background:var(--ink);color:#fff;border-radius:var(--radius);
+  padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.custom-band .glow{position:absolute;top:-180px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(61,220,151,.22) 0%,transparent 65%);pointer-events:none}
+.custom-band .cb-icon{flex:none;width:48px;height:48px;border-radius:14px;background:rgba(61,220,151,.15);display:flex;align-items:center;justify-content:center}
+.custom-band .cb-icon svg{width:24px;height:24px;stroke:var(--mint);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.custom-band .cb-text{position:relative;flex:1;min-width:240px}
+.custom-band h3{font-size:1.2rem;margin-bottom:4px}
+.custom-band p{color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.5}
+.custom-band .btn{position:relative;flex:none}
+
+/* ---------- Testimonial ---------- */
+.testi{display:grid;grid-template-columns:1fr 1.05fr;gap:0;background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);box-shadow:var(--shadow-deep);overflow:hidden;margin-top:48px}
+.testi-photo img{width:100%;height:100%;object-fit:cover;min-height:440px}
+.testi-body{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+.testi-quote{font-family:var(--font-head);font-weight:600;font-size:1.55rem;line-height:1.32;letter-spacing:-0.01em;margin-bottom:26px}
+.testi-quote mark{background:linear-gradient(transparent 58%,rgba(61,220,151,.5) 58%);color:inherit;padding:0 2px}
+.testi-author{display:flex;align-items:center;gap:14px}
+.testi-avatar{width:50px;height:50px;border-radius:50%;background:var(--mint);color:var(--mint-dark);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:1.05rem}
+.testi-author strong{display:block;font-weight:700}
+.testi-author span{font-size:.9rem;color:var(--gray)}
+.testi-stats{display:flex;gap:36px;margin-top:30px;padding-top:26px;border-top:1px solid var(--sand)}
+.testi-stats .num{font-size:1.9rem;display:block;color:var(--mint-deep);line-height:1}
+.testi-stats span{font-size:.82rem;color:var(--gray);display:block;margin-top:4px}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:760px;margin:56px auto 0}
+.faq details{
+  background:var(--white);border:1px solid var(--sand);border-radius:18px;
+  margin-bottom:12px;overflow:hidden;
+  transition:box-shadow .25s var(--ease);
+}
+.faq details[open]{box-shadow:var(--shadow-soft)}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 26px;font-family:var(--font-head);font-weight:600;font-size:1.05rem;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{
+  flex:none;transition:transform .3s var(--ease);color:var(--mint-deep);
+}
+.faq details[open] summary .chev{transform:rotate(45deg)}
+.faq .faq-body{padding:0 26px 24px;color:var(--gray)}
+
+/* ---------- Final CTA ---------- */
+.final{text-align:center;position:relative}
+.final .glow{left:50%;top:auto;bottom:-340px;right:auto;transform:translateX(-50%)}
+.final h2{margin:0 auto 18px}
+.final p{color:rgba(255,255,255,.65);max-width:560px;margin:0 auto 36px}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--sand);padding:72px 0 40px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.foot-grid p{color:var(--gray);font-size:.9rem;margin-top:14px;max-width:260px}
+footer h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-weight:600;margin-bottom:16px}
+footer ul{list-style:none;display:grid;gap:10px}
+footer ul a{font-size:.93rem;color:var(--ink);transition:color .2s}
+footer ul a:hover{color:var(--mint-deep)}
+.foot-bottom{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  border-top:1px solid var(--sand);padding-top:28px;color:var(--gray);font-size:.88rem;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal{opacity:0;transform:translateY(24px)}
+.reveal.in{
+  opacity:1;transform:none;
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+  transition-delay:var(--d,0ms);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1023px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .feature.span3,.feature.span2,.feature.span4{grid-column:span 1}
+  .pricing-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}
+  .price-card.featured{transform:none}
+  .price-card.featured:hover{transform:translateY(-4px)}
+  .versus{grid-template-columns:1fr;padding:42px 32px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .own-grid{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .nav-links,.nav-actions .btn-ghost{display:none}
+  .nav-toggle{display:block}
+  .nav-mobile{
+    display:none;flex-direction:column;gap:4px;padding:12px 24px 20px;
+    border-bottom:1px solid var(--sand);background:rgba(250,250,247,.97);
+  }
+  .nav-mobile.open{display:flex}
+  .nav-mobile a{padding:12px 4px;font-weight:500}
+  .dash{grid-template-columns:1fr}
+  .dash-side{flex-direction:row;flex-wrap:wrap;border-right:none;border-bottom:1px solid var(--sand);padding:16px}
+  .dash-side .wordmark{display:none}
+  .dash-nav-item{padding:7px 12px;font-size:.8rem}
+  .dash-nav-item span{display:none}
+  .dash-nav-item.active span{display:inline}
+  .dash-stats{grid-template-columns:1fr}
+  .dash-table th:nth-child(3),.dash-table td:nth-child(3){display:none}
+  .pain-grid{grid-template-columns:1fr}
+  .shop{grid-template-columns:1fr}
+  .shop-photo{min-height:260px}
+  .split{grid-template-columns:1fr;gap:32px}
+  .split.rev .split-visual{order:0}
+  .testi{grid-template-columns:1fr}
+  .testi-photo img{min-height:280px}
+  .testi-body{padding:38px 30px}
+  .custom-band{padding:24px 22px}
+  .custom-band .cb-icon{display:none}
+  .section{padding:72px 0}
+  .hero{padding:56px 0 32px}
+}
+@media (max-width:560px){
+  .bento{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .sports-row img{width:84px;height:84px}
+  .versus{padding:34px 24px}
+  .shop-card{padding:34px 26px}
+}
+@media (min-width:861px){.nav-mobile{display:none!important}}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .hero h1 .w,.dash-wrap,.reveal{opacity:1!important;transform:none!important}
+  .hl::after{transform:scaleX(1)!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="wordmark" data-i18n-aria="nav_aria_home" aria-label="EasyClub — accueil">Easy<em>Club</em></a>
+    <nav data-i18n-aria="nav_aria_main" aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a href="#fonctionnalites" data-i18n="nav_features">Fonctionnalités</a></li>
+        <li><a href="#clients" data-i18n="nav_clients">Clients</a></li>
+        <li><a href="#tarifs" data-i18n="nav_pricing">Tarifs</a></li>
+        <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-switch" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" class="btn btn-mint" data-i18n="nav_cta">Demander une démo</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" data-i18n-aria="nav_aria_open" aria-label="Ouvrir le menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#fonctionnalites" data-i18n="nav_features">Fonctionnalités</a>
+    <a href="#clients" data-i18n="nav_clients">Clients</a>
+    <a href="#tarifs" data-i18n="nav_pricing">Tarifs</a>
+    <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" data-i18n="nav_cta">Demander une démo</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <h1 id="heroTitle" data-i18n-html="hero_title">Ne chassez plus <span class="hl">les mauvais payeurs.</span></h1>
+    <p class="hero-sub" data-i18n-html="hero_sub">On ne vous vend pas un logiciel de plus. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions 100&nbsp;% en ligne, paiements automatiques, site web et boutique. Vous gardez votre marque, on fait disparaître la paperasse.</p>
+    <div class="hero-ctas">
+      <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" class="btn btn-mint" data-i18n="hero_cta">Demander une démo</a>
+      <a href="#tarifs" class="btn btn-outline" data-i18n="hero_cta2">Voir les tarifs</a>
+    </div>
+
+    <!-- Fake dashboard mockup -->
+    <div class="dash-wrap">
+      <div class="dash" role="img" data-i18n-aria="dash_aria" aria-label="Aperçu du tableau de bord EasyClub : impayés à zéro euro, 42 350 euros encaissés cette saison, 23 personnes en liste d'attente">
+        <aside class="dash-side" aria-hidden="true">
+          <span class="wordmark">Easy<em>Club</em></span>
+          <span class="dash-nav-item active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span data-i18n="dash_sidebar_inscriptions">Inscriptions</span></span>
+          <span class="dash-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><span data-i18n="dash_sidebar_cours">Cours</span></span>
+          <span class="dash-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="dash_sidebar_waitlist">Liste d'attente</span></span>
+          <span class="dash-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg><span data-i18n="dash_sidebar_emails">Emails</span></span>
+          <span class="dash-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span data-i18n="dash_sidebar_news">Actualités</span></span>
+          <span class="dash-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.6-4-9s1.5-6.4 4-9z"/></svg><span data-i18n="dash_sidebar_site">Éditeur de site</span></span>
+          <span class="dash-nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.27.62.86 1 1.56 1H21a2 2 0 1 1 0 4h-.09c-.7 0-1.29.38-1.51 1z"/></svg><span data-i18n="dash_sidebar_settings">Paramètres</span></span>
+        </aside>
+        <div class="dash-main" aria-hidden="true">
+          <div class="dash-head">
+            <h3 data-i18n="dash_hello">Bonjour, ASC Danse Lyon</h3>
+            <span class="dash-season num" data-i18n="dash_season">Saison 2026–2027</span>
+          </div>
+          <div class="dash-stats">
+            <div class="stat mint">
+              <div class="label" data-i18n="dash_stat_unpaid_label">Impayés</div>
+              <div class="value num"><span data-count="0" data-suffix=" €" data-i18n="dash_stat_unpaid_value">0 €</span></div>
+            </div>
+            <div class="stat">
+              <div class="label" data-i18n="dash_stat_collected_label">Encaissé cette saison</div>
+              <div class="value num"><span data-count="42350" data-suffix=" €" data-i18n="dash_stat_collected_value">42 350 €</span></div>
+            </div>
+            <div class="stat">
+              <div class="label" data-i18n="dash_stat_waitlist_label">Liste d'attente</div>
+              <div class="value num"><span data-count="23" data-i18n="dash_stat_waitlist_value">23</span></div>
+            </div>
+          </div>
+          <table class="dash-table">
+            <caption data-i18n="dash_table_caption">Dernières inscriptions</caption>
+            <thead>
+              <tr><th scope="col" data-i18n="dash_table_th_member">Adhérent</th><th scope="col" data-i18n="dash_table_th_class">Cours</th><th scope="col" data-i18n="dash_table_th_amount">Montant</th><th scope="col" data-i18n="dash_table_th_status">Statut</th></tr>
+            </thead>
+            <tbody>
+              <tr><td data-i18n="dash_row1_name">Léa Moreau</td><td data-i18n="dash_row1_class">Ballet débutant</td><td class="num" data-i18n="dash_row1_amount">280 €</td><td><span class="badge paid" data-i18n="dash_row1_status">Payé</span></td></tr>
+              <tr><td data-i18n="dash_row2_name">Karim Benali</td><td data-i18n="dash_row2_class">Hip-hop ados</td><td class="num" data-i18n="dash_row2_amount">240 €</td><td><span class="badge split" data-i18n="dash_row2_status">3× en cours</span></td></tr>
+              <tr><td data-i18n="dash_row3_name">Emma Riva</td><td data-i18n="dash_row3_class">Modern jazz</td><td class="num" data-i18n="dash_row3_amount">310 €</td><td><span class="badge paid" data-i18n="dash_row3_status">Payé</span></td></tr>
+              <tr><td data-i18n="dash_row4_name">Hugo Lambert</td><td data-i18n="dash_row4_class">Éveil 4–6 ans</td><td class="num" data-i18n="dash_row4_amount">195 €</td><td><span class="badge pending" data-i18n="dash_row4_status">En attente</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPORTS STRIP ============ -->
+<section class="sports">
+  <div class="container">
+    <p class="reveal" data-i18n="sports_intro">Conçu pour les assos de danse, foot, judo, basket, yoga, fitness…</p>
+    <div class="sports-row">
+      <figure class="reveal" style="--d:0ms"><img src="../brand/img/sport/ballet-1-horizon.jpg" data-i18n-alt="sport_alt_dance" alt="Cours de danse classique pour enfants" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_dance">Danse</figcaption></figure>
+      <figure class="reveal" style="--d:60ms"><img src="../brand/img/sport/soccer-1-horizon.jpg" data-i18n-alt="sport_alt_soccer" alt="Entraînement de football" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_soccer">Foot</figcaption></figure>
+      <figure class="reveal" style="--d:120ms"><img src="../brand/img/sport/judo-1-horizon.jpg" data-i18n-alt="sport_alt_judo" alt="Cours de judo" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_judo">Judo</figcaption></figure>
+      <figure class="reveal" style="--d:180ms"><img src="../brand/img/sport/basket-1-horizon.jpg" data-i18n-alt="sport_alt_basket" alt="Match de basket en salle" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_basket">Basket</figcaption></figure>
+      <figure class="reveal" style="--d:240ms"><img src="../brand/img/sport/yoga-1-horizon.jpg" data-i18n-alt="sport_alt_yoga" alt="Séance de yoga en groupe" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_yoga">Yoga</figcaption></figure>
+      <figure class="reveal" style="--d:300ms"><img src="../brand/img/sport/fitness-1-horizon.jpg" data-i18n-alt="sport_alt_fitness" alt="Cours collectif de fitness" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_fitness">Fitness</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN (DARK) ============ -->
+<section class="section dark">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="container">
+    <span class="kicker reveal" data-i18n="pain_kicker">Le vrai coût du bénévolat</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n="pain_title">Le bénévole ne devrait pas être un huissier.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n="pain_lead">Chaque rentrée, les trésoriers d'asso passent des soirées entières à courir après l'argent. Ce temps appartient au club, pas aux relances.</p>
+    <div class="pain-grid">
+      <div class="pain-card reveal" style="--d:0ms">
+        <span class="num" data-i18n="pain1_num">12 h/mois</span>
+        <h3 data-i18n="pain1_title">De relances sans fin</h3>
+        <p data-i18n="pain1_text">Messages WhatsApp, mails, rappels à la sortie du cours… et toujours les mêmes familles à relancer.</p>
+      </div>
+      <div class="pain-card reveal" style="--d:100ms">
+        <span class="num" data-i18n="pain2_num">30 %</span>
+        <h3 data-i18n="pain2_title">Paient en retard</h3>
+        <p data-i18n="pain2_text">Chèques perdus, espèces oubliées, virements promis « pour la semaine prochaine ». La trésorerie en souffre toute la saison.</p>
+      </div>
+      <div class="pain-card reveal" style="--d:200ms">
+        <span class="num" data-i18n="pain3_num">0 visibilité</span>
+        <h3 data-i18n="pain3_title">Des tableurs illisibles</h3>
+        <p data-i18n="pain3_text">Trois fichiers Excel contradictoires, personne ne sait qui a payé quoi. Impossible de piloter le club sereinement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSCRIPTIONS 100% EN LIGNE ============ -->
+<section class="section" id="inscriptions">
+  <div class="container">
+    <div class="split">
+      <div class="split-text">
+        <span class="kicker reveal" data-i18n="insc_kicker">Inscriptions</span>
+        <h2 class="reveal" style="--d:80ms" data-i18n-html="insc_title">L'inscription 100&nbsp;% en ligne. <span class="hl">Fini les PDF.</span></h2>
+        <p class="lead reveal" style="--d:160ms" data-i18n="insc_lead">Plus de formulaire papier à imprimer, à remplir à la main, à scanner et à ressaisir. Les familles s'inscrivent et paient depuis leur canapé, en cinq minutes. Vous ne ressaisissez plus jamais une ligne.</p>
+        <ul class="checklist reveal" style="--d:220ms">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n-html="insc_check1">On gère les parcours complexes<small>Une famille, trois enfants, cinq cours, des réductions fratrie, un Pass'Sport et un Pass 5e&nbsp;: tout se calcule tout seul, sans erreur.</small></span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n-html="insc_check2">Documents collectés au bon moment<small>Certificat médical, Pass'Sport, attestation&nbsp;: l'inscription bloque tant qu'il manque une pièce. Vous ne courez plus après.</small></span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n-html="insc_check3">Cours d'essai avec place réservée<small>La place est gardée, le paiement ne part qu'une fois l'essai validé. Aucune place fantôme.</small></span></li>
+        </ul>
+      </div>
+      <div class="split-visual reveal" style="--d:120ms">
+        <div class="flowcard">
+          <h4 data-i18n="insc_flow_title">Inscription — Famille Moreau</h4>
+          <div class="flow-step done"><span class="flow-num">1</span><div class="flow-body"><strong data-i18n="insc_flow1_title">2 enfants ajoutés</strong><span data-i18n="insc_flow1_sub">Léa (8 ans) · Tom (11 ans)</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
+          <div class="flow-step done"><span class="flow-num">2</span><div class="flow-body"><strong data-i18n="insc_flow2_title">3 cours sélectionnés</strong><span data-i18n="insc_flow2_sub">Ballet · Modern jazz · Hip-hop</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
+          <div class="flow-step done"><span class="flow-num">3</span><div class="flow-body"><strong data-i18n-html="insc_flow3_title">Réduction fratrie −15&nbsp;%</strong><span data-i18n="insc_flow3_sub">Appliquée automatiquement</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
+          <div class="flow-step done"><span class="flow-num">4</span><div class="flow-body"><strong data-i18n="insc_flow4_title">Certificats médicaux reçus</strong><span data-i18n="insc_flow4_sub">2 / 2 documents validés</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
+          <div class="flow-step done"><span class="flow-num">5</span><div class="flow-body"><strong data-i18n-html="insc_flow5_title">Paiement en 3× · <span class="num">459&nbsp;€</span></strong><span data-i18n="insc_flow5_sub">153 € aujourd'hui, puis 2 prélèvements</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES BENTO ============ -->
+<section class="section" id="fonctionnalites">
+  <div class="container">
+    <span class="kicker reveal" data-i18n="feat_kicker">Fonctionnalités</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n="feat_title">Tout votre club, au même endroit.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n="feat_lead">De l'inscription au paiement, du site web aux emails : EasyClub remplace le tableur, la boîte mail et la boîte à chèques.</p>
+    <div class="bento">
+      <div class="feature span3 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M6 12h12M10 19h4"/></svg></div>
+        <h3 data-i18n="feat_pilotage_title">Pilotage en un coup d'œil</h3>
+        <p data-i18n-html="feat_pilotage_text">Filtrez par cours, par statut de paiement, par adresse ou code postal. Sélectionnez, modifiez en masse, puis exportez tout en un clic vers Excel, CSV ou Google&nbsp;Sheets. Vos données vous suivent où vous voulez.</p>
+        <span class="tag" data-i18n="feat_pilotage_tag">Export Excel · CSV · Google Sheets</span>
+      </div>
+      <div class="feature span3 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
+        <h3 data-i18n="feat_payment_title">Paiement sans friction</h3>
+        <p data-i18n="feat_payment_text">CB, Apple Pay, Google Pay, paiement en 3 fois. Factures générées automatiquement. La cotisation est réglée au moment de l'inscription, pas trois mois après.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3 data-i18n="feat_waitlist_title">Liste d'attente intelligente</h3>
+        <p data-i18n="feat_waitlist_text">Une place se libère ? Le suivant est notifié automatiquement et dispose de 48 h pour confirmer. Zéro place perdue.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
+        <h3 data-i18n="feat_season_title">Gestion par saison</h3>
+        <p data-i18n="feat_season_text">Dupliquez tous vos cours d'une saison à l'autre en un clic. La rentrée se prépare en une heure, pas en une semaine.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:160ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <h3 data-i18n="feat_emails_title">Emails automatiques</h3>
+        <p data-i18n="feat_emails_text">Confirmations, relances de paiement, campagnes vers les adhérents : tout part automatiquement, au bon moment.</p>
+      </div>
+      <div class="feature span4 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.6-4-9s1.5-6.4 4-9z"/></svg></div>
+        <h3 data-i18n="feat_website_title">Site web inclus</h3>
+        <p data-i18n="feat_website_text">Un vrai site à l'image de votre club, sans développeur : éditeur visuel, planning des cours exportable en PDF, événements et billetterie, blog et FAQ. Vos adhérents trouvent tout au même endroit.</p>
+        <span class="tag" data-i18n="feat_website_tag">Éditeur visuel</span>
+      </div>
+      <div class="feature span2 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 13H5z"/><path d="M8 6V5a4 4 0 0 1 8 0v1"/></svg></div>
+        <h3 data-i18n="feat_shop_title">Boutique club</h3>
+        <p data-i18n="feat_shop_text">Maillots, tenues, accessoires : vendez l'équipement officiel du club directement depuis votre site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOUTIQUE ============ -->
+<section class="section" id="boutique" style="padding-top:0">
+  <div class="container">
+    <span class="kicker lav reveal" data-i18n="boutique_kicker">Boutique</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n="boutique_title">Votre boutique club, sans Shopify.</h2>
+    <div class="shop">
+      <div class="shop-photo reveal" style="--d:0ms">
+        <img src="../brand/img/sport/basket-1-horizon.jpg" data-i18n-alt="boutique_photo_alt" alt="Joueurs de basket en tenue de club sur un terrain en salle" loading="lazy">
+      </div>
+      <div class="shop-card reveal" style="--d:120ms">
+        <h3 data-i18n="boutique_card_title">Vendez l'équipement officiel, encaissez sans effort.</h3>
+        <p data-i18n="boutique_card_text">Pas besoin d'un deuxième outil ni d'un abonnement e-commerce. La boutique vit sur votre site EasyClub et les paiements arrivent au même endroit que les cotisations.</p>
+        <ul class="shop-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="boutique_li1">Catalogue produits illimité</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="boutique_li2">Variantes taille et couleur</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="boutique_li3">Suivi du stock en temps réel</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="boutique_li4">Codes promo et offres adhérents</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="boutique_li5">Gestion des commandes intégrée</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OWNERSHIP (DARK) ============ -->
+<section class="section dark" id="propriete">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="container">
+    <span class="kicker reveal" data-i18n="own_kicker">Votre plateforme, pas la nôtre</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n="own_title">Tout est chez vous. Rien n'est captif.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n-html="own_lead">On ne vous loue pas un bout de notre logiciel. On vous livre votre plateforme&nbsp;: votre marque, votre argent, vos données. Si un jour vous partez, vous partez avec tout.</p>
+    <div class="own-grid">
+      <div class="own-card reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3 data-i18n="own_brand_title">Votre marque, votre nom</h3>
+        <p data-i18n-html="own_brand_text">Votre logo, vos couleurs, votre nom de domaine. Vos adhérents arrivent sur <strong>le site de votre club</strong>, pas sur une page anonyme noyée parmi des milliers d'autres assos.</p>
+      </div>
+      <div class="own-card reveal" style="--d:100ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg></div>
+        <h3 data-i18n="own_payment_title">Votre compte de paiement</h3>
+        <p data-i18n-html="own_payment_text">L'argent des cotisations arrive <strong>directement sur le compte du club</strong>, jamais sur le nôtre. Notre pourcentage est prélevé automatiquement à chaque transaction. Les paiements en espèces ou par chèque se notent en deux clics&nbsp;: tout est centralisé.</p>
+      </div>
+      <div class="own-card reveal" style="--d:200ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3 data-i18n="own_data_title">Vos données, point.</h3>
+        <p data-i18n-html="own_data_text">Hébergées en Europe, conformes au RGPD, <strong>exportables à tout moment</strong> et jamais revendues. Le fichier de vos adhérents appartient à votre association, pas à un éditeur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="tarifs">
+  <div class="container">
+    <span class="kicker reveal" data-i18n="pricing_kicker">Tarifs</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n="pricing_title">Un prix simple : un pourcentage, zéro frais fixe.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n="pricing_lead">EasyClub ne coûte rien tant que votre club n'encaisse pas. Vous payez uniquement sur ce qui rentre.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal" style="--d:0ms">
+        <h3 data-i18n="pricing_easypay_name">EasyPay</h3>
+        <div class="price-pct num" data-i18n-html="pricing_easypay_pct">2,9&nbsp;%</div>
+        <p class="price-sub" data-i18n="pricing_easypay_sub">des cotisations encaissées, zéro frais fixe</p>
+        <ul class="price-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easypay_li1">Inscriptions et paiement en ligne</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easypay_li2">CB, Apple Pay, Google Pay, 3×</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easypay_li3">Tableau de bord et suivi des impayés</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easypay_li4">Factures automatiques</span></li>
+        </ul>
+        <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="pricing_easypay_cta">Commencer avec EasyPay</a>
+      </div>
+      <div class="price-card featured reveal" style="--d:100ms">
+        <span class="price-badge" data-i18n="pricing_easyclub_badge">La plus choisie</span>
+        <h3 data-i18n="pricing_easyclub_name">EasyClub</h3>
+        <div class="price-pct num" data-i18n-html="pricing_easyclub_pct">4,9&nbsp;%</div>
+        <p class="price-sub" data-i18n="pricing_easyclub_sub">des cotisations encaissées, zéro frais fixe</p>
+        <ul class="price-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easyclub_li1">Tout EasyPay, plus :</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easyclub_li2">Site web complet à votre image</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easyclub_li3">Planning, actualités, événements</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easyclub_li4">Liste d'attente intelligente</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_easyclub_li5">Emails automatiques et campagnes</span></li>
+        </ul>
+        <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" class="btn btn-mint" data-i18n="pricing_easyclub_cta">Demander une démo</a>
+      </div>
+      <div class="price-card reveal" style="--d:200ms">
+        <h3 data-i18n="pricing_max_name">EasyClub Max</h3>
+        <div class="price-pct num" data-i18n-html="pricing_max_pct">6,9&nbsp;%</div>
+        <p class="price-sub" data-i18n="pricing_max_sub">des cotisations encaissées, zéro frais fixe</p>
+        <ul class="price-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_max_li1">Tout EasyClub, plus :</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_max_li2">Boutique club intégrée</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_max_li3">Billetterie d'événements</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="pricing_max_li4">Accompagnement prioritaire</span></li>
+        </ul>
+        <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="pricing_max_cta">Choisir Max</a>
+      </div>
+    </div>
+    <p class="price-foot reveal" data-i18n="pricing_foot">Aucun abonnement, aucun frais fixe. Le pourcentage est prélevé automatiquement à chaque encaissement, frais bancaires inclus.</p>
+  </div>
+</section>
+
+<!-- ============ COMPARISON ============ -->
+<section class="section" id="comparatif" style="padding-top:0">
+  <div class="container">
+    <span class="kicker reveal" data-i18n="compare_kicker">La différence</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n="compare_title">Un formulaire générique, ou votre plateforme.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n="compare_lead">Les cagnottes et les tableurs dépannent. Ils ne font pas vivre un club. Voilà ce qui nous sépare.</p>
+    <div class="compare reveal" style="--d:120ms" role="region" data-i18n-aria="compare_aria" aria-label="Comparatif EasyClub, plateforme de cagnotte et tableur">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">&nbsp;</th>
+            <th scope="col" class="us" data-i18n="compare_col_us">EasyClub</th>
+            <th scope="col" class="them" data-i18n="compare_col_fundraiser">Cagnotte en ligne</th>
+            <th scope="col" class="them" data-i18n="compare_col_spreadsheet">Le tableur Excel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="compare_row1_label">Site web à votre image et à votre nom</td><td class="us"><span class="yes" data-i18n="compare_row1_us">Inclus</span></td><td class="them" data-i18n="compare_row1_fundraiser">Page générique partagée</td><td class="them" data-i18n="compare_row1_spreadsheet">—</td></tr>
+          <tr><td data-i18n-html="compare_row2_label">Inscriptions 100&nbsp;% en ligne, parcours complexes</td><td class="us"><span class="yes" data-i18n="compare_row2_us">Oui</span></td><td class="them" data-i18n="compare_row2_fundraiser">Formulaire simple</td><td class="them" data-i18n="compare_row2_spreadsheet">Saisie manuelle</td></tr>
+          <tr><td data-i18n="compare_row3_label">Paiement direct sur le compte du club</td><td class="us"><span class="yes" data-i18n="compare_row3_us">Oui</span></td><td class="them" data-i18n="compare_row3_fundraiser">Reversement différé</td><td class="them" data-i18n="compare_row3_spreadsheet">Chèques à la main</td></tr>
+          <tr><td data-i18n-html="compare_row4_label">Boutique &amp; billetterie intégrées</td><td class="us"><span class="yes" data-i18n="compare_row4_us">Oui</span></td><td class="them" data-i18n="compare_row4_fundraiser">Non</td><td class="them" data-i18n="compare_row4_spreadsheet">—</td></tr>
+          <tr><td data-i18n="compare_row5_label">Tri, export Excel / CSV / Sheets, modif. de masse</td><td class="us"><span class="yes" data-i18n="compare_row5_us">Oui</span></td><td class="them" data-i18n="compare_row5_fundraiser">Limité</td><td class="them" data-i18n="compare_row5_spreadsheet">Bricolage</td></tr>
+          <tr><td data-i18n="compare_row6_label">Développements sur mesure pour votre club</td><td class="us"><span class="yes" data-i18n="compare_row6_us">Oui</span></td><td class="them" data-i18n="compare_row6_fundraiser">Non</td><td class="them" data-i18n="compare_row6_spreadsheet">Non</td></tr>
+          <tr><td data-i18n="compare_row7_label">Une équipe qui configure votre saison avec vous</td><td class="us"><span class="yes" data-i18n="compare_row7_us">Oui</span></td><td class="them" data-i18n="compare_row7_fundraiser">FAQ en libre-service</td><td class="them" data-i18n="compare_row7_spreadsheet">Vous, seul</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="custom-band reveal" style="--d:80ms">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="cb-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="10"/></svg></div>
+      <div class="cb-text">
+        <h3 data-i18n-html="custom_title">Une demande particulière&nbsp;? On la développe.</h3>
+        <p data-i18n="custom_text">Réservation de spectacle, billetterie de gala, formulaire spécifique… Votre plateforme, vos règles.</p>
+      </div>
+      <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" class="btn btn-mint" data-i18n="custom_cta">En parler avec nous</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL / CLIENTS ============ -->
+<section class="section" id="clients" style="padding-top:0">
+  <div class="container">
+    <span class="kicker reveal" data-i18n="testi_kicker">Ils nous font déjà confiance</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n-html="testi_title">Ce qu'on leur fait vraiment gagner&nbsp;? Du temps.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n="testi_lead">On ne change pas juste un outil, on change leurs soirées de rentrée. Plus de tableur jusqu'à minuit, plus de relances le dimanche.</p>
+    <div class="testi reveal" style="--d:120ms">
+      <div class="testi-photo">
+        <img src="../brand/img/sport/dancecenter-a-horizon.jpg" data-i18n-alt="testi_photo_alt" alt="Studio de l'école de danse, parquet, barre et miroir" loading="lazy">
+      </div>
+      <div class="testi-body">
+        <blockquote class="testi-quote" data-i18n-html="testi_quote">« Avant, la rentrée c'était trois semaines de paperasse et des chèques partout. Avec EasyClub, <mark>tout est rentré avant le premier cours</mark> et je récupère mes soirées. Honnêtement, je ne reviendrai jamais en arrière. »</blockquote>
+        <div class="testi-author">
+          <span class="testi-avatar" aria-hidden="true">N</span>
+          <div>
+            <strong data-i18n="testi_author_name">Noémie</strong>
+            <span data-i18n="testi_author_role">Directrice, École de Danse</span>
+          </div>
+        </div>
+        <div class="testi-stats">
+          <div><span class="num" data-i18n="testi_stat1_num">15 h</span><span data-i18n="testi_stat1_label">gagnées chaque rentrée</span></div>
+          <div><span class="num" data-i18n="testi_stat2_num">100 %</span><span data-i18n="testi_stat2_label">encaissé avant le 1ᵉʳ cours</span></div>
+          <div><span class="num" data-i18n="testi_stat3_num">3 j</span><span data-i18n="testi_stat3_label">pour ouvrir les inscriptions</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="container">
+    <div style="text-align:center">
+      <span class="kicker reveal" data-i18n="faq_kicker">FAQ</span>
+      <h2 class="reveal" style="--d:80ms;margin-left:auto;margin-right:auto" data-i18n="faq_title">Les questions qu'on nous pose à chaque démo.</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal" style="--d:0ms">
+        <summary aria-label="Question : Combien ça coûte vraiment ?" data-i18n-html="faq1_q">Combien ça coûte vraiment&nbsp;?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <div class="faq-body"><p data-i18n-html="faq1_a">Un pourcentage des cotisations encaissées, c'est tout. Pas d'abonnement, pas de frais d'installation, pas de coût par adhérent. Les frais bancaires sont inclus dans le pourcentage. Exemple : un club qui encaisse <span class="num">30 000 €</span> en formule EasyClub paie <span class="num">1 470 €</span> sur la saison, prélevés automatiquement au fil des encaissements.</p></div>
+      </details>
+      <details class="reveal" style="--d:60ms">
+        <summary aria-label="Question : Où arrive l'argent des cotisations ?" data-i18n-html="faq2_q">Où arrive l'argent des cotisations&nbsp;?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <div class="faq-body"><p data-i18n-html="faq2_a">Directement sur le compte de paiement de votre association. À aucun moment l'argent ne transite par nous&nbsp;: notre pourcentage est simplement prélevé à chaque transaction. Les paiements en espèces ou par chèque s'ajoutent à la main en deux clics, pour que votre tableau de bord reflète exactement votre caisse.</p></div>
+      </details>
+      <details class="reveal" style="--d:90ms">
+        <summary aria-label="Question : On a un besoin spécifique, c'est possible ?" data-i18n-html="faq3_q">On a un besoin spécifique, c'est possible&nbsp;?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <div class="faq-body"><p data-i18n="faq3_a">Très souvent, oui. Billetterie d'un gala, réservation de spectacle avec places numérotées, formulaire propre à votre discipline… Comme c'est votre plateforme, nous pouvons la développer sur mesure. Décrivez-nous le besoin en démo, on vous dit ce qui est possible et sous quel délai.</p></div>
+      </details>
+      <details class="reveal" style="--d:120ms">
+        <summary aria-label="Question : Qui gère les remboursements ?" data-i18n-html="faq4_q">Qui gère les remboursements&nbsp;?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <div class="faq-body"><p data-i18n="faq4_a">Vous, en deux clics depuis le tableau de bord. Remboursement total ou partiel, le montant repart directement sur la carte de l'adhérent. Vous gardez la main sur votre politique d'annulation, EasyClub s'occupe de la mécanique bancaire.</p></div>
+      </details>
+      <details class="reveal" style="--d:180ms">
+        <summary aria-label="Question : Mes données sont où ?" data-i18n-html="faq5_q">Mes données sont où&nbsp;?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <div class="faq-body"><p data-i18n="faq5_a">Hébergées en Union européenne, conformes au RGPD. Les données de vos adhérents appartiennent à votre association : vous pouvez les exporter à tout moment et elles ne sont jamais revendues ni utilisées à des fins publicitaires.</p></div>
+      </details>
+      <details class="reveal" style="--d:240ms">
+        <summary aria-label="Question : Combien de temps pour démarrer ?" data-i18n-html="faq6_q">Combien de temps pour démarrer&nbsp;?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <div class="faq-body"><p data-i18n="faq6_a">Une semaine en moyenne. Après la démo, nous configurons votre saison avec vous : cours, tarifs, formulaires, site web. La plupart des clubs ouvrent leurs inscriptions en ligne moins de sept jours après le premier rendez-vous.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section dark final" id="demo">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="container">
+    <h2 class="reveal" data-i18n-html="final_title">Encaissez 100&nbsp;% de vos cotisations dès la rentrée.</h2>
+    <p class="reveal" style="--d:100ms" data-i18n="final_text">Une démo de 30 minutes avec votre vraie saison, vos vrais cours, vos vrais tarifs. Sans engagement.</p>
+    <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" target="_blank" rel="noopener" class="btn btn-mint reveal" style="--d:200ms" data-i18n="final_cta">Demander une démo</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="wordmark" data-i18n-aria="nav_aria_home" aria-label="EasyClub — accueil">Easy<em>Club</em></a>
+        <p data-i18n="footer_tagline">La plateforme tout-en-un des associations sportives et culturelles.</p>
+      </div>
+      <nav aria-label="Produit">
+        <h4 data-i18n="footer_product">Produit</h4>
+        <ul>
+          <li><a href="#fonctionnalites" data-i18n="footer_product_features">Fonctionnalités</a></li>
+          <li><a href="#boutique" data-i18n="footer_product_shop">Boutique</a></li>
+          <li><a href="#tarifs" data-i18n="footer_product_pricing">Tarifs</a></li>
+          <li><a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" data-i18n="footer_product_demo">Demander une démo</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Ressources">
+        <h4 data-i18n="footer_resources">Ressources</h4>
+        <ul>
+          <li><a href="#faq" data-i18n="footer_resources_faq">FAQ</a></li>
+          <li><a href="#" data-i18n="footer_resources_blog">Blog</a></li>
+          <li><a href="#" data-i18n="footer_resources_help">Centre d'aide</a></li>
+          <li><a href="#" data-i18n="footer_resources_contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Légal">
+        <h4 data-i18n="footer_legal">Légal</h4>
+        <ul>
+          <li><a href="#" data-i18n="footer_legal_terms">CGV</a></li>
+          <li><a href="#" data-i18n="footer_legal_rules">Règlement intérieur</a></li>
+          <li><a href="#" data-i18n="footer_legal_guide">Guide d'inscription</a></li>
+          <li><a href="#" data-i18n="footer_legal_privacy">Confidentialité</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span class="num" data-i18n="footer_copyright">© 2026 EasyClub</span>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Hero headline: wrap words for staggered entrance (keep highlight intact) */
+  var wrapWords = function(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(child){
+      if (child.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach(function(part){
+          if (/^\s+$/.test(part) || part === '') { frag.appendChild(document.createTextNode(part)); }
+          else {
+            var s = document.createElement('span');
+            s.className = 'w'; s.textContent = part;
+            frag.appendChild(s);
+          }
+        });
+        node.replaceChild(frag, child);
+      } else if (child.nodeType === 1 && !child.classList.contains('hl')) {
+        wrapWords(child);
+      } else if (child.nodeType === 1 && child.classList.contains('hl')) {
+        child.classList.add('w');
+      }
+    });
+  };
+  var title = document.getElementById('heroTitle');
+  if (title && !reduced) {
+    wrapWords(title);
+    var words = title.querySelectorAll('.w');
+    words.forEach(function(w,i){
+      w.style.transitionDelay = (i*70)+'ms';
+    });
+  }
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ document.body.classList.add('loaded'); });
+  });
+
+  /* Navbar scroll state */
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* Mobile menu */
+  var toggle = document.getElementById('navToggle');
+  var mobile = document.getElementById('navMobile');
+  toggle.addEventListener('click', function(){
+    var open = mobile.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+  });
+  mobile.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') {
+      mobile.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* Scroll reveal */
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  /* Animated counters (tnum-safe, fr-FR formatting) */
+  var fmt = function(n){ return n.toLocaleString('fr-FR').replace(/ | /g, ' '); };
+  var counters = document.querySelectorAll('[data-count]');
+  var runCounter = function(el){
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduced || target === 0) { el.textContent = fmt(target) + suffix; return; }
+    var dur = 1400, start = null;
+    var step = function(ts){
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  if (reduced || !('IntersectionObserver' in window)) {
+    counters.forEach(function(el){ runCounter(el); });
+  } else {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          runCounter(entry.target);
+          cio.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.5});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+
+  /* ── i18n system ── */
+  var currentLang = (navigator.language || 'fr').slice(0,2);
+  if (!window.I18N[currentLang]) currentLang = 'fr';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    var t = window.I18N[lang];
+    if (!t) return;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var k = el.getAttribute('data-i18n');
+      if (t[k] != null) el.textContent = t[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+      var k = el.getAttribute('data-i18n-html');
+      if (t[k] != null) {
+        el.innerHTML = t[k];
+        if (el.id === 'heroTitle' && !reduced) {
+          wrapWords(el);
+          el.querySelectorAll('.w').forEach(function(w,i){ w.style.transitionDelay = (i*70)+'ms'; });
+          el.querySelectorAll('.w').forEach(function(w){ w.classList.add('in'); });
+        }
+      }
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(function(el) {
+      var k = el.getAttribute('data-i18n-alt');
+      if (t[k] != null) el.alt = t[k];
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function(el) {
+      var k = el.getAttribute('data-i18n-aria');
+      if (t[k] != null) el.setAttribute('aria-label', t[k]);
+    });
+    var metaDesc = document.querySelector('[data-i18n-content="meta_description"]');
+    if (metaDesc && t.meta_description) metaDesc.content = t.meta_description;
+    if (t.meta_title) document.title = t.meta_title;
+    document.querySelectorAll('.lang-switch button').forEach(function(b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    var fmtLocale = lang === 'fr' ? 'fr-FR' : lang === 'es' ? 'es-ES' : 'en-GB';
+    fmt = function(n){ return n.toLocaleString(fmtLocale).replace(/ | /g, ' '); };
+    try { localStorage.setItem('ec-lang', lang); } catch(e) {}
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem('ec-lang'); } catch(e) {}
+  if (saved && window.I18N[saved]) {
+    applyLang(saved);
+  } else if (currentLang !== 'fr') {
+    applyLang(currentLang);
+  }
+})();
+</script>
+</body>
+</html>

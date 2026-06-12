@@ -1,0 +1,17 @@
+<svg viewBox="0 0 1584 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EasyClub LinkedIn banner">
+  <defs>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16325C"/>
+      <stop offset="0.45" stop-color="#0B1F3A"/>
+      <stop offset="1" stop-color="#061325"/>
+    </linearGradient>
+  </defs>
+  <rect width="1584" height="396" fill="url(#navy)"/>
+  <rect x="96" y="118" width="96" height="96" rx="21" fill="#FFFFFF"/>
+  <path d="M123 168 L138 183 L165 149" fill="none" stroke="#34C794" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="216" y="186" font-family="Geist, Inter, -apple-system, sans-serif" font-size="56" font-weight="600" fill="#FFFFFF">Easy<tspan fill="#7FA8F2">Club</tspan></text>
+  <text x="98" y="266" font-family="Geist, Inter, -apple-system, sans-serif" font-size="30" font-weight="500" fill="#FFFFFF">Ne chassez plus les mauvais payeurs.</text>
+  <text x="98" y="306" font-family="Inter, -apple-system, sans-serif" font-size="19" fill="#8A93A6">100 % des cotisations encaissées avant le premier cours · easyclub.app</text>
+  <text x="1392" y="266" font-family="Geist, Inter, -apple-system, sans-serif" font-size="44" font-weight="600" fill="#34C794" text-anchor="end">0 €</text>
+  <text x="1392" y="296" font-family="Inter, -apple-system, sans-serif" font-size="17" fill="#8A93A6" text-anchor="end">d'impayés</text>
+</svg>

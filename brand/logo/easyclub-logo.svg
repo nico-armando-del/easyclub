@@ -1,0 +1,5 @@
+<svg viewBox="0 0 430 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EasyClub logo">
+  <rect x="4" y="12" width="72" height="72" rx="16" fill="#0B1F3A"/>
+  <path d="M24 49 L36 61 L57 34" fill="none" stroke="#34C794" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="92" y="64" font-family="Geist, Inter, -apple-system, sans-serif" font-size="46" font-weight="600" fill="#0B1F3A">Easy<tspan fill="#2E6BE6">Club</tspan></text>
+</svg>
