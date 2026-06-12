@@ -1,0 +1,4 @@
+{
+  "buildCommand": "cp -r brand site/brand",
+  "outputDirectory": "site"
+}
