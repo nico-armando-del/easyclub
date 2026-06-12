@@ -414,8 +414,11 @@ footer ul a:hover{color:var(--mint-deep)}
   .own-grid{grid-template-columns:1fr}
 }
 @media (max-width:860px){
-  .nav-links,.nav-actions .btn-ghost{display:none}
+  .nav-links,.nav-actions .btn-ghost,.nav-actions .lang-switch,.nav-actions .btn-mint{display:none}
   .nav-toggle{display:block}
+  .nav-mobile .lang-switch-mobile{display:flex;gap:2px;background:var(--sand);border-radius:8px;padding:2px;margin:8px 4px 4px;width:fit-content}
+  .nav-mobile .lang-switch-mobile button{border:none;background:none;padding:5px 12px;font-size:.82rem;font-weight:600;font-family:var(--font-body);color:var(--gray);border-radius:6px;cursor:pointer;line-height:1}
+  .nav-mobile .lang-switch-mobile button[aria-pressed="true"]{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
   .nav-mobile{
     display:none;flex-direction:column;gap:4px;padding:12px 24px 20px;
     border-bottom:1px solid var(--sand);background:rgba(250,250,247,.97);
@@ -493,6 +496,11 @@ footer ul a:hover{color:var(--mint-deep)}
     <a href="#tarifs" data-i18n="nav_pricing">Tarifs</a>
     <a href="#faq" data-i18n="nav_faq">FAQ</a>
     <a href="https://app.reclaim.ai/m/nico-bertone/easyclub" target="_blank" rel="noopener" data-i18n="nav_cta">Demander une démo</a>
+    <div class="lang-switch-mobile" role="group" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
   </div>
 </header>
 
@@ -1078,7 +1086,7 @@ footer ul a:hover{color:var(--mint-deep)}
     var metaDesc = document.querySelector('[data-i18n-content="meta_description"]');
     if (metaDesc && t.meta_description) metaDesc.content = t.meta_description;
     if (t.meta_title) document.title = t.meta_title;
-    document.querySelectorAll('.lang-switch button').forEach(function(b) {
+    document.querySelectorAll('.lang-switch button, .lang-switch-mobile button').forEach(function(b) {
       b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
     });
     var fmtLocale = lang === 'fr' ? 'fr-FR' : lang === 'es' ? 'es-ES' : 'en-GB';
@@ -1086,7 +1094,7 @@ footer ul a:hover{color:var(--mint-deep)}
     try { localStorage.setItem('ec-lang', lang); } catch(e) {}
   }
 
-  document.querySelectorAll('.lang-switch button').forEach(function(btn) {
+  document.querySelectorAll('.lang-switch button, .lang-switch-mobile button').forEach(function(btn) {
     btn.addEventListener('click', function() {
       applyLang(btn.getAttribute('data-lang'));
     });
