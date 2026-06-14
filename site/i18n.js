@@ -7,8 +7,8 @@ window.I18N = {
   fr: {
 
     /* ── Meta ── */
-    meta_title: "EasyClub — La plateforme tout-en-un des associations sportives et culturelles",
-    meta_description: "Pas un logiciel de plus : votre propre plateforme à votre image. Inscriptions 100 % en ligne, paiements automatiques sur votre compte, site web et boutique. 100 % des cotisations encaissées avant le premier cours.",
+    meta_title: "EasyClub — La plateforme tout-en-un pour clubs sportifs",
+    meta_description: "Inscriptions en ligne, paiements automatiques sur votre compte, site web et boutique inclus. Encaissez 100 % de vos cotisations dès la rentrée.",
 
     /* ── Navbar ── */
     nav_features: "Fonctionnalités",
@@ -297,8 +297,8 @@ window.I18N = {
   en: {
 
     /* ── Meta ── */
-    meta_title: "EasyClub — The all-in-one platform for sports & community clubs",
-    meta_description: "Not just another tool — your own branded platform. 100% online registration, automatic payments to your account, website, and shop. Collect 100% of membership fees before the first class.",
+    meta_title: "EasyClub — All-in-one platform for sports clubs",
+    meta_description: "Online registration, automatic payments to your account, website and shop included. Collect 100% of membership fees from day one.",
 
     /* ── Navbar ── */
     nav_features: "Features",
@@ -587,8 +587,8 @@ window.I18N = {
   es: {
 
     /* ── Meta ── */
-    meta_title: "EasyClub — La plataforma todo en uno para clubes deportivos y culturales",
-    meta_description: "No es un software más: su propia plataforma con su imagen. Inscripciones 100 % en línea, pagos automáticos en su cuenta, sitio web y tienda. 100 % de las cuotas cobradas antes de la primera clase.",
+    meta_title: "EasyClub — La plataforma todo en uno para clubes",
+    meta_description: "Inscripciones online, pagos automáticos en su cuenta, sitio web y tienda incluidos. Cobre el 100 % de las cuotas desde el primer día.",
 
     /* ── Navbar ── */
     nav_features: "Funcionalidades",

@@ -3,9 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="meta_title">EasyClub — La plateforme tout-en-un des associations sportives et culturelles</title>
-<meta name="description" data-i18n-content="meta_description" content="Pas un logiciel de plus : votre propre plateforme à votre image. Inscriptions 100 % en ligne, paiements automatiques sur votre compte, site web et boutique. 100 % des cotisations encaissées avant le premier cours.">
+<title data-i18n="meta_title">EasyClub — La plateforme tout-en-un pour clubs sportifs</title>
+<meta name="description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiements automatiques sur votre compte, site web et boutique inclus. Encaissez 100 % de vos cotisations dès la rentrée.">
+<link rel="canonical" href="https://nico-armando-del.github.io/easyclub/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233DDC97'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%230F3D2A' text-anchor='middle'%3EEC%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EasyClub">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://nico-armando-del.github.io/easyclub/">
+<meta property="og:title" data-i18n-content="meta_title" content="EasyClub — La plateforme tout-en-un pour clubs sportifs">
+<meta property="og:description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiements automatiques sur votre compte, site web et boutique inclus. Encaissez 100 % de vos cotisations dès la rentrée.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" data-i18n-content="meta_title" content="EasyClub — La plateforme tout-en-un pour clubs sportifs">
+<meta name="twitter:description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiements automatiques sur votre compte, site web et boutique inclus. Encaissez 100 % de vos cotisations dès la rentrée.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "EasyClub",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Plateforme tout-en-un pour les associations sportives et culturelles : inscriptions en ligne, paiements automatiques, site web et boutique.",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "price": "0",
+    "description": "Tarification au pourcentage des cotisations encaissées, à partir de 2,9 %."
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Combien ça coûte vraiment ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un pourcentage des cotisations encaissées, c'est tout. Pas d'abonnement, pas de frais d'installation, pas de coût par adhérent. Les frais bancaires sont inclus dans le pourcentage. Exemple : un club qui encaisse 30 000 € en formule EasyClub paie 1 470 € sur la saison, prélevés automatiquement au fil des encaissements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Où arrive l'argent des cotisations ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Directement sur le compte de paiement de votre association. À aucun moment l'argent ne transite par nous : notre pourcentage est simplement prélevé à chaque transaction. Les paiements en espèces ou par chèque s'ajoutent à la main en deux clics, pour que votre tableau de bord reflète exactement votre caisse."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "On a un besoin spécifique, c'est possible ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Très souvent, oui. Billetterie d'un gala, réservation de spectacle avec places numérotées, formulaire propre à votre discipline... Comme c'est votre plateforme, nous pouvons la développer sur mesure. Décrivez-nous le besoin en démo, on vous dit ce qui est possible et sous quel délai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qui gère les remboursements ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous, en deux clics depuis le tableau de bord. Remboursement total ou partiel, le montant repart directement sur la carte de l'adhérent. Vous gardez la main sur votre politique d'annulation, EasyClub s'occupe de la mécanique bancaire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mes données sont où ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hébergées en Union européenne, conformes au RGPD. Les données de vos adhérents appartiennent à votre association : vous pouvez les exporter à tout moment et elles ne sont jamais revendues ni utilisées à des fins publicitaires."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps pour démarrer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Une semaine en moyenne. Après la démo, nous configurons votre saison avec vous : cours, tarifs, formulaires, site web. La plupart des clubs ouvrent leurs inscriptions en ligne moins de sept jours après le premier rendez-vous."
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&display=swap" rel="stylesheet">
@@ -82,7 +166,7 @@ a{color:inherit;text-decoration:none}
 .nav-actions{display:flex;align-items:center;gap:8px}
 .nav-actions .btn{padding:11px 22px;font-size:.95rem}
 .lang-switch{display:flex;gap:2px;background:var(--sand);border-radius:8px;padding:2px}
-.lang-switch button{border:none;background:none;padding:5px 9px;font-size:.78rem;font-weight:600;font-family:var(--font-body);color:var(--gray);border-radius:6px;cursor:pointer;transition:all .2s ease;line-height:1}
+.lang-switch button{border:none;background:none;padding:5px 9px;font-size:.78rem;font-weight:600;font-family:var(--font-body);color:#5C5C54;border-radius:6px;cursor:pointer;transition:all .2s ease;line-height:1}
 .lang-switch button[aria-pressed="true"]{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
 .nav-toggle svg{display:block}
@@ -297,7 +381,7 @@ a{color:inherit;text-decoration:none}
 .checklist li svg{flex:none;margin-top:2px;color:var(--mint-deep)}
 .checklist li small{display:block;font-weight:400;color:var(--gray);font-size:.92rem;margin-top:2px}
 .flowcard{background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);box-shadow:var(--shadow-deep);padding:14px 24px}
-.flowcard h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);font-weight:600;padding:14px 0 6px}
+.flowcard h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);font-weight:600;padding:14px 0 6px}
 .flow-step{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--sand)}
 .flow-step:last-child{border-bottom:none}
 .flow-num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--cream);border:1px solid var(--sand);color:var(--gray);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:.8rem}
@@ -322,7 +406,7 @@ a{color:inherit;text-decoration:none}
 .compare th,.compare td{padding:17px 22px;text-align:left;border-bottom:1px solid var(--sand);font-size:.95rem}
 .compare thead th{font-family:var(--font-head);font-size:1rem;font-weight:700}
 .compare thead th.us{color:var(--mint-deep)}
-.compare tbody td:first-child{font-weight:600}
+.compare tbody th{font-weight:600;text-align:left}
 .compare td.us,.compare th.us{background:rgba(61,220,151,.07);text-align:center}
 .compare td.them,.compare th.them{text-align:center;color:var(--gray)}
 .compare tr:last-child td{border-bottom:none}
@@ -385,7 +469,7 @@ a{color:inherit;text-decoration:none}
 footer{border-top:1px solid var(--sand);padding:72px 0 40px}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
 .foot-grid p{color:var(--gray);font-size:.9rem;margin-top:14px;max-width:260px}
-footer h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-weight:600;margin-bottom:16px}
+footer h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-weight:600;margin-bottom:16px}
 footer ul{list-style:none;display:grid;gap:10px}
 footer ul a{font-size:.93rem;color:var(--ink);transition:color .2s}
 footer ul a:hover{color:var(--mint-deep)}
@@ -624,7 +708,7 @@ footer ul a:hover{color:var(--mint-deep)}
       </div>
       <div class="split-visual reveal" style="--d:120ms">
         <div class="flowcard">
-          <h4 data-i18n="insc_flow_title">Inscription — Famille Moreau</h4>
+          <h3 data-i18n="insc_flow_title">Inscription — Famille Moreau</h3>
           <div class="flow-step done"><span class="flow-num">1</span><div class="flow-body"><strong data-i18n="insc_flow1_title">2 enfants ajoutés</strong><span data-i18n="insc_flow1_sub">Léa (8 ans) · Tom (11 ans)</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
           <div class="flow-step done"><span class="flow-num">2</span><div class="flow-body"><strong data-i18n="insc_flow2_title">3 cours sélectionnés</strong><span data-i18n="insc_flow2_sub">Ballet · Modern jazz · Hip-hop</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
           <div class="flow-step done"><span class="flow-num">3</span><div class="flow-body"><strong data-i18n-html="insc_flow3_title">Réduction fratrie −15&nbsp;%</strong><span data-i18n="insc_flow3_sub">Appliquée automatiquement</span></div><svg class="flow-tick" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg></div>
@@ -802,13 +886,13 @@ footer ul a:hover{color:var(--mint-deep)}
           </tr>
         </thead>
         <tbody>
-          <tr><td data-i18n="compare_row1_label">Site web à votre image et à votre nom</td><td class="us"><span class="yes" data-i18n="compare_row1_us">Inclus</span></td><td class="them" data-i18n="compare_row1_fundraiser">Page générique partagée</td><td class="them" data-i18n="compare_row1_spreadsheet">—</td></tr>
-          <tr><td data-i18n-html="compare_row2_label">Inscriptions 100&nbsp;% en ligne, parcours complexes</td><td class="us"><span class="yes" data-i18n="compare_row2_us">Oui</span></td><td class="them" data-i18n="compare_row2_fundraiser">Formulaire simple</td><td class="them" data-i18n="compare_row2_spreadsheet">Saisie manuelle</td></tr>
-          <tr><td data-i18n="compare_row3_label">Paiement direct sur le compte du club</td><td class="us"><span class="yes" data-i18n="compare_row3_us">Oui</span></td><td class="them" data-i18n="compare_row3_fundraiser">Reversement différé</td><td class="them" data-i18n="compare_row3_spreadsheet">Chèques à la main</td></tr>
-          <tr><td data-i18n-html="compare_row4_label">Boutique &amp; billetterie intégrées</td><td class="us"><span class="yes" data-i18n="compare_row4_us">Oui</span></td><td class="them" data-i18n="compare_row4_fundraiser">Non</td><td class="them" data-i18n="compare_row4_spreadsheet">—</td></tr>
-          <tr><td data-i18n="compare_row5_label">Tri, export Excel / CSV / Sheets, modif. de masse</td><td class="us"><span class="yes" data-i18n="compare_row5_us">Oui</span></td><td class="them" data-i18n="compare_row5_fundraiser">Limité</td><td class="them" data-i18n="compare_row5_spreadsheet">Bricolage</td></tr>
-          <tr><td data-i18n="compare_row6_label">Développements sur mesure pour votre club</td><td class="us"><span class="yes" data-i18n="compare_row6_us">Oui</span></td><td class="them" data-i18n="compare_row6_fundraiser">Non</td><td class="them" data-i18n="compare_row6_spreadsheet">Non</td></tr>
-          <tr><td data-i18n="compare_row7_label">Une équipe qui configure votre saison avec vous</td><td class="us"><span class="yes" data-i18n="compare_row7_us">Oui</span></td><td class="them" data-i18n="compare_row7_fundraiser">FAQ en libre-service</td><td class="them" data-i18n="compare_row7_spreadsheet">Vous, seul</td></tr>
+          <tr><th scope="row" data-i18n="compare_row1_label">Site web à votre image et à votre nom</th><td class="us"><span class="yes" data-i18n="compare_row1_us">Inclus</span></td><td class="them" data-i18n="compare_row1_fundraiser">Page générique partagée</td><td class="them" data-i18n="compare_row1_spreadsheet">—</td></tr>
+          <tr><th scope="row" data-i18n-html="compare_row2_label">Inscriptions 100&nbsp;% en ligne, parcours complexes</th><td class="us"><span class="yes" data-i18n="compare_row2_us">Oui</span></td><td class="them" data-i18n="compare_row2_fundraiser">Formulaire simple</td><td class="them" data-i18n="compare_row2_spreadsheet">Saisie manuelle</td></tr>
+          <tr><th scope="row" data-i18n="compare_row3_label">Paiement direct sur le compte du club</th><td class="us"><span class="yes" data-i18n="compare_row3_us">Oui</span></td><td class="them" data-i18n="compare_row3_fundraiser">Reversement différé</td><td class="them" data-i18n="compare_row3_spreadsheet">Chèques à la main</td></tr>
+          <tr><th scope="row" data-i18n-html="compare_row4_label">Boutique &amp; billetterie intégrées</th><td class="us"><span class="yes" data-i18n="compare_row4_us">Oui</span></td><td class="them" data-i18n="compare_row4_fundraiser">Non</td><td class="them" data-i18n="compare_row4_spreadsheet">—</td></tr>
+          <tr><th scope="row" data-i18n="compare_row5_label">Tri, export Excel / CSV / Sheets, modif. de masse</th><td class="us"><span class="yes" data-i18n="compare_row5_us">Oui</span></td><td class="them" data-i18n="compare_row5_fundraiser">Limité</td><td class="them" data-i18n="compare_row5_spreadsheet">Bricolage</td></tr>
+          <tr><th scope="row" data-i18n="compare_row6_label">Développements sur mesure pour votre club</th><td class="us"><span class="yes" data-i18n="compare_row6_us">Oui</span></td><td class="them" data-i18n="compare_row6_fundraiser">Non</td><td class="them" data-i18n="compare_row6_spreadsheet">Non</td></tr>
+          <tr><th scope="row" data-i18n="compare_row7_label">Une équipe qui configure votre saison avec vous</th><td class="us"><span class="yes" data-i18n="compare_row7_us">Oui</span></td><td class="them" data-i18n="compare_row7_fundraiser">FAQ en libre-service</td><td class="them" data-i18n="compare_row7_spreadsheet">Vous, seul</td></tr>
         </tbody>
       </table>
     </div>
@@ -911,7 +995,7 @@ footer ul a:hover{color:var(--mint-deep)}
         <p data-i18n="footer_tagline">La plateforme tout-en-un des associations sportives et culturelles.</p>
       </div>
       <nav aria-label="Produit">
-        <h4 data-i18n="footer_product">Produit</h4>
+        <h3 data-i18n="footer_product">Produit</h3>
         <ul>
           <li><a href="#fonctionnalites" data-i18n="footer_product_features">Fonctionnalités</a></li>
           <li><a href="#boutique" data-i18n="footer_product_shop">Boutique</a></li>
@@ -920,7 +1004,7 @@ footer ul a:hover{color:var(--mint-deep)}
         </ul>
       </nav>
       <nav aria-label="Ressources">
-        <h4 data-i18n="footer_resources">Ressources</h4>
+        <h3 data-i18n="footer_resources">Ressources</h3>
         <ul>
           <li><a href="#faq" data-i18n="footer_resources_faq">FAQ</a></li>
           <li><a href="#" data-i18n="footer_resources_blog">Blog</a></li>
@@ -929,7 +1013,7 @@ footer ul a:hover{color:var(--mint-deep)}
         </ul>
       </nav>
       <nav aria-label="Légal">
-        <h4 data-i18n="footer_legal">Légal</h4>
+        <h3 data-i18n="footer_legal">Légal</h3>
         <ul>
           <li><a href="#" data-i18n="footer_legal_terms">CGV</a></li>
           <li><a href="#" data-i18n="footer_legal_rules">Règlement intérieur</a></li>
@@ -1083,8 +1167,12 @@ footer ul a:hover{color:var(--mint-deep)}
       var k = el.getAttribute('data-i18n-aria');
       if (t[k] != null) el.setAttribute('aria-label', t[k]);
     });
-    var metaDesc = document.querySelector('[data-i18n-content="meta_description"]');
-    if (metaDesc && t.meta_description) metaDesc.content = t.meta_description;
+    document.querySelectorAll('[data-i18n-content="meta_description"]').forEach(function(el) {
+      if (t.meta_description) el.content = t.meta_description;
+    });
+    document.querySelectorAll('[data-i18n-content="meta_title"]').forEach(function(el) {
+      if (t.meta_title) el.content = t.meta_title;
+    });
     if (t.meta_title) document.title = t.meta_title;
     document.querySelectorAll('.lang-switch button, .lang-switch-mobile button').forEach(function(b) {
       b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
