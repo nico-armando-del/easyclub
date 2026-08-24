@@ -1,5 +1,5 @@
 /**
- * EasyClub i18n — Complete translation object
+ * OnClub i18n — Complete translation object
  * Languages: fr (source), en, es
  */
 window.I18N = {
@@ -7,7 +7,7 @@ window.I18N = {
   fr: {
 
     /* ── Meta ── */
-    meta_title: "EasyClub — La plateforme tout-en-un pour clubs sportifs",
+    meta_title: "OnClub — La plateforme tout-en-un pour clubs sportifs",
     meta_description: "Inscriptions en ligne, paiements automatiques sur votre compte, site web et boutique inclus. Encaissez 100 % de vos cotisations dès la rentrée.",
 
     /* ── Navbar ── */
@@ -16,7 +16,7 @@ window.I18N = {
     nav_pricing: "Tarifs",
     nav_faq: "FAQ",
     nav_cta: "Demander une démo",
-    nav_aria_home: "EasyClub — accueil",
+    nav_aria_home: "OnClub — accueil",
     nav_aria_main: "Navigation principale",
     nav_aria_open: "Ouvrir le menu",
     nav_aria_close: "Fermer le menu",
@@ -28,7 +28,7 @@ window.I18N = {
     hero_cta2: "Voir les tarifs",
 
     /* ── Dashboard mockup ── */
-    dash_aria: "Aperçu du tableau de bord EasyClub : impayés à zéro euro, 42 350 euros encaissés cette saison, 23 personnes en liste d’attente",
+    dash_aria: "Aperçu du tableau de bord OnClub : impayés à zéro euro, 42 350 euros encaissés cette saison, 23 personnes en liste d’attente",
     dash_hello: "Bonjour, ASC Danse Lyon",
     dash_season: "Saison 2026–2027",
     dash_stat_unpaid_label: "Impayés",
@@ -117,7 +117,7 @@ window.I18N = {
     /* ── Features bento ── */
     feat_kicker: "Fonctionnalités",
     feat_title: "Tout votre club, au même endroit.",
-    feat_lead: "De l’inscription au paiement, du site web aux emails : EasyClub remplace le tableur, la boîte mail et la boîte à chèques.",
+    feat_lead: "De l’inscription au paiement, du site web aux emails : OnClub remplace le tableur, la boîte mail et la boîte à chèques.",
     feat_pilotage_title: "Pilotage en un coup d’œil",
     feat_pilotage_text: "Filtrez par cours, par statut de paiement, par adresse ou code postal. Sélectionnez, modifiez en masse, puis exportez tout en un clic vers Excel, CSV ou Google&nbsp;Sheets. Vos données vous suivent où vous voulez.",
     feat_pilotage_tag: "Export Excel · CSV · Google Sheets",
@@ -140,7 +140,7 @@ window.I18N = {
     boutique_title: "Votre boutique club, sans Shopify.",
     boutique_photo_alt: "Joueurs de basket en tenue de club sur un terrain en salle",
     boutique_card_title: "Vendez l’équipement officiel, encaissez sans effort.",
-    boutique_card_text: "Pas besoin d’un deuxième outil ni d’un abonnement e-commerce. La boutique vit sur votre site EasyClub et les paiements arrivent au même endroit que les cotisations.",
+    boutique_card_text: "Pas besoin d’un deuxième outil ni d’un abonnement e-commerce. La boutique vit sur votre site OnClub et les paiements arrivent au même endroit que les cotisations.",
     boutique_li1: "Catalogue produits illimité",
     boutique_li2: "Variantes taille et couleur",
     boutique_li3: "Suivi du stock en temps réel",
@@ -161,7 +161,7 @@ window.I18N = {
     /* ── Pricing ── */
     pricing_kicker: "Tarifs",
     pricing_title: "Un prix simple : un pourcentage, zéro frais fixe.",
-    pricing_lead: "EasyClub ne coûte rien tant que votre club n’encaisse pas. Vous payez uniquement sur ce qui rentre.",
+    pricing_lead: "OnClub ne coûte rien tant que votre club n’encaisse pas. Vous payez uniquement sur ce qui rentre.",
 
     pricing_easypay_name: "EasyPay",
     pricing_easypay_pct: "2,9&nbsp;%",
@@ -173,7 +173,7 @@ window.I18N = {
     pricing_easypay_cta: "Commencer avec EasyPay",
 
     pricing_easyclub_badge: "La plus choisie",
-    pricing_easyclub_name: "EasyClub",
+    pricing_easyclub_name: "OnClub",
     pricing_easyclub_pct: "4,9&nbsp;%",
     pricing_easyclub_sub: "des cotisations encaissées, zéro frais fixe",
     pricing_easyclub_li1: "Tout EasyPay, plus :",
@@ -183,10 +183,10 @@ window.I18N = {
     pricing_easyclub_li5: "Emails automatiques et campagnes",
     pricing_easyclub_cta: "Demander une démo",
 
-    pricing_max_name: "EasyClub Max",
+    pricing_max_name: "OnClub Max",
     pricing_max_pct: "6,9&nbsp;%",
     pricing_max_sub: "des cotisations encaissées, zéro frais fixe",
-    pricing_max_li1: "Tout EasyClub, plus :",
+    pricing_max_li1: "Tout OnClub, plus :",
     pricing_max_li2: "Boutique club intégrée",
     pricing_max_li3: "Billetterie d’événements",
     pricing_max_li4: "Accompagnement prioritaire",
@@ -198,8 +198,8 @@ window.I18N = {
     compare_kicker: "La différence",
     compare_title: "Un formulaire générique, ou votre plateforme.",
     compare_lead: "Les cagnottes et les tableurs dépannent. Ils ne font pas vivre un club. Voilà ce qui nous sépare.",
-    compare_aria: "Comparatif EasyClub, plateforme de cagnotte et tableur",
-    compare_col_us: "EasyClub",
+    compare_aria: "Comparatif OnClub, plateforme de cagnotte et tableur",
+    compare_col_us: "OnClub",
     compare_col_fundraiser: "Cagnotte en ligne",
     compare_col_spreadsheet: "Le tableur Excel",
     compare_row1_label: "Site web à votre image et à votre nom",
@@ -241,7 +241,7 @@ window.I18N = {
     testi_title: "Ce qu’on leur fait vraiment gagner&nbsp;? Du temps.",
     testi_lead: "On ne change pas juste un outil, on change leurs soirées de rentrée. Plus de tableur jusqu’à minuit, plus de relances le dimanche.",
     testi_photo_alt: "Studio de l’école de danse, parquet, barre et miroir",
-    testi_quote: '« Avant, la rentrée c’était trois semaines de paperasse et des chèques partout. Avec EasyClub, <mark>tout est rentré avant le premier cours</mark> et je récupère mes soirées. Honnêtement, je ne reviendrai jamais en arrière. »',
+    testi_quote: '« Avant, la rentrée c’était trois semaines de paperasse et des chèques partout. Avec OnClub, <mark>tout est rentré avant le premier cours</mark> et je récupère mes soirées. Honnêtement, je ne reviendrai jamais en arrière. »',
     testi_author_name: "Noémie",
     testi_author_role: "Directrice, École de Danse",
     testi_stat1_num: "15 h",
@@ -255,13 +255,13 @@ window.I18N = {
     faq_kicker: "FAQ",
     faq_title: "Les questions qu’on nous pose à chaque démo.",
     faq1_q: "Combien ça coûte vraiment&nbsp;?",
-    faq1_a: 'Un pourcentage des cotisations encaissées, c’est tout. Pas d’abonnement, pas de frais d’installation, pas de coût par adhérent. Les frais bancaires sont inclus dans le pourcentage. Exemple : un club qui encaisse <span class="num">30 000 €</span> en formule EasyClub paie <span class="num">1 470 €</span> sur la saison, prélevés automatiquement au fil des encaissements.',
+    faq1_a: 'Un pourcentage des cotisations encaissées, c’est tout. Pas d’abonnement, pas de frais d’installation, pas de coût par adhérent. Les frais bancaires sont inclus dans le pourcentage. Exemple : un club qui encaisse <span class="num">30 000 €</span> en formule OnClub paie <span class="num">1 470 €</span> sur la saison, prélevés automatiquement au fil des encaissements.',
     faq2_q: "Où arrive l’argent des cotisations&nbsp;?",
     faq2_a: "Directement sur le compte de paiement de votre association. À aucun moment l’argent ne transite par nous&nbsp;: notre pourcentage est simplement prélevé à chaque transaction. Les paiements en espèces ou par chèque s’ajoutent à la main en deux clics, pour que votre tableau de bord reflète exactement votre caisse.",
     faq3_q: "On a un besoin spécifique, c’est possible&nbsp;?",
     faq3_a: "Très souvent, oui. Billetterie d’un gala, réservation de spectacle avec places numérotées, formulaire propre à votre discipline… Comme c’est votre plateforme, nous pouvons la développer sur mesure. Décrivez-nous le besoin en démo, on vous dit ce qui est possible et sous quel délai.",
     faq4_q: "Qui gère les remboursements&nbsp;?",
-    faq4_a: "Vous, en deux clics depuis le tableau de bord. Remboursement total ou partiel, le montant repart directement sur la carte de l’adhérent. Vous gardez la main sur votre politique d’annulation, EasyClub s’occupe de la mécanique bancaire.",
+    faq4_a: "Vous, en deux clics depuis le tableau de bord. Remboursement total ou partiel, le montant repart directement sur la carte de l’adhérent. Vous gardez la main sur votre politique d’annulation, OnClub s’occupe de la mécanique bancaire.",
     faq5_q: "Mes données sont où&nbsp;?",
     faq5_a: "Hébergées en Union européenne, conformes au RGPD. Les données de vos adhérents appartiennent à votre association : vous pouvez les exporter à tout moment et elles ne sont jamais revendues ni utilisées à des fins publicitaires.",
     faq6_q: "Combien de temps pour démarrer&nbsp;?",
@@ -289,7 +289,7 @@ window.I18N = {
     footer_legal_rules: "Règlement intérieur",
     footer_legal_guide: "Guide d’inscription",
     footer_legal_privacy: "Confidentialité",
-    footer_copyright: "© 2026 EasyClub",
+    footer_copyright: "© 2026 OnClub",
     footer_lang_aria: "Choix de la langue"
   },
 
@@ -297,7 +297,7 @@ window.I18N = {
   en: {
 
     /* ── Meta ── */
-    meta_title: "EasyClub — All-in-one platform for sports clubs",
+    meta_title: "OnClub — All-in-one platform for sports clubs",
     meta_description: "Online registration, automatic payments to your account, website and shop included. Collect 100% of membership fees from day one.",
 
     /* ── Navbar ── */
@@ -306,7 +306,7 @@ window.I18N = {
     nav_pricing: "Pricing",
     nav_faq: "FAQ",
     nav_cta: "Book a demo",
-    nav_aria_home: "EasyClub — home",
+    nav_aria_home: "OnClub — home",
     nav_aria_main: "Main navigation",
     nav_aria_open: "Open menu",
     nav_aria_close: "Close menu",
@@ -318,7 +318,7 @@ window.I18N = {
     hero_cta2: "See pricing",
 
     /* ── Dashboard mockup ── */
-    dash_aria: "EasyClub dashboard preview: zero unpaid fees, €42,350 collected this season, 23 on waitlist",
+    dash_aria: "OnClub dashboard preview: zero unpaid fees, €42,350 collected this season, 23 on waitlist",
     dash_hello: "Hello, ASC Danse Lyon",
     dash_season: "Season 2026–2027",
     dash_stat_unpaid_label: "Unpaid",
@@ -407,7 +407,7 @@ window.I18N = {
     /* ── Features bento ── */
     feat_kicker: "Features",
     feat_title: "Your entire club, in one place.",
-    feat_lead: "From registration to payment, from your website to emails: EasyClub replaces the spreadsheet, the inbox and the cheque book.",
+    feat_lead: "From registration to payment, from your website to emails: OnClub replaces the spreadsheet, the inbox and the cheque book.",
     feat_pilotage_title: "Bird’s-eye view",
     feat_pilotage_text: "Filter by class, payment status, address or postcode. Select, bulk-edit, then export to Excel, CSV or Google Sheets in one click. Your data follows you wherever you go.",
     feat_pilotage_tag: "Export Excel · CSV · Google Sheets",
@@ -430,7 +430,7 @@ window.I18N = {
     boutique_title: "Your club shop, without Shopify.",
     boutique_photo_alt: "Basketball players in club gear on an indoor court",
     boutique_card_title: "Sell official gear. Get paid effortlessly.",
-    boutique_card_text: "No need for a second tool or an e-commerce subscription. The shop lives on your EasyClub site and payments land in the same place as membership fees.",
+    boutique_card_text: "No need for a second tool or an e-commerce subscription. The shop lives on your OnClub site and payments land in the same place as membership fees.",
     boutique_li1: "Unlimited product catalogue",
     boutique_li2: "Size and colour variants",
     boutique_li3: "Real-time stock tracking",
@@ -451,7 +451,7 @@ window.I18N = {
     /* ── Pricing ── */
     pricing_kicker: "Pricing",
     pricing_title: "One simple price: a percentage. Zero fixed fees.",
-    pricing_lead: "EasyClub costs nothing until your club collects. You only pay on what comes in.",
+    pricing_lead: "OnClub costs nothing until your club collects. You only pay on what comes in.",
 
     pricing_easypay_name: "EasyPay",
     pricing_easypay_pct: "2.9%",
@@ -463,7 +463,7 @@ window.I18N = {
     pricing_easypay_cta: "Start with EasyPay",
 
     pricing_easyclub_badge: "Most popular",
-    pricing_easyclub_name: "EasyClub",
+    pricing_easyclub_name: "OnClub",
     pricing_easyclub_pct: "4.9%",
     pricing_easyclub_sub: "of collected fees, zero fixed costs",
     pricing_easyclub_li1: "Everything in EasyPay, plus:",
@@ -473,10 +473,10 @@ window.I18N = {
     pricing_easyclub_li5: "Automated emails and campaigns",
     pricing_easyclub_cta: "Book a demo",
 
-    pricing_max_name: "EasyClub Max",
+    pricing_max_name: "OnClub Max",
     pricing_max_pct: "6.9%",
     pricing_max_sub: "of collected fees, zero fixed costs",
-    pricing_max_li1: "Everything in EasyClub, plus:",
+    pricing_max_li1: "Everything in OnClub, plus:",
     pricing_max_li2: "Integrated club shop",
     pricing_max_li3: "Event ticketing",
     pricing_max_li4: "Priority support",
@@ -488,8 +488,8 @@ window.I18N = {
     compare_kicker: "The difference",
     compare_title: "A generic form, or your own platform.",
     compare_lead: "Fundraising pages and spreadsheets are fine in a pinch. They don’t run a club. Here’s what sets us apart.",
-    compare_aria: "Comparison: EasyClub vs online fundraiser vs spreadsheet",
-    compare_col_us: "EasyClub",
+    compare_aria: "Comparison: OnClub vs online fundraiser vs spreadsheet",
+    compare_col_us: "OnClub",
     compare_col_fundraiser: "Online fundraiser",
     compare_col_spreadsheet: "Spreadsheet",
     compare_row1_label: "Website with your brand and name",
@@ -531,7 +531,7 @@ window.I18N = {
     testi_title: "What do we really save them? Time.",
     testi_lead: "We don’t just swap a tool — we give them their evenings back. No more spreadsheets until midnight, no more reminders on Sunday.",
     testi_photo_alt: "Dance school studio with wooden floor, barre and mirror",
-    testi_quote: '“Before, September meant three weeks of paperwork and cheques everywhere. With EasyClub, <mark>everything was collected before the first class</mark> and I got my evenings back. Honestly, I’d never go back.”',
+    testi_quote: '“Before, September meant three weeks of paperwork and cheques everywhere. With OnClub, <mark>everything was collected before the first class</mark> and I got my evenings back. Honestly, I’d never go back.”',
     testi_author_name: "Noémie",
     testi_author_role: "Director, Dance School",
     testi_stat1_num: "15 hrs",
@@ -545,13 +545,13 @@ window.I18N = {
     faq_kicker: "FAQ",
     faq_title: "The questions we get at every demo.",
     faq1_q: "How much does it really cost?",
-    faq1_a: 'A percentage of collected fees — that’s it. No subscription, no setup fee, no per-member cost. Bank charges are included. Example: a club collecting <span class="num">€30,000</span> on the EasyClub plan pays <span class="num">€1,470</span> over the season, deducted automatically as payments come in.',
+    faq1_a: 'A percentage of collected fees — that’s it. No subscription, no setup fee, no per-member cost. Bank charges are included. Example: a club collecting <span class="num">€30,000</span> on the OnClub plan pays <span class="num">€1,470</span> over the season, deducted automatically as payments come in.',
     faq2_q: "Where does the membership money go?",
     faq2_a: "Straight to your club’s payment account. The money never passes through us — our percentage is simply deducted from each transaction. Cash and cheque payments can be logged manually in two clicks so your dashboard always matches your books.",
     faq3_q: "We have a specific need — is that possible?",
     faq3_a: "Very often, yes. Gala ticketing, numbered-seat reservations, discipline-specific forms… Because it’s your platform, we can build it to measure. Describe your need during the demo and we’ll tell you what’s possible and when.",
     faq4_q: "Who handles refunds?",
-    faq4_a: "You do, in two clicks from the dashboard. Full or partial refund — the amount goes straight back to the member’s card. You keep control of your cancellation policy; EasyClub handles the banking mechanics.",
+    faq4_a: "You do, in two clicks from the dashboard. Full or partial refund — the amount goes straight back to the member’s card. You keep control of your cancellation policy; OnClub handles the banking mechanics.",
     faq5_q: "Where is my data stored?",
     faq5_a: "In the European Union, fully GDPR-compliant. Your member data belongs to your club: you can export it at any time and it is never resold or used for advertising.",
     faq6_q: "How long does it take to get started?",
@@ -579,7 +579,7 @@ window.I18N = {
     footer_legal_rules: "Club rules",
     footer_legal_guide: "Registration guide",
     footer_legal_privacy: "Privacy",
-    footer_copyright: "© 2026 EasyClub",
+    footer_copyright: "© 2026 OnClub",
     footer_lang_aria: "Language selection"
   },
 
@@ -587,7 +587,7 @@ window.I18N = {
   es: {
 
     /* ── Meta ── */
-    meta_title: "EasyClub — La plataforma todo en uno para clubes",
+    meta_title: "OnClub — La plataforma todo en uno para clubes",
     meta_description: "Inscripciones online, pagos automáticos en su cuenta, sitio web y tienda incluidos. Cobre el 100 % de las cuotas desde el primer día.",
 
     /* ── Navbar ── */
@@ -596,7 +596,7 @@ window.I18N = {
     nav_pricing: "Precios",
     nav_faq: "FAQ",
     nav_cta: "Solicitar una demo",
-    nav_aria_home: "EasyClub — inicio",
+    nav_aria_home: "OnClub — inicio",
     nav_aria_main: "Navegación principal",
     nav_aria_open: "Abrir el menú",
     nav_aria_close: "Cerrar el menú",
@@ -608,7 +608,7 @@ window.I18N = {
     hero_cta2: "Ver precios",
 
     /* ── Dashboard mockup ── */
-    dash_aria: "Vista previa del panel EasyClub: cero impagos, 42 350 € cobrados esta temporada, 23 en lista de espera",
+    dash_aria: "Vista previa del panel OnClub: cero impagos, 42 350 € cobrados esta temporada, 23 en lista de espera",
     dash_hello: "Hola, ASC Danse Lyon",
     dash_season: "Temporada 2026–2027",
     dash_stat_unpaid_label: "Impagos",
@@ -697,7 +697,7 @@ window.I18N = {
     /* ── Features bento ── */
     feat_kicker: "Funcionalidades",
     feat_title: "Todo su club, en un solo lugar.",
-    feat_lead: "Desde la inscripción hasta el pago, desde el sitio web hasta los correos: EasyClub sustituye la hoja de cálculo, la bandeja de entrada y el talonario de cheques.",
+    feat_lead: "Desde la inscripción hasta el pago, desde el sitio web hasta los correos: OnClub sustituye la hoja de cálculo, la bandeja de entrada y el talonario de cheques.",
     feat_pilotage_title: "Visión global en un vistazo",
     feat_pilotage_text: "Filtre por clase, estado de pago, dirección o código postal. Seleccione, modifique en bloque y exporte todo con un clic a Excel, CSV o Google Sheets. Sus datos le acompañan donde los necesite.",
     feat_pilotage_tag: "Export Excel · CSV · Google Sheets",
@@ -720,7 +720,7 @@ window.I18N = {
     boutique_title: "Su tienda del club, sin Shopify.",
     boutique_photo_alt: "Jugadores de baloncesto con equipación del club en una cancha cubierta",
     boutique_card_title: "Venda el equipamiento oficial. Cobre sin esfuerzo.",
-    boutique_card_text: "No necesita una segunda herramienta ni una suscripción de e-commerce. La tienda vive en su sitio EasyClub y los pagos llegan al mismo lugar que las cuotas.",
+    boutique_card_text: "No necesita una segunda herramienta ni una suscripción de e-commerce. La tienda vive en su sitio OnClub y los pagos llegan al mismo lugar que las cuotas.",
     boutique_li1: "Catálogo de productos ilimitado",
     boutique_li2: "Variantes de talla y color",
     boutique_li3: "Seguimiento de stock en tiempo real",
@@ -741,7 +741,7 @@ window.I18N = {
     /* ── Pricing ── */
     pricing_kicker: "Precios",
     pricing_title: "Un precio simple: un porcentaje, cero costes fijos.",
-    pricing_lead: "EasyClub no cuesta nada mientras su club no cobre. Solo paga sobre lo que ingresa.",
+    pricing_lead: "OnClub no cuesta nada mientras su club no cobre. Solo paga sobre lo que ingresa.",
 
     pricing_easypay_name: "EasyPay",
     pricing_easypay_pct: "2,9&nbsp;%",
@@ -753,7 +753,7 @@ window.I18N = {
     pricing_easypay_cta: "Empezar con EasyPay",
 
     pricing_easyclub_badge: "La más elegida",
-    pricing_easyclub_name: "EasyClub",
+    pricing_easyclub_name: "OnClub",
     pricing_easyclub_pct: "4,9&nbsp;%",
     pricing_easyclub_sub: "de las cuotas cobradas, cero costes fijos",
     pricing_easyclub_li1: "Todo EasyPay, más:",
@@ -763,10 +763,10 @@ window.I18N = {
     pricing_easyclub_li5: "Correos automáticos y campañas",
     pricing_easyclub_cta: "Solicitar una demo",
 
-    pricing_max_name: "EasyClub Max",
+    pricing_max_name: "OnClub Max",
     pricing_max_pct: "6,9&nbsp;%",
     pricing_max_sub: "de las cuotas cobradas, cero costes fijos",
-    pricing_max_li1: "Todo EasyClub, más:",
+    pricing_max_li1: "Todo OnClub, más:",
     pricing_max_li2: "Tienda del club integrada",
     pricing_max_li3: "Venta de entradas para eventos",
     pricing_max_li4: "Soporte prioritario",
@@ -778,8 +778,8 @@ window.I18N = {
     compare_kicker: "La diferencia",
     compare_title: "Un formulario genérico, o su propia plataforma.",
     compare_lead: "Las plataformas de recaudación y las hojas de cálculo sacan de un apuro. No hacen funcionar un club. Esto es lo que nos distingue.",
-    compare_aria: "Comparativa: EasyClub, plataforma de recaudación y hoja de cálculo",
-    compare_col_us: "EasyClub",
+    compare_aria: "Comparativa: OnClub, plataforma de recaudación y hoja de cálculo",
+    compare_col_us: "OnClub",
     compare_col_fundraiser: "Plataforma de recaudación",
     compare_col_spreadsheet: "La hoja de cálculo",
     compare_row1_label: "Sitio web con su imagen y su nombre",
@@ -821,7 +821,7 @@ window.I18N = {
     testi_title: "¿Qué les hacemos ganar realmente? Tiempo.",
     testi_lead: "No cambiamos solo una herramienta, cambiamos sus noches de inicio de curso. Se acabaron las hojas de cálculo hasta medianoche y los recordatorios el domingo.",
     testi_photo_alt: "Estudio de la escuela de danza, parqué, barra y espejo",
-    testi_quote: '«Antes, el inicio de curso eran tres semanas de papeleo y cheques por todas partes. Con EasyClub, <mark>todo estaba cobrado antes de la primera clase</mark> y recuperé mis noches. Sinceramente, no volvería atrás jamás.»',
+    testi_quote: '«Antes, el inicio de curso eran tres semanas de papeleo y cheques por todas partes. Con OnClub, <mark>todo estaba cobrado antes de la primera clase</mark> y recuperé mis noches. Sinceramente, no volvería atrás jamás.»',
     testi_author_name: "Noémie",
     testi_author_role: "Directora, Escuela de Danza",
     testi_stat1_num: "15 h",
@@ -835,13 +835,13 @@ window.I18N = {
     faq_kicker: "FAQ",
     faq_title: "Las preguntas que nos hacen en cada demo.",
     faq1_q: "¿Cuánto cuesta realmente?",
-    faq1_a: 'Un porcentaje de las cuotas cobradas, nada más. Sin suscripción, sin costes de instalación, sin coste por socio. Las comisiones bancarias están incluidas. Ejemplo: un club que cobra <span class="num">30 000 €</span> con la fórmula EasyClub paga <span class="num">1 470 €</span> en la temporada, descontados automáticamente a medida que se recaudan.',
+    faq1_a: 'Un porcentaje de las cuotas cobradas, nada más. Sin suscripción, sin costes de instalación, sin coste por socio. Las comisiones bancarias están incluidas. Ejemplo: un club que cobra <span class="num">30 000 €</span> con la fórmula OnClub paga <span class="num">1 470 €</span> en la temporada, descontados automáticamente a medida que se recaudan.',
     faq2_q: "¿Dónde llega el dinero de las cuotas?",
     faq2_a: "Directamente a la cuenta de pago de su asociación. En ningún momento el dinero pasa por nosotros: nuestro porcentaje simplemente se descuenta en cada transacción. Los pagos en efectivo o con cheque se añaden manualmente en dos clics, para que su panel refleje exactamente su caja.",
     faq3_q: "¿Podemos cubrir una necesidad específica?",
     faq3_a: "Muy a menudo, sí. Venta de entradas para un gala, reserva de espectáculo con asientos numerados, formulario propio de su disciplina… Como es su plataforma, podemos desarrollarla a medida. Descríbanos la necesidad en la demo y le indicaremos qué es posible y en qué plazo.",
     faq4_q: "¿Quién gestiona las devoluciones?",
-    faq4_a: "Usted, en dos clics desde el panel. Devolución total o parcial, el importe vuelve directamente a la tarjeta del socio. Usted mantiene el control de su política de cancelación; EasyClub se encarga de la mecánica bancaria.",
+    faq4_a: "Usted, en dos clics desde el panel. Devolución total o parcial, el importe vuelve directamente a la tarjeta del socio. Usted mantiene el control de su política de cancelación; OnClub se encarga de la mecánica bancaria.",
     faq5_q: "¿Dónde están mis datos?",
     faq5_a: "Alojados en la Unión Europea, conformes con el RGPD. Los datos de sus socios pertenecen a su asociación: puede exportarlos en cualquier momento y nunca se revenden ni se utilizan con fines publicitarios.",
     faq6_q: "¿Cuánto se tarda en empezar?",
@@ -869,7 +869,7 @@ window.I18N = {
     footer_legal_rules: "Reglamento interno",
     footer_legal_guide: "Guía de inscripción",
     footer_legal_privacy: "Privacidad",
-    footer_copyright: "© 2026 EasyClub",
+    footer_copyright: "© 2026 OnClub",
     footer_lang_aria: "Selección de idioma"
   }
 
