@@ -37,8 +37,9 @@ Argument de vente : « EasyClub est gratuit. On prend 4,9 % sur ce qu'on vous ai
 ## La société
 
 * Forme : SAS en France
-* Équipe : un CEO (Président), Nico en CTO (Directeur Général), un troisième associé. Répartition 45 / 45 / 10
-* Pacte d'associés obligatoire dès le jour 1 : vesting 4 ans avec cliff 1 an, clause anti-deadlock pour le 45/45, préemption, good leaver / bad leaver
+* Équipe : deux fondateurs, oncle et neveu. Patrick Bertone (CEO et Directeur Général, résident fiscal en Espagne, Barcelone) et Nico-Armando Bertone (Président et CTO, France). Répartition 50 / 50
+* Nico est Président et unique représentant légal délibérément, pour préserver les droits de Patrick à l'allocation chômage espagnole (SEPE). Patrick ne perçoit aucune rémunération tant que ces droits courent
+* Pacte de fondateurs RÉDIGÉ (juin 2026, non signé) : vesting 4 ans avec cliff 12 mois, clause de sortie de blocage avec rachat forcé, préemption, bon et mauvais partant, lock-up 24 mois, cession de PI y compris antérieure, non-concurrence 12 mois
 * Marchés et langues : France d'abord, puis Espagne. Produit en 3 langues dès le départ : français, espagnol, anglais. i18n dans le code dès le jour 1 (textes, emails, factures, devises)
 * Domaine : easyclub.app ou geteasyclub.com avec /fr, /es, /en
 

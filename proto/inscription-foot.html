@@ -1,0 +1,671 @@
+<title>Moteur d'inscription OnClub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  /* jetons de marque du club, remplacés par la config */
+  --bg:#0A1826; --surface:#12283C; --surface-2:#183349; --line:#22455F;
+  --ink:#EEF4F8; --ink-soft:#9DB4C6; --ink-faint:#6E8CA3;
+  --accent:#FF7A3D; --accent-ink:#0A1826; --accent-soft:rgba(255,122,61,.14);
+  --ok:#3DDC97; --ok-soft:rgba(61,220,151,.14);
+  --warn:#FFC94D; --warn-soft:rgba(255,201,77,.13);
+  --bad:#FF6B6B; --bad-soft:rgba(255,107,107,.13);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Public Sans',system-ui,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.disp{font-family:'Archivo','Public Sans',sans-serif;line-height:1.1;text-wrap:balance;margin:0;letter-spacing:-.015em}
+button{font:inherit;cursor:pointer}
+input,select{font:inherit}
+
+/* ---------- barre outil prototype ---------- */
+.shell{position:sticky;top:0;z-index:60;background:#06101A;border-bottom:1px solid var(--line);
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:10px 18px}
+.shell .tag{font-family:'Archivo';font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.shell .sep{color:var(--ink-faint);font-size:12px}
+.pillbar{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.pill{background:transparent;border:1px solid var(--line);color:var(--ink-soft);
+  padding:5px 12px;border-radius:99px;font-size:12.5px;font-weight:600}
+.pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pill:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- mise en page ---------- */
+.page{max-width:1180px;margin:0 auto;padding:28px 18px 140px;display:grid;grid-template-columns:1fr 330px;gap:28px;align-items:start}
+@media (max-width:960px){.page{grid-template-columns:1fr;padding-bottom:190px}}
+.hero{grid-column:1/-1;padding:6px 0 4px}
+.hero .club{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.crest{width:40px;height:40px;border-radius:10px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-family:'Archivo';font-weight:800;font-size:15px}
+.hero h1{font-size:clamp(27px,4.4vw,40px);font-weight:800}
+.hero p{color:var(--ink-soft);max-width:62ch;margin:10px 0 0}
+
+/* ---------- sections ---------- */
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.sechead{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+.num{font-family:'Archivo';font-weight:800;font-size:12px;color:var(--accent);letter-spacing:.1em}
+.sechead h2{font-size:19px;font-weight:700}
+.sechead .req{margin-left:auto;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.hint{color:var(--ink-soft);font-size:13.5px;margin:2px 0 14px}
+
+/* ---------- champs ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid.three{grid-template-columns:2fr 1fr 1fr}
+@media (max-width:680px){.grid,.grid.three{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+.f label .star{color:var(--accent)}
+.f input,.f select{background:var(--surface-2);border:1px solid var(--line);color:var(--ink);
+  border-radius:10px;padding:11px 13px;width:100%}
+.f input::placeholder{color:var(--ink-faint)}
+.f .note{font-size:12px;color:var(--ink-faint)}
+
+/* ---------- badge calculé ---------- */
+.calc{display:flex;align-items:center;gap:10px;background:var(--ok-soft);border:1px solid var(--ok);
+  border-radius:10px;padding:10px 14px;margin-top:12px;font-size:13.5px}
+.calc strong{font-family:'Archivo';font-weight:800;color:var(--ok)}
+.calc.empty{background:var(--surface-2);border-color:var(--line);color:var(--ink-faint)}
+.calc.empty strong{color:var(--ink-faint)}
+
+/* ---------- alertes ---------- */
+.alert{border-radius:10px;padding:12px 15px;font-size:13.5px;margin-top:12px;border:1px solid}
+.alert.warn{background:var(--warn-soft);border-color:var(--warn)}
+.alert.warn b{color:var(--warn)}
+.alert.info{background:var(--accent-soft);border-color:var(--accent)}
+.alert.info b{color:var(--accent)}
+.alert.bad{background:var(--bad-soft);border-color:var(--bad)}
+.alert.bad b{color:var(--bad)}
+
+/* ---------- cartes équipe ---------- */
+.teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:6px}
+.team{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:15px;
+  display:flex;flex-direction:column;gap:9px;text-align:left;color:inherit;transition:border-color .15s,background .15s}
+.team:hover{border-color:var(--accent)}
+.team[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.team h3{font-size:15px;font-weight:700}
+.team .meta{font-size:12.5px;color:var(--ink-soft);display:flex;flex-direction:column;gap:3px}
+.team .meta span{display:flex;gap:7px;align-items:center}
+.team .dot{width:5px;height:5px;border-radius:99px;background:var(--accent);flex:none}
+.team .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:4px}
+.places{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.places.ok{color:var(--ok)} .places.low{color:var(--warn)} .places.full{color:var(--bad)}
+.price-tag{font-family:'Archivo';font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+.team.full{opacity:.72}
+.wl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);
+  background:var(--warn-soft);border:1px solid var(--warn);border-radius:99px;padding:2px 8px}
+
+/* ---------- cases ---------- */
+.check{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:10px;cursor:pointer;margin-top:9px}
+.check:hover{border-color:var(--ink-faint)}
+.check input{margin:3px 0 0;accent-color:var(--accent);width:17px;height:17px;flex:none}
+.check .t{font-size:13.5px}
+.check .t b{display:block;font-weight:600;font-size:14px}
+.check .t small{color:var(--ink-soft);display:block;margin-top:2px}
+.check.on{border-color:var(--accent);background:var(--accent-soft)}
+.check.off{opacity:.44;cursor:not-allowed}
+.check .amt{margin-left:auto;font-family:'Archivo';font-weight:800;font-size:14px;color:var(--ok);white-space:nowrap;font-variant-numeric:tabular-nums}
+.check .amt.cost{color:var(--ink)}
+
+/* ---------- documents ---------- */
+.doc{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px dashed var(--line);
+  border-radius:10px;margin-top:9px;background:var(--surface-2)}
+.doc .ico{width:30px;height:30px;border-radius:8px;background:var(--surface);display:grid;place-items:center;flex:none;font-size:14px}
+.doc .t{font-size:13.5px}
+.doc .t b{display:block;font-weight:600;font-size:14px}
+.doc .t small{color:var(--ink-soft)}
+.doc .st{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:99px;padding:3px 9px;white-space:nowrap;border:1px solid}
+.st.block{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.st.soft{color:var(--ink-soft);border-color:var(--line);background:var(--surface)}
+
+/* ---------- règlement bloquant ---------- */
+.rules{background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:18px 20px;margin-top:14px}
+.rules p{margin:0 0 12px;font-size:14px;font-weight:500}
+.dl{display:inline-flex;align-items:center;gap:8px;background:var(--accent-ink);color:var(--accent);
+  border:none;border-radius:99px;padding:9px 17px;font-weight:700;font-size:13.5px;font-family:'Archivo'}
+.rules .check{background:rgba(0,0,0,.09);border-color:rgba(0,0,0,.2);color:var(--accent-ink)}
+.rules .check.on{background:rgba(0,0,0,.16)}
+.rules .check small{color:rgba(0,0,0,.62)}
+.rules .err{color:#8A1B00;font-size:12.5px;font-weight:600;margin:7px 0 0}
+
+/* ---------- joueurs ---------- */
+.player{border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;background:var(--surface-2);margin-bottom:14px}
+.player > header{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.player > header h3{font-size:16px;font-weight:700;font-family:'Archivo'}
+.badge{font-family:'Archivo';font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--accent);color:var(--accent-ink);border-radius:99px;padding:3px 10px}
+.rm{margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink-soft);
+  border-radius:99px;padding:4px 12px;font-size:12.5px}
+.rm:hover{border-color:var(--bad);color:var(--bad)}
+.addp{width:100%;background:var(--accent);color:var(--accent-ink);border:none;border-radius:99px;
+  padding:14px;font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.sub{font-family:'Archivo';font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-faint);margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--line)}
+.player .sub:first-of-type{padding-top:0;border-top:none;margin-top:4px}
+
+/* ---------- panier ---------- */
+.cart{position:sticky;top:70px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+@media (max-width:960px){
+  .cart{position:fixed;left:0;right:0;bottom:0;top:auto;border-radius:16px 16px 0 0;
+    border-bottom:none;max-height:47vh;overflow-y:auto;z-index:50;box-shadow:0 -14px 40px rgba(0,0,0,.5)}
+}
+.cart h3{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.lines{display:flex;flex-direction:column;gap:2px;font-variant-numeric:tabular-nums}
+.ln{display:flex;gap:10px;font-size:13.5px;padding:5px 0;align-items:baseline}
+.ln .l{color:var(--ink-soft);min-width:0}
+.ln .v{margin-left:auto;font-weight:600;white-space:nowrap}
+.ln.who{color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.07em;text-transform:uppercase;
+  padding-top:12px;font-family:'Archivo'}
+.ln.disc .l,.ln.disc .v{color:var(--ok)}
+.ln.tot{border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
+.ln.tot .l{color:var(--ink);font-weight:700;font-size:15px}
+.ln.tot .v{font-family:'Archivo';font-weight:800;font-size:26px;color:var(--ink)}
+.cart .pay{width:100%;margin-top:14px;background:var(--accent);color:var(--accent-ink);border:none;
+  border-radius:99px;padding:13px;font-family:'Archivo';font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.04em}
+.cart .pay:disabled{background:var(--surface-2);color:var(--ink-faint);cursor:not-allowed}
+.cart .why{font-size:12px;color:var(--ink-faint);margin-top:9px;text-align:center}
+.split{display:flex;gap:7px;margin-top:11px}
+.split button{flex:1;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-soft);
+  border-radius:9px;padding:8px 4px;font-size:12px;font-weight:600}
+.split button[aria-pressed="true"]{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.empty-cart{color:var(--ink-faint);font-size:13.5px;padding:8px 0 4px}
+
+/* ---------- vue config ---------- */
+#vue-config{display:none;grid-column:1/-1}
+#vue-config.on{display:block}
+.page.config{grid-template-columns:1fr}
+pre{background:#06101A;border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  overflow-x:auto;font-size:12.5px;line-height:1.65;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-soft)}
+pre .k{color:var(--accent)} pre .s{color:var(--ok)} pre .n{color:var(--warn)}
+.cfgnote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:10px;padding:16px 20px;margin-bottom:18px}
+.cfgnote p{margin:6px 0;font-size:14px;color:var(--ink-soft)}
+.cfgnote p b{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="shell">
+  <span class="tag">OnClub</span>
+  <span class="sep">prototype du moteur · formulaire généré depuis une config</span>
+  <div class="pillbar">
+    <button class="pill" id="t-form" aria-pressed="true">Le formulaire</button>
+    <button class="pill" id="t-cfg" aria-pressed="false">La config</button>
+    <button class="pill" id="t-brand" aria-pressed="false">Changer de club</button>
+  </div>
+</div>
+
+<div class="page" id="page">
+
+  <div class="hero">
+    <div class="club"><div class="crest" id="crest">ASM</div>
+      <div><div class="disp" style="font-weight:700;font-size:15px" id="clubname">AS Montclar</div>
+      <div style="font-size:12.5px;color:var(--ink-soft)" id="season">Saison 2026 · 2027</div></div>
+    </div>
+    <h1 id="title">Inscription au club</h1>
+    <p id="sub">Inscrivez un ou plusieurs enfants en une seule fois. La catégorie et l'équipe sont calculées automatiquement à partir de l'année de naissance. Le paiement est dû à la validation, aucun document ne bloque le règlement.</p>
+  </div>
+
+  <main id="vue-form">
+    <div id="players"></div>
+    <button class="addp" id="add">+ Ajouter un autre joueur</button>
+
+    <section class="card" style="margin-top:16px">
+      <div class="sechead"><span class="num">R1</span><h2>Responsables légaux</h2><span class="req">obligatoire si mineur</span></div>
+      <p class="hint">Le responsable 1 reçoit les convocations, les factures et les relances. Il est le contact par défaut du club.</p>
+      <div class="sub">Responsable 1</div>
+      <div class="grid">
+        <div class="f"><label>Nom <span class="star">*</span></label><input placeholder="Nom de famille"></div>
+        <div class="f"><label>Prénom <span class="star">*</span></label><input placeholder="Prénom"></div>
+        <div class="f"><label>Lien avec le joueur <span class="star">*</span></label>
+          <select><option>Mère</option><option>Père</option><option>Tuteur légal</option><option>Autre</option></select></div>
+        <div class="f"><label>Téléphone <span class="star">*</span></label><input placeholder="06 12 34 56 78" inputmode="tel"></div>
+        <div class="f"><label>Adresse mail <span class="star">*</span></label><input placeholder="parent@exemple.fr" inputmode="email"></div>
+        <div class="f"><label>Profession (facultatif)</label><input placeholder="Utile pour les partenariats CE"></div>
+      </div>
+
+      <label class="check" id="sepwrap"><input type="checkbox" id="sep">
+        <span class="t"><b>Les parents sont séparés</b>
+        <small>Ouvre un second responsable avec sa propre adresse. Les deux reçoivent les convocations, aucune adresse n'est visible de l'autre.</small></span></label>
+
+      <div id="p2" hidden>
+        <div class="sub">Responsable 2</div>
+        <div class="grid">
+          <div class="f"><label>Nom <span class="star">*</span></label><input placeholder="Nom de famille"></div>
+          <div class="f"><label>Prénom <span class="star">*</span></label><input placeholder="Prénom"></div>
+          <div class="f"><label>Téléphone <span class="star">*</span></label><input placeholder="06 …" inputmode="tel"></div>
+          <div class="f"><label>Adresse mail <span class="star">*</span></label><input placeholder="parent2@exemple.fr" inputmode="email"></div>
+        </div>
+        <div class="alert info"><b>Adresses distinctes.</b> Chaque responsable saisit la sienne. Elles ne sont jamais fusionnées et ne sont jamais montrées à l'autre parent.</div>
+      </div>
+
+      <div class="sub">Contact d'urgence, autre que les responsables</div>
+      <div class="grid three">
+        <div class="f"><label>Nom et prénom <span class="star">*</span></label><input placeholder="Grand-parent, voisin…"></div>
+        <div class="f"><label>Téléphone <span class="star">*</span></label><input placeholder="06 …" inputmode="tel"></div>
+        <div class="f"><label>Lien</label><input placeholder="Grand-mère"></div>
+      </div>
+
+      <div class="sub">Autorisations</div>
+      <label class="check"><input type="checkbox" checked><span class="t"><b>Soins et hospitalisation d'urgence</b>
+        <small>J'autorise le club à faire pratiquer les soins urgents en cas de besoin.</small></span></label>
+      <label class="check"><input type="checkbox"><span class="t"><b>Transport par un autre parent du club</b>
+        <small>Déplacements aux matchs extérieurs. Vaut pour toute la saison, révocable à tout moment.</small></span></label>
+      <label class="check" id="img1"><input type="checkbox" checked><span class="t"><b>Droit à l'image, usage interne</b>
+        <small>Photos affichées au club et envoyées aux familles de l'équipe.</small></span></label>
+      <label class="check" id="img2"><input type="checkbox" checked><span class="t"><b>Droit à l'image, site du club</b>
+        <small>Photos publiées sur le site public du club.</small></span></label>
+      <label class="check" id="img3"><input type="checkbox"><span class="t"><b>Droit à l'image, réseaux sociaux</b>
+        <small>Instagram et Facebook du club. Refusable indépendamment des deux autres.</small></span></label>
+    </section>
+
+    <section class="card">
+      <div class="sechead"><span class="num">R2</span><h2>Engagement bénévole</h2><span class="req">un choix obligatoire</span></div>
+      <p class="hint">Le club tourne avec 60 bénévoles. Chaque famille tient trois créneaux dans la saison, ou choisit la contribution au fonctionnement.</p>
+      <label class="check on" id="ben-y"><input type="radio" name="ben" checked><span class="t"><b>Je tiens trois créneaux dans la saison</b>
+        <small>Buvette, arbitrage de touche, lavage des maillots ou transport. Le planning s'ouvre en septembre.</small></span><span class="amt">0 €</span></label>
+      <label class="check" id="ben-n"><input type="radio" name="ben"><span class="t"><b>Je choisis la contribution au fonctionnement</b>
+        <small>Le club emploie quelqu'un sur les créneaux que vous ne tenez pas. Encaissée avec l'inscription.</small></span><span class="amt cost">120 €</span></label>
+    </section>
+
+    <section class="card">
+      <div class="sechead"><span class="num">R3</span><h2>Validations</h2><span class="req">bloquant</span></div>
+      <div class="rules">
+        <p>Merci de télécharger et de lire le règlement intérieur avant de valider. Cocher la case confirme que vous en avez pris connaissance et que vous l'acceptez sans réserve.</p>
+        <button class="dl" id="dl-rules">↓ Règlement intérieur</button>
+        <label class="check" id="ck-rules-wrap"><input type="checkbox" id="ck-rules" disabled>
+          <span class="t"><b>Je reconnais avoir lu le règlement intérieur et en accepter l'intégralité des termes.</b></span></label>
+        <p class="err" id="rules-err">Veuillez d'abord télécharger et lire le règlement intérieur</p>
+      </div>
+      <label class="check" id="ck-charte-wrap"><input type="checkbox" id="ck-charte">
+        <span class="t"><b>Charte du joueur et charte des parents</b>
+        <small>Comportement au bord du terrain, respect de l'arbitre, ponctualité aux entraînements.</small></span></label>
+      <label class="check" id="ck-rgpd-wrap"><input type="checkbox" id="ck-rgpd">
+        <span class="t"><b>Traitement des données</b>
+        <small>Le club traite ces données pour gérer l'inscription et la licence. Les justificatifs de santé sont contrôlés puis effacés, seule leur validité est conservée.</small></span></label>
+    </section>
+  </main>
+
+  <aside class="cart" id="cart">
+    <h3>Votre inscription</h3>
+    <div class="lines" id="lines"><div class="empty-cart">Renseignez une date de naissance et choisissez une équipe pour voir le détail du prix.</div></div>
+    <div class="split" id="split" hidden>
+      <button aria-pressed="true" data-n="1">1 fois</button>
+      <button aria-pressed="false" data-n="3">3 fois</button>
+      <button aria-pressed="false" data-n="10">10 fois</button>
+    </div>
+    <button class="pay" id="pay" disabled>Payer et valider</button>
+    <p class="why" id="why">Complétez les validations pour continuer</p>
+  </aside>
+
+  <div id="vue-config"></div>
+</div>
+
+<script>
+/* ==========================================================================
+   LA CONFIG DU CLUB. Tout le formulaire, tous les prix et toutes les règles
+   sortent de cet objet. Le moteur, lui, ne connaît aucun club.
+   ========================================================================== */
+const CONFIG = {
+  club:{ nom:"AS Montclar", sigle:"ASM", saison:"2026 · 2027", anneeRef:2026,
+         marque:{ bg:"#0A1826", surface:"#12283C", surface2:"#183349", line:"#22455F",
+                  ink:"#EEF4F8", inkSoft:"#9DB4C6", inkFaint:"#6E8CA3",
+                  accent:"#FF7A3D", accentInk:"#0A1826" } },
+
+  // catégorie calculée par ANNÉE DE NAISSANCE, jamais par âge
+  categories:[
+    {code:"U7",  label:"U7",  naissance:[2020,2021], cotisation:150, licence:32},
+    {code:"U9",  label:"U9",  naissance:[2018,2019], cotisation:170, licence:32},
+    {code:"U11", label:"U11", naissance:[2016,2017], cotisation:190, licence:38},
+    {code:"U13", label:"U13", naissance:[2014,2015], cotisation:210, licence:38},
+    {code:"U15", label:"U15", naissance:[2012,2013], cotisation:230, licence:45},
+    {code:"U17", label:"U17", naissance:[2010,2011], cotisation:245, licence:45},
+    {code:"U19", label:"U19", naissance:[2008,2009], cotisation:255, licence:52},
+    {code:"SEN", label:"Senior", naissance:[1987,2007], cotisation:285, licence:62},
+    {code:"VET", label:"Vétéran", naissance:[1900,1986], cotisation:210, licence:62}
+  ],
+
+  equipes:[
+    {id:"u11a", cat:"U11", nom:"U11 A",      sexe:"tous", section:"Football à 11",
+     creneaux:["Mardi 17h30 · 19h00","Jeudi 17h30 · 19h00"], lieu:"Stade des Tilleuls", coach:"K. Berrada", places:22, pris:19},
+    {id:"u11b", cat:"U11", nom:"U11 B",      sexe:"tous", section:"Football à 11",
+     creneaux:["Mercredi 14h00 · 15h30"], lieu:"Stade des Tilleuls", coach:"M. Fournet", places:20, pris:20},
+    {id:"u13a", cat:"U13", nom:"U13 A",      sexe:"tous", section:"Football à 11",
+     creneaux:["Mardi 18h00 · 19h30","Vendredi 18h00 · 19h30"], lieu:"Stade des Tilleuls", coach:"S. Lemaire", places:20, pris:17},
+    {id:"u13f", cat:"U13", nom:"U13 Féminines", sexe:"f",  section:"Football féminin",
+     creneaux:["Mercredi 16h00 · 17h30"], lieu:"Complexe Jean Zay", coach:"L. Traoré", places:18, pris:9},
+    {id:"u13fu",cat:"U13", nom:"U13 Futsal",    sexe:"tous", section:"Futsal",
+     creneaux:["Samedi 10h00 · 11h30"], lieu:"Gymnase Pagnol", coach:"A. Sissoko", places:14, pris:11, complement:true, prix:70},
+    {id:"u15a", cat:"U15", nom:"U15 A",      sexe:"tous", section:"Football à 11",
+     creneaux:["Lundi 18h30 · 20h00","Jeudi 18h30 · 20h00"], lieu:"Stade des Tilleuls", coach:"R. Delcourt", places:22, pris:22},
+    {id:"u15b", cat:"U15", nom:"U15 B",      sexe:"tous", section:"Football à 11",
+     creneaux:["Mardi 18h30 · 20h00"], lieu:"Terrain annexe", coach:"P. Vasseur", places:22, pris:14},
+    {id:"sena", cat:"SEN", nom:"Seniors A",  sexe:"tous", section:"Football à 11",
+     creneaux:["Mardi 20h00 · 21h30","Jeudi 20h00 · 21h30"], lieu:"Stade des Tilleuls", coach:"D. Marchand", places:26, pris:21}
+  ],
+
+  frais:{
+    adhesion:{label:"Adhésion à l'association", montant:18, portee:"famille"},
+    equipement:{label:"Pack équipement obligatoire", montant:65, portee:"joueur",
+                detail:"Survêtement, maillot floqué, short, deux paires de chaussettes"},
+    mutation:{label:"Frais de mutation", montant:60, portee:"joueur",
+              detail:"Facturés par le district au club quitté"},
+    assurance:{label:"Assurance complémentaire", montant:12, portee:"joueur", optionnel:true,
+               detail:"Couvre les dommages dentaires et les lunettes, non couverts par la licence"}
+  },
+
+  reductions:[
+    {id:"fratrie2", label:"Réduction 2e enfant",  montant:20, auto:true},
+    {id:"fratrie3", label:"Réduction 3e enfant",  montant:40, auto:true},
+    {id:"multi",    label:"Réduction seconde section", montant:25, auto:true,
+                    detail:"Le joueur pratique dans deux sections du club"}
+  ],
+
+  // aides publiques, NON CUMULABLES entre elles : seule la plus élevée s'applique
+  aides:{ cumulables:false, liste:[
+    {id:"passsport", label:"Pass Sport",  montant:70,  condition:"Allocataire, joueur né entre 2007 et 2020", piece:"Code à 9 caractères"},
+    {id:"pass5e",    label:"Pass 5e",     montant:100, condition:"Élève de 5e", piece:"Code du dispositif"},
+    {id:"boncaf",    label:"Bon CAF",     montant:110, condition:"Selon quotient familial", piece:"Bon nominatif"},
+    {id:"ancv",      label:"Coupons Sport ANCV", montant:50, condition:"Coupons remis au club", piece:"Coupons physiques"},
+    {id:"mairie",    label:"Aide de la commune", montant:40, condition:"Résident de Montclar", piece:"Justificatif de domicile"}
+  ]},
+
+  documents:[
+    {id:"photo",    label:"Photo d'identité",  bloquant:false, detail:"Obligatoire pour la licence FFF, une photo prise au téléphone suffit"},
+    {id:"identite", label:"Pièce d'identité ou livret de famille", bloquant:false, detail:"Première licence uniquement"},
+    {id:"sante",    label:"Questionnaire de santé QS-Sport", bloquant:false,
+                    detail:"Pour les mineurs. Le club contrôle puis efface le document, seule la validité est conservée"},
+    {id:"surclass", label:"Certificat médical de surclassement", bloquant:false, conditionnel:"surclassement",
+                    detail:"Mention obligatoire autorisant la pratique en catégorie supérieure"},
+    {id:"mutation", label:"Accord du club quitté", bloquant:true, conditionnel:"mutation",
+                    detail:"Sans lui le district refuse la licence, la place ne peut pas être réservée"}
+  ],
+
+  benevolat:{ quota:3, contribution:120 },
+  echeances:[1,3,10],
+  listeAttente:{ actif:true, fenetreHeures:48 }
+};
+
+/* ==========================================================================
+   LE MOTEUR. Il ne contient aucune règle propre à un club.
+   ========================================================================== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const eur=n=>(Math.round(n*100)/100).toLocaleString('fr-FR',{minimumFractionDigits:0})+' €';
+let players=[], seq=0, rulesRead=false;
+
+const catOf=y=>!y?null:CONFIG.categories.find(c=>y>=c.naissance[0]&&y<=c.naissance[1])||null;
+
+function newPlayer(){ return {uid:++seq, prenom:'', nom:'', annee:null, sexe:'tous',
+  statut:'nouvelle', equipes:[], attente:[], surclassement:false, aide:null, assurance:false}; }
+
+/* ---------- rendu d'un joueur ---------- */
+function renderPlayer(p,i){
+  const cat=catOf(p.annee);
+  const el=document.createElement('section');
+  el.className='card player'; el.dataset.uid=p.uid;
+
+  const dispo=cat?CONFIG.equipes.filter(e=>e.cat===cat.code&&(e.sexe==='tous'||e.sexe===p.sexe)):[];
+
+  el.innerHTML=`
+  <header>
+    <span class="badge">Joueur ${i+1}</span>
+    <h3>${p.prenom||p.nom?`${p.prenom} ${p.nom}`.trim():'Nouveau joueur'}</h3>
+    ${i>0?'<button class="rm" data-act="rm">Retirer</button>':''}
+  </header>
+
+  <div class="sub">Identité</div>
+  <div class="grid">
+    <div class="f"><label>Prénom <span class="star">*</span></label><input data-k="prenom" value="${p.prenom}" placeholder="Prénom du joueur"></div>
+    <div class="f"><label>Nom <span class="star">*</span></label><input data-k="nom" value="${p.nom}" placeholder="Nom du joueur"></div>
+    <div class="f"><label>Année de naissance <span class="star">*</span></label>
+      <select data-k="annee"><option value="">Choisir…</option>
+      ${Array.from({length:45},(_,k)=>2021-k).map(y=>`<option value="${y}" ${p.annee===y?'selected':''}>${y}</option>`).join('')}</select>
+      <span class="note">La catégorie se calcule sur l'année, jamais sur l'âge du jour.</span></div>
+    <div class="f"><label>Sexe <span class="star">*</span></label>
+      <select data-k="sexe"><option value="tous" ${p.sexe==='tous'?'selected':''}>Masculin</option>
+      <option value="f" ${p.sexe==='f'?'selected':''}>Féminin</option></select>
+      <span class="note">Ouvre l'accès aux équipes féminines du club.</span></div>
+  </div>
+
+  <div class="calc ${cat?'':'empty'}">${cat
+    ? `Catégorie <strong>${cat.label}</strong> · cotisation ${eur(cat.cotisation)} · licence FFF ${eur(cat.licence)} · ${dispo.length} équipe${dispo.length>1?'s':''} ouverte${dispo.length>1?'s':''}`
+    : `<strong>Catégorie en attente</strong> · renseignez l'année de naissance`}</div>
+
+  <div class="sub">Licence</div>
+  <div class="grid">
+    <div class="f"><label>Situation <span class="star">*</span></label>
+      <select data-k="statut">
+        <option value="nouvelle" ${p.statut==='nouvelle'?'selected':''}>Première licence</option>
+        <option value="renouv" ${p.statut==='renouv'?'selected':''}>Renouvellement au club</option>
+        <option value="mutation" ${p.statut==='mutation'?'selected':''}>Mutation, je viens d'un autre club</option>
+      </select></div>
+    ${p.statut==='mutation'?`
+    <div class="f"><label>Club quitté <span class="star">*</span></label><input placeholder="Nom du club précédent"></div>
+    <div class="f"><label>Numéro de licence <span class="star">*</span></label><input placeholder="2 543 812 345">
+      <span class="note">Seule clé stable de rapprochement avec Footclubs.</span></div>`:''}
+  </div>
+  ${p.statut==='mutation'?`<div class="alert warn"><b>Mutation.</b> ${eur(CONFIG.frais.mutation.montant)} de frais de district s'ajoutent, et l'accord du club quitté est indispensable. Tant qu'il manque, la place n'est pas réservée.</div>`:''}
+
+  ${cat&&['U13','U15','U17'].includes(cat.code)?`
+  <label class="check ${p.surclassement?'on':''}"><input type="checkbox" data-k="surclassement" ${p.surclassement?'checked':''}>
+    <span class="t"><b>Demander un surclassement</b><small>Jouer dans la catégorie supérieure. Nécessite un certificat médical portant la mention.</small></span></label>`:''}
+
+  <div class="sub">Équipe</div>
+  ${!cat?`<p class="hint">Renseignez l'année de naissance pour voir les équipes ouvertes à ce joueur.</p>`
+   :`<p class="hint">Seules les équipes de la catégorie ${cat.label} sont proposées. Une équipe complète bascule en liste d'attente, la place est proposée sous ${CONFIG.listeAttente.fenetreHeures} h en cas de désistement.</p>
+   <div class="teams">${dispo.map(e=>{
+     const reste=e.places-e.pris, full=reste<=0;
+     const sel=p.equipes.includes(e.id), wl=p.attente.includes(e.id);
+     return `<button type="button" class="team ${full?'full':''}" data-team="${e.id}" aria-pressed="${sel||wl}">
+       <h3>${e.nom}</h3>
+       <div class="meta">
+         ${e.creneaux.map(c=>`<span><i class="dot"></i>${c}</span>`).join('')}
+         <span><i class="dot"></i>${e.lieu}</span>
+         <span><i class="dot"></i>${e.coach}</span>
+         <span><i class="dot"></i>${e.section}</span>
+       </div>
+       <div class="foot">
+         ${full?'<span class="wl">Liste d’attente</span>'
+              :`<span class="places ${reste<=3?'low':'ok'}">${reste} place${reste>1?'s':''} sur ${e.places}</span>`}
+         <span class="price-tag">${e.complement?'+ '+eur(e.prix):eur(cat.cotisation)}</span>
+       </div></button>`}).join('')}</div>
+   ${p.attente.length?`<div class="alert warn"><b>Liste d'attente.</b> Vous serez prévenu dès qu'une place se libère et vous aurez ${CONFIG.listeAttente.fenetreHeures} h pour la confirmer. Rien n'est débité tant que la place n'est pas acceptée.</div>`:''}
+   ${p.equipes.length>1?`<div class="alert info"><b>Seconde section.</b> ${eur(25)} de réduction appliqués automatiquement.</div>`:''}`}
+
+  <div class="sub">Équipement</div>
+  <div class="grid three">
+    <div class="f"><label>Taille de maillot <span class="star">*</span></label>
+      <select><option>Choisir…</option><option>6 ans</option><option>8 ans</option><option>10 ans</option>
+      <option>12 ans</option><option>14 ans</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></div>
+    <div class="f"><label>Pointure</label><select><option>Choisir…</option>${Array.from({length:18},(_,k)=>28+k).map(n=>`<option>${n}</option>`).join('')}</select></div>
+    <div class="f"><label>Numéro souhaité</label><input placeholder="10" inputmode="numeric"><span class="note">Attribué si disponible.</span></div>
+  </div>
+  <label class="check ${p.assurance?'on':''}"><input type="checkbox" data-k="assurance" ${p.assurance?'checked':''}>
+    <span class="t"><b>${CONFIG.frais.assurance.label}</b><small>${CONFIG.frais.assurance.detail}</small></span>
+    <span class="amt cost">${eur(CONFIG.frais.assurance.montant)}</span></label>
+
+  <div class="sub">Aides et réductions</div>
+  <p class="hint">Les aides publiques ne sont pas cumulables entre elles. Sélectionnez-en une, la plus avantageuse est mise en avant. Les réductions fratrie et seconde section, elles, s'ajoutent automatiquement.</p>
+  ${CONFIG.aides.liste.map(a=>{
+    const on=p.aide===a.id, off=p.aide&&!on;
+    return `<label class="check ${on?'on':''} ${off?'off':''}"><input type="radio" name="aide-${p.uid}" data-aide="${a.id}" ${on?'checked':''} ${off?'disabled':''}>
+      <span class="t"><b>${a.label}</b><small>${a.condition} · ${a.piece}</small></span>
+      <span class="amt">− ${eur(a.montant)}</span></label>`}).join('')}
+  ${p.aide?`<button class="rm" data-act="noaide" style="margin-top:10px">Retirer l'aide sélectionnée</button>`:''}
+
+  <div class="sub">Documents</div>
+  <p class="hint">Vous pouvez payer sans les avoir sous la main. Un lien de dépôt vous est envoyé et le club relance automatiquement.</p>
+  ${CONFIG.documents.filter(d=>!d.conditionnel
+      ||(d.conditionnel==='mutation'&&p.statut==='mutation')
+      ||(d.conditionnel==='surclassement'&&p.surclassement))
+    .map(d=>`<div class="doc"><div class="ico">↑</div>
+      <div class="t"><b>${d.label}</b><small>${d.detail}</small></div>
+      <span class="st ${d.bloquant?'block':'soft'}">${d.bloquant?'bloquant':'non bloquant'}</span></div>`).join('')}
+  `;
+  return el;
+}
+
+/* ---------- calcul du prix, la partie qui doit être juste ---------- */
+function compute(){
+  const groups=[]; let famille=0, nbPayants=0;
+
+  players.forEach((p,i)=>{
+    const cat=catOf(p.annee); if(!cat) return;
+    const principales=p.equipes.map(id=>CONFIG.equipes.find(e=>e.id===id)).filter(e=>e&&!e.complement);
+    const compl=p.equipes.map(id=>CONFIG.equipes.find(e=>e.id===id)).filter(e=>e&&e.complement);
+    if(!principales.length&&!compl.length) return;
+
+    const L=[]; let s=0;
+    if(principales.length){ L.push([`Cotisation ${cat.label}`,cat.cotisation]); s+=cat.cotisation;
+                            L.push([`Licence FFF ${cat.label}`,cat.licence]); s+=cat.licence; }
+    compl.forEach(e=>{ L.push([`${e.nom}, seconde section`,e.prix]); s+=e.prix; });
+    L.push([CONFIG.frais.equipement.label,CONFIG.frais.equipement.montant]); s+=CONFIG.frais.equipement.montant;
+    if(p.statut==='mutation'){ L.push([CONFIG.frais.mutation.label,CONFIG.frais.mutation.montant]); s+=CONFIG.frais.mutation.montant; }
+    if(p.assurance){ L.push([CONFIG.frais.assurance.label,CONFIG.frais.assurance.montant]); s+=CONFIG.frais.assurance.montant; }
+
+    const D=[];
+    if(p.equipes.length>1){ const r=CONFIG.reductions.find(x=>x.id==='multi'); D.push([r.label,-r.montant]); s-=r.montant; }
+    nbPayants++;
+    if(nbPayants===2){ const r=CONFIG.reductions.find(x=>x.id==='fratrie2'); D.push([r.label,-r.montant]); s-=r.montant; }
+    if(nbPayants>=3){ const r=CONFIG.reductions.find(x=>x.id==='fratrie3'); D.push([r.label,-r.montant]); s-=r.montant; }
+    if(p.aide){ const a=CONFIG.aides.liste.find(x=>x.id===p.aide); D.push([a.label,-a.montant]); s-=a.montant; }
+
+    s=Math.max(0,s);
+    groups.push({nom:`${p.prenom||'Joueur'} ${p.nom||i+1}`.trim(),lignes:L,remises:D,total:s});
+    famille+=s;
+  });
+
+  if(groups.length){
+    famille+=CONFIG.frais.adhesion.montant;
+    if($('#ben-n input').checked) famille+=CONFIG.benevolat.contribution;
+  }
+  return {groups,famille};
+}
+
+function renderCart(){
+  const {groups,famille}=compute(), box=$('#lines');
+  if(!groups.length){
+    box.innerHTML='<div class="empty-cart">Renseignez une date de naissance et choisissez une équipe pour voir le détail du prix.</div>';
+    $('#split').hidden=true;
+  } else {
+    let h='';
+    groups.forEach(g=>{
+      h+=`<div class="ln who"><span class="l">${g.nom}</span></div>`;
+      g.lignes.forEach(([l,v])=>h+=`<div class="ln"><span class="l">${l}</span><span class="v">${eur(v)}</span></div>`);
+      g.remises.forEach(([l,v])=>h+=`<div class="ln disc"><span class="l">${l}</span><span class="v">${eur(v)}</span></div>`);
+    });
+    h+=`<div class="ln"><span class="l">${CONFIG.frais.adhesion.label}, une fois par famille</span><span class="v">${eur(CONFIG.frais.adhesion.montant)}</span></div>`;
+    if($('#ben-n input').checked) h+=`<div class="ln"><span class="l">Contribution au fonctionnement</span><span class="v">${eur(CONFIG.benevolat.contribution)}</span></div>`;
+    h+=`<div class="ln tot"><span class="l">Total</span><span class="v">${eur(famille)}</span></div>`;
+    const n=+$('#split [aria-pressed="true"]').dataset.n;
+    if(n>1) h+=`<div class="ln"><span class="l">Soit ${n} × </span><span class="v">${eur(Math.ceil(famille/n))}</span></div>`;
+    box.innerHTML=h; $('#split').hidden=false;
+  }
+
+  const ok=groups.length&&$('#ck-rules').checked&&$('#ck-charte').checked&&$('#ck-rgpd').checked;
+  $('#pay').disabled=!ok;
+  $('#why').textContent=!groups.length?'Choisissez au moins une équipe'
+    :!ok?'Acceptez le règlement, les chartes et le traitement des données'
+    :'Aucun document n\'est exigé pour payer';
+}
+
+function render(){
+  const box=$('#players'); box.innerHTML='';
+  players.forEach((p,i)=>box.appendChild(renderPlayer(p,i)));
+  renderCart();
+}
+
+/* ---------- interactions ---------- */
+$('#players').addEventListener('input',e=>{
+  const card=e.target.closest('.player'); if(!card) return;
+  const p=players.find(x=>x.uid==card.dataset.uid), k=e.target.dataset.k;
+  if(!k) return;
+  if(k==='annee'){ p.annee=+e.target.value||null; p.equipes=[]; p.attente=[]; }
+  else if(k==='sexe'){ p.sexe=e.target.value; p.equipes=[]; p.attente=[]; }
+  else if(k==='statut'){ p.statut=e.target.value; }
+  else if(k==='surclassement'||k==='assurance'){ p[k]=e.target.checked; }
+  else { p[k]=e.target.value; renderCart();
+         const h=card.querySelector('header h3');
+         h.textContent=(p.prenom||p.nom)?`${p.prenom} ${p.nom}`.trim():'Nouveau joueur'; return; }
+  render();
+});
+
+$('#players').addEventListener('click',e=>{
+  const card=e.target.closest('.player'); if(!card) return;
+  const p=players.find(x=>x.uid==card.dataset.uid);
+  const t=e.target.closest('[data-team]');
+  if(t){ const eq=CONFIG.equipes.find(x=>x.id===t.dataset.team), full=eq.places-eq.pris<=0;
+    const arr=full?p.attente:p.equipes, other=full?p.equipes:p.attente;
+    const j=arr.indexOf(eq.id);
+    if(j>=0) arr.splice(j,1); else { arr.push(eq.id); const o=other.indexOf(eq.id); if(o>=0) other.splice(o,1); }
+    render(); return; }
+  const a=e.target.closest('[data-aide]');
+  if(a){ p.aide=a.dataset.aide; render(); return; }
+  const act=e.target.closest('[data-act]');
+  if(act?.dataset.act==='rm'){ players=players.filter(x=>x.uid!=p.uid); render(); return; }
+  if(act?.dataset.act==='noaide'){ p.aide=null; render(); return; }
+});
+
+$('#add').addEventListener('click',()=>{ players.push(newPlayer()); render();
+  window.scrollTo({top:document.body.scrollHeight-900,behavior:'smooth'}); });
+
+$('#sep').addEventListener('change',e=>{ $('#p2').hidden=!e.target.checked;
+  $('#sepwrap').classList.toggle('on',e.target.checked); });
+
+$('#dl-rules').addEventListener('click',()=>{ rulesRead=true;
+  $('#ck-rules').disabled=false; $('#rules-err').style.display='none';
+  $('#dl-rules').textContent='✓ Règlement téléchargé'; });
+
+['#ck-rules','#ck-charte','#ck-rgpd'].forEach(s=>$(s).addEventListener('change',e=>{
+  e.target.closest('.check').classList.toggle('on',e.target.checked); renderCart(); }));
+
+$$('#ben-y input, #ben-n input').forEach(r=>r.addEventListener('change',()=>{
+  $('#ben-y').classList.toggle('on',$('#ben-y input').checked);
+  $('#ben-n').classList.toggle('on',$('#ben-n input').checked); renderCart(); }));
+
+$('#split').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return;
+  $$('#split button').forEach(x=>x.setAttribute('aria-pressed',x===b)); renderCart(); });
+
+/* ---------- vue config ---------- */
+const color=j=>j.replace(/("(\\\\u[\da-fA-F]{4}|\\\\[^u]|[^\\\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+  m=>`<span class="${/^"/.test(m)?(/:$/.test(m)?'k':'s'):'n'}">${m}</span>`);
+
+$('#vue-config').innerHTML=`
+  <div class="cfgnote">
+    <p><b>Voici tout ce qui change d'un club à l'autre.</b> Le formulaire de gauche est entièrement produit par cet objet. Le moteur, lui, ne contient aucune règle propre à l'AS Montclar.</p>
+    <p>Un club de danse aura la même structure avec des niveaux au lieu de catégories d'âge, une licence FFDanse au lieu d'une licence FFF, et un cours d'essai avec paiement bloqué. Le code, lui, ne bouge pas.</p>
+    <p>C'est cet objet que l'IA produit à partir du brief du club, que tu relis en quinze minutes, et que tu pousses.</p>
+  </div>
+  <pre>${color(JSON.stringify(CONFIG,null,2).replace(/&/g,'&amp;').replace(/</g,'&lt;'))}</pre>`;
+
+/* ---------- bascule de vues et de marque ---------- */
+const MARQUES=[
+  {nom:"AS Montclar", sigle:"ASM", t:{bg:"#0A1826",surface:"#12283C",s2:"#183349",line:"#22455F",
+    ink:"#EEF4F8",soft:"#9DB4C6",faint:"#6E8CA3",acc:"#FF7A3D",accInk:"#0A1826"}},
+  {nom:"Étoile de Rivelaine", sigle:"ER", t:{bg:"#F6F4EF",surface:"#FFFFFF",s2:"#F0EDE5",line:"#DFDACE",
+    ink:"#161310",soft:"#5C554B",faint:"#8B8377",acc:"#1F6B4A",accInk:"#FFFFFF"}},
+  {nom:"FC Vallon", sigle:"FCV", t:{bg:"#0D0D0F",surface:"#161619",s2:"#1D1D21",line:"#2C2C31",
+    ink:"#F4F4F5",soft:"#A1A1A8",faint:"#71717A",acc:"#E63946",accInk:"#FFFFFF"}}
+];
+let mi=0;
+$('#t-brand').addEventListener('click',()=>{
+  mi=(mi+1)%MARQUES.length; const m=MARQUES[mi], r=document.documentElement.style;
+  r.setProperty('--bg',m.t.bg); r.setProperty('--surface',m.t.surface); r.setProperty('--surface-2',m.t.s2);
+  r.setProperty('--line',m.t.line); r.setProperty('--ink',m.t.ink); r.setProperty('--ink-soft',m.t.soft);
+  r.setProperty('--ink-faint',m.t.faint); r.setProperty('--accent',m.t.acc); r.setProperty('--accent-ink',m.t.accInk);
+  r.setProperty('--accent-soft',m.t.acc+'24');
+  $('#clubname').textContent=m.nom; $('#crest').textContent=m.sigle;
+});
+
+$('#t-form').addEventListener('click',()=>{
+  $('#t-form').setAttribute('aria-pressed','true'); $('#t-cfg').setAttribute('aria-pressed','false');
+  $('#vue-form').style.display=''; $('#cart').style.display=''; $('#vue-config').classList.remove('on');
+  $('#page').classList.remove('config');
+});
+$('#t-cfg').addEventListener('click',()=>{
+  $('#t-cfg').setAttribute('aria-pressed','true'); $('#t-form').setAttribute('aria-pressed','false');
+  $('#vue-form').style.display='none'; $('#cart').style.display='none'; $('#vue-config').classList.add('on');
+  $('#page').classList.add('config');
+});
+
+players.push(newPlayer()); render();
+</script>

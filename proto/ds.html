@@ -1,0 +1,353 @@
+<title>Design system OnClub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* ---------- COUCHE 1 · PRIMITIVES ---------- */
+:root{
+  --oc-neutral-0:#FFFFFF;   --oc-neutral-50:#FAFAF7;  --oc-neutral-100:#F2F1EB;
+  --oc-neutral-200:#E8E6DE; --oc-neutral-300:#D6D3C8; --oc-neutral-400:#A8A49A;
+  --oc-neutral-500:#6E6E66; --oc-neutral-600:#5C5C54; --oc-neutral-700:#43433D;
+  --oc-neutral-800:#2A2C2C; --oc-neutral-900:#191C20; --oc-neutral-950:#0E1116;
+  --oc-mint-50:#EAFBF3;  --oc-mint-100:#CDF5E3; --oc-mint-200:#9DEBC8; --oc-mint-300:#6BE2AE;
+  --oc-mint-400:#3DDC97; --oc-mint-500:#22B77A; --oc-mint-600:#16915F; --oc-mint-700:#0F6B47;
+  --oc-mint-800:#0D5238; --oc-mint-900:#0F3D2A;
+  --oc-lav-100:#EFEDFB; --oc-lav-300:#C9C4F2; --oc-lav-500:#7D75C9; --oc-lav-700:#4A4290;
+  --oc-amber-100:#FDF3DC; --oc-amber-400:#E0A62A; --oc-amber-700:#92600A;
+  --oc-red-100:#FDECEC; --oc-red-300:#F0918C; --oc-red-500:#E0544F; --oc-red-700:#9B2C28;
+}
+/* ---------- COUCHE 2 · SÉMANTIQUE, CLAIR ---------- */
+:root{
+  --surface-page:var(--oc-neutral-50); --surface-raised:var(--oc-neutral-0);
+  --surface-sunken:var(--oc-neutral-100); --surface-inverse:var(--oc-neutral-950);
+  --content-primary:var(--oc-neutral-950); --content-secondary:var(--oc-neutral-600);
+  --content-muted:var(--oc-neutral-500); --content-disabled:var(--oc-neutral-400);
+  --content-inverse:var(--oc-neutral-50);
+  --border-subtle:var(--oc-neutral-200); --border-strong:var(--oc-neutral-950);
+  --border-focus:var(--oc-mint-400);
+  --action-primary:var(--oc-mint-400); --action-primary-hover:var(--oc-mint-500);
+  --action-on-primary:var(--oc-mint-900); --action-quiet-hover:var(--oc-neutral-100);
+  --money-received:var(--oc-mint-700); --money-due:var(--oc-amber-700);
+  --money-overdue:var(--oc-red-700);   --money-neutral:var(--oc-neutral-500);
+  --money-received-surface:var(--oc-mint-50); --money-due-surface:var(--oc-amber-100);
+  --money-overdue-surface:var(--oc-red-100);
+  --feedback-success:var(--oc-mint-700); --feedback-warning:var(--oc-amber-700);
+  --feedback-error:var(--oc-red-700);    --feedback-info:var(--oc-lav-700);
+  --feedback-success-surface:var(--oc-mint-50); --feedback-warning-surface:var(--oc-amber-100);
+  --feedback-error-surface:var(--oc-red-100);   --feedback-info-surface:var(--oc-lav-100);
+  --font-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --font-body:'Poppins',system-ui,sans-serif;
+  --radius-chip:8px; --radius-field:12px; --radius-card:22px; --radius-pill:999px;
+  --shadow-soft:0 20px 60px rgb(14 17 22 / .08);
+  --ease-brand:cubic-bezier(.22,1,.36,1);
+}
+/* ---------- COUCHE 2 bis · SOMBRE ---------- */
+.dark{
+  --surface-page:var(--oc-neutral-950); --surface-raised:var(--oc-neutral-900);
+  --surface-sunken:#090B0F; --surface-inverse:var(--oc-neutral-50);
+  --content-primary:var(--oc-neutral-50); --content-secondary:var(--oc-neutral-300);
+  --content-muted:var(--oc-neutral-400); --content-disabled:var(--oc-neutral-600);
+  --content-inverse:var(--oc-neutral-950);
+  --border-subtle:var(--oc-neutral-800); --border-strong:var(--oc-neutral-300);
+  --money-received:var(--oc-mint-300); --money-due:var(--oc-amber-400); --money-overdue:var(--oc-red-300);
+  --money-neutral:var(--oc-neutral-400);
+  --money-received-surface:rgb(61 220 151 / .12); --money-due-surface:rgb(224 166 42 / .12);
+  --money-overdue-surface:rgb(224 84 79 / .12);
+  --feedback-success:var(--oc-mint-300); --feedback-warning:var(--oc-amber-400);
+  --feedback-error:var(--oc-red-300);    --feedback-info:var(--oc-lav-300);
+  --feedback-success-surface:rgb(61 220 151 / .12); --feedback-warning-surface:rgb(224 166 42 / .12);
+  --feedback-error-surface:rgb(224 84 79 / .12);    --feedback-info-surface:rgb(201 196 242 / .12);
+  --action-quiet-hover:var(--oc-neutral-800);
+}
+/* ---------- COUCHE 2 ter · THÈME CLUB ---------- */
+[data-club]{
+  --action-primary:var(--club-accent);
+  --action-primary-hover:var(--club-accent-hover);
+  --action-on-primary:var(--club-accent-contrast);
+  --border-focus:var(--club-accent);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-page);color:var(--content-primary);
+  font-family:var(--font-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  transition:background .3s var(--ease-brand),color .3s var(--ease-brand)}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.12;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.tabular{font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--border-focus);outline-offset:3px;border-radius:6px}
+button{font:inherit;cursor:pointer}
+
+.bar{position:sticky;top:0;z-index:20;background:var(--surface-raised);border-bottom:1px solid var(--border-subtle);
+  display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:11px 22px}
+.bar .lbl{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--money-received)}
+.bar .note{font-size:12.5px;color:var(--content-secondary)}
+.bar .grp{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.tgl{background:transparent;border:1px solid var(--border-subtle);color:var(--content-secondary);
+  padding:6px 13px;border-radius:var(--radius-pill);font-size:12.5px;font-weight:600;transition:.2s var(--ease-brand)}
+.tgl[aria-pressed="true"]{background:var(--action-primary);border-color:var(--action-primary);color:var(--action-on-primary)}
+
+.wrap{max-width:1080px;margin:0 auto;padding:34px 22px 90px}
+.lede{color:var(--content-secondary);max-width:64ch;margin:12px 0 0}
+section{margin-top:52px}
+.shead{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border-subtle);padding-bottom:9px;margin-bottom:20px}
+.shead h2{font-size:20px}
+.shead span{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--content-muted);margin-left:auto;font-weight:600}
+
+/* échelles */
+.ramp{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.row .name{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--content-secondary);width:78px;flex:none}
+.swatches{display:flex;flex:1;min-width:260px;border-radius:var(--radius-chip);overflow:hidden;border:1px solid var(--border-subtle)}
+.sw{flex:1;height:56px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;
+  font-size:9.5px;font-weight:700;font-family:var(--font-display);letter-spacing:.02em}
+.sw.used::before{content:"◆";position:absolute;margin-bottom:24px;font-size:8px}
+.sw span{position:relative}
+
+/* tokens sémantiques */
+.tokens{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:12px}
+.tok{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--radius-field);
+  padding:13px 15px;display:flex;gap:12px;align-items:center}
+.chipc{width:34px;height:34px;border-radius:9px;flex:none;border:1px solid var(--border-subtle)}
+.tok code{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--content-primary);display:block;word-break:break-all}
+.tok small{color:var(--content-muted);font-size:11px}
+
+/* composants */
+.demo{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:24px;margin-bottom:14px}
+.demo > h3{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--content-muted);margin-bottom:16px;font-family:var(--font-display);font-weight:700}
+.btns{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;
+  border-radius:var(--radius-pill);padding:13px 27px;font-weight:700;font-size:15px;
+  transition:.25s var(--ease-brand);white-space:nowrap}
+.btn-primary{background:var(--action-primary);color:var(--action-on-primary)}
+.btn-primary:hover{background:var(--action-primary-hover);transform:scale(1.03)}
+.btn-outline{background:transparent;color:var(--content-primary);border:1.5px solid var(--border-strong)}
+.btn-outline:hover{background:var(--action-quiet-hover)}
+.btn-quiet{background:transparent;color:var(--content-primary);font-weight:500;padding:13px 16px}
+.btn-quiet:hover{color:var(--money-received)}
+.btn-danger{background:transparent;color:var(--feedback-error);border:1.5px solid var(--feedback-error)}
+.btn-danger:hover{background:var(--feedback-error-surface)}
+
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:620px){.fields{grid-template-columns:1fr}}
+.fl{display:flex;flex-direction:column;gap:6px}
+.fl label{font-size:12px;font-weight:600;color:var(--content-secondary)}
+.fl input{background:var(--surface-raised);border:1px solid var(--border-subtle);color:var(--content-primary);
+  border-radius:var(--radius-field);padding:11px 14px;width:100%;font:inherit}
+.fl input::placeholder{color:var(--content-muted)}
+.fl input[aria-invalid="true"]{border-color:var(--feedback-error)}
+.fl .help{font-size:11.5px;color:var(--content-muted)}
+.fl .err{font-size:11.5px;color:var(--feedback-error)}
+
+.pills{display:flex;gap:10px;flex-wrap:wrap}
+.pill{border-radius:var(--radius-chip);padding:5px 11px;font-size:12.5px;font-weight:700}
+.p-rec{background:var(--money-received-surface);color:var(--money-received)}
+.p-due{background:var(--money-due-surface);color:var(--money-due)}
+.p-late{background:var(--money-overdue-surface);color:var(--money-overdue)}
+.p-neu{background:var(--surface-sunken);color:var(--money-neutral)}
+
+.fbs{display:grid;gap:10px}
+.fb{border-radius:var(--radius-field);padding:13px 16px;font-size:13.5px;border:1px solid}
+.fb b{display:block;margin-bottom:2px}
+.f-ok{background:var(--feedback-success-surface);border-color:var(--feedback-success);color:var(--feedback-success)}
+.f-wa{background:var(--feedback-warning-surface);border-color:var(--feedback-warning);color:var(--feedback-warning)}
+.f-er{background:var(--feedback-error-surface);border-color:var(--feedback-error);color:var(--feedback-error)}
+.f-in{background:var(--feedback-info-surface);border-color:var(--feedback-info);color:var(--feedback-info)}
+
+/* tuile dashboard */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
+.tile{background:var(--surface-raised);border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:19px 21px}
+.tile .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--content-secondary)}
+.tile .v{font-family:var(--font-display);font-weight:800;font-size:34px;margin-top:7px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:12.5px;color:var(--content-muted);margin-top:3px}
+.tile.hero{background:var(--money-received-surface);border-color:var(--money-received)}
+.tile.hero .k,.tile.hero .v{color:var(--money-received)}
+.tile.alert .v{color:var(--money-overdue)}
+
+/* type */
+.typerow{display:flex;gap:18px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--border-subtle);flex-wrap:wrap}
+.typerow code{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--content-muted);width:92px;flex:none}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tscroll{overflow-x:auto}
+th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--content-muted);
+  font-weight:700;padding:8px 14px 8px 0;border-bottom:1px solid var(--border-strong);white-space:nowrap}
+td{padding:9px 14px 9px 0;border-bottom:1px solid var(--border-subtle);vertical-align:top}
+td code{font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
+.rule{background:var(--surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--action-primary);
+  border-radius:var(--radius-field);padding:15px 19px;margin-top:13px}
+.rule b{color:var(--content-primary)}
+.rule p{margin:4px 0;color:var(--content-secondary);font-size:14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="bar">
+  <span class="lbl">OnClub</span>
+  <span class="note">design system · trois couches, deux modes, un thème par club</span>
+  <div class="grp">
+    <button class="tgl" id="mode" aria-pressed="false">Mode sombre</button>
+    <button class="tgl" id="club" aria-pressed="false">Thème club</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1 style="font-size:clamp(30px,5vw,44px);font-weight:800">Design system</h1>
+  <p class="lede">Tout ce que tu vois ici sort de trois couches de tokens. Les deux boutons en haut à droite ne changent aucune règle CSS de composant, ils ne redéfinissent que des variables sémantiques. C'est le test qui prouve que le système tient.</p>
+
+  <section>
+    <div class="shead"><h2>1 · Primitives</h2><span>jamais utilisées directement</span></div>
+    <div class="ramp" id="ramps"></div>
+  </section>
+
+  <section>
+    <div class="shead"><h2>2 · Sémantique</h2><span>ce que le produit écrit</span></div>
+    <h3 style="font-size:14px;margin-bottom:11px;color:var(--content-secondary)">Argent, le concept qui porte l'identité</h3>
+    <div class="tokens" id="tok-money"></div>
+    <h3 style="font-size:14px;margin:22px 0 11px;color:var(--content-secondary)">Surfaces et contenu</h3>
+    <div class="tokens" id="tok-base"></div>
+    <h3 style="font-size:14px;margin:22px 0 11px;color:var(--content-secondary)">Retours système</h3>
+    <div class="tokens" id="tok-fb"></div>
+    <div class="rule">
+      <p><b>La menthe est la couleur de l'argent encaissé et des confirmations. Rien d'autre.</b></p>
+      <p>C'est ce qui fait qu'un trésorier lit son dashboard en une seconde. Si la menthe sert aussi aux liens et aux icônes décoratives, le signal disparaît et le produit perd son argument principal.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><h2>3 · Typographie</h2><span>Bricolage Grotesque · Satoshi</span></div>
+    <div class="demo">
+      <div class="typerow"><code>text-5xl</code><span style="font-family:var(--font-display);font-weight:800;font-size:3.75rem;line-height:1.05">Ne chassez plus</span></div>
+      <div class="typerow"><code>text-3xl</code><span style="font-family:var(--font-display);font-weight:700;font-size:2.25rem">Reste à encaisser</span></div>
+      <div class="typerow"><code>text-xl</code><span style="font-family:var(--font-display);font-weight:700;font-size:1.375rem">Liste d'attente</span></div>
+      <div class="typerow"><code>text-base</code><span style="font-size:1rem">Le corps de texte, en Satoshi, avec Poppins en secours.</span></div>
+      <div class="typerow"><code>text-sm</code><span style="font-size:.875rem;color:var(--content-secondary)">Le texte secondaire des aides et des libellés.</span></div>
+      <div class="typerow" style="border:none"><code>tabular</code><span class="tabular" style="font-family:var(--font-display);font-weight:800;font-size:1.75rem">42 350 € · 1 190 € · 4,9 %</span></div>
+    </div>
+    <div class="rule"><p><b>Tout montant est en chiffres tabulaires.</b></p>
+      <p>Sans ça, une colonne de prix danse d'une ligne à l'autre et le dashboard a l'air amateur.</p></div>
+  </section>
+
+  <section>
+    <div class="shead"><h2>4 · Composants</h2><span>écrits une fois</span></div>
+
+    <div class="demo"><h3>Boutons</h3>
+      <div class="btns">
+        <button class="btn btn-primary">Demander une démo</button>
+        <button class="btn btn-outline">Voir les tarifs</button>
+        <button class="btn btn-quiet">En savoir plus</button>
+        <button class="btn btn-danger">Rembourser</button>
+      </div></div>
+
+    <div class="demo"><h3>Champs</h3>
+      <div class="fields">
+        <div class="fl"><label>Prénom du participant</label><input placeholder="Prénom">
+          <span class="help">Tel qu'il figure sur le justificatif.</span></div>
+        <div class="fl"><label>Adresse mail</label><input placeholder="parent@exemple.fr" aria-invalid="true" value="parent@exemple">
+          <span class="err">Cette adresse est incomplète.</span></div>
+      </div></div>
+
+    <div class="demo"><h3>Pastilles de montant</h3>
+      <div class="pills">
+        <span class="pill p-rec tabular">330 € encaissé</span>
+        <span class="pill p-due tabular">110 € attendu</span>
+        <span class="pill p-late tabular">280 € en retard</span>
+        <span class="pill p-neu tabular">18 € adhésion</span>
+      </div></div>
+
+    <div class="demo"><h3>Retours système</h3>
+      <div class="fbs">
+        <div class="fb f-ok"><b>Paiement confirmé</b>La facture part par mail dans une minute.</div>
+        <div class="fb f-wa"><b>Certificat médical expiré</b>Le club a relancé la famille il y a trois jours.</div>
+        <div class="fb f-er"><b>Prélèvement refusé</b>La carte a expiré. Une relance part automatiquement demain.</div>
+        <div class="fb f-in"><b>Place proposée</b>La famille a 48 heures pour confirmer.</div>
+      </div></div>
+
+    <div class="demo"><h3>Tuiles du dashboard</h3>
+      <div class="tiles">
+        <div class="tile hero"><div class="k">Encaissé cette saison</div><div class="v tabular">42 350 €</div><div class="s">sur 47 800 € attendus</div></div>
+        <div class="tile alert"><div class="k">Reste à encaisser</div><div class="v tabular">5 450 €</div><div class="s">23 familles concernées</div></div>
+        <div class="tile"><div class="k">Liste d'attente</div><div class="v tabular">23</div><div class="s">sur 6 cours complets</div></div>
+      </div></div>
+  </section>
+
+  <section>
+    <div class="shead"><h2>5 · Formes et mouvement</h2><span>ni mode ni thème</span></div>
+    <div class="tscroll"><table>
+      <thead><tr><th>Token</th><th>Valeur</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>--radius-chip</code></td><td>8px</td><td>Pastilles, badges, sélecteur de langue</td></tr>
+        <tr><td><code>--radius-field</code></td><td>12px</td><td>Champs, alertes, petits blocs</td></tr>
+        <tr><td><code>--radius-card</code></td><td>22px</td><td>Cartes et sections. Le rayon signature du site.</td></tr>
+        <tr><td><code>--radius-pill</code></td><td>999px</td><td>Boutons, uniquement</td></tr>
+        <tr><td><code>--shadow-soft</code></td><td>0 20px 60px / .08</td><td>Ce qui flotte vraiment. Jamais une carte dans le flux.</td></tr>
+        <tr><td><code>--ease-brand</code></td><td>cubic-bezier(.22,1,.36,1)</td><td>Toutes les transitions du produit</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="shead"><h2>6 · Le thème club</h2><span>club ≠ mode</span></div>
+    <div class="rule">
+      <p><b>Le club est un thème, le clair et le sombre sont des modes.</b> Ce sont deux axes indépendants, et chaque club possède les deux. Essaie les deux boutons en haut ensemble.</p>
+      <p>Un club, c'est quatre valeurs dans sa config, posées en variables sur la balise racine. Aucun composant n'est modifié.</p>
+    </div>
+    <div class="demo" style="margin-top:13px">
+      <h3>Ce que le club fournit</h3>
+      <div class="tscroll"><table>
+        <thead><tr><th>Variable</th><th>Origine</th><th>Remarque</th></tr></thead>
+        <tbody>
+          <tr><td><code>--club-accent</code></td><td>Config du club</td><td>Sa couleur principale</td></tr>
+          <tr><td><code>--club-accent-hover</code></td><td>Config du club</td><td>Un cran plus foncé</td></tr>
+          <tr><td><code>--club-accent-contrast</code></td><td><b>Calculé côté serveur</b></td><td>Ne jamais laisser le club le choisir. Un jaune vif avec du texte blanc dessus est illisible, et tu le découvres en production un soir de rentrée.</td></tr>
+          <tr><td><code>--club-logo</code></td><td>Config du club</td><td>SVG de préférence</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const PRIM={
+  neutral:[['0','#FFFFFF'],['50','#FAFAF7',1],['100','#F2F1EB'],['200','#E8E6DE',1],['300','#D6D3C8'],
+    ['400','#A8A49A'],['500','#6E6E66',1],['600','#5C5C54',1],['700','#43433D'],['800','#2A2C2C'],
+    ['900','#191C20'],['950','#0E1116',1]],
+  mint:[['50','#EAFBF3'],['100','#CDF5E3'],['200','#9DEBC8'],['300','#6BE2AE'],['400','#3DDC97',1],
+    ['500','#22B77A'],['600','#16915F'],['700','#0F6B47',1],['800','#0D5238'],['900','#0F3D2A',1]],
+  lavender:[['100','#EFEDFB'],['300','#C9C4F2',1],['500','#7D75C9'],['700','#4A4290',1]],
+  amber:[['100','#FDF3DC'],['400','#E0A62A'],['700','#92600A',1]],
+  red:[['100','#FDECEC'],['300','#F0918C'],['500','#E0544F'],['700','#9B2C28']]
+};
+const lum=h=>{const c=h.replace('#',''),[r,g,b]=[0,2,4].map(i=>parseInt(c.substr(i,2),16)/255)
+  .map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*r+.7152*g+.0722*b};
+document.getElementById('ramps').innerHTML=Object.entries(PRIM).map(([k,v])=>
+  `<div class="row"><span class="name">${k}</span><div class="swatches">${v.map(([n,hex,used])=>
+    `<div class="sw" style="background:${hex};color:${lum(hex)>.45?'#0E1116':'#FFFFFF'}"><span>${n}${used?' ◆':''}</span></div>`
+  ).join('')}</div></div>`).join('');
+
+const tok=(id,list)=>document.getElementById(id).innerHTML=list.map(([v,d])=>
+  `<div class="tok"><span class="chipc" style="background:var(${v})"></span>
+   <span><code>${v.replace('--','')}</code><small>${d}</small></span></div>`).join('');
+tok('tok-money',[['--money-received','Encaissé, arrivé'],['--money-due','Attendu'],
+  ['--money-overdue','En retard'],['--money-neutral','Montant sans jugement']]);
+tok('tok-base',[['--surface-page','Fond de page'],['--surface-raised','Carte, panneau'],
+  ['--surface-sunken','Champ, zone creuse'],['--content-primary','Texte principal'],
+  ['--content-secondary','Texte secondaire'],['--content-muted','Aide, indication'],
+  ['--border-subtle','Séparateur'],['--action-primary','Action principale']]);
+tok('tok-fb',[['--feedback-success','Confirmation'],['--feedback-warning','Vigilance'],
+  ['--feedback-error','Erreur'],['--feedback-info','Information']]);
+
+const CLUB={accent:'#FF7A3D',hover:'#E8632A',contrast:'#0A1826'};
+document.getElementById('mode').addEventListener('click',e=>{
+  const on=e.target.getAttribute('aria-pressed')==='true';
+  e.target.setAttribute('aria-pressed',!on);
+  document.body.classList.toggle('dark',!on);
+  e.target.textContent=on?'Mode sombre':'Mode clair';
+});
+document.getElementById('club').addEventListener('click',e=>{
+  const on=e.target.getAttribute('aria-pressed')==='true';
+  e.target.setAttribute('aria-pressed',!on);
+  const r=document.documentElement;
+  if(on){ r.removeAttribute('data-club'); e.target.textContent='Thème club'; }
+  else { r.setAttribute('data-club','asm');
+    r.style.setProperty('--club-accent',CLUB.accent);
+    r.style.setProperty('--club-accent-hover',CLUB.hover);
+    r.style.setProperty('--club-accent-contrast',CLUB.contrast);
+    e.target.textContent='Thème OnClub'; }
+});
+</script>
