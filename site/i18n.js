@@ -22,7 +22,7 @@ window.I18N = {
     nav_aria_close: "Fermer le menu",
 
     /* ── Hero ── */
-    hero_title: "Inscriptions, paiements, site, familles&nbsp;: <span class=\"hl\">votre club, tout en un.</span>",
+    hero_title: "Votre club, <span class=\"hl\">tout en un.</span>",
     hero_sub: "La plateforme de digitalisation à la portée de tous les clubs de sport, écoles de sport, de musique et de langues. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, page du club, boutique — et Onie, l’assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
     hero_cta: "Demander une démo",
     hero_cta2: "Voir les tarifs",
@@ -370,7 +370,7 @@ window.I18N = {
     nav_aria_close: "Close menu",
 
     /* ── Hero ── */
-    hero_title: "Registrations, payments, website, families: <span class=\"hl\">your club, all in one.</span>",
+    hero_title: "Your club, <span class=\"hl\">all in one.</span>",
     hero_sub: "Digitalisation within reach of every sports club and every sports, music or language school. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club page, shop — and Onie, the assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
     hero_cta: "Book a demo",
     hero_cta2: "See pricing",
@@ -718,7 +718,7 @@ window.I18N = {
     nav_aria_close: "Cerrar el menú",
 
     /* ── Hero ── */
-    hero_title: "Inscripciones, pagos, web, familias: <span class=\"hl\">tu club, todo en uno.</span>",
+    hero_title: "Tu club, <span class=\"hl\">todo en uno.</span>",
     hero_sub: "La digitalización al alcance de todos los clubes deportivos y de las escuelas de deporte, música e idiomas. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, página del club, tienda — y Onie, el asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
     hero_cta: "Solicitar una demo",
     hero_cta2: "Ver precios",
