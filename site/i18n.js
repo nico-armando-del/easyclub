@@ -8,7 +8,7 @@ window.I18N = {
 
     /* ── Meta ── */
     meta_title: "La solution tout-en-un pour les inscriptions et les paiements des clubs de sport et des écoles — OnClub",
-    meta_description: "Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Relances, site du club, boutique : la digitalisation à la portée de tous.",
+    meta_description: "Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Site du club, boutique : la digitalisation à la portée de tous.",
 
     /* ── Navbar ── */
     nav_features: "Fonctionnalités",
@@ -22,8 +22,8 @@ window.I18N = {
     nav_aria_close: "Fermer le menu",
 
     /* ── Hero ── */
-    hero_title: 'Ne chassez plus <span class="hl">les mauvais payeurs.</span>',
-    hero_sub: "On ne vous vend pas un logiciel de plus. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique — et un assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
+    hero_title: "Inscriptions, paiements, site, familles&nbsp;: <span class=\"hl\">votre club, tout en un.</span>",
+    hero_sub: "La plateforme de digitalisation à la portée de tous les clubs de sport, écoles de sport, de musique et de langues. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, page du club, boutique — et un assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
     hero_cta: "Demander une démo",
     hero_cta2: "Voir les tarifs",
     hero_kicker: "La solution tout-en-un pour les inscriptions et les paiements — clubs de sport, écoles de sport, de musique et de langues",
@@ -182,7 +182,7 @@ window.I18N = {
     /* ── Ownership (dark) ── */
     own_kicker: "Votre plateforme, pas la nôtre",
     own_title: "Tout est chez vous. Rien n’est captif.",
-    own_lead: "On ne vous loue pas un bout de notre logiciel. On vous livre votre plateforme&nbsp;: votre marque, votre argent, vos données. Si un jour vous partez, vous partez avec tout.",
+    own_lead: "On ne vous loue pas un bout de notre plateforme. On vous livre votre plateforme&nbsp;: votre marque, votre argent, vos données. Si un jour vous partez, vous partez avec tout.",
     own_brand_title: "Votre marque, votre nom",
     own_brand_text: "Votre logo, vos couleurs, votre page à votre nom. Vos adhérents arrivent sur <strong>la page de votre club</strong>, pas sur une page anonyme noyée parmi des milliers d’autres assos.",
     own_payment_title: "Votre compte de paiement",
@@ -360,8 +360,8 @@ window.I18N = {
     nav_aria_close: "Close menu",
 
     /* ── Hero ── */
-    hero_title: 'Stop chasing <span class="hl">late payments.</span>',
-    hero_sub: "We don’t sell you one more piece of software. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club website, shop — and an assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
+    hero_title: "Registrations, payments, website, families: <span class=\"hl\">your club, all in one.</span>",
+    hero_sub: "Digitalisation within reach of every sports club and every sports, music or language school. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club page, shop — and an assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
     hero_cta: "Book a demo",
     hero_cta2: "See pricing",
     hero_kicker: "The all-in-one solution for registrations and payments — sports clubs, sports, music and language schools",
@@ -698,8 +698,8 @@ window.I18N = {
     nav_aria_close: "Cerrar el menú",
 
     /* ── Hero ── */
-    hero_title: 'Deje de perseguir <span class="hl">a los morosos.</span>',
-    hero_sub: "No te vendemos un programa más. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, web del club, tienda — y un asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
+    hero_title: "Inscripciones, pagos, web, familias: <span class=\"hl\">tu club, todo en uno.</span>",
+    hero_sub: "La digitalización al alcance de todos los clubes deportivos y de las escuelas de deporte, música e idiomas. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, página del club, tienda — y un asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
     hero_cta: "Solicitar una demo",
     hero_cta2: "Ver precios",
     hero_kicker: "La solución todo en uno para las inscripciones y los pagos — clubes deportivos, escuelas de deporte, de música y de idiomas",
