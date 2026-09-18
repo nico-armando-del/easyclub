@@ -23,7 +23,7 @@ window.I18N = {
 
     /* ── Hero ── */
     hero_title: "Inscriptions, paiements, site, familles&nbsp;: <span class=\"hl\">votre club, tout en un.</span>",
-    hero_sub: "La plateforme de digitalisation à la portée de tous les clubs de sport, écoles de sport, de musique et de langues. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, page du club, boutique — et un assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
+    hero_sub: "La plateforme de digitalisation à la portée de tous les clubs de sport, écoles de sport, de musique et de langues. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, page du club, boutique — et Onie, l’assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
     hero_cta: "Demander une démo",
     hero_cta2: "Voir les tarifs",
     hero_kicker: "La solution tout-en-un pour les inscriptions et les paiements — clubs de sport, écoles de sport, de musique et de langues",
@@ -118,7 +118,7 @@ window.I18N = {
     /* ── Features bento ── */
     feat_kicker: "Fonctionnalités",
     feat_title: "Tout votre club, au même endroit.",
-    feat_lead: "De l’inscription au paiement, du site du club aux emails : OnClub remplace le tableur, la boîte mail et la boîte à chèques. Et un assistant répond au bureau.",
+    feat_lead: "De l’inscription au paiement, du site du club aux emails : OnClub remplace le tableur, la boîte mail et la boîte à chèques. Et Onie répond au bureau.",
     feat_pilotage_title: "Pilotage en un coup d’œil",
     feat_pilotage_text: "Qui a payé, qui doit encore, quelle pièce manque, qui bénéficie d’une aide&nbsp;: filtrez par cours, par état, par pièce, puis exportez en un clic — les colonnes de votre tableur, prêtes pour Excel ou Google&nbsp;Sheets.",
     feat_pilotage_tag: "Export CSV · Excel · Google Sheets",
@@ -135,8 +135,8 @@ window.I18N = {
     feat_website_tag: "Retouches par IA",
     feat_shop_title: "Boutique club",
     feat_shop_text: "Maillots, tenues, accessoires : vendus au moment de l’inscription ou depuis votre page, avec la feuille de préparation pour le bureau.",
-    feat_assistant_title: "Un assistant qui répond au bureau",
-    feat_assistant_text: "« Qui doit encore de l’argent en modern jazz ? » Une liste, un chiffre ou une relance en une phrase : il prépare, vous confirmez. Il lit votre catalogue et vos compteurs, jamais les dossiers des familles.",
+    feat_assistant_title: "Onie répond au bureau",
+    feat_assistant_text: "« Qui doit encore de l’argent en modern jazz ? » Une liste, un chiffre ou une relance en une phrase : Onie prépare, vous confirmez. Il lit votre catalogue et vos compteurs, jamais les dossiers des familles.",
     feat_assistant_tag: "Formule Pro Max IA",
     feat_essai_title: "Le cours d’essai",
     feat_essai_text: "La famille réserve une séance depuis la page du cours, reçoit un rappel deux jours avant, et vous voyez combien d’essais deviennent des inscriptions — en euros.",
@@ -145,7 +145,7 @@ window.I18N = {
     demo_kicker: "Voyez-le fonctionner",
     demo_title: "Trois gestes du bureau, en vrai.",
     demo_lead: "Ce ne sont pas des vidéos : ce sont les écrans du produit, rejoués. Rien ne part sans un clic du bureau.",
-    demo1_title: "L’assistant",
+    demo1_title: "Onie, l’assistant",
     demo1_q: "Qui doit encore de l’argent en modern jazz ?",
     demo1_a: "3 familles, 540 € en retard, toutes échelonnées. Je prépare la relance ?",
     demo1_prop: "À valider · Relance de retard à 3 familles",
@@ -165,7 +165,7 @@ window.I18N = {
     demo3_a: "12 dossiers avec une pièce à fournir. Le fichier est prêt.",
     demo3_file: "pieces-manquantes.csv · 12 lignes · 6 colonnes",
     demo3_btn: "Télécharger",
-    demo3_note: "L’assistant choisit les critères, le serveur écrit le fichier : aucun nom ne passe par le modèle.",
+    demo3_note: "Onie choisit les critères, le serveur écrit le fichier : aucun nom ne passe par le modèle.",
 
     /* ── Boutique section ── */
     boutique_kicker: "Boutique",
@@ -219,7 +219,7 @@ window.I18N = {
     pricing_max_pct: "6,90&nbsp;%",
     pricing_max_sub: "des cotisations encaissées, + 2 % sur la boutique",
     pricing_max_li1: "Tout Pro, plus :",
-    pricing_max_li2: "L’assistant du bureau (IA)",
+    pricing_max_li2: "Onie, l’assistant du bureau (IA)",
     pricing_max_li3: "La boutique du club",
     pricing_max_li4: "Événements et stages, accompagnement prioritaire",
     pricing_max_cta: "Choisir Pro Max IA",
@@ -361,7 +361,7 @@ window.I18N = {
 
     /* ── Hero ── */
     hero_title: "Registrations, payments, website, families: <span class=\"hl\">your club, all in one.</span>",
-    hero_sub: "Digitalisation within reach of every sports club and every sports, music or language school. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club page, shop — and an assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
+    hero_sub: "Digitalisation within reach of every sports club and every sports, music or language school. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club page, shop — and Onie, the assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
     hero_cta: "Book a demo",
     hero_cta2: "See pricing",
     hero_kicker: "The all-in-one solution for registrations and payments — sports clubs, sports, music and language schools",
@@ -456,7 +456,7 @@ window.I18N = {
     /* ── Features bento ── */
     feat_kicker: "Features",
     feat_title: "Your entire club, in one place.",
-    feat_lead: "From registration to payment, from the club website to emails: OnClub replaces the spreadsheet, the inbox and the cheque box. And an assistant answers the committee.",
+    feat_lead: "From registration to payment, from the club website to emails: OnClub replaces the spreadsheet, the inbox and the cheque box. And Onie answers the committee.",
     feat_pilotage_title: "Bird’s-eye view",
     feat_pilotage_text: "Who has paid, who still owes, which document is missing, who gets a subsidy: filter by class, status or document, then export in one click — your spreadsheet’s columns, ready for Excel or Google&nbsp;Sheets.",
     feat_pilotage_tag: "CSV · Excel · Google Sheets export",
@@ -473,8 +473,8 @@ window.I18N = {
     feat_website_tag: "Edits by AI",
     feat_shop_title: "Club shop",
     feat_shop_text: "Jerseys, outfits, accessories: sold at registration or from your page, with the packing sheet for the committee.",
-    feat_assistant_title: "An assistant that answers the committee",
-    feat_assistant_text: "“Who still owes money in modern jazz?” A list, a figure or a reminder in one sentence: it prepares, you confirm. It reads your catalogue and your counters, never the families’ files.",
+    feat_assistant_title: "Onie answers the committee",
+    feat_assistant_text: "“Who still owes money in modern jazz?” A list, a figure or a reminder in one sentence: Onie prepares, you confirm. It reads your catalogue and your counters, never the families’ files.",
     feat_assistant_tag: "Pro Max IA plan",
     feat_essai_title: "The trial class",
     feat_essai_text: "The family books a session from the class page, gets a reminder two days before, and you see how many trials turn into registrations — in euros.",
@@ -483,7 +483,7 @@ window.I18N = {
     demo_kicker: "See it work",
     demo_title: "Three committee gestures, for real.",
     demo_lead: "These are not videos: they are the product’s screens, replayed. Nothing leaves without a click from the committee.",
-    demo1_title: "The assistant",
+    demo1_title: "Onie, the assistant",
     demo1_q: "Who still owes money in modern jazz?",
     demo1_a: "3 families, €540 overdue, all on instalments. Shall I prepare the reminder?",
     demo1_prop: "To confirm · Overdue reminder to 3 families",
@@ -503,7 +503,7 @@ window.I18N = {
     demo3_a: "12 files with a document to provide. The file is ready.",
     demo3_file: "missing-documents.csv · 12 rows · 6 columns",
     demo3_btn: "Download",
-    demo3_note: "The assistant picks the criteria, the server writes the file: no name goes through the model.",
+    demo3_note: "Onie picks the criteria, the server writes the file: no name goes through the model.",
 
     /* ── Boutique section ── */
     boutique_kicker: "Shop",
@@ -557,7 +557,7 @@ window.I18N = {
     pricing_max_pct: "6.90%",
     pricing_max_sub: "of collected fees, + 2% on the shop",
     pricing_max_li1: "Everything in Pro, plus:",
-    pricing_max_li2: "The committee’s assistant (AI)",
+    pricing_max_li2: "Onie, the committee’s assistant (AI)",
     pricing_max_li3: "The club shop",
     pricing_max_li4: "Events and camps, priority support",
     pricing_max_cta: "Choose Pro Max IA",
@@ -699,7 +699,7 @@ window.I18N = {
 
     /* ── Hero ── */
     hero_title: "Inscripciones, pagos, web, familias: <span class=\"hl\">tu club, todo en uno.</span>",
-    hero_sub: "La digitalización al alcance de todos los clubes deportivos y de las escuelas de deporte, música e idiomas. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, página del club, tienda — y un asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
+    hero_sub: "La digitalización al alcance de todos los clubes deportivos y de las escuelas de deporte, música e idiomas. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, página del club, tienda — y Onie, el asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
     hero_cta: "Solicitar una demo",
     hero_cta2: "Ver precios",
     hero_kicker: "La solución todo en uno para las inscripciones y los pagos — clubes deportivos, escuelas de deporte, de música y de idiomas",
@@ -794,7 +794,7 @@ window.I18N = {
     /* ── Features bento ── */
     feat_kicker: "Funcionalidades",
     feat_title: "Todo su club, en un solo lugar.",
-    feat_lead: "De la inscripción al pago, de la web del club a los emails: OnClub sustituye la hoja de cálculo, el buzón y la caja de cheques. Y un asistente responde a la directiva.",
+    feat_lead: "De la inscripción al pago, de la web del club a los emails: OnClub sustituye la hoja de cálculo, el buzón y la caja de cheques. Y Onie responde a la directiva.",
     feat_pilotage_title: "Visión global en un vistazo",
     feat_pilotage_text: "Quién ha pagado, quién debe todavía, qué justificante falta, quién tiene una ayuda: filtra por clase, estado o justificante y exporta en un clic — las columnas de tu hoja, listas para Excel o Google&nbsp;Sheets.",
     feat_pilotage_tag: "Exportación CSV · Excel · Google Sheets",
@@ -811,8 +811,8 @@ window.I18N = {
     feat_website_tag: "Retoques por IA",
     feat_shop_title: "Tienda del club",
     feat_shop_text: "Camisetas, equipaciones, accesorios: vendidos en el momento de la inscripción o desde tu página, con la hoja de preparación para la directiva.",
-    feat_assistant_title: "Un asistente que responde a la directiva",
-    feat_assistant_text: "«¿Quién debe todavía dinero en modern jazz?» Una lista, una cifra o un recordatorio en una frase: él prepara, tú confirmas. Lee tu catálogo y tus contadores, nunca los expedientes de las familias.",
+    feat_assistant_title: "Onie responde a la directiva",
+    feat_assistant_text: "«¿Quién debe todavía dinero en modern jazz?» Una lista, una cifra o un recordatorio en una frase: Onie prepara, tú confirmas. Lee tu catálogo y tus contadores, nunca los expedientes de las familias.",
     feat_assistant_tag: "Fórmula Pro Max IA",
     feat_essai_title: "La clase de prueba",
     feat_essai_text: "La familia reserva una sesión desde la página de la clase, recibe un recordatorio dos días antes, y tú ves cuántas pruebas se convierten en inscripciones — en euros.",
@@ -821,7 +821,7 @@ window.I18N = {
     demo_kicker: "Míralo funcionar",
     demo_title: "Tres gestos de la directiva, de verdad.",
     demo_lead: "No son vídeos: son las pantallas del producto, reproducidas. Nada sale sin un clic de la directiva.",
-    demo1_title: "El asistente",
+    demo1_title: "Onie, el asistente",
     demo1_q: "¿Quién debe todavía dinero en modern jazz?",
     demo1_a: "3 familias, 540 € en retraso, todas a plazos. ¿Preparo el recordatorio?",
     demo1_prop: "Por validar · Recordatorio de retraso a 3 familias",
@@ -841,7 +841,7 @@ window.I18N = {
     demo3_a: "12 expedientes con un justificante pendiente. El archivo está listo.",
     demo3_file: "justificantes-pendientes.csv · 12 filas · 6 columnas",
     demo3_btn: "Descargar",
-    demo3_note: "El asistente elige los criterios, el servidor escribe el archivo: ningún nombre pasa por el modelo.",
+    demo3_note: "Onie elige los criterios, el servidor escribe el archivo: ningún nombre pasa por el modelo.",
 
     /* ── Boutique section ── */
     boutique_kicker: "Tienda",
@@ -895,7 +895,7 @@ window.I18N = {
     pricing_max_pct: "6,90&nbsp;%",
     pricing_max_sub: "de las cuotas cobradas, + 2 % sobre la tienda",
     pricing_max_li1: "Todo Pro, más:",
-    pricing_max_li2: "El asistente de la directiva (IA)",
+    pricing_max_li2: "Onie, el asistente de la directiva (IA)",
     pricing_max_li3: "La tienda del club",
     pricing_max_li4: "Eventos y campus, acompañamiento prioritario",
     pricing_max_cta: "Elegir Pro Max IA",
