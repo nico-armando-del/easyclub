@@ -281,6 +281,8 @@ a{color:inherit;text-decoration:none}
 .sports{padding:64px 0 80px;text-align:center}
 .sports p{color:var(--gray);font-size:.95rem;margin-bottom:26px}
 .sports-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.sports-row figure a{display:block;color:inherit;text-decoration:none}
+.sports-row figure a:hover figcaption{color:var(--mint-deep)}
 .sports-row figure{margin:0}
 .sports-row img{
   width:104px;height:104px;object-fit:cover;border-radius:18px;
@@ -496,7 +498,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- Footer ---------- */
 footer{border-top:1px solid var(--sand);padding:72px 0 40px}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:56px}
 .foot-grid p{color:var(--gray);font-size:.9rem;margin-top:14px;max-width:260px}
 footer h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-weight:600;margin-bottom:16px}
 footer ul{list-style:none;display:grid;gap:10px}
@@ -683,14 +685,14 @@ footer ul a:hover{color:var(--mint-deep)}
 <!-- ============ SPORTS STRIP ============ -->
 <section class="sports">
   <div class="container">
-    <p class="reveal" data-i18n="sports_intro">Conçu pour les assos de danse, foot, judo, basket, yoga, fitness…</p>
+    <p class="reveal" data-i18n="sports_intro">Conçu pour les assos de danse, foot, judo, basket, yoga, fitness — chaque sport a sa page.</p>
     <div class="sports-row">
-      <figure class="reveal" style="--d:0ms"><img src="img/sport/ballet-320.webp" data-i18n-alt="sport_alt_dance" alt="Cours de danse classique pour enfants" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_dance">Danse</figcaption></figure>
-      <figure class="reveal" style="--d:60ms"><img src="img/sport/soccer-320.webp" data-i18n-alt="sport_alt_soccer" alt="Entraînement de football" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_soccer">Foot</figcaption></figure>
-      <figure class="reveal" style="--d:120ms"><img src="img/sport/judo-320.webp" data-i18n-alt="sport_alt_judo" alt="Cours de judo" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_judo">Judo</figcaption></figure>
-      <figure class="reveal" style="--d:180ms"><img src="img/sport/basket-320.webp" data-i18n-alt="sport_alt_basket" alt="Match de basket en salle" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_basket">Basket</figcaption></figure>
-      <figure class="reveal" style="--d:240ms"><img src="img/sport/yoga-320.webp" data-i18n-alt="sport_alt_yoga" alt="Séance de yoga en groupe" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_yoga">Yoga</figcaption></figure>
-      <figure class="reveal" style="--d:300ms"><img src="img/sport/fitness-320.webp" data-i18n-alt="sport_alt_fitness" alt="Cours collectif de fitness" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_fitness">Fitness</figcaption></figure>
+      <figure class="reveal" style="--d:0ms"><a href="/sport/danse"><img src="img/sport/ballet-320.webp" data-i18n-alt="sport_alt_dance" alt="Cours de danse classique pour enfants" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_dance">Danse</figcaption></a></figure>
+      <figure class="reveal" style="--d:60ms"><a href="/sport/football"><img src="img/sport/soccer-320.webp" data-i18n-alt="sport_alt_soccer" alt="Entraînement de football" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_soccer">Foot</figcaption></a></figure>
+      <figure class="reveal" style="--d:120ms"><a href="/sport/judo"><img src="img/sport/judo-320.webp" data-i18n-alt="sport_alt_judo" alt="Cours de judo" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_judo">Judo</figcaption></a></figure>
+      <figure class="reveal" style="--d:180ms"><a href="/sport/basket"><img src="img/sport/basket-320.webp" data-i18n-alt="sport_alt_basket" alt="Match de basket en salle" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_basket">Basket</figcaption></a></figure>
+      <figure class="reveal" style="--d:240ms"><a href="/sport/yoga"><img src="img/sport/yoga-320.webp" data-i18n-alt="sport_alt_yoga" alt="Séance de yoga en groupe" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_yoga">Yoga</figcaption></a></figure>
+      <figure class="reveal" style="--d:300ms"><a href="/sport/fitness"><img src="img/sport/fitness-320.webp" data-i18n-alt="sport_alt_fitness" alt="Cours collectif de fitness" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_fitness">Fitness</figcaption></a></figure>
     </div>
   </div>
 </section>
@@ -1047,6 +1049,17 @@ footer ul a:hover{color:var(--mint-deep)}
           <li><a href="#boutique" data-i18n="footer_product_shop">Boutique</a></li>
           <li><a href="#tarifs" data-i18n="footer_product_pricing">Tarifs</a></li>
           <li><a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener" data-i18n="footer_product_demo">Demander une démo</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Par sport">
+        <h3>Par sport</h3>
+        <ul>
+          <li><a href="/sport/football">Football</a></li>
+          <li><a href="/sport/danse">Danse</a></li>
+          <li><a href="/sport/judo">Judo</a></li>
+          <li><a href="/sport/basket">Basket</a></li>
+          <li><a href="/sport/yoga">Yoga</a></li>
+          <li><a href="/sport/fitness">Fitness</a></li>
         </ul>
       </nav>
       <nav aria-label="Ressources">

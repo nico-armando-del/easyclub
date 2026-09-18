@@ -68,7 +68,7 @@ window.I18N = {
     dash_row4_status: "À régler",
 
     /* ── Sports strip ── */
-    sports_intro: "Conçu pour les assos de danse, foot, judo, basket, yoga, fitness…",
+    sports_intro: "Conçu pour les assos de danse, foot, judo, basket, yoga, fitness — chaque sport a sa page.",
     sport_dance: "Danse",
     sport_soccer: "Foot",
     sport_judo: "Judo",
@@ -366,7 +366,7 @@ window.I18N = {
     dash_row4_status: "To pay",
 
     /* ── Sports strip ── */
-    sports_intro: "Built for dance, football, judo, basketball, yoga, fitness clubs and more…",
+    sports_intro: "Built for dance, football, judo, basketball, yoga and fitness clubs — each sport has its page.",
     sport_dance: "Dance",
     sport_soccer: "Football",
     sport_judo: "Judo",
@@ -664,7 +664,7 @@ window.I18N = {
     dash_row4_status: "Por pagar",
 
     /* ── Sports strip ── */
-    sports_intro: "Diseñado para clubes de danza, fútbol, judo, baloncesto, yoga, fitness…",
+    sports_intro: "Pensado para asociaciones de danza, fútbol, judo, baloncesto, yoga y fitness — cada deporte tiene su página.",
     sport_dance: "Danza",
     sport_soccer: "Fútbol",
     sport_judo: "Judo",
