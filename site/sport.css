@@ -43,7 +43,8 @@ section{padding:40px 0}
 .dark{background:var(--ink);color:var(--cream);border-radius:var(--radius);padding:44px 40px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .dark p{color:rgba(255,255,255,.72)}
 .autres{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.autres a{display:block;background:var(--white);border:1px solid var(--sand);border-radius:14px;padding:14px 16px;text-decoration:none;font-weight:600}
+.autres a{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--sand);border-radius:14px;padding:14px 16px;text-decoration:none;font-weight:600}
+.autres .ico{font-size:1.3rem;line-height:1}
 .autres a:hover{border-color:var(--ink)}
 .crumbs{font-size:.85rem;color:var(--gray);margin-top:8px}
 .crumbs a{color:var(--gray)}

@@ -629,112 +629,6 @@ footer ul a:hover{color:var(--mint-deep)}
 .demo .note{font-size:.8rem;color:var(--gray);margin-top:auto}
 @media (max-width:900px){.demos{grid-template-columns:1fr}.simu-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.bulle,.prop,.fichier{opacity:1!important;transform:none!important}.mini-site .photo{height:64px}.bulle.q .curseur{display:none}}
-
-/* ---------- Les fonctionnalités, montrées plutôt qu'iconisées ---------- */
-.mini{position:relative;height:84px;border-radius:12px;background:var(--cream);border:1px solid var(--sand);overflow:hidden;margin-bottom:16px;font-size:.7rem;color:var(--gray)}
-.mini i{display:block;border-radius:4px;background:var(--sand)}
-.mini .etiq{position:absolute;right:10px;bottom:8px;font-weight:600;color:var(--mint-deep)}
-/* tableau filtré */
-.mini-tableau .chips{display:flex;gap:6px;padding:8px 10px 0}
-.mini-tableau .chips span{padding:2px 8px;border-radius:999px;background:var(--white);border:1px solid var(--sand);font-weight:600}
-.mini-tableau .chips span:nth-child(2){animation:chip 6s infinite}
-@keyframes chip{0%,20%{background:var(--white)}30%,90%{background:var(--mint);color:var(--mint-dark);border-color:var(--mint)}100%{background:var(--white)}}
-.mini-tableau .rangs{display:grid;gap:5px;padding:8px 10px 0}
-.mini-tableau .rangs i{height:7px;width:90%;animation:rang 6s infinite}
-.mini-tableau .rangs i:nth-child(1){animation-delay:0s}.mini-tableau .rangs i:nth-child(3){animation-delay:0s}
-.mini-tableau .rangs i:nth-child(2),.mini-tableau .rangs i:nth-child(4){animation-name:rang-garde}
-@keyframes rang{0%,25%{opacity:1}35%,88%{opacity:.18}100%{opacity:1}}
-@keyframes rang-garde{0%,25%{background:var(--sand)}35%,88%{background:#E8B44A}100%{background:var(--sand)}}
-/* échéancier */
-.mini-paiement .tranches{display:flex;gap:6px;padding:14px 10px 0}
-.mini-paiement .tranches i{height:12px;flex:1;background:var(--sand);position:relative;overflow:hidden}
-.mini-paiement .tranches i::after{content:"";position:absolute;inset:0;background:var(--mint);transform:translateX(-101%);animation:remplir 6s infinite}
-.mini-paiement .tranches i:nth-child(1)::after{animation-delay:.3s}.mini-paiement .tranches i:nth-child(2)::after{animation-delay:1.6s}.mini-paiement .tranches i:nth-child(3)::after{animation-delay:2.9s}
-@keyframes remplir{0%{transform:translateX(-101%)}12%,80%{transform:none}100%{transform:none}}
-.mini-paiement .etiq{left:10px;right:auto;color:var(--gray);font-weight:500}
-.mini-paiement .ok{position:absolute;right:10px;bottom:8px;padding:2px 8px;border-radius:999px;background:var(--mint);color:var(--mint-dark);font-weight:700;opacity:0;animation:paye 6s infinite}
-@keyframes paye{0%,65%{opacity:0}72%,92%{opacity:1}100%{opacity:0}}
-/* liste d'attente */
-.mini-attente .place{position:absolute;left:10px;top:12px;width:26px;height:26px;border-radius:50%;border:2px dashed var(--mint-deep)}
-.mini-attente .file{position:absolute;left:46px;top:12px;display:flex;gap:6px}
-.mini-attente .file i{width:26px;height:26px;border-radius:50%;background:var(--sand);animation:avance 6s infinite}
-.mini-attente .file i:nth-child(1){animation-name:promu}
-@keyframes promu{0%,30%{transform:none;background:var(--sand)}45%,85%{transform:translateX(-36px);background:var(--mint)}100%{transform:none;background:var(--sand)}}
-@keyframes avance{0%,30%{transform:none}45%,85%{transform:translateX(-32px)}100%{transform:none}}
-/* saison dupliquée */
-.mini-saison{display:flex;align-items:center;gap:8px;padding:10px}
-.mini-saison .carte{flex:1;background:var(--white);border:1px solid var(--sand);border-radius:8px;padding:6px 8px;display:grid;gap:4px}
-.mini-saison .carte b{font-size:.68rem;color:var(--ink)}.mini-saison .carte i{height:5px;width:80%}
-.mini-saison .carte.b{opacity:0;transform:translateX(-10px);animation:copie 6s infinite}
-.mini-saison .fleche{color:var(--mint-deep);font-weight:700}
-@keyframes copie{0%,25%{opacity:0;transform:translateX(-10px)}40%,90%{opacity:1;transform:none}100%{opacity:0}}
-/* mails */
-.mini-mails{display:grid;gap:6px;padding:9px 10px}
-.mini-mails .mail{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--sand);border-radius:8px;padding:4px 8px;transform:translateX(-110%);animation:arrive 6s infinite}
-.mini-mails .mail span{width:8px;height:8px;border-radius:50%;background:var(--mint)}
-.mini-mails .mail em{font-style:normal;font-weight:600;color:var(--ink)}
-.mini-mails .m2{animation-delay:.9s}.mini-mails .m3{animation-delay:1.8s}
-@keyframes arrive{0%{transform:translateX(-110%)}14%,85%{transform:none}100%{transform:translateX(-110%)}}
-/* page du club */
-.mini-page{padding:8px 10px}
-.mini-page .entete{display:flex;gap:6px;margin-bottom:6px}.mini-page .entete span{height:6px;width:26px;border-radius:3px;background:var(--sand)}
-.mini-page .photo{height:0;border-radius:6px;background:linear-gradient(135deg,rgba(93,232,143,.7),rgba(93,232,143,.2));animation:apparait 6s infinite;margin-bottom:6px}
-@keyframes apparait{0%,25%{height:0;margin-bottom:0}40%,90%{height:34px;margin-bottom:6px}100%{height:0;margin-bottom:0}}
-.mini-page .lignes i{height:5px;width:70%;margin-bottom:4px}
-/* boutique */
-.mini-boutique{padding:8px 10px}
-.mini-boutique .article{display:flex;align-items:center;gap:8px}
-.mini-boutique .vis{width:30px;height:30px;border-radius:8px;background:var(--mint-dark)}
-.mini-boutique b{color:var(--ink)}
-.mini-boutique .tailles{display:flex;gap:4px}.mini-boutique .tailles i{width:20px;height:18px;display:grid;place-items:center;font-style:normal;font-size:.62rem;background:var(--white);border:1px solid var(--sand)}
-.mini-boutique .tailles i:nth-child(2){animation:taille 6s infinite}
-@keyframes taille{0%,30%{background:var(--white)}40%,90%{background:var(--mint);color:var(--mint-dark)}100%{background:var(--white)}}
-.mini-boutique .stock{position:absolute;right:10px;bottom:8px;font-weight:600}
-.mini-boutique .stock::after{content:"12";animation:stock 6s infinite;margin-left:3px}
-.mini-boutique .stock{font-size:0}.mini-boutique .stock::before{content:"Stock";font-size:.7rem}.mini-boutique .stock::after{font-size:.7rem;color:var(--mint-deep)}
-@keyframes stock{0%,45%{content:"12"}50%,100%{content:"11"}}
-/* Onie */
-.mini-onie{padding:8px 10px;display:grid;gap:5px;align-content:start}
-.mini-onie .q{justify-self:end;background:var(--white);border:1px solid var(--sand);border-radius:10px 10px 2px 10px;padding:3px 8px;color:var(--ink)}
-.mini-onie .pts{display:flex;gap:3px;height:10px;align-items:center}
-.mini-onie .pts i{width:5px;height:5px;border-radius:50%;background:var(--gray);animation:pt 6s infinite}
-.mini-onie .pts i:nth-child(2){animation-delay:.15s}.mini-onie .pts i:nth-child(3){animation-delay:.3s}
-@keyframes pt{0%,15%{opacity:0}20%,40%{opacity:1}45%,100%{opacity:0}}
-.mini-onie .r{border-left:2px solid var(--mint);padding-left:8px;color:var(--ink);opacity:0;animation:rep 6s infinite}
-@keyframes rep{0%,45%{opacity:0}52%,92%{opacity:1}100%{opacity:0}}
-/* essai */
-.mini-essai .cal{position:absolute;left:10px;top:10px;background:var(--white);border:1px solid var(--sand);border-radius:8px;padding:5px 8px;display:grid}
-.mini-essai .cal b{color:var(--ink)}
-.mini-essai .cloche{position:absolute;right:12px;top:10px;font-size:1.2rem;transform-origin:top center;animation:sonne 6s infinite}
-@keyframes sonne{0%,40%{transform:rotate(0)}44%{transform:rotate(18deg)}48%{transform:rotate(-16deg)}52%{transform:rotate(12deg)}56%{transform:rotate(-8deg)}60%,100%{transform:rotate(0)}}
-/* rentrée */
-.mini-rentree{display:grid;gap:6px;padding:10px}
-.mini-rentree .vague{background:var(--white);border:1px solid var(--sand);border-radius:8px;padding:5px 8px;display:flex;align-items:center;gap:8px}
-.mini-rentree .vague b{color:var(--ink);white-space:nowrap}
-.mini-rentree .vague i{flex:1;height:8px;background:var(--sand);position:relative;overflow:hidden}
-.mini-rentree .vague i::after{content:"";position:absolute;inset:0;background:var(--mint);transform:translateX(-101%);animation:remplir 6s infinite}
-.mini-rentree .v2 i::after{animation-delay:2.4s}
-@media (prefers-reduced-motion:reduce){.mini *,.mini *::after,.mini *::before{animation:none!important}.mini-saison .carte.b,.mini-onie .r,.mini-paiement .ok{opacity:1;transform:none}.mini-mails .mail{transform:none}.mini-page .photo{height:34px}.mini-paiement .tranches i::after,.mini-rentree .vague i::after{transform:none}}
-
-/* ---------- La vitrine des fonctionnalités : une à la fois, en grand ---------- */
-.vitrine{display:grid;grid-template-columns:minmax(260px,1fr) 1.6fr;gap:28px;margin-top:48px;align-items:start}
-.vitrine-liste{list-style:none;display:grid;gap:6px}
-.vitrine-liste button{width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:14px;padding:12px 14px;cursor:pointer;font-family:var(--font-body);transition:background .25s var(--ease),border-color .25s var(--ease)}
-.vitrine-liste button b{display:block;font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--ink)}
-.vitrine-liste button span{display:block;font-size:.85rem;color:var(--gray);margin-top:2px}
-.vitrine-liste button:hover{background:var(--white)}
-.vitrine-liste button.on{background:var(--white);border-color:var(--sand);box-shadow:var(--shadow-soft)}
-.vitrine-liste button.on b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);margin-right:8px;vertical-align:2px}
-.vitrine-scene{position:sticky;top:96px;background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);padding:28px;min-height:420px;box-shadow:var(--shadow-soft)}
-.scene{display:none;flex-direction:column;gap:18px}
-.scene.on{display:flex;animation:scene-in .5s var(--ease)}
-@keyframes scene-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.scene .cadre{height:290px;display:grid;place-items:center;overflow:hidden;border-radius:16px;background:var(--cream)}
-.scene .mini{width:320px;margin:0;transform:scale(2.4);transform-origin:center;box-shadow:none;background:var(--white)}
-.scene .tag{align-self:flex-start}
-.scene .legende{color:var(--gray);font-size:1rem;max-width:56ch}
-@media (max-width:900px){.vitrine{grid-template-columns:1fr}.vitrine-scene{position:static;min-height:0;padding:18px}.scene .cadre{height:200px}.scene .mini{transform:scale(1.5)}.vitrine-liste{grid-template-columns:1fr 1fr;gap:6px}.vitrine-liste button span{display:none}}
-@media (max-width:520px){.vitrine-liste{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -916,9 +810,60 @@ footer ul a:hover{color:var(--mint-deep)}
     <span class="kicker reveal" data-i18n="feat_kicker">Fonctionnalités</span>
     <h2 class="reveal" style="--d:80ms" data-i18n="feat_title">Tout votre club, au même endroit.</h2>
     <p class="lead reveal" style="--d:160ms" data-i18n="feat_lead">De l’inscription au paiement, du site du club aux emails : OnClub remplace le tableur, la boîte mail et la boîte à chèques. Et Onie répond au bureau.</p>
-    <div class="vitrine reveal" id="vitrine">
-      <ol class="vitrine-liste"><li><button type="button" data-feat="pilotage" class="on" aria-pressed="true"><b data-i18n="feat_pilotage_title">Pilotage en un coup d'œil</b><span data-i18n="feat_pilotage_court">Qui a payé, qui doit, quelle pièce manque.</span></button></li><li><button type="button" data-feat="payment" aria-pressed="false"><b data-i18n="feat_payment_title">Paiement sans friction</b><span data-i18n="feat_payment_court">En une fois ou en dix, prélevé tout seul.</span></button></li><li><button type="button" data-feat="emails" aria-pressed="false"><b data-i18n="feat_emails_title">Emails automatiques</b><span data-i18n="feat_emails_court">Dix mails prêts, personnalisables, journalisés.</span></button></li><li><button type="button" data-feat="waitlist" aria-pressed="false"><b data-i18n="feat_waitlist_title">Liste d'attente intelligente</b><span data-i18n="feat_waitlist_court">La place libérée va au suivant, en 48 h.</span></button></li><li><button type="button" data-feat="essai" aria-pressed="false"><b data-i18n="feat_essai_title">Le cours d'essai</b><span data-i18n="feat_essai_court">Une séance réservée, un rappel deux jours avant.</span></button></li><li><button type="button" data-feat="rentree" aria-pressed="false"><b data-i18n="feat_rentree_title">La rentrée, dans l'ordre</b><span data-i18n="feat_rentree_court">Les anciens d’abord, puis tout le monde.</span></button></li><li><button type="button" data-feat="season" aria-pressed="false"><b data-i18n="feat_season_title">Gestion par saison</b><span data-i18n="feat_season_court">Vos cours et tarifs repris en un clic.</span></button></li><li><button type="button" data-feat="website" aria-pressed="false"><b data-i18n="feat_website_title">Site web inclus</b><span data-i18n="feat_website_court">Planning, tarifs, actus, retouchés par IA.</span></button></li><li><button type="button" data-feat="shop" aria-pressed="false"><b data-i18n="feat_shop_title">Boutique club</b><span data-i18n="feat_shop_court">Tenues par taille, stock, feuille de préparation.</span></button></li><li><button type="button" data-feat="assistant" aria-pressed="false"><b data-i18n="feat_assistant_title">Onie répond au bureau</b><span data-i18n="feat_assistant_court">Une question, une liste, une relance : Onie prépare.</span></button></li></ol>
-      <div class="vitrine-scene"><div class="scene on" data-feat="pilotage"><div class="cadre"><div class="mini mini-tableau" aria-hidden="true"><div class="chips"><span>Payé</span><span>Retard</span><span>Pièce manquante</span></div><div class="rangs"><i></i><i></i><i></i><i></i></div></div></div><span class="tag" data-i18n="feat_pilotage_tag">Export CSV · Excel · Google Sheets</span><p class="legende" data-i18n-html="feat_pilotage_text">Qui a payé, qui doit encore, quelle pièce manque, qui bénéficie d'une aide&nbsp;: filtrez par cours, par état, par pièce, puis exportez en un clic — les colonnes de votre tableur, prêtes pour Excel ou Google&nbsp;Sheets.</p></div><div class="scene" data-feat="payment"><div class="cadre"><div class="mini mini-paiement" aria-hidden="true"><div class="tranches"><i></i><i></i><i></i></div><span class="etiq">Acompte · puis 2 échéances</span><span class="ok">Payé</span></div></div><p class="legende" data-i18n="feat_payment_text">Carte bancaire, en une fois ou en plusieurs&nbsp;: un acompte, puis des échéances datées prélevées automatiquement — jusqu'à dix, ou davantage si votre club le décide. Reçu envoyé à chaque règlement. Le chèque ou les espèces se notent en deux clics.</p></div><div class="scene" data-feat="emails"><div class="cadre"><div class="mini mini-mails" aria-hidden="true"><div class="mail m1"><span></span><em>Confirmation</em></div><div class="mail m2"><span></span><em>Relance</em></div><div class="mail m3"><span></span><em>Place libérée</em></div></div></div><p class="legende" data-i18n="feat_emails_text">Confirmation, règlement reçu, relance de retard, pièce manquante, place libérée&nbsp;: dix modèles que vous personnalisez, un journal de tout ce qui est parti, et des campagnes à qui vous voulez.</p></div><div class="scene" data-feat="waitlist"><div class="cadre"><div class="mini mini-attente" aria-hidden="true"><div class="place"></div><div class="file"><i></i><i></i><i></i></div><span class="etiq">48 h pour confirmer</span></div></div><p class="legende" data-i18n="feat_waitlist_text">Une place se libère ? Le suivant est notifié automatiquement et dispose de 48 h pour confirmer. Zéro place perdue.</p></div><div class="scene" data-feat="essai"><div class="cadre"><div class="mini mini-essai" aria-hidden="true"><div class="cal"><b>Sam. 20</b><span>Séance d’essai</span></div><div class="cloche">🔔</div><span class="etiq">Rappel J−2</span></div></div><p class="legende" data-i18n="feat_essai_text">La famille réserve une séance depuis la page du cours, reçoit un rappel deux jours avant, et vous voyez combien d'essais deviennent des inscriptions — en euros.</p></div><div class="scene" data-feat="rentree"><div class="cadre"><div class="mini mini-rentree" aria-hidden="true"><div class="vague v1"><b>Anciens</b><i></i></div><div class="vague v2"><b>Tout le monde</b><i></i></div></div></div><p class="legende" data-i18n="feat_rentree_text">Ouvrez d'abord aux anciens, puis à tous&nbsp;: les vagues d'inscription tiennent la porte, la campagne « Inscriptions bientôt » prévient les familles de l'an dernier, et la liste d'attente propose la place libérée au suivant.</p></div><div class="scene" data-feat="season"><div class="cadre"><div class="mini mini-saison" aria-hidden="true"><div class="carte a"><b>2025 · 2026</b><i></i><i></i><i></i></div><span class="fleche">→</span><div class="carte b"><b>2026 · 2027</b><i></i><i></i><i></i></div></div></div><p class="legende" data-i18n="feat_season_text">Ouvrez la saison suivante en reprenant vos cours et vos tarifs en un clic, consultez l'année passée, et voyez qui est revenu.</p></div><div class="scene" data-feat="website"><div class="cadre"><div class="mini mini-page" aria-hidden="true"><div class="entete"><span></span><span></span><span></span></div><div class="photo"></div><div class="lignes"><i></i><i></i></div></div></div><span class="tag" data-i18n="feat_website_tag">Retouches par IA</span><p class="legende" data-i18n="feat_website_text">Planning, tarifs, actualités, galerie photo&nbsp;: la page de votre club se met à jour depuis ce que vous avez déjà saisi. Pour la retoucher, vous le dites à l'IA, en français, avec un aperçu avant de valider.</p></div><div class="scene" data-feat="shop"><div class="cadre"><div class="mini mini-boutique" aria-hidden="true"><div class="article"><span class="vis"></span><b>Maillot</b><div class="tailles"><i>8</i><i>10</i><i>12</i><i>14</i></div></div><span class="stock">Stock 12</span></div></div><p class="legende" data-i18n="feat_shop_text">Maillots, tenues, accessoires&nbsp;: vendus au moment de l'inscription ou depuis votre page, avec la feuille de préparation pour le bureau.</p></div><div class="scene" data-feat="assistant"><div class="cadre"><div class="mini mini-onie" aria-hidden="true"><div class="q">Qui est en retard ?</div><div class="pts"><i></i><i></i><i></i></div><div class="r">3 familles · 540 €</div></div></div><span class="tag" data-i18n="feat_assistant_tag">Formule Pro Max IA</span><p class="legende" data-i18n="feat_assistant_text">« Qui doit encore de l’argent en modern jazz ? » Une liste, un chiffre ou une relance en une phrase : Onie prépare, vous confirmez. Il lit votre catalogue et vos compteurs, jamais les dossiers des familles.</p></div></div>
+    <div class="bento">
+      <div class="feature span3 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M6 12h12M10 19h4"/></svg></div>
+        <h3 data-i18n="feat_pilotage_title">Pilotage en un coup d'œil</h3>
+        <p data-i18n-html="feat_pilotage_text">Qui a payé, qui doit encore, quelle pièce manque, qui bénéficie d'une aide&nbsp;: filtrez par cours, par état, par pièce, puis exportez en un clic — les colonnes de votre tableur, prêtes pour Excel ou Google&nbsp;Sheets.</p>
+        <span class="tag" data-i18n="feat_pilotage_tag">Export CSV · Excel · Google Sheets</span>
+      </div>
+      <div class="feature span3 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
+        <h3 data-i18n="feat_payment_title">Paiement sans friction</h3>
+        <p data-i18n="feat_payment_text">Carte bancaire, en une fois ou en plusieurs&nbsp;: un acompte, puis des échéances datées prélevées automatiquement — jusqu'à dix, ou davantage si votre club le décide. Reçu envoyé à chaque règlement. Le chèque ou les espèces se notent en deux clics.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3 data-i18n="feat_waitlist_title">Liste d'attente intelligente</h3>
+        <p data-i18n="feat_waitlist_text">Une place se libère ? Le suivant est notifié automatiquement et dispose de 48 h pour confirmer. Zéro place perdue.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
+        <h3 data-i18n="feat_season_title">Gestion par saison</h3>
+        <p data-i18n="feat_season_text">Ouvrez la saison suivante en reprenant vos cours et vos tarifs en un clic, consultez l'année passée, et voyez qui est revenu.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:160ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <h3 data-i18n="feat_emails_title">Emails automatiques</h3>
+        <p data-i18n="feat_emails_text">Confirmation, règlement reçu, relance de retard, pièce manquante, place libérée&nbsp;: dix modèles que vous personnalisez, un journal de tout ce qui est parti, et des campagnes à qui vous voulez.</p>
+      </div>
+      <div class="feature span4 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.6-4-9s1.5-6.4 4-9z"/></svg></div>
+        <h3 data-i18n="feat_website_title">Site web inclus</h3>
+        <p data-i18n="feat_website_text">Planning, tarifs, actualités, galerie photo&nbsp;: la page de votre club se met à jour depuis ce que vous avez déjà saisi. Pour la retoucher, vous le dites à l'IA, en français, avec un aperçu avant de valider.</p>
+        <span class="tag" data-i18n="feat_website_tag">Retouches par IA</span>
+      </div>
+      <div class="feature span2 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 13H5z"/><path d="M8 6V5a4 4 0 0 1 8 0v1"/></svg></div>
+        <h3 data-i18n="feat_shop_title">Boutique club</h3>
+        <p data-i18n="feat_shop_text">Maillots, tenues, accessoires&nbsp;: vendus au moment de l'inscription ou depuis votre page, avec la feuille de préparation pour le bureau.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:0ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg></div>
+        <h3 data-i18n="feat_assistant_title">Onie répond au bureau</h3>
+        <p data-i18n="feat_assistant_text">« Qui doit encore de l'argent en modern jazz ? » Une liste, un chiffre ou une relance en une phrase&nbsp;: Onie prépare, vous confirmez. Il lit votre catalogue et vos compteurs, jamais les dossiers des familles.</p>
+        <span class="tag" data-i18n="feat_assistant_tag">Formule Pro Max IA</span>
+      </div>
+      <div class="feature span2 reveal" style="--d:80ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg></div>
+        <h3 data-i18n="feat_essai_title">Le cours d'essai</h3>
+        <p data-i18n="feat_essai_text">La famille réserve une séance depuis la page du cours, reçoit un rappel deux jours avant, et vous voyez combien d'essais deviennent des inscriptions — en euros.</p>
+      </div>
+      <div class="feature span2 reveal" style="--d:160ms">
+        <div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4M8 14h3M13 14h3"/></svg></div>
+        <h3 data-i18n="feat_rentree_title">La rentrée, dans l'ordre</h3>
+        <p data-i18n="feat_rentree_text">Ouvrez d'abord aux anciens, puis à tous&nbsp;: les vagues d'inscription tiennent la porte, la campagne « Inscriptions bientôt » prévient les familles de l'an dernier, et la liste d'attente propose la place libérée au suivant.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1489,25 +1434,6 @@ footer ul a:hover{color:var(--mint-deep)}
       var p = d.querySelector('.prop'); if (p) p.classList.add('fait');
       var ph = d.querySelector('.mini-site .photo'); if (ph) ph.classList.add('on');
     });
-  }
-
-  /* ── La vitrine : une fonctionnalité à la fois ── */
-  var vitrine = document.getElementById('vitrine');
-  if (vitrine) {
-    var boutons = Array.prototype.slice.call(vitrine.querySelectorAll('.vitrine-liste button'));
-    var scenes = Array.prototype.slice.call(vitrine.querySelectorAll('.scene'));
-    var courant = 0, minuterie = null;
-    var montrer = function(i){
-      courant = (i + boutons.length) % boutons.length;
-      boutons.forEach(function(b, j){ b.classList.toggle('on', j === courant); b.setAttribute('aria-pressed', j === courant ? 'true' : 'false'); });
-      scenes.forEach(function(s, j){ s.classList.toggle('on', j === courant); });
-    };
-    var defiler = function(){ if (minuterie) clearInterval(minuterie); if (!reduced) minuterie = setInterval(function(){ montrer(courant + 1); }, 5200); };
-    boutons.forEach(function(b, i){ b.addEventListener('click', function(){ montrer(i); if (minuterie) { clearInterval(minuterie); minuterie = null; } }); });
-    if ('IntersectionObserver' in window) {
-      var vio = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if (e.isIntersecting) defiler(); else if (minuterie) { clearInterval(minuterie); minuterie = null; } }); }, {threshold: 0.25});
-      vio.observe(vitrine);
-    } else { defiler(); }
   }
 })();
 </script>
