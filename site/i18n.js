@@ -7,8 +7,8 @@ window.I18N = {
   fr: {
 
     /* ── Meta ── */
-    meta_title: "Inscriptions en ligne pour clubs et associations sportives — OnClub",
-    meta_description: "Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club et boutique. Sans abonnement : une commission dès 2,90 %.",
+    meta_title: "La solution tout-en-un pour les inscriptions et les paiements des clubs de sport et des écoles — OnClub",
+    meta_description: "Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Relances, site du club, boutique : la digitalisation à la portée de tous.",
 
     /* ── Navbar ── */
     nav_features: "Fonctionnalités",
@@ -26,7 +26,7 @@ window.I18N = {
     hero_sub: "On ne vous vend pas un logiciel de plus. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique — et un assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
     hero_cta: "Demander une démo",
     hero_cta2: "Voir les tarifs",
-    hero_kicker: "Le logiciel d’inscription et de paiement des clubs et associations sportives",
+    hero_kicker: "La solution tout-en-un pour les inscriptions et les paiements — clubs de sport, écoles de sport, de musique et de langues",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Aperçu du tableau de bord OnClub : rien en retard, 42 350 euros encaissés cette saison, 23 familles en liste d’attente",
@@ -142,6 +142,30 @@ window.I18N = {
     feat_essai_text: "La famille réserve une séance depuis la page du cours, reçoit un rappel deux jours avant, et vous voyez combien d’essais deviennent des inscriptions — en euros.",
     feat_rentree_title: "La rentrée, dans l’ordre",
     feat_rentree_text: "Ouvrez d’abord aux anciens, puis à tous : les vagues d’inscription tiennent la porte, la campagne « Inscriptions bientôt » prévient les familles de l’an dernier, et la liste d’attente propose la place libérée au suivant.",
+    demo_kicker: "Voyez-le fonctionner",
+    demo_title: "Trois gestes du bureau, en vrai.",
+    demo_lead: "Ce ne sont pas des vidéos : ce sont les écrans du produit, rejoués. Rien ne part sans un clic du bureau.",
+    demo1_title: "L’assistant",
+    demo1_q: "Qui doit encore de l’argent en modern jazz ?",
+    demo1_a: "3 familles, 540 € en retard, toutes échelonnées. Je prépare la relance ?",
+    demo1_prop: "À valider · Relance de retard à 3 familles",
+    demo1_btn: "Appliquer",
+    demo1_done: "Fait · 3 relances parties, journal à jour",
+    demo2_title: "Le site du club, retouché par chat",
+    demo2_q: "Ajoute la photo du gala en haut et ferme la page Actualités.",
+    demo2_a: "Photo ajoutée en tête, page Actualités fermée. J’applique ?",
+    demo2_btn: "Mettre en ligne",
+    demo2_done: "En ligne · aperçu à jour",
+    demo2_site_1: "Planning",
+    demo2_site_2: "Tarifs",
+    demo2_site_3: "Actualités",
+    demo2_photo: "Photo du gala",
+    demo3_title: "Les exports à la demande",
+    demo3_q: "Prépare-moi la liste des pièces manquantes.",
+    demo3_a: "12 dossiers avec une pièce à fournir. Le fichier est prêt.",
+    demo3_file: "pieces-manquantes.csv · 12 lignes · 6 colonnes",
+    demo3_btn: "Télécharger",
+    demo3_note: "L’assistant choisit les critères, le serveur écrit le fichier : aucun nom ne passe par le modèle.",
 
     /* ── Boutique section ── */
     boutique_kicker: "Boutique",
@@ -200,7 +224,23 @@ window.I18N = {
     pricing_max_li4: "Billetterie (à venir), accompagnement prioritaire",
     pricing_max_cta: "Choisir Pro Max IA",
 
-    pricing_foot: "Aucun abonnement, aucun frais fixe. Le pourcentage est prélevé automatiquement à chaque encaissement, frais bancaires inclus.",
+    pricing_foot: "Votre abonnement, c’est un pourcentage : rien de fixe, rien tant que vous n’encaissez pas. Il est prélevé automatiquement à chaque encaissement, frais bancaires inclus.",
+
+    simu_title: "Combien ça coûte pour votre club ?",
+
+    simu_cotis: "Cotisations encaissées en ligne sur la saison",
+
+    simu_boutique: "Ventes de la boutique sur la saison",
+
+    simu_formule: "Formule",
+
+    simu_saison: "sur la saison",
+
+    simu_pour100: "pour 100 € encaissés",
+
+    simu_mois: "par mois, sur dix mois",
+
+    simu_note: "Prélevé au fil des encaissements, frais bancaires inclus. Rien tant que vous n’encaissez pas, rien sur les chèques et les espèces. La boutique n’est comptée qu’en Pro Max IA, à 2 % des ventes.",
 
     /* ── Comparison table ── */
     compare_kicker: "La différence",
@@ -263,7 +303,7 @@ window.I18N = {
     faq_kicker: "FAQ",
     faq_title: "Les questions qu’on nous pose à chaque démo.",
     faq1_q: "Combien ça coûte vraiment&nbsp;?",
-    faq1_a: "Un pourcentage des cotisations encaissées, c’est tout. Pas d’abonnement, pas de frais d’installation, pas de coût par adhérent. Les frais bancaires sont inclus dans le pourcentage. Exemple : un club qui encaisse <span class=\"num\">30 000 €</span> en formule OnClub Pro paie <span class=\"num\">1 470 €</span> sur la saison, prélevés automatiquement au fil des encaissements.",
+    faq1_a: "Un abonnement au pourcentage des cotisations encaissées, c’est tout. Pas de frais fixe, pas de frais d’installation, pas de coût par adhérent. Les frais bancaires sont inclus dans le pourcentage. Exemple : un club qui encaisse <span class=\"num\">30 000 €</span> en formule OnClub Pro paie <span class=\"num\">1 470 €</span> sur la saison, prélevés automatiquement au fil des encaissements.",
     faq2_q: "Où arrive l’argent des cotisations&nbsp;?",
     faq2_a: "Directement sur le compte de paiement de votre association. À aucun moment l’argent ne transite par nous&nbsp;: notre pourcentage est simplement prélevé à chaque transaction. Les paiements en espèces ou par chèque s’ajoutent à la main en deux clics, pour que votre tableau de bord reflète exactement votre caisse.",
     faq3_q: "On a un besoin spécifique, c’est possible&nbsp;?",
@@ -305,8 +345,8 @@ window.I18N = {
   en: {
 
     /* ── Meta ── */
-    meta_title: "Online registration for sports clubs and associations — OnClub",
-    meta_description: "Online registration, payment in instalments, automatic reminders, club website and shop. No subscription: a commission from 2.90%.",
+    meta_title: "The all-in-one solution for registrations and payments of sports clubs and schools — OnClub",
+    meta_description: "Online registration and payments for sports clubs, sports, music and language schools. Reminders, club website, shop: digitalisation within everyone’s reach.",
 
     /* ── Navbar ── */
     nav_features: "Features",
@@ -324,7 +364,7 @@ window.I18N = {
     hero_sub: "We don’t sell you one more piece of software. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club website, shop — and an assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
     hero_cta: "Book a demo",
     hero_cta2: "See pricing",
-    hero_kicker: "Registration and payment software for sports clubs and associations",
+    hero_kicker: "The all-in-one solution for registrations and payments — sports clubs, sports, music and language schools",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Preview of the OnClub dashboard: nothing overdue, €42,350 collected this season, 23 families on the waitlist",
@@ -440,6 +480,30 @@ window.I18N = {
     feat_essai_text: "The family books a session from the class page, gets a reminder two days before, and you see how many trials turn into registrations — in euros.",
     feat_rentree_title: "The new season, in order",
     feat_rentree_text: "Open to returning families first, then to everyone: registration waves hold the door, the “Registrations soon” campaign warns last year’s families, and the waitlist offers a freed-up place to the next in line.",
+    demo_kicker: "See it work",
+    demo_title: "Three committee gestures, for real.",
+    demo_lead: "These are not videos: they are the product’s screens, replayed. Nothing leaves without a click from the committee.",
+    demo1_title: "The assistant",
+    demo1_q: "Who still owes money in modern jazz?",
+    demo1_a: "3 families, €540 overdue, all on instalments. Shall I prepare the reminder?",
+    demo1_prop: "To confirm · Overdue reminder to 3 families",
+    demo1_btn: "Apply",
+    demo1_done: "Done · 3 reminders sent, log updated",
+    demo2_title: "The club website, edited by chat",
+    demo2_q: "Add the gala photo at the top and close the News page.",
+    demo2_a: "Photo added at the top, News page closed. Apply?",
+    demo2_btn: "Publish",
+    demo2_done: "Live · preview updated",
+    demo2_site_1: "Schedule",
+    demo2_site_2: "Prices",
+    demo2_site_3: "News",
+    demo2_photo: "Gala photo",
+    demo3_title: "Exports on demand",
+    demo3_q: "Prepare the list of missing documents.",
+    demo3_a: "12 files with a document to provide. The file is ready.",
+    demo3_file: "missing-documents.csv · 12 rows · 6 columns",
+    demo3_btn: "Download",
+    demo3_note: "The assistant picks the criteria, the server writes the file: no name goes through the model.",
 
     /* ── Boutique section ── */
     boutique_kicker: "Shop",
@@ -498,7 +562,23 @@ window.I18N = {
     pricing_max_li4: "Ticketing (coming), priority support",
     pricing_max_cta: "Choose Pro Max IA",
 
-    pricing_foot: "No subscription, no fixed fees. The percentage is deducted automatically from each payment, bank charges included.",
+    pricing_foot: "Your subscription is a percentage: nothing fixed, nothing until you collect. It is deducted automatically from each payment, bank charges included.",
+
+    simu_title: "How much does it cost for your club?",
+
+    simu_cotis: "Fees collected online over the season",
+
+    simu_boutique: "Shop sales over the season",
+
+    simu_formule: "Plan",
+
+    simu_saison: "over the season",
+
+    simu_pour100: "per €100 collected",
+
+    simu_mois: "per month, over ten months",
+
+    simu_note: "Deducted as payments come in, bank charges included. Nothing until you collect, nothing on cheques and cash. The shop only counts on Pro Max IA, at 2% of sales.",
 
     /* ── Comparison table ── */
     compare_kicker: "The difference",
@@ -561,7 +641,7 @@ window.I18N = {
     faq_kicker: "FAQ",
     faq_title: "The questions we get at every demo.",
     faq1_q: "How much does it really cost?",
-    faq1_a: "A percentage of collected fees, that’s all. No subscription, no setup fee, no per-member cost. Bank charges are included in the percentage. Example: a club collecting <span class=\"num\">€30,000</span> on the OnClub Pro plan pays <span class=\"num\">€1,470</span> over the season, deducted automatically as payments come in.",
+    faq1_a: "A percentage-based subscription on collected fees, that’s all. No fixed fee, no setup fee, no per-member cost. Bank charges are included in the percentage. Example: a club collecting <span class=\"num\">€30,000</span> on the OnClub Pro plan pays <span class=\"num\">€1,470</span> over the season, deducted automatically as payments come in.",
     faq2_q: "Where does the membership money go?",
     faq2_a: "Straight to your club’s payment account. The money never passes through us — our percentage is simply deducted from each transaction. Cash and cheque payments can be logged manually in two clicks so your dashboard always matches your books.",
     faq3_q: "We have a specific need — is that possible?",
@@ -603,8 +683,8 @@ window.I18N = {
   es: {
 
     /* ── Meta ── */
-    meta_title: "Inscripciones en línea para clubes y asociaciones deportivas — OnClub",
-    meta_description: "Inscripciones en línea, pago a plazos, recordatorios automáticos, web del club y tienda. Sin suscripción: una comisión desde el 2,90 %.",
+    meta_title: "La solución todo en uno para las inscripciones y los pagos de clubes deportivos y escuelas — OnClub",
+    meta_description: "Inscripciones y pagos en línea para clubes deportivos, escuelas de deporte, de música y de idiomas. Recordatorios, web del club, tienda: la digitalización al alcance de todos.",
 
     /* ── Navbar ── */
     nav_features: "Funcionalidades",
@@ -622,7 +702,7 @@ window.I18N = {
     hero_sub: "No te vendemos un programa más. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, web del club, tienda — y un asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
     hero_cta: "Solicitar una demo",
     hero_cta2: "Ver precios",
-    hero_kicker: "El programa de inscripción y pago de clubes y asociaciones deportivas",
+    hero_kicker: "La solución todo en uno para las inscripciones y los pagos — clubes deportivos, escuelas de deporte, de música y de idiomas",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Vista del panel de OnClub: nada en retraso, 42 350 euros cobrados esta temporada, 23 familias en lista de espera",
@@ -738,6 +818,30 @@ window.I18N = {
     feat_essai_text: "La familia reserva una sesión desde la página de la clase, recibe un recordatorio dos días antes, y tú ves cuántas pruebas se convierten en inscripciones — en euros.",
     feat_rentree_title: "La vuelta, en orden",
     feat_rentree_text: "Abre primero a los antiguos y luego a todos: las oleadas de inscripción sujetan la puerta, la campaña «Inscripciones pronto» avisa a las familias del año pasado, y la lista de espera ofrece la plaza liberada al siguiente.",
+    demo_kicker: "Míralo funcionar",
+    demo_title: "Tres gestos de la directiva, de verdad.",
+    demo_lead: "No son vídeos: son las pantallas del producto, reproducidas. Nada sale sin un clic de la directiva.",
+    demo1_title: "El asistente",
+    demo1_q: "¿Quién debe todavía dinero en modern jazz?",
+    demo1_a: "3 familias, 540 € en retraso, todas a plazos. ¿Preparo el recordatorio?",
+    demo1_prop: "Por validar · Recordatorio de retraso a 3 familias",
+    demo1_btn: "Aplicar",
+    demo1_done: "Hecho · 3 recordatorios enviados, registro al día",
+    demo2_title: "La web del club, retocada por chat",
+    demo2_q: "Añade la foto de la gala arriba y cierra la página Noticias.",
+    demo2_a: "Foto añadida arriba, página Noticias cerrada. ¿Lo aplico?",
+    demo2_btn: "Publicar",
+    demo2_done: "En línea · vista previa al día",
+    demo2_site_1: "Horarios",
+    demo2_site_2: "Tarifas",
+    demo2_site_3: "Noticias",
+    demo2_photo: "Foto de la gala",
+    demo3_title: "Exportaciones a demanda",
+    demo3_q: "Prepárame la lista de justificantes que faltan.",
+    demo3_a: "12 expedientes con un justificante pendiente. El archivo está listo.",
+    demo3_file: "justificantes-pendientes.csv · 12 filas · 6 columnas",
+    demo3_btn: "Descargar",
+    demo3_note: "El asistente elige los criterios, el servidor escribe el archivo: ningún nombre pasa por el modelo.",
 
     /* ── Boutique section ── */
     boutique_kicker: "Tienda",
@@ -796,7 +900,23 @@ window.I18N = {
     pricing_max_li4: "Venta de entradas (próximamente), acompañamiento prioritario",
     pricing_max_cta: "Elegir Pro Max IA",
 
-    pricing_foot: "Sin suscripción, sin costes fijos. El porcentaje se descuenta automáticamente en cada cobro, comisiones bancarias incluidas.",
+    pricing_foot: "Tu suscripción es un porcentaje: nada fijo, nada mientras no cobres. Se descuenta automáticamente en cada cobro, comisiones bancarias incluidas.",
+
+    simu_title: "¿Cuánto cuesta para tu club?",
+
+    simu_cotis: "Cuotas cobradas en línea en la temporada",
+
+    simu_boutique: "Ventas de la tienda en la temporada",
+
+    simu_formule: "Fórmula",
+
+    simu_saison: "en la temporada",
+
+    simu_pour100: "por cada 100 € cobrados",
+
+    simu_mois: "al mes, en diez meses",
+
+    simu_note: "Descontado a medida que cobras, comisiones bancarias incluidas. Nada mientras no cobres, nada sobre cheques y efectivo. La tienda solo cuenta en Pro Max IA, al 2 % de las ventas.",
 
     /* ── Comparison table ── */
     compare_kicker: "La diferencia",
@@ -859,7 +979,7 @@ window.I18N = {
     faq_kicker: "FAQ",
     faq_title: "Las preguntas que nos hacen en cada demo.",
     faq1_q: "¿Cuánto cuesta realmente?",
-    faq1_a: "Un porcentaje de las cuotas cobradas, nada más. Sin suscripción, sin gastos de instalación, sin coste por socio. Las comisiones bancarias están incluidas en el porcentaje. Ejemplo: un club que cobra <span class=\"num\">30 000 €</span> con la fórmula OnClub Pro paga <span class=\"num\">1 470 €</span> en la temporada, descontados automáticamente a medida que llegan los cobros.",
+    faq1_a: "Una suscripción en porcentaje de las cuotas cobradas, nada más. Sin coste fijo, sin gastos de instalación, sin coste por socio. Las comisiones bancarias están incluidas en el porcentaje. Ejemplo: un club que cobra <span class=\"num\">30 000 €</span> con la fórmula OnClub Pro paga <span class=\"num\">1 470 €</span> en la temporada, descontados automáticamente a medida que llegan los cobros.",
     faq2_q: "¿Dónde llega el dinero de las cuotas?",
     faq2_a: "Directamente a la cuenta de pago de su asociación. En ningún momento el dinero pasa por nosotros: nuestro porcentaje simplemente se descuenta en cada transacción. Los pagos en efectivo o con cheque se añaden manualmente en dos clics, para que su panel refleje exactamente su caja.",
     faq3_q: "¿Podemos cubrir una necesidad específica?",
