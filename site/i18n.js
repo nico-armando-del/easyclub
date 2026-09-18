@@ -7,8 +7,8 @@ window.I18N = {
   fr: {
 
     /* ── Meta ── */
-    meta_title: "OnClub — Les inscriptions, les encaissements et les familles de votre club, au même endroit",
-    meta_description: "Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique et assistant IA. Sans abonnement : une commission sur ce que vous encaissez, dès 2,90 %.",
+    meta_title: "Inscriptions en ligne pour clubs de sport et écoles de danse — OnClub",
+    meta_description: "Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club et boutique. Sans abonnement : une commission dès 2,90 %.",
 
     /* ── Navbar ── */
     nav_features: "Fonctionnalités",
@@ -26,6 +26,7 @@ window.I18N = {
     hero_sub: "On ne vous vend pas un logiciel de plus. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique — et un assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
     hero_cta: "Demander une démo",
     hero_cta2: "Voir les tarifs",
+    hero_kicker: "Le logiciel d’inscription et de paiement des clubs de sport et des écoles de danse",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Aperçu du tableau de bord OnClub : rien en retard, 42 350 euros encaissés cette saison, 23 familles en liste d’attente",
@@ -304,8 +305,8 @@ window.I18N = {
   en: {
 
     /* ── Meta ── */
-    meta_title: "OnClub — Your club’s registrations, payments and families, in one place",
-    meta_description: "Online registration, payment in instalments, automatic reminders, club website, shop and AI assistant. No subscription: a commission on what you collect, from 2.90%.",
+    meta_title: "Online registration for sports clubs and dance schools — OnClub",
+    meta_description: "Online registration, payment in instalments, automatic reminders, club website and shop. No subscription: a commission from 2.90%.",
 
     /* ── Navbar ── */
     nav_features: "Features",
@@ -323,6 +324,7 @@ window.I18N = {
     hero_sub: "We don’t sell you one more piece of software. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club website, shop — and an assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
     hero_cta: "Book a demo",
     hero_cta2: "See pricing",
+    hero_kicker: "Registration and payment software for sports clubs and dance schools",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Preview of the OnClub dashboard: nothing overdue, €42,350 collected this season, 23 families on the waitlist",
@@ -601,8 +603,8 @@ window.I18N = {
   es: {
 
     /* ── Meta ── */
-    meta_title: "OnClub — Las inscripciones, los cobros y las familias de tu club, en un mismo lugar",
-    meta_description: "Inscripciones en línea, pago a plazos, recordatorios automáticos, web del club, tienda y asistente IA. Sin suscripción: una comisión sobre lo que cobras, desde el 2,90 %.",
+    meta_title: "Inscripciones en línea para clubes deportivos y escuelas de danza — OnClub",
+    meta_description: "Inscripciones en línea, pago a plazos, recordatorios automáticos, web del club y tienda. Sin suscripción: una comisión desde el 2,90 %.",
 
     /* ── Navbar ── */
     nav_features: "Funcionalidades",
@@ -620,6 +622,7 @@ window.I18N = {
     hero_sub: "No te vendemos un programa más. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, web del club, tienda — y un asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
     hero_cta: "Solicitar una demo",
     hero_cta2: "Ver precios",
+    hero_kicker: "El programa de inscripción y pago de clubes deportivos y escuelas de danza",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Vista del panel de OnClub: nada en retraso, 42 350 euros cobrados esta temporada, 23 familias en lista de espera",

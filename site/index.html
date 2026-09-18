@@ -3,21 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="meta_title">OnClub — Les inscriptions, les encaissements et les familles de votre club, au même endroit</title>
-<meta name="description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique et assistant IA. Sans abonnement : une commission sur ce que vous encaissez, dès 2,90 %.">
+<title data-i18n="meta_title">Inscriptions en ligne pour clubs de sport et écoles de danse — OnClub</title>
+<meta name="description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club et boutique. Sans abonnement : une commission dès 2,90 %.">
 <link rel="canonical" href="https://onclub.vercel.app/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233DDC97'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%230F3D2A' text-anchor='middle'%3EOC%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/favicon.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#0E1116">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OnClub">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://onclub.vercel.app/">
-<meta property="og:title" data-i18n-content="meta_title" content="OnClub — Les inscriptions, les encaissements et les familles de votre club, au même endroit">
-<meta property="og:description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique et assistant IA. Sans abonnement : une commission sur ce que vous encaissez, dès 2,90 %.">
+<meta property="og:title" data-i18n-content="meta_title" content="Inscriptions en ligne pour clubs de sport et écoles de danse — OnClub">
+<meta property="og:description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club et boutique. Sans abonnement : une commission dès 2,90 %.">
+<meta property="og:image" content="https://onclub.vercel.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le logo OnClub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" data-i18n-content="meta_title" content="OnClub — Les inscriptions, les encaissements et les familles de votre club, au même endroit">
-<meta name="twitter:description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique et assistant IA. Sans abonnement : une commission sur ce que vous encaissez, dès 2,90 %.">
+<meta name="twitter:title" data-i18n-content="meta_title" content="Inscriptions en ligne pour clubs de sport et écoles de danse — OnClub">
+<meta name="twitter:description" data-i18n-content="meta_description" content="Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club et boutique. Sans abonnement : une commission dès 2,90 %.">
+<meta name="twitter:image" content="https://onclub.vercel.app/img/og.jpg">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "OnClub",
+  "url": "https://onclub.vercel.app/",
+  "logo": "https://onclub.vercel.app/img/logo-512.png",
+  "description": "Inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club et boutique, pour les clubs de sport et les écoles de danse.",
+  "areaServed": "FR",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "telephone": "+33645049227",
+    "url": "https://wa.me/33645049227",
+    "availableLanguage": ["fr", "en", "es"]
+  }
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -92,13 +118,15 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#FAFAF7;
   --ink:#0E1116;
-  --mint:#3DDC97;
+  --mint:#5DE88F;
   --mint-dark:#0F3D2A;
   --mint-deep:#0F6B47;
   --gray:#6E6E66;
@@ -138,7 +166,7 @@ a{color:inherit;text-decoration:none}
   white-space:nowrap;
 }
 .btn-mint{background:var(--mint);color:var(--mint-dark)}
-.btn-mint:hover{transform:scale(1.03);box-shadow:0 12px 36px rgba(61,220,151,.35)}
+.btn-mint:hover{transform:scale(1.03);box-shadow:0 12px 36px rgba(93,232,143,.35)}
 .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
 .btn-outline:hover{transform:scale(1.03);background:rgba(14,17,22,.04)}
 .btn-outline-light{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
@@ -158,7 +186,8 @@ a{color:inherit;text-decoration:none}
   border-bottom-color:var(--sand);
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
-.wordmark{font-family:var(--font-head);font-weight:700;font-size:1.4rem;letter-spacing:-0.02em}
+.wordmark{font-family:var(--font-head);font-weight:700;font-size:1.4rem;letter-spacing:-0.02em;display:inline-flex;align-items:center;gap:10px}
+.wordmark img{height:26px;width:auto}
 .wordmark em{font-style:normal;color:inherit}
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-weight:500;font-size:.95rem;color:var(--gray);transition:color .2s ease}
@@ -244,7 +273,7 @@ a{color:inherit;text-decoration:none}
 .badge{
   display:inline-block;padding:3px 11px;border-radius:999px;font-size:.74rem;font-weight:700;
 }
-.badge.paid{background:rgba(61,220,151,.18);color:var(--mint-deep)}
+.badge.paid{background:rgba(93,232,143,.18);color:var(--mint-deep)}
 .badge.pending{background:rgba(245,158,11,.14);color:#92600A}
 .badge.split{background:rgba(201,196,242,.35);color:#4A4290}
 
@@ -265,7 +294,7 @@ a{color:inherit;text-decoration:none}
 .section{padding:104px 0}
 .kicker{
   display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--mint-deep);background:rgba(61,220,151,.14);border-radius:999px;padding:6px 14px;margin-bottom:18px;
+  color:var(--mint-deep);background:rgba(93,232,143,.14);border-radius:999px;padding:6px 14px;margin-bottom:18px;
 }
 .kicker.lav{color:#4A4290;background:rgba(201,196,242,.35)}
 .section h2{font-size:clamp(1.9rem,4vw,2.9rem);max-width:760px;margin-bottom:16px}
@@ -277,10 +306,10 @@ a{color:inherit;text-decoration:none}
 }
 .dark .glow{
   position:absolute;width:680px;height:680px;border-radius:50%;
-  background:radial-gradient(circle,rgba(61,220,151,.22) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(93,232,143,.22) 0%,transparent 65%);
   top:-280px;right:-180px;pointer-events:none;
 }
-.dark .kicker{color:var(--mint);background:rgba(61,220,151,.12)}
+.dark .kicker{color:var(--mint);background:rgba(93,232,143,.12)}
 .dark .lead{color:rgba(255,255,255,.65)}
 .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
 .pain-card{
@@ -305,7 +334,7 @@ a{color:inherit;text-decoration:none}
 .feature.span2{grid-column:span 2}
 .feature.span4{grid-column:span 4}
 .icon-tile{
-  width:48px;height:48px;border-radius:14px;background:rgba(61,220,151,.16);
+  width:48px;height:48px;border-radius:14px;background:rgba(93,232,143,.16);
   display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--mint-deep);
 }
 .feature h3{font-size:1.18rem;margin-bottom:8px}
@@ -342,7 +371,7 @@ a{color:inherit;text-decoration:none}
 .price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-deep)}
 .price-card.featured{
   border:2px solid var(--mint);transform:scale(1.045);z-index:1;
-  box-shadow:0 30px 80px rgba(61,220,151,.18);
+  box-shadow:0 30px 80px rgba(93,232,143,.18);
 }
 .price-card.featured:hover{transform:scale(1.045) translateY(-4px)}
 .price-badge{
@@ -395,7 +424,7 @@ a{color:inherit;text-decoration:none}
 .own-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
 .own-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:32px 28px;transition:transform .25s var(--ease)}
 .own-card:hover{transform:translateY(-4px)}
-.own-card .icon-tile{background:rgba(61,220,151,.16);color:var(--mint)}
+.own-card .icon-tile{background:rgba(93,232,143,.16);color:var(--mint)}
 .own-card h3{font-size:1.12rem;margin-bottom:8px}
 .own-card p{color:rgba(255,255,255,.62);font-size:.93rem}
 .own-card strong{color:#fff}
@@ -407,7 +436,7 @@ a{color:inherit;text-decoration:none}
 .compare thead th{font-family:var(--font-head);font-size:1rem;font-weight:700}
 .compare thead th.us{color:var(--mint-deep)}
 .compare tbody th{font-weight:600;text-align:left}
-.compare td.us,.compare th.us{background:rgba(61,220,151,.07);text-align:center}
+.compare td.us,.compare th.us{background:rgba(93,232,143,.07);text-align:center}
 .compare td.them,.compare th.them{text-align:center;color:var(--gray)}
 .compare tr:last-child td{border-bottom:none}
 .compare .yes{color:var(--mint-deep);font-weight:700}
@@ -418,8 +447,8 @@ a{color:inherit;text-decoration:none}
   padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
   position:relative;overflow:hidden;
 }
-.custom-band .glow{position:absolute;top:-180px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(61,220,151,.22) 0%,transparent 65%);pointer-events:none}
-.custom-band .cb-icon{flex:none;width:48px;height:48px;border-radius:14px;background:rgba(61,220,151,.15);display:flex;align-items:center;justify-content:center}
+.custom-band .glow{position:absolute;top:-180px;right:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(93,232,143,.22) 0%,transparent 65%);pointer-events:none}
+.custom-band .cb-icon{flex:none;width:48px;height:48px;border-radius:14px;background:rgba(93,232,143,.15);display:flex;align-items:center;justify-content:center}
 .custom-band .cb-icon svg{width:24px;height:24px;stroke:var(--mint);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .custom-band .cb-text{position:relative;flex:1;min-width:240px}
 .custom-band h3{font-size:1.2rem;margin-bottom:4px}
@@ -431,7 +460,7 @@ a{color:inherit;text-decoration:none}
 .testi-photo img{width:100%;height:100%;object-fit:cover;min-height:440px}
 .testi-body{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
 .testi-quote{font-family:var(--font-head);font-weight:600;font-size:1.55rem;line-height:1.32;letter-spacing:-0.01em;margin-bottom:26px}
-.testi-quote mark{background:linear-gradient(transparent 58%,rgba(61,220,151,.5) 58%);color:inherit;padding:0 2px}
+.testi-quote mark{background:linear-gradient(transparent 58%,rgba(93,232,143,.5) 58%);color:inherit;padding:0 2px}
 .testi-author{display:flex;align-items:center;gap:14px}
 .testi-avatar{width:50px;height:50px;border-radius:50%;background:var(--mint);color:var(--mint-dark);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:1.05rem}
 .testi-author strong{display:block;font-weight:700}
@@ -553,7 +582,7 @@ footer ul a:hover{color:var(--mint-deep)}
 <!-- ============ NAVBAR ============ -->
 <header class="nav" id="nav">
   <div class="container nav-inner">
-    <a href="#" class="wordmark" data-i18n-aria="nav_aria_home" aria-label="OnClub — accueil">On<em>Club</em></a>
+    <a href="#" class="wordmark" data-i18n-aria="nav_aria_home" aria-label="OnClub — accueil"><img src="img/logo.svg" alt="" width="52" height="26"><span>On<em>Club</em></span></a>
     <nav data-i18n-aria="nav_aria_main" aria-label="Navigation principale">
       <ul class="nav-links">
         <li><a href="#fonctionnalites" data-i18n="nav_features">Fonctionnalités</a></li>
@@ -593,6 +622,7 @@ footer ul a:hover{color:var(--mint-deep)}
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
+    <p class="kicker" data-i18n="hero_kicker">Le logiciel d’inscription et de paiement des clubs de sport et des écoles de danse</p>
     <h1 id="heroTitle" data-i18n-html="hero_title">Ne chassez plus <span class="hl">les mauvais payeurs.</span></h1>
     <p class="hero-sub" data-i18n-html="hero_sub">On ne vous vend pas un logiciel de plus. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique — et un assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.</p>
     <div class="hero-ctas">
@@ -655,12 +685,12 @@ footer ul a:hover{color:var(--mint-deep)}
   <div class="container">
     <p class="reveal" data-i18n="sports_intro">Conçu pour les assos de danse, foot, judo, basket, yoga, fitness…</p>
     <div class="sports-row">
-      <figure class="reveal" style="--d:0ms"><img src="brand/img/sport/ballet-1-horizon.jpg" data-i18n-alt="sport_alt_dance" alt="Cours de danse classique pour enfants" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_dance">Danse</figcaption></figure>
-      <figure class="reveal" style="--d:60ms"><img src="brand/img/sport/soccer-1-horizon.jpg" data-i18n-alt="sport_alt_soccer" alt="Entraînement de football" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_soccer">Foot</figcaption></figure>
-      <figure class="reveal" style="--d:120ms"><img src="brand/img/sport/judo-1-horizon.jpg" data-i18n-alt="sport_alt_judo" alt="Cours de judo" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_judo">Judo</figcaption></figure>
-      <figure class="reveal" style="--d:180ms"><img src="brand/img/sport/basket-1-horizon.jpg" data-i18n-alt="sport_alt_basket" alt="Match de basket en salle" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_basket">Basket</figcaption></figure>
-      <figure class="reveal" style="--d:240ms"><img src="brand/img/sport/yoga-1-horizon.jpg" data-i18n-alt="sport_alt_yoga" alt="Séance de yoga en groupe" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_yoga">Yoga</figcaption></figure>
-      <figure class="reveal" style="--d:300ms"><img src="brand/img/sport/fitness-1-horizon.jpg" data-i18n-alt="sport_alt_fitness" alt="Cours collectif de fitness" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_fitness">Fitness</figcaption></figure>
+      <figure class="reveal" style="--d:0ms"><img src="img/sport/ballet-320.webp" data-i18n-alt="sport_alt_dance" alt="Cours de danse classique pour enfants" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_dance">Danse</figcaption></figure>
+      <figure class="reveal" style="--d:60ms"><img src="img/sport/soccer-320.webp" data-i18n-alt="sport_alt_soccer" alt="Entraînement de football" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_soccer">Foot</figcaption></figure>
+      <figure class="reveal" style="--d:120ms"><img src="img/sport/judo-320.webp" data-i18n-alt="sport_alt_judo" alt="Cours de judo" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_judo">Judo</figcaption></figure>
+      <figure class="reveal" style="--d:180ms"><img src="img/sport/basket-320.webp" data-i18n-alt="sport_alt_basket" alt="Match de basket en salle" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_basket">Basket</figcaption></figure>
+      <figure class="reveal" style="--d:240ms"><img src="img/sport/yoga-320.webp" data-i18n-alt="sport_alt_yoga" alt="Séance de yoga en groupe" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_yoga">Yoga</figcaption></figure>
+      <figure class="reveal" style="--d:300ms"><img src="img/sport/fitness-320.webp" data-i18n-alt="sport_alt_fitness" alt="Cours collectif de fitness" loading="lazy" width="104" height="104"><figcaption data-i18n="sport_fitness">Fitness</figcaption></figure>
     </div>
   </div>
 </section>
@@ -791,7 +821,7 @@ footer ul a:hover{color:var(--mint-deep)}
     <h2 class="reveal" style="--d:80ms" data-i18n="boutique_title">Votre boutique club, sans Shopify.</h2>
     <div class="shop">
       <div class="shop-photo reveal" style="--d:0ms">
-        <img src="brand/img/sport/basket-1-horizon.jpg" data-i18n-alt="boutique_photo_alt" alt="Joueurs de basket en tenue de club sur un terrain en salle" loading="lazy">
+        <img src="img/sport/basket-1200.webp" width="1200" height="800" data-i18n-alt="boutique_photo_alt" alt="Joueurs de basket en tenue de club sur un terrain en salle" loading="lazy">
       </div>
       <div class="shop-card reveal" style="--d:120ms">
         <h3 data-i18n="boutique_card_title">Vendez l'équipement officiel, encaissez sans effort.</h3>
@@ -933,7 +963,7 @@ footer ul a:hover{color:var(--mint-deep)}
     <p class="lead reveal" style="--d:160ms" data-i18n="testi_lead">On ne change pas juste un outil, on change leurs soirées de rentrée. Plus de tableur jusqu'à minuit, plus de relances le dimanche.</p>
     <div class="testi reveal" style="--d:120ms">
       <div class="testi-photo">
-        <img src="brand/img/sport/dancecenter-a-horizon.jpg" data-i18n-alt="testi_photo_alt" alt="Studio de l'école de danse, parquet, barre et miroir" loading="lazy">
+        <img src="img/sport/dancecenter-1200.webp" width="1200" height="800" data-i18n-alt="testi_photo_alt" alt="Studio de l'école de danse, parquet, barre et miroir" loading="lazy">
       </div>
       <div class="testi-body">
         <blockquote class="testi-quote" data-i18n-html="testi_quote">« Avant, la rentrée c'était trois semaines de paperasse et des chèques partout. Avec OnClub, <mark>tout est rentré avant le premier cours</mark> et je récupère mes soirées. Honnêtement, je ne reviendrai jamais en arrière. »</blockquote>
@@ -1007,7 +1037,7 @@ footer ul a:hover{color:var(--mint-deep)}
   <div class="container">
     <div class="foot-grid">
       <div>
-        <a href="#" class="wordmark" data-i18n-aria="nav_aria_home" aria-label="OnClub — accueil">On<em>Club</em></a>
+        <a href="#" class="wordmark" data-i18n-aria="nav_aria_home" aria-label="OnClub — accueil"><img src="img/logo.svg" alt="" width="52" height="26"><span>On<em>Club</em></span></a>
         <p data-i18n="footer_tagline">Les inscriptions, les encaissements et les familles de votre club, au même endroit.</p>
       </div>
       <nav aria-label="Produit">
