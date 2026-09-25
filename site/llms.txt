@@ -27,6 +27,11 @@ Rien n'est dû tant que le club n'encaisse pas. Un simulateur de prix se trouve 
 - [Yoga](https://onclub.app/sport/yoga) : petits groupes, places limitées, cours d'essai, paiement de la saison en plusieurs fois.
 - [Fitness](https://onclub.app/sport/fitness) : cours collectifs à places limitées, planning hebdomadaire, cotisation de saison en plusieurs fois.
 
+## Articles
+
+- [La cotisation en plusieurs fois, sans y passer vos soirées](https://onclub.app/blog/cotisation-en-plusieurs-fois) : chèques déposés à des dates convenues, prélèvement SEPA ou carte avec un échéancier en ligne ; combien d'échéances prévoir, acompte, relances, règlement intérieur.
+- [Tous les articles](https://onclub.app/blog)
+
 ## Pages principales
 
 - [Accueil](https://onclub.app/) : présentation, fonctionnalités, démonstrations animées, simulateur de prix, comparatif avec une cagnotte en ligne et un tableur, questions fréquentes.
