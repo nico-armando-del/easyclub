@@ -12,7 +12,7 @@ window.I18N = {
 
     /* ── Navbar ── */
     nav_features: "Fonctionnalités",
-    nav_clients: "Clients",
+    nav_clients: "Clubs pilotes",
     nav_pricing: "Tarifs",
     nav_faq: "FAQ",
     nav_cta: "Demander une démo",
@@ -23,10 +23,10 @@ window.I18N = {
 
     /* ── Hero ── */
     hero_title: "Votre club, <span class=\"hl\">tout en un.</span>",
-    hero_sub: "La plateforme de digitalisation à la portée de tous les clubs de sport, écoles de sport, de musique et de langues. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, page du club, boutique — et Onie, l’assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.",
+    hero_sub: "La digitalisation à la portée de tous les clubs et de toutes les écoles — sport, musique, langues. <strong>Votre plateforme, à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique, et Onie, l’assistant qui répond au bureau.",
     hero_cta: "Demander une démo",
     hero_cta2: "Voir les tarifs",
-    hero_kicker: "La solution tout-en-un pour les inscriptions et les paiements — clubs de sport, écoles de sport, de musique et de langues",
+    hero_kicker: "La solution tout-en-un des clubs et des écoles",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Aperçu du tableau de bord OnClub : rien en retard, 42 350 euros encaissés cette saison, 23 familles en liste d’attente",
@@ -294,20 +294,21 @@ window.I18N = {
     custom_text: "Réservation de spectacle, billetterie de gala, formulaire spécifique… Votre plateforme, vos règles.",
     custom_cta: "En parler avec nous",
 
-    /* ── Testimonial ── */
-    testi_kicker: "Ils nous font déjà confiance",
-    testi_title: "Ce qu’on leur fait vraiment gagner&nbsp;? Du temps.",
-    testi_lead: "On ne change pas juste un outil, on change leurs soirées de rentrée. Plus de tableur jusqu’à minuit, plus de relances le dimanche.",
-    testi_photo_alt: "Studio de l’école de danse, parquet, barre et miroir",
-    testi_quote: '« Avant, la rentrée c’était trois semaines de paperasse et des chèques partout. Avec OnClub, <mark>tout est rentré avant le premier cours</mark> et je récupère mes soirées. Honnêtement, je ne reviendrai jamais en arrière. »',
-    testi_author_name: "Noémie",
-    testi_author_role: "Directrice, École de Danse",
-    testi_stat1_num: "15 h",
-    testi_stat1_label: "gagnées chaque rentrée",
-    testi_stat2_num: "100 %",
-    testi_stat2_label: "encaissé avant le 1ᵉʳ cours",
-    testi_stat3_num: "3 j",
-    testi_stat3_label: "pour ouvrir les inscriptions",
+    /* ── Clubs pilotes ── */
+    pilote_kicker: "Clubs pilotes",
+    pilote_title: "On ouvre OnClub à nos premiers clubs.",
+    pilote_lead: "Vous voulez une rentrée sans chèques ni tableur&nbsp;? On met la plateforme en place avec vous, et vos retours décident de la suite.",
+    pilote_photo_alt: "Studio de danse, parquet, barre et miroir",
+    pilote_promise: "Pas de paperasse, pas de chèques qui traînent, pas de relances le dimanche&nbsp;: <mark>c’est la rentrée qu’on construit avec vous</mark>.",
+    pilote_sign_name: "L’équipe OnClub",
+    pilote_sign_role: "Les fondateurs",
+    pilote_fact1_num: "0&nbsp;€",
+    pilote_fact1_label: "de frais fixe ou d’installation",
+    pilote_fact2_num: "24&nbsp;h/24",
+    pilote_fact2_label: "inscriptions et paiements en ligne",
+    pilote_fact3_num: "UE",
+    pilote_fact3_label: "données hébergées en Europe",
+    pilote_cta: "Devenir club pilote",
 
     /* ── FAQ ── */
     faq_kicker: "FAQ",
@@ -360,7 +361,7 @@ window.I18N = {
 
     /* ── Navbar ── */
     nav_features: "Features",
-    nav_clients: "Clients",
+    nav_clients: "Pilot clubs",
     nav_pricing: "Pricing",
     nav_faq: "FAQ",
     nav_cta: "Book a demo",
@@ -371,10 +372,10 @@ window.I18N = {
 
     /* ── Hero ── */
     hero_title: "Your club, <span class=\"hl\">all in one.</span>",
-    hero_sub: "Digitalisation within reach of every sports club and every sports, music or language school. We build <strong>your own platform, in your brand and under your name</strong>: online registration, payment in instalments, automatic reminders, club page, shop — and Onie, the assistant that answers the committee. You keep your brand, we make the paperwork disappear.",
+    hero_sub: "Digitalisation within reach of every club and every school — sports, music, languages. <strong>Your platform, under your name</strong>: online registration, payment in instalments, automatic reminders, club website, shop, and Onie, the assistant that answers the committee.",
     hero_cta: "Book a demo",
     hero_cta2: "See pricing",
-    hero_kicker: "The all-in-one solution for registrations and payments — sports clubs, sports, music and language schools",
+    hero_kicker: "The all-in-one solution for clubs and schools",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Preview of the OnClub dashboard: nothing overdue, €42,350 collected this season, 23 families on the waitlist",
@@ -642,20 +643,21 @@ window.I18N = {
     custom_text: "Show ticketing, gala reservations, discipline-specific forms… Your platform, your rules.",
     custom_cta: "Let’s talk",
 
-    /* ── Testimonial ── */
-    testi_kicker: "They already trust us",
-    testi_title: "What do we really save them? Time.",
-    testi_lead: "We don’t just swap a tool — we give them their evenings back. No more spreadsheets until midnight, no more reminders on Sunday.",
-    testi_photo_alt: "Dance school studio with wooden floor, barre and mirror",
-    testi_quote: '“Before, September meant three weeks of paperwork and cheques everywhere. With OnClub, <mark>everything was collected before the first class</mark> and I got my evenings back. Honestly, I’d never go back.”',
-    testi_author_name: "Noémie",
-    testi_author_role: "Director, Dance School",
-    testi_stat1_num: "15 hrs",
-    testi_stat1_label: "saved every September",
-    testi_stat2_num: "100%",
-    testi_stat2_label: "collected before the 1st class",
-    testi_stat3_num: "3 days",
-    testi_stat3_label: "to open registrations",
+    /* ── Clubs pilotes ── */
+    pilote_kicker: "Pilot clubs",
+    pilote_title: "We’re opening OnClub to our first clubs.",
+    pilote_lead: "Want a new season with no cheques and no spreadsheets? We set the platform up with you, and your feedback shapes what comes next.",
+    pilote_photo_alt: "Dance studio with wooden floor, barre and mirror",
+    pilote_promise: "No paperwork, no cheques lying around, no reminders on Sunday: <mark>that’s the season we’re building with you</mark>.",
+    pilote_sign_name: "The OnClub team",
+    pilote_sign_role: "The founders",
+    pilote_fact1_num: "€0",
+    pilote_fact1_label: "fixed or setup fees",
+    pilote_fact2_num: "24/7",
+    pilote_fact2_label: "online registration and payments",
+    pilote_fact3_num: "EU",
+    pilote_fact3_label: "data hosted in Europe",
+    pilote_cta: "Become a pilot club",
 
     /* ── FAQ ── */
     faq_kicker: "FAQ",
@@ -708,7 +710,7 @@ window.I18N = {
 
     /* ── Navbar ── */
     nav_features: "Funcionalidades",
-    nav_clients: "Clientes",
+    nav_clients: "Clubes piloto",
     nav_pricing: "Precios",
     nav_faq: "FAQ",
     nav_cta: "Solicitar una demo",
@@ -719,10 +721,10 @@ window.I18N = {
 
     /* ── Hero ── */
     hero_title: "Tu club, <span class=\"hl\">todo en uno.</span>",
-    hero_sub: "La digitalización al alcance de todos los clubes deportivos y de las escuelas de deporte, música e idiomas. Te construimos <strong>tu propia plataforma, con tu imagen y tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, página del club, tienda — y Onie, el asistente que responde a la directiva. Tú conservas tu marca, nosotros hacemos desaparecer el papeleo.",
+    hero_sub: "La digitalización al alcance de todos los clubes y de todas las escuelas — deporte, música, idiomas. <strong>Tu plataforma, con tu nombre</strong>: inscripciones en línea, pago a plazos, recordatorios automáticos, web del club, tienda y Onie, el asistente que responde a la directiva.",
     hero_cta: "Solicitar una demo",
     hero_cta2: "Ver precios",
-    hero_kicker: "La solución todo en uno para las inscripciones y los pagos — clubes deportivos, escuelas de deporte, de música y de idiomas",
+    hero_kicker: "La solución todo en uno para clubes y escuelas",
 
     /* ── Dashboard mockup ── */
     dash_aria: "Vista del panel de OnClub: nada en retraso, 42 350 euros cobrados esta temporada, 23 familias en lista de espera",
@@ -990,20 +992,21 @@ window.I18N = {
     custom_text: "Reserva de espectáculos, venta de entradas para galas, formularios específicos… Su plataforma, sus reglas.",
     custom_cta: "Hablemos",
 
-    /* ── Testimonial ── */
-    testi_kicker: "Ya confían en nosotros",
-    testi_title: "¿Qué les hacemos ganar realmente? Tiempo.",
-    testi_lead: "No cambiamos solo una herramienta, cambiamos sus noches de inicio de curso. Se acabaron las hojas de cálculo hasta medianoche y los recordatorios el domingo.",
-    testi_photo_alt: "Estudio de la escuela de danza, parqué, barra y espejo",
-    testi_quote: '«Antes, el inicio de curso eran tres semanas de papeleo y cheques por todas partes. Con OnClub, <mark>todo estaba cobrado antes de la primera clase</mark> y recuperé mis noches. Sinceramente, no volvería atrás jamás.»',
-    testi_author_name: "Noémie",
-    testi_author_role: "Directora, Escuela de Danza",
-    testi_stat1_num: "15 h",
-    testi_stat1_label: "ahorradas cada inicio de curso",
-    testi_stat2_num: "100 %",
-    testi_stat2_label: "cobrado antes de la 1.ª clase",
-    testi_stat3_num: "3 días",
-    testi_stat3_label: "para abrir las inscripciones",
+    /* ── Clubs pilotes ── */
+    pilote_kicker: "Clubes piloto",
+    pilote_title: "Abrimos OnClub a nuestros primeros clubes.",
+    pilote_lead: "¿Quieres un inicio de curso sin cheques ni hojas de cálculo? Ponemos la plataforma en marcha contigo, y tus comentarios deciden lo que viene después.",
+    pilote_photo_alt: "Estudio de danza, parqué, barra y espejo",
+    pilote_promise: "Sin papeleo, sin cheques pendientes, sin recordatorios el domingo: <mark>ese es el inicio de curso que construimos contigo</mark>.",
+    pilote_sign_name: "El equipo de OnClub",
+    pilote_sign_role: "Los fundadores",
+    pilote_fact1_num: "0&nbsp;€",
+    pilote_fact1_label: "de cuota fija o de instalación",
+    pilote_fact2_num: "24&nbsp;h",
+    pilote_fact2_label: "inscripciones y pagos en línea, todos los días",
+    pilote_fact3_num: "UE",
+    pilote_fact3_label: "datos alojados en Europa",
+    pilote_cta: "Quiero ser club piloto",
 
     /* ── FAQ ── */
     faq_kicker: "FAQ",

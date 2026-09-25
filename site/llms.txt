@@ -1,0 +1,39 @@
+# OnClub
+
+> OnClub est une plateforme française tout-en-un pour les clubs de sport, les associations sportives et les écoles de sport, de musique et de langues. Elle réunit les inscriptions en ligne, le paiement des cotisations en une ou plusieurs fois, les relances automatiques, les justificatifs, le site du club, la boutique et Onie, un assistant IA pour le bureau. Le club paie un pourcentage de ce qu'il encaisse, sans frais fixe ni frais d'installation.
+
+OnClub construit à chaque club sa propre plateforme, à son nom et à son image. Les familles s'inscrivent et paient en ligne. L'argent des cotisations arrive directement sur le compte de paiement du club, et OnClub prélève son pourcentage à chaque transaction, frais bancaires inclus. Les chèques et les espèces se saisissent à la main et ne sont pas comptés. Les données sont hébergées dans l'Union européenne.
+
+## Pour qui
+
+- Clubs et associations sportives : football, basket, judo, danse, yoga, fitness et toutes les disciplines organisées en cours, catégories ou équipes.
+- Écoles de sport, de musique et de langues qui encaissent des inscriptions à l'année ou à la saison.
+- Bureaux de bénévoles (présidence, trésorerie, secrétariat) qui gèrent aujourd'hui un tableur, des chèques et des relances à la main.
+
+## Formules
+
+- OnClub Mini, 2,90 % des cotisations encaissées : inscriptions en ligne, paiement en une ou plusieurs fois, relances automatiques des retards, tableau de bord, justificatifs, exports, cours d'essai, espace famille, vagues d'inscription.
+- OnClub Pro, 4,90 % des cotisations encaissées : tout Mini, plus la page du club retouchée par IA (planning, actualités, galerie), la liste d'attente automatique, les campagnes email et la saison suivante en un clic.
+- OnClub Pro Max IA, 6,90 % des cotisations encaissées et 2 % sur la boutique : tout Pro, plus Onie, l'assistant du bureau, la boutique du club, les événements et stages, et un accompagnement prioritaire.
+
+Rien n'est dû tant que le club n'encaisse pas. Un simulateur de prix se trouve sur la page d'accueil.
+
+## Pages par sport
+
+- [Football](https://onclub.app/sport/football) : catégories U7 à seniors bornées par année de naissance, dossiers complets avant le premier entraînement, cotisation en une ou plusieurs fois.
+- [Danse](https://onclub.app/sport/danse) : éveil, classique, modern jazz, hip-hop ; plusieurs cours par élève, fratries, cours d'essai, gala.
+- [Judo](https://onclub.app/sport/judo) : catégories par année de naissance, certificat ou questionnaire de santé, kimono, cours d'essai.
+- [Basket](https://onclub.app/sport/basket) : équipes par année de naissance, gymnases et créneaux, entraîneurs, maillots par taille.
+- [Yoga](https://onclub.app/sport/yoga) : petits groupes, places limitées, cours d'essai, paiement de la saison en plusieurs fois.
+- [Fitness](https://onclub.app/sport/fitness) : cours collectifs à places limitées, planning hebdomadaire, cotisation de saison en plusieurs fois.
+
+## Pages principales
+
+- [Accueil](https://onclub.app/) : présentation, fonctionnalités, démonstrations animées, simulateur de prix, comparatif avec une cagnotte en ligne et un tableur, questions fréquentes.
+- [Mentions légales](https://onclub.app/mentions-legales)
+- [Politique de confidentialité](https://onclub.app/confidentialite)
+- [Conditions d'utilisation et de service](https://onclub.app/conditions)
+
+## Contact
+
+- Démonstration et questions : WhatsApp, https://wa.me/33645049227

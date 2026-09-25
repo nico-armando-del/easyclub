@@ -462,6 +462,7 @@ a{color:inherit;text-decoration:none}
 .testi-photo img{width:100%;height:100%;object-fit:cover;min-height:440px}
 .testi-body{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
 .testi-quote{font-family:var(--font-head);font-weight:600;font-size:1.55rem;line-height:1.32;letter-spacing:-0.01em;margin-bottom:26px}
+.testi-cta{margin-top:26px;align-self:flex-start}
 .testi-quote mark{background:linear-gradient(transparent 58%,rgba(93,232,143,.5) 58%);color:inherit;padding:0 2px}
 .testi-author{display:flex;align-items:center;gap:14px}
 .testi-avatar{width:50px;height:50px;border-radius:50%;background:var(--mint);color:var(--mint-dark);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:1.05rem}
@@ -640,7 +641,7 @@ footer ul a:hover{color:var(--mint-deep)}
     <nav data-i18n-aria="nav_aria_main" aria-label="Navigation principale">
       <ul class="nav-links">
         <li><a href="#fonctionnalites" data-i18n="nav_features">Fonctionnalités</a></li>
-        <li><a href="#clients" data-i18n="nav_clients">Clients</a></li>
+        <li><a href="#clubs-pilotes" data-i18n="nav_clients">Clubs pilotes</a></li>
         <li><a href="#tarifs" data-i18n="nav_pricing">Tarifs</a></li>
         <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
       </ul>
@@ -659,7 +660,7 @@ footer ul a:hover{color:var(--mint-deep)}
   </div>
   <div class="nav-mobile" id="navMobile">
     <a href="#fonctionnalites" data-i18n="nav_features">Fonctionnalités</a>
-    <a href="#clients" data-i18n="nav_clients">Clients</a>
+    <a href="#clubs-pilotes" data-i18n="nav_clients">Clubs pilotes</a>
     <a href="#tarifs" data-i18n="nav_pricing">Tarifs</a>
     <a href="#faq" data-i18n="nav_faq">FAQ</a>
     <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener" data-i18n="nav_cta">Demander une démo</a>
@@ -676,9 +677,9 @@ footer ul a:hover{color:var(--mint-deep)}
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <p class="kicker" data-i18n="hero_kicker">La solution tout-en-un pour les inscriptions et les paiements — clubs de sport, écoles de sport, de musique et de langues</p>
+    <p class="kicker" data-i18n="hero_kicker">La solution tout-en-un des clubs et des écoles</p>
     <h1 id="heroTitle" data-i18n-html="hero_title">Votre club, <span class="hl">tout en un.</span></h1>
-    <p class="hero-sub" data-i18n-html="hero_sub">La plateforme de digitalisation à la portée de tous les clubs de sport, écoles de sport, de musique et de langues. On vous construit <strong>votre propre plateforme, à votre image et à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, page du club, boutique — et Onie, l’assistant qui répond au bureau. Vous gardez votre marque, on fait disparaître la paperasse.</p>
+    <p class="hero-sub" data-i18n-html="hero_sub">La digitalisation à la portée de tous les clubs et de toutes les écoles — sport, musique, langues. <strong>Votre plateforme, à votre nom</strong>&nbsp;: inscriptions en ligne, paiement en plusieurs fois, relances automatiques, site du club, boutique, et Onie, l’assistant qui répond au bureau.</p>
     <div class="hero-ctas">
       <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener" class="btn btn-mint" data-i18n="hero_cta">Demander une démo</a>
       <a href="#tarifs" class="btn btn-outline" data-i18n="hero_cta2">Voir les tarifs</a>
@@ -1058,30 +1059,31 @@ footer ul a:hover{color:var(--mint-deep)}
   </div>
 </section>
 
-<!-- ============ TESTIMONIAL / CLIENTS ============ -->
-<section class="section" id="clients" style="padding-top:0">
+<!-- ============ CLUBS PILOTES ============ -->
+<section class="section" id="clubs-pilotes" style="padding-top:0">
   <div class="container">
-    <span class="kicker reveal" data-i18n="testi_kicker">Ils nous font déjà confiance</span>
-    <h2 class="reveal" style="--d:80ms" data-i18n-html="testi_title">Ce qu'on leur fait vraiment gagner&nbsp;? Du temps.</h2>
-    <p class="lead reveal" style="--d:160ms" data-i18n="testi_lead">On ne change pas juste un outil, on change leurs soirées de rentrée. Plus de tableur jusqu'à minuit, plus de relances le dimanche.</p>
+    <span class="kicker reveal" data-i18n="pilote_kicker">Clubs pilotes</span>
+    <h2 class="reveal" style="--d:80ms" data-i18n-html="pilote_title">On ouvre OnClub à nos premiers clubs.</h2>
+    <p class="lead reveal" style="--d:160ms" data-i18n-html="pilote_lead">Vous voulez une rentrée sans chèques ni tableur&nbsp;? On met la plateforme en place avec vous, et vos retours décident de la suite.</p>
     <div class="testi reveal" style="--d:120ms">
       <div class="testi-photo">
-        <img src="img/sport/dancecenter-1200.webp" width="1200" height="800" data-i18n-alt="testi_photo_alt" alt="Studio de l'école de danse, parquet, barre et miroir" loading="lazy">
+        <img src="img/sport/dancecenter-1200.webp" width="1200" height="800" data-i18n-alt="pilote_photo_alt" alt="Studio de danse, parquet, barre et miroir" loading="lazy">
       </div>
       <div class="testi-body">
-        <blockquote class="testi-quote" data-i18n-html="testi_quote">« Avant, la rentrée c'était trois semaines de paperasse et des chèques partout. Avec OnClub, <mark>tout est rentré avant le premier cours</mark> et je récupère mes soirées. Honnêtement, je ne reviendrai jamais en arrière. »</blockquote>
+        <p class="testi-quote" data-i18n-html="pilote_promise">Pas de paperasse, pas de chèques qui traînent, pas de relances le dimanche&nbsp;: <mark>c’est la rentrée qu’on construit avec vous</mark>.</p>
         <div class="testi-author">
-          <span class="testi-avatar" aria-hidden="true">N</span>
+          <span class="testi-avatar" aria-hidden="true">OC</span>
           <div>
-            <strong data-i18n="testi_author_name">Noémie</strong>
-            <span data-i18n="testi_author_role">Directrice, École de Danse</span>
+            <strong data-i18n="pilote_sign_name">L’équipe OnClub</strong>
+            <span data-i18n="pilote_sign_role">Les fondateurs</span>
           </div>
         </div>
         <div class="testi-stats">
-          <div><span class="num" data-i18n="testi_stat1_num">15 h</span><span data-i18n="testi_stat1_label">gagnées chaque rentrée</span></div>
-          <div><span class="num" data-i18n="testi_stat2_num">100 %</span><span data-i18n="testi_stat2_label">encaissé avant le 1ᵉʳ cours</span></div>
-          <div><span class="num" data-i18n="testi_stat3_num">3 j</span><span data-i18n="testi_stat3_label">pour ouvrir les inscriptions</span></div>
+          <div><span class="num" data-i18n-html="pilote_fact1_num">0&nbsp;€</span><span data-i18n="pilote_fact1_label">de frais fixe ou d’installation</span></div>
+          <div><span class="num" data-i18n-html="pilote_fact2_num">24&nbsp;h/24</span><span data-i18n="pilote_fact2_label">inscriptions et paiements en ligne</span></div>
+          <div><span class="num" data-i18n="pilote_fact3_num">UE</span><span data-i18n="pilote_fact3_label">données hébergées en Europe</span></div>
         </div>
+        <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20que%20mon%20club%20devienne%20club%20pilote%20OnClub." target="_blank" rel="noopener" class="btn btn-mint testi-cta" data-i18n="pilote_cta">Devenir club pilote</a>
       </div>
     </div>
   </div>
@@ -1168,7 +1170,6 @@ footer ul a:hover{color:var(--mint-deep)}
         <ul>
           <li><a href="#faq" data-i18n="footer_resources_faq">FAQ</a></li>
           <li><a href="#tarifs" data-i18n="footer_product_pricing">Tarifs</a></li>
-          <li><a href="mailto:bonjour@onclub.app">bonjour@onclub.app</a></li>
           <li><a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener" data-i18n="footer_resources_contact">Contact</a></li>
         </ul>
       </nav>
@@ -1224,9 +1225,12 @@ footer ul a:hover{color:var(--mint-deep)}
       w.style.transitionDelay = (i*70)+'ms';
     });
   }
-  requestAnimationFrame(function(){
-    requestAnimationFrame(function(){ document.body.classList.add('loaded'); });
-  });
+  /* Deux images plus tard, le titre entre. Dans un onglet en arrière-plan ou
+     une capture d'aperçu, requestAnimationFrame ne tourne pas : sans ce filet,
+     le titre resterait invisible. */
+  var charge = function(){ document.body.classList.add('loaded'); };
+  requestAnimationFrame(function(){ requestAnimationFrame(charge); });
+  setTimeout(charge, 800);
 
   /* Navbar scroll state */
   var nav = document.getElementById('nav');
