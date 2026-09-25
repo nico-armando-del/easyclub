@@ -16,7 +16,7 @@ OnClub construit à chaque club sa propre plateforme, à son nom et à son image
 - OnClub Pro, 4,90 % des cotisations encaissées : tout Mini, plus la page du club retouchée par IA (planning, actualités, galerie), la liste d'attente automatique, les campagnes email et la saison suivante en un clic.
 - OnClub Pro Max IA, 6,90 % des cotisations encaissées et 2 % sur la boutique : tout Pro, plus Onie, l'assistant du bureau, la boutique du club, les événements et stages, et un accompagnement prioritaire.
 
-Rien n'est dû tant que le club n'encaisse pas. Un simulateur de prix se trouve sur la page d'accueil.
+Rien n'est dû tant que le club n'encaisse pas.
 
 ## Pages par sport
 
@@ -34,7 +34,7 @@ Rien n'est dû tant que le club n'encaisse pas. Un simulateur de prix se trouve 
 
 ## Pages principales
 
-- [Accueil](https://onclub.app/) : présentation, fonctionnalités, démonstrations animées, simulateur de prix, comparatif avec une cagnotte en ligne et un tableur, questions fréquentes.
+- [Accueil](https://onclub.app/) : présentation, fonctionnalités, démonstrations animées, formules et tarifs, comparatif avec une cagnotte en ligne et un tableur, questions fréquentes.
 - [Mentions légales](https://onclub.app/mentions-legales)
 - [Politique de confidentialité](https://onclub.app/confidentialite)
 - [Conditions d'utilisation et de service](https://onclub.app/conditions)

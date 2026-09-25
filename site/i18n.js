@@ -237,22 +237,6 @@ window.I18N = {
 
     pricing_foot: "Votre abonnement, c’est un pourcentage : rien de fixe, rien tant que vous n’encaissez pas. Il est prélevé automatiquement à chaque encaissement, frais bancaires inclus.",
 
-    simu_title: "Combien ça coûte pour votre club ?",
-
-    simu_cotis: "Cotisations encaissées en ligne sur la saison",
-
-    simu_boutique: "Ventes de la boutique sur la saison",
-
-    simu_formule: "Formule",
-
-    simu_saison: "sur la saison",
-
-    simu_pour100: "pour 100 € encaissés",
-
-    simu_mois: "par mois, sur dix mois",
-
-    simu_note: "Prélevé au fil des encaissements, frais bancaires inclus. Rien tant que vous n’encaissez pas, rien sur les chèques et les espèces. La boutique n’est comptée qu’en Pro Max IA, à 2 % des ventes.",
-
     /* ── Comparison table ── */
     compare_kicker: "La différence",
     compare_title: "Un formulaire générique, ou votre plateforme.",
@@ -352,7 +336,6 @@ window.I18N = {
     footer_copyright: "© 2026 OnClub",
     footer_lang_aria: "Choix de la langue"
   },
-
 
   en: {
 
@@ -587,22 +570,6 @@ window.I18N = {
 
     pricing_foot: "Your subscription is a percentage: nothing fixed, nothing until you collect. It is deducted automatically from each payment, bank charges included.",
 
-    simu_title: "How much does it cost for your club?",
-
-    simu_cotis: "Fees collected online over the season",
-
-    simu_boutique: "Shop sales over the season",
-
-    simu_formule: "Plan",
-
-    simu_saison: "over the season",
-
-    simu_pour100: "per €100 collected",
-
-    simu_mois: "per month, over ten months",
-
-    simu_note: "Deducted as payments come in, bank charges included. Nothing until you collect, nothing on cheques and cash. The shop only counts on Pro Max IA, at 2% of sales.",
-
     /* ── Comparison table ── */
     compare_kicker: "The difference",
     compare_title: "A generic form, or your own platform.",
@@ -702,7 +669,6 @@ window.I18N = {
     footer_copyright: "© 2026 OnClub",
     footer_lang_aria: "Language selection"
   },
-
 
   es: {
 
@@ -936,22 +902,6 @@ window.I18N = {
     pricing_max_cta: "Elegir Pro Max IA",
 
     pricing_foot: "Tu suscripción es un porcentaje: nada fijo, nada mientras no cobres. Se descuenta automáticamente en cada cobro, comisiones bancarias incluidas.",
-
-    simu_title: "¿Cuánto cuesta para tu club?",
-
-    simu_cotis: "Cuotas cobradas en línea en la temporada",
-
-    simu_boutique: "Ventas de la tienda en la temporada",
-
-    simu_formule: "Fórmula",
-
-    simu_saison: "en la temporada",
-
-    simu_pour100: "por cada 100 € cobrados",
-
-    simu_mois: "al mes, en diez meses",
-
-    simu_note: "Descontado a medida que cobras, comisiones bancarias incluidas. Nada mientras no cobres, nada sobre cheques y efectivo. La tienda solo cuenta en Pro Max IA, al 2 % de las ventas.",
 
     /* ── Comparison table ── */
     compare_kicker: "La diferencia",

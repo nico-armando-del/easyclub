@@ -497,23 +497,6 @@ footer ul a:hover{color:var(--mint-deep)}
   .hl::after{transform:scaleX(1)!important}
 }
 
-/* ---------- Simulateur ---------- */
-.simu{margin-top:40px;background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);padding:28px 30px;box-shadow:var(--shadow-soft)}
-.simu h3{font-size:1.3rem;margin-bottom:18px}
-.simu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;align-items:end}
-.simu label{display:flex;flex-direction:column;gap:8px;font-size:.92rem;color:var(--gray)}
-.simu label output{font-family:var(--font-head);font-weight:700;font-size:1.15rem;color:var(--ink);font-feature-settings:'tnum'}
-.simu input[type=range]{width:100%;accent-color:var(--mint-deep)}
-.simu fieldset{border:0;display:flex;gap:8px;flex-wrap:wrap}
-.simu fieldset legend{font-size:.92rem;color:var(--gray);margin-bottom:8px}
-.simu fieldset label{flex-direction:row;align-items:center;gap:8px;border:1.5px solid var(--sand);border-radius:999px;padding:8px 14px;cursor:pointer;color:var(--ink);font-weight:600;font-size:.9rem}
-.simu fieldset label:has(input:checked){border-color:var(--ink);background:var(--cream)}
-.simu fieldset input{accent-color:var(--mint-deep)}
-.simu-out{margin-top:24px;display:flex;gap:28px;flex-wrap:wrap;align-items:baseline}
-.simu-out .big{font-family:var(--font-head);font-weight:700;font-size:2.4rem;letter-spacing:-0.02em;font-feature-settings:'tnum'}
-.simu-out .sub{color:var(--gray);font-size:.95rem}
-.simu-out .sub b{color:var(--ink);font-family:var(--font-head);font-feature-settings:'tnum'}
-.simu-note{margin-top:14px;font-size:.84rem;color:var(--gray)}
 /* ---------- Démos rejouées ---------- */
 .demos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
 .demo{background:var(--white);border:1px solid var(--sand);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px;min-height:400px}
@@ -546,7 +529,7 @@ footer ul a:hover{color:var(--mint-deep)}
 .fichier .ico{width:34px;height:40px;border-radius:6px;background:var(--cream);border:1px solid var(--sand);display:grid;place-items:center;font-size:.6rem;font-weight:700;color:var(--mint-deep);flex:none}
 .fichier .btn{margin-left:auto;padding:8px 14px;font-size:.85rem}
 .demo .note{font-size:.8rem;color:var(--gray);margin-top:auto}
-@media (max-width:900px){.demos{grid-template-columns:1fr}.simu-grid{grid-template-columns:1fr}}
+@media (max-width:900px){.demos{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.bulle,.prop,.fichier{opacity:1!important;transform:none!important}.mini-site .photo{height:64px}.bulle.q .curseur{display:none}}
 </style>
 </head>
@@ -917,23 +900,6 @@ footer ul a:hover{color:var(--mint-deep)}
     </div>
     <p class="price-foot reveal" data-i18n="pricing_foot">Your subscription is a percentage: nothing fixed, nothing until you collect. It is deducted automatically from each payment, bank charges included.</p>
 
-    <div class="simu reveal" id="simulateur">
-      <h3 data-i18n="simu_title">How much does it cost for your club?</h3>
-      <div class="simu-grid">
-        <label><span data-i18n="simu_cotis">Fees collected online over the season</span><output id="simu-cotis-v">30 000 €</output><input type="range" id="simu-cotis" min="5000" max="200000" step="1000" value="30000"></label>
-        <label><span data-i18n="simu_boutique">Shop sales over the season</span><output id="simu-boutique-v">0 €</output><input type="range" id="simu-boutique" min="0" max="30000" step="500" value="0"></label>
-        <fieldset id="simu-formule"><legend data-i18n="simu_formule">Plan</legend>
-          <label><input type="radio" name="simu-formule" value="290">OnClub Mini · 2,90 %</label>
-          <label><input type="radio" name="simu-formule" value="490" checked>OnClub Pro · 4,90 %</label>
-          <label><input type="radio" name="simu-formule" value="690">OnClub Pro Max IA · 6,90 %</label>
-        </fieldset>
-      </div>
-      <div class="simu-out">
-        <span class="big" id="simu-total">1 470 €</span>
-        <span class="sub"><span data-i18n="simu_saison">over the season</span> · <b id="simu-100">4,90 €</b> <span data-i18n="simu_pour100">per €100 collected</span> · <b id="simu-mois">147 €</b> <span data-i18n="simu_mois">per month, over ten months</span></span>
-      </div>
-      <p class="simu-note" data-i18n="simu_note">Deducted as payments come in, bank charges included. Nothing until you collect, nothing on cheques and cash. The shop only counts on Pro Max IA, at 2% of sales.</p>
-    </div>
   </div>
 </section>
 
@@ -1230,27 +1196,6 @@ footer ul a:hover{color:var(--mint-deep)}
       if (location.hash) a.setAttribute('href', a.getAttribute('href').split('#')[0] + location.hash);
     });
   });
-
-  /* ── Simulateur : le prix, calculé devant le club ── */
-  var simu = document.getElementById('simulateur');
-  if (simu) {
-    var cotis = document.getElementById('simu-cotis'), boutique = document.getElementById('simu-boutique');
-    var localeDe = function(){ var l = document.documentElement.lang; return l === 'en' ? 'en-GB' : l === 'es' ? 'es-ES' : 'fr-FR'; };
-    var euros = function(n){ return n.toLocaleString(localeDe(), {maximumFractionDigits: 0}).replace(/ | /g, ' ') + ' €'; };
-    var calcul = function(){
-      var choisi = simu.querySelector('input[name=simu-formule]:checked');
-      var taux = parseInt(choisi ? choisi.value : '490', 10);
-      var c = parseInt(cotis.value, 10), b = parseInt(boutique.value, 10);
-      var total = Math.round(c * taux / 10000 + (taux === 690 ? b * 0.02 : 0));
-      document.getElementById('simu-cotis-v').textContent = euros(c);
-      document.getElementById('simu-boutique-v').textContent = euros(b);
-      document.getElementById('simu-total').textContent = euros(total);
-      document.getElementById('simu-100').textContent = (taux / 100).toLocaleString(localeDe(), {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' €';
-      document.getElementById('simu-mois').textContent = euros(Math.round(total / 10));
-    };
-    simu.addEventListener('input', calcul);
-    calcul();
-  }
 
   /* ── Démos rejouées : les écrans du produit, étape par étape, en boucle ── */
   var demos = document.querySelectorAll('.demo[data-demo]');
