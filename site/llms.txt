@@ -39,6 +39,11 @@ Rien n'est dû tant que le club n'encaisse pas. Un simulateur de prix se trouve 
 - [Politique de confidentialité](https://onclub.app/confidentialite)
 - [Conditions d'utilisation et de service](https://onclub.app/conditions)
 
+## Autres langues
+
+- [OnClub in English](https://onclub.app/en) : the all-in-one solution for registrations and payments of sports clubs and schools.
+- [OnClub en español](https://onclub.app/es) : la solución todo en uno para las inscripciones y los pagos de clubes deportivos y escuelas.
+
 ## Contact
 
 - Démonstration et questions : WhatsApp, https://wa.me/33645049227
