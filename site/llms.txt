@@ -1,6 +1,6 @@
 # OnClub
 
-> OnClub est une plateforme française tout-en-un pour les clubs de sport, les associations sportives et les écoles de sport, de musique et de langues. Elle réunit les inscriptions en ligne, le paiement des cotisations en une ou plusieurs fois, les relances automatiques, les justificatifs, le site du club, la boutique et Onie, un assistant IA pour le bureau. Le club paie un pourcentage de ce qu'il encaisse, sans frais fixe ni frais d'installation.
+> OnClub est une plateforme française tout-en-un pour les clubs de sport, les associations sportives et les écoles de sport, de musique et de langues. Elle réunit les inscriptions en ligne, le paiement des cotisations en une ou plusieurs fois, les relances automatiques, les justificatifs, le site du club, la boutique et Cluby, un assistant IA pour le bureau. Le club paie un pourcentage de ce qu'il encaisse, sans frais fixe ni frais d'installation.
 
 OnClub construit à chaque club sa propre plateforme, à son nom et à son image. Les familles s'inscrivent et paient en ligne. L'argent des cotisations arrive directement sur le compte de paiement du club, et OnClub prélève son pourcentage à chaque transaction, frais bancaires inclus. Les chèques et les espèces se saisissent à la main et ne sont pas comptés. Les données sont hébergées dans l'Union européenne.
 
@@ -14,7 +14,7 @@ OnClub construit à chaque club sa propre plateforme, à son nom et à son image
 
 - OnClub Mini, 2,90 % des cotisations encaissées : inscriptions en ligne, paiement en une ou plusieurs fois, relances automatiques des retards, tableau de bord, justificatifs, exports, cours d'essai, espace famille, vagues d'inscription.
 - OnClub Pro, 4,90 % des cotisations encaissées : tout Mini, plus la page du club retouchée par IA (planning, actualités, galerie), la liste d'attente automatique, les campagnes email et la saison suivante en un clic.
-- OnClub Pro Max IA, 6,90 % des cotisations encaissées et 2 % sur la boutique : tout Pro, plus Onie, l'assistant du bureau, la boutique du club, les événements et stages, et un accompagnement prioritaire.
+- OnClub Pro Max IA, 6,90 % des cotisations encaissées et 2 % sur la boutique : tout Pro, plus Cluby, l'assistant du bureau, la boutique du club, les événements et stages, et un accompagnement prioritaire.
 
 Rien n'est dû tant que le club n'encaisse pas.
 
