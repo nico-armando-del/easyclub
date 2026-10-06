@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ce que règle OnClub — OnClub</title>
+<meta name="description" content="Inscriptions, paiements, relances, saisons, équipes, site, boutique, assistant : chaque fonctionnalité d’OnClub, face au problème qu’elle règle pour le bureau d’un club.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://onclub.app/fonctionnalites">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OnClub">
+<meta property="og:title" content="Ce que règle OnClub">
+<meta property="og:description" content="Chaque fonctionnalité d’OnClub, face au problème qu’elle règle pour le bureau d’un club.">
+<meta property="og:url" content="https://onclub.app/fonctionnalites">
+<meta property="og:image" content="https://onclub.app/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/img/favicon.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#0E1116">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sport.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* La page se lit sans script : l'état caché n'existe que sous html.js. */
+.barre{position:fixed;top:0;left:0;height:4px;width:100%;background:var(--mint);transform-origin:0 50%;transform:scaleX(0);z-index:20}
+.large{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.ouverture{padding:56px 0 72px}
+.ouverture .kicker{margin-bottom:22px}
+.ouverture h1{font-size:clamp(2.6rem,6.4vw,5.2rem);line-height:1.02;letter-spacing:-0.035em;max-width:15ch;text-wrap:balance}
+.ouverture h1 .mot{display:inline-block}
+.ouverture h1 .vert{color:var(--mint-deep)}
+.ouverture .lead{font-size:1.2rem;color:#4F4F48;max-width:58ch;margin-top:26px}
+.chapitres{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.chapitres a{text-decoration:none;font-weight:600;font-size:.92rem;padding:9px 16px;border-radius:999px;background:var(--white);border:1px solid var(--sand);transition:background .2s,border-color .2s}
+.chapitres a:hover{background:var(--mint);border-color:var(--mint)}
+.defile{display:flex;align-items:center;gap:10px;margin-top:44px;color:var(--gray);font-size:.9rem;font-weight:500}
+.defile span{display:block;width:2px;height:34px;background:var(--sand);position:relative;overflow:hidden;border-radius:2px}
+.defile span::after{content:"";position:absolute;left:0;top:-40%;width:100%;height:40%;background:var(--mint-deep);animation:goutte 1.8s ease-in-out infinite}
+@keyframes goutte{to{top:100%}}
+
+.corps{display:grid;grid-template-columns:230px 1fr;gap:56px;align-items:start}
+.rail{position:sticky;top:40px;padding-top:8px}
+.rail p{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:14px}
+.rail ol{list-style:none;display:flex;flex-direction:column;gap:4px;border-left:2px solid var(--sand)}
+.rail a{display:block;text-decoration:none;padding:7px 0 7px 16px;margin-left:-2px;border-left:2px solid transparent;color:var(--gray);font-weight:500;font-size:.95rem;line-height:1.35;transition:color .25s,border-color .25s}
+.rail a.actif{color:var(--ink);border-left-color:var(--mint-deep);font-weight:700}
+
+.chapitre{padding:28px 0 64px;border-top:1px solid var(--sand)}
+.chapitre:first-child{border-top:none;padding-top:0}
+.chapitre>header{margin-bottom:34px}
+.chapitre>header .kicker{margin-bottom:12px}
+.chapitre>header h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.05;letter-spacing:-0.03em;margin:0;text-wrap:balance}
+.chapitre>header p{color:#4F4F48;font-size:1.08rem;margin-top:12px;max-width:60ch}
+
+.f{display:grid;grid-template-columns:1fr 46px 1.15fr;gap:20px;align-items:center;padding:26px 0;border-top:1px dashed var(--sand)}
+.f:first-of-type{border-top:none}
+.f h3{grid-column:1/-1;font-size:1.32rem;margin:0 0 2px;letter-spacing:-0.015em}
+.etiquette{display:block;font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px}
+.pb .etiquette{color:#92600A}
+.sol .etiquette{color:var(--mint-deep)}
+.pb p{color:#4F4F48;font-size:1.02rem}
+.pb p span{background-image:linear-gradient(transparent 52%,rgba(146,96,10,.55) 52%,rgba(146,96,10,.55) 60%,transparent 60%);background-repeat:no-repeat;background-size:100% 100%}
+.sol{background:var(--white);border:1px solid var(--sand);border-radius:18px;padding:18px 22px;box-shadow:var(--shadow-soft)}
+.sol p{font-size:1.04rem;color:var(--ink)}
+.fleche{width:46px;height:46px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.fleche svg{width:20px;height:20px;stroke:var(--mint);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* L'animation : le problème se raye, la flèche tourne, la solution monte. */
+.js .pb p span{background-size:0% 100%;transition:background-size .7s cubic-bezier(.6,0,.3,1) .15s,color .5s .15s}
+.js .f.vu .pb p span{background-size:100% 100%;color:#8A8A80}
+.js .fleche{transform:scale(.6) rotate(-90deg);opacity:0;transition:transform .45s cubic-bezier(.3,1.4,.5,1) .55s,opacity .3s .55s}
+.js .f.vu .fleche{transform:none;opacity:1}
+.js .sol{opacity:0;transform:translateY(22px);transition:opacity .55s ease .75s,transform .55s cubic-bezier(.2,.8,.2,1) .75s}
+.js .f.vu .sol{opacity:1;transform:none}
+.js .chapitre>header{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .chapitre>header.vu{opacity:1;transform:none}
+.js .ouverture h1 .mot{opacity:0;transform:translateY(.4em);animation:monte .7s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes monte{to{opacity:1;transform:none}}
+
+.fin{background:var(--ink);color:var(--cream);border-radius:28px;padding:72px 56px;margin:24px 0 72px;position:relative;overflow:hidden}
+.fin::before{content:"";position:absolute;right:-180px;top:-180px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(93,232,143,.32),rgba(93,232,143,0) 65%)}
+.fin h2{font-size:clamp(2.2rem,5vw,4rem);line-height:1.04;letter-spacing:-0.035em;color:var(--cream);max-width:16ch;position:relative}
+.fin h2 .vert{color:var(--mint)}
+.fin p{color:#BFC3BA;font-size:1.15rem;margin-top:20px;max-width:56ch;position:relative}
+.fin .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;position:relative}
+.fin .btn-outline{color:var(--cream)!important;border-color:rgba(250,250,247,.45)}
+
+@media (max-width:980px){
+  .corps{grid-template-columns:1fr}
+  .rail{display:none}
+}
+@media (max-width:720px){
+  .f{grid-template-columns:1fr;gap:12px}
+  .fleche{width:36px;height:36px;justify-self:start}
+  .fleche svg{transform:rotate(90deg)}
+  .fin{padding:48px 26px}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .pb p span,.js .fleche,.js .sol,.js .chapitre>header,.js .ouverture h1 .mot{transition:none;animation:none;opacity:1;transform:none}
+  .js .pb p span{background-size:100% 100%}
+  .defile span::after{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="barre" aria-hidden="true"></div>
+<header class="container nav">
+  <a href="/" class="wordmark" aria-label="OnClub — accueil"><img src="/img/logo.svg" alt="" width="52" height="26"><span>On<em>Club</em></span></a>
+  <nav aria-label="Navigation">
+    <a href="/#fonctionnalites">Accueil</a>
+    <a href="/#tarifs">Tarifs</a>
+    <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." class="btn" target="_blank" rel="noopener">Demander une démo</a>
+  </nav>
+</header>
+
+<main>
+  <section class="large ouverture">
+    <span class="kicker">Les fonctionnalités, une par une</span>
+    <h1><span class="mot">Chaque</span> <span class="mot">casse-tête</span> <span class="mot">du</span> <span class="mot">bureau</span> <span class="mot vert">a</span> <span class="mot vert">sa</span> <span class="mot vert">réponse.</span></h1>
+    <p class="lead">Inscriptions, argent, saisons, équipes, site, boutique, assistant : voici ce que fait OnClub, et ce que chaque fonctionnalité règle pour un club et ses bénévoles.</p>
+    <nav class="chapitres" aria-label="Chapitres">
+      <a href="#inscrire">Les inscriptions</a>
+      <a href="#argent">L’argent</a>
+      <a href="#saisons">Les saisons</a>
+      <a href="#equipes">Les équipes</a>
+      <a href="#vitrine">Le site et la boutique</a>
+      <a href="#cluby">L’assistant</a>
+      <a href="#federation">La fédération</a>
+    </nav>
+    <p class="defile"><span></span>Faites défiler : le problème, puis ce qu’OnClub en fait.</p>
+  </section>
+
+  <div class="large corps">
+    <aside class="rail" aria-label="Où vous en êtes">
+      <p>La saison d’un club</p>
+      <ol>
+        <li><a href="#inscrire">Les familles s’inscrivent seules</a></li>
+        <li><a href="#argent">L’argent rentre</a></li>
+        <li><a href="#saisons">La saison s’enchaîne</a></li>
+        <li><a href="#equipes">Les équipes prennent vie</a></li>
+        <li><a href="#vitrine">Le club se montre</a></li>
+        <li><a href="#cluby">Vous le demandez</a></li>
+        <li><a href="#federation">La fédération</a></li>
+      </ol>
+    </aside>
+
+    <div class="contenu">
+
+      <section class="chapitre" id="inscrire">
+        <header><span class="kicker">Les inscriptions</span><h2>Les familles s’inscrivent seules</h2><p>Fini le dossier papier recopié par un bénévole : la famille fait tout depuis son téléphone, le bureau ne ressaisit rien.</p></header>
+
+        <article class="f"><h3>L’inscription en ligne</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Des fiches papier à recopier, et des dossiers encore incomplets en octobre.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Un seul formulaire pour toute la famille, depuis le téléphone. Seules les équipes où l’enfant a sa place lui sont proposées, et les places restantes se voient.</p></div>
+        </article>
+
+        <article class="f"><h3>Les pièces et la santé</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Le certificat qui manque, l’autorisation perdue, découverts au pire moment.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Les pièces se déposent en photo, le bureau les contrôle, celles qui manquent se relancent. Elles n’empêchent ni de s’inscrire ni de payer : la famille peut les déposer plus tard.</p></div>
+        </article>
+
+        <article class="f"><h3>Un formulaire à votre image</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Un formulaire tout fait, qui ne pose pas les questions de votre club.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Taille de maillot, allergies, covoiturage : vous ajoutez vos questions en les demandant à l’atelier d’inscription. L’identité de l’enfant, elle, reste verrouillée.</p></div>
+        </article>
+
+        <article class="f"><h3>Les séances d’essai</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Les nouveaux veulent essayer avant de s’engager, et personne ne sait qui vient.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Ils réservent leur séance d’essai en ligne. Le bureau sait qui vient, et quand.</p></div>
+        </article>
+      </section>
+
+      <section class="chapitre" id="argent">
+        <header><span class="kicker">L’argent</span><h2>L’argent rentre, et vous savez où il en est</h2><p>Le cœur du club : chaque cotisation suivie jusqu’au dernier euro, sans jouer les huissiers.</p></header>
+
+        <article class="f"><h3>Le paiement en plusieurs fois</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Des chèques qui traînent, et des paiements en plusieurs fois à suivre à la main.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>La famille paie par carte, en une ou plusieurs fois selon ce que le club propose, et voit ses versements avant de valider.</p></div>
+        </article>
+
+        <article class="f"><h3>Le tableau de bord de l’argent</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Personne ne sait vraiment où en est l’argent du club.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Encaissé, à venir, en retard, rien versé : tout au même endroit. Les chèques et les espèces se notent dans le dossier, au centime.</p></div>
+        </article>
+
+        <article class="f"><h3>Les relances en un clic</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Courir après les parents, mail par mail, appel par appel.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Un bouton relance une famille, et une équipe entière se relance d’un coup. Le mail s’écrit tout seul : vous voyez l’aperçu avant l’envoi.</p></div>
+        </article>
+
+        <article class="f"><h3>La comptabilité et les exports</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Le trésorier refait tout dans un tableur en fin de saison.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>La comptabilité, les inscriptions et les licences s’exportent en tableur, quand vous voulez.</p></div>
+        </article>
+
+        <article class="f"><h3>L’argent arrive chez vous</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Des chèques et des espèces à déposer à la banque.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Les paiements par carte sont versés sur le compte du club, déduction faite de la part OnClub.</p></div>
+        </article>
+      </section>
+
+      <section class="chapitre" id="saisons">
+        <header><span class="kicker">Les saisons</span><h2>La saison s’enchaîne, sans tout refaire</h2><p>Les enfants passent d’une équipe à l’autre, d’une saison à l’autre : la rentrée se prépare au lieu de se subir.</p></header>
+
+        <article class="f"><h3>La saison suivante</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Chaque rentrée se refait de zéro : les équipes, les créneaux, les places.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Vous ouvrez la saison suivante : les équipes sont reprises, il ne reste qu’à ajuster.</p></div>
+        </article>
+
+        <article class="f"><h3>Les réinscriptions en priorité</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Les anciens découvrent qu’il n’y a plus de place pour eux.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Les anciens se réinscrivent d’abord, avec leur lien, et la place que vous leur avez gardée les attend un temps. Puis l’inscription s’ouvre au public, et vous ouvrez des places au fur et à mesure.</p></div>
+        </article>
+
+        <article class="f"><h3>La liste d’attente</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Une équipe pleine, une place qui se libère, et personne ne sait à qui la donner.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>D’un clic, le bureau propose la place libérée au suivant de la liste, qui a un délai pour l’accepter.</p></div>
+        </article>
+
+        <article class="f"><h3>La reprise de vos fichiers</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Changer d’outil, c’est tout ressaisir.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Vos tableurs sont repris : vos anciens sont reconnus et reçoivent leur lien de réinscription.</p></div>
+        </article>
+      </section>
+
+      <section class="chapitre" id="equipes">
+        <header><span class="kicker">Les équipes</span><h2>Les équipes prennent vie, jusqu’au terrain</h2><p>Chaque inscrit arrive dans son équipe, et l’entraîneur la fait vivre depuis son téléphone.</p></header>
+
+        <article class="f"><h3>Les effectifs</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Qui joue où, avec quel numéro : la réponse n’est que dans la tête de l’entraîneur.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Chaque équipe avec ses joueurs, leurs numéros et leurs postes, en liste ou sur le terrain.</p></div>
+        </article>
+
+        <article class="f"><h3>L’espace de l’entraîneur</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>L’entraîneur n’a accès à rien, ou à tout, y compris les adresses des familles.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Il reçoit un lien personnel, sans compte ni mot de passe. Il fait l’appel, sans voir ni adresse ni téléphone.</p></div>
+        </article>
+
+        <article class="f"><h3>Le terrain</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>La composition griffonnée sur un coin de feuille.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Il touche un joueur, touche un poste : la place est prise. Plusieurs configurations par équipe, une pour chaque façon de jouer.</p></div>
+        </article>
+
+        <article class="f"><h3>Les convocations et la compo du match</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Les absents découverts le samedi matin.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Les familles répondent à la convocation sans compte, et la compo du match part de leurs réponses.</p></div>
+        </article>
+      </section>
+
+      <section class="chapitre" id="vitrine">
+        <header><span class="kicker">Le site et la boutique</span><h2>Le club se montre, et vend ses maillots</h2><p>Une vitrine reliée à tout le reste : ce que la famille voit en ligne est ce que le bureau gère.</p></header>
+
+        <article class="f"><h3>Le site du club</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Un site figé que personne n’ose toucher.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Le site du club à vos couleurs, relié aux inscriptions, aux équipes et à l’agenda.</p></div>
+        </article>
+
+        <article class="f"><h3>La boutique en ligne</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Des cartons de maillots qui dorment au local.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Une boutique en ligne : le stock par taille, le paiement en ligne, le retrait au club.</p></div>
+        </article>
+
+        <article class="f"><h3>Les événements et les stages</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Un stage, un tournoi : une feuille d’inscription et une cagnotte à part.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Chaque événement a sa page d’inscription en ligne, au même endroit que le reste du club.</p></div>
+        </article>
+
+        <article class="f"><h3>Les messages aux familles</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Écrire aux bonnes familles sans liste à jour.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>Un message à une équipe, aux familles en retard, aux nouveaux ou à toute la saison, avec le suivi de qui l’a reçu.</p></div>
+        </article>
+      </section>
+
+      <section class="chapitre" id="cluby">
+        <header><span class="kicker">L’assistant</span><h2>Vous le demandez, Cluby le prépare</h2><p>Comme une conversation avec quelqu’un qui connaît votre club : vous le demandez en une phrase, vous relisez, vous validez.</p></header>
+
+        <article class="f"><h3>Cluby, l’assistant du bureau</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Chercher le bon menu, ou attendre que quelqu’un soit disponible.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>« Ouvre des places chez les M15 », « ajoute un cours le jeudi », « relance l’équipe des seniors » : Cluby prépare, vous validez. Rien ne change sans votre clic.</p></div>
+        </article>
+
+        <article class="f"><h3>Le site retouché en le demandant</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Changer un titre ou une photo du site demande un prestataire.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>« Change le grand titre », « remplace la photo de l’équipe » : le changement est prêt à relire, avec l’avant et l’après, puis vous publiez.</p></div>
+        </article>
+      </section>
+
+      <section class="chapitre" id="federation">
+        <header><span class="kicker">La fédération</span><h2>La liste des licences, prête pour vous</h2><p>OnClub ne remplace pas l’outil de la fédération : il vous dit qui déclarer, et avec quelles informations.</p></header>
+
+        <article class="f"><h3>Les licences</h3>
+          <div class="pb"><span class="etiquette">Le problème</span><p><span>Chercher qui déclarer à la fédération, et retrouver ses informations.</span></p></div>
+          <div class="fleche" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="sol"><span class="etiquette">Avec OnClub</span><p>La liste est prête, avec son export : qui est à déclarer, qui renouvelle, et ce qu’il faut saisir dans l’espace de la fédération.</p></div>
+        </article>
+      </section>
+
+    </div>
+  </div>
+
+  <section class="large">
+    <div class="fin">
+      <h2>Zéro paperasse. Tout centralisé. <span class="vert">Les paiements gérés.</span></h2>
+      <p>Le temps rendu au bureau, pour ce qui compte : créer des moments pour le club, plutôt que subir l’administratif.</p>
+      <div class="ctas">
+        <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." class="btn" target="_blank" rel="noopener">Demander une démo</a>
+        <a href="/" class="btn btn-outline">Retour à l’accueil</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="liens">
+      <a href="/">Accueil</a>
+      <a href="/#tarifs">Tarifs</a>
+      <a href="/blog">Blog</a>
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/confidentialite">Confidentialité</a>
+      <a href="/conditions">Conditions</a>
+      <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener">Contact WhatsApp</a>
+    </div>
+    <span>© 2026 OnClub</span>
+  </div>
+</footer>
+<script>
+(function(){
+  var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Les mots du titre montent l'un après l'autre.
+  var mots = document.querySelectorAll('.ouverture h1 .mot');
+  for (var i = 0; i < mots.length; i++) mots[i].style.animationDelay = (0.08 * i) + 's';
+
+  var tout = document.querySelectorAll('.f, .chapitre > header');
+  if (!('IntersectionObserver' in window) || calme) {
+    for (var j = 0; j < tout.length; j++) tout[j].classList.add('vu');
+  } else {
+    var obs = new IntersectionObserver(function(entrees){
+      entrees.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('vu'); obs.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -18% 0px', threshold: 0.25 });
+    tout.forEach(function(el){ obs.observe(el); });
+  }
+
+  // Le rail suit le chapitre lu.
+  var liens = {};
+  document.querySelectorAll('.rail a').forEach(function(a){ liens[a.getAttribute('href').slice(1)] = a; });
+  var chapitres = document.querySelectorAll('.chapitre');
+  function suivre(){
+    var milieu = window.innerHeight * 0.4, actif = null;
+    chapitres.forEach(function(c){ if (c.getBoundingClientRect().top <= milieu) actif = c.id; });
+    Object.keys(liens).forEach(function(k){ liens[k].classList.toggle('actif', k === actif); });
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    barre.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')';
+  }
+  var barre = document.querySelector('.barre'), attente = false;
+  window.addEventListener('scroll', function(){ if (!attente) { attente = true; requestAnimationFrame(function(){ suivre(); attente = false; }); } }, { passive: true });
+  suivre();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
