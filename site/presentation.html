@@ -190,6 +190,17 @@ section{padding:120px 0}
 @media (max-width:720px){.chiffre-source{grid-template-columns:1fr;gap:10px;padding:26px}.tache{grid-template-columns:1fr}.barres{grid-column:1;grid-row:auto}.estimation{padding:30px 22px}}
 @media (prefers-reduced-motion:reduce){.js .estimation .rempli{transform:none;transition:none}}
 
+
+.gain-duo{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.gain-duo .temps{order:-1;padding-bottom:10px;border-bottom:1px solid #CFEFD9}
+.gain-duo .temps b{color:var(--mint-deep);font-size:2.4rem;line-height:1}
+.gain-duo b{white-space:nowrap}
+.gain-duo>div:not(.temps) b{font-size:1.35rem}
+.groupe-barres{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mint);margin:34px 0 4px}
+.groupe-barres:first-child{margin-top:0}
+.seg.heures{background:var(--mint);color:var(--mint-dark)}
+.js .vu .seg.heures{transition-delay:.25s}
+
 /* Fin */
 .fin .geant{font-size:clamp(2.8rem,8vw,6.6rem)}
 
@@ -438,20 +449,20 @@ footer a{text-decoration:none;margin-right:16px}
         <h3>OnClub Mini</h3>
         <p class="taux">2,9 %<small>des paiements encaissés</small></p>
         <ul><li>Inscriptions et paiements en ligne</li><li>Relances et suivi de l’argent</li><li>Pièces justificatives</li><li>Tableau de bord et exports</li><li>Sans l’assistant</li></ul>
-        <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 3 550 €</b><p>5 000 € récupérés, 1 450 € pour OnClub.</p></div>
+        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b>+ 3 550 €</b><p>5 000 € récupérés, 1 450 € pour OnClub.</p></div><div class="temps"><b>+ 51 h</b><p>rendues au bureau par saison.</p></div></div></div>
       </div>
       <div class="offre">
         <h3>OnClub Pro</h3>
         <p class="taux">4,9 %<small>des paiements encaissés</small></p>
         <ul><li>Tout Mini</li><li>Les saisons, la suivante ouverte en un clic</li><li>Le site du club</li><li>Liste d’attente et messages aux familles</li><li>Cluby, 100 questions par mois</li></ul>
-        <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 2 550 €</b><p>5 000 € récupérés, 2 450 € pour OnClub.</p></div>
+        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b>+ 2 550 €</b><p>5 000 € récupérés, 2 450 € pour OnClub.</p></div><div class="temps"><b>+ 75 h</b><p>rendues au bureau par saison.</p></div></div></div>
       </div>
       <div class="offre phare">
         <p class="tag">Avec la boutique</p>
         <h3>OnClub Pro Max IA</h3>
         <p class="taux">6,9 %<small>des paiements encaissés</small></p>
         <ul><li>Tout Pro</li><li>La boutique en ligne, 2 % sur les ventes</li><li>Événements et stages</li><li>Cluby, sans limite</li></ul>
-        <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 1 550 €</b><p>5 000 € récupérés, 3 450 € pour OnClub, et tous les services du club en plus.</p></div>
+        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b>+ 1 550 €</b><p>5 000 € récupérés, 3 450 € pour OnClub.</p></div><div class="temps"><b>+ 97 h</b><p>rendues au bureau par saison.</p></div></div></div>
       </div>
     </div>
   </div>
@@ -461,13 +472,18 @@ footer a{text-decoration:none;margin-right:16px}
 <section class="noir c" id="rentable">
   <div class="w">
     <p class="sur monte">Est-ce vraiment rentable ?</p>
-    <h2 class="grand monte">Oui, tant que l’outil coûte<br><span class="vert">moins que ce qui ne se perd plus.</span></h2>
+    <h2 class="grand monte">L’argent rentre.<br><span class="vert">Et le temps revient au club.</span></h2>
     <div class="perte monte">
+      <p class="groupe-barres">L’argent, sur une saison</p>
       <div class="ligne-barre"><b>Aujourd’hui</b><div class="piste"><div class="seg perdu" style="width:100%">5 000 € perdus</div></div></div>
       <div class="ligne-barre"><b>Avec Mini</b><div class="piste"><div class="seg cout" style="width:29%">1 450 €</div><div class="seg garde" style="width:71%">3 550 € gagnés</div></div></div>
       <div class="ligne-barre"><b>Avec Pro</b><div class="piste"><div class="seg cout" style="width:49%">2 450 €</div><div class="seg garde" style="width:51%">2 550 € gagnés</div></div></div>
       <div class="ligne-barre"><b>Avec Pro Max IA</b><div class="piste"><div class="seg cout" style="width:69%">3 450 €</div><div class="seg garde" style="width:31%">1 550 € gagnés</div></div></div>
-      <p class="note">Sur l’exemple d’un club qui encaisse 50 000 € par carte et perd 10 % aujourd’hui. Les frais de carte bancaire s’ajoutent : 1,5 % + 0,25 € par paiement. Les chèques et les espèces notés par le bureau ne sont pas commissionnés. Et le temps rendu aux bénévoles ne figure pas dans ce calcul.</p>
+      <p class="groupe-barres">Le temps rendu au bureau, sur une saison</p>
+      <div class="ligne-barre"><b>Avec Mini</b><div class="piste"><div class="seg heures" style="width:51%">51 heures</div></div></div>
+      <div class="ligne-barre"><b>Avec Pro</b><div class="piste"><div class="seg heures" style="width:75%">75 heures</div></div></div>
+      <div class="ligne-barre"><b>Avec Pro Max IA</b><div class="piste"><div class="seg heures" style="width:97%">97 heures</div></div></div>
+      <p class="note">Sur l’exemple d’un club qui encaisse 50 000 € par carte et perd 10 % aujourd’hui. Les frais de carte bancaire s’ajoutent : 1,5 % + 0,25 € par paiement. Les chèques et les espèces notés par le bureau ne sont pas commissionnés. Plus l’offre est complète, moins il reste d’argent, mais plus le bureau récupère de temps. Le temps, notre estimation pour 250 licenciés : Mini couvre les fiches, le suivi des paiements, les relances et les pièces (51 h) ; Pro ajoute la rentrée suivante (10 h), les messages aux familles (10 messages de 45 min → 5 min, 6 h 40), la liste d’attente (20 places de 10 min → 1 min, 3 h) et le site mis à jour sans prestataire (4 h) ; Pro Max IA ajoute la boutique (150 commandes de 6 min → 1 min au retrait, 12 h 30) et les événements (4 événements de 3 h → 30 min, 10 h).</p>
     </div>
   </div>
 </section>
