@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OnClub, présenté — OnClub</title>
+<meta name="description" content="Ce que fait OnClub, pourquoi, et ce qu’un club y gagne : du temps, de l’argent, des fonctionnalités jusqu’à l’assistant, trois offres comparées à aujourd’hui.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://onclub.app/presentation">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OnClub">
+<meta property="og:title" content="OnClub, présenté">
+<meta property="og:description" content="Ce que fait OnClub, pourquoi, et ce qu’un club y gagne.">
+<meta property="og:url" content="https://onclub.app/presentation">
+<meta property="og:image" content="https://onclub.app/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/img/favicon.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#0E1116">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--cream:#FAFAF7;--ink:#0E1116;--ink-2:#171B22;--mint:#5DE88F;--mint-dark:#0F3D2A;--mint-deep:#0F6B47;--gray:#6E6E66;--soft:#A9AEA6;--sand:#E8E6DE;--amber:#E0A62A;--white:#FFFFFF;
+  --font-head:'Bricolage Grotesque',system-ui,sans-serif;--font-body:'Satoshi','Poppins',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:1.05rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--font-head);letter-spacing:-0.035em;line-height:1.02;text-wrap:balance}
+.w{max-width:1120px;margin:0 auto;padding:0 24px}
+.etroit{max-width:820px;margin:0 auto;padding:0 24px}
+.c{text-align:center}
+
+/* Barre du haut, collante, discrète comme une barre de produit */
+.haut{position:sticky;top:0;z-index:30;background:rgba(14,17,22,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);color:var(--cream)}
+.haut .w{display:flex;align-items:center;justify-content:space-between;height:52px;gap:16px}
+.haut .marque{font-family:var(--font-head);font-weight:700;font-size:1.1rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.haut .marque img{height:18px;width:auto}
+.haut nav{display:flex;gap:22px;font-size:.84rem;align-items:center}
+.haut nav a{text-decoration:none;color:#D5D8D0}
+.haut nav a:hover{color:var(--white)}
+.haut .btn{background:var(--mint);color:var(--mint-dark);padding:6px 14px;border-radius:999px;font-weight:700}
+@media (max-width:820px){.haut nav a:not(.btn){display:none}}
+
+section{padding:120px 0}
+.noir{background:var(--ink);color:var(--cream)}
+.noir p{color:var(--soft)}
+.sable{background:#F1EFE8}
+.sur{font-size:.95rem;font-weight:700;letter-spacing:.02em;color:var(--mint-deep);margin-bottom:14px}
+.noir .sur{color:var(--mint)}
+.geant{font-size:clamp(3.2rem,10vw,8.4rem);font-weight:800}
+.grand{font-size:clamp(2.4rem,6.2vw,5rem);font-weight:800}
+.moyen{font-size:clamp(1.8rem,3.8vw,3rem);font-weight:700}
+.vert{color:var(--mint-deep)}
+.noir .vert{color:var(--mint)}
+.chapo{font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.5;color:#4F4F48;max-width:44ch;margin:26px auto 0}
+.noir .chapo{color:var(--soft)}
+
+/* Ouverture */
+.ouv{padding:150px 0 130px;position:relative;overflow:hidden}
+.ouv::before{content:"";position:absolute;left:50%;top:58%;width:1100px;height:1100px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(93,232,143,.28),rgba(93,232,143,0) 62%);pointer-events:none}
+.ouv .w{position:relative}
+.ouv .geant span{display:block}
+.ouv .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.bouton{display:inline-flex;align-items:center;justify-content:center;font-weight:700;padding:14px 26px;border-radius:999px;background:var(--mint);color:var(--mint-dark)!important;text-decoration:none}
+.bouton.creux{background:transparent;border:1.5px solid rgba(250,250,247,.4);color:var(--cream)!important}
+.sable .bouton.creux,.clair .bouton.creux{border-color:var(--ink);color:var(--ink)!important}
+
+/* Ce qu'on fait : trois verbes */
+.verbes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px}
+.verbe{background:var(--white);border:1px solid var(--sand);border-radius:28px;padding:38px 32px;text-align:left}
+.verbe h3{font-size:2.4rem;font-weight:800}
+.verbe p{color:#4F4F48;margin-top:12px}
+
+/* Avant / Avec */
+.duel{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:64px}
+.colonne{border-radius:28px;padding:36px 34px}
+.colonne h3{font-size:1.5rem;margin-bottom:18px}
+.colonne ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.colonne li{display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+.colonne li::before{flex:none;width:22px;height:22px;border-radius:50%;margin-top:2px;content:"";background-position:center;background-repeat:no-repeat;background-size:12px}
+.avant{background:#ECEAE3;color:#4F4F48}
+.avant li::before{background-color:#D9D6CC;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 3l6 6M9 3l-6 6' stroke='%236E6E66' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E")}
+.avec{background:var(--ink);color:var(--cream)}
+.avec li::before{background-color:var(--mint);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3L9.5 3.8' stroke='%230F3D2A' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+
+/* L'argent : la barre de la perte */
+.perte{margin:70px auto 0;max-width:900px;text-align:left}
+.ligne-barre{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:center;margin-top:16px}
+.ligne-barre b{font-size:.98rem;color:var(--cream)}
+.piste{height:64px;border-radius:16px;background:rgba(255,255,255,.06);display:flex;gap:6px;overflow:hidden}
+.seg{height:100%;border-radius:14px;display:flex;align-items:center;padding:0 18px;font-weight:700;font-size:.98rem;white-space:nowrap;font-family:var(--font-head);letter-spacing:-0.01em}
+.seg.perdu{background:var(--amber);color:#3D2A05}
+.seg.cout{background:#2A2F38;color:var(--cream)}
+.seg.garde{background:var(--mint);color:var(--mint-dark)}
+.note{font-size:.88rem;color:var(--soft);margin-top:22px;line-height:1.55}
+.sable .note,.clair .note{color:var(--gray)}
+
+/* Mauvais payeurs */
+.raisons{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:64px;text-align:left}
+.raison{background:var(--white);border:1px solid var(--sand);border-radius:24px;padding:30px}
+.raison h3{font-size:1.35rem;letter-spacing:-0.02em}
+.raison p{color:#4F4F48;margin-top:8px}
+.raison.large{grid-column:1/-1;background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.raison.large p{color:var(--soft)}
+
+/* Connecteurs */
+.prises{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px;text-align:left}
+.prise{background:var(--white);border:1px solid var(--sand);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.prise .pastille{width:44px;height:44px;border-radius:12px;background:var(--ink);color:var(--mint);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:1rem}
+.prise h3{font-size:1.12rem;letter-spacing:-0.015em;line-height:1.2}
+.prise p{font-size:.93rem;color:#4F4F48;line-height:1.5}
+
+/* Fonctionnalités jusqu'à l'IA */
+.fonctions{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:64px;text-align:left}
+.fn{background:var(--white);border:1px solid var(--sand);border-radius:20px;padding:22px}
+.fn h3{font-size:1.08rem;letter-spacing:-0.015em;line-height:1.2}
+.fn p{font-size:.9rem;color:#4F4F48;margin-top:6px;line-height:1.45}
+.groupe{grid-column:1/-1;font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray);margin-top:18px}
+.ia{margin-top:22px;background:var(--ink);color:var(--cream);border-radius:32px;padding:56px 48px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;text-align:left;position:relative;overflow:hidden}
+.ia::before{content:"";position:absolute;right:-160px;bottom:-200px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(93,232,143,.3),rgba(93,232,143,0) 65%)}
+.ia h3{font-size:clamp(2rem,4vw,3.2rem);font-weight:800}
+.ia p{color:var(--soft);margin-top:14px}
+.bulles{display:flex;flex-direction:column;gap:10px;position:relative}
+.bulle{max-width:92%;padding:14px 18px;border-radius:18px;font-size:.98rem;line-height:1.45}
+.bulle.vous{align-self:flex-end;background:var(--mint);color:var(--mint-dark);border-bottom-right-radius:6px}
+.bulle.cluby{align-self:flex-start;background:#20252E;color:var(--cream);border-bottom-left-radius:6px}
+
+/* Offres */
+.offres{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px;text-align:left;align-items:stretch}
+.offre{background:var(--white);border:1px solid var(--sand);border-radius:28px;padding:34px 30px;display:flex;flex-direction:column;gap:14px}
+.offre.phare{border:2px solid var(--mint-deep);box-shadow:0 30px 80px rgba(15,107,71,.14)}
+.offre .tag{align-self:flex-start;font-size:.78rem;font-weight:700;background:var(--mint);color:var(--mint-dark);padding:5px 12px;border-radius:999px}
+.offre h3{font-size:1.7rem}
+.offre .taux{font-family:var(--font-head);font-weight:800;font-size:2.8rem;letter-spacing:-0.03em;color:var(--mint-deep);line-height:1}
+.offre .taux small{display:block;font-family:var(--font-body);font-size:.92rem;font-weight:600;color:var(--gray);letter-spacing:0;margin-top:8px}
+.offre ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.96rem;color:#4F4F48}
+.offre li{padding-left:18px;position:relative}
+.offre li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--mint-deep)}
+.gain{margin-top:auto;background:#EAFBF0;border-radius:18px;padding:18px}
+.gain span{display:block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mint-deep)}
+.gain b{display:block;font-family:var(--font-head);font-size:1.7rem;letter-spacing:-0.02em;margin-top:2px}
+.gain p{font-size:.88rem;color:#4F4F48;margin-top:4px}
+
+/* Fin */
+.fin .geant{font-size:clamp(2.8rem,8vw,6.6rem)}
+
+/* Apparitions au défilement : l'état caché n'existe que sous html.js */
+.js .entree{opacity:0;transform:translateY(26px);animation:entree 1s cubic-bezier(.2,.8,.2,1) forwards}
+.js .entree.e2{transform:scale(.94);animation-delay:.12s}
+.js .entree.e3{animation-delay:.35s}
+.js .entree.e4{animation-delay:.5s}
+@keyframes entree{to{opacity:1;transform:none}}
+
+.js .monte{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .monte.vu{opacity:1;transform:none}
+.js .zoom{opacity:0;transform:scale(.92);transition:opacity 1s ease,transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.js .zoom.vu{opacity:1;transform:none}
+.js .seg{transform:scaleX(0);transform-origin:0 50%;transition:transform 1.1s cubic-bezier(.6,0,.2,1)}
+.js .vu .seg{transform:none}
+.js .vu .seg.garde{transition-delay:.55s}
+.js .cascade>*{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .cascade.vu>*{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .prises,.fonctions{grid-template-columns:repeat(2,1fr)}
+  .offres{grid-template-columns:1fr}
+  .ia{grid-template-columns:1fr;padding:44px 28px}
+}
+@media (max-width:720px){
+  section{padding:84px 0}
+  .verbes,.duel,.raisons{grid-template-columns:1fr}
+  .ligne-barre{grid-template-columns:1fr;gap:8px}
+  .seg{font-size:.85rem;padding:0 12px}
+}
+@media (max-width:480px){.prises,.fonctions{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .monte,.js .zoom,.js .seg,.js .cascade>*,.js .entree{opacity:1;transform:none;transition:none;animation:none}
+}
+footer{background:var(--ink);color:var(--soft);padding:34px 0;font-size:.88rem}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:none;margin-right:16px}
+</style>
+</head>
+<body>
+
+<header class="haut">
+  <div class="w">
+    <a href="/" class="marque" aria-label="OnClub — accueil"><img src="/img/logo.svg" alt="" width="36" height="18">OnClub</a>
+    <nav aria-label="Dans cette page">
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#temps">Le temps</a>
+      <a href="#argent">L’argent</a>
+      <a href="#connecteurs">Connecteurs</a>
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#offres">Offres</a>
+      <a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." class="btn" target="_blank" rel="noopener">Une démo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. Ouverture -->
+<section class="noir ouv c">
+  <div class="w">
+    <p class="sur entree">OnClub</p>
+    <h1 class="geant entree e2"><span>Votre club,</span><span class="vert">tout en un.</span></h1>
+    <p class="chapo entree e3">La plateforme qui fait tourner un club de sport : les inscriptions, l’argent, les équipes, le site et la boutique. Et un assistant pour tout le reste.</p>
+    <div class="actions entree e4">
+      <a class="bouton" href="#temps">Ce que vous y gagnez</a>
+      <a class="bouton creux" href="#offres">Les offres</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Ce qu'on fait -->
+<section class="c">
+  <div class="w">
+    <p class="sur monte">Ce qu’on fait</p>
+    <h2 class="grand monte">On inscrit. On encaisse.<br>On organise.</h2>
+    <div class="verbes cascade">
+      <div class="verbe"><h3>Inscrire</h3><p>La famille inscrit ses enfants depuis son téléphone, dépose ses pièces en photo, et le dossier arrive au bureau sans rien ressaisir.</p></div>
+      <div class="verbe"><h3>Encaisser</h3><p>Le paiement par carte dès l’inscription, en une fois ou en plusieurs échéances. Chaque cotisation suivie, chaque retard visible, chaque relance en un clic.</p></div>
+      <div class="verbe"><h3>Organiser</h3><p>Les saisons qui s’enchaînent, les équipes jusqu’au terrain, le site du club et sa boutique. Au même endroit.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Pourquoi -->
+<section class="noir c" id="pourquoi">
+  <div class="etroit">
+    <p class="sur monte">Pourquoi</p>
+    <h2 class="grand monte">Le but d’un club, c’est de créer des moments. <span class="vert">Pas de subir l’administratif.</span></h2>
+    <p class="chapo monte">Un club repose sur des bénévoles. Leurs soirées partent dans les fiches papier, les tableurs, les chèques et les relances. OnClub leur rend ce temps, et fait rentrer l’argent qui se perdait en route.</p>
+  </div>
+</section>
+
+<!-- 4. Le temps -->
+<section class="c" id="temps">
+  <div class="w">
+    <p class="sur monte">Ce que vous y gagnez, d’abord</p>
+    <h2 class="geant zoom">Le temps.</h2>
+    <p class="chapo monte">La plupart des tâches faites à la main se font en ligne, ou en un geste.</p>
+    <div class="duel">
+      <div class="colonne avant monte">
+        <h3>Aujourd’hui</h3>
+        <ul>
+          <li>Recopier chaque fiche papier dans un tableur.</li>
+          <li>Courir après les certificats manquants.</li>
+          <li>Relancer les parents un par un, par mail et par téléphone.</li>
+          <li>Refaire toute la rentrée, chaque septembre.</li>
+          <li>L’appel sur une feuille, la compo sur un coin de papier.</li>
+          <li>Attendre quelqu’un pour changer une ligne du site.</li>
+        </ul>
+      </div>
+      <div class="colonne avec monte">
+        <h3>Avec OnClub</h3>
+        <ul>
+          <li>La famille s’inscrit seule : rien à ressaisir.</li>
+          <li>Les pièces se déposent en photo, celles qui manquent se relancent en un clic.</li>
+          <li>Un clic relance une famille, ou une équipe entière.</li>
+          <li>La saison suivante s’ouvre, les équipes sont reprises.</li>
+          <li>L’entraîneur fait l’appel et sa compo sur son téléphone.</li>
+          <li>Vous demandez le changement à l’assistant, vous validez.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. L'argent -->
+<section class="noir c" id="argent">
+  <div class="w">
+    <p class="sur monte">Ce que vous y gagnez, ensuite</p>
+    <h2 class="geant zoom">L’argent.</h2>
+    <p class="chapo monte">Dans un club, une part des cotisations ne rentre jamais : les impayés, les chèques qui traînent, les relances abandonnées. D’après les clubs que nous rencontrons, de 7 à 12 %, et certaines années bien plus.</p>
+    <div class="perte monte">
+      <div class="ligne-barre"><b>Un club qui encaisse 50 000 € par saison</b><div class="piste"><div class="seg perdu" style="width:100%">5 000 € qui ne rentrent jamais, si 10 % se perdent</div></div></div>
+      <p class="note">Exemple, pas une promesse : à refaire avec les chiffres de votre club. Avec OnClub, chaque cotisation est suivie jusqu’au dernier euro : l’argent récupéré peut payer l’outil.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Mauvais payeurs -->
+<section class="sable c" id="payeurs">
+  <div class="w">
+    <p class="sur monte">Pourquoi les mauvais payeurs disparaissent</p>
+    <h2 class="grand monte">Le paiement est demandé dès l’inscription.<br><span class="vert">Et chaque euro dû reste visible.</span></h2>
+    <div class="raisons cascade">
+      <div class="raison large"><h3>Le paiement fait partie de l’inscription</h3><p>Fini « je vous donne le chèque la semaine prochaine » : quand le club encaisse en ligne, la famille paie par carte juste après l’inscription, en une fois, ou la première échéance si le club propose le paiement en plusieurs fois.</p></div>
+      <div class="raison"><h3>Plusieurs fois, c’est plus facile à payer</h3><p>Une cotisation étalée pèse moins sur le budget d’une famille, et la famille voit ses versements avant de valider.</p></div>
+      <div class="raison"><h3>Chaque retard se voit</h3><p>Encaissé, à venir, en retard, rien versé : le bureau sait, sans chercher, qui doit quoi.</p></div>
+      <div class="raison"><h3>Une relance ne coûte qu’un clic</h3><p>Une famille, ou toute une équipe d’un coup. Le mail s’écrit tout seul, le bureau n’a plus à jouer les huissiers.</p></div>
+      <div class="raison"><h3>Les aides sont suivies</h3><p>Une aide comme le Pass’Sport est déduite à l’inscription. Si son justificatif est refusé, le montant réapparaît à réclamer, au lieu de se perdre.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Connecteurs -->
+<section class="c" id="connecteurs">
+  <div class="w">
+    <p class="sur monte">Les connecteurs</p>
+    <h2 class="grand monte">Branché sur ce que vous utilisez déjà.</h2>
+    <p class="chapo monte">OnClub ne vous demande pas de tout changer : il reprend vos fichiers, et parle aux outils qui comptent.</p>
+    <div class="prises cascade">
+      <div class="prise"><div class="pastille" aria-hidden="true">€</div><h3>Le paiement par carte</h3><p>Avec Stripe : les familles paient par carte, l’argent va sur le compte du club, une fois ce compte ouvert.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">@</div><h3>Les mails aux familles</h3><p>Confirmations et reçus partent dès l’inscription ; relances et messages partent en un clic, chacun à la bonne famille.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">⇪</div><h3>Vos tableurs</h3><p>Votre tableur, enregistré en CSV, ou un export HelloAsso est repris : vos anciens sont reconnus.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">⇩</div><h3>Les exports</h3><p>Comptabilité, inscriptions et licences en tableur, pour le trésorier et le comptable.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">F</div><h3>La fédération</h3><p>La liste des licences à déclarer, prête à reporter dans l’espace de votre fédération.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">P</div><h3>Les aides</h3><p>Pass’Sport et les aides du club, déduites à l’inscription, avec leur justificatif.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">www</div><h3>Le site du club</h3><p>Relié en direct aux inscriptions et aux équipes ; à l’agenda et à la boutique avec Pro Max IA.</p></div>
+      <div class="prise"><div class="pastille" aria-hidden="true">IA</div><h3>L’intelligence artificielle</h3><p>Intégrée à l’outil : vous demandez en français, l’assistant prépare, vous validez.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Fonctionnalités, jusqu'à l'IA -->
+<section class="sable c" id="fonctionnalites">
+  <div class="w">
+    <p class="sur monte">Les fonctionnalités</p>
+    <h2 class="grand monte">De l’inscription<br>jusqu’à l’intelligence artificielle.</h2>
+    <div class="fonctions cascade">
+      <p class="groupe">Les familles</p>
+      <div class="fn"><h3>Inscription en ligne</h3><p>Un formulaire pour toute la famille ; seules les équipes où l’enfant a sa place.</p></div>
+      <div class="fn"><h3>Pièces et santé</h3><p>Déposées en photo, contrôlées, relancées.</p></div>
+      <div class="fn"><h3>Séances d’essai</h3><p>Les nouveaux réservent leur essai en ligne.</p></div>
+      <div class="fn"><h3>Formulaire à votre image</h3><p>Vos questions à vous, ajoutées en les demandant.</p></div>
+      <p class="groupe">L’argent</p>
+      <div class="fn"><h3>Paiement en plusieurs fois</h3><p>L’échéancier affiché avant de valider, chaque échéance suivie.</p></div>
+      <div class="fn"><h3>Tableau de bord</h3><p>Encaissé, à venir, en retard, rien versé.</p></div>
+      <div class="fn"><h3>Relances</h3><p>Une famille ou une équipe, en un clic.</p></div>
+      <div class="fn"><h3>Comptabilité</h3><p>Chèques et espèces au centime, exports en tableur.</p></div>
+      <p class="groupe">La saison et les équipes</p>
+      <div class="fn"><h3>Saisons</h3><p>Les anciens d’abord, puis le public.</p></div>
+      <div class="fn"><h3>Liste d’attente</h3><p>La place libérée, proposée au suivant d’un clic.</p></div>
+      <div class="fn"><h3>Espace entraîneur</h3><p>Un lien sans compte : l’appel, le terrain, la compo.</p></div>
+      <div class="fn"><h3>Convocations</h3><p>Les familles répondent ; la compo du match en tient compte.</p></div>
+      <p class="groupe">La vitrine</p>
+      <div class="fn"><h3>Site du club</h3><p>À vos couleurs, relié aux inscriptions et aux équipes.</p></div>
+      <div class="fn"><h3>Boutique</h3><p>Stock par taille, paiement en ligne, retrait au club.</p></div>
+      <div class="fn"><h3>Événements et stages</h3><p>Chaque événement a sa page d’inscription.</p></div>
+      <div class="fn"><h3>Messages</h3><p>À une équipe, aux retardataires, aux nouveaux.</p></div>
+    </div>
+
+    <div class="ia monte">
+      <div>
+        <p class="sur">Et pour tout le reste</p>
+        <h3>Cluby,<br>l’assistant du bureau.</h3>
+        <p>Comme parler à quelqu’un qui connaît votre club. Vous le demandez en une phrase ; il prépare ; rien ne change sans votre clic. Et sur le site du club, l’assistant retouche un titre, une photo, le nom d’un lien : vous relisez, vous publiez.</p>
+      </div>
+      <div class="bulles" aria-label="Exemple de conversation">
+        <p class="bulle vous">Ouvre quatre places de plus chez les M15 filles.</p>
+        <p class="bulle cluby">C’est prêt. Vous relisez, vous validez.</p>
+        <p class="bulle vous">Relance les familles des M13 en retard.</p>
+        <p class="bulle cluby">Un mail par famille, prêt à partir. Rien ne part sans votre clic.</p>
+      </div>
+    </div>
+    <p class="monte" style="margin-top:36px"><a class="bouton creux" href="/fonctionnalites">Chaque fonctionnalité, face au problème qu’elle règle</a></p>
+  </div>
+</section>
+
+<!-- 9. Trois offres -->
+<section class="c" id="offres">
+  <div class="w">
+    <p class="sur monte">Trois offres</p>
+    <h2 class="grand monte">Ce que vous y gagnez,<br><span class="vert">comparé à aujourd’hui.</span></h2>
+    <p class="chapo monte">Pas d’abonnement fixe : un pourcentage des paiements par carte et par virement, rien sur les chèques et les espèces. Sur notre exemple, un club de 50 000 € de cotisations qui perd 10 % aujourd’hui.</p>
+    <div class="offres cascade">
+      <div class="offre">
+        <h3>OnClub Mini</h3>
+        <p class="taux">2,9 %<small>des paiements encaissés</small></p>
+        <ul><li>Inscriptions et paiements en ligne</li><li>Relances et suivi de l’argent</li><li>Pièces justificatives</li><li>Tableau de bord et exports</li><li>Cluby, 30 questions par mois</li></ul>
+        <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 3 550 €</b><p>5 000 € récupérés, 1 450 € pour OnClub.</p></div>
+      </div>
+      <div class="offre">
+        <h3>OnClub Pro</h3>
+        <p class="taux">4,9 %<small>des paiements encaissés</small></p>
+        <ul><li>Tout Mini</li><li>Les saisons, la suivante ouverte en un clic</li><li>Le site du club</li><li>Liste d’attente et messages aux familles</li><li>Cluby, 100 questions par mois</li></ul>
+        <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 2 550 €</b><p>5 000 € récupérés, 2 450 € pour OnClub.</p></div>
+      </div>
+      <div class="offre phare">
+        <p class="tag">Avec la boutique</p>
+        <h3>OnClub Pro Max IA</h3>
+        <p class="taux">6,9 %<small>des paiements encaissés</small></p>
+        <ul><li>Tout Pro</li><li>La boutique en ligne, 2 % sur les ventes</li><li>Événements et stages</li><li>Cluby, sans limite</li></ul>
+        <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 1 550 €</b><p>5 000 € récupérés, 3 450 € pour OnClub, et tous les services du club en plus.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Rentable ? -->
+<section class="noir c" id="rentable">
+  <div class="w">
+    <p class="sur monte">Est-ce vraiment rentable ?</p>
+    <h2 class="grand monte">Oui, tant que l’outil coûte<br><span class="vert">moins que ce qui ne se perd plus.</span></h2>
+    <div class="perte monte">
+      <div class="ligne-barre"><b>Aujourd’hui</b><div class="piste"><div class="seg perdu" style="width:100%">5 000 € perdus</div></div></div>
+      <div class="ligne-barre"><b>Avec Mini</b><div class="piste"><div class="seg cout" style="width:29%">1 450 €</div><div class="seg garde" style="width:71%">3 550 € gagnés</div></div></div>
+      <div class="ligne-barre"><b>Avec Pro</b><div class="piste"><div class="seg cout" style="width:49%">2 450 €</div><div class="seg garde" style="width:51%">2 550 € gagnés</div></div></div>
+      <div class="ligne-barre"><b>Avec Pro Max IA</b><div class="piste"><div class="seg cout" style="width:69%">3 450 €</div><div class="seg garde" style="width:31%">1 550 € gagnés</div></div></div>
+      <p class="note">Sur l’exemple d’un club qui encaisse 50 000 € par carte et perd 10 % aujourd’hui. Les frais de carte bancaire s’ajoutent : 1,5 % + 0,25 € par paiement. Les chèques et les espèces notés par le bureau ne sont pas commissionnés. Et le temps rendu aux bénévoles ne figure pas dans ce calcul.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Fin -->
+<section class="c fin">
+  <div class="w">
+    <h2 class="geant zoom">Zéro paperasse.<br>Tout centralisé.<br><span class="vert">Les paiements gérés.</span></h2>
+    <p class="chapo monte">Votre club en ligne en quinze jours, avec une pré-livraison au dixième jour pour tout valider ensemble.</p>
+    <div class="ouv-actions monte" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px">
+      <a class="bouton" href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener">Demander une démo</a>
+      <a class="bouton creux" style="border-color:var(--ink);color:var(--ink)!important" href="/fonctionnalites">Toutes les fonctionnalités</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="w">
+    <div><a href="/">Accueil</a><a href="/fonctionnalites">Fonctionnalités</a><a href="/mentions-legales">Mentions légales</a><a href="/confidentialite">Confidentialité</a><a href="/conditions">Conditions</a></div>
+    <span>© 2026 OnClub</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.monte, .zoom, .cascade, .perte');
+  var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Les cartes d'une cascade arrivent l'une après l'autre.
+  document.querySelectorAll('.cascade').forEach(function(c){
+    Array.prototype.forEach.call(c.children, function(el, i){ el.style.transitionDelay = (Math.min(i, 12) * 0.07) + 's'; });
+  });
+  if (calme || !('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('vu'); }); return; }
+  var obs = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('vu'); obs.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.18 });
+  els.forEach(function(e){ obs.observe(e); });
+  setTimeout(function(){ els.forEach(function(e){ var r = e.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) e.classList.add('vu'); }); }, 600);
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
