@@ -149,6 +149,47 @@ section{padding:120px 0}
 .gain b{display:block;font-family:var(--font-head);font-size:1.7rem;letter-spacing:-0.02em;margin-top:2px}
 .gain p{font-size:.88rem;color:#4F4F48;margin-top:4px}
 
+
+/* Les écrans animés : une scène texte + écran */
+.scene{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:center;margin-top:96px;text-align:left}
+.scene.tel{grid-template-columns:1fr auto}
+.scene.inverse>.scene-texte{order:2}
+.scene-texte .sur{margin-bottom:10px}
+.scene-texte h3{font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:800;letter-spacing:-0.03em}
+.scene-texte p{color:#4F4F48;margin-top:14px;max-width:42ch}
+.noir .scene-texte p{color:var(--soft)}
+.scene-ecran{min-width:0;display:flex;justify-content:center}
+.scene-ecran>.ec{width:100%}
+@media (max-width:860px){.scene,.scene.tel{grid-template-columns:1fr;gap:28px}.scene.inverse>.scene-texte{order:0}}
+
+
+/* Combien de temps : la source publique, puis l'estimation chiffrée */
+.chiffre-source{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin:72px auto 0;max-width:900px;text-align:left;background:var(--white);border:1px solid var(--sand);border-radius:28px;padding:32px 36px}
+.chiffre-source .gros{font-family:var(--font-head);font-weight:800;font-size:clamp(3.4rem,8vw,5.6rem);letter-spacing:-0.04em;line-height:1;color:var(--mint-deep)}
+.chiffre-source p{color:#4F4F48}
+.chiffre-source a{font-size:.85rem;color:var(--gray)}
+.estimation{margin:28px auto 0;max-width:900px;text-align:left;background:var(--ink);color:var(--cream);border-radius:28px;padding:40px 36px}
+.estimation h3{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800}
+.estimation .total{font-family:var(--font-head);font-weight:800;font-size:clamp(3rem,7vw,4.6rem);letter-spacing:-0.04em;color:var(--mint);line-height:1;margin-top:10px}
+.estimation .total small{font-size:1.1rem;font-weight:600;color:var(--soft);letter-spacing:0;margin-left:8px}
+.tache{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.5fr);gap:8px 20px;align-items:center;padding:16px 0;border-top:1px solid rgba(255,255,255,.08)}
+.tache:first-of-type{margin-top:26px}
+.tache b{font-size:1rem;color:var(--cream);font-weight:700}
+.tache .calc{grid-column:1;font-size:.85rem;color:var(--soft)}
+.barres{grid-column:2;grid-row:1/span 2;display:flex;flex-direction:column;gap:6px}
+.barre-t{display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:700;min-height:22px}
+.barre-t .rempli{flex:none;height:18px;border-radius:6px;min-width:4px}
+.barre-t.t-avant .rempli{background:#4A505B}
+.barre-t.t-apres .rempli{background:var(--mint)}
+.barre-t.t-avant .lib{color:#C9CCC4}
+.barre-t.t-apres .lib{color:var(--mint)}
+.js .estimation .rempli{transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.6,0,.2,1)}
+.js .estimation.vu .rempli{transform:none}
+.js .estimation.vu .t-apres .rempli{transition-delay:.45s}
+.estimation .note{color:var(--soft)}
+@media (max-width:720px){.chiffre-source{grid-template-columns:1fr;gap:10px;padding:26px}.tache{grid-template-columns:1fr}.barres{grid-column:1;grid-row:auto}.estimation{padding:30px 22px}}
+@media (prefers-reduced-motion:reduce){.js .estimation .rempli{transform:none;transition:none}}
+
 /* Fin */
 .fin .geant{font-size:clamp(2.8rem,8vw,6.6rem)}
 
@@ -274,6 +315,22 @@ footer a{text-decoration:none;margin-right:16px}
         </ul>
       </div>
     </div>
+    <div class="chiffre-source monte">
+      <p class="gros">39 %</p>
+      <div><p><b>des bénévoles des associations sportives</b> citent les tâches administratives parmi ce qu’ils font : c’est leur activité la plus citée, devant l’organisation interne (38 %) et même l’entraînement ou l’arbitrage (36 %).</p>
+      <a href="https://injep.fr/publication/les-benevoles-des-associations-sportives-plus-souvent-des-hommes-jeunes-et-des-parents/" target="_blank" rel="noopener">Source : INJEP, Analyses &amp; synthèses n° 71, octobre 2023 (enquête ENEAD 2021)</a></div>
+    </div>
+    <div class="estimation monte">
+      <p class="sur">Notre estimation, pour un club de 250 licenciés</p>
+      <h3>Le temps rendu au bureau, chaque saison</h3>
+      <p class="total"><span data-compte="61">61</span> h<small>de moins, environ, sur les cinq tâches ci-dessous</small></p>
+      <div class="tache"><b>Recopier les fiches d’inscription</b><span class="calc">250 dossiers × 6 min</span><div class="barres"><span class="barre-t t-avant"><span class="rempli" style="width:55%"></span><span class="lib">Aujourd’hui : 25 h</span></span><span class="barre-t t-apres"><span class="rempli" style="width:2%"></span><span class="lib">Avec OnClub : 0 h — la famille saisit elle-même</span></span></div></div>
+      <div class="tache"><b>Suivre les paiements dans un tableur</b><span class="calc">250 dossiers × 3 min</span><div class="barres"><span class="barre-t t-avant"><span class="rempli" style="width:28%"></span><span class="lib">Aujourd’hui : 12 h 30</span></span><span class="barre-t t-apres"><span class="rempli" style="width:3%"></span><span class="lib">Avec OnClub : 1 h — le tableau de bord le tient à jour</span></span></div></div>
+      <div class="tache"><b>Relancer les retards</b><span class="calc">40 familles × 3 relances × 5 min</span><div class="barres"><span class="barre-t t-avant"><span class="rempli" style="width:22%"></span><span class="lib">Aujourd’hui : 10 h</span></span><span class="barre-t t-apres"><span class="rempli" style="width:3%"></span><span class="lib">Avec OnClub : 40 min — une relance en un clic</span></span></div></div>
+      <div class="tache"><b>Réclamer les pièces manquantes</b><span class="calc">80 pièces × 5 min</span><div class="barres"><span class="barre-t t-avant"><span class="rempli" style="width:15%"></span><span class="lib">Aujourd’hui : 6 h 40</span></span><span class="barre-t t-apres"><span class="rempli" style="width:3%"></span><span class="lib">Avec OnClub : 1 h 30 — contrôle en photo, relance en un clic</span></span></div></div>
+      <div class="tache"><b>Préparer la rentrée suivante</b><span class="calc">listes, équipes, places</span><div class="barres"><span class="barre-t t-avant"><span class="rempli" style="width:26%"></span><span class="lib">Aujourd’hui : 12 h</span></span><span class="barre-t t-apres"><span class="rempli" style="width:4%"></span><span class="lib">Avec OnClub : 2 h — la saison suivante s’ouvre, les équipes sont reprises</span></span></div></div>
+      <p class="note">Une estimation, pas une étude : 66 heures environ aujourd’hui, 5 heures avec OnClub. Hypothèses : 250 licenciés, 6 minutes pour recopier une fiche, 3 minutes de suivi par dossier, 40 familles relancées trois fois, 80 pièces à réclamer. À refaire avec les chiffres de votre club.</p>
+    </div>
   </div>
 </section>
 
@@ -352,6 +409,7 @@ footer a{text-decoration:none;margin-right:16px}
       <div class="fn"><h3>Messages</h3><p>À une équipe, aux retardataires, aux nouveaux.</p></div>
     </div>
 
+
     <div class="ia monte">
       <div>
         <p class="sur">Et pour tout le reste</p>
@@ -379,7 +437,7 @@ footer a{text-decoration:none;margin-right:16px}
       <div class="offre">
         <h3>OnClub Mini</h3>
         <p class="taux">2,9 %<small>des paiements encaissés</small></p>
-        <ul><li>Inscriptions et paiements en ligne</li><li>Relances et suivi de l’argent</li><li>Pièces justificatives</li><li>Tableau de bord et exports</li><li>Cluby, 30 questions par mois</li></ul>
+        <ul><li>Inscriptions et paiements en ligne</li><li>Relances et suivi de l’argent</li><li>Pièces justificatives</li><li>Tableau de bord et exports</li><li>Sans l’assistant</li></ul>
         <div class="gain"><span>Comparé à aujourd’hui</span><b>+ 3 550 €</b><p>5 000 € récupérés, 1 450 € pour OnClub.</p></div>
       </div>
       <div class="offre">
@@ -438,6 +496,16 @@ footer a{text-decoration:none;margin-right:16px}
 <script>
 (function(){
   var els = document.querySelectorAll('.monte, .zoom, .cascade, .perte');
+  // Le total des heures compte jusqu'à sa valeur quand il apparaît.
+  document.querySelectorAll('[data-compte]').forEach(function(el){
+    var bloc = el.closest('.monte'), fin = +el.getAttribute('data-compte'), parti = false;
+    if (!bloc || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    el.textContent = '0';
+    new MutationObserver(function(){ if (parti || !bloc.classList.contains('vu')) return; parti = true;
+      var t0 = performance.now();
+      (function pas(t){ var k = Math.min(1, (t - t0) / 1400); el.textContent = Math.round(fin * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(pas); })(t0);
+    }).observe(bloc, { attributes: true, attributeFilter: ['class'] });
+  });
   var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // Les cartes d'une cascade arrivent l'une après l'autre.
   document.querySelectorAll('.cascade').forEach(function(c){
