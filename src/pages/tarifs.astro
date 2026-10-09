@@ -1,0 +1,171 @@
+---
+/*
+  LES TARIFS. Les taux et ce que chaque offre ouvre viennent de src/data/site.ts
+  (OFFRES) ; le tableau « fonctionnalité par offre » est construit à partir du
+  champ `offre` de chaque fonctionnalité. L'exemple chiffré est CALCULÉ ici à
+  partir des mêmes constantes (taux, frais de carte) : rien n'est tapé à la main.
+*/
+import Layout from '../layouts/Layout.astro'
+import FilAriane from '../components/FilAriane.astro'
+import Offres from '../components/Offres.astro'
+import Faq from '../components/Faq.astro'
+import AppelDemo from '../components/AppelDemo.astro'
+import { OFFRES, FRAIS_CARTE, NOM_OFFRE, MISE_EN_ROUTE } from '../data/site'
+import { liste, url } from '../lib/collections'
+
+const fonctions = await liste('fonctionnalites')
+const RANG = { mini: 0, pro: 1, max: 2 } as const
+const cles = ['mini', 'pro', 'max'] as const
+
+const euros = (c: number) => (c / 100).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'
+const pro = OFFRES.find((o) => o.cle === 'pro')!
+const tauxPro = parseFloat(pro.taux.replace(',', '.')) / 100
+function exemple(prixCents: number) {
+  const commission = Math.round(prixCents * tauxPro)
+  const carte = Math.round(prixCents * FRAIS_CARTE.pourcentage) + FRAIS_CARTE.fixeCents
+  return { prix: prixCents, commission, carte, recu: prixCents - commission - carte }
+}
+const COTISATION = 20000
+const DOSSIER = 1000
+const a = exemple(COTISATION)
+const b = exemple(COTISATION + DOSSIER)
+
+const fil = [{ nom: 'Tarifs', url: '/tarifs' }]
+const faq = [
+  { question: 'Y a-t-il un abonnement fixe ou des frais d’installation ?', reponse: 'Non. L’abonnement est un pourcentage des cotisations encaissées en ligne, et rien d’autre : ni frais fixe, ni frais d’installation, ni coût par adhérent, ni minimum.' },
+  { question: 'Les chèques et les espèces sont-ils comptés ?', reponse: 'Non. Ce que le bureau note lui-même, en chèque ou en espèces, ne passe pas par la commission. Seul ce qui est payé en ligne compte.' },
+  { question: 'Qui paie les frais de carte bancaire ?', reponse: 'L’association. Beaucoup les couvrent par des frais de dossier inclus dans le prix d’inscription, appliqués à toutes les familles quel que soit le moyen de paiement. L’exemple chiffré de cette page montre les deux cas.' },
+  { question: 'Peut-on changer d’offre en cours de saison ?', reponse: 'Oui. Le changement vaut pour les encaissements suivants, sans effet rétroactif. En passant de Pro à Mini, l’association perd ce que Pro ouvre, Cluby compris.' },
+  { question: 'Quand l’association est-elle en ligne ?', reponse: MISE_EN_ROUTE },
+]
+---
+<Layout
+  titre="Tarifs OnClub : un pourcentage, rien de fixe"
+  description="Les tarifs d’OnClub : 2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne, rien de fixe. Ce que chaque offre ouvre, le temps rendu, un exemple chiffré."
+  chemin="/tarifs"
+  fil={fil}
+  faq={faq}
+>
+  <div class="tete-page">
+    <div class="enveloppe">
+      <FilAriane fil={fil} />
+      <p class="surtitre">Tarifs</p>
+      <h1>Un abonnement au pourcentage. Rien de fixe.</h1>
+      <p class="chapo">Vous payez un pourcentage de ce que l’association encaisse en ligne, et rien sur les chèques ni les espèces. Plus l’offre est complète, plus elle vous rend de temps.</p>
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="t-offres">
+    <div class="enveloppe">
+      <h2 id="t-offres" class="sr">Les trois offres</h2>
+      <Offres />
+    </div>
+  </section>
+
+  <section class="section fond-blanc" aria-labelledby="t-ouvre">
+    <div class="enveloppe">
+      <div class="tete-section">
+        <p class="surtitre">Fonctionnalité par fonctionnalité</p>
+        <h2 id="t-ouvre">Ce que chaque offre ouvre</h2>
+      </div>
+      <div class="tableau-defile">
+        <table class="tableau-offres">
+          <caption class="sr">Les fonctionnalités incluses dans chaque offre</caption>
+          <thead><tr><th scope="col">Fonctionnalité</th>{cles.map((k) => <th scope="col">{NOM_OFFRE[k]}</th>)}</tr></thead>
+          <tbody>
+            {fonctions.slice().sort((x, y) => RANG[x.data.offre] - RANG[y.data.offre] || x.data.nom.localeCompare(y.data.nom, 'fr')).map((f) => (
+              <tr>
+                <th scope="row"><a href={url('fonctionnalites', f.id)}>{f.data.nom}</a><span>{f.data.ligne}</span></th>
+                {cles.map((k) => RANG[k] >= RANG[f.data.offre] ? <td class="oui"><svg aria-hidden="true"><use href="#coche"/></svg><span class="sr">Incluse</span></td> : <td class="non"><span aria-hidden="true">—</span><span class="sr">Non incluse</span></td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="exemple" aria-labelledby="t-exemple">
+    <div class="enveloppe">
+      <div class="tete-section">
+        <p class="surtitre">Exemple chiffré</p>
+        <h2 id="t-exemple">Une cotisation de {euros(COTISATION)}, payée par carte, avec OnClub Pro</h2>
+        <p class="intro">Les frais de carte bancaire sont à la charge de l’association. Voici ce qu’elle reçoit, sans puis avec des frais de dossier.</p>
+      </div>
+      <div class="exemples">
+        <article class="exemple-carte">
+          <h3>Sans frais de dossier</h3>
+          <dl>
+            <div><dt>La famille paie</dt><dd>{euros(a.prix)}</dd></div>
+            <div><dt>OnClub Pro, {pro.taux}</dt><dd>− {euros(a.commission)}</dd></div>
+            <div><dt>Frais de carte, {FRAIS_CARTE.texte}</dt><dd>− {euros(a.carte)}</dd></div>
+            <div class="total"><dt>L’association reçoit</dt><dd>{euros(a.recu)}</dd></div>
+          </dl>
+        </article>
+        <article class="exemple-carte exemple-dossier">
+          <h3>Avec {euros(DOSSIER)} de frais de dossier</h3>
+          <dl>
+            <div><dt>La famille paie</dt><dd>{euros(b.prix)}</dd></div>
+            <div><dt>OnClub Pro, {pro.taux}</dt><dd>− {euros(b.commission)}</dd></div>
+            <div><dt>Frais de carte, {FRAIS_CARTE.texte}</dt><dd>− {euros(b.carte)}</dd></div>
+            <div class="total"><dt>L’association reçoit</dt><dd>{euros(b.recu)}</dd></div>
+          </dl>
+          <p>Les frais de dossier sont inclus dans le prix d’inscription et appliqués à toutes les familles, quel que soit le moyen de paiement. Une famille qui paie par chèque règle aussi {euros(b.prix)}, sans commission ni frais de carte.</p>
+        </article>
+      </div>
+      <p class="note">Exemple, pas un devis. Frais de carte&nbsp;: tarif standard de Stripe pour les cartes de l’Espace économique européen, <a href={FRAIS_CARTE.source} target="_blank" rel="noopener">grille tarifaire Stripe</a>, consultée le {FRAIS_CARTE.consulte}. Les cotisations payées en plusieurs fois suivent la même règle, échéance par échéance.</p>
+    </div>
+  </section>
+
+  <section class="section fond-menthe" aria-labelledby="t-temps">
+    <div class="enveloppe temps-rappel">
+      <div>
+        <p class="surtitre">Le temps rendu</p>
+        <h2 id="t-temps">Le vrai calcul, c’est vos soirées.</h2>
+        <p class="intro">Environ {OFFRES[0].heures} heures rendues par saison avec Mini, {OFFRES[1].heures} avec Pro, {OFFRES[2].heures} avec Pro Max IA, pour une association de 250 adhérents. Estimation, pas une étude&nbsp;: les hypothèses sont sous les offres, et le calculateur refait le compte pour votre association.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-encre" href="/temps-gagne">Calculer mon temps gagné</a>
+        <a class="btn btn-blanc" href="/demo">Demander une démo</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section"><div class="enveloppe"><Faq items={faq} /><p class="liens-fin">À lire aussi&nbsp;: <a href="/fonctionnalites">toutes les fonctionnalités</a>, <a href="/ressources">les guides pour le bureau</a>, <a href="/pour-qui">les associations</a>.</p></div></div>
+  <AppelDemo titre="Voyons ce que l’offre change pour votre association." />
+</Layout>
+
+<style>
+.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
+.tete-page .surtitre{margin-top:20px}
+.tete-page h1{max-width:16ch}
+.tableau-defile{overflow-x:auto;margin-top:32px;-webkit-overflow-scrolling:touch}
+.tableau-offres{width:100%;border-collapse:collapse}
+.tableau-offres thead th:not(:first-child),.tableau-offres td{width:64px;padding-inline:4px}
+@media (min-width:760px){.tableau-offres thead th:not(:first-child),.tableau-offres td{width:140px}}
+.tableau-offres th,.tableau-offres td{padding:14px 10px;border-bottom:1px solid var(--trait);text-align:center;vertical-align:middle}
+.tableau-offres thead th{font:700 1rem/1.2 var(--f-titre);border-bottom:2px solid var(--encre)}
+.tableau-offres tbody th{text-align:left;font-weight:500}
+.tableau-offres tbody th a{display:block;font:700 1.0625rem/1.25 var(--f-titre)}
+.tableau-offres tbody th span{display:block;font-size:.875rem;color:var(--gris)}
+.tableau-offres thead th:first-child{text-align:left}
+.oui svg{width:20px;height:20px;margin:0 auto;color:var(--sapin)}
+.non{color:var(--gris)}
+.exemples{display:grid;gap:20px;margin-top:32px}
+@media (min-width:900px){.exemples{grid-template-columns:1fr 1fr;gap:24px}}
+.exemple-carte{background:var(--blanc);border-radius:var(--r-l);padding:28px;border:2px solid var(--encre)}
+.exemple-dossier{background:var(--lilas-pale)}
+.exemple-carte h3{font-size:1.375rem}
+.exemple-carte dl{margin:18px 0 0}
+.exemple-carte dl div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--trait)}
+.exemple-carte dt{color:var(--gris)}
+.exemple-carte dd{margin:0;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.exemple-carte .total{border-bottom:0;padding-top:14px}
+.exemple-carte .total dt{color:var(--encre);font-weight:700}
+.exemple-carte .total dd{font:800 1.5rem/1 var(--f-titre)}
+.exemple-carte>p{margin-top:16px;font-size:.9375rem}
+.temps-rappel{display:grid;gap:24px}
+@media (min-width:960px){.temps-rappel{grid-template-columns:1.4fr 1fr;align-items:end;gap:56px}}
+.liens-fin{margin-top:32px}
+.liens-fin a{font-weight:700}
+</style>

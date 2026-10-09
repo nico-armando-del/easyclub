@@ -1,0 +1,218 @@
+<style>
+.ec-inscription{--eci-h:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);container-type:inline-size;width:100%;max-width:440px;margin:0 auto;font-family:var(--font-body,'Satoshi',system-ui,sans-serif);color:#0E1116;line-height:1.4;text-align:left}
+.ec-inscription *,.ec-inscription *::before,.ec-inscription *::after{box-sizing:border-box;margin:0;padding:0}
+.ec-inscription .eci-scene{--s:1;position:relative;height:calc(var(--s) * 600px + 40px);border-radius:24px;border:1px solid #E8E6DE;background:radial-gradient(60% 48% at 50% 55%,rgba(93,232,143,.22),rgba(93,232,143,0)),#FAFAF7;overflow:hidden}
+.ec-inscription .eci-tel{position:absolute;left:50%;top:50%;width:300px;height:600px;margin:-300px 0 0 -150px;transform:scale(var(--s));background:#0E1116;border-radius:46px;padding:10px;box-shadow:0 28px 50px -18px rgba(14,17,22,.45),inset 0 0 0 2px #2B313B}
+.ec-inscription .eci-ecran{position:relative;width:280px;height:580px;border-radius:36px;overflow:hidden;background:#F5F4EF;font-size:13px}
+.ec-inscription .eci-ile{position:absolute;top:9px;left:50%;width:82px;height:22px;margin-left:-41px;border-radius:12px;background:#0E1116;z-index:40}
+.ec-inscription .eci-statut{position:absolute;top:0;left:0;right:0;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 30px;font-weight:700;font-size:13px;background:#F5F4EF;z-index:35}
+.ec-inscription .eci-pile{width:22px;height:11px;border:1.5px solid #0E1116;border-radius:3px;position:relative}
+.ec-inscription .eci-pile::before{content:"";position:absolute;top:1.5px;bottom:1.5px;left:1.5px;right:5px;background:#0E1116;border-radius:1px}
+.ec-inscription .eci-vue{position:absolute;top:38px;left:0;right:0;bottom:0;overflow:hidden}
+.ec-inscription .eci-defile{position:relative;padding:10px 10px 180px;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.ec-inscription .eci-club{display:flex;align-items:center;gap:8px;font-size:12px;color:#4F4F48}
+.ec-inscription .eci-sigle{width:28px;height:28px;border-radius:8px;background:#0F3D2A;color:#5DE88F;display:flex;align-items:center;justify-content:center;font:800 12px var(--eci-h)}
+.ec-inscription .eci-h1{font:800 20px/1.1 var(--eci-h);letter-spacing:-.02em;margin:10px 0 6px;text-wrap:balance}
+.ec-inscription .eci-p{font-size:12px;color:#4F4F48}
+.ec-inscription .eci-carte{background:#fff;border:1px solid #E8E6DE;border-radius:16px;padding:12px;margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.ec-inscription .eci-titre{font:700 16px/1.15 var(--eci-h)}
+.ec-inscription .eci-h3{font:700 14px/1.2 var(--eci-h);margin-top:4px}
+.ec-inscription .eci-mut{font-size:12px;color:#6E6E66}
+.ec-inscription .eci-lab{font-size:12px;font-weight:700;color:#4F4F48;margin-bottom:4px}
+.ec-inscription .eci-lab i{font-style:normal;color:#C23B2A}
+.ec-inscription .eci-champ{height:34px;border:1px solid #D9D6CC;border-radius:10px;padding:0 10px;display:flex;align-items:center;font-size:14px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.ec-inscription .eci-champ.is-focus{border-color:#0F6B47;box-shadow:0 0 0 3px rgba(93,232,143,.35)}
+.ec-inscription .is-focus .eci-val::after{content:"";display:inline-block;width:1.5px;height:16px;margin-left:1px;vertical-align:-3px;background:#0E1116;animation:ec-inscription-caret 1s steps(1) infinite}
+.ec-inscription .eci-ph{color:#A9AEA6}
+.ec-inscription .eci-val:not(:empty)+.eci-ph{display:none}
+.ec-inscription .eci-aide{font-size:12px;color:#6E6E66;margin-top:4px}
+.ec-inscription .eci-alerte{border:1px solid;border-radius:10px;padding:8px 10px;font-size:12px}
+.ec-inscription .eci-info{background:#EEF3F8;border-color:#C7D5E5;color:#25466B;font-weight:700}
+.ec-inscription .eci-succes{background:#E9F8EF;border-color:#9BDDB6;color:#0F6B47}
+.ec-inscription .eci-succes b{display:block;font-size:13px}
+.ec-inscription .eci-q{font-size:13px;font-weight:700;margin-bottom:6px}
+.ec-inscription .eci-btn{display:flex;align-items:center;justify-content:center;height:40px;border-radius:999px;font-weight:700;font-size:14px;transition:background .25s,color .25s,opacity .25s,border-color .25s}
+.ec-inscription .eci-prim{background:#5DE88F;color:#0F3D2A}
+.ec-inscription .eci-prim.is-off{opacity:.45}
+.ec-inscription .eci-out{border:1.5px solid #D9D6CC;background:#fff;color:#0E1116}
+.ec-inscription .eci-out.is-on{background:#5DE88F;border-color:#5DE88F;color:#0F3D2A}
+.ec-inscription .eci-duo{display:flex;gap:8px}
+.ec-inscription .eci-duo .eci-btn{flex:1}
+.ec-inscription .eci-liste{display:flex;flex-direction:column;gap:10px}
+.ec-inscription .eci-cours{border:1.5px solid #E8E6DE;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;max-height:150px;overflow:hidden;transition:max-height .45s ease,opacity .3s,padding .45s,margin .45s,border-color .25s,background .25s}
+.ec-inscription .eci-cours.is-choisi{border-color:#0F6B47;background:#F4FCF7}
+.ec-inscription .eci-cours.eci-plie{max-height:0;opacity:0;padding-top:0;padding-bottom:0;margin-top:-10px;border-width:0}
+.ec-inscription .eci-crow{display:flex;gap:8px;align-items:flex-start}
+.ec-inscription .eci-case{width:16px;height:16px;border:1.5px solid #A9AEA6;border-radius:4px;margin-top:2px;flex:none;position:relative;transition:background .2s,border-color .2s}
+.ec-inscription .is-choisi .eci-case{background:#0F6B47;border-color:#0F6B47}
+.ec-inscription .is-choisi .eci-case::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ec-inscription .eci-cinfo{flex:1;min-width:0}
+.ec-inscription .eci-cnom{font:700 14px/1.2 var(--eci-h)}
+.ec-inscription .eci-cre{font-size:12px;color:#4F4F48;margin-top:2px}
+.ec-inscription .eci-prix{font:800 15px var(--eci-h);white-space:nowrap}
+.ec-inscription .eci-jauge{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#4F4F48}
+.ec-inscription .eci-rail{flex:1;height:6px;border-radius:9px;background:#ECEAE3;overflow:hidden}
+.ec-inscription .eci-rail i{display:block;height:100%;border-radius:9px;background:#2FA866}
+.ec-inscription .eci-panier{position:absolute;left:8px;right:8px;bottom:8px;background:#fff;border-radius:28px;padding:12px;box-shadow:0 -6px 24px rgba(14,17,22,.14),0 0 0 1px #E8E6DE;z-index:20;transition:opacity .4s,transform .4s}
+.ec-inscription .eci-prow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ec-inscription .eci-cap{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6E6E66}
+.ec-inscription .eci-total{font:800 20px/1.15 var(--eci-h);display:inline-block}
+.ec-inscription .eci-mention{font-size:12px;color:#4F4F48;text-decoration:underline;text-underline-offset:2px}
+.ec-inscription .eci-quiet{font-size:13px;font-weight:600;color:#4F4F48;padding:6px 4px;white-space:nowrap}
+.ec-inscription .eci-detail{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1)}
+.ec-inscription.is-ouvert .eci-detail{max-height:440px}
+.ec-inscription.is-libre .eci-detail{overflow:visible}
+.ec-inscription .eci-replie{max-height:90px;overflow:hidden;margin-top:10px;transition:max-height .45s,opacity .3s,margin .45s}
+.ec-inscription.is-ouvert .eci-replie{max-height:0;opacity:0;margin-top:0}
+.ec-inscription .eci-h2{font:700 16px var(--eci-h);margin:12px 0 8px}
+.ec-inscription .eci-ligne{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:#4F4F48;margin-top:3px}
+.ec-inscription .eci-ligne b{color:#0E1116}
+.ec-inscription .eci-grp{margin-top:8px}
+.ec-inscription .eci-tot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E8E6DE;padding-top:8px;margin-top:10px;font:700 14px var(--eci-h)}
+.ec-inscription .eci-tot b{font-size:18px;font-weight:800}
+.ec-inscription .eci-sel{position:relative;margin-top:10px}
+.ec-inscription .eci-select{height:36px;border:1px solid #D9D6CC;border-radius:10px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.ec-inscription .eci-select i{width:7px;height:7px;border:solid #4F4F48;border-width:0 1.5px 1.5px 0;transform:translateY(-2px) rotate(45deg)}
+.ec-inscription .eci-options{position:absolute;left:0;right:0;bottom:calc(100% + 6px);background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(14,17,22,.22),0 0 0 1px #E8E6DE;padding:4px;opacity:0;transform:translateY(6px) scale(.97);transition:opacity .2s,transform .2s;z-index:5}
+.ec-inscription .eci-options.is-vu{opacity:1;transform:none}
+.ec-inscription .eci-opt{position:relative;padding:8px 26px 8px 10px;border-radius:8px;font-size:13px;transition:background .2s}
+.ec-inscription .eci-opt.is-on{background:#EEF8F2;font-weight:700}
+.ec-inscription .eci-opt.is-on::after{content:"";position:absolute;right:12px;top:11px;width:5px;height:10px;border:solid #0F6B47;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ec-inscription .eci-regle{font-size:12px;color:#4F4F48;margin:8px -8px 0;padding:6px 8px;border-radius:8px}
+.ec-inscription .eci-detail .eci-btn{margin-top:10px}
+.ec-inscription .eci-err{font-size:12px;color:#C23B2A;margin-top:6px}
+.ec-inscription .eci-conf{position:absolute;top:38px;left:0;right:0;bottom:0;background:#F5F4EF;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s linear .5s;z-index:22}
+.ec-inscription.is-fini .eci-conf{opacity:1;visibility:visible;transition:opacity .5s}
+.ec-inscription.is-fini .eci-panier{opacity:0;transform:translateY(24px)}
+.ec-inscription .eci-cdef{padding:12px 10px 16px;display:flex;flex-direction:column;gap:10px;transition:transform 1s cubic-bezier(.4,0,.2,1)}
+.ec-inscription .eci-conf .eci-carte{margin-top:0;gap:4px}
+.ec-inscription .eci-ctitre{font:800 19px/1.15 var(--eci-h)}
+.ec-inscription .eci-voile{position:absolute;inset:0;background:#F5F4EF;opacity:0;transition:opacity .35s;z-index:30;pointer-events:none}
+.ec-inscription.is-voile .eci-voile{opacity:1}
+.ec-inscription .eci-doigt{position:absolute;left:0;top:0;width:0;height:0;opacity:0;z-index:28;pointer-events:none;transform:translate(220px,600px);transition:transform .6s cubic-bezier(.45,.05,.25,1),opacity .35s}
+.ec-inscription .eci-pulpe{position:absolute;left:-16px;top:-16px;width:32px;height:32px;border-radius:50%;background:rgba(14,17,22,.28);border:2px solid #fff;box-shadow:0 3px 10px rgba(14,17,22,.3)}
+.ec-inscription .eci-pulpe::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #5DE88F;opacity:0}
+.ec-inscription .is-tap .eci-pulpe{animation:ec-inscription-tap .32s ease}
+.ec-inscription .is-tap .eci-pulpe::after{animation:ec-inscription-onde .55s ease-out}
+.ec-inscription .eci-legende{margin-top:10px;text-align:center;font-size:12px;color:#6E6E66;letter-spacing:.02em}
+.ec-inscription .eci-cache{display:none!important}
+.ec-inscription .eci-entre{animation:ec-inscription-entre .45s cubic-bezier(.2,.7,.3,1) both}
+.ec-inscription .eci-pop{animation:ec-inscription-pop .45s ease}
+.ec-inscription .eci-surligne{animation:ec-inscription-surligne 2.6s ease}
+.ec-inscription.is-pause *,.ec-inscription.is-pause *::before,.ec-inscription.is-pause *::after{animation-play-state:paused!important}
+.ec-inscription.is-fixe *,.ec-inscription.is-fixe *::before,.ec-inscription.is-fixe *::after{transition:none!important;animation:none!important}
+@container (max-width:311px){.ec-inscription .eci-scene{--s:.9}}
+@container (max-width:282px){.ec-inscription .eci-scene{--s:.82}}
+@keyframes ec-inscription-entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes ec-inscription-pop{40%{transform:scale(1.14)}}
+@keyframes ec-inscription-surligne{0%,35%{background:rgba(93,232,143,.38)}100%{background:rgba(93,232,143,0)}}
+@keyframes ec-inscription-caret{50%{opacity:0}}
+@keyframes ec-inscription-tap{40%{transform:scale(.78)}}
+@keyframes ec-inscription-onde{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+</style>
+<div class="ec ec-inscription" role="img" aria-label="Écran animé d’un téléphone : un parent inscrit sa fille Léa au club de volley. Il saisit son prénom, son nom et sa date de naissance, indique Filles, et seule l’équipe M15 filles reste proposée, avec ses places libres. Il la coche, choisit le paiement en 10 fois sans frais : l’échéancier s’affiche, 27 € aujourd’hui puis 9 fois 17 € jusqu’en juillet. Il valide sa demande et reçoit la confirmation. Données fictives.">
+<div class="eci-scene">
+<div class="eci-tel">
+<div class="eci-ecran">
+<div class="eci-ile"></div>
+<div class="eci-statut"><span>9:41</span><span class="eci-pile"></span></div>
+<div class="eci-vue">
+<div class="eci-defile" data-k="defile">
+<div class="eci-club"><span class="eci-sigle">VC</span><span>Volley Club Démo</span></div>
+<div class="eci-h1">Inscription Saison 2026&nbsp;·&nbsp;2027</div>
+<p class="eci-p">Un seul formulaire pour toute la famille. Le montant se met à jour à chaque choix, réductions et aides comprises.</p>
+<div class="eci-carte">
+<div>
+<div class="eci-titre">Participant 1<span data-k="t-prenom"></span></div>
+<div class="eci-mut">Les autres membres de la famille s’ajoutent plus bas.</div>
+</div>
+<div class="eci-h3">Le participant</div>
+<div><div class="eci-lab">Prénom <i>*</i></div><div class="eci-champ" data-k="c-prenom"><span class="eci-val" data-k="v-prenom"></span></div></div>
+<div><div class="eci-lab">Nom <i>*</i></div><div class="eci-champ" data-k="c-nom"><span class="eci-val" data-k="v-nom"></span></div></div>
+<div><div class="eci-lab">Date de naissance <i>*</i></div><div class="eci-champ" data-k="c-date"><span class="eci-val" data-k="v-date"></span><span class="eci-ph">jj/mm/aaaa</span></div>
+<div class="eci-aide">La catégorie se calcule sur l’année, jamais sur l’âge du jour.</div></div>
+<div class="eci-alerte eci-info eci-cache" data-k="alerte">2 cours ouverts à une naissance en 2013</div>
+<div>
+<div class="eci-h3">Les cours</div>
+<div class="eci-aide" data-k="sous">Renseignez la date de naissance pour voir les cours ouverts.</div>
+</div>
+<div class="eci-cache" data-k="sexe">
+<div class="eci-q">Léa joue dans une équipe de…</div>
+<div class="eci-duo"><span class="eci-btn eci-out" data-k="f">Filles</span><span class="eci-btn eci-out" data-k="g">Garçons</span></div>
+<div class="eci-aide">Les équipes mixtes restent proposées dans les deux cas.</div>
+</div>
+<div class="eci-liste">
+<div class="eci-cours eci-cache" data-k="m15f">
+<div class="eci-crow"><span class="eci-case"></span>
+<div class="eci-cinfo"><div class="eci-cnom">M15 filles</div><div class="eci-cre">lundi 18:00 à 19:30</div><div class="eci-mut">Salle des Tilleuls, Claire Dumas</div></div>
+<div class="eci-prix">120 €</div></div>
+<div class="eci-jauge"><span class="eci-rail"><i style="width:67%"></i></span><span>4 places libres</span></div>
+</div>
+<div class="eci-cours eci-cache" data-k="m15g">
+<div class="eci-crow"><span class="eci-case"></span>
+<div class="eci-cinfo"><div class="eci-cnom">M15 garçons</div><div class="eci-cre">jeudi 18:00 à 19:30</div><div class="eci-mut">Salle des Tilleuls, Sarah Guillot</div></div>
+<div class="eci-prix">120 €</div></div>
+<div class="eci-jauge"><span class="eci-rail"><i style="width:50%"></i></span><span>6 places libres</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="eci-panier">
+<div class="eci-prow">
+<div>
+<div class="eci-cap">Total</div>
+<div class="eci-total" data-k="total">0 €</div>
+<div class="eci-mention eci-cache" data-k="mention"></div>
+</div>
+<span class="eci-quiet" data-k="voir">Voir le détail</span>
+</div>
+<div class="eci-detail">
+<div class="eci-h2">Votre panier</div>
+<div class="eci-cap">Léa Martin</div>
+<div class="eci-ligne"><span>M15 filles</span><b>120 €</b></div>
+<div class="eci-ligne"><span>Licence FFVolley</span><b>45 €</b></div>
+<div class="eci-cap eci-grp">Toute la famille</div>
+<div class="eci-ligne"><span>Adhésion à l’association</span><b>15 €</b></div>
+<div class="eci-tot"><span>Total</span><b>180 €</b></div>
+<div class="eci-sel">
+<div class="eci-lab">Paiement</div>
+<div class="eci-select" data-k="select"><span data-k="choix">En une fois</span><i></i></div>
+<div class="eci-options" data-k="options">
+<div class="eci-opt is-on" data-k="o1">En une fois</div>
+<div class="eci-opt">En 3 fois, sans frais</div>
+<div class="eci-opt" data-k="o10">En 10 fois, sans frais</div>
+</div>
+</div>
+<p class="eci-regle eci-cache" data-k="regle">Votre règlement : 27 € aujourd’hui, puis 9 fois 17 €, du 5 novembre 2026 au 5 juillet 2027.</p>
+<span class="eci-btn eci-prim" data-k="valider">Valider ma demande</span>
+</div>
+<div class="eci-replie">
+<span class="eci-btn eci-prim is-off" data-k="valider0">Valider ma demande</span>
+<div class="eci-err" data-k="err">Aucun cours sélectionné pour le moment.</div>
+</div>
+</div>
+<div class="eci-conf" data-k="conf">
+<div class="eci-cdef" data-k="cdef">
+<div class="eci-alerte eci-succes"><b>Inscription enregistrée</b>Votre inscription est enregistrée. Le règlement se fera avec le club, qui vous indiquera comment.</div>
+<div class="eci-carte">
+<div class="eci-ctitre">Merci, c’est validé</div>
+<div class="eci-mut">Reçu de cotisation 4F7A2C91</div>
+<p class="eci-p">Volley Club Démo, Saison 2026 · 2027. Un récapitulatif part sur l’adresse mail du responsable 1.</p>
+<div class="eci-cap eci-grp">Léa Martin</div>
+<div class="eci-ligne"><span>M15 filles</span><b>120 €</b></div>
+<div class="eci-ligne"><span>Licence FFVolley</span><b>45 €</b></div>
+<div class="eci-cap eci-grp">Toute la famille</div>
+<div class="eci-ligne"><span>Adhésion à l’association</span><b>15 €</b></div>
+<div class="eci-tot"><span>Total à régler</span><b>180 €</b></div>
+<p class="eci-p">En 10 fois, sans frais : 27 € aujourd’hui, puis 9 fois 17 €, du 5 novembre 2026 au 5 juillet 2027.</p>
+</div>
+<span class="eci-btn eci-prim">Voir mon dossier</span>
+</div>
+</div>
+<div class="eci-voile"></div>
+<div class="eci-doigt" data-k="doigt"><span class="eci-pulpe"></span></div>
+</div>
+</div>
+</div>
+</div>

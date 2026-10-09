@@ -1,0 +1,186 @@
+<style>
+.ec-boutique{--a:#1D6FD8;--ink:#0E1116;--sec:#5C5C54;--mut:#6E6E66;--bd:#E8E6DE;--fh:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);width:100%;max-width:300px;margin:0 auto;font-family:var(--font-body,'Satoshi',system-ui,sans-serif);color:#0E1116;line-height:1.4;text-align:left;-webkit-font-smoothing:antialiased}
+.ec-boutique *,.ec-boutique *::before,.ec-boutique *::after{box-sizing:border-box;margin:0;padding:0}
+.ec-boutique .b-cadre{position:relative;width:300px;max-width:100%;aspect-ratio:1/2;margin:0 auto}
+.ec-boutique .b-tel{position:absolute;left:0;top:0;width:300px;height:600px;transform-origin:0 0;transform:scale(var(--k,1));background:#0E1116;border-radius:46px;padding:10px;box-shadow:0 28px 50px -18px rgba(14,17,22,.45),inset 0 0 0 2px #2B313B}
+.ec-boutique .b-ecran{position:relative;width:280px;height:580px;border-radius:36px;overflow:hidden;background:#FAFAF7;font-size:13px}
+.ec-boutique .b-ecran::after{content:"";position:absolute;inset:0;background:#FAFAF7;z-index:70;opacity:0;pointer-events:none;transition:opacity .4s}
+.ec-boutique .b-ecran.b-fondu::after{opacity:1}
+.ec-boutique .b-net *{transition:none!important}
+.ec-boutique.b-pause *{animation-play-state:paused!important}
+.ec-boutique .b-ile{position:absolute;top:9px;left:50%;width:82px;height:22px;margin-left:-41px;border-radius:12px;background:#0E1116;z-index:61}
+.ec-boutique .b-statut{position:absolute;top:0;left:0;right:0;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 30px;font-weight:700;background:#FAFAF7;z-index:60}
+.ec-boutique .b-pile{width:22px;height:11px;border:1.5px solid #0E1116;border-radius:3px;position:relative}
+.ec-boutique .b-pile::before{content:"";position:absolute;top:1.5px;bottom:1.5px;left:1.5px;right:5px;background:#0E1116;border-radius:1px}
+.ec-boutique .b-vue{position:absolute;top:38px;left:0;right:0;bottom:0;overflow:hidden;background:#FAFAF7;opacity:0;visibility:hidden;transform:translateX(24px);transition:opacity .35s,transform .35s,visibility 0s .35s}
+.ec-boutique [data-vue=site] .b-v-site,.ec-boutique [data-vue=bout] .b-v-bout,.ec-boutique [data-vue=cmd] .b-v-cmd{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
+.ec-boutique .b-page{transition:transform .75s cubic-bezier(.4,0,.2,1),opacity .2s}
+.ec-boutique .b-page.b-cache{opacity:0}
+.ec-boutique .b-tete{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:9px 14px;border-bottom:1px solid var(--bd)}
+.ec-boutique .b-marque{display:flex;align-items:center;gap:9px}
+.ec-boutique .b-sigle{width:34px;height:34px;border-radius:10px;background:var(--a);color:#fff;display:grid;place-items:center;font:800 13px var(--fh)}
+.ec-boutique .b-nom{font:700 14px/1.15 var(--fh)}
+.ec-boutique .b-sais,.ec-boutique .b-lien{font-size:12px;color:var(--sec);white-space:nowrap}
+.ec-boutique .b-lien{margin-left:auto;font-weight:600}
+.ec-boutique .b-lb{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.ec-boutique .b-hero{margin:14px;height:178px;border-radius:22px;background:var(--a);color:#fff;padding:20px 18px}
+.ec-boutique .b-hero b{display:block;font:800 25px/1.05 var(--fh);letter-spacing:-.03em}
+.ec-boutique .b-hero span{display:block;font-size:12px;opacity:.85;margin:6px 0 10px}
+.ec-boutique .b-os{display:block;height:9px;border-radius:5px;background:rgba(255,255,255,.3);margin-top:12px}
+.ec-boutique .b-sq{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px}
+.ec-boutique .b-sq i{height:118px;border-radius:18px;background:#fff;border:1px solid var(--bd)}
+.ec-boutique .b-intro{padding:16px 14px 14px}
+.ec-boutique .b-h1{font:800 30px/1 var(--fh);letter-spacing:-.035em}
+.ec-boutique .b-acc,.ec-boutique .b-ret{margin-top:9px;color:var(--sec);line-height:1.45}
+.ec-boutique .b-ret{font-size:12px}
+.ec-boutique .b-ret b{color:var(--ink)}
+.ec-boutique .b-grille{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 120px}
+.ec-boutique .b-art{display:flex;flex-direction:column;border:1px solid var(--bd);border-radius:22px;overflow:hidden;background:#fff}
+.ec-boutique .b-img{aspect-ratio:1;display:grid;place-items:center;background:#E8F0FB}
+.ec-boutique .b-img svg{width:82%;height:82%}
+.ec-boutique .b-mono{background:var(--a);color:#fff;font:800 30px var(--fh)}
+.ec-boutique .b-epu .b-img{opacity:.45}
+.ec-boutique .b-ac{display:flex;flex-direction:column;gap:2px;padding:9px 10px 11px;font:700 13px/1.2 var(--fh)}
+.ec-boutique .b-ap{font-weight:800}
+.ec-boutique .b-bgs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;font-family:var(--font-body,system-ui)}
+.ec-boutique .b-bg{display:inline-flex;align-self:flex-start;border-radius:8px;padding:2px 6px;font-size:12px;line-height:1.25;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.ec-boutique .b-ok{background:#EAFBF3;color:#0F6B47}
+.ec-boutique .b-at{background:#FDF3DC;color:#92600A}
+.ec-boutique .b-er{background:#FDECEC;color:#9B2C28}
+.ec-boutique .b-acb{background:var(--a);color:#fff;display:none}
+.ec-boutique .plein .b-acb{display:inline-flex}
+.ec-boutique .b-btn{display:inline-flex;align-items:center;border-radius:999px;font-weight:700;white-space:nowrap;font-size:13px;padding:7px 14px;line-height:1.2;transition:opacity .2s}
+.ec-boutique .b-out{border:1.5px solid var(--ink);background:#fff}
+.ec-boutique .b-pri{background:var(--a);color:#fff}
+.ec-boutique .b-off{opacity:.55}
+.ec-boutique .b-barre{position:absolute;left:8px;right:8px;bottom:8px;z-index:20;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--bd);border-radius:22px;box-shadow:0 14px 34px -10px rgba(14,17,22,.3);padding:11px 12px;transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.ec-boutique .plein .b-barre{transform:none}
+.ec-boutique .b-barre>div{flex:1;min-width:0}
+.ec-boutique .b-te,.ec-boutique .b-cht{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);white-space:nowrap}
+.ec-boutique .b-tt{font:800 21px/1.15 var(--fh)}
+.ec-boutique .b-td{max-width:104px;font-size:12px;color:var(--sec);text-decoration:underline;text-underline-offset:2px}
+.ec-boutique .b-act{padding:10px 14px}
+.ec-boutique .b-fiche{position:absolute;inset:0;z-index:30;visibility:hidden;transition:visibility 0s .45s}
+.ec-boutique .b-voile{position:absolute;inset:0;background:rgba(14,17,22,.5);opacity:0;transition:opacity .4s}
+.ec-boutique .b-feuille{position:absolute;left:0;right:0;bottom:0;height:500px;display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:28px 28px 0 0;transform:translateY(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.ec-boutique .fiche .b-fiche{visibility:visible;transition:none}
+.ec-boutique .fiche .b-voile{opacity:1}
+.ec-boutique .fiche .b-feuille{transform:none}
+.ec-boutique .b-fz{flex:1;min-height:0;overflow:hidden}
+.ec-boutique .b-fd{transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.ec-boutique .b-gal{position:relative;height:200px;display:grid;place-items:center;background:#E8F0FB}
+.ec-boutique .b-gal svg{width:150px;height:150px}
+.ec-boutique .b-gal .b-btn{position:absolute;right:12px;top:12px}
+.ec-boutique .b-fc{padding:16px 18px 18px}
+.ec-boutique .b-fn{font:800 20px/1.1 var(--fh);letter-spacing:-.02em}
+.ec-boutique .b-fpx{font:800 18px var(--fh);margin:6px 0}
+.ec-boutique .b-fc p{color:var(--sec);line-height:1.5}
+.ec-boutique .b-cht{margin-top:16px}
+.ec-boutique .b-tl{display:flex;align-items:center;gap:10px;min-height:50px;padding:7px 0}
+.ec-boutique .b-tl+.b-tl{border-top:1px solid var(--bd)}
+.ec-boutique .b-tl>div{flex:1}
+.ec-boutique .b-tn{font-size:14px;font-weight:600}
+.ec-boutique .b-tm{font-size:12px;color:#92600A}
+.ec-boutique .b-tz .b-tn{color:#A8A49A}
+.ec-boutique .b-tz .b-tm{color:#9B2C28}
+.ec-boutique .b-cpt{display:none;align-items:center;gap:4px}
+.ec-boutique .b-cpt i{width:32px;height:32px;border-radius:999px;border:1.5px solid var(--ink);display:grid;place-items:center;font-style:normal;font-size:17px;font-weight:700}
+.ec-boutique .b-cpt b{width:24px;text-align:center;font:800 15px var(--fh)}
+.ec-boutique .ajoute .b-aj,.ec-boutique .b-f1,.ec-boutique .ajoute .b-f0{display:none}
+.ec-boutique .ajoute .b-cpt{display:flex}
+.ec-boutique .ajoute .b-f1{display:inline}
+.ec-boutique .b-fp{display:flex;align-items:center;gap:10px;border-top:1px solid var(--bd);padding:11px 14px 13px;color:var(--sec)}
+.ec-boutique .b-fp>span{flex:1}
+.ec-boutique .b-coord{display:none;padding:0 14px 140px}
+.ec-boutique [data-etape=coord] .b-coord{display:block}
+.ec-boutique [data-etape=coord] .b-grille{display:none}
+.ec-boutique .b-card{background:#fff;border:1px solid var(--bd);border-radius:22px;padding:14px 16px;margin-bottom:12px}
+.ec-boutique .b-h2{font:700 16px/1.2 var(--fh);letter-spacing:-.02em}
+.ec-boutique .b-row{display:flex;align-items:center}
+.ec-boutique .b-q{margin-left:auto;font-weight:500;color:var(--sec);padding:4px 8px}
+.ec-boutique .b-li{color:var(--sec);margin-top:8px}
+.ec-boutique .b-li span,.ec-boutique .b-aide,.ec-boutique .b-note,.ec-boutique .b-rq{color:var(--mut)}
+.ec-boutique .b-lab{display:block;font-size:12px;font-weight:600;color:var(--sec);margin:11px 0 5px}
+.ec-boutique .b-in{height:40px;display:flex;align-items:center;border:1px solid var(--bd);border-radius:12px;padding:0 13px;font-size:14px;white-space:nowrap;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.ec-boutique .b-in.f{border-color:var(--a);box-shadow:0 0 0 3px rgba(29,111,216,.16)}
+.ec-boutique .b-in.f::after{content:"";width:1.5px;height:17px;margin-left:1px;background:var(--a);animation:ec-boutique-clig 1s steps(1) infinite}
+.ec-boutique .b-aide,.ec-boutique .b-note,.ec-boutique .b-rq{font-size:12px;margin-top:5px;line-height:1.4}
+.ec-boutique .b-leg{position:absolute;inset:38px 0 0;z-index:45;display:grid;place-items:center;background:rgba(14,17,22,.62);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.ec-boutique .paie .b-leg{opacity:1;visibility:visible;transition:opacity .35s}
+.ec-boutique .b-puce{max-width:214px;border-radius:18px;background:#0E1116;color:#C9CCC4;padding:16px;text-align:center}
+.ec-boutique .b-puce b{display:block;font:700 15px var(--fh);color:#FAFAF7;margin-bottom:3px}
+.ec-boutique .b-rond{width:24px;height:24px;margin:0 auto 10px;border-radius:50%;border:3px solid rgba(93,232,143,.25);border-top-color:#5DE88F;animation:ec-boutique-tour .8s linear infinite}
+.ec-boutique .b-cmd{padding:16px 14px 40px}
+.ec-boutique .b-pass{color:var(--sec);margin:8px 0 10px}
+.ec-boutique .b-al{margin:14px 0 12px;border:1px solid #0F6B47;border-radius:12px;background:#EAFBF3;color:#0F6B47;padding:11px 14px;line-height:1.45}
+.ec-boutique .b-al b{display:block}
+.ec-boutique .b-al u{display:block;margin-top:7px;font-weight:700;text-underline-offset:2px}
+.ec-boutique .b-tab{width:100%;border-collapse:collapse;margin-top:6px}
+.ec-boutique .b-tab th{text-align:left;font-size:12px;text-transform:uppercase;color:var(--mut);padding:6px 0;border-bottom:1px solid var(--ink)}
+.ec-boutique .b-tab td{padding:8px 0;border-bottom:1px solid var(--bd);vertical-align:top}
+.ec-boutique .b-tab .r{text-align:right;padding-left:8px}
+.ec-boutique .b-tab .g{font-weight:700}
+.ec-boutique .b-rt{color:var(--sec);margin-top:6px}
+.ec-boutique .b-rq{margin-top:9px}
+.ec-boutique .b-doigt{position:absolute;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;z-index:65;pointer-events:none;opacity:0;transform:translate(250px,620px);transition:transform .6s cubic-bezier(.4,0,.2,1),opacity .3s}
+.ec-boutique .b-doigt.on{opacity:1}
+.ec-boutique .b-doigt i{position:absolute;inset:0;border-radius:50%;background:rgba(14,17,22,.26);border:2px solid rgba(255,255,255,.95);box-shadow:0 3px 10px rgba(14,17,22,.3);transition:transform .15s}
+.ec-boutique .b-doigt.tap i{transform:scale(.78)}
+.ec-boutique .b-doigt.tap::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--a);animation:ec-boutique-onde .5s ease-out forwards}
+.ec-boutique .b-legende{margin-top:14px;text-align:center;font-size:12px;color:#6E6E66}
+@keyframes ec-boutique-clig{50%{opacity:0}}
+@keyframes ec-boutique-tour{to{transform:rotate(360deg)}}
+@keyframes ec-boutique-onde{from{transform:scale(.6);opacity:1}to{transform:scale(2.1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ec-boutique *,.ec-boutique *::after{transition:none!important;animation:none!important}}
+</style>
+<div class="ec ec-boutique" role="img" aria-label="Écran animé d’un téléphone : depuis le site du club, un parent ouvre « La boutique », touche le maillot de match, voit le stock restant par taille (plus que 2 en 12 ans, 14 ans épuisé), ajoute un 12 ans, voit le total de 35 € et le retrait au gymnase le mercredi de 18 h à 20 h, donne ses coordonnées et commande ; la page « Ma commande » confirme le paiement et rappelle où retirer le maillot.">
+<div class="b-cadre"><div class="b-tel"><div class="b-ecran" data-vue="site" data-etape="rayon">
+<div class="b-ile"></div>
+<div class="b-statut"><span>20:30</span><span class="b-pile"></span></div>
+<div class="b-vue b-v-site"><div class="b-page" data-l="La boutique">
+<div class="b-hero"><b>Volley Club Démo</b><span>Saison 2026 · 2027</span><i class="b-os" style="width:86%"></i><i class="b-os" style="width:64%"></i><i class="b-os" style="width:74%"></i></div>
+<div class="b-sq"><i></i><i></i><i></i><i></i></div>
+</div></div>
+<div class="b-vue b-v-bout"><div class="b-page" data-l="Le club et ses cours">
+<div class="b-intro"><div class="b-h1">Boutique</div><p class="b-acc">Les tenues du club, à retirer au gymnase. Le maillot de match est obligatoire en championnat.</p><p class="b-ret"><b>Retrait :</b> Gymnase Jean-Moulin, à l’accueil, Le mercredi de 18 h à 20 h.</p></div>
+<div class="b-grille">
+<div class="b-art b-a1"><div class="b-img"><svg viewBox="0 0 120 120"><path d="M42 16 26 21 8 40l14 15 10-8v57h56V47l10 8 14-15-18-19-16-5c-4 9-32 9-36 0Z" fill="#1D6FD8"/><path d="M42 16c4 9 32 9 36 0M8 40l14 15m90-15L98 55" stroke="#fff" stroke-width="3" fill="none"/><text x="60" y="84" font-size="32" font-weight="800" fill="#fff" text-anchor="middle" style="font-family:var(--fh)">7</text></svg></div><div class="b-ac"><span>Maillot de match</span><span class="b-ap">35&#8239;€</span><span class="b-bgs"><span class="b-bg b-ok">En stock</span><span class="b-bg b-acb">1 au panier</span></span></div></div>
+<div class="b-art"><div class="b-img"><svg viewBox="0 0 120 120"><path d="M22 26h76l8 70H68l-8-40-8 40H14Z" fill="#0E2A5C"/><path d="M22 35h76" stroke="#fff" stroke-width="3"/></svg></div><div class="b-ac"><span>Short de match</span><span class="b-ap">20&#8239;€</span><span class="b-bgs"><span class="b-bg b-ok">En stock</span></span></div></div>
+<div class="b-art"><div class="b-img b-mono">SD</div><div class="b-ac"><span>Sweat du club</span><span class="b-ap">45&#8239;€</span><span class="b-bgs"><span class="b-bg b-at">Derniers exemplaires</span></span></div></div>
+<div class="b-art b-epu"><div class="b-img b-mono">CD</div><div class="b-ac"><span>Chaussettes du club</span><span class="b-ap">8&#8239;€</span><span class="b-bgs"><span class="b-bg b-er">Épuisé</span></span></div></div>
+</div>
+<div class="b-coord">
+<div class="b-card"><div class="b-row"><span class="b-h2">Votre commande</span><span class="b-q">Modifier</span></div><p class="b-li">1 × Maillot de match · 12 ans<span> — 35&#8239;€</span></p></div>
+<div class="b-card"><span class="b-h2">Vos coordonnées</span>
+<span class="b-lab">Nom</span><div class="b-in"><span></span></div>
+<span class="b-lab">Adresse email</span><div class="b-in"><span></span></div>
+<span class="b-lab">Téléphone</span><div class="b-in"><span></span></div><p class="b-aide">Le club vous prévient quand la commande est prête à retirer.</p>
+</div>
+<p class="b-note">Le montant exact est confirmé à l’écran suivant, avant tout paiement. Vos articles sont réservés 30 minutes, le temps de régler.</p>
+</div>
+</div>
+<div class="b-barre"><div><div class="b-te">Total estimé</div><div class="b-tt">35&#8239;€</div><div class="b-td">1 article · voir le détail</div></div><span class="b-btn b-pri b-act">Continuer</span></div>
+<div class="b-fiche"><div class="b-voile"></div><div class="b-feuille">
+<div class="b-fz"><div class="b-fd">
+<div class="b-gal"><span class="b-btn b-out">Fermer</span></div>
+<div class="b-fc"><div class="b-fn">Maillot de match</div><div class="b-fpx">35&#8239;€</div><p>Maillot officiel du club, respirant. Le numéro est celui de l’équipe.</p>
+<div class="b-cht">Choisissez votre taille</div><div class="b-tls"></div>
+</div></div></div>
+<div class="b-fp"><span><span class="b-f0">Rien de cet article dans votre panier.</span><span class="b-f1">1 dans votre panier.</span></span><span class="b-btn b-pri b-fini">Terminé</span></div>
+</div></div>
+</div>
+<div class="b-vue b-v-cmd"><div class="b-page" data-l="La boutique du club">
+<div class="b-cmd">
+<div class="b-h1">Ma commande</div>
+<p class="b-pass">Passée le 6 octobre 2026, au nom de Claire Martin.</p>
+<span class="b-bg b-at">À préparer</span>
+<div class="b-al"><b>Votre commande est réglée</b><b>Réglée le 2026-10-06 · 35&#8239;€</b>Le club prépare votre paquet. Vous n’avez rien d’autre à faire que de venir le retirer.<u>Voir le reçu de cette commande</u></div>
+<div class="b-card"><span class="b-h2">Ce que vous avez commandé</span>
+<table class="b-tab"><tr><th>Article</th><th class="r">Quantité</th><th class="r">Montant</th></tr><tr><td>Maillot de match · 12 ans</td><td class="r">1</td><td class="r">35&#8239;€</td></tr><tr><td class="g">Total</td><td></td><td class="r g">35&#8239;€</td></tr></table></div>
+<div class="b-card"><span class="b-h2">Où retirer votre commande</span><p class="b-rt">Gymnase Jean-Moulin, à l’accueil</p><p class="b-rt" style="margin-top:2px">Le mercredi de 18 h à 20 h</p><p class="b-rq">Une question sur ce paquet ? Écrivez au club à bureau@exemple.fr, ou appelez le 06 39 98 00 00.</p></div>
+</div>
+</div></div>
+<div class="b-leg"><div class="b-puce"><div class="b-rond"></div><b>Paiement par carte</b>sur la page sécurisée de Stripe, puis retour au site du club</div></div>
+<div class="b-doigt"><i></i></div>
+</div></div></div>
+</div>

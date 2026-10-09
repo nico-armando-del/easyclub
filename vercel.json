@@ -1,5 +1,7 @@
 {
-  "outputDirectory": "site",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm ci",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
@@ -23,6 +25,16 @@
         }
       ],
       "destination": "https://onclub.app/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/cotisation-en-plusieurs-fois",
+      "destination": "/articles/cotisation-en-plusieurs-fois",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/ressources",
       "permanent": true
     }
   ],
@@ -53,6 +65,19 @@
         {
           "key": "Content-Security-Policy",
           "value": "frame-ancestors 'none'"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store, max-age=0"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         }
       ]
     }

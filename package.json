@@ -1,0 +1,19 @@
+{
+  "name": "onclub-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && python3 scripts/controle_seo.py dist && python3 scripts/ressemblance.py dist",
+    "build:seul": "astro build",
+    "controle": "python3 scripts/controle_seo.py dist && python3 scripts/ressemblance.py dist",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.0.3",
+    "astro": "^7.3.8"
+  }
+}

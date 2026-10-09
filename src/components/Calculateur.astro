@@ -1,0 +1,71 @@
+---
+/*
+  « COMBIEN DE TEMPS VOTRE ASSOCIATION VA GAGNER ? »
+  Rendu au build pour 250 adhérents : la page est complète sans JavaScript.
+  public/js/calculateur.js recalcule pour le nombre saisi, avec la même
+  méthode que calculer() (src/data/temps.ts) : quatre tâches proportionnelles
+  au nombre d'adhérents, la rentrée suivante fixe (12 h → 2 h).
+*/
+import { calculer, duree, TACHES, CINQ_TACHES, ADHERENTS_REFERENCE } from '../data/temps'
+interface Props { grand?: boolean; id?: string; entree?: boolean }
+const { grand = false, id = 'calculateur', entree = true } = Astro.props
+const r = calculer(ADHERENTS_REFERENCE)
+const h = (m: number) => `${Math.round(m / 60)} h`
+const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c].avantMin, apres: TACHES[c].apresMin, prop: TACHES[c].proportionnelle })))
+---
+<div class:list={['calculateur', { grand, 'sans-entree': !entree }]} id={id} data-calculateur={donnees}>
+  <div class="calc-entree">
+    <label for={`${id}-n`}>Nombre d’adhérents de votre association</label>
+    <div class="calc-champs">
+      <input id={`${id}-n`} type="number" inputmode="numeric" min="10" max="5000" step="1" value={ADHERENTS_REFERENCE} data-calc-n>
+      <input type="range" min="10" max="1500" step="10" value={ADHERENTS_REFERENCE} aria-label="Nombre d’adhérents, curseur" data-calc-curseur>
+    </div>
+    <p class="calc-sansjs">Calcul affiché pour 250 adhérents.</p>
+  </div>
+  <div class="calc-resultat" aria-live="polite">
+    <div class="calc-totaux">
+      <div><span>Aujourd’hui</span><b class="num" data-calc-avant>≈ {h(r.avant)}</b></div>
+      <div><span>Avec OnClub</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
+      <div class="calc-gain"><span>Rendues chaque saison</span><b class="num" data-calc-gain>≈ {h(r.gain)}</b></div>
+    </div>
+    <table class="calc-table">
+      <caption class="sr">Les cinq tâches recalculées</caption>
+      <thead><tr><th scope="col">Tâche</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th></tr></thead>
+      <tbody>
+        {r.lignes.map((l) => (
+          <tr data-calc-ligne={l.cle}><th scope="row">{l.tache}</th><td class="num" data-avant>{duree(l.avant)}</td><td class="num" data-apres>{duree(l.apres)}</td></tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="calc-note">Estimation, pas une promesse : la méthode et les hypothèses sont sur <a href="/temps-gagne#hypotheses">la page du temps gagné</a>.</p>
+  </div>
+</div>
+<script is:inline defer src="/js/calculateur.js"></script>
+<style>
+.calculateur{background:var(--blanc);border:2px solid var(--encre);border-radius:var(--r-l);padding:24px;display:grid;gap:28px;box-shadow:0 6px 0 var(--encre)}
+@media (min-width:960px){.calculateur.grand{grid-template-columns:.8fr 1.2fr;padding:40px;gap:48px}}
+.sans-entree .calc-entree{display:none}
+@media (min-width:960px){.calculateur.grand.sans-entree{grid-template-columns:1fr}}
+.calc-entree label{display:block;font:700 1.25rem/1.25 var(--f-titre)}
+.calc-champs{display:grid;gap:14px;margin-top:14px}
+.calc-champs input[type=number]{width:100%;max-width:220px;min-height:56px;border:2px solid var(--encre);border-radius:14px;padding:0 16px;font:700 1.5rem var(--f-titre);background:var(--papier);color:var(--encre)}
+.calc-champs input[type=number]:focus{outline:none;box-shadow:0 0 0 3px var(--menthe)}
+.calc-champs input[type=range]{width:100%;accent-color:var(--sapin);min-height:44px}
+.calc-sansjs{margin-top:8px;font-size:.9375rem;color:var(--gris)}
+:global(.js) .calc-sansjs{display:none}
+.calc-champs{display:none}
+:global(.js) .calc-champs{display:grid}
+.calc-totaux{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.calc-totaux div{background:var(--papier);border-radius:var(--r-s);padding:14px}
+.calc-totaux span{display:block;font-size:.875rem;color:var(--gris)}
+.calc-totaux b{display:block;font:800 clamp(1.5rem,1.2rem + 1vw,2.25rem)/1.1 var(--f-titre)}
+.calc-totaux .calc-gain{grid-column:1/-1;background:var(--menthe)}
+.calc-totaux .calc-gain span{color:var(--encre)}
+.calc-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:.9375rem}
+.calc-table th,.calc-table td{padding:10px 6px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
+.calc-table thead th{font-size:.8125rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gris)}
+.calc-table td{white-space:nowrap;font-weight:700}
+.calc-table tbody th{font-weight:500}
+.calc-note{margin-top:14px;font-size:.875rem;color:var(--gris)}
+.calc-note a{font-weight:700}
+</style>

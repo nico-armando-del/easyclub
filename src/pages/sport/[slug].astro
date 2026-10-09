@@ -1,0 +1,11 @@
+---
+/* Une page par fichier de src/content/sports/. Le gabarit commun : components/PageCollection.astro. */
+import PageCollection from '../../components/PageCollection.astro'
+import { liste } from '../../lib/collections'
+export async function getStaticPaths() {
+  const entrees = await liste('sports')
+  return entrees.map((entree) => ({ params: { slug: entree.id }, props: { entree } }))
+}
+const { entree } = Astro.props
+---
+<PageCollection collection="sports" entree={entree} />

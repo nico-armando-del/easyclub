@@ -1,0 +1,41 @@
+---
+/* Les trois offres, avec le temps rendu en tête (51 / 75 / 97 h) et les hypothèses en note. */
+import { OFFRES } from '../data/site'
+import { HYPOTHESES_OFFRES } from '../data/temps'
+interface Props { titre?: 'h2' | 'h3' }
+const { titre = 'h3' } = Astro.props
+const T = titre
+---
+<div class="offres">
+  {OFFRES.map((o) => (
+    <article class:list={['offre', { 'offre-phare sur-encre': o.phare }]}>
+      <T class="offre-nom">{o.nom}</T>
+      <p class="offre-temps"><b class="num">≈ {o.heures} h</b> rendues par saison*</p>
+      <p class="offre-taux num">{o.taux}</p>
+      <p class="offre-leg">des cotisations encaissées en ligne{o.tauxBoutique && <>, + {o.tauxBoutique} sur la boutique</>}. Rien de fixe.</p>
+      <ul>{o.ouvre.map((l) => <li>{l}</li>)}</ul>
+      <a class:list={['btn', o.phare ? 'btn-menthe' : 'btn-contour']} href={`/demo?offre=${o.cle}`}>Voir {o.nom.replace('OnClub ', '')} en démo</a>
+    </article>
+  ))}
+</div>
+<p class="note offres-note">* Estimation OnClub pour une association de 250 adhérents, pas une étude. {HYPOTHESES_OFFRES} Rien n’est prélevé sur les chèques et les espèces. Les frais de carte bancaire sont à la charge de l’association : <a href="/tarifs#exemple">voir l’exemple chiffré</a>.</p>
+<style>
+.offres{display:grid;gap:20px}
+@media (min-width:960px){.offres{grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}}
+.offre{background:var(--blanc);border-radius:var(--r-l);padding:32px 28px;display:flex;flex-direction:column}
+.offre-phare{background:var(--encre);color:var(--blanc)}
+.offre-nom{font:800 1.5rem/1.1 var(--f-titre)}
+.offre-temps{margin-top:16px;padding:12px 14px;border-radius:var(--r-s);background:var(--menthe-pale);color:var(--sapin);font-weight:600}
+.offre-phare .offre-temps{background:var(--menthe);color:var(--encre)}
+.offre-temps b{font:800 1.75rem/1 var(--f-titre);margin-right:4px}
+.offre-taux{margin-top:20px;font:800 3rem/1 var(--f-titre)}
+.offre-phare .offre-taux{color:var(--menthe)}
+.offre-leg{margin-top:8px;font-size:.9375rem;color:var(--gris)}
+.offre-phare .offre-leg{color:var(--gris-nuit)}
+.offre ul{list-style:none;margin:22px 0 28px;padding:18px 0 0;border-top:1px solid var(--trait);display:grid;gap:10px}
+.offre-phare ul{border-color:#2A323D}
+.offre li{padding-left:22px;position:relative}
+.offre li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:currentColor}
+.offre .btn{margin-top:auto;width:100%}
+.offres-note{margin-top:24px;max-width:none}
+</style>

@@ -1,0 +1,40 @@
+---
+/*
+  LE BANDEAU DE CONSENTEMENT (CNIL) : « Accepter » et « Refuser » ont le même
+  poids, le refus est l'état par défaut, le choix est gardé 6 mois au plus
+  (cookie onclub_consentement, 180 jours), et on change d'avis par le lien
+  « Cookies et localisation » du pied de page.
+
+  Il ne masque pas le contenu : c'est une barre basse et compacte, et tant
+  qu'elle est ouverte, site.js ajoute sous la page une marge de sa hauteur
+  (on peut toujours lire et cliquer jusqu'au bout de la page).
+
+  Seule finalité : après « Accepter », le navigateur demande à /api/ville la
+  ville approximative déduite de la connexion, pour personnaliser trois
+  phrases. Sans « Accepter », aucune requête n'est faite. Logique : public/js/site.js.
+*/
+---
+<section class="consentement" data-consentement hidden aria-labelledby="consentement-titre" role="region">
+  <div class="consentement-boite">
+    <div class="consentement-texte">
+      <h2 id="consentement-titre">Adapter le site à votre ville&nbsp;?</h2>
+      <p>Si vous acceptez, nous déduisons votre ville approximative de votre connexion. Rien n’est enregistré, aucun service tiers. <a href="/confidentialite#localisation">En savoir plus</a></p>
+    </div>
+    <div class="consentement-choix">
+      <button type="button" class="btn btn-blanc" data-consentement-choix="refuse">Refuser</button>
+      <button type="button" class="btn btn-blanc" data-consentement-choix="accepte">Accepter</button>
+    </div>
+  </div>
+</section>
+<style>
+.consentement{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:0 12px calc(12px + env(safe-area-inset-bottom))}
+.consentement[hidden]{display:none}
+.consentement-boite{max-width:980px;margin:0 auto;background:var(--encre);color:var(--blanc);border-radius:var(--r-m);padding:14px 16px;box-shadow:var(--ombre);display:grid;gap:12px}
+@media (min-width:860px){.consentement-boite{grid-template-columns:1fr auto;align-items:center;gap:24px;padding:16px 20px}}
+.consentement h2{font:700 1.0625rem/1.25 var(--f-titre);margin:0 0 4px}
+.consentement p{color:#D7DBE1;font-size:.875rem;line-height:1.45}
+.consentement a{color:var(--blanc);font-weight:600}
+.consentement-choix{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.consentement-choix .btn{width:100%;min-height:44px;padding:0 22px;font-size:.9375rem}
+.consentement :focus-visible{outline-color:var(--menthe)}
+</style>

@@ -1,0 +1,87 @@
+---
+/* LE PIED DE PAGE : toutes les familles de pages, construites à partir des collections. */
+import { FAMILLES, EMAIL, lienWhatsApp, PHRASE_BUT } from '../data/site'
+import { liste, url } from '../lib/collections'
+const sports = await liste('sports')
+const activites = await liste('activites')
+const profils = await liste('profils')
+const annee = new Date().getFullYear()
+---
+<footer class="pied sur-encre">
+  <div class="enveloppe">
+    <div class="pied-haut">
+      <div class="pied-marque">
+        <a class="marque" href="/" aria-label="OnClub, accueil"><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
+        <p>{PHRASE_BUT}</p>
+        <a class="btn btn-menthe btn-petit" href="/demo">Demander une démo</a>
+      </div>
+      <nav class="pied-grille" aria-label="Plan du site">
+        <div>
+          <h2>Fonctionnalités</h2>
+          <ul>
+            {FAMILLES.map((f) => <li><a href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a></li>)}
+            <li><a href="/fonctionnalites">Toutes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Sports</h2>
+          <ul>{sports.map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}</ul>
+        </div>
+        <div>
+          <h2>Autres activités</h2>
+          <ul>{activites.map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}</ul>
+          <h2 class="h2-suite">Votre rôle</h2>
+          <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
+        </div>
+        <div>
+          <h2>Ressources</h2>
+          <ul>
+            <li><a href="/ressources">Guides et articles</a></li>
+            <li><a href="/ressources#comparatifs">Comparatifs</a></li>
+            <li><a href="/temps-gagne">Le temps gagné</a></li>
+            <li><a href="/tarifs">Tarifs</a></li>
+            <li><a href="/presentation">La présentation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>OnClub</h2>
+          <ul>
+            <li><a href="/demo">Demander une démo</a></li>
+            <li><a href="/recommander">Transmettre à mon club</a></li>
+            <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+            <li><a href={lienWhatsApp()} rel="noopener" target="_blank">WhatsApp</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="pied-bas">
+      <span>© {annee} OnClub</span>
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/confidentialite">Confidentialité</a>
+      <a href="/conditions">Conditions</a>
+      <button type="button" class="pied-cookies" data-consentement-ouvrir>Cookies et localisation</button>
+      <a href="/en" hreflang="en" lang="en">English</a>
+      <a href="/es" hreflang="es" lang="es">Español</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+.pied{background:var(--encre);color:#C3C8D0;padding-block:64px 40px;font-size:.9375rem}
+.pied-haut{display:grid;gap:48px}
+@media (min-width:1000px){.pied-haut{grid-template-columns:1fr 3fr;gap:56px}}
+.pied-marque{display:flex;flex-direction:column;align-items:flex-start;gap:18px;max-width:34ch}
+.pied .marque{display:inline-flex;align-items:center;gap:10px;color:var(--blanc);text-decoration:none;font:800 1.375rem/1 var(--f-titre)}
+.pied .marque svg{width:44px;height:22px;color:var(--menthe)}
+.pied-grille{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px}
+@media (min-width:760px){.pied-grille{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.pied h2{font:700 1rem/1.3 var(--f-texte);color:var(--blanc);margin-bottom:8px;letter-spacing:0}
+.pied .h2-suite{margin-top:20px}
+.pied ul{list-style:none;padding:0}
+.pied ul a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;overflow-wrap:anywhere}
+.pied ul a:hover{color:var(--menthe);text-decoration:underline}
+.pied-bas{margin-top:48px;padding-top:16px;border-top:1px solid #2A323D;display:flex;flex-wrap:wrap;align-items:center;gap:0 24px}
+.pied-bas a,.pied-bas span,.pied-cookies{display:inline-flex;align-items:center;min-height:44px}
+.pied-bas a:hover{color:var(--menthe)}
+.pied-cookies{background:none;border:0;color:inherit;font:inherit;padding:0;text-decoration:underline;cursor:pointer}
+</style>

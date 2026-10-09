@@ -1,0 +1,92 @@
+---
+/* L'ESPACE RESSOURCES : guides, articles, comparatifs (construits à partir des collections), FAQ générale, liens utiles. */
+import Layout from '../layouts/Layout.astro'
+import FilAriane from '../components/FilAriane.astro'
+import CartesCollection from '../components/CartesCollection.astro'
+import Faq from '../components/Faq.astro'
+import AppelDemo from '../components/AppelDemo.astro'
+import { MISE_EN_ROUTE } from '../data/site'
+
+const fil = [{ nom: 'Ressources', url: '/ressources' }]
+const faq = [
+  { question: 'Qu’est-ce qu’OnClub ?', reponse: 'Une plateforme française pour les associations qui inscrivent des adhérents : inscriptions et cotisations en ligne, suivi de l’argent, relances d’un bouton, pièces justificatives, saison suivante, convocations, site et boutique de l’association.' },
+  { question: 'OnClub convient-il à une association qui n’est pas sportive ?', reponse: 'Oui, dès qu’il y a des inscriptions, des cours ou des groupes et des cotisations : école de musique, de danse, de théâtre, de langues, chorale, atelier. Chaque cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.' },
+  { question: 'Combien de temps faut-il pour démarrer ?', reponse: MISE_EN_ROUTE },
+  { question: 'Les données des familles sont-elles protégées ?', reponse: 'Les données sont hébergées dans l’Union européenne, ni revendues ni utilisées à des fins publicitaires. Les paiements sont traités par Stripe : OnClub ne voit ni ne conserve les numéros de carte. Le détail est dans la politique de confidentialité.' },
+  { question: 'Comment obtenir une démo ?', reponse: 'Répondez aux cinq questions de la page de démo : vous voyez le temps que votre association gagnerait, puis vous nous écrivez sur WhatsApp ou par e-mail avec un message déjà rempli.' },
+]
+---
+<Layout
+  titre="Guides et ressources pour gérer une association | OnClub"
+  description="Guides pratiques, articles et comparatifs pour les bénévoles d’association : cotisations, aides, inscriptions, rentrée. Sans jargon, avec les sources."
+  chemin="/ressources"
+  fil={fil}
+  faq={faq}
+>
+  <div class="tete-page">
+    <div class="enveloppe">
+      <FilAriane fil={fil} />
+      <p class="surtitre">Ressources</p>
+      <h1>Les ressources du bureau bénévole</h1>
+      <p class="chapo">Des guides pour faire juste, des articles pour gagner du temps, des comparatifs pour choisir. Écrits pour les trésoriers, présidents et secrétaires d’association, avec leurs sources.</p>
+      <nav class="sommaire" aria-label="Rubriques">
+        <a href="#guides">Guides</a><a href="#articles">Articles</a><a href="#comparatifs">Comparatifs</a><a href="#questions">Questions</a><a href="#outils">Outils</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="section" id="guides" aria-labelledby="t-guides">
+    <div class="enveloppe">
+      <h2 id="t-guides">Guides pratiques</h2>
+      <p class="intro">Les aides, les règles, les démarches&nbsp;: ce que le bureau doit savoir et faire.</p>
+      <CartesCollection collection="guides" />
+    </div>
+  </section>
+
+  <section class="section fond-blanc" id="articles" aria-labelledby="t-articles">
+    <div class="enveloppe">
+      <h2 id="t-articles">Articles</h2>
+      <p class="intro">Le quotidien d’une association, et comment y passer moins de soirées.</p>
+      <CartesCollection collection="articles" />
+    </div>
+  </section>
+
+  <section class="section" id="comparatifs" aria-labelledby="t-comparatifs">
+    <div class="enveloppe">
+      <h2 id="t-comparatifs">Comparatifs</h2>
+      <p class="intro">Tableur, papier, outils&nbsp;: ce que chaque façon de faire coûte en temps.</p>
+      <CartesCollection collection="comparatifs" />
+    </div>
+  </section>
+
+  <section class="section fond-encre sur-encre" id="outils" aria-labelledby="t-outils">
+    <div class="enveloppe">
+      <h2 id="t-outils">Les outils</h2>
+      <ul class="grille grille-3 outils">
+        <li><a class="carte-lien" href="/temps-gagne"><small>Calculateur</small><b>Le temps gagné</b><span>Votre nombre d’adhérents, les cinq tâches recalculées.</span></a></li>
+        <li><a class="carte-lien" href="/tarifs"><small>Tarifs</small><b>Les offres et un exemple chiffré</b><span>Commission, frais de carte, frais de dossier.</span></a></li>
+        <li><a class="carte-lien" href="/presentation"><small>Présentation</small><b>OnClub en écrans animés</b><span>La présentation complète, écran par écran.</span></a></li>
+        <li><a class="carte-lien" href="/fonctionnalites"><small>Fonctionnalités</small><b>Toutes les fonctionnalités</b><span>Six familles, une ligne pour chacune.</span></a></li>
+        <li><a class="carte-lien" href="/pour-qui"><small>Pour qui</small><b>Sports et autres activités</b><span>Ce qu’OnClub fait pour votre type d’association.</span></a></li>
+        <li><a class="carte-lien" href="/demo"><small>Démo</small><b>Préparer ma démo</b><span>Cinq questions, un message prêt à envoyer.</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="section"><div class="enveloppe"><Faq items={faq} /></div></div>
+  <AppelDemo />
+</Layout>
+<style>
+.tete-page{background:var(--lilas);padding-block:8px calc(var(--section) * .7)}
+.tete-page .surtitre{margin-top:20px}
+.tete-page h1{max-width:18ch}
+.sommaire{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.sommaire a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--blanc);border:2px solid var(--encre);font-weight:700;text-decoration:none}
+.sommaire a:hover{background:var(--encre);color:var(--blanc)}
+.outils{list-style:none;padding:0;margin:28px 0 0}
+.outils .carte-lien{background:var(--nuit);color:var(--blanc)}
+.outils .carte-lien span{color:var(--gris-nuit)}
+.outils .carte-lien small{color:var(--menthe)}
+.outils .carte-lien:hover{border-color:var(--menthe)}
+.fond-blanc :global(.carte-lien){background:var(--papier)}
+</style>

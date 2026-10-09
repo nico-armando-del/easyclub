@@ -1,0 +1,13 @@
+---
+/* Le bouton de démo, fixé en bas de l'écran sur téléphone. Il s'efface quand le bandeau de consentement est ouvert. */
+---
+<div class="demo-fixe" data-demo-fixe>
+  <a class="btn btn-encre" href="/demo">Demander une démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+</div>
+<style>
+.demo-fixe{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px var(--g) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--papier) 70%,rgba(245,242,234,0))}
+.demo-fixe .btn{width:100%;min-height:50px}
+:global(body){padding-bottom:84px}
+:global(html.consentement-ouvert) .demo-fixe{display:none}
+@media (min-width:760px){.demo-fixe{display:none}:global(body){padding-bottom:0}}
+</style>

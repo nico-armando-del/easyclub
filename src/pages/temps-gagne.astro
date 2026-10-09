@@ -1,0 +1,127 @@
+---
+/*
+  LE TEMPS GAGNÉ : le calculateur en grand, la méthode, les hypothèses
+  (ancre #hypotheses, visée par chaque BlocTemps du site), l'INJEP sourcé.
+  Tous les chiffres viennent de src/data/temps.ts.
+*/
+import Layout from '../layouts/Layout.astro'
+import FilAriane from '../components/FilAriane.astro'
+import Calculateur from '../components/Calculateur.astro'
+import BlocTemps from '../components/BlocTemps.astro'
+import Faq from '../components/Faq.astro'
+import AppelDemo from '../components/AppelDemo.astro'
+import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES, HYPOTHESES_OFFRES, duree } from '../data/temps'
+import { INJEP, OFFRES, PHRASE_BUT } from '../data/site'
+
+const fil = [{ nom: 'Le temps gagné', url: '/temps-gagne' }]
+const faq = [
+  { question: 'Ces chiffres sont-ils une promesse ?', reponse: 'Non. C’est une estimation OnClub pour une association de 250 adhérents, pas une étude. Chaque hypothèse est écrite sur cette page : changez le nombre d’adhérents dans le calculateur, ou refaites le compte avec vos propres durées.' },
+  { question: 'Pourquoi la rentrée suivante ne dépend-elle pas du nombre d’adhérents ?', reponse: 'Parce que le travail de la rentrée tient surtout aux groupes, aux créneaux et aux places à rouvrir, pas au nombre de dossiers. Le calculateur la garde donc fixe : 12 heures aujourd’hui, 2 heures avec OnClub.' },
+  { question: 'Pourquoi le temps rendu change-t-il avec l’offre ?', reponse: 'Parce que chaque offre prend en charge plus de tâches. Mini couvre les fiches, les paiements, les relances et les pièces. Pro ajoute la rentrée, les messages, la liste d’attente et le site. Pro Max IA ajoute la boutique et les événements.' },
+]
+---
+<Layout
+  titre="Temps gagné par les bénévoles d’une association | OnClub"
+  description="Combien de temps votre association va gagner avec OnClub : le calculateur, la méthode, les hypothèses tâche par tâche, et ce que disent les bénévoles (INJEP)."
+  chemin="/temps-gagne"
+  fil={fil}
+  faq={faq}
+>
+  <div class="tete-page">
+    <div class="enveloppe">
+      <FilAriane fil={fil} />
+      <p class="surtitre">Le temps gagné</p>
+      <h1>Combien de temps votre association va gagner&nbsp;?</h1>
+      <p class="chapo">Pour une association de 250 adhérents, l’administratif prend environ {TOTAL.avant} par saison. Avec OnClub, il en reste environ {TOTAL.apres}. Faites le calcul pour la vôtre.</p>
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="t-calc">
+    <div class="enveloppe">
+      <h2 id="t-calc" class="sr">Le calculateur</h2>
+      <Calculateur grand />
+    </div>
+  </section>
+
+  <section class="section fond-blanc" id="hypotheses" aria-labelledby="t-hyp">
+    <div class="enveloppe">
+      <div class="tete-section">
+        <p class="surtitre">La méthode</p>
+        <h2 id="t-hyp">Les hypothèses, tâche par tâche</h2>
+        <p class="intro">{HYPOTHESES}</p>
+      </div>
+      <div class="tableau-defile">
+        <table class="tableau-hyp">
+          <caption class="sr">Les cinq tâches de l’estimation, pour 250 adhérents</caption>
+          <thead><tr><th scope="col">Tâche</th><th scope="col">Le calcul</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th><th scope="col">Ce qui change</th></tr></thead>
+          <tbody>
+            {CINQ_TACHES.map((c) => { const t = TACHES[c]; return (
+              <tr><th scope="row">{t.tache}</th><td>{t.calcul}</td><td class="num">{duree(t.avantMin ?? 0)}</td><td class="num">{duree(t.apresMin ?? 0)}</td><td>{t.comment}</td></tr>
+            ) })}
+            <tr class="total"><th scope="row">Total</th><td>Les cinq tâches</td><td class="num">≈ {TOTAL.avant}</td><td class="num">≈ {TOTAL.apres}</td><td>≈ {TOTAL.gain} rendues</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="methode">
+        <li><b>Proportionnel.</b> Recopier les fiches, suivre les paiements, relancer et réclamer les pièces suivent le nombre d’adhérents&nbsp;: le calculateur les multiplie par (vos adhérents ÷ 250).</li>
+        <li><b>Fixe.</b> La préparation de la rentrée suivante reste à 12 h → 2 h quel que soit le nombre d’adhérents.</li>
+        <li><b>Arrondi.</b> Les totaux sont arrondis à l’heure, les lignes à la minute.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="t-offres">
+    <div class="enveloppe">
+      <div class="tete-section">
+        <p class="surtitre">Par offre</p>
+        <h2 id="t-offres">Plus l’offre en prend, plus elle en rend.</h2>
+      </div>
+      <ul class="par-offre">
+        {OFFRES.map((o) => <li><b class="num">≈ {o.heures} h</b><span>{o.nom}</span></li>)}
+      </ul>
+      <p class="note">Estimation OnClub pour 250 adhérents, pas une étude. {HYPOTHESES_OFFRES}</p>
+      <div class="detail-pro"><BlocTemps cles={['messages', 'attente', 'site', 'boutique', 'evenements']} titre="Ce que Pro et Pro Max IA ajoutent" /></div>
+    </div>
+  </section>
+
+  <section class="section fond-encre sur-encre" aria-labelledby="t-injep">
+    <div class="enveloppe injep">
+      <div>
+        <p class="surtitre">Ce que disent les bénévoles</p>
+        <h2 id="t-injep"><span class="injep-chiffre">{INJEP.chiffre}</span> {INJEP.texte}</h2>
+        <p class="note">Source&nbsp;: <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a>, consultée le 9 octobre 2026.</p>
+      </div>
+      <p class="injep-phrase">{PHRASE_BUT}</p>
+    </div>
+  </section>
+
+  <div class="section"><div class="enveloppe"><Faq items={faq} /><p class="liens-fin">Pour aller plus loin&nbsp;: <a href="/fonctionnalites">les fonctionnalités</a>, <a href="/tarifs">les tarifs</a>, <a href="/ressources">les guides</a>, <a href="/demo">préparer ma démo</a>.</p></div></div>
+  <AppelDemo />
+</Layout>
+
+<style>
+.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
+.tete-page .surtitre{margin-top:20px}
+.tete-page h1{max-width:18ch}
+.tableau-defile{overflow-x:auto;margin-top:32px}
+.tableau-hyp{width:100%;min-width:720px;border-collapse:collapse;font-size:.9375rem}
+.tableau-hyp th,.tableau-hyp td{padding:12px 10px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
+.tableau-hyp thead th{font-size:.8125rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gris);border-bottom:2px solid var(--encre)}
+.tableau-hyp tbody th{font-weight:700}
+.tableau-hyp td.num{font-weight:700;white-space:nowrap}
+.tableau-hyp .total th,.tableau-hyp .total td{border-bottom:0;font-weight:800;background:var(--menthe-pale)}
+.methode{margin-top:28px;padding-left:1.2em;display:grid;gap:10px;max-width:var(--lecture)}
+.par-offre{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:12px}
+@media (min-width:760px){.par-offre{grid-template-columns:repeat(3,1fr)}}
+.par-offre li{background:var(--blanc);border-radius:var(--r-l);padding:24px;display:grid;gap:4px}
+.par-offre b{font:800 2.5rem/1 var(--f-titre)}
+.detail-pro{margin-top:40px;max-width:960px}
+.injep{display:grid;gap:32px}
+@media (min-width:960px){.injep{grid-template-columns:1.5fr 1fr;align-items:end;gap:64px}}
+.injep h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.375rem);line-height:1.2}
+.injep-chiffre{display:block;font-size:clamp(4rem,3rem + 4vw,6.5rem);line-height:1;color:var(--menthe)}
+.injep .note a{color:var(--blanc)}
+.injep-phrase{font:700 clamp(1.25rem,1.1rem + .6vw,1.625rem)/1.3 var(--f-titre);color:var(--menthe)}
+.liens-fin{margin-top:32px}
+.liens-fin a{font-weight:700}
+</style>

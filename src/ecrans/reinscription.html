@@ -1,0 +1,175 @@
+<style>
+.ec-reinscription{--k:var(--ink,#0E1116);--c:var(--cream,#FAFAF7);--s:var(--sand,#E8E6DE);--g:var(--gray,#6E6E66);--g2:#5C5C54;--su:#F2F1EB;--m:var(--mint,#5DE88F);--md:var(--mint-dark,#0F3D2A);--mp:var(--mint-deep,#0F6B47);--fh:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);--fb:var(--font-body,'Satoshi',system-ui,sans-serif);container-type:inline-size;width:100%;max-width:880px;margin:0 auto;text-align:left;font-family:var(--fb);font-size:14px;line-height:1.4;color:var(--k)}
+.ec-reinscription *{box-sizing:border-box;margin:0}
+.ec-reinscription .ri-fen{position:relative;height:540px;display:flex;flex-direction:column;background:#fff;border:1px solid var(--s);border-radius:14px;box-shadow:0 30px 80px rgba(14,17,22,.14);overflow:hidden}
+.ec-reinscription .ri-barre{flex:none;height:34px;display:flex;align-items:center;gap:7px;padding:0 12px;background:var(--su);border-bottom:1px solid var(--s)}
+.ec-reinscription .ri-pt{width:10px;height:10px;border-radius:50%;background:#D6D3C8;flex:none}
+.ec-reinscription .ri-url{margin-left:10px;flex:1;min-width:0;max-width:430px;height:22px;line-height:20px;padding:0 12px;border-radius:999px;background:#fff;border:1px solid var(--s);font-size:12px;color:var(--g);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ec-reinscription .ri-corps{position:relative;flex:1;min-height:0;display:flex;background:var(--c);overflow:hidden;transition:opacity .35s}
+.ec-reinscription .ri-corps.ri-fondu{opacity:0}
+.ec-reinscription .ri-menu{flex:none;width:168px;display:flex;flex-direction:column;gap:14px;padding:14px 10px;background:#fff;border-right:1px solid var(--s)}
+.ec-reinscription .ri-club{display:flex;align-items:center;gap:9px;padding:0 4px 12px;border-bottom:1px solid var(--s)}
+.ec-reinscription .ri-logo{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--m);color:var(--md);font-family:var(--fh);font-weight:800;font-size:13px}
+.ec-reinscription .ri-cn{display:flex;flex-direction:column;min-width:0;font-family:var(--fh);font-weight:700;font-size:14px;line-height:1.2}
+.ec-reinscription .ri-cn span{font-family:var(--fb);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--g)}
+.ec-reinscription .ri-nav{display:flex;flex-direction:column;gap:2px}
+.ec-reinscription .ri-a{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:10px;font-size:13px;font-weight:500;color:var(--g2)}
+.ec-reinscription .ri-a::before{content:"";width:2px;height:14px;border-radius:2px}
+.ec-reinscription .ri-a.ri-actif{background:var(--su);color:var(--k);font-weight:700}
+.ec-reinscription .ri-a.ri-actif::before{background:var(--m)}
+.ec-reinscription .ri-gt{margin:10px 0 2px 8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g)}
+.ec-reinscription .ri-page{flex:1;min-width:0;display:flex;flex-direction:column}
+.ec-reinscription .ri-tete{display:none;flex:none;align-items:center;gap:10px;height:50px;padding:0 16px;background:#fff;border-bottom:1px solid var(--s)}
+.ec-reinscription .ri-burger{margin-left:auto;width:32px;height:32px;border:1px solid var(--s);border-radius:10px;background:linear-gradient(var(--g2),var(--g2)) 50% 10px/14px 2px no-repeat,linear-gradient(var(--g2),var(--g2)) 50% 14px/14px 2px no-repeat,linear-gradient(var(--g2),var(--g2)) 50% 18px/14px 2px no-repeat}
+.ec-reinscription .ri-contenu{display:flex;flex-direction:column;gap:14px;padding:20px 24px}
+.ec-reinscription .ri-titre{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.ec-reinscription .ri-h1{font-family:var(--fh);font-weight:700;font-size:24px;letter-spacing:-.03em;line-height:1.15}
+.ec-reinscription .ri-pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border:1.5px dashed var(--k);border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.ec-reinscription .ri-gly{width:9px;height:9px;border-radius:50%;border:1.5px dashed var(--k)}
+.ec-reinscription .ri-etat,.ec-reinscription .ri-delai{margin-top:4px;font-size:13px;color:var(--g2)}
+.ec-reinscription .ri-delai{margin:0}
+.ec-reinscription .ri-tabs{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--su);align-self:flex-start}
+.ec-reinscription .ri-tab{display:flex;flex-direction:column;justify-content:center;padding:4px 14px;border-radius:999px;font-size:12px;line-height:1.3}
+.ec-reinscription .ri-tab span{color:var(--g)}
+.ec-reinscription .ri-tab.ri-on{background:var(--k);color:var(--c)}
+.ec-reinscription .ri-tab.ri-on span{color:var(--c);opacity:.8}
+.ec-reinscription .ri-ban{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 14px;border:1px solid var(--s);border-radius:12px;background:#fff;font-size:13px}
+.ec-reinscription .ri-ban>span:first-child{flex:1 1 220px}
+.ec-reinscription .ri-cartes{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ec-reinscription .ri-carte{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid var(--s);border-radius:20px;background:#fff}
+.ec-reinscription .ri-ct{display:flex;align-items:baseline;gap:8px}
+.ec-reinscription .ri-ct b{font-family:var(--fh);font-size:17px;letter-spacing:-.02em}
+.ec-reinscription .ri-ct span,.ec-reinscription .ri-cx{font-size:13px;color:var(--g2)}
+.ec-reinscription .ri-jg{position:relative;height:8px;border-radius:999px;background:var(--su);overflow:hidden}
+.ec-reinscription .ri-jg i{position:absolute;top:0;bottom:0;left:0;background:var(--k)}
+.ec-reinscription .ri-cbts{display:flex;flex-wrap:wrap;gap:8px}
+.ec-reinscription .ri-b{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap;transition:transform .15s,opacity .2s}
+.ec-reinscription .ri-b1{background:var(--m);color:var(--md)}
+.ec-reinscription .ri-bo{border:1.5px solid var(--k)}
+.ec-reinscription .ri-bq{color:var(--g2);font-weight:500}
+.ec-reinscription .ri-b.ri-off{opacity:.45}
+.ec-reinscription .ri-presse{transform:scale(.94)}
+.ec-reinscription .ri-cache{display:none!important}
+.ec-reinscription .ri-voile{position:absolute;inset:0;background:rgba(14,17,22,.4);opacity:0;transition:opacity .4s;pointer-events:none}
+.ec-reinscription .ri-volet{position:absolute;top:0;right:0;bottom:0;width:420px;display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--s);border-radius:24px 0 0 24px;box-shadow:0 20px 60px rgba(14,17,22,.12);transform:translateX(104%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ec-reinscription .ri-ouvert .ri-voile{opacity:1}
+.ec-reinscription .ri-ouvert .ri-volet{transform:none}
+.ec-reinscription .ri-vt{flex:none;display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-bottom:1px solid var(--s)}
+.ec-reinscription .ri-vt b{font-family:var(--fh);font-size:17px;letter-spacing:-.02em}
+.ec-reinscription .ri-vt p{margin-top:2px;font-size:12px;color:var(--g2)}
+.ec-reinscription .ri-vt .ri-b{margin-left:auto;flex:none}
+.ec-reinscription .ri-vc{flex:1;min-height:0;overflow:hidden}
+.ec-reinscription .ri-defil{display:flex;flex-direction:column;gap:16px;padding:16px 18px;transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.ec-reinscription .ri-msg{display:flex;flex-direction:column;gap:8px}
+.ec-reinscription .ri-msg>.ri-b{align-self:flex-start}
+.ec-reinscription .ri-al{padding:10px 14px;border:1px solid var(--mp);border-radius:12px;background:#EAFBF3;color:var(--mp);font-size:13px;font-weight:500}
+.ec-reinscription .ri-ap{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--s);border-radius:12px;background:var(--c);font-size:13px}
+.ec-reinscription .ri-rang{display:flex;flex-wrap:wrap;gap:8px}
+.ec-reinscription .ri-msg,.ec-reinscription .ri-gs,.ec-reinscription .ri-ap,.ec-reinscription .ri-mettre{animation:ec-reinscription-entre .35s ease-out}
+.ec-reinscription .ri-t4{padding-bottom:4px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g)}
+.ec-reinscription .ri-l{display:flex;flex-direction:column;gap:6px;padding:8px 0;max-height:120px;overflow:hidden;border-top:1px solid var(--s);transition:max-height .45s,padding .45s,opacity .3s,border-color .3s}
+.ec-reinscription .ri-t4+.ri-l{border-top-color:transparent}
+.ec-reinscription .ri-l.ri-parti{max-height:0;padding:0;opacity:0;border-top-color:transparent}
+.ec-reinscription .ri-lh{display:flex;align-items:center;gap:10px}
+.ec-reinscription .ri-nm{flex:1;min-width:0;display:flex;flex-direction:column;font-size:14px}
+.ec-reinscription .ri-nm b,.ec-reinscription .ri-nm span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ec-reinscription .ri-nm span{font-size:12px;color:var(--g)}
+.ec-reinscription .ri-lh .ri-b,.ec-reinscription .ri-g .ri-b{flex:none;height:30px;padding:0 10px}
+.ec-reinscription .ri-cb{position:relative;flex:none;width:18px;height:18px;border:1.5px solid #8C8A80;border-radius:5px;background:#fff;transition:background .15s,border-color .15s,transform .15s}
+.ec-reinscription .ri-cb.ri-coche{background:var(--m);border-color:var(--mp)}
+.ec-reinscription .ri-cb.ri-coche::after{content:"";position:absolute;left:4.5px;top:1px;width:4px;height:9px;border:solid var(--md);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ec-reinscription .ri-eq,.ec-reinscription .ri-mettre{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--g2)}
+.ec-reinscription .ri-eq{padding-left:28px}
+.ec-reinscription .ri-sel{position:relative;flex:1;min-width:0;height:32px;line-height:30px;padding:0 30px 0 10px;border:1px solid var(--s);border-radius:12px;background:#fff;color:var(--k);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ec-reinscription .ri-sel::after{content:"";position:absolute;right:12px;top:50%;width:6px;height:6px;border:solid var(--g);border-width:0 1.5px 1.5px 0;transform:translateY(-70%) rotate(45deg)}
+.ec-reinscription .ri-gs{display:flex;flex-direction:column;gap:8px}
+.ec-reinscription .ri-g{display:flex;align-items:center;gap:10px;padding:7px 10px 7px 12px;border:1.5px dashed var(--k);border-radius:12px}
+.ec-reinscription .ri-pied{flex:none;display:flex;flex-direction:column;gap:8px;padding:12px 18px;border-top:1px solid var(--s);background:#fff}
+.ec-reinscription .ri-st{font-size:12px;color:var(--g2)}
+.ec-reinscription .ri-grille{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ec-reinscription .ri-pied .ri-b{width:100%;padding:0 10px}
+.ec-reinscription .ri-cur{position:absolute;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:transform .7s cubic-bezier(.45,.05,.25,1),opacity .3s}
+.ec-reinscription .ri-cur.ri-vis{opacity:1}
+.ec-reinscription .ri-fl{display:block;width:22px;height:22px;transform-origin:3px 2px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3));transition:transform .12s}
+.ec-reinscription .ri-doigt{display:none;position:absolute;left:-17px;top:-17px;width:34px;height:34px;border-radius:50%;background:rgba(14,17,22,.22);border:2px solid rgba(255,255,255,.95);box-shadow:0 2px 8px rgba(0,0,0,.2);transition:transform .12s}
+.ec-reinscription .ri-onde{position:absolute;left:-16px;top:-16px;width:32px;height:32px;border-radius:50%;border:2px solid var(--mp);opacity:0}
+.ec-reinscription .ri-cur.ri-clic .ri-fl,.ec-reinscription .ri-cur.ri-clic .ri-doigt{transform:scale(.85)}
+.ec-reinscription .ri-cur.ri-clic .ri-onde{animation:ec-reinscription-onde .5s ease-out}
+.ec-reinscription .ri-leg{margin-top:12px;text-align:center;font-size:12px;color:var(--g)}
+.ec-reinscription.ri-sec *{transition:none!important;animation:none!important}
+@keyframes ec-reinscription-entre{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes ec-reinscription-onde{from{opacity:.9;transform:scale(.3)}to{opacity:0;transform:scale(1.4)}}
+@container (max-width:719px){
+.ec-reinscription .ri-menu{display:none}
+.ec-reinscription .ri-tete{display:flex}
+.ec-reinscription .ri-contenu{padding:18px 20px}
+.ec-reinscription .ri-volet{width:min(400px,80%)}
+}
+@container (max-width:559px){
+.ec-reinscription .ri-fen{height:610px}
+.ec-reinscription .ri-cartes{grid-template-columns:1fr}
+.ec-reinscription .ri-contenu{padding:16px}
+.ec-reinscription .ri-tabs{align-self:stretch}
+.ec-reinscription .ri-tab{flex:1;align-items:center;padding:8px 6px}
+.ec-reinscription .ri-tab span{display:none}
+.ec-reinscription .ri-volet{width:calc(100% - 48px)}
+.ec-reinscription .ri-vt,.ec-reinscription .ri-defil,.ec-reinscription .ri-pied{padding-left:16px;padding-right:16px}
+.ec-reinscription .ri-grille{grid-template-columns:1fr}
+}
+@container (max-width:399px){
+.ec-reinscription .ri-volet{width:100%;border-radius:0;border-left:0}
+}
+@media (hover:none){
+.ec-reinscription .ri-fl{display:none}
+.ec-reinscription .ri-doigt{display:block}
+}
+@media (prefers-reduced-motion:reduce){.ec-reinscription *{transition:none!important;animation:none!important}}
+</style>
+<div class="ec ec-reinscription" role="img" aria-label="Animation de l’écran Adhérents d’OnClub, onglet Équipes : le bureau ouvre l’équipe M15 Filles, coche deux joueuses de la saison dernière et clique « Garder 2 joueurs » ; leurs places sont gardées jusqu’au 5 juillet, puis le lien de réinscription part aux deux familles et l’écran confirme « 2 liens envoyés ».">
+<div class="ri-fen">
+<div class="ri-barre"><span class="ri-pt"></span><span class="ri-pt"></span><span class="ri-pt"></span><span class="ri-url">onclub.app/volley-club/dashboard/adherents?onglet=equipes</span></div>
+<div class="ri-corps">
+<div class="ri-menu">
+<div class="ri-club"><span class="ri-logo">VC</span><span class="ri-cn">Volley Club<span>OnClub</span></span></div>
+<div class="ri-nav"><span class="ri-a">Accueil</span><span class="ri-gt">Familles</span><span class="ri-a">Inscriptions</span><span class="ri-a ri-actif">Adhérents</span><span class="ri-a">Cours d’essai</span><span class="ri-a">Justificatifs</span><span class="ri-a">Licences</span><span class="ri-a">Emails</span><span class="ri-gt">Votre club</span><span class="ri-a">Cours</span><span class="ri-a">Effectifs</span><span class="ri-a">Lieux</span></div>
+</div>
+<div class="ri-page">
+<div class="ri-tete"><span class="ri-logo">VC</span><span class="ri-cn">Volley Club<span>OnClub</span></span><span class="ri-burger"></span></div>
+<div class="ri-contenu">
+<div><div class="ri-titre"><span class="ri-h1">Adhérents</span><span class="ri-pill"><i class="ri-gly"></i>2027-2028 · se prépare</span></div><p class="ri-etat">14 revenus sur 31 anciens · 3 places gardées · 14 sans nouvelles</p></div>
+<div class="ri-tabs"><span class="ri-tab ri-on"><b>Équipes</b><span>14 sans nouvelles</span></span><span class="ri-tab"><b>Joueurs</b><span>58 fiches</span></span><span class="ri-tab"><b>Familles</b><span>9 à prévenir</span></span></div>
+<p class="ri-delai">Une place gardée attend la famille 14 jours, puis revient aux autres. <u>Modifier le délai</u></p>
+<div class="ri-ban"><span><b>9 familles à prévenir</b> : lien jamais reçu, ou reçu il y a plus d’une semaine.</span><span class="ri-b ri-b1">Prévenir 9 familles</span></div>
+<div class="ri-cartes">
+<div class="ri-carte"><div class="ri-ct"><b>M15 Filles</b><span>9 sur 12</span></div><div class="ri-jg"><i style="width:75%"></i></div><p class="ri-cx">3 anciens sans nouvelles · 3 places libres</p><div class="ri-cbts"><span class="ri-b ri-bo" data-k="cbt">Décider pour 3 joueurs</span></div></div>
+<div class="ri-carte"><div class="ri-ct"><b>M13 Filles</b><span>8 sur 12</span></div><div class="ri-jg"><i style="width:66.7%"></i></div><p class="ri-cx">4 anciens sans nouvelles · 4 places libres</p><div class="ri-cbts"><span class="ri-b ri-bo">Décider pour 4 joueurs</span></div></div>
+</div>
+</div>
+</div>
+<div class="ri-voile"></div>
+<div class="ri-volet">
+<div class="ri-vt"><div><b>M15 Filles · 2027-2028</b><p data-k="sous">3 anciens sans nouvelles · 3 places libres</p></div><span class="ri-b ri-bq">Fermer</span></div>
+<div class="ri-vc"><div class="ri-defil">
+<div class="ri-msg ri-cache" data-k="msg"><div class="ri-al" data-k="al"></div><span class="ri-b ri-b1" data-k="env">Envoyer le lien à ces 2 familles</span><div class="ri-ap ri-cache" data-k="ap"><p><b>2 familles le reçoivent maintenant.</b> Chacune reçoit son lien personnel, avec l’équipe déjà choisie quand une place lui est gardée.</p><div class="ri-rang"><span class="ri-b ri-b1" data-k="apb">Envoyer à 2 familles</span><span class="ri-b ri-bq">Annuler</span></div></div></div>
+<div>
+<p class="ri-t4">Sans nouvelles · <span data-k="nsn">3</span></p>
+<div class="ri-l" data-k="l1"><div class="ri-lh"><span class="ri-cb" data-k="c1"></span><span class="ri-nm"><b>Léa Moreau</b><span>2014 · M13 Filles l’an dernier</span></span><span class="ri-b ri-bq">Ne revient pas</span></div><div class="ri-eq">Équipe<span class="ri-sel" data-k="sel">M15 Filles · 3 places</span></div></div>
+<div class="ri-l" data-k="l2"><div class="ri-lh"><span class="ri-cb" data-k="c2"></span><span class="ri-nm"><b>Inès Garnier</b><span>2014 · M13 Filles l’an dernier</span></span><span class="ri-b ri-bq">Ne revient pas</span></div><div class="ri-eq">Équipe<span class="ri-sel" data-k="sel">M15 Filles · 3 places</span></div></div>
+<div class="ri-l"><div class="ri-lh"><span class="ri-cb"></span><span class="ri-nm"><b>Chloé Lefèvre</b><span>2013 · M15 Filles l’an dernier</span></span><span class="ri-b ri-bq">Ne revient pas</span></div><div class="ri-eq">Équipe<span class="ri-sel" data-k="sel">M15 Filles · 3 places</span></div></div>
+</div>
+<div class="ri-gs ri-cache" data-k="gs"><p class="ri-t4">Places gardées · 2</p>
+<div class="ri-g"><span class="ri-cb"></span><span class="ri-nm"><b>Léa Moreau</b><span>2014 · jusqu’au 5 juillet</span></span><span class="ri-b ri-bq">Rendre la place</span></div>
+<div class="ri-g"><span class="ri-cb"></span><span class="ri-nm"><b>Inès Garnier</b><span>2014 · jusqu’au 5 juillet</span></span><span class="ri-b ri-bq">Rendre la place</span></div>
+</div>
+</div></div>
+<div class="ri-pied">
+<p class="ri-st" data-k="st">Cochez les joueurs que vous gardez.</p>
+<div class="ri-mettre ri-cache" data-k="mt"><span data-k="mtt">Mettre les 2 cochés en</span><span class="ri-sel" data-k="sel">M15 Filles · 3 places</span></div>
+<div class="ri-grille"><span class="ri-b ri-b1 ri-off" data-k="gar">Garder</span><span class="ri-b ri-bo ri-off" data-k="lien">Envoyer le lien</span></div>
+<span class="ri-b ri-bo ri-off" data-k="ecr">Écrire un message</span>
+</div>
+</div>
+<div class="ri-cur"><svg class="ri-fl" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l7.6 19.2 2.7-7.8 7.7-2.8z" fill="#0E1116" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="ri-doigt"></span><span class="ri-onde"></span></div>
+</div>
+</div>
+</div>

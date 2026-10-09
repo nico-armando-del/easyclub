@@ -1,0 +1,200 @@
+<style>
+.ec-site{--es-ink:#0E1116;--es-mint:#5DE88F;--es-md:#0F3D2A;--es-mp:#0F6B47;--es-sand:#E8E6DE;--es-sunk:#F3F2EC;--es-txt:#4F4F48;--es-gray:#6E6E66;--es-pale:#8A8A81;--es-lime:#D7FF3D;--es-h:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);container:ec-site/inline-size;position:relative;width:100%;max-width:880px;margin:0 auto;font-family:var(--font-body,'Satoshi',system-ui,sans-serif);font-size:12.5px;line-height:1.4;color:var(--es-ink);text-align:left;-webkit-font-smoothing:antialiased}
+.ec-site *{box-sizing:border-box;margin:0;padding:0}
+.ec-site .es-cp{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ec-site .es-fen{position:relative;height:540px;display:flex;flex-direction:column;background:#FAFAF7;border:1px solid var(--es-sand);border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -24px rgba(14,17,22,.28)}
+.ec-site .es-chrome{flex:none;height:32px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#ECEAE3;border-bottom:1px solid #E0DDD3}
+.ec-site .es-chrome>i{flex:none;width:10px;height:10px;border-radius:50%;background:#D3D0C6}
+.ec-site .es-url{margin:0 auto;max-width:70%;padding:1px 14px;border-radius:999px;background:#fff;font-size:12px;color:var(--es-gray)}
+.ec-site .es-corps{flex:1;min-height:0;display:flex}
+.ec-site .es-nav{flex:none;width:150px;display:flex;flex-direction:column;gap:3px;padding:12px 10px;background:#fff;border-right:1px solid var(--es-sand);font-size:12px;color:var(--es-txt);white-space:nowrap;overflow:hidden}
+.ec-site .es-club{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;color:var(--es-ink)}
+.ec-site .es-club>span{flex:none;width:28px;height:28px;border-radius:8px;background:var(--es-mint);color:var(--es-md);display:grid;place-items:center;font:800 12px/1 var(--es-h)}
+.ec-site .es-g{margin-top:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--es-pale)}
+.ec-site .es-l{display:flex;align-items:center;gap:6px;padding:1px 0}
+.ec-site .es-l::before{content:"";flex:none;width:2px;height:13px;border-radius:2px}
+.ec-site .es-actif{font-weight:700;color:var(--es-ink)}
+.ec-site .es-actif::before{background:var(--es-mint)}
+.ec-site .es-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;padding:12px 14px;background:#F7F6F1}
+.ec-site .es-tete{flex:none;display:flex;align-items:baseline;gap:10px;min-width:0}
+.ec-site .es-tete>b{font:700 18px/1.1 var(--es-h);letter-spacing:-.02em;white-space:nowrap}
+.ec-site .es-tete>span{min-width:0;font-size:12px;color:var(--es-gray)}
+.ec-site .es-etabli{flex:1;min-height:0;display:flex;flex-direction:row-reverse;gap:12px}
+.ec-site .es-chat{flex:none;width:320px;display:flex;flex-direction:column;background:var(--es-sunk);border:1px solid var(--es-sand);border-radius:12px;overflow:hidden}
+.ec-site .es-ctete{flex:none;display:flex;align-items:center;gap:8px;padding:7px 12px;background:#fff;border-bottom:1px solid var(--es-sand)}
+.ec-site .es-ctete b{display:block;font:700 14px/1.2 var(--es-h)}
+.ec-site .es-ctete small{display:block;font-size:12px;color:var(--es-gray)}
+.ec-site .es-aide{margin-left:auto;flex:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--es-sand);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--es-txt)}
+.ec-site .es-fil{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding:10px}
+.ec-site .es-fil>*{flex:none}
+.ec-site .es-carte{background:#fff;border:1px solid var(--es-sand);border-radius:10px;padding:9px 11px;color:var(--es-txt)}
+.ec-site .es-carte b{color:var(--es-ink)}
+.ec-site .es-dem{align-self:flex-end;max-width:88%;padding:7px 10px;border-radius:10px;background:var(--es-ink);color:#FAFAF7}
+.ec-site .es-opt{display:none}
+.ec-site .es-opt.es-la{display:block;animation:ec-site-entree .35s cubic-bezier(.2,.7,.2,1) both}
+.ec-site .es-muet{color:var(--es-gray)}
+.ec-site .es-muet.es-la{animation:ec-site-entree .35s both,ec-site-pulse 1.2s .35s infinite}
+.ec-site .es-ligne{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px}
+.ec-site .es-badge{display:inline-block;padding:1px 7px;border-radius:6px;background:var(--es-sunk);color:var(--es-txt);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;transition:background .25s,color .25s}
+.ec-site .es-badge.es-accent{background:var(--es-mint);color:var(--es-md)}
+.ec-site .es-badge.es-ok{background:#E3F8EA;color:var(--es-mp)}
+.ec-site .es-note{margin-top:3px;font-size:12px;color:var(--es-gray)}
+.ec-site .es-retouche{margin-top:8px;padding:8px;border:1px solid var(--es-sand);border-radius:8px}
+.ec-site .es-retouche>small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--es-pale)}
+.ec-site .es-retouche>b{display:block;line-height:1.3}
+.ec-site .es-table{display:grid;grid-template-columns:.9fr 1fr 1fr;gap:3px 8px;margin:7px 0 8px;font-size:12px;line-height:1.35}
+.ec-site .es-table em{font-style:normal;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--es-pale)}
+.ec-site .es-champ{font-weight:700;color:var(--es-txt)}
+.ec-site .es-avant{color:var(--es-gray)}
+.ec-site .es-apres{color:var(--es-ink)}
+.ec-site .es-case{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;border:1px solid var(--es-sand);border-radius:8px;background:#fff;transition:border-color .2s,background .2s,transform .15s}
+.ec-site .es-case.es-coche{border-color:var(--es-mp);background:#F1FBF4}
+.ec-site .es-case>span>b,.ec-site .es-case>span>small{display:block;line-height:1.3}
+.ec-site .es-case small{font-size:12px;color:var(--es-gray)}
+.ec-site .es-carre{position:relative;flex:none;width:15px;height:15px;margin-top:1px;border:1.5px solid #B9B6AC;border-radius:4px;background:#fff;transition:background .15s,border-color .15s}
+.ec-site .es-coche .es-carre{background:var(--es-mp);border-color:var(--es-mp)}
+.ec-site .es-coche .es-carre::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ec-site .es-relecture{display:flex;flex-direction:column;gap:7px;margin-top:8px;padding:8px;border:1px solid var(--es-sand);border-radius:8px;background:var(--es-sunk)}
+.ec-site .es-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;padding:5px 14px;border-radius:999px;background:var(--es-mint);color:var(--es-md);font-size:12.5px;font-weight:700;white-space:nowrap;transition:opacity .2s,transform .15s}
+.ec-site .es-btn.es-off{opacity:.45}
+.ec-site .es-btn.es-creux{background:transparent;border:1px solid #CFCCC2;color:var(--es-ink);padding:4px 13px}
+.ec-site .es-appui{transform:scale(.95)}
+.ec-site .es-effet{display:flex;align-items:flex-start;gap:8px;margin-top:6px}
+.ec-site .es-compo{flex:none;display:flex;flex-direction:column;gap:6px;padding:8px 10px;background:#fff;border-top:1px solid var(--es-sand)}
+.ec-site .es-racc{display:flex;gap:5px;overflow:hidden;white-space:nowrap;transition:opacity .2s}
+.ec-site .es-racc>span{flex:none;padding:1px 9px;border:1px solid var(--es-sand);border-radius:999px;font-size:12px;font-weight:700;color:var(--es-txt)}
+.ec-site.es-tape .es-racc,.ec-site.es-occupe .es-racc{opacity:0;visibility:hidden}
+.ec-site .es-zone{position:relative;height:46px;padding:6px 8px;border:1px solid #D9D6CC;border-radius:8px;background:#fff;line-height:1.35;overflow:hidden;transition:border-color .2s,box-shadow .2s,background .2s}
+.ec-site.es-focus .es-zone{border-color:var(--es-mp);box-shadow:0 0 0 3px rgba(93,232,143,.3)}
+.ec-site.es-occupe .es-zone{background:var(--es-sunk)}
+.ec-site .es-ph{position:absolute;top:6px;left:8px;right:8px;color:var(--es-pale)}
+.ec-site.es-tape .es-ph{display:none}
+.ec-site .es-caret{display:none;width:1.5px;height:14px;margin-left:1px;vertical-align:-2px;background:var(--es-ink);animation:ec-site-caret 1s steps(1) infinite}
+.ec-site.es-focus .es-caret{display:inline-block}
+.ec-site .es-actions{display:flex;align-items:center;gap:7px;min-width:0}
+.ec-site .es-compte{min-width:0;font-size:12px;color:var(--es-pale)}
+.ec-site .es-apercu{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
+.ec-site .es-outils{flex:none;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden}
+.ec-site .es-pill{flex:none;padding:1px 9px;border:1px solid var(--es-sand);border-radius:999px;font-size:12px;font-weight:700;color:var(--es-txt)}
+.ec-site .es-pill.es-on{background:var(--es-ink);border-color:var(--es-ink);color:#FAFAF7}
+.ec-site .es-sep{flex:none;width:1px;height:14px;margin:0 3px;background:var(--es-sand)}
+.ec-site .es-recharger{flex:none;font-size:12px;font-weight:700;color:var(--es-txt);text-decoration:underline;text-underline-offset:2px}
+.ec-site .es-ecrin{position:relative;flex:1;min-height:0;background:var(--es-sunk);border:1px solid var(--es-sand);border-radius:12px}
+.ec-site .es-cadre{container:ec-site-cadre/size;position:absolute;inset:10px;display:flex;flex-direction:column;border-radius:8px;overflow:hidden;background:#0B0C10;color:#fff;box-shadow:0 8px 24px -8px rgba(14,17,22,.35);transition:opacity .3s}
+.ec-site .es-cadre.es-recharge{opacity:.08}
+.ec-site .es-sh{flex:none;display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ec-site .es-pastille{flex:none;width:20px;height:20px;border-radius:50%;background:var(--es-lime);color:#0B0C10;display:grid;place-items:center;font:800 12px/1 var(--es-h)}
+.ec-site .es-marque{font:800 12px/1 var(--es-h);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.ec-site .es-smenu{margin-left:auto;display:flex;gap:12px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.ec-site .es-sinscrire{flex:none;padding:3px 10px;border-radius:999px;background:var(--es-lime);color:#0B0C10;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.ec-site .es-hero{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:6px;padding:12px;background:linear-gradient(180deg,rgba(10,18,64,.6) 0%,rgba(10,18,64,.1) 35%,rgba(11,12,16,.25) 60%,#0B0C10 100%),radial-gradient(55% 50% at 72% 34%,rgba(35,64,255,.8),rgba(35,64,255,0) 72%),radial-gradient(35% 32% at 22% 22%,rgba(140,165,255,.4),rgba(140,165,255,0) 72%),#0E1640}
+.ec-site .es-haut{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.ec-site .es-haut>span{overflow:hidden;text-overflow:ellipsis}
+.ec-site .es-point{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:var(--es-lime);vertical-align:1px}
+.ec-site .es-mots{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:0 3cqi;font-family:var(--es-h);font-weight:800;font-size:clamp(14px,min(8.5cqi,14cqb),60px);line-height:.95;letter-spacing:-.02em;text-transform:uppercase}
+.ec-site .es-mots.es-neuf>span{animation:ec-site-mot .55s cubic-bezier(.2,.7,.2,1) both}
+.ec-site .es-lime{color:var(--es-lime)}
+.ec-site .es-bas{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.ec-site .es-phrase{max-width:62%;font-size:12px;line-height:1.4;color:rgba(255,255,255,.86)}
+.ec-site .es-appel{flex:none;margin-left:auto;padding-bottom:3px;border-bottom:2px solid var(--es-lime);color:var(--es-lime);font:800 14px/1 var(--es-h);text-transform:uppercase;white-space:nowrap}
+.ec-site .es-curseur{position:absolute;left:0;top:0;z-index:6;width:20px;height:20px;opacity:0;pointer-events:none;transition:transform .75s cubic-bezier(.45,0,.2,1),opacity .3s}
+.ec-site .es-curseur svg{display:block;width:20px;height:20px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.ec-site .es-curseur::before{content:"";position:absolute;left:-12px;top:-12px;width:24px;height:24px;border-radius:50%;background:rgba(93,232,143,.6);opacity:0}
+.ec-site .es-curseur.es-clic::before{animation:ec-site-onde .5s ease-out}
+.ec-site .es-legende{margin-top:10px;font-size:12px;color:var(--es-gray);text-align:center}
+@keyframes ec-site-entree{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes ec-site-pulse{50%{opacity:.5}}
+@keyframes ec-site-caret{50%{opacity:0}}
+@keyframes ec-site-mot{from{opacity:0;transform:translateY(35%)}to{opacity:1;transform:none}}
+@keyframes ec-site-onde{0%{opacity:1;transform:scale(.2)}100%{opacity:0;transform:scale(1.6)}}
+@container ec-site (max-width:859px){.ec-site .es-nav{display:none}}
+@container ec-site (max-width:699px){
+.ec-site .es-fen{height:680px}
+.ec-site .es-etabli{flex-direction:column;gap:10px}
+.ec-site .es-chat{width:auto;height:350px}
+}
+@container ec-site (max-width:479px){
+.ec-site .es-fen{height:640px;border-radius:12px}
+.ec-site .es-chrome{height:28px}
+.ec-site .es-chrome>i{width:8px;height:8px}
+.ec-site .es-main{padding:8px;gap:8px}
+.ec-site .es-tete>span,.ec-site .es-ctete small,.ec-site .es-racc>span+span+span,.ec-site .es-btn.es-creux,.ec-site .es-sep,.ec-site .es-sep~span{display:none}
+.ec-site .es-tete>b{font-size:16px}
+.ec-site .es-etabli{gap:8px}
+.ec-site .es-chat{height:350px}
+.ec-site .es-fil{padding:8px}
+.ec-site .es-ecrin .es-cadre{inset:8px}
+}
+@container ec-site-cadre (max-width:440px){.ec-site .es-smenu,.ec-site .es-haut>span+span{display:none}}
+@container ec-site-cadre (max-width:300px){.ec-site .es-marque{display:none}}
+@container ec-site-cadre (max-height:200px){.ec-site .es-phrase{display:none}}
+@container ec-site-cadre (max-height:175px){.ec-site .es-haut{display:none}}
+@media (prefers-reduced-motion:reduce){.ec-site *,.ec-site *::before{animation:none!important;transition:none!important}}
+</style>
+<div class="ec ec-site" role="img" aria-label="Le site du club dans le tableau de bord OnClub : on demande à l’atelier de changer le grand titre, on relit l’avant et l’après, on publie, et l’aperçu affiche « Le volley, une famille ». Données fictives.">
+<div class="es-fen">
+<div class="es-chrome"><i></i><i></i><i></i><span class="es-url es-cp">onclub.app/volley-club-demo/dashboard/site</span></div>
+<div class="es-corps">
+<div class="es-nav">
+<div class="es-club"><span>TV</span>Volley Club Démo</div>
+<div class="es-l">Accueil</div>
+<div class="es-g">Familles</div>
+<div class="es-l">Inscriptions</div>
+<div class="es-l">Adhérents</div>
+<div class="es-g">Votre club</div>
+<div class="es-l">Effectifs</div>
+<div class="es-l">Événements</div>
+<div class="es-g">Page publique</div>
+<div class="es-l">Atelier d’inscription</div>
+<div class="es-l es-actif">Site du club</div>
+<div class="es-l">Boutique</div>
+</div>
+<div class="es-main">
+<div class="es-tete"><b>Site du club</b><span class="es-cp">Votre site tel qu’il est servi, et le chat qui le retouche : il propose, vous relisez, rien n’est publié avant votre clic.</span></div>
+<div class="es-etabli">
+<div class="es-chat">
+<div class="es-ctete"><div><b>Atelier du site</b><small>Il propose, vous relisez, vous publiez.</small></div><span class="es-aide">?</span></div>
+<div class="es-fil" data-es="fil">
+<div class="es-carte">Dites ce que vous voulez changer sur le site de <b>Volley Club Démo</b> — l’accroche, un texte, une actualité. Je propose des retouches, vous relisez l’avant et l’après de chacune, et rien n’est publié avant votre clic.</div>
+<div class="es-dem es-opt" data-es="dem">Change le grand titre par “Le volley, une famille”</div>
+<div class="es-carte es-muet es-opt" data-es="attente">Je relis le site et je prépare des retouches…</div>
+<div class="es-carte es-opt" data-es="relu">
+<div class="es-ligne"><b>Ce que chaque retouche change</b><span class="es-badge" data-es="badge">0 / 1 à appliquer</span></div>
+<div class="es-note">Relisez la colonne « après » : une retouche qui a l’air anodine peut effacer un paragraphe.</div>
+<div class="es-retouche">
+<small>Retouche 1</small><b>Texte de la page · Grand titre en haut de l’accueil</b>
+<div class="es-table" data-es="table"><em>Champ</em><em>Avant</em><em>Après</em><span class="es-champ">Grand titre en haut de l’accueil</span><span class="es-avant">Servir. Bloquer. Gagner. (texte d’origine)</span><span class="es-apres">Le volley, une famille</span></div>
+<div class="es-case" data-es="c1"><span class="es-carre"></span><span><b>Appliquer cette retouche</b><small>1 champ touché, aucun effacement.</small></span></div>
+</div>
+<div class="es-relecture">
+<div class="es-case" data-es="c2"><span class="es-carre"></span><span><b>J’ai relu l’avant/après ci-dessus</b></span></div>
+<span class="es-btn es-off" data-es="publier">Publier 0 retouche</span>
+</div>
+</div>
+<div class="es-carte es-opt" data-es="fait"><b>Ce que le serveur a réellement fait</b><div class="es-effet"><span class="es-badge es-ok">Fait</span><span>1 retouche(s) appliquée(s) au site. 1 champ touché, aucun effacement.</span></div></div>
+</div>
+<div class="es-compo">
+<div class="es-racc"><span>Changer l’accroche</span><span>Réécrire un texte</span><span>Ajouter une actualité</span></div>
+<div class="es-zone" data-es="zone"><span class="es-ph es-cp">Change l’accroche de Volley Club Démo pour parler de la rentrée…</span><span data-es="saisie"></span><i class="es-caret"></i></div>
+<div class="es-actions"><span class="es-btn" data-es="envoyer">Envoyer</span><span class="es-btn es-creux">Photo</span><span class="es-compte es-cp" data-es="compte">0 / 1200 · ⌘⏎ pour envoyer</span></div>
+</div>
+</div>
+<div class="es-apercu">
+<div class="es-outils"><span class="es-pill es-on">Accueil</span><span class="es-pill">Équipes</span><span class="es-pill">Agenda</span><i class="es-sep"></i><span class="es-pill es-on">Ordinateur</span><span class="es-pill">Téléphone</span><span class="es-recharger">Recharger</span></div>
+<div class="es-ecrin">
+<div class="es-cadre" data-es="cadre">
+<div class="es-sh"><span class="es-pastille">T</span><span class="es-marque">Volley Club Démo</span><span class="es-smenu"><span>Équipes</span><span>Agenda</span></span><span class="es-sinscrire">S’inscrire ↗</span></div>
+<div class="es-hero">
+<div class="es-haut"><span><i class="es-point"></i>Saison 2026-2027 · Inscriptions ouvertes</span><span>Volley Club Démo</span></div>
+<div class="es-mots" data-es="mots"><span>Servir.</span><span class="es-lime">Bloquer.</span><span>Gagner.</span></div>
+<div class="es-bas"><span class="es-phrase">Dès 6 ans, compétition ou loisir : 14 équipes, une seule famille.</span><span class="es-appel">S’inscrire ↗</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<span class="es-curseur" data-es="curseur"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 1v15.5l4.2-3.9 2.9 6.4 2.7-1.2-2.9-6.3H15z" fill="#0E1116" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+</div>

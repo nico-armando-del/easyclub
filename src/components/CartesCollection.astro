@@ -1,0 +1,17 @@
+---
+/* Une grille de cartes pour une collection (hubs). Vide : un message, jamais un lien mort. */
+import { liste, url, ETIQUETTE, type NomCollection } from '../lib/collections'
+interface Props { collection: NomCollection; vide?: string }
+const { collection, vide = 'Les premières pages arrivent.' } = Astro.props
+const entrees = await liste(collection)
+---
+{entrees.length > 0 ? (
+  <ul class="grille grille-3 cartes">
+    {entrees.map((e: any) => (
+      <li><a class="carte-lien" href={url(collection, e.id)}><small>{collection === 'articles' ? e.data.rubrique : ETIQUETTE[collection]}{e.data.lecture ? ` · ${e.data.lecture} min` : ''}</small><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>
+    ))}
+  </ul>
+) : <p class="note">{vide}</p>}
+<style>
+.cartes{list-style:none;padding:0;margin:28px 0 0}
+</style>

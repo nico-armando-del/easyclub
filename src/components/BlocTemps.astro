@@ -1,0 +1,72 @@
+---
+/*
+  LE TEMPS GAGNÉ, AVANT → APRÈS, HYPOTHÈSES VISIBLES À CÔTÉ DU CHIFFRE.
+
+  Deux usages, et jamais un chiffre tapé à la main :
+    <BlocTemps cles={['fiches', 'relances']} />   chiffres de src/data/temps.ts
+    <BlocTemps geste="La famille répond depuis le mail, en un clic." />
+  En tête de chaque page de collection, il est rendu à partir du champ `temps`.
+*/
+import { TACHES, duree, HYPOTHESES, type CleTemps } from '../data/temps'
+
+interface Props { cles?: CleTemps[]; geste?: string; titre?: string; sombre?: boolean }
+const { cles, geste, titre, sombre = false } = Astro.props
+const lignes = (cles ?? []).map((c) => ({ cle: c, ...TACHES[c] }))
+const max = Math.max(1, ...lignes.map((l) => l.avantMin ?? l.gainMin))
+const pct = (m: number) => `${Math.max(1.5, (m / max) * 100).toFixed(1)}%`
+---
+<aside class:list={['bloc-temps', { sombre }]} aria-label="Le temps gagné">
+  <p class="bt-titre">{titre ?? (geste ? 'Le geste qui fait gagner du temps' : 'Le temps rendu, chaque saison')}</p>
+  {geste && <p class="bt-geste">{geste}</p>}
+  {lignes.length > 0 && (
+    <ul class="bt-lignes">
+      {lignes.map((l) => (
+        <li>
+          <div class="bt-tache"><b>{l.tache}</b><span>{l.calcul}</span></div>
+          {l.avantMin !== null && l.apresMin !== null ? (
+            <div class="bt-barres">
+              <div class="bt-barre avant"><span class="bt-lib">Aujourd’hui</span><span class="bt-piste"><i style={`width:${pct(l.avantMin)}`}></i></span><b>{duree(l.avantMin)}</b></div>
+              <div class="bt-barre apres"><span class="bt-lib">Avec OnClub</span><span class="bt-piste"><i style={`width:${pct(l.apresMin)}`}></i></span><b>{duree(l.apresMin)}</b></div>
+              <p class="bt-comment">{l.comment}</p>
+            </div>
+          ) : (
+            <div class="bt-barres">
+              <div class="bt-barre apres"><span class="bt-lib">Rendues</span><span class="bt-piste"><i style={`width:${pct(l.gainMin)}`}></i></span><b>{duree(l.gainMin)}</b></div>
+              <p class="bt-comment">{l.comment}</p>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+  {lignes.length > 0 && <p class="bt-hyp">{HYPOTHESES} <a href="/temps-gagne#hypotheses">Voir le calcul</a></p>}
+</aside>
+<style>
+.bloc-temps{background:var(--blanc);border-radius:var(--r-l);padding:24px;border:2px solid var(--encre)}
+@media (min-width:760px){.bloc-temps{padding:32px 36px}}
+.bloc-temps.sombre{background:var(--nuit);color:var(--blanc);border-color:#2A323D}
+.bt-titre{font:700 .875rem/1.3 var(--f-texte);letter-spacing:.06em;text-transform:uppercase;color:var(--sapin)}
+.sombre .bt-titre{color:var(--menthe)}
+.bt-geste{margin-top:10px;font:700 clamp(1.25rem,1.1rem + .6vw,1.625rem)/1.25 var(--f-titre);max-width:40ch}
+.bt-lignes{list-style:none;padding:0;margin:14px 0 0;display:grid}
+.bt-lignes li{display:grid;gap:10px;padding:16px 0;border-top:1px solid var(--trait)}
+.sombre .bt-lignes li{border-color:#2A323D}
+@media (min-width:860px){.bt-lignes li{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:24px;align-items:center}}
+.bt-tache b{display:block;font-weight:700}
+.bt-tache span{display:block;font-size:.9375rem;color:var(--gris)}
+.sombre .bt-tache span{color:var(--gris-nuit)}
+.bt-barres{display:grid;gap:6px}
+.bt-barre{display:grid;grid-template-columns:92px minmax(0,1fr) 4.6em;align-items:center;gap:10px}
+.bt-lib{font-size:.8125rem;font-weight:600;color:var(--gris)}
+.sombre .bt-lib{color:var(--gris-nuit)}
+.bt-piste{display:block}
+.bt-barre i{display:block;height:12px;border-radius:4px;background:#C9C3B4}
+.bt-barre.apres i{background:var(--menthe)}
+.sombre .bt-barre.avant i{background:#4A505B}
+.bt-barre b{font-weight:700;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.bt-comment{font-size:.875rem;color:var(--gris);line-height:1.4}
+.sombre .bt-comment{color:var(--gris-nuit)}
+.bt-hyp{margin-top:14px;font-size:.875rem;color:var(--gris);line-height:1.55;max-width:var(--lecture)}
+.sombre .bt-hyp{color:var(--gris-nuit)}
+.bt-hyp a{font-weight:700;white-space:nowrap}
+</style>

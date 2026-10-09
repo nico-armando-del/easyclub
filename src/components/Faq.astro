@@ -1,0 +1,26 @@
+---
+/* La FAQ visible. Passez la MÊME liste au Layout (prop `faq`) : le JSON-LD est construit à partir d'elle. */
+interface Props { items: { question: string; reponse: string }[]; titre?: string; id?: string }
+const { items, titre = 'Questions fréquentes', id = 'questions' } = Astro.props
+---
+<section class="faq" aria-labelledby={`${id}-titre`} id={id}>
+  <h2 id={`${id}-titre`}>{titre}</h2>
+  <div class="faq-liste">
+    {items.map((q) => (
+      <details>
+        <summary>{q.question}</summary>
+        <p>{q.reponse}</p>
+      </details>
+    ))}
+  </div>
+</section>
+<style>
+.faq h2{font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem)}
+.faq-liste{margin-top:24px;border-top:2px solid var(--encre);max-width:860px}
+.faq details{border-bottom:1px solid var(--trait)}
+.faq summary{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:64px;padding:14px 0;cursor:pointer;font:700 1.125rem/1.35 var(--f-titre);list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:700 1.5rem/1 var(--f-texte);flex:none;width:24px;text-align:center}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 20px;max-width:var(--lecture);color:var(--gris)}
+</style>

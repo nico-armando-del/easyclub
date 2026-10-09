@@ -1,0 +1,27 @@
+---
+/*
+  UN ÉCRAN DE PRODUIT ANIMÉ, REPRIS DE /presentation, DONNÉES FICTIVES.
+  <EcranAnime nom="inscription" /> — noms : inscription, reinscription,
+  relance, site, boutique, terrain, cluby. Le balisage et le style sont dans
+  src/ecrans/<nom>.html, le script dans public/ecrans/<nom>.js (chargé en
+  différé, une seule fois par page même si l'écran revient deux fois).
+  L'animation ne tourne que quand l'écran est visible ; sous
+  prefers-reduced-motion, il affiche son état final.
+*/
+const ECRANS = import.meta.glob('../ecrans/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+interface Props { nom: 'inscription' | 'reinscription' | 'relance' | 'site' | 'boutique' | 'terrain' | 'cluby'; legende?: string; sombre?: boolean }
+const { nom, legende, sombre = false } = Astro.props
+const html = ECRANS[`../ecrans/${nom}.html`]
+if (!html) throw new Error(`Écran inconnu : ${nom}`)
+---
+<figure class:list={['ecran-anime', `ecran-${nom}`, { sombre }]}>
+  <Fragment set:html={html} />
+  <figcaption><span class="exemple">Exemple</span> {legende ?? 'Écran animé, données fictives.'}</figcaption>
+</figure>
+<script is:inline defer src={`/ecrans/${nom}.js`}></script>
+<style>
+.ecran-anime{margin:0;min-width:0}
+.ecran-anime figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;justify-content:center;margin-top:14px;font-size:.875rem;color:var(--gris);text-align:center}
+.ecran-anime.sombre figcaption{color:var(--gris-nuit)}
+.ecran-anime.sombre .exemple{color:var(--gris-nuit)}
+</style>

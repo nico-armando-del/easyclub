@@ -1,0 +1,21 @@
+---
+/* « Voir aussi » : construit par lib/collections.ts (liens déclarés, liens inverses, voisines). */
+import { voirAussi, type NomCollection } from '../lib/collections'
+interface Props { collection: NomCollection; id: string; min?: number; titre?: string }
+const { collection, id, min = 6, titre = 'Voir aussi' } = Astro.props
+const liens = await voirAussi(collection, id, min)
+---
+{liens.length > 0 && (
+  <section class="voir-aussi" aria-labelledby="voir-aussi-titre">
+    <h2 id="voir-aussi-titre">{titre}</h2>
+    <ul class="grille grille-3">
+      {liens.map((l) => (
+        <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
+      ))}
+    </ul>
+  </section>
+)}
+<style>
+.voir-aussi h2{font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem)}
+.voir-aussi ul{list-style:none;padding:0;margin:24px 0 0}
+</style>

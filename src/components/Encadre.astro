@@ -1,0 +1,9 @@
+---
+/* Un encadré dans le texte : <Encadre titre="À retenir">…</Encadre> */
+interface Props { titre?: string }
+const { titre } = Astro.props
+---
+<div class="encadre">
+  {titre && <p class="encadre-titre">{titre}</p>}
+  <slot />
+</div>

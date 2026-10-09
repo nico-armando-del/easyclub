@@ -1,0 +1,236 @@
+<style>
+.ec-relance{--ecr-h:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);container-type:inline-size;width:100%;max-width:960px;margin:0 auto;font:13px/1.4 var(--font-body,'Satoshi',system-ui,sans-serif);font-feature-settings:"tnum";color:#0E1116;text-align:left}
+.ec-relance *{box-sizing:border-box;margin:0;padding:0}
+.ec-relance .r-fond{background:#F1EFE8;border-radius:28px;padding:36px 32px 14px}
+.ec-relance .r-fen{position:relative;max-width:880px;height:520px;margin:0 auto;background:#FAFAF7;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px #0E111617,0 28px 60px -18px #0E11164d}
+.ec-relance .r-chr{flex:none;height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#ECEAE3;border-bottom:1px solid #E0DDD3}
+.ec-relance .r-chr i{width:11px;height:11px;margin-right:36px;border-radius:50%;background:#F0918C;box-shadow:18px 0 #E8C46A,36px 0 #7FD6A4}
+.ec-relance .r-tit{margin:0 auto;min-width:0;padding:2px 14px;border-radius:8px;background:#FAFAF7;color:#6E6E66;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ec-relance .r-app{flex:1;display:flex;min-height:0}
+.ec-relance .r-menu{flex:none;width:200px;background:#fff;border-right:1px solid #E8E6DE;padding:14px 10px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.ec-relance .r-id,.ec-relance .r-mob{display:flex;align-items:center;gap:9px;font-weight:700;white-space:nowrap}
+.ec-relance .r-sig{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:#3DDC97;color:#0F3D2A;font:800 12px var(--ecr-h)}
+.ec-relance .r-sais{display:flex;flex-direction:column;align-items:flex-start;gap:6px;border:1px solid #E8E6DE;border-radius:12px;padding:7px}
+.ec-relance .r-sais .r-pas{padding:0 8px}
+.ec-relance .r-lib{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6E6E66}
+.ec-relance .r-menu .r-lib{padding:4px 10px 2px}
+.ec-relance .r-ln{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:10px;color:#5C5C54;white-space:nowrap;transition:background .3s}
+.ec-relance .r-ln:before{content:"";width:2px;height:14px;border-radius:2px}
+.ec-relance .r-ln.r-act{background:#F2F1EB;color:#0E1116;font-weight:700}
+.ec-relance .r-ln.r-act:before{background:#3DDC97}
+.ec-relance .r-mob{display:none;flex:none;height:44px;padding:0 14px;background:#fff;border-bottom:1px solid #E8E6DE}
+.ec-relance .r-bg{margin-left:auto;width:16px;height:12px;border-block:2px solid #5C5C54;background:linear-gradient(#5C5C54,#5C5C54) center/100% 2px no-repeat}
+.ec-relance .r-vue{flex:1;min-width:0;display:flex;flex-direction:column}
+.ec-relance .r-ecr{flex:1;position:relative}
+.ec-relance .r-sc{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .3s,visibility 0s .3s}
+.ec-relance .r-sc.r-on{opacity:1;visibility:visible;transform:none;transition:opacity .35s .15s,transform .45s .15s}
+.ec-relance .r-def{padding:20px 22px;transition:transform .7s cubic-bezier(.3,.7,.2,1)}
+.ec-relance .r-h1,.ec-relance .r-nom{font:800 22px/1.15 var(--ecr-h);letter-spacing:-.02em}
+.ec-relance .r-h2{font:800 17px/1.2 var(--ecr-h)}
+.ec-relance .r-h3{font:800 16px/1.25 var(--ecr-h);margin-bottom:4px}
+.ec-relance .r-tete{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.ec-relance .r-tl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ec-relance .r-sec,.ec-relance td,.ec-relance .r-tu span,.ec-relance .r-gros span,.ec-relance .r-back{color:#5C5C54}
+.ec-relance .r-mu{color:#6E6E66;font-size:12px}
+.ec-relance .r-carte{background:#fff;border:1px solid #E8E6DE;border-radius:18px}
+.ec-relance .r-pas{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border:1.5px solid;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+.ec-relance .r-pas:before{content:"";width:7px;height:7px;border-radius:50%;background:#0E1116}
+.ec-relance .r-sa{padding:16px;display:grid;gap:14px}
+.ec-relance .r-g2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px}
+.ec-relance .r-col{display:flex;flex-direction:column;gap:9px;min-width:0}
+.ec-relance .r-gros{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.ec-relance .r-gros b{font:800 28px/1.1 var(--ecr-h)}
+.ec-relance .r-gros>span{flex-basis:100%}
+.ec-relance .r-bar{height:10px;border-radius:4px;background:#F2F1EB;overflow:hidden}
+.ec-relance .r-bi{display:flex;gap:3px;height:100%;overflow:hidden}
+.ec-relance .r-bi i{min-width:6px;border-radius:3px}
+.ec-relance .r-c1{background:#22B77A}
+.ec-relance .r-c2{background:#E0A62A}
+.ec-relance .r-c3{background:#E0544F}
+.ec-relance .r-c4{border:1.5px solid #6E6E66;background:#fff}
+.ec-relance .r-tus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ec-relance .r-tu{display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr auto;align-items:start;gap:2px 7px;padding:8px 10px;border:1px solid #E8E6DE;border-radius:12px;background:#FAFAF7}
+.ec-relance .r-tu i{width:10px;height:10px;border-radius:3px;margin-top:2px}
+.ec-relance .r-tu span{font-size:12px;line-height:1.25}
+.ec-relance .r-tu b{grid-column:1/-1;font:800 16px/1.2 var(--ecr-h)}
+.ec-relance .r-ge{display:flex;align-items:center;gap:10px;min-height:38px;padding:4px 8px;margin:0 -8px;border-radius:12px;transition:background .25s}
+.ec-relance .r-ge:after{content:"";margin:0 4px 0 auto;flex:none;width:7px;height:7px;border:solid #6E6E66;border-width:1.8px 1.8px 0 0;transform:rotate(45deg)}
+.ec-relance .r-ge+.r-ge{border-top:1px solid #E8E6DE}
+.ec-relance .r-ge em{flex:none;display:grid;place-items:center;min-width:32px;height:26px;padding:0 7px;border-radius:8px;font:800 13px var(--ecr-h)}
+.ec-relance .r-tr{background:#FDECEC;color:#9B2C28}
+.ec-relance .r-ta{background:#FDF3DC;color:#92600A}
+.ec-relance .r-tn{background:#F2F1EB;color:#5C5C54}
+.ec-relance .r-sv{background:#F2F1EB}
+.ec-relance .r-ogs{display:flex;gap:6px;margin-bottom:12px;white-space:nowrap;overflow:hidden}
+.ec-relance .r-og{flex:none;display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;border:1px solid #E8E6DE;border-radius:99px;font-size:12.5px;font-weight:700;color:#5C5C54}
+.ec-relance .r-og b{color:#6E6E66}
+.ec-relance .r-og.r-act{background:#0E1116;color:#FAFAF7}
+.ec-relance .r-og.r-act b{color:#A8A49A}
+.ec-relance .r-bt{display:inline-flex;align-items:center;height:32px;padding:0 14px;border:1.5px solid;border-radius:99px;font-weight:700;white-space:nowrap;transition:background .2s,opacity .2s,transform .15s}
+.ec-relance .r-pri{background:#3DDC97;border-color:#3DDC97;color:#0F3D2A}
+.ec-relance .r-pri.r-sv{background:#22B77A;border-color:#22B77A}
+.ec-relance .r-qui{border-color:transparent;color:#5C5C54}
+.ec-relance .r-pr{transform:scale(.96)}
+.ec-relance .r-off{opacity:.45}
+.ec-relance .r-tab{padding:4px 12px}
+.ec-relance table{width:100%;border-collapse:collapse}
+.ec-relance th,.ec-relance td{padding:9px 6px;text-align:left;vertical-align:top;white-space:nowrap;border-bottom:1px solid #E8E6DE;transition:background .4s,box-shadow .4s}
+.ec-relance th{font-size:12px;color:#6E6E66}
+.ec-relance .r-cc{width:118px;white-space:normal}
+.ec-relance tr:last-child td{border:0}
+.ec-relance td span{display:block}
+.ec-relance td i{font-style:normal;color:#6E6E66}
+.ec-relance .r-a,.ec-relance .r-p{color:#0E1116}
+.ec-relance .r-a{font-weight:700}
+.ec-relance .r-a.r-sv{background:none;text-decoration:underline}
+.ec-relance .r-n{text-align:right;white-space:nowrap}
+.ec-relance .r-n b{color:#0E1116}
+.ec-relance .r-m{display:inline-block;border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700;white-space:nowrap}
+.ec-relance .r-vise.r-on td{background:#FEF5F4}
+.ec-relance .r-vise.r-on td:first-child{box-shadow:inset 3px 0 #E0544F}
+.ec-relance .r-back{margin-bottom:10px}
+.ec-relance .r-ent{display:flex;flex-wrap:wrap;gap:10px 20px;padding:16px 18px;margin-bottom:16px}
+.ec-relance .r-ent>div{flex:1 1 220px;min-width:0}
+.ec-relance .r-ent .r-rd{flex:none;margin-left:auto;text-align:right}
+.ec-relance .r-rd b{display:block;font:800 34px/1.1 var(--ecr-h);color:#9B2C28}
+.ec-relance .r-tf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0 16px}
+.ec-relance .r-ti{border:1px solid #E8E6DE;border-radius:16px;padding:10px 14px;min-width:0}
+.ec-relance .r-ti b{display:block;font:800 24px/1.2 var(--ecr-h);margin:2px 0 1px}
+.ec-relance .r-ti span{display:block;font-size:12px;color:#6E6E66;border-radius:6px;transition:background .5s}
+.ec-relance .r-ti.r-en{background:#EAFBF3;border-color:#0F6B47}
+.ec-relance .r-en *{color:#0F6B47!important}
+.ec-relance .r-ti.r-rt{background:#FDECEC;border-color:#9B2C28}
+.ec-relance .r-rt .r-lib,.ec-relance .r-rt b{color:#9B2C28}
+.ec-relance .r-ti .r-fl{background:#fff;color:#0E1116;font-weight:700;padding:0 4px;margin-left:-4px}
+.ec-relance .r-bts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.ec-relance .r-jo{display:none;margin-top:10px;padding:10px 14px;border:1px solid #0F6B47;border-radius:12px;background:#EAFBF3;color:#0F6B47}
+.ec-relance .r-jo b{display:block}
+.ec-relance .r-pan{display:none;padding:16px 18px}
+.ec-relance .r-vu{display:block;animation:ec-relance-in .4s}
+.ec-relance .r-prep{height:0;transform:translateY(14px)}
+.ec-relance .r-ap{visibility:hidden;opacity:0;margin-top:12px;padding:12px 14px;border:1px solid #E8E6DE;border-radius:12px;background:#F2F1EB;transition:opacity .4s}
+.ec-relance .r-ap .r-lib{margin-top:7px}
+.ec-relance .r-ok .r-ap{visibility:visible;opacity:1}
+.ec-relance .r-ok .r-prep{display:none}
+.ec-relance .r-pan:not(.r-ok) .r-pri{opacity:.45}
+.ec-relance .r-pan .r-bts{margin:14px 0 0}
+.ec-relance .r-corps{position:relative;white-space:pre-line;max-height:128px;overflow:hidden;color:#5C5C54}
+.ec-relance .r-corps:after{content:"";position:absolute;inset:auto 0 0;height:40px;background:linear-gradient(#F2F1EB00,#F2F1EB)}
+.ec-relance .r-cur{position:absolute;left:0;top:0;z-index:5;pointer-events:none;opacity:0;transition:transform 0s cubic-bezier(.45,.05,.25,1),opacity .3s}
+.ec-relance .r-cur.r-vis{opacity:1}
+.ec-relance .r-cur svg{display:block;transform-origin:0 0;transition:transform .12s;filter:drop-shadow(0 2px 3px #0E11164d)}
+.ec-relance .r-clic svg{transform:scale(.82)}
+.ec-relance .r-onde{position:absolute;z-index:4;width:36px;height:36px;margin:-18px;border-radius:50%;background:#3DDC978c;opacity:0;pointer-events:none}
+.ec-relance .r-go{animation:ec-relance-onde .55s ease-out}
+.ec-relance .r-leg{margin-top:10px;text-align:center;font-size:12px;color:#6E6E66}
+@keyframes ec-relance-onde{from{opacity:.9;transform:scale(.2)}to{opacity:0;transform:scale(1.5)}}
+@keyframes ec-relance-in{from{opacity:0;transform:translateY(8px)}}
+@container (max-width:759px){
+.ec-relance .r-menu,.ec-relance .r-af,.ec-relance .r-cc,.ec-relance .r-cp,.ec-relance .r-prec{display:none}
+.ec-relance .r-mob{display:flex}
+.ec-relance .r-fen{height:548px}
+.ec-relance .r-g2{grid-template-columns:minmax(0,1fr)}
+}
+@container (min-width:600px) and (max-width:759px){.ec-relance .r-tus{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@container (max-width:519px){
+.ec-relance .r-fond{padding:14px 10px 8px;border-radius:20px}
+.ec-relance .r-fen{height:604px}
+.ec-relance .r-def{padding:14px 12px}
+.ec-relance .r-sa,.ec-relance .r-ent,.ec-relance .r-pan{padding:12px}
+.ec-relance .r-cr,.ec-relance .r-tit,.ec-relance .r-bf .r-bt:nth-child(n+3){display:none}
+.ec-relance .r-ogs{-webkit-mask-image:linear-gradient(90deg,#000 80%,#0000);mask-image:linear-gradient(90deg,#000 80%,#0000)}
+.ec-relance .r-ti{padding:8px 9px}
+.ec-relance .r-ti b{font-size:18px}
+.ec-relance .r-corps{max-height:112px}
+}
+@media (prefers-reduced-motion:reduce){.ec-relance *{transition:none!important;animation:none!important}}
+</style>
+<div class="ec ec-relance" role="img" aria-label="Tableau de bord d’un club : l’argent de la saison se compte, le bureau ouvre les impayés, relance une famille en retard, lit le mail mot pour mot, l’envoie, et la fiche le confirme.">
+<div class="r-fond"><div class="r-fen">
+<div class="r-chr"><i></i><span class="r-tit">Accueil — Volley Club Démo</span></div>
+<div class="r-app">
+<div class="r-menu">
+<div class="r-id"><span class="r-sig">VC</span>Volley Club Démo</div>
+<div class="r-sais"><span class="r-lib">Saisons</span><span class="r-pas">2026-2027 · se joue</span></div>
+<div><div class="r-ln r-act" data-m="a">Accueil</div><div class="r-ln">Comptabilité</div></div>
+<div><span class="r-lib">Familles</span><div class="r-ln" data-m="i">Inscriptions</div><div class="r-ln">Adhérents</div><div class="r-ln">Liste d’attente</div><div class="r-ln">Justificatifs</div><div class="r-ln">Emails</div></div>
+<div><span class="r-lib">Votre club</span><div class="r-ln">Cours / Équipes</div></div>
+</div>
+<div class="r-vue">
+<div class="r-mob"><span class="r-sig">VC</span>Volley Club Démo<span class="r-bg"></span></div>
+<div class="r-ecr">
+<div class="r-sc r-on" data-sc="a"><div class="r-def">
+<div class="r-tete"><div class="r-h1">Accueil</div><div class="r-sec">Mardi 6 octobre · <b style="color:#0E1116">4 points à traiter</b></div></div>
+<div class="r-carte r-sa">
+<div class="r-tl"><span class="r-pas">2026-2027 · se joue</span><span class="r-mu r-prec">jusqu’au 30 juin 2027</span></div>
+<div class="r-g2"><div class="r-col">
+<span class="r-lib">Argent</span>
+<div class="r-gros"><b data-v="2864000">28&#8239;640&nbsp;€</b><span>encaissés sur 40&#8239;395&nbsp;€ attendus · <span data-p>71</span>&nbsp;%</span></div>
+<div class="r-bar"><div class="r-bi"><i class="r-c1" style="flex:28640"></i><i class="r-c2" style="flex:9870"></i><i class="r-c3" style="flex:365"></i><i class="r-c4" style="flex:1520"></i></div></div>
+<div class="r-tus">
+<div class="r-tu"><i class="r-c1"></i><span>Encaissés</span><b data-v="2864000">28&#8239;640&nbsp;€</b></div>
+<div class="r-tu"><i class="r-c2"></i><span>À venir</span><b data-v="987000">9&#8239;870&nbsp;€</b></div>
+<div class="r-tu"><i class="r-c3"></i><span>En retard</span><b data-v="36500">365&nbsp;€</b></div>
+<div class="r-tu"><i class="r-c4"></i><span>Sans aucun versement</span><b data-v="152000">1&#8239;520&nbsp;€</b></div>
+</div>
+<div><div class="r-ge" data-c="a"><em class="r-tr">3</em><span>familles en retard de paiement · 365&nbsp;€</span></div><div class="r-ge"><em class="r-tn">4</em><span>dossiers sans aucun versement · 1&#8239;520&nbsp;€</span></div></div>
+</div><div class="r-col r-af">
+<span class="r-lib">À faire</span>
+<div><div class="r-ge"><em class="r-ta">6</em><span>dossiers incomplets à relancer</span></div><div class="r-ge"><em class="r-tn">2</em><span>demandes en liste d’attente</span></div></div>
+</div></div>
+</div>
+</div></div>
+<div class="r-sc" data-sc="l"><div class="r-def">
+<div class="r-tete"><div class="r-tl"><span class="r-h1">Inscriptions</span><span class="r-pas">2026-2027 · se joue</span></div><div class="r-sec">152 dossiers</div></div>
+<div class="r-ogs"><span class="r-og">Toutes <b>152</b></span><span class="r-og r-act">Impayées <b>3</b></span><span class="r-og">Aucun versement <b>4</b></span><span class="r-og">Échelonnées <b>47</b></span><span class="r-og">Dossier incomplet <b>6</b></span></div>
+<div class="r-carte r-tab"><table>
+<tr><th>Participant(s)</th><th class="r-cr">Responsable</th><th class="r-cc">Cours</th><th>Statut</th><th class="r-cp r-n">Payé / total</th><th class="r-n">Reste</th></tr>
+<tr><td><span class="r-a">Hugo Roux</span><span>Jade Roux</span></td><td class="r-cr"><span class="r-p">Nathalie Roux</span><span class="r-mu">06 39 98 27 64</span></td><td class="r-cc">M13 garçons, École de volley</td><td><span class="r-m r-tr">En retard</span></td><td class="r-cp r-n">160&nbsp;€ <i>/ 480&nbsp;€</i></td><td class="r-n"><b>320&nbsp;€</b></td></tr>
+<tr class="r-vise"><td><span class="r-a" data-c="l">Léna Lambert</span></td><td class="r-cr"><span class="r-p">Sophie Lambert</span><span class="r-mu">06 39 98 41 27</span></td><td class="r-cc">M15 filles</td><td><span class="r-m r-tr">En retard</span></td><td class="r-cp r-n">110&nbsp;€ <i>/ 330&nbsp;€</i></td><td class="r-n"><b>220&nbsp;€</b></td></tr>
+<tr><td><span class="r-a">Yanis Haddad</span></td><td class="r-cr"><span class="r-p">Mehdi Haddad</span><span class="r-mu">06 39 98 63 05</span></td><td class="r-cc">M11 mixte</td><td><span class="r-m r-tr">En retard</span></td><td class="r-cp r-n">95&nbsp;€ <i>/ 285&nbsp;€</i></td><td class="r-n"><b>190&nbsp;€</b></td></tr>
+</table></div>
+</div></div>
+<div class="r-sc" data-sc="f"><div class="r-def">
+<div class="r-back">← Retour aux inscriptions</div>
+<div class="r-carte r-ent">
+<div><div class="r-nom">Sophie Lambert</div><div class="r-mu">Inscription volley-club-demo-2026-d042, créée le 28 août 2026</div><span class="r-m r-tr" style="margin-top:9px">En retard</span></div>
+<div class="r-rd"><span class="r-lib">Reste à encaisser</span><b>220&nbsp;€</b><span class="r-mu">sur 330&nbsp;€</span></div>
+</div>
+<div class="r-h2">Argent</div><div class="r-sec">3 échéances, Chèque</div>
+<div class="r-tf">
+<div class="r-ti"><span class="r-lib">Total dû</span><b>330&nbsp;€</b><span>1 participant</span></div>
+<div class="r-ti r-en"><span class="r-lib">Déjà payé</span><b>110&nbsp;€</b><span>Chèque</span></div>
+<div class="r-ti r-rt"><span class="r-lib">Reste</span><b>220&nbsp;€</b><span data-r>Aucune relance</span></div>
+</div>
+<div class="r-h2">Actions</div>
+<div class="r-jo"><b>Enregistré</b>Modèle «&nbsp;Relance d’impayé&nbsp;», envoyé à sophie.lambert@exemple.fr.</div>
+<div class="r-bts r-bf"><span class="r-bt r-pri" data-c="r">Relancer la famille</span><span class="r-bt">Encaisser un chèque</span><span class="r-bt">Valider un justificatif</span><span class="r-bt">Changer de cours</span><span class="r-bt">Mettre le dossier en réserve</span></div>
+<div class="r-carte r-pan">
+<div class="r-h3">Relancer cette famille ?</div>
+<div class="r-sec">Le message qui partirait est écrit ci-dessous, mot pour mot, avec l’adresse exacte où il ira. Rien ne part tant que vous n’avez pas confirmé.</div>
+<div class="r-mu" style="margin-top:6px">Dossier de Sophie Lambert.</div>
+<div class="r-prep r-mu">Préparation du message…</div>
+<div class="r-ap">
+<span class="r-lib">Destinataire</span><div>sophie.lambert@exemple.fr</div>
+<span class="r-lib">Objet</span><b>Volley Club Démo · 110&nbsp;€ en retard de règlement</b>
+<span class="r-lib">Message</span><div class="r-corps">Bonjour Sophie,
+
+Il manque 110&nbsp;€ sur l’inscription de Léna : la tranche du 28 septembre 2026 n’est pas arrivée.
+
+Il reste 220&nbsp;€ au total, prochaines tranches comprises.
+
+La prochaine tranche, 110&nbsp;€, est prévue le 28 octobre 2026.
+
+Réglez en ligne depuis votre dossier :
+https://…/volley-club-demo/mon-dossier?d=…</div>
+</div>
+<div class="r-bts"><span class="r-bt r-pri" data-c="e">Envoyer ce message</span><span class="r-bt r-qui">Revenir en arrière</span></div>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+<div class="r-onde"></div>
+<div class="r-cur"><svg width="20" height="26" viewBox="0 0 20 26" aria-hidden="true"><path d="M1.5 1.5v18.6l4.6-4.3 3.2 7.6 3.3-1.4-3.2-7.4h6.4z" fill="#0E1116" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+</div></div>
+</div>

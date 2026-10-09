@@ -1,0 +1,68 @@
+---
+/*
+  UN MINI-ÉCRAN D'EXEMPLE, EN HTML/CSS, POUR LES ACTIVITÉS QUE LES ÉCRANS
+  ANIMÉS (tous tirés d'un club de volley) ne montrent pas : une école de
+  musique, de danse, une troupe de théâtre…  Données fictives, étiquette
+  « Exemple » toujours visible. Les lignes apparaissent l'une après l'autre
+  (une fois, quand l'écran entre dans la vue ; immobile sous reduced-motion).
+
+  <MiniEcran
+    association="École de musique exemple"
+    titre="Inscription 2026-2027"
+    lignes={[{ nom: 'Piano, niveau 2', detail: 'Mardi 18 h · salle 3', statut: '2 places', ton: 'ok' }]}
+    pied={{ libelle: 'Total', valeur: '420,00 €' }}
+    bouton="Valider l’inscription"
+    legende="L’inscription vue par la famille, données fictives."
+  />
+*/
+interface Ligne { nom: string; detail?: string; statut?: string; ton?: 'ok' | 'ko' | 'neutre' }
+interface Props { association: string; titre: string; sousTitre?: string; lignes: Ligne[]; pied?: { libelle: string; valeur: string }; bouton?: string; legende?: string }
+const { association, titre, sousTitre, lignes, pied, bouton, legende = 'Écran d’exemple, données fictives.' } = Astro.props
+const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[0].toUpperCase()).join('').slice(0, 2) || 'OC'
+---
+<figure class="mini-ecran">
+  <div class="me-cadre" data-mini-ecran>
+    <div class="me-tete"><span class="me-sigle" aria-hidden="true">{sigle}</span><span class="me-asso">{association}</span><span class="exemple">Exemple</span></div>
+    <p class="me-titre">{titre}</p>
+    {sousTitre && <p class="me-sous">{sousTitre}</p>}
+    <ul class="me-lignes">
+      {lignes.map((l, i) => (
+        <li style={`--i:${i}`}><span class="me-nom"><b>{l.nom}</b>{l.detail && <span>{l.detail}</span>}</span>{l.statut && <span class:list={['statut', l.ton ?? 'neutre']}>{l.statut}</span>}</li>
+      ))}
+    </ul>
+    {pied && <p class="me-pied"><span>{pied.libelle}</span><b class="num">{pied.valeur}</b></p>}
+    {bouton && <span class="me-bouton" aria-hidden="true">{bouton}</span>}
+  </div>
+  <figcaption>{legende}</figcaption>
+</figure>
+<script is:inline>
+(function () {
+  if (!('IntersectionObserver' in window)) return
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  document.querySelectorAll('[data-mini-ecran]:not([data-vu])').forEach(function (el) {
+    el.setAttribute('data-vu', '0'); el.classList.add('me-attend')
+    var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { el.classList.remove('me-attend'); el.classList.add('me-joue'); o.disconnect() } }) }, { threshold: .35 })
+    o.observe(el)
+  })
+})()
+</script>
+<style>
+.mini-ecran{margin:0;max-width:420px}
+.me-cadre{background:var(--blanc);border:2px solid var(--encre);border-radius:28px;padding:20px;box-shadow:0 6px 0 var(--encre)}
+.me-tete{display:flex;align-items:center;gap:10px;font-size:.875rem;color:var(--gris)}
+.me-sigle{width:32px;height:32px;border-radius:9px;background:var(--sapin);color:var(--menthe);display:grid;place-items:center;font:800 .8125rem var(--f-titre);flex:none}
+.me-asso{flex:1;min-width:0}
+.me-titre{margin-top:14px;font:800 1.375rem/1.15 var(--f-titre)}
+.me-sous{margin-top:4px;font-size:.875rem;color:var(--gris)}
+.me-lignes{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.me-lignes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--trait);border-radius:14px;background:var(--papier)}
+.me-nom{display:grid;gap:2px;min-width:0}
+.me-nom b{font-size:.9375rem;line-height:1.25}
+.me-nom span{font-size:.8125rem;color:var(--gris)}
+.me-pied{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--trait)}
+.me-pied b{font:800 1.375rem/1 var(--f-titre)}
+.me-bouton{display:flex;align-items:center;justify-content:center;min-height:46px;margin-top:14px;border-radius:999px;background:var(--menthe);font-weight:700;font-size:.9375rem}
+.mini-ecran figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:14px;font-size:.875rem;color:var(--gris)}
+.me-attend .me-lignes li{opacity:0;transform:translateY(10px)}
+.me-joue .me-lignes li{transition:opacity .45s ease,transform .45s ease;transition-delay:calc(var(--i) * .18s)}
+</style>

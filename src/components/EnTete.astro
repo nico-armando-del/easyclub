@@ -1,0 +1,134 @@
+---
+/*
+  L'EN-TÊTE. Le menu se construit à partir des collections : une fonctionnalité,
+  un sport ou un profil ajouté apparaît ici sans toucher à ce fichier.
+  Sans JavaScript, les menus déroulants sont des <details> qui s'ouvrent au clic ;
+  site.js les referme seulement au clic ailleurs ou sur Échap.
+*/
+import { parFamille, liste, url } from '../lib/collections'
+
+interface Props { chemin: string }
+const { chemin } = Astro.props
+const familles = await parFamille()
+const sports = await liste('sports')
+const activites = await liste('activites')
+const profils = await liste('profils')
+const actif = (p: string) => (chemin === p || chemin.startsWith(p + '/') ? 'page' : undefined)
+---
+<header class="entete">
+  <div class="enveloppe entete-barre">
+    <a class="marque" href="/" aria-label="OnClub, accueil"><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
+
+    <nav class="nav" aria-label="Principale">
+      <details class="deroulant">
+        <summary aria-current={actif('/fonctionnalites')}>Fonctionnalités</summary>
+        <div class="panneau panneau-large">
+          <div class="panneau-grille six">
+            {familles.map((f) => (
+              <div>
+                <a class="panneau-titre" href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a>
+                <ul>{f.items.map((e) => <li><a href={url('fonctionnalites', e.id)}>{e.data.nom}</a></li>)}</ul>
+              </div>
+            ))}
+          </div>
+          <a class="panneau-pied" href="/fonctionnalites">Toutes les fonctionnalités <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+        </div>
+      </details>
+      <details class="deroulant">
+        <summary aria-current={actif('/pour-qui')}>Pour qui</summary>
+        <div class="panneau">
+          <div class="panneau-grille trois">
+            <div>
+              <a class="panneau-titre" href="/pour-qui#sports">Sports</a>
+              <ul>{sports.map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}</ul>
+            </div>
+            <div>
+              <a class="panneau-titre" href="/pour-qui#activites">Autres activités</a>
+              <ul>{activites.map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}</ul>
+            </div>
+            <div>
+              <a class="panneau-titre" href="/pour-qui#profils">Votre rôle</a>
+              <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
+            </div>
+          </div>
+          <a class="panneau-pied" href="/pour-qui">Toutes les associations <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+        </div>
+      </details>
+      <a href="/tarifs" aria-current={actif('/tarifs')}>Tarifs</a>
+      <a href="/ressources" aria-current={actif('/ressources')}>Ressources</a>
+      <a class="nav-discret" href="/recommander" aria-current={actif('/recommander')}>Transmettre à mon club</a>
+      <a class="btn btn-encre nav-btn" href="/demo">Demander une démo</a>
+    </nav>
+
+    <details class="menu-tel">
+      <summary>Menu</summary>
+      <div class="menu-tel-panneau">
+        <a class="btn btn-menthe" href="/demo">Demander une démo</a>
+        <details>
+          <summary>Fonctionnalités</summary>
+          <ul>
+            {familles.map((f) => <li><a href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a></li>)}
+            <li><a href="/fonctionnalites">Toutes les fonctionnalités</a></li>
+          </ul>
+        </details>
+        <details>
+          <summary>Pour qui</summary>
+          <ul>
+            <li><a href="/pour-qui#sports">Sports</a></li>
+            <li><a href="/pour-qui#activites">Autres activités</a></li>
+            <li><a href="/pour-qui#profils">Votre rôle</a></li>
+          </ul>
+        </details>
+        <a class="menu-tel-lien" href="/tarifs">Tarifs</a>
+        <a class="menu-tel-lien" href="/temps-gagne">Le temps gagné</a>
+        <a class="menu-tel-lien" href="/ressources">Ressources</a>
+        <a class="menu-tel-lien discret" href="/recommander">Transmettre à mon club</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<style>
+.entete{background:var(--menthe);position:relative;z-index:40}
+.entete-barre{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;min-height:72px}
+.marque{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 1.375rem/1 var(--f-titre)}
+.marque svg{width:44px;height:22px}
+.nav{display:none;align-items:center;gap:2px}
+.nav>a,.deroulant>summary{display:inline-flex;align-items:center;min-height:46px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;cursor:pointer;list-style:none}
+.deroulant>summary::-webkit-details-marker{display:none}
+.deroulant>summary::after{content:"";width:7px;height:7px;margin-left:9px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg)}
+.deroulant[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+.nav>a:hover,.deroulant>summary:hover,.deroulant[open]>summary{background:rgba(11,15,20,.08)}
+.nav [aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.nav-discret{font-weight:500!important;font-size:.9375rem;opacity:.85}
+.nav .nav-btn{margin-left:10px;min-height:46px;padding:0 22px}
+.nav .nav-btn:hover{background:var(--encre)}
+.deroulant{position:static}
+.panneau{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% - 6px);width:min(1120px,calc(100vw - 2 * var(--g)));background:var(--encre);color:var(--blanc);border-radius:var(--r-m);padding:28px;box-shadow:var(--ombre)}
+.panneau-grille{display:grid;gap:20px}
+.panneau-grille.six{grid-template-columns:repeat(6,minmax(0,1fr))}
+.panneau-grille.trois{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panneau ul{list-style:none;padding:0;margin:6px 0 0}
+.panneau li a{display:flex;align-items:center;min-height:40px;color:#D7DBE1;text-decoration:none;font-size:.9375rem;line-height:1.3}
+.panneau li a:hover{color:var(--menthe);text-decoration:underline}
+.panneau-titre{display:block;font:700 1rem/1.3 var(--f-titre);color:var(--menthe);text-decoration:none;padding-bottom:6px;border-bottom:1px solid #2A323D}
+.panneau-pied{display:inline-flex;align-items:center;gap:8px;margin-top:18px;min-height:44px;color:var(--blanc);font-weight:700;text-decoration:none}
+.panneau-pied svg{width:18px;height:18px}
+.panneau :focus-visible{outline-color:var(--menthe)}
+.menu-tel{position:static}
+.menu-tel>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:999px;border:2px solid var(--encre);font-weight:700;background:var(--blanc)}
+.menu-tel>summary::-webkit-details-marker{display:none}
+.menu-tel[open]>summary{background:var(--encre);color:var(--blanc)}
+.menu-tel-panneau{position:absolute;left:var(--g);right:var(--g);top:calc(100% - 4px);background:var(--encre);color:var(--blanc);border-radius:var(--r-m);padding:16px;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 100px);overflow:auto}
+.menu-tel-panneau .btn{width:100%;margin-bottom:8px}
+.menu-tel-panneau summary,.menu-tel-lien{display:flex;align-items:center;min-height:48px;padding:0 12px;border-radius:12px;font-weight:600;text-decoration:none;cursor:pointer}
+.menu-tel-panneau summary{list-style:none}
+.menu-tel-panneau summary::-webkit-details-marker{display:none}
+.menu-tel-panneau summary::after{content:"+";margin-left:auto;font-size:1.3rem;color:var(--menthe)}
+.menu-tel-panneau details[open] summary::after{content:"−"}
+.menu-tel-panneau ul{list-style:none;padding:0 0 8px 12px}
+.menu-tel-panneau li a{display:flex;align-items:center;min-height:44px;padding:0 12px;color:#D7DBE1;text-decoration:none}
+.menu-tel-lien.discret{font-weight:500;color:#D7DBE1}
+.menu-tel-panneau :focus-visible{outline-color:var(--menthe)}
+@media (min-width:1080px){.nav{display:flex}.menu-tel{display:none}}
+</style>

@@ -1,0 +1,101 @@
+---
+/*
+  LE HUB DES FONCTIONNALITÉS, PAR FAMILLES. Construit à partir de la
+  collection : une fonctionnalité ajoutée dans src/content/fonctionnalites/
+  apparaît ici, dans le menu, le pied de page et le plan du site.
+*/
+import Layout from '../layouts/Layout.astro'
+import FilAriane from '../components/FilAriane.astro'
+import TuileFonction from '../components/TuileFonction.astro'
+import EcranAnime from '../components/EcranAnime.astro'
+import BlocTemps from '../components/BlocTemps.astro'
+import Faq from '../components/Faq.astro'
+import AppelDemo from '../components/AppelDemo.astro'
+import { parFamille, url } from '../lib/collections'
+import { CINQ_TACHES } from '../data/temps'
+
+const familles = await parFamille()
+const total = familles.reduce((s, f) => s + f.items.length, 0)
+const ECRAN: Record<string, { nom: 'inscription' | 'relance' | 'terrain' | 'site' | 'boutique' | 'reinscription'; legende: string }> = {
+  Inscrire: { nom: 'inscription', legende: 'L’inscription vue par la famille, données fictives.' },
+  Encaisser: { nom: 'relance', legende: 'Le tableau de l’argent et la relance, données fictives.' },
+  Organiser: { nom: 'terrain', legende: 'La compo du match sur le téléphone de l’encadrant, données fictives.' },
+  Communiquer: { nom: 'site', legende: 'Le site de l’association retouché en le demandant, données fictives.' },
+  Vendre: { nom: 'boutique', legende: 'La boutique vue par la famille, données fictives.' },
+  Piloter: { nom: 'reinscription', legende: 'La saison suivante et les réinscriptions, données fictives.' },
+}
+const fil = [{ nom: 'Fonctionnalités', url: '/fonctionnalites' }]
+const faq = [
+  { question: 'Faut-il prendre toutes les fonctionnalités ?', reponse: 'Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances et les pièces. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.' },
+  { question: 'Où arrive l’argent payé par carte ?', reponse: 'Sur le compte de l’association, déduction faite de la part OnClub et des frais de carte. Les chèques et les espèces se notent dans le dossier, au centime, et ne passent pas par la commission.' },
+  { question: 'Peut-on reprendre nos fichiers de la saison passée ?', reponse: 'Oui. Vos tableurs sont repris : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription, sans rien ressaisir.' },
+  { question: 'Un encadrant doit-il créer un compte ?', reponse: 'Non. Il reçoit un lien personnel, sans compte ni mot de passe. Il fait l’appel et prépare la compo depuis son téléphone, sans voir ni adresse ni téléphone des familles.' },
+]
+---
+<Layout
+  titre="Fonctionnalités pour gérer une association | OnClub"
+  description={`Les ${total} fonctionnalités d’OnClub en six familles : inscrire, encaisser, organiser, communiquer, vendre, piloter. Le nom, et le temps que chacune vous rend.`}
+  chemin="/fonctionnalites"
+  fil={fil}
+  faq={faq}
+>
+  <div class="tete-page">
+    <div class="enveloppe">
+      <FilAriane fil={fil} />
+      <p class="surtitre">Les fonctionnalités</p>
+      <h1>Chaque soirée perdue a sa fonctionnalité.</h1>
+      <p class="chapo">{total} fonctionnalités, rangées en six familles. Pour chacune, son nom en deux ou trois mots et ce qu’elle vous fait gagner. Cliquez pour voir l’écran et le détail.</p>
+      <nav class="sommaire" aria-label="Les six familles">
+        {familles.map((f) => <a href={`#${f.ancre}`}>{f.cle} <span>{f.items.length}</span></a>)}
+      </nav>
+    </div>
+  </div>
+
+  {familles.map((f, i) => (
+    <section class:list={['section', 'famille', { 'fond-blanc': i % 2 === 1 }]} id={f.ancre} aria-labelledby={`t-${f.ancre}`}>
+      <div class="enveloppe famille-grille">
+        <div>
+          <p class="surtitre">Famille {i + 1} sur 6</p>
+          <h2 id={`t-${f.ancre}`}>{f.cle}</h2>
+          <p class="intro">{f.phrase}</p>
+          <ul class="tuiles">
+            {f.items.map((e) => (
+              <li><TuileFonction nom={e.data.nom} ligne={e.data.ligne} href={url('fonctionnalites', e.id)} offre={e.data.offre} /></li>
+            ))}
+          </ul>
+        </div>
+        {ECRAN[f.cle] && <EcranAnime nom={ECRAN[f.cle].nom} legende={ECRAN[f.cle].legende} />}
+      </div>
+    </section>
+  ))}
+
+  <section class="section fond-encre sur-encre" aria-labelledby="t-temps">
+    <div class="enveloppe">
+      <div class="tete-section">
+        <p class="surtitre">Le temps</p>
+        <h2 id="t-temps">Ce que l’ensemble vous rend, chaque saison.</h2>
+      </div>
+      <div class="temps-boite"><BlocTemps cles={CINQ_TACHES} sombre /></div>
+      <p class="note"><a href="/temps-gagne">Calculer pour votre nombre d’adhérents</a> · <a href="/tarifs">Ce que chaque offre ouvre</a></p>
+    </div>
+  </section>
+
+  <div class="section"><div class="enveloppe"><Faq items={faq} /></div></div>
+  <AppelDemo />
+</Layout>
+
+<style>
+.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
+.tete-page .surtitre{margin-top:20px}
+.tete-page h1{max-width:18ch}
+.sommaire{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.sommaire a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--blanc);border:2px solid var(--encre);font-weight:700;text-decoration:none}
+.sommaire a span{font-weight:600;color:var(--gris)}
+.sommaire a:hover{background:var(--encre);color:var(--blanc)}
+.famille-grille{display:grid;gap:48px}
+@media (min-width:1040px){.famille-grille{grid-template-columns:1.25fr .75fr;gap:64px;align-items:start}}
+.tuiles{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:14px}
+@media (min-width:640px){.tuiles{grid-template-columns:1fr 1fr}}
+.fond-blanc :global(.tuile-fonction){background:var(--papier)}
+.temps-boite{margin-top:32px}
+</style>

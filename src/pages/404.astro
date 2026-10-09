@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+<Layout titre="Page introuvable — OnClub, l’association tout en un" description="Cette page n’existe pas ou plus. Retrouvez les fonctionnalités d’OnClub, les tarifs, les ressources, ou demandez une démo pour votre association." chemin="/404" noindex={true}>
+  <div class="enveloppe page-404">
+    <p class="surtitre">Erreur 404</p>
+    <h1>Cette page s’est perdue en chemin.</h1>
+    <p class="chapo">Pas vos soirées, promis. Reprenez par ici&nbsp;:</p>
+    <ul class="grille grille-3 liens">
+      <li><a class="carte-lien" href="/"><b>Accueil</b><span>Ce que fait OnClub.</span></a></li>
+      <li><a class="carte-lien" href="/fonctionnalites"><b>Fonctionnalités</b><span>Six familles.</span></a></li>
+      <li><a class="carte-lien" href="/tarifs"><b>Tarifs</b><span>Un pourcentage, rien de fixe.</span></a></li>
+      <li><a class="carte-lien" href="/ressources"><b>Ressources</b><span>Guides et articles.</span></a></li>
+      <li><a class="carte-lien" href="/temps-gagne"><b>Le temps gagné</b><span>Le calculateur.</span></a></li>
+      <li><a class="carte-lien" href="/demo"><b>Demander une démo</b><span>Cinq questions.</span></a></li>
+    </ul>
+  </div>
+</Layout>
+<style>
+.page-404{padding-block:40px var(--section)}
+.liens{list-style:none;padding:0;margin:32px 0 0}
+</style>

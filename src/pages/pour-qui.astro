@@ -1,0 +1,74 @@
+---
+/* LE HUB « POUR QUI » : sports, autres activités, profils, construits à partir des collections. Aucun annuaire de clubs. */
+import Layout from '../layouts/Layout.astro'
+import FilAriane from '../components/FilAriane.astro'
+import CartesCollection from '../components/CartesCollection.astro'
+import BlocTemps from '../components/BlocTemps.astro'
+import Faq from '../components/Faq.astro'
+import AppelDemo from '../components/AppelDemo.astro'
+import { CINQ_TACHES } from '../data/temps'
+
+const fil = [{ nom: 'Pour qui', url: '/pour-qui' }]
+const faq = [
+  { question: 'Mon activité n’est pas dans la liste : OnClub peut-il convenir ?', reponse: 'Probablement, s’il y a des inscriptions, des cours ou des groupes et des cotisations. Chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.' },
+  { question: 'Les adultes peuvent-ils s’inscrire seuls ?', reponse: 'Oui. Chaque cours est borné par années de naissance : un cours pour adultes s’ouvre aux années qui conviennent. Un adulte qui s’inscrit seul indique un contact d’urgence.' },
+  { question: 'Je suis adhérent, pas au bureau : que puis-je faire ?', reponse: 'Transmettre OnClub à votre club : la page dédiée prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail.' },
+]
+---
+<Layout
+  titre="Pour quelles associations ? Sport, musique, danse | OnClub"
+  description="OnClub sert toutes les associations qui inscrivent : clubs de sport, écoles de musique, de danse, de théâtre, de langues. Et chaque rôle du bureau."
+  chemin="/pour-qui"
+  fil={fil}
+  faq={faq}
+>
+  <div class="tete-page">
+    <div class="enveloppe">
+      <FilAriane fil={fil} />
+      <p class="surtitre">Pour qui</p>
+      <h1>Toutes les associations qui inscrivent, cotisent et se retrouvent</h1>
+      <p class="chapo">Un club de foot, une école de musique, une troupe de théâtre, un cours de langues&nbsp;: dès qu’il y a des inscriptions, des cours ou des équipes et des cotisations, le bureau passe trop de soirées sur l’administratif.</p>
+    </div>
+  </div>
+  <section class="section" id="sports" aria-labelledby="t-sports">
+    <div class="enveloppe">
+      <h2 id="t-sports">Sports</h2>
+      <p class="intro">Catégories tirées de la date de naissance, convocations, compo du match, licences.</p>
+      <CartesCollection collection="sports" />
+    </div>
+  </section>
+  <section class="section fond-blanc" id="activites" aria-labelledby="t-activites">
+    <div class="enveloppe">
+      <h2 id="t-activites">Musique, danse, théâtre et autres activités</h2>
+      <p class="intro">Des cours, des niveaux, des professeurs, des salles&nbsp;: les inscriptions de la rentrée, sans fiches à recopier.</p>
+      <CartesCollection collection="activites" />
+    </div>
+  </section>
+  <section class="section" id="profils" aria-labelledby="t-profils">
+    <div class="enveloppe">
+      <h2 id="t-profils">Votre rôle dans l’association</h2>
+      <p class="intro">Trésorier, président, secrétaire, encadrant, parent&nbsp;: ce que chacun récupère.</p>
+      <CartesCollection collection="profils" />
+      <p class="membre">Vous êtes adhérent ou parent&nbsp;? <a href="/recommander">Transmettre à mon club</a></p>
+    </div>
+  </section>
+  <section class="section fond-encre sur-encre" aria-labelledby="t-temps">
+    <div class="enveloppe">
+      <h2 id="t-temps">Quelle que soit l’activité, le même temps perdu.</h2>
+      <div class="temps-boite"><BlocTemps cles={CINQ_TACHES} sombre /></div>
+    </div>
+  </section>
+  <div class="section"><div class="enveloppe"><Faq items={faq} /><p class="liens-fin">Voir aussi&nbsp;: <a href="/fonctionnalites">les fonctionnalités</a>, <a href="/tarifs">les tarifs</a>, <a href="/ressources">les ressources</a>.</p></div></div>
+  <AppelDemo />
+</Layout>
+<style>
+.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
+.tete-page .surtitre{margin-top:20px}
+.tete-page h1{max-width:22ch}
+.fond-blanc :global(.carte-lien){background:var(--papier)}
+.membre{margin-top:28px;font-weight:600}
+.membre a{font-weight:700}
+.temps-boite{margin-top:32px}
+.liens-fin{margin-top:32px}
+.liens-fin a{font-weight:700}
+</style>

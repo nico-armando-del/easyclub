@@ -1,0 +1,36 @@
+---
+/* Le bloc de fin de chaque page : la démo, en clair, et ses deux raccourcis. */
+import { lienWhatsApp, EMAIL, MISE_EN_ROUTE } from '../data/site'
+interface Props { titre?: string; texte?: string; message?: string }
+const {
+  titre = 'Voyez le temps que votre association va gagner.',
+  texte = `Une démo avec vos cours ou vos équipes, vos tarifs et vos questions. ${MISE_EN_ROUTE}`,
+  message,
+} = Astro.props
+---
+<section class="appel-demo sur-encre" aria-labelledby="appel-demo-titre">
+  <div class="enveloppe appel-grille">
+    <div>
+      <p class="surtitre">Demander une démo</p>
+      <h2 id="appel-demo-titre">{titre}</h2>
+      <p class="intro">{texte}</p>
+    </div>
+    <div class="appel-actions">
+      <a class="btn btn-menthe" href="/demo">Préparer ma démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+      <a class="btn btn-contour" href={lienWhatsApp(message)} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Écrire sur WhatsApp</a>
+      <a class="btn btn-contour" href={`mailto:${EMAIL}?subject=${encodeURIComponent('Démo OnClub')}`}><svg aria-hidden="true"><use href="#courriel"/></svg>Écrire un e-mail</a>
+      <p class="appel-membre">Vous êtes adhérent ou parent ? <a href="/recommander">Transmettre à mon club</a></p>
+    </div>
+  </div>
+</section>
+<style>
+.appel-demo{background:var(--encre);color:var(--blanc);padding-block:var(--section)}
+.appel-demo .surtitre{color:var(--menthe)}
+.appel-demo .intro{color:#D7DBE1}
+.appel-grille{display:grid;gap:40px}
+@media (min-width:960px){.appel-grille{grid-template-columns:1.3fr 1fr;align-items:end;gap:64px}}
+.appel-actions{display:grid;gap:12px}
+.appel-actions .btn{width:100%}
+.appel-membre{margin-top:8px;color:#D7DBE1;font-size:.9375rem}
+.appel-membre a{color:var(--blanc);font-weight:700}
+</style>
