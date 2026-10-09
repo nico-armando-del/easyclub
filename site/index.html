@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="meta_title">La solution tout-en-un pour les inscriptions et les paiements des clubs de sport et des écoles — OnClub</title>
+<title data-i18n="meta_title">OnClub — inscriptions et paiements en ligne des clubs sportifs</title>
 <meta name="description" data-i18n-content="meta_description" content="Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Site du club, boutique : la digitalisation à la portée de tous.">
 <link rel="canonical" href="https://onclub.app/">
 <link rel="alternate" hreflang="fr" href="https://onclub.app/">
@@ -19,17 +19,27 @@
 <meta property="og:site_name" content="OnClub">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://onclub.app/">
-<meta property="og:title" data-i18n-content="meta_title" content="La solution tout-en-un pour les inscriptions et les paiements des clubs de sport et des écoles — OnClub">
+<meta property="og:title" data-i18n-content="meta_title" content="OnClub — inscriptions et paiements en ligne des clubs sportifs">
 <meta property="og:description" data-i18n-content="meta_description" content="Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Site du club, boutique : la digitalisation à la portée de tous.">
 <meta property="og:image" content="https://onclub.app/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Le logo OnClub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" data-i18n-content="meta_title" content="La solution tout-en-un pour les inscriptions et les paiements des clubs de sport et des écoles — OnClub">
+<meta name="twitter:title" data-i18n-content="meta_title" content="OnClub — inscriptions et paiements en ligne des clubs sportifs">
 <meta name="twitter:description" data-i18n-content="meta_description" content="Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Site du club, boutique : la digitalisation à la portée de tous.">
 <meta name="twitter:image" content="https://onclub.app/img/og.jpg">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://onclub.app/#site",
+  "name": "OnClub",
+  "url": "https://onclub.app/",
+  "publisher": { "@type": "Organization", "name": "OnClub", "url": "https://onclub.app/" }
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,8 +54,10 @@
     "contactType": "sales",
     "telephone": "+33645049227",
     "url": "https://wa.me/33645049227",
+    "email": "onclub.contact@gmail.com",
     "availableLanguage": ["fr", "en", "es"]
-  }
+  },
+  "email": "onclub.contact@gmail.com"
 }
 </script>
 <script type="application/ld+json">
@@ -59,7 +71,6 @@
   "offers": {
     "@type": "Offer",
     "priceCurrency": "EUR",
-    "price": "0",
     "description": "Un abonnement au pourcentage : à partir de 2,90 % des cotisations encaissées en ligne, rien de fixe."
   }
 }
@@ -255,7 +266,7 @@ a{color:inherit;text-decoration:none}
 .dash-nav-item.active{background:var(--white);color:var(--ink);box-shadow:0 4px 14px rgba(14,17,22,.06);font-weight:700}
 .dash-main{padding:26px 28px}
 .dash-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
-.dash-head h3{font-size:1.1rem}
+.dash-head h3,.dash-head .dash-hello{font-size:1.1rem;font-family:var(--font-head);font-weight:700;letter-spacing:-0.02em}
 .dash-season{font-size:.78rem;color:var(--gray);background:var(--cream);border:1px solid var(--sand);border-radius:999px;padding:5px 12px}
 .dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
 .stat{
@@ -687,7 +698,7 @@ footer ul a:hover{color:var(--mint-deep)}
         </aside>
         <div class="dash-main" aria-hidden="true">
           <div class="dash-head">
-            <h3 data-i18n="dash_hello">Bonjour, ASC Danse Lyon</h3>
+            <p class="dash-hello" data-i18n="dash_hello">Bonjour, le bureau</p>
             <span class="dash-season num" data-i18n="dash_season">Saison 2026–2027</span>
           </div>
           <div class="dash-stats">
@@ -1119,6 +1130,7 @@ footer ul a:hover{color:var(--mint-deep)}
         <h3 data-i18n="footer_product">Produit</h3>
         <ul>
           <li><a href="#fonctionnalites" data-i18n="footer_product_features">Fonctionnalités</a></li>
+          <li><a href="/fonctionnalites" data-i18n="footer_product_all_features">Toutes les fonctionnalités</a></li>
           <li><a href="#boutique" data-i18n="footer_product_shop">Boutique</a></li>
           <li><a href="#tarifs" data-i18n="footer_product_pricing">Tarifs</a></li>
           <li><a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener" data-i18n="footer_product_demo">Demander une démo</a></li>
@@ -1133,6 +1145,9 @@ footer ul a:hover{color:var(--mint-deep)}
           <li><a href="/sport/basket">Basket</a></li>
           <li><a href="/sport/yoga">Yoga</a></li>
           <li><a href="/sport/fitness">Fitness</a></li>
+          <li><a href="/sport/volley">Volley-ball</a></li>
+          <li><a href="/sport/handball">Handball</a></li>
+          <li><a href="/sport/tennis">Tennis</a></li>
         </ul>
       </nav>
       <nav aria-label="Ressources">
@@ -1142,6 +1157,7 @@ footer ul a:hover{color:var(--mint-deep)}
           <li><a href="/blog" data-i18n="footer_resources_blog">Blog</a></li>
           <li><a href="#tarifs" data-i18n="footer_product_pricing">Tarifs</a></li>
           <li><a href="https://wa.me/33645049227?text=Bonjour%2C%20je%20voudrais%20une%20d%C3%A9mo%20d%E2%80%99OnClub%20pour%20mon%20club." target="_blank" rel="noopener" data-i18n="footer_resources_contact">Contact</a></li>
+          <li><a href="mailto:onclub.contact@gmail.com">onclub.contact@gmail.com</a></li>
         </ul>
       </nav>
       <nav aria-label="Légal">

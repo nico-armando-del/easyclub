@@ -7,7 +7,7 @@ window.I18N = {
   fr: {
 
     /* ── Meta ── */
-    meta_title: "La solution tout-en-un pour les inscriptions et les paiements des clubs de sport et des écoles — OnClub",
+    meta_title: "OnClub — inscriptions et paiements en ligne des clubs sportifs",
     meta_description: "Inscriptions et paiements en ligne pour clubs de sport, écoles de sport, de musique et de langues. Site du club, boutique : la digitalisation à la portée de tous.",
 
     /* ── Navbar ── */
@@ -30,7 +30,7 @@ window.I18N = {
 
     /* ── Dashboard mockup ── */
     dash_aria: "Aperçu du tableau de bord OnClub : rien en retard, 42 350 euros encaissés cette saison, 23 familles en liste d’attente",
-    dash_hello: "Bonjour, ASC Danse Lyon",
+    dash_hello: "Bonjour, le bureau",
     dash_season: "Saison 2026–2027",
     dash_stat_unpaid_label: "En retard",
     dash_stat_unpaid_value: "0 €",
@@ -323,6 +323,7 @@ window.I18N = {
     footer_product_shop: "Boutique",
     footer_product_pricing: "Tarifs",
     footer_product_demo: "Demander une démo",
+    footer_product_all_features: "Toutes les fonctionnalités",
     footer_resources: "Ressources",
     footer_resources_faq: "FAQ",
     footer_resources_blog: "Blog",
@@ -340,7 +341,7 @@ window.I18N = {
   en: {
 
     /* ── Meta ── */
-    meta_title: "The all-in-one solution for registrations and payments of sports clubs and schools — OnClub",
+    meta_title: "OnClub — online registrations and payments for sports clubs",
     meta_description: "Online registration and payments for sports clubs, sports, music and language schools. Reminders, club website, shop: digitalisation within everyone’s reach.",
 
     /* ── Navbar ── */
@@ -363,7 +364,7 @@ window.I18N = {
 
     /* ── Dashboard mockup ── */
     dash_aria: "Preview of the OnClub dashboard: nothing overdue, €42,350 collected this season, 23 families on the waitlist",
-    dash_hello: "Hello, ASC Danse Lyon",
+    dash_hello: "Hello, club board",
     dash_season: "Season 2026–2027",
     dash_stat_unpaid_label: "Overdue",
     dash_stat_unpaid_value: "€0",
@@ -656,6 +657,7 @@ window.I18N = {
     footer_product_shop: "Shop",
     footer_product_pricing: "Pricing",
     footer_product_demo: "Book a demo",
+    footer_product_all_features: "All features",
     footer_resources: "Resources",
     footer_resources_faq: "FAQ",
     footer_resources_blog: "Blog",
@@ -673,7 +675,7 @@ window.I18N = {
   es: {
 
     /* ── Meta ── */
-    meta_title: "La solución todo en uno para las inscripciones y los pagos de clubes deportivos y escuelas — OnClub",
+    meta_title: "OnClub — inscripciones y pagos en línea para clubes deportivos",
     meta_description: "Inscripciones y pagos en línea para clubes deportivos, escuelas de deporte, de música y de idiomas. Recordatorios, web del club, tienda: la digitalización al alcance de todos.",
 
     /* ── Navbar ── */
@@ -696,7 +698,7 @@ window.I18N = {
 
     /* ── Dashboard mockup ── */
     dash_aria: "Vista del panel de OnClub: nada en retraso, 42 350 euros cobrados esta temporada, 23 familias en lista de espera",
-    dash_hello: "Hola, ASC Danse Lyon",
+    dash_hello: "Hola, directiva",
     dash_season: "Temporada 2026–2027",
     dash_stat_unpaid_label: "En retraso",
     dash_stat_unpaid_value: "0 €",
@@ -989,6 +991,7 @@ window.I18N = {
     footer_product_shop: "Tienda",
     footer_product_pricing: "Precios",
     footer_product_demo: "Solicitar una demo",
+    footer_product_all_features: "Todas las funcionalidades",
     footer_resources: "Recursos",
     footer_resources_faq: "FAQ",
     footer_resources_blog: "Blog",

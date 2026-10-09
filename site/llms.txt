@@ -27,6 +27,10 @@ Rien n'est dû tant que le club n'encaisse pas.
 - [Yoga](https://onclub.app/sport/yoga) : petits groupes, places limitées, cours d'essai, paiement de la saison en plusieurs fois.
 - [Fitness](https://onclub.app/sport/fitness) : cours collectifs à places limitées, planning hebdomadaire, cotisation de saison en plusieurs fois.
 
+- [Volley-ball](https://onclub.app/sport/volley) : catégories FFvolley par année de naissance, comparaison de l'export des licences de l'Espace Club avec les dossiers du club, compositions et beach-volley en duo, convocations du week-end.
+- [Handball](https://onclub.app/sport/handball) : équipes par âge du règlement FFHandball, filles, garçons ou mixte, dossiers prêts à déclarer dans Gest'hand, convocations du samedi.
+- [Tennis](https://onclub.app/sport/tennis) : inscriptions à l'école de tennis par niveau et par âge, cotisation en plusieurs fois, équipes de championnat ; la licence et la réservation des courts restent dans les outils de la FFT.
+
 ## Articles
 
 - [La cotisation en plusieurs fois, sans y passer vos soirées](https://onclub.app/blog/cotisation-en-plusieurs-fois) : chèques déposés à des dates convenues, prélèvement SEPA ou carte avec un échéancier en ligne ; combien d'échéances prévoir, acompte, relances, règlement intérieur.
@@ -35,6 +39,8 @@ Rien n'est dû tant que le club n'encaisse pas.
 ## Pages principales
 
 - [Accueil](https://onclub.app/) : présentation, fonctionnalités, démonstrations animées, formules et tarifs, comparatif avec une cagnotte en ligne et un tableur, questions fréquentes.
+- [Fonctionnalités](https://onclub.app/fonctionnalites) : chaque fonctionnalité d'OnClub, face au problème qu'elle règle pour le bureau d'un club.
+- [Présentation](https://onclub.app/presentation) : ce que fait OnClub, le temps et l'argent qu'un club y gagne, les connecteurs, les trois formules, avec des écrans animés aux données fictives.
 - [Mentions légales](https://onclub.app/mentions-legales)
 - [Politique de confidentialité](https://onclub.app/confidentialite)
 - [Conditions d'utilisation et de service](https://onclub.app/conditions)
@@ -47,3 +53,4 @@ Rien n'est dû tant que le club n'encaisse pas.
 ## Contact
 
 - Démonstration et questions : WhatsApp, https://wa.me/33645049227
+- E-mail : onclub.contact@gmail.com

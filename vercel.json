@@ -4,8 +4,24 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.onclub.app"
+        }
+      ],
+      "destination": "https://onclub.app/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.onclub.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.onclub.app"
+        }
+      ],
       "destination": "https://onclub.app/:path*",
       "permanent": true
     }
