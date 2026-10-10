@@ -81,6 +81,6 @@ const cartes = items.map((i) => ({ ...i, p: photoDe(i.photo) })).filter((i) => i
 .bande-vide a::after{display:none}
 .bande-vide b{font:700 1.625rem/1.1 var(--f-titre)}
 .curseur{display:block;width:2px;height:28px;background:var(--encre)}
-@media (prefers-reduced-motion: no-preference){.curseur{animation:ba-clignote 1.1s steps(1) infinite}}
+@media (prefers-reduced-motion: no-preference){.curseur{animation:ba-clignote 1.1s steps(1) 4}}
 @keyframes ba-clignote{50%{opacity:0}}
 </style>

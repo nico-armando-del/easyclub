@@ -93,7 +93,8 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       hypotheses: 'See the assumptions',
       note: `Estimate for ${N} members, not a study. Names and amounts are fictitious.`,
-      lien: 'Calculate for my association',
+      perimetre: (g, mini, pro) => `The ${g}: ${mini} from Mini (forms, payments, reminders, documents), ${pro} more with Pro (next season).`,
+      lien: 'Calculate for my club',
       pause: 'Pause', reprise: 'Play the animation',
     },
     ecrans: {
@@ -229,7 +230,8 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       hypotheses: 'Ver las hipótesis',
       note: `Estimación para ${N} socios, no un estudio. Nombres e importes ficticios.`,
-      lien: 'Calcular para mi asociación',
+      perimetre: (g, mini, pro) => `Las ${g}: ${mini} desde Mini (fichas, pagos, recordatorios, justificantes), ${pro} más con Pro (la nueva temporada).`,
+      lien: 'Calcular para mi club',
       pause: 'Pausar', reprise: 'Reanudar la animación',
     },
     ecrans: {

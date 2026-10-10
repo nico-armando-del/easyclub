@@ -52,6 +52,8 @@ export type TextesSemaine = {
   pieces: { asso: string; titre: string; sous: string; lignes: LigneMini[]; bouton: string }
   hypotheses: string
   note: string
+  /** À quelle offre se rapportent les 61 h : les durées viennent de temps.ts, jamais tapées. */
+  perimetre?: (gain: string, mini: string, pro: string) => string
   lien: string
   pause: string
   reprise: string
@@ -101,7 +103,8 @@ const FR: TextesSemaine = {
   },
   hypotheses: 'Voir les hypothèses',
   note: `Estimation pour ${ADHERENTS_REFERENCE} adhérents, pas une étude. Noms et montants fictifs.`,
-  lien: 'Calculer pour mon association',
+  perimetre: (g, mini, pro) => `Les ${g} : ${mini} dès Mini (fiches, paiements, relances, pièces), ${pro} de plus avec Pro (la rentrée suivante).`,
+  lien: 'Calculer pour mon club',
   pause: 'Mettre en pause',
   reprise: 'Relancer l’animation',
 }
@@ -122,6 +125,9 @@ const nb = (s: string) => s.replace(/ /g, NB)
 const lignes = CINQ_TACHES.map((c) => ({ avant: nb(duree(TACHES[c].avantMin ?? 0)), apres: nb(duree(TACHES[c].apresMin ?? 0)) }))
 const slots = await Promise.all([0, 1, 2, 3, 4].map(async (k) => (Astro.slots.has(`ecran-${k}`) ? await Astro.slots.render(`ecran-${k}`) : null)))
 const o = t.objets
+/* Le périmètre des 61 h : les quatre tâches de Mini, puis la rentrée suivante (Pro). */
+const gainDe = (offre: string) => CINQ_TACHES.filter((c) => TACHES[c].offre === offre).reduce((s, c) => s + (TACHES[c].gainMin ?? 0), 0)
+const perimetre = t.perimetre ? fine(t.perimetre(nb(TOTAL.gain), nb(duree(gainDe('mini'))), nb(duree(gainDe('pro'))))) : null
 const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4L16 6"/></svg>'
 ---
 <section class="section semaine-section" id={id} aria-labelledby="t-semaine">
@@ -159,7 +165,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
               <div class="sans">
                 <div class="pile" aria-hidden="true">
                   {k === 0 && (<>
-                    <div class="objet" style="--x:0%;--y:4%;--r:-5deg"><b>{o.fiche}</b><span class="trait">{fine(o.ficheNom)}</span><span class="trait">{fine(o.ficheNe)}</span><span class="statut neutre">{o.aRecopier}</span></div>
+                    <div class="objet" style="--x:0%;--y:4%;--r:-5deg"><b>{o.fiche}</b><span class="trait">{fine(o.ficheNom)}</span><span class="trait">{fine(o.ficheNe)}</span></div>
                     <div class="objet" style="--x:18%;--y:34%;--r:4deg"><b>{o.fiche}</b><span class="trait">{fine(o.ficheNom)}</span><span class="trait">{fine(o.ficheNe)}</span><span class="statut neutre">{o.aRecopier}</span></div>
                     <div class="objet o-message" style="--x:8%;--y:72%;--r:-2deg"><span class="heure">23:47</span><span>{fine(o.message)}</span></div>
                   </>)}
@@ -212,7 +218,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
           </slot>
         </div>
       </details>
-      <span class="s-note">{t.note}</span>
+      <span class="s-note">{t.note}{perimetre && <span class="s-perimetre"> {perimetre}</span>}</span>
       <button class="pause" type="button" aria-pressed="false" data-pause-ecrans data-pause={t.pause} data-reprise={t.reprise}><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg><svg class="i-lecture" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2l9 5-9 5z"/></svg><span data-texte>{t.pause}</span></button>
     </div>
   </div>
@@ -242,6 +248,17 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     r.closest('label').addEventListener('click', function (e) {
       if (tel && tel.matches && r.checked && e.target !== r) { e.preventDefault(); r.checked = false; regle() }
     })
+  })
+  /* L'interrupteur, touché : la page ne bouge pas. Sans ce relais, le navigateur met au
+     focus la case cachée de la barre collante et fait défiler jusqu'à sa place d'origine
+     (424 px plus haut au téléphone) : le visiteur perdait la soirée qu'il lisait. */
+  var inter = avec.closest('label')
+  if (inter) inter.addEventListener('click', function (e) {
+    if (e.target === avec) return
+    e.preventDefault()
+    avec.checked = !avec.checked
+    try { avec.focus({ preventScroll: true }) } catch (x) {}
+    avec.dispatchEvent(new Event('change', { bubbles: true }))
   })
   sem.addEventListener('change', function (e) {
     if (e.target === avec && avec.checked && !radios.some(function (r) { return r.checked })) radios[0].checked = true

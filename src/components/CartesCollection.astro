@@ -88,6 +88,7 @@ if (montrerAz) {
           ))}
         </div>
         <p class="note" data-az-vide hidden>Aucune page ne correspond à cette recherche.</p>
+        <button type="button" class="az-tout" data-az-tout hidden>Voir toute la liste</button>
       </div>
     )}
   </>
@@ -102,7 +103,21 @@ if (montrerAz) {
     const vide = bloc.querySelector<HTMLElement>('[data-az-vide]')
     if (!zone || !champ) return
     zone.hidden = false
+    /* Téléphone : la liste se replie derrière le champ (les premières lettres, puis « Voir toute
+       la liste ») ; une recherche, ou le bouton, la déplie. Sans JavaScript : la liste entière. */
+    const tout = bloc.querySelector<HTMLButtonElement>('[data-az-tout]')
+    const deplier = () => { bloc.classList.remove('az-replie'); if (tout) tout.hidden = true }
+    if (tout && window.matchMedia('(max-width: 699px)').matches) {
+      const n = bloc.querySelectorAll('[data-az-nom]').length
+      if (n > 24) {
+        tout.textContent = `Voir toute la liste (${n})`
+        tout.hidden = false
+        bloc.classList.add('az-replie')
+        tout.addEventListener('click', () => { deplier(); champ.focus({ preventScroll: true }) })
+      }
+    }
     champ.addEventListener('input', () => {
+      if (champ.value) deplier()
       const q = plat(champ.value)
       let n = 0
       bloc.querySelectorAll<HTMLElement>('[data-az-groupe]').forEach((g) => {
@@ -176,7 +191,13 @@ if (montrerAz) {
 .az-groupe[hidden],.az-groupe li[hidden]{display:none}
 .az-lettre{font:700 1.75rem/1 var(--f-titre);color:var(--sapin);margin-bottom:4px}
 .az-groupe ul{list-style:none;padding:0;margin:0}
-.az-groupe a{display:inline-flex;align-items:center;min-height:44px;font-size:var(--t-petit);font-weight:600;text-decoration:none}
-@media (min-width:1000px){.az-groupe a{min-height:36px}}
+/* Un intervalle régulier, que le nom tienne sur une ligne ou deux : le texte part du haut, même marge dessus et dessous. */
+.az-groupe a{display:inline-flex;align-items:flex-start;padding-block:11px;line-height:1.3;font-size:var(--t-petit);font-weight:600;text-decoration:none}
+@media (min-width:1000px){.az-groupe a{padding-block:7px}}
+/* Téléphone, liste repliée : les premières lettres, fondues vers le bas, puis le bouton. */
+:global(.az-replie) .az-groupes{max-height:560px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}
+.az-tout{display:inline-flex;align-items:center;min-height:48px;margin-top:8px;padding:0 22px;border:1.5px solid var(--encre);border-radius:999px;background:var(--blanc);color:var(--encre);font:700 1rem var(--f-texte);cursor:pointer}
+.az-tout[hidden]{display:none}
+.az-tout:focus-visible{outline:3px solid var(--sapin);outline-offset:2px}
 .az-groupe a:hover{text-decoration:underline}
 </style>

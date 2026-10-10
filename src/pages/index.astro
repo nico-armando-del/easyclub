@@ -66,7 +66,7 @@ const faq = [
   langues={true}
 >
   <SceneAccueil
-    titre="Club de sport ou association ? La paperasse, c’est fini"
+    titre="Association sportive ou artistique ? La paperasse, c’est fini"
     phrase="OnClub met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées."
     cta={{ texte: 'Demander une démo', href: '/demo' }}
   />
@@ -123,7 +123,7 @@ const faq = [
   </section>
 
   <div class="section fond-blanc">
-    <div class="enveloppe">
+    <div class="enveloppe accueil-faq">
       <Faq items={faq} titre="Les questions du bureau" disposition="deux-colonnes">
         {ressources.length > 0 && (
           <p class="accueil-guides">
@@ -148,4 +148,6 @@ const faq = [
 .accueil-guides span{font-weight:600;color:var(--encre)}
 .accueil-guides a:not(.lien-fleche){display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--encre);text-underline-offset:3px}
 .accueil-guides .lien-fleche{color:var(--sapin)}
+/* Six questions seulement : le titre reste en haut, face à la première (pas collant, il descendait seul dans le vide). */
+.enveloppe.accueil-faq :global(.faq[data-disposition="deux-colonnes"] h2){position:static}
 </style>

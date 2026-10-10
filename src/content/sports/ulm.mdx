@@ -1,0 +1,117 @@
+---
+nom: "ULM"
+ligne: "Paramoteur, pendulaire, multiaxe : l’élève adhère et se licencie avant son premier vol"
+ordre: 50
+titreSeo: "Club et école ULM : adhésion des élèves en ligne | OnClub"
+description: "Club ULM : l’élève adhère en ligne et se licencie avant son premier vol, cotisation en plusieurs fois, certificat suivi. La licence FFPLUM reste sur ffplum.fr."
+titre: "Club ULM : l’élève adhère avant son premier vol"
+chapo: "L’élève choisit sa classe d’ULM, adhère et paie depuis son téléphone ; avant le premier vol, le bureau voit qui est prêt à se licencier à la FFPLUM."
+temps:
+  cles: [fiches, pieces, relances]
+  titre: "Le temps rendu au bureau d’un club ULM, chaque année"
+fonctionnalites: [inscription-en-ligne, liste-des-licences, pieces-justificatives, paiement-en-ligne, convocations, espace-encadrant]
+profils: [tresorier]
+guides: [certificat-medical-sport, assurance-association]
+maj: 2026-10-10
+faq:
+  - question: "OnClub prend-il la licence FFPLUM à la place de nos membres ?"
+    reponse: "Non. La licence se souscrit en ligne sur ffplum.fr, dans l’espace licencié, ou sur le bulletin papier. OnClub n’envoie rien à la fédération : il garde la liste des membres prêts à se licencier, payés et sans pièce manquante, pour savoir qui relancer avant le premier vol."
+  - question: "Pourquoi l’élève doit-il être licencié dès le début de sa formation ?"
+    reponse: "Le bulletin FFPLUM 2026 le rappelle : pour que la garantie de responsabilité civile de l’instructeur soit acquise, ses élèves doivent être licenciés à la FFPLUM dès le début de leur formation. OnClub vous montre la liste ; la vérification avant le vol reste la vôtre."
+  - question: "Quel document médical demander à un nouveau pilote ?"
+    reponse: "Pour une première licence, la FFPLUM demande un certificat de non-contre-indication à la pratique de l’ULM de moins d’un an, que tout médecin peut établir, ou un certificat aéronautique classe 1, classe 2 ou LAPL valide. Le club peut le demander aussi comme pièce : déposé en photo, il est contrôlé par le bureau."
+  - question: "Peut-on gérer la réservation des machines et les heures de vol ?"
+    reponse: "Non. OnClub ne réserve ni les ULM ni les instructeurs, ne tient ni carnet de vol ni compte d’heures, et ne suit pas l’entretien des machines. Il s’occupe de l’adhésion, des pièces, de la cotisation, des convocations et de la liste des licences."
+sources:
+  - titre: "FFPLUM, souscription licence et assurances 2026 (bulletin)"
+    url: "https://ffplum.fr/images/Licence/2025/Souscription-Licence-2026.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFPLUM, pratiquer : le médical"
+    url: "https://ffplum.fr/pratiquer/medical"
+    consulte: "2026-10-10"
+  - titre: "Code du sport, article D231-1-5 (disciplines à contraintes particulières)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034417463"
+    consulte: "2026-10-10"
+---
+
+## Avant le premier vol : l’élève déjà licencié
+
+La FFPLUM l’écrit sur son bulletin 2026 : pour que l’assurance de l’instructeur joue, l’élève doit être licencié dès le début de sa formation. Le bureau doit donc savoir, avant le premier vol, qui l’est déjà.
+
+<Idee visuel="droite">
+
+L’écran Licences d’OnClub range chaque membre : prêt à être licencié, en attente de paiement, en attente de pièces ; nouveau ou en renouvellement. Le numéro de licence y figure quand il vient du fichier des membres repris.
+
+<Repli>
+
+- **Une ligne par membre**, même s’il suit deux formations.
+- **L’export en tableur** reprend nom, année de naissance, groupe, numéro de licence et adresse mail. Voir la [liste des licences](/fonctionnalites/liste-des-licences).
+- **La première licence FFPLUM 2026** s’ouvrait dès octobre 2025, avec trois mois offerts : un élève de l’automne était couvert jusqu’à la fin de l’année suivante.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club ULM"
+  titre="Licences · élèves de la saison"
+  sousTitre="À vérifier avant le premier vol"
+  lignes={[
+    { nom: 'Paul R.', detail: 'Multiaxe · renouvellement', statut: 'Prêt', ton: 'ok' },
+    { nom: 'Inès K.', detail: 'Paramoteur · nouvelle', statut: 'Paiement', ton: 'neutre' },
+    { nom: 'Hugo D.', detail: 'Pendulaire · certificat absent', statut: 'Pièces', ton: 'ko' },
+  ]}
+  bouton="Exporter la liste"
+  legende="La liste des élèves vue par le bureau : qui est prêt, qui doit encore payer, à qui il manque une pièce. Noms fictifs."
+/>
+
+</Idee>
+
+## Inscription en école ULM en ligne : paramoteur, pendulaire, multiaxe
+
+Chaque formation est un groupe avec ses places et son tarif : paramoteur, pendulaire, multiaxe, autogire. L’élève choisit la sienne, remplit son dossier et paie dans la foulée.
+
+<Repli>
+
+- **Vos questions** s’ajoutent : brevet déjà détenu, autre licence aéronautique, propriétaire d’une machine ou non.
+- **Un mineur** est inscrit par un responsable légal majeur ; un adulte seul laisse un contact d’urgence.
+- **La séance de découverte** peut se réserver depuis la page du club, si vous ouvrez les [séances d’essai](/fonctionnalites/seances-essai).
+
+</Repli>
+
+## Cotisation du club ULM en plusieurs fois
+
+La cotisation se paie par carte, en une fois ou en un acompte suivi de versements, chaque échéance affichée avant de valider.
+
+<Repli>
+
+- **Les chèques et les espèces** se notent dans le dossier, au centime.
+- **Le trésorier** voit l’encaissé, l’à venir et le retard, et relance d’un bouton après relecture.
+- **Le prix d’OnClub** se prend sur ce qui est payé en ligne : voir les [tarifs](/tarifs).
+
+</Repli>
+
+## Licence FFPLUM : l’espace licencié reste l’outil, OnClub suit le certificat
+
+La licence 2026 se souscrit en ligne sur ffplum.fr, dans l’espace licencié ; ses garanties prennent fin au 31 décembre. OnClub ne la saisit pas : il prépare la liste et suit les pièces.
+
+<Repli>
+
+- **Première licence** : certificat de non-contre-indication à l’ULM de moins d’un an, établi par n’importe quel médecin, ou certificat aéronautique classe 1, classe 2 ou LAPL valide.
+- **Renouvellement** : le pilote répond au questionnaire de santé QS-SPORT ; une réponse positive le renvoie chez son médecin. En compétition, le certificat est annuel.
+- **Dans OnClub**, le certificat se dépose en photo et le bureau le contrôle ; le QS-SPORT d’un adulte peut aussi se remplir en ligne, et seule l’attestation arrive au club. Voir les [pièces justificatives](/fonctionnalites/pieces-justificatives).
+
+</Repli>
+
+## Convocation des élèves et appel du jour d’école
+
+L’instructeur ouvre sa page par un lien personnel, convoque ses élèves et fait l’appel à partir de leurs réponses ; il ne voit ni leur adresse ni leur téléphone.
+
+<Repli>
+
+- **Un absent qui a prévenu** est noté excusé, pas absent.
+- **Trois absences sans prévenir** sur les cinq derniers appels sont signalées au bureau.
+- **L’instructeur** retrouve la prochaine séance en tête de sa page. Voir l’[espace encadrant](/fonctionnalites/espace-encadrant).
+
+</Repli>
+
+OnClub ne réserve ni les machines ni les instructeurs, ne tient ni carnet de vol ni compte d’heures, et n’assure pas les ULM : la responsabilité civile des machines fait partie des assurances proposées par la FFPLUM. Pour voir le reste sur votre club, [demandez une démo](/demo?type=sport).

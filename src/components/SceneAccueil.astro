@@ -225,16 +225,30 @@ h1{font-size:clamp(2.125rem,1.15rem + 4.4vw,4.6875rem);line-height:1;font-weight
 .c-tab .traduit{--l:440!important;--h:440!important}
 /* Écrans traduits (HTML fluide) : on les compose à la largeur voulue, sans vide sous le contenu. */
 .c-tel .traduit{--h:500!important}
-/* Téléphone : les quatre cartes côte à côte, que l'on fait glisser du doigt (le visiteur seul les
-   fait défiler) ; la suivante dépasse au bord. La scène tient en un écran : les légendes 1, 2, 3
-   suivent tout de suite les repères numérotés (une légende touchée amène son écran). */
+/* Téléphone (défaut 2 du 10 oct. : rien hors du cadre, aucun mot coupé) : tout se voit sans
+   glisser. Le téléphone de la famille à gauche ; à droite, le temps rendu puis l'argent du
+   tableau de bord, recadré sur sa carte ; la relance en dessous, sur toute la largeur. */
 @media (max-width:759px){
-  .scene{padding:14px 0 12px}
-  .plateau{display:flex;align-items:center;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:20px;padding:16px 20px 8px;scrollbar-width:none}
-  .plateau::-webkit-scrollbar{display:none}
-  .couche{flex:0 0 82%;scroll-snap-align:start}
-  .c-tel{flex:0 0 auto;width:236px}
-  .scene-pied{padding-inline:16px}
+  .scene{padding:18px 14px 12px}
+  .plateau{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:14px 12px;align-items:start}
+  .c-tel{order:0;grid-column:1;grid-row:1 / span 2;width:100%;justify-self:stretch}
+  .c-temps{grid-column:2;grid-row:1}
+  .c-tab{grid-column:2;grid-row:2}
+  .c-notif{grid-column:1 / -1;grid-row:3}
+  .c-tab .fenetre{--cx:227;--cy:156;--cw:361;--ch:248;border-radius:12px}
+  .temps{padding:12px 12px 10px;border-radius:14px}
+  .t-avant{font-size:.75rem}
+  .t-gros{margin-top:4px;gap:2px 6px}
+  .t-gros b{font-size:2.125rem}
+  .t-gros span{font-size:.8125rem}
+  .t-barre{margin-top:8px;height:5px}
+  .t-note{font-size:.75rem}
+  .scene-pied{margin-top:10px}
+  /* Écrans traduits (/en, /es) : la carte d'inscription est courte ; le tableau de bord passe
+     dessous, sur toute la largeur, et le repère 1 va au coin droit, hors du logo. */
+  .plateau:has(.traduit) .c-tel{grid-row:1}
+  .plateau:has(.traduit) .c-tab{grid-column:1 / -1;grid-row:2}
+  .c-tel:has(.traduit) .repere{left:auto;right:-10px}
 }
 /* Tablette : le téléphone à gauche, les trois autres à droite, en colonne. */
 @media (min-width:760px) and (max-width:1099px){

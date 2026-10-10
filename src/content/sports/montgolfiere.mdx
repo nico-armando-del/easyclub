@@ -1,0 +1,111 @@
+---
+nom: "Montgolfière"
+ligne: "Pilotes et équipiers adhèrent en ligne ; le bureau suit la liste à faire adhérer à la FFAé"
+ordre: 50
+titreSeo: "Club de montgolfière : adhésion des membres en ligne | OnClub"
+description: "Club de montgolfière : adhésion et cotisation en ligne, liste des membres à faire adhérer à la FFAé, convocations des équipiers. La FFAé garde la licence."
+titre: "Club de montgolfière : chaque membre adhère, FFAé comprise"
+chapo: "À la FFAé, il n’y a pas de cotisation de club : chaque membre adhère lui-même. Le bureau doit donc savoir, nom par nom, qui l’a fait."
+temps:
+  cles: [fiches, paiements]
+  titre: "Le temps rendu au bureau d’un club d’aérostation, chaque année"
+fonctionnalites: [liste-des-licences, inscription-en-ligne, paiement-en-ligne, suivi-des-paiements, convocations, reprise-des-fichiers]
+profils: [tresorier]
+guides: [assurance-association, assemblee-generale-association]
+maj: 2026-10-10
+faq:
+  - question: "Pourquoi tous nos membres doivent-ils adhérer à la FFAé ?"
+    reponse: "La FFAé l’explique : la responsabilité civile du club et de son président est couverte par son assurance groupe dans la mesure où tous les membres de l’association sont adhérents de la fédération. OnClub ne vérifie rien chez la FFAé : il vous donne la liste des membres du club, à rapprocher de celle des adhérents fédéraux."
+  - question: "OnClub peut-il faire adhérer nos membres à la FFAé ?"
+    reponse: "Non. Chaque membre adhère lui-même auprès de la fédération, qui fixe le prix de la licence et de l’assurance obligatoire selon son statut et son âge. OnClub encaisse la cotisation du club et tient la liste à suivre, exportable en tableur."
+  - question: "Les équipiers qui ne pilotent pas sont-ils des membres comme les autres ?"
+    reponse: "Dans OnClub, oui : un équipier adhère par une formule à son nom, avec son tarif, et il reçoit les convocations comme un pilote. Le poste s’écrit librement dans l’effectif : pilote, équipier, chef d’équipe au sol."
+  - question: "Peut-on gérer les vols passagers, les ballons ou les bons cadeaux ?"
+    reponse: "Non. OnClub ne vend pas de vols, ne tient ni le carnet de vol ni l’entretien des enveloppes et des nacelles, et ne gère pas de bons cadeaux. Il s’occupe de l’adhésion au club, de la cotisation, des convocations et de la liste des membres."
+sources:
+  - titre: "FFAé, devenir adhérent : adhésion individuelle, affiliation des clubs, assurance groupe"
+    url: "https://ffaerostation.org/federation/devenir-adh%C3%A9rents/"
+    consulte: "2026-10-10"
+---
+
+## Pas de cotisation de club à la FFAé : chaque membre adhère lui-même
+
+L’aérostation compte un peu plus d’un millier de pilotes en France, et la Fédération française d’aérostation rassemble 80 associations. Elle n’a pas de cotisation de club : seuls les membres adhèrent, chacun pour soi.
+
+<Idee visuel="droite">
+
+Or la responsabilité civile du club et de son président n’est couverte par l’assurance groupe de la FFAé que si tous les membres sont adhérents. Le bureau suit donc chaque nom.
+
+<Repli>
+
+- **L’écran Licences d’OnClub** range chaque membre : prêt, en attente de paiement, en attente de pièces ; nouveau ou en renouvellement.
+- **Le numéro d’adhérent FFAé** se demande dans le formulaire, comme une question du club.
+- **L’export en tableur** sert à la vérification. Voir la [liste des licences](/fonctionnalites/liste-des-licences).
+- **Un membre inscrit dans deux formules**, pilote et équipier, n’a qu’une ligne : on ne le compte pas deux fois.
+- **Nouveau ou renouvellement** : l’écran les distingue dès que le club a une saison précédente dans OnClub ou une liste reprise.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club d’aérostation"
+  titre="Membres 2027 · à faire adhérer à la FFAé"
+  sousTitre="Tous adhérents, sinon pas de couverture"
+  lignes={[
+    { nom: 'Bernard L.', detail: 'Pilote · renouvellement', statut: 'Prêt', ton: 'ok' },
+    { nom: 'Chloé R.', detail: 'Équipière · nouvelle', statut: 'Pièces', ton: 'neutre' },
+    { nom: 'Antoine G.', detail: 'Équipier · cotisation due', statut: 'Paiement', ton: 'ko' },
+  ]}
+  bouton="Exporter la liste"
+  legende="Les membres de l’année vus par le bureau, prêts ou non, à rapprocher des adhésions FFAé. Noms fictifs."
+/>
+
+</Idee>
+
+## Inscription au club de montgolfière en ligne : pilotes et équipiers
+
+Pilote, élève pilote, équipier au sol : chaque formule a son tarif. Le membre remplit son adhésion depuis son téléphone et paie dans la foulée.
+
+<Repli>
+
+- **Vos questions** s’ajoutent : numéro d’adhérent FFAé, brevet de pilote détenu, disponibilité le week-end.
+- **Un mineur** est inscrit par un responsable légal majeur ; un adulte seul laisse un contact d’urgence.
+- **Le fichier des membres** de l’an dernier est repris : les anciens sont reconnus. Voir la [reprise des fichiers](/fonctionnalites/reprise-des-fichiers).
+
+</Repli>
+
+## Cotisation du club d’aérostation en une ou plusieurs fois
+
+La cotisation du club se paie par carte, en une fois ou en un acompte suivi de versements. L’adhésion à la FFAé, elle, se règle à la fédération.
+
+<Repli>
+
+- **Le trésorier** voit l’encaissé, l’à venir et le retard ; chèques et espèces se notent dans le dossier.
+- **Une famille ou un membre en retard** se relance d’un bouton, après relecture.
+- **Le prix d’OnClub** se prend sur ce qui est payé en ligne : voir les [tarifs](/tarifs).
+
+</Repli>
+
+## Licence FFAé : la fédération reste l’outil, OnClub tient la liste
+
+La FFAé fixe le prix de sa licence avec l’assurance obligatoire selon le statut et l’âge du membre, et propose une assurance complémentaire en option. OnClub ne transmet rien à la fédération.
+
+<Repli>
+
+- **L’affiliation du club** se renouvelle chaque année avant fin février, avec la déclaration d’activité à la DGAC et le rapport d’activités présenté à la dernière assemblée générale.
+- **Préparer cette assemblée** : le [guide de l’assemblée générale](/guides/assemblee-generale-association).
+
+</Repli>
+
+## Convocation des équipiers au gonflage
+
+Le pilote convoque son équipe pour un vol ou un rassemblement ; chaque équipier répond depuis le mail, sans compte. Si le vol n’a pas lieu, l’annulation prévient tous les convoqués, avec un mot.
+
+<Repli>
+
+- **Le pilote ouvre sa page** par un lien personnel, sans mot de passe : il y voit ses équipiers et leurs réponses, jamais leur adresse ni leur téléphone.
+- **L’appel du jour** part des réponses ; un équipier qui a prévenu est excusé.
+
+</Repli>
+
+OnClub ne vend pas de vols passagers, ne tient ni carnet de vol ni entretien des ballons, et ne gère pas de bons cadeaux. Pour voir le reste sur votre club, [demandez une démo](/demo?type=sport).

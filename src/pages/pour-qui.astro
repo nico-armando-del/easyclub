@@ -64,7 +64,7 @@ const faq = [
         {mosaique.map((c, k) => (
           <li class:list={[{ grande: k === 0 }]}>
             {aPage(c.href) ? (
-              <a class="tuile" href={c.href}><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b><span>{c.ligne}</span></span></a>
+              <a class="tuile" href={c.href}><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b>{k === 0 && <span>{c.ligne}</span>}</span></a>
             ) : (
               <div class="tuile"><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b></span></div>
             )}
