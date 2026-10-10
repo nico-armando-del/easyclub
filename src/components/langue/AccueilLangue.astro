@@ -3,11 +3,12 @@
   L'ACCUEIL TRADUIT (/en, /es), ALIGNÉ SUR LE NOUVEL ACCUEIL FRANÇAIS
   (src/pages/index.astro) : mêmes écrans, même ordre, mêmes composants.
 
-  1. Le héros immersif (SceneAccueil, prop t) et la note de langue, visible.
-  2. Le temps rendu (« And yours? », le champ 250).
+  1. Le héros : le produit en scène (SceneAccueil, prop t ; écrans traduits en
+     slots) et la note de langue, visible.
+  2. Avec ou sans OnClub (SemaineBureau, prop t ; écrans traduits en slots).
   3. Les fonctionnalités en bento (familles traduites).
   4. Le produit qui tourne : les écrans traduits (EcranTraduit).
-  5. Les sites de club de démonstration. 6. Les associations en photos.
+  5. Les sites de club de démonstration. 6. Les associations en photos (les clubs de sport d’abord).
   7. Les offres (mode accueil). 8. La FAQ : les six mêmes questions (JSON-LD
      construit par LayoutLangue à partir de la même liste).
   9. L'appel final et « Pass it on to my club » (message prêt à envoyer,
@@ -16,8 +17,9 @@
   Mots : src/i18n/refonte.ts (nouveaux) et src/i18n/accueil.ts (le reste).
   Les liens vers une page française portent l'étiquette « FR ».
 */
-import SceneAccueil, { type TextesScene } from '../SceneAccueil.astro'
-import TempsRendu from '../TempsRendu.astro'
+import SceneAccueil from '../SceneAccueil.astro'
+import SemaineBureau from '../SemaineBureau.astro'
+import MiniEcran from '../MiniEcran.astro'
 import Bento from '../Bento.astro'
 import OngletsProduit from '../OngletsProduit.astro'
 import VitrineClubs from '../VitrineClubs.astro'
@@ -28,7 +30,7 @@ import VersFr from './VersFr.astro'
 import EcranTraduit from './EcranTraduit.astro'
 import { liste, url } from '../../lib/collections'
 import { INJEP } from '../../data/site'
-import { TACHES, CINQ_TACHES, duree } from '../../data/temps'
+import { cartesSports } from '../../i18n/bande'
 import type { Textes, Langue } from '../../i18n/accueil'
 import { REFONTE } from '../../i18n/refonte'
 
@@ -37,49 +39,32 @@ const { l, langue } = Astro.props
 const r = REFONTE[langue]
 const sr = l.versFrSr
 
-/* ---- La scène : objets traduits (accueil.ts), le reste (refonte.ts). */
-const t: TextesScene = {
-  objets: {
-    fiche: l.scene.fiche, ficheNom: l.scene.ficheNom, ficheNe: l.scene.ficheNe, ficheStatut: l.scene.aRecopier,
-    cheque: l.scene.cheque, chequeDepot: l.scene.chequeDepot, tableur: l.scene.tableur,
-    relance: l.scene.relance, relanceTexte: l.scene.relanceTexte,
-    certificat: l.scene.certificat, certificatStatut: l.scene.manquant, message: l.scene.message,
-  },
-  ...r.scene,
-  aria: l.scene.aria,
-}
-const lignesTemps = CINQ_TACHES.map((c) => ({ cle: c, ...TACHES[c], ...l.taches[c]! }))
 const injep = langue === 'en' ? INJEP.chiffre.replace(' ', '') : INJEP.chiffre
 
 /* ---- Les onglets : les écrans traduits, retrouvés par leur lien. */
 const ecran = (href: string) => l.ecrans.items.find((x) => x.lien === href)
+const eIns = ecran('/fonctionnalites/inscription-en-ligne')
+const eRel = ecran('/fonctionnalites/relance-un-clic')
+const eRen = ecran('/fonctionnalites/saison-suivante')
+const eCompo = ecran('/fonctionnalites/compo-du-match')
+const { tableau: eTab, convocations: eConv, site: eSite } = r.ecrans
+/* L'inscription et la relance sont dans le héros : les onglets montrent la suite (le visiteur clique, rien ne s'enchaîne). */
 const DEF = [
-  { id: 'inscription', ecran: 'inscription' as const, href: '/fonctionnalites/inscription-en-ligne' },
-  { id: 'relance', ecran: 'relance' as const, href: '/fonctionnalites/relance-un-clic' },
-  { id: 'rentree', ecran: 'reinscription' as const, href: '/fonctionnalites/saison-suivante' },
-  { id: 'compo', ecran: 'terrain' as const, href: '/fonctionnalites/compo-du-match' },
+  { id: 'rentree', ecran: 'reinscription' as const, x: eRen, href: '/fonctionnalites/saison-suivante' },
+  { id: 'compo', ecran: 'terrain' as const, x: eCompo, href: '/fonctionnalites/compo-du-match' },
+  { id: 'convocations', ecran: 'terrain' as const, x: eConv, href: '/fonctionnalites/convocations' },
+  { id: 'site', ecran: 'site' as const, x: eSite, href: '/fonctionnalites/site-association' },
 ]
-const onglets = DEF.map((d, i) => {
-  const x = ecran(d.href)
-  return { id: d.id, ecran: d.ecran, libelle: r.onglets.libelles[i], phrase: x?.titre ?? '', lien: { texte: x?.lienNom ?? r.onglets.libelles[i], href: d.href } }
-})
-const [eIns, eRel, eRen, eCompo] = DEF.map((d) => ecran(d.href))
+const onglets = DEF.map((d, i) => ({ id: d.id, ecran: d.ecran, libelle: r.onglets.libelles[i], phrase: d.x?.titre ?? '', lien: { texte: d.x?.lienNom ?? r.onglets.libelles[i], href: d.href } }))
 
-/* ---- La bande : les familles d'associations traduites, chacune vers une page qui existe, avec sa photo. */
+
+/* ---- La bande : les clubs de sport d'abord (au moins 8, src/i18n/bande.ts), puis la musique et le théâtre (cartes traduites). */
 const activites = await liste('activites')
-const profils = await liste('profils')
-const aMusique = activites.some((e) => e.id === 'ecole-de-musique')
-const aTheatre = activites.some((e) => e.id === 'theatre')
-const aTresorier = profils.some((e) => e.id === 'tresorier')
-const DESTINATION = {
-  sports: { href: url('sports', 'football'), photo: 'football' },
-  musique: { href: aMusique ? url('activites', 'ecole-de-musique') : '/pour-qui#activites', photo: 'ecole-de-musique' },
-  activites: { href: aTheatre ? url('activites', 'theatre') : '/pour-qui#activites', photo: 'theatre' },
-  tresorier: { href: aTresorier ? url('profils', 'tresorier') : '/pour-qui#profils', photo: 'benevole' },
-} as const
-const bande = l.assos.cartes
-  .filter((c) => c.cle !== 'toutes')
-  .map((c) => ({ nom: c.nom, ligne: c.ligne, ...DESTINATION[c.cle as keyof typeof DESTINATION] }))
+const ARTS = { musique: 'ecole-de-musique', activites: 'theatre' } as const
+const arts = l.assos.cartes
+  .filter((c) => c.cle === 'musique' || c.cle === 'activites')
+  .map((c) => { const id = ARTS[c.cle as keyof typeof ARTS]; return { nom: c.nom, ligne: c.ligne, photo: id, href: activites.some((e) => e.id === id) ? url('activites', id) : '/pour-qui#activites' } })
+const bande = [...(await cartesSports(langue)), ...arts]
 
 /* ---- Les offres : les mots et les listes traduits ; les hypothèses sans leur préfixe « * Estimation… ». */
 const offres: TextesOffres = {
@@ -109,27 +94,21 @@ const partage = {
 const NB = String.fromCharCode(160)
 const fine = (s: string) => (langue === 'es' ? s : s.replace(/ ([?!:;])/g, `${NB}$1`))
 ---
-<SceneAccueil titre={r.h1} phrase={r.phrase} cta={{ texte: r.bouton, href: '/demo' }} ctaVersFr={sr} noteLangue={r.noteLangue} t={t}>
-  <Fragment slot="hypotheses">
-    <p>{l.temps.hypotheses}</p>
-    <table class="hyp-table">
-      <caption class="sr">{l.temps.blocTitre}</caption>
-      <thead><tr><th scope="col"></th><th scope="col">{l.temps.aujourdhui}</th><th scope="col">{l.temps.avecOnclub}</th></tr></thead>
-      <tbody>
-        {lignesTemps.map((x) => (
-          <tr><th scope="row">{x.tache}<span>{x.calcul}</span></th><td class="num">{duree(x.avantMin ?? 0)}</td><td class="num">{duree(x.apresMin ?? 0)}</td></tr>
-        ))}
-      </tbody>
-    </table>
-    <p class="hyp-injep"><b>{injep}</b> {l.temps.injepTexte} <a href={INJEP.source} target="_blank" rel="noopener" hreflang="fr">{l.temps.injepSource}</a></p>
-  </Fragment>
+<SceneAccueil titre={r.h1} phrase={r.phrase} cta={{ texte: r.bouton, href: '/demo' }} ctaVersFr={sr} noteLangue={r.noteLangue} t={r.scene} lienCalcul="#temps">
+  {eIns && <EcranTraduit slot="ecran-tel" x={eIns} />}
+  <EcranTraduit slot="ecran-tab" x={eTab} />
 </SceneAccueil>
 
-<section class="section" id="temps" aria-labelledby="t-temps">
-  <div class="enveloppe">
-    <TempsRendu titre={r.temps.titre} note={r.temps.note} lien={{ texte: r.temps.lien, href: '/temps-gagne' }} mots={r.temps.mots} versFr={sr} />
-  </div>
-</section>
+<SemaineBureau t={r.semaine} versFr={sr} id="temps" mots={r.temps.mots}>
+  {eIns && <EcranTraduit slot="ecran-0" x={eIns} />}
+  <EcranTraduit slot="ecran-1" x={eTab} />
+  {eRel && <EcranTraduit slot="ecran-2" x={eRel} />}
+  {eRen && <EcranTraduit slot="ecran-4" x={eRen} />}
+  <Fragment slot="hypotheses">
+    <p>{l.temps.hypotheses}</p>
+    <p><b>{injep}</b> {l.temps.injepTexte} <a href={INJEP.source} target="_blank" rel="noopener" hreflang="fr">{l.temps.injepSource}</a></p>
+  </Fragment>
+</SemaineBureau>
 
 <section class="section" id="fonctionnalites" aria-labelledby="t-bento">
   <div class="enveloppe">
@@ -139,11 +118,11 @@ const fine = (s: string) => (langue === 'es' ? s : s.replace(/ ([?!:;])/g, `${NB
 
 <section class="section" aria-labelledby="onglets-titre">
   <div class="enveloppe sur-encre">
-    <OngletsProduit titre={r.onglets.titre} onglets={onglets} legende={r.onglets.legende} versFr={sr}>
-      {eIns && <EcranTraduit slot="ecran-inscription" x={eIns} />}
-      {eRel && <EcranTraduit slot="ecran-relance" x={eRel} />}
+    <OngletsProduit titre={r.onglets.titre} onglets={onglets} legende={r.onglets.legende} versFr={sr} pause={{ pause: r.onglets.pause, reprise: r.onglets.reprise }}>
       {eRen && <EcranTraduit slot="ecran-rentree" x={eRen} />}
       {eCompo && <EcranTraduit slot="ecran-compo" x={eCompo} />}
+      <EcranTraduit slot="ecran-convocations" x={eConv} />
+      <EcranTraduit slot="ecran-site" x={eSite} />
     </OngletsProduit>
   </div>
 </section>
@@ -205,13 +184,6 @@ const fine = (s: string) => (langue === 'es' ? s : s.replace(/ ([?!:;])/g, `${NB
 </section>
 
 <style>
-.hyp-table{width:100%;max-width:640px;border-collapse:collapse;font-size:.9375rem}
-.hyp-table th,.hyp-table td{padding:10px 6px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
-.hyp-table thead th{font-size:.8125rem;color:var(--gris)}
-.hyp-table tbody th{font-weight:600}
-.hyp-table tbody th span{display:block;font-weight:400;font-size:.8125rem;color:var(--gris)}
-.hyp-table td{white-space:nowrap;font-weight:700}
-.hyp-injep a{font-weight:600}
 .langue-offres{margin-top:40px}
 .langue-offres + .lien-fleche{margin-top:12px}
 @media (min-width:1000px){.langue-tete{display:grid;grid-template-columns:5fr 7fr;gap:var(--e-7,48px);align-items:end}.langue-tete .intro{margin:0}}

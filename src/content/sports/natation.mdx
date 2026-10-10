@@ -1,0 +1,132 @@
+---
+nom: "Natation"
+ligne: "Des groupes d’école de nage aux nageurs de compétition, chaque ligne d’eau comptée"
+ordre: 50
+titreSeo: "Inscription club de natation en ligne, par groupe | OnClub"
+description: "Club de natation : chaque groupe affiche ses places, la famille choisit selon l’année de naissance, paie en plusieurs fois. La licence FFN reste dans extraNat."
+titre: "Club de natation : des inscriptions par groupe, en ligne"
+chapo: "Les lignes d’eau sont comptées et les groupes partent vite. La famille voit les places qui restent, inscrit et paie ; le bureau ne trie plus les mails."
+temps:
+  cles: [fiches, paiements, attente]
+  titre: "Ce que le bureau d’un club de natation récupère, saison après saison"
+fonctionnalites: [inscription-en-ligne, liste-attente, seances-essai, convocations, liste-des-licences, pieces-justificatives]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "Un enfant peut-il essayer un groupe de natation avant de s’inscrire ?"
+    reponse: "Oui, si le groupe l’accepte. Chaque groupe se règle à part : pas d’essai, un essai tant qu’il reste de la place, ou un essai même complet. La famille réserve sa séance depuis la page publique du club, et l’inscription qui suit reste rattachée à cet essai."
+  - question: "Le groupe du mercredi est plein le soir de l’ouverture : que voit la famille ?"
+    reponse: "Avec l’offre Pro, elle s’inscrit sur la liste d’attente au lieu de repartir. Quand un nageur se désiste, le bureau propose la place d’un clic au suivant ; il a un délai pour accepter et ne paie qu’en acceptant."
+  - question: "OnClub engage-t-il nos nageurs en compétition ?"
+    reponse: "Non. Les engagements passent par extraNat, avec une licence « compétiteur » ; les temps et les résultats y restent aussi. OnClub sert avant et autour : la convocation des nageurs retenus, leurs réponses, l’appel le jour même."
+  - question: "Faut-il un certificat médical pour un nageur mineur ?"
+    reponse: "Pas en règle générale : la FFN ne le demande plus aux mineurs, sauf si une réponse au questionnaire de santé conduit à consulter. Dans OnClub, la famille remplit ce questionnaire en ligne ; les réponses restent sur son téléphone, seule l’attestation arrive au club."
+sources:
+  - titre: "FFN, s’affilier : validité de la licence et extraNat"
+    url: "https://www.ffnatation.fr/saffilier"
+    consulte: "2026-10-10"
+  - titre: "FFN, règlement Natation Course 2026 : âge des compétiteurs, licence compétiteur, renouvellement de septembre"
+    url: "https://www.ffnatation.fr/sites/default/files/2025-11/%F0%9F%93%9926_VPUB_1.1.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFN, fin conditionnée du certificat médical pour les mineurs"
+    url: "https://www.ffnatation.fr/actualites/actu-grand-public/fin-conditionnee-du-certificat-medical-de-non-contre-indication-la"
+    consulte: "2026-10-10"
+---
+
+## Lignes d’eau comptées : chaque groupe affiche ses places
+
+<Idee visuel="droite">
+
+Un groupe de natation tient dans quelques lignes d’eau, pas une de plus. Chaque groupe porte donc ses places, ses créneaux de bassin et ses années de naissance : la famille voit ce qui reste avant de choisir.
+
+<Repli>
+
+- **Jusqu’à six créneaux** par groupe dans la semaine, avec le bassin et son adresse.
+- **Complet aujourd’hui** n’est pas **complet pour la saison** : le club dit lequel des deux.
+- **Un groupe réservé** aux anciens, ou ouvert sur invitation, pour la section compétition.
+- **Le niveau** s’écrit comme le club le nomme : école de nage, perfectionnement, adultes.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de natation"
+  titre="Inscription · Léo, né en 2016"
+  sousTitre="Saison 2026-2027 · groupes ouverts à son année"
+  lignes={[
+    { nom: 'École de nage', detail: 'Mercredi 14:00 · bassin', statut: '3 places', ton: 'ok' },
+    { nom: 'Perfectionnement', detail: 'Samedi 10:00 · bassin', statut: 'Complet', ton: 'ko' },
+    { nom: 'Initiation compétition', detail: 'Mardi 18:30 · bassin', statut: 'Sur invitation', ton: 'neutre' },
+  ]}
+  pied={{ libelle: 'Cotisation', valeur: '3 × 70,00 €' }}
+  bouton="Choisir ce groupe"
+  legende="Le formulaire vu par la famille : seuls les groupes ouverts à l’année de naissance s’affichent. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Inscription club de natation en ligne, par année de naissance
+
+Depuis 2026, la FFN ne parle plus d’avenirs, de benjamins ni de juniors : un compétiteur est « U » suivi de l’âge qu’il atteint dans l’année. OnClub raisonne de la même façon, par année de naissance.
+
+<Repli>
+
+- **En 2026**, selon le règlement fédéral, un U12 est né en 2014 et un senior en 2007 ou avant ; en 2027, chaque année de naissance monte d’un cran.
+- **Pas de changement de groupe** le jour d’un anniversaire : le groupe suit une génération.
+- **Plusieurs nageurs**, un dossier : frères, sœurs et parent au groupe adultes paient ensemble.
+- **Un adulte seul** laisse un contact d’urgence ; pour un mineur, un responsable légal majeur.
+
+</Repli>
+
+## Cotisation de natation en plusieurs versements, aides déduites
+
+La famille choisit un acompte puis des versements, voit chaque échéance avant de payer, et le trésorier suit l’encaissé, l’attendu et le retard.
+
+<Repli>
+
+- **Réductions** pour le deuxième et le troisième enfant, ou pour un nageur inscrit dans deux groupes, calculées seules.
+- **Pass’Sport et aides locales** cochés à l’inscription, déduits du total, justificatif demandé.
+- **Chèques et espèces** notés dans le dossier, sans commission.
+- **Un retard** se relance d’un bouton, message relu avant l’envoi ([relance d’un clic](/fonctionnalites/relance-un-clic)).
+
+</Repli>
+
+## Licence FFN : extraNat reste l’outil, OnClub prépare la liste
+
+La licence se prend dans extraNat, où OnClub ne saisit rien. Elle vaut du 1er septembre au 31 août, et aucune compétition de natation course ne se déclare du 1er au 15 septembre : la fédération protège ce temps de renouvellement.
+
+<Repli>
+
+- **La liste à suivre** : qui est prêt, qui attend un paiement ou une pièce, qui renouvelle, qui arrive au club.
+- **L’export en tableur**, avec l’équipe, le numéro de licence et l’adresse mail à reporter.
+- **Le questionnaire de santé** du mineur se remplit en ligne ; un certificat déposé en photo est contrôlé, sa fin de validité suivie ([le guide du certificat](/guides/certificat-medical-sport)).
+
+</Repli>
+
+## Convocation aux compétitions et appel au bord du bassin
+
+L’entraîneur convoque ses nageurs pour une compétition ou un entraînement ; les parents répondent depuis le mail, sans compte, et l’appel part de ces réponses.
+
+<Repli>
+
+- **Son lien personnel** ouvre la prochaine séance, tirée des créneaux de ses groupes.
+- **Un nageur sans réponse** à une compétition reste à cocher : on ne le compte pas présent d’office.
+- **Trois absences sans prévenir** sur les cinq derniers appels sont signalées au bureau.
+- **Le poste** reste vide : un club de natation n’en a pas, et OnClub ne dessine aucun terrain.
+
+</Repli>
+
+OnClub ne suit ni les temps, ni les tests de progression, ni les engagements : le niveau est celui du groupe, et les performances restent chez la fédération.
+
+## Mai : les groupes de l’an prochain se préparent
+
+Avec l’offre Pro, l’entraîneur coche dès mai les nageurs qu’il garde et le groupe où il les attend ; la place est réservée, la famille confirme par son lien.
+
+<Repli>
+
+- **Les anciens d’abord**, puis l’ouverture au public, et la [liste d’attente](/fonctionnalites/liste-attente) prend le relais des groupes pleins.
+- **Les groupes de la saison** sont repris pour la suivante, sans tout ressaisir.
+- **Pour voir l’écran** avec vos propres groupes : [une démo pour un club de sport](/demo?type=sport), ou [les offres](/tarifs).
+
+</Repli>

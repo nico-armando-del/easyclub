@@ -1,0 +1,131 @@
+---
+nom: "Volley-ball"
+ligne: "Des M7 aux seniors, salle et beach : la rentrée du volley se fait en ligne"
+ordre: 50
+titreSeo: "Inscription en ligne club de volley, cotisation, licence | OnClub"
+description: "Club de volley : inscription en ligne par catégorie FFvolley, cotisation en plusieurs fois, export de l’Espace Club comparé aux dossiers, convocations de match."
+titre: "Club de volley : vos licences FFvolley contrôlées"
+chapo: "Les demandes MyFFvolley arrivent dans l’Espace Club. Déposez son export : chaque licence se range face au dossier du joueur, et vous voyez qui manque."
+temps:
+  cles: [pieces, fiches, paiements]
+  titre: "Le temps rendu au bureau d’un club de volley, chaque saison"
+ecran: terrain
+fonctionnalites: [liste-des-licences, inscription-en-ligne, compo-du-match, convocations, paiement-en-ligne, pieces-justificatives]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "OnClub remplace-t-il MyFFvolley ou l’Espace Club ?"
+    reponse: "Non. Le joueur demande toujours sa licence depuis son Espace Personnel MyFFvolley, et le club la valide dans son Espace Club. OnClub ne transmet rien à la fédération : il tient l’inscription au club, les pièces et la cotisation, puis vous aide à vérifier que chaque inscrit a bien sa licence."
+  - question: "Quel fichier déposer pour comparer les licences du club ?"
+    reponse: "L’export de l’Espace Club, rubrique Utilitaires, Exportation des Licences, en XML ou en CSV. Un classeur Excel s’enregistre d’abord en CSV. Le XML garde les numéros de licence intacts. Rien n’est enregistré chez OnClub : le contrôle se refait autant de fois qu’il faut."
+  - question: "Un joueur fait du volley en salle et du beach l’été : deux dossiers ?"
+    reponse: "Un seul. Le beach s’ajoute comme seconde section dans le même dossier, et la réduction que le club a prévue pour une seconde section s’applique toute seule. Côté fédération, la pratique du beach relève de l’extension Outdoor de la licence."
+  - question: "Nos M11 jouent à quatre : la compo suit-elle ?"
+    reponse: "Oui. Une équipe dont les plus grands ont treize ans au plus démarre en volley à quatre, deux devant et deux derrière ; un clic la fait passer à six. Le beach a son format en duo, une paire par onglet."
+sources:
+  - titre: "FFvolley, récapitulatif des catégories d’âges et surclassements, saison 2026/2027"
+    url: "https://extranet.ffvb.org/data/Files/documents/licences/FFvolley_Categories_2026-27.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFvolley, règlement général des licences et des GSA, saison 2026/2027"
+    url: "https://extranet.ffvb.org/data/Files/manuel_juridique/2026-2027/FFvolley_RGLIGA_2026-27.pdf"
+    consulte: "2026-10-10"
+---
+
+## Licence FFvolley : l’export de l’Espace Club face à vos dossiers
+
+Le joueur demande sa licence depuis son Espace Personnel MyFFvolley, le club la valide dans son Espace Club. OnClub ne saisit ni ne transmet aucune licence : il prépare avant, et contrôle après.
+
+<Idee visuel="droite">
+
+Avant d’ouvrir l’Espace Club, l’écran [Licences](/fonctionnalites/liste-des-licences) dit qui est prêt : cotisation réglée ou échéancier à jour, plus aucune pièce à redemander. Il marque aussi qui renouvelle et qui est nouveau.
+
+<Repli>
+
+- **La saison de licence** court du 1er septembre au 31 août : une licence prise entre le 1er juin et le 31 août est homologuée le 1er septembre.
+- **L’export** : Espace Club, Utilitaires, Exportation des Licences, en XML ou en CSV.
+- **Le dépôt** : chaque licence du fichier se range face au dossier du joueur chez vous.
+- **Les validations** de la fédération sont lues dans le fichier : un joueur n’est « en ordre » que si elles y figurent.
+- **Le doute** : deux homonymes ou un numéro incertain restent « à vérifier », jamais appariés au hasard.
+- **Rien n’est enregistré** : le contrôle se refait après chaque vague de validations.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club"
+  titre="Licences · export de l’Espace Club"
+  sousTitre="Saison 2026-2027 · 62 licences lues"
+  lignes={[
+    { nom: 'Hugo B.', detail: 'Seniors 2', statut: 'Pas encore validée', ton: 'neutre' },
+    { nom: 'Sami K.', detail: 'M18 garçons', statut: 'Sans licence', ton: 'ko' },
+    { nom: 'Chloé R.', detail: 'Loisirs', statut: 'À vérifier', ton: 'neutre' },
+    { nom: 'Léa D.', detail: 'M15 filles', statut: 'En ordre', ton: 'ok' },
+  ]}
+  bouton="Déposer un autre export"
+  legende="La comparaison vue par le secrétaire : ce qui demande un geste d’abord. Noms fictifs."
+/>
+
+</Idee>
+
+## Inscription club de volley en ligne, du baby-volley aux seniors
+
+La FFvolley classe ses joueurs par année de naissance : le formulaire ne propose à la famille que les équipes ouvertes à cette année, avec les places qui restent.
+
+<Repli titre="Les catégories FFvolley 2026-2027">
+
+- **Baby / M7** : nés en 2020 et après.
+- **M9** : 2018 et 2019. **M11** : 2016 et 2017. **M13** : 2014 et 2015. **M15** : 2012 et 2013.
+- **M18** : 2009 à 2011. **M21** : 2006 à 2008.
+- **Seniors** : 2005 et avant ; **Masters** : 1986 et avant.
+
+</Repli>
+
+<Repli>
+
+- **Filles, garçons ou mixte** : « M13 filles » n’apparaît qu’aux joueuses de 2014 et 2015 ; la question n’est posée que si une équipe de cet âge la pose.
+- **Un surclassement** se demande selon le tableau fédéral ; le bureau réserve lui-même la place dans l’équipe du dessus et envoie le lien à la famille.
+- **Le questionnaire de santé** se remplit en ligne ; seule l’attestation arrive au club. Une réponse positive appelle un certificat de moins de six mois, selon le règlement fédéral.
+- **La séance d’essai** se réserve depuis la page du club, avant de s’engager.
+
+</Repli>
+
+## Cotisation de volley en plusieurs fois, beach compris
+
+La famille choisit sa formule, voit chaque versement et son total, puis paie par carte : un acompte, ensuite des échéances aux dates du club.
+
+<Repli>
+
+- **La salle et le beach** dans un seul dossier, la réduction de seconde section comprise.
+- **Frères et sœurs** : la réduction du deuxième et du troisième enfant se calcule seule.
+- **Le [Pass’Sport](/guides/pass-sport)** se coche à l’inscription et se déduit, avec sa pièce justificative.
+- **Le trésorier** voit encaissé, à venir et en retard ; chèques et espèces se notent au centime, un retard se relance d’un bouton.
+
+</Repli>
+
+## Convocation du match : le six de départ part des réponses
+
+L’entraîneur convoque pour le match du samedi depuis son lien personnel, sans compte ; les familles répondent présent ou absent depuis le mail, et la compo se remplit avec ceux qui viennent.
+
+<Repli>
+
+- **Volley à six** en 5-1, passeur en zone 1, ou en 4-2 à deux passeurs ; le libéro à part.
+- **Volley à quatre** par défaut chez les plus jeunes, deux devant, deux derrière.
+- **Capitaine et capitaine de jeu**, numéros de 1 à 99 ; un numéro porté deux fois est signalé.
+- **L’appel** au gymnase : présent, absent ou excusé ; trois absences non prévenues sur les cinq derniers appels sont signalées au bureau.
+- **Les résultats** : la page de l’équipe renvoie vers sa poule chez la fédération, OnClub ne recopie ni scores ni classement.
+
+</Repli>
+
+## Beach-volley l’été et stages des vacances
+
+Quand la saison en salle s’arrête, le stage de beach ou le tournoi du club a sa page d’inscription, avec sa date, son tarif et ses places : c’est l’offre [Pro Max IA](/tarifs).
+
+<Repli>
+
+- **Un stage**, réglé à part de la cotisation, avec sa liste d’attente.
+- **Les maillots** et les shorts se vendent dans la boutique du club, stock taille par taille, retrait au club.
+
+</Repli>
+
+Ce qu’OnClub ne fait pas pour un club de volley : la demande et la validation de licence, les surclassements fédéraux, les feuilles de match et les classements restent chez la FFvolley et ses ligues. Pour voir tout cela avec vos équipes, [demandez une démo](/demo?type=sport).

@@ -1,0 +1,118 @@
+---
+nom: "Tir sportif"
+ligne: "Carabine, pistolet, plateau : chaque tireur dépose son certificat en ligne"
+ordre: 50
+titreSeo: "Inscription club de tir sportif en ligne | OnClub"
+description: "Club de tir sportif : inscription en ligne, certificat médical déposé et suivi pour chaque tireur, cotisation en plusieurs fois. Licence FFTir dans ITAC."
+titre: "Club de tir : inscriptions et certificats en ligne"
+chapo: "Au stand, chaque tireur, adulte compris, doit présenter un certificat médical de moins d’un an. En ligne, il le dépose en photo et le bureau voit qui manque."
+temps:
+  cles: [pieces, fiches]
+  titre: "Le temps rendu au bureau d’un club de tir sportif, chaque saison"
+fonctionnalites: [pieces-justificatives, inscription-en-ligne, paiement-en-ligne, liste-des-licences, convocations, espace-encadrant]
+profils: [tresorier]
+guides: [certificat-medical-sport, inscriptions-en-ligne-association]
+maj: 2026-10-10
+faq:
+  - question: "OnClub crée-t-il les licences dans ITAC ?"
+    reponse: "Non. Les créations et renouvellements restent dans ITAC, où le club valide aussi l’existence du certificat médical. OnClub prépare la liste à suivre : qui a payé, dont le certificat est arrivé, qui est nouveau au club. Elle s’exporte en tableur, ITAC ouvert à côté."
+  - question: "Un tireur adulte peut-il remplir le questionnaire de santé à la place du certificat ?"
+    reponse: "Non. La FFTir exige un certificat médical de moins d’un an pour tous, jeunes et adultes, à la création comme au renouvellement. Dans OnClub, la pièce d’un club de tir se règle en certificat à téléverser : aucun questionnaire rempli en ligne ne la remplace."
+  - question: "Le certificat expire en cours de saison : la licence tombe-t-elle ?"
+    reponse: "Selon la FFTir, une licence renouvelée avec un certificat valide reste valable jusqu’à la fin de la saison, même si le certificat expire en route. Pour concourir, il doit en revanche être à jour. OnClub garde la date de fin de chaque certificat déposé, pour que le bureau voie venir l’échéance."
+  - question: "Que coûte OnClub à un club de tir sportif ?"
+    reponse: "Rien de fixe : un pourcentage des cotisations payées en ligne, 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA. Une cotisation réglée par chèque ou en espèces et notée par le trésorier n’en paie pas."
+sources:
+  - titre: "FFTir, protocole licences 2026-2027"
+    url: "https://www.fftir.org/protocole-licences-fftir/"
+    consulte: "2026-10-10"
+  - titre: "FFTir, le certificat médical"
+    url: "https://www.fftir.org/certificat-medical/"
+    consulte: "2026-10-10"
+  - titre: "FFTir, règlement général sportif 2025-2026 (catégories d’âge et surclassements)"
+    url: "https://www.fftir.org/wp-content/uploads/2026/03/RGS-VN-2025-2026-V3.pdf"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## La rentrée du stand : un certificat par tireur, chaque saison
+
+<Idee visuel="droite">
+
+À la FFTir, le certificat médical de moins d’un an est obligatoire pour tous, jeunes et adultes, à la création comme au renouvellement : sans lui, pas de licence.
+
+<Repli>
+
+- **Déposé en photo** : le tireur l’envoie depuis son téléphone, le bureau le contrôle à l’écran.
+- **Sa date de fin est suivie** : les certificats qui arrivent à échéance se repèrent d’un coup d’œil.
+- **Aucun questionnaire à la place** : le tir aux armes à feu est une discipline à contraintes particulières ; la pièce n’a pas de bouton « Remplir », seul le certificat du médecin compte.
+- **Une pièce manquante** n’empêche pas de régler la cotisation ; elle se réclame d’un bouton.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de tir"
+  titre="Certificats médicaux · saison 2026-2027"
+  sousTitre="Section pistolet · adultes"
+  lignes={[
+    { nom: 'Marc L.', detail: 'Certificat du 2 septembre 2026', statut: 'Contrôlé', ton: 'ok' },
+    { nom: 'Sophie R.', detail: 'Déposé ce matin', statut: 'À contrôler', ton: 'neutre' },
+    { nom: 'Paul G.', detail: 'Aucun certificat reçu', statut: 'À réclamer', ton: 'ko' },
+  ]}
+  bouton="Réclamer la pièce"
+  legende="Les certificats d’une section vus par le bureau, avant la saisie des licences. Noms et montants fictifs."
+/>
+
+</Idee>
+
+Le détail des pièces et de leur suivi est sur la page [pièces justificatives](/fonctionnalites/pieces-justificatives), et les règles générales dans le [guide du certificat médical](/guides/certificat-medical-sport).
+
+## Inscription club de tir en ligne : école de tir et adultes
+
+Le tireur, ou ses parents, choisit la section ouverte à son année de naissance : l’école de tir pour les plus jeunes, la carabine, le pistolet ou le plateau ensuite.
+
+<Repli>
+
+- **Les catégories de la FFTir** : poussins, benjamins et minimes à l’école de tir, puis cadets, juniors, et trois catégories dames et seniors.
+- **Les bornes d’années se posent par cours** : le RGS 2025-2026 plaçait les minimes nés en 2012 et 2013 ; reprenez la grille 2026-2027 de la fédération avant d’ouvrir la saison.
+- **Le surclassement d’un mineur** demande, selon le RGS, une autorisation parentale et un certificat de surclassement distinct de celui de la licence. Il est interdit dans les épreuves de l’école de tir.
+- **Pour un mineur**, un responsable légal majeur remplit le dossier ; un adulte qui s’inscrit seul donne un contact d’urgence.
+
+</Repli>
+
+## Cotisation du club de tir en plusieurs fois
+
+Le tarif du club, licence comprise s’il l’inclut, s’affiche en total avant le paiement, réglé par carte en une fois ou avec un acompte puis des versements.
+
+<Repli>
+
+- **Deux disciplines** : le pistolet ajouté à la carabine se déclare comme seconde section, avec sa réduction si le club en prévoit une.
+- **Chèques et espèces** se notent dans le dossier, au centime, sans commission.
+- **Le tableau du trésorier** sépare l’encaissé, l’à venir et le retard ; un retard se relance d’un bouton, après relecture du message.
+
+</Repli>
+
+## Licence FFTir : ITAC reste l’outil, OnClub prépare la liste
+
+Les créations et renouvellements se font dans ITAC, l’intranet des clubs, ouvert pour 2026-2027 depuis le lundi 24 août 2026 ; le tireur retrouve ensuite sa licence dans son espace EDEN. OnClub n’envoie rien à ITAC.
+
+Le club y valide l’existence du certificat avant de délivrer la licence. L’écran Licences d’OnClub dit qui est prêt, c’est-à-dire payé et sans pièce à redemander, qui renouvelle et qui est nouveau. La liste s’exporte en tableur.
+
+## Convocation aux championnats et ce qu’OnClub ne fait pas
+
+Pour un championnat départemental, l’entraîneur convoque ses tireurs ; chacun répond présent ou absent depuis le mail, sans créer de compte.
+
+OnClub ne gère ni les armes du club, ni la réservation des postes de tir, ni les résultats : il s’arrête à l’adhésion, à l’argent et aux pièces.
+
+<Repli>
+
+- **Un lien personnel** ouvre la page de l’entraîneur, sans mot de passe ; il n’y voit ni l’adresse ni le téléphone des familles.
+- **L’appel** part des réponses : un tireur qui a prévenu est noté excusé, pas absent.
+- **Un championnat annulé** se signale aux convoqués, avec un mot facultatif.
+
+</Repli>
+
+Pour voir l’ensemble sur un club de tir, [demandez une démonstration](/demo?type=sport) ou comparez les [offres et tarifs](/tarifs).

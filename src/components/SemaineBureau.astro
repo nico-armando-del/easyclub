@@ -1,0 +1,400 @@
+---
+/*
+  AVEC OU SANS ONCLUB : LA SEMAINE DU BUREAU (concept C, juste sous le héros ;
+  remplace l'ancienne section du temps, TempsRendu).
+
+  Cinq soirées de la semaine, chacune prise par une des cinq tâches de
+  src/data/temps.ts (les durées viennent de là, jamais tapées). Le VISITEUR
+  bascule lui-même l'interrupteur « Sans OnClub / Avec OnClub » : les soirées se
+  libèrent (d'abord celles du club de sport : l'entraînement, puis la répétition,
+  la soirée en famille), le compteur passe de 66 h à 5 h. La soirée choisie
+  montre le papier (sans) ou le vrai écran qui fait le travail (avec).
+  Rien n'est piloté par le défilement, rien ne se déclenche seul.
+
+  Sans JavaScript : tout marche (case à cocher, boutons radio, :has). Le script
+  sert seulement à arrêter les écrans cachés (data-inactif, voir
+  public/js/ecrans-ctrl.js, chargé par SceneAccueil) et, au téléphone, à fermer
+  les soirées au départ (on en ouvre une en la touchant).
+  Pages traduites : `t` porte les textes, les slots « ecran-0 » à « ecran-4 »
+  remplacent les écrans français.
+*/
+import EcranAnime from './EcranAnime.astro'
+import EcranFige from './EcranFige.astro'
+import MiniEcran from './MiniEcran.astro'
+import Calculateur from './Calculateur.astro'
+import VersFr from './langue/VersFr.astro'
+import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES, ADHERENTS_REFERENCE, duree } from '../data/temps'
+import { INJEP } from '../data/site'
+
+type Soir = { jour: string; quoiSans: string; commentSans: string; quoiAvec: string; commentAvec: string; legendeSans: string; legendeAvec: string }
+type LigneMini = { nom: string; detail?: string; statut?: string; ton?: 'ok' | 'ko' | 'neutre' }
+export type TextesSemaine = {
+  titre: string
+  sans: string
+  avec: string
+  indice: string
+  compteur: string
+  pour: string
+  rendu: string
+  tete: string
+  toucher: string
+  parSaison: string
+  groupe: string
+  soirs: [Soir, Soir, Soir, Soir, Soir]
+  objets: {
+    fiche: string; ficheNom: string; ficheNe: string; aRecopier: string; message: string
+    cheque: string; chequeDepot: string; tableur: string
+    relance3: string; relance2: string; relanceTexte: string
+    certificat: string; manquant: string; autorisation: string; manquante: string
+    equipes: string; equipesL1: string; equipesL2: string; aRefaire: string; tableurEquipes: string
+  }
+  tableau: string
+  pieces: { asso: string; titre: string; sous: string; lignes: LigneMini[]; bouton: string }
+  hypotheses: string
+  note: string
+  lien: string
+  pause: string
+  reprise: string
+}
+
+const FR: TextesSemaine = {
+  titre: 'Votre semaine, avec ou sans OnClub',
+  sans: 'Sans OnClub',
+  avec: 'Avec OnClub',
+  indice: '<b>Basculez</b> pour voir la même semaine avec OnClub.',
+  compteur: 'd’administratif par saison',
+  pour: `pour ${ADHERENTS_REFERENCE} adhérents`,
+  rendu: 'rendues au bureau',
+  tete: 'Vos soirées de la semaine',
+  toucher: 'Touchez une soirée',
+  parSaison: 'Par saison',
+  groupe: 'Les soirées du bureau : choisissez-en une pour voir le détail',
+  soirs: [
+    { jour: 'Lundi soir', quoiSans: 'Recopier les fiches', commentSans: 'Une par une, à la main', quoiAvec: 'L’entraînement du lundi', commentAvec: 'La famille saisit elle-même',
+      legendeSans: 'Les fiches arrivent en papier ; <b>un bénévole recopie chaque dossier.</b>', legendeAvec: '<b>La famille inscrit son enfant depuis son téléphone</b> : son équipe, la cotisation en une ou plusieurs fois.' },
+    { jour: 'Mardi soir', quoiSans: 'Pointer les paiements', commentSans: 'Chèques et virements, dans le tableur', quoiAvec: 'Soirée libre', commentAvec: 'Le tableau de bord le tient à jour',
+      legendeSans: 'Les chèques datés dorment dans un tiroir ; <b>chaque versement se pointe à la main.</b>', legendeAvec: '<b>Le tableau de bord se tient à jour</b> : encaissé, à venir, en retard.' },
+    { jour: 'Mercredi soir', quoiSans: 'Relancer les retards', commentSans: 'Le même message, famille par famille', quoiAvec: 'Soirée libre', commentAvec: 'Une relance en un clic',
+      legendeSans: 'Retrouver qui doit quoi, <b>écrire le même message, trois fois.</b>', legendeAvec: '<b>Le message est déjà écrit</b> : vous le relisez, il part d’un clic.' },
+    { jour: 'Jeudi soir', quoiSans: 'Réclamer les pièces', commentSans: 'Certificats, autorisations', quoiAvec: 'La répétition du jeudi', commentAvec: 'En photo, relancées d’un clic',
+      legendeSans: 'Le certificat qui manque, <b>découvert au pire moment.</b>', legendeAvec: '<b>Les pièces arrivent en photo</b> ; celles qui manquent se réclament d’un clic.' },
+    { jour: 'Vendredi soir', quoiSans: 'Préparer la rentrée', commentSans: 'Listes, équipes, places', quoiAvec: 'La soirée en famille', commentAvec: 'Les équipes sont reprises',
+      legendeSans: 'En juin, <b>toutes les listes repartent de zéro.</b>', legendeAvec: '<b>La saison suivante s’ouvre</b> : les places sont gardées, le lien part aux familles.' },
+  ],
+  objets: {
+    fiche: 'Fiche d’inscription', ficheNom: 'Nom : ……………', ficheNe: 'Né(e) le : … / … / ……', aRecopier: 'À recopier',
+    message: 'Bonjour, il reste de la place chez les M11 ?',
+    cheque: 'Chèque n° 3 sur 4', chequeDepot: 'À déposer le 5 novembre', tableur: 'cotisations_2026_FINAL(3).xlsx',
+    relance3: 'Relance n° 3', relance2: 'Relance n° 2', relanceTexte: 'Cotisation de septembre, toujours rien',
+    certificat: 'Certificat médical', manquant: 'Manquant', autorisation: 'Autorisation parentale', manquante: 'Manquante',
+    equipes: 'Équipes 2027-2028', equipesL1: 'M15 filles : qui revient ?', equipesL2: 'M13 garçons : … / 12', aRefaire: 'À refaire', tableurEquipes: 'equipes_2027_v2.xlsx',
+  },
+  tableau: 'Le tableau de bord du club : 28 640 euros encaissés sur 40 395 attendus, le reste à venir ou en retard. Montants fictifs.',
+  pieces: {
+    asso: 'Volley Club Démo', titre: 'Justificatifs', sous: 'Saison 2026-2027 · déposés en photo par les familles',
+    lignes: [
+      { nom: 'Léa Martin', detail: 'Certificat médical', statut: 'Accepté', ton: 'ok' },
+      { nom: 'Hugo Roux', detail: 'Attestation de santé', statut: 'À contrôler', ton: 'neutre' },
+      { nom: 'Yanis Haddad', detail: 'Certificat médical', statut: 'Manquant', ton: 'ko' },
+    ],
+    bouton: 'Relancer les pièces manquantes',
+  },
+  hypotheses: 'Voir les hypothèses',
+  note: `Estimation pour ${ADHERENTS_REFERENCE} adhérents, pas une étude. Noms et montants fictifs.`,
+  lien: 'Calculer pour mon association',
+  pause: 'Mettre en pause',
+  reprise: 'Relancer l’animation',
+}
+
+interface Props {
+  t?: TextesSemaine
+  lien?: string
+  versFr?: string
+  /** L'ancre de la section (« temps » sur /en et /es, dont le menu y renvoie). */
+  id?: string
+  /** Mots du calculateur compact (/en, /es). */
+  mots?: { avant: string; apres: string; etiquette: string }
+}
+const { t = FR, lien = '/temps-gagne', versFr, id = 'semaine', mots } = Astro.props
+const NB = String.fromCharCode(160)
+const fine = (s: string) => s.replace(/ ([?!:;])/g, `${NB}$1`)
+const nb = (s: string) => s.replace(/ /g, NB)
+const lignes = CINQ_TACHES.map((c) => ({ avant: nb(duree(TACHES[c].avantMin ?? 0)), apres: nb(duree(TACHES[c].apresMin ?? 0)) }))
+const slots = await Promise.all([0, 1, 2, 3, 4].map(async (k) => (Astro.slots.has(`ecran-${k}`) ? await Astro.slots.render(`ecran-${k}`) : null)))
+const o = t.objets
+const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4L16 6"/></svg>'
+---
+<section class="section semaine-section" id={id} aria-labelledby="t-semaine">
+  <div class="enveloppe"><h2 class="h2-idee semaine-h2" id="t-semaine">{fine(t.titre)}</h2></div>
+  <div class="semaine" data-semaine>
+    <div class="s-tete">
+      <div class="s-barre">
+        <label class="interrupteur">
+          <input type="checkbox" role="switch" id="semaine-avec" aria-describedby="semaine-indice">
+          <span class="i-sans">{t.sans}</span>
+          <span class="piste" aria-hidden="true"><span class="bouton"></span></span>
+          <span class="i-avec">{t.avec}</span>
+        </label>
+        <p class="indice" id="semaine-indice" set:html={fine(t.indice)} />
+      </div>
+      <div class="compteur" aria-live="polite">
+        <p class="c-val num"><span class="sans">{nb(TOTAL.avant)}</span><span class="avec">{nb(TOTAL.apres)}</span></p>
+        <p class="c-lib">{t.compteur}</p>
+        <p class="c-rendu"><span class="sans c-pour">{t.pour}</span><span class="avec">{nb(TOTAL.gain)} {t.rendu}</span></p>
+      </div>
+    </div>
+    <div class="soirs" role="radiogroup" aria-label={t.groupe}>
+      <p class="soirs-tete" aria-hidden="true"><span><span class="ord-seul">{t.tete}</span><span class="tel-seul">{t.toucher}</span></span><span>{t.parSaison}</span></p>
+      {t.soirs.map((s, k) => (
+        <>
+          <label class="soir" style={`--n:${k + 2}`}>
+            <input type="radio" name="semaine-soir" value={String(k)} checked={k === 0}>
+            <span class="jour">{s.jour}</span>
+            <span class="quoi"><span class="sans">{s.quoiSans}</span><span class="avec" set:html={coche + fine(s.quoiAvec)} /></span>
+            <span class="comment"><span class="sans">{s.commentSans}</span><span class="avec">{s.commentAvec}</span></span>
+            <span class="duree num"><span class="sans">{lignes[k].avant}</span><span class="avec">{lignes[k].apres}</span></span>
+          </label>
+          <figure class="vue" data-soir={String(k)}>
+            <div class="vue-cadre">
+              <div class="sans">
+                <div class="pile" aria-hidden="true">
+                  {k === 0 && (<>
+                    <div class="objet" style="--x:0%;--y:4%;--r:-5deg"><b>{o.fiche}</b><span class="trait">{fine(o.ficheNom)}</span><span class="trait">{fine(o.ficheNe)}</span><span class="statut neutre">{o.aRecopier}</span></div>
+                    <div class="objet" style="--x:18%;--y:34%;--r:4deg"><b>{o.fiche}</b><span class="trait">{fine(o.ficheNom)}</span><span class="trait">{fine(o.ficheNe)}</span><span class="statut neutre">{o.aRecopier}</span></div>
+                    <div class="objet o-message" style="--x:8%;--y:72%;--r:-2deg"><span class="heure">23:47</span><span>{fine(o.message)}</span></div>
+                  </>)}
+                  {k === 1 && (<>
+                    <div class="objet o-cheque" style="--x:2%;--y:8%;--r:-4deg"><b>{fine(o.cheque)}</b><span>{o.chequeDepot}</span><span class="montant num">45,00&nbsp;€</span></div>
+                    <div class="objet o-tableur" style="--x:12%;--y:48%;--r:3deg"><b>{o.tableur}</b><span class="grille-xls"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+                  </>)}
+                  {k === 2 && (<>
+                    <div class="objet o-relance" style="--x:6%;--y:16%;--r:-3deg"><b>{fine(o.relance3)}</b><span>{o.relanceTexte}</span></div>
+                    <div class="objet o-relance" style="--x:18%;--y:50%;--r:4deg"><b>{fine(o.relance2)}</b><span>{o.relanceTexte}</span></div>
+                  </>)}
+                  {k === 3 && (<>
+                    <div class="objet" style="--x:6%;--y:14%;--r:-4deg"><b>{o.certificat}</b><span class="statut ko">{o.manquant}</span></div>
+                    <div class="objet" style="--x:20%;--y:46%;--r:3deg"><b>{o.autorisation}</b><span class="statut ko">{o.manquante}</span></div>
+                  </>)}
+                  {k === 4 && (<>
+                    <div class="objet o-rentree" style="--x:4%;--y:10%;--r:-3deg"><b>{o.equipes}</b><span class="trait">{fine(o.equipesL1)}</span><span class="trait">{fine(o.equipesL2)}</span><span class="statut neutre">{o.aRefaire}</span></div>
+                    <div class="objet o-tableur" style="--x:16%;--y:56%;--r:4deg"><b>{o.tableurEquipes}</b><span class="grille-xls"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+                  </>)}
+                </div>
+              </div>
+              <div class="avec" data-ecran>
+                {slots[k] ? (
+                  <div class="v-traduit"><Fragment set:html={slots[k]} /></div>
+                ) : k === 0 ? (
+                  <div class="v-tel" style="--l:340;--h:640"><div class="echelle" data-echelle><div class="echelle-in"><EcranAnime nom="inscription" /></div></div></div>
+                ) : k === 1 ? (
+                  <div class="v-fen cr-tab" style="--l:880;--h:520" role="img" aria-label={t.tableau}><div class="echelle" data-echelle><div class="echelle-in"><EcranFige nom="relance" /></div></div></div>
+                ) : k === 2 ? (
+                  <div class="v-fen cr-tab" style="--l:880;--h:520"><div class="echelle" data-echelle><div class="echelle-in"><EcranAnime nom="relance" /></div></div></div>
+                ) : k === 3 ? (
+                  <div class="v-mini"><MiniEcran association={t.pieces.asso} titre={t.pieces.titre} sousTitre={t.pieces.sous} lignes={t.pieces.lignes} bouton={t.pieces.bouton} /></div>
+                ) : (
+                  <div class="v-fen cr-reins" style="--l:880;--h:540"><div class="echelle" data-echelle><div class="echelle-in"><EcranAnime nom="reinscription" /></div></div></div>
+                )}
+              </div>
+            </div>
+            <figcaption><span class="sans" set:html={fine(s.legendeSans)} /><span class="avec" set:html={fine(s.legendeAvec)} /></figcaption>
+          </figure>
+        </>
+      ))}
+    </div>
+    <div class="s-pied">
+      <details class="s-hyp">
+        <summary>{t.hypotheses}</summary>
+        <div class="s-hyp-corps">
+          <slot name="hypotheses">
+            <p>{HYPOTHESES} Les durées sont celles d’une saison entière.</p>
+            <p><b>{INJEP.chiffre}</b> {INJEP.texte} <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a></p>
+          </slot>
+        </div>
+      </details>
+      <span class="s-note">{t.note}</span>
+      <button class="pause" type="button" aria-pressed="false" data-pause-ecrans data-pause={t.pause} data-reprise={t.reprise}><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg><svg class="i-lecture" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2l9 5-9 5z"/></svg><span data-texte>{t.pause}</span></button>
+    </div>
+  </div>
+  <div class="enveloppe s-lien">
+    <Calculateur compact id="combien" mots={mots} />
+    <a class="lien-fleche" href={lien} hreflang={versFr ? 'fr' : undefined}>{t.lien}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+  </div>
+</section>
+<script is:inline>
+(function () {
+  var sem = document.querySelector('[data-semaine]'); if (!sem) return
+  var avec = document.getElementById('semaine-avec')
+  var radios = [].slice.call(sem.querySelectorAll('input[name="semaine-soir"]'))
+  /* Seul l'écran affiché joue ; les autres s'arrêtent là où ils en sont. */
+  function regle() {
+    var c = radios.filter(function (r) { return r.checked })[0], soir = c ? c.value : null
+    ;[].forEach.call(sem.querySelectorAll('.vue'), function (v) {
+      var on = avec.checked && v.getAttribute('data-soir') === soir
+      ;[].forEach.call(v.querySelectorAll('[data-ecran]'), function (e) { if (on) e.removeAttribute('data-inactif'); else e.setAttribute('data-inactif', '') })
+    })
+    if (window.ecransRafraichir) window.ecransRafraichir()
+  }
+  /* Téléphone : lundi est ouvert d'emblée, comme sur ordinateur (le papier se voit sans rien toucher) ; on referme une soirée en la retouchant.
+     En basculant sur « Avec OnClub » sans soirée ouverte, la première s'ouvre : l'écran qui fait le travail apparaît. */
+  var tel = window.matchMedia && window.matchMedia('(max-width: 899px)')
+  radios.forEach(function (r) {
+    r.closest('label').addEventListener('click', function (e) {
+      if (tel && tel.matches && r.checked && e.target !== r) { e.preventDefault(); r.checked = false; regle() }
+    })
+  })
+  sem.addEventListener('change', function (e) {
+    if (e.target === avec && avec.checked && !radios.some(function (r) { return r.checked })) radios[0].checked = true
+    regle()
+  })
+  regle()
+})()
+</script>
+
+<style>
+.semaine-h2{max-width:18ch}
+.semaine{position:relative;isolation:isolate;margin:32px 12px 0;border-radius:var(--r-panneau);background:var(--scene);color:var(--blanc);overflow:clip}
+@media (min-width:760px){.semaine{width:calc(100% - 80px);max-width:var(--max-large);margin:40px auto 0}}
+.semaine::before,.semaine::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;transition:opacity 1200ms var(--courbe-sortie)}
+/* La lampe du soir (ambre), puis la lueur menthe */
+.semaine::before{background:radial-gradient(60% 55% at 22% 110%,rgba(255,182,39,.30) 0%,rgba(255,182,39,.08) 45%,rgba(255,182,39,0) 72%),radial-gradient(50% 40% at 80% -10%,rgba(255,182,39,.10) 0%,rgba(255,182,39,0) 70%)}
+.semaine::after{background:var(--lueur),var(--lueur-haut);opacity:0}
+.semaine:has(#semaine-avec:checked)::before{opacity:0}
+.semaine:has(#semaine-avec:checked)::after{opacity:1}
+/* La tête : l'interrupteur (collant au téléphone, le long du panneau seulement) et le compteur */
+.s-tete{display:grid;border-bottom:1px solid var(--trait-scene)}
+@media (max-width:759px){.s-tete{display:contents}.compteur{border-bottom:1px solid var(--trait-scene)}}
+@media (min-width:760px){.s-tete{grid-template-columns:1fr auto;align-items:center;gap:28px;padding:28px 40px}}
+/* Sous l'en-tête du site quand il est affiché (il revient quand on remonte), contre le haut sinon. */
+.s-barre{position:sticky;top:0;transition:top var(--d-2) var(--courbe-sortie);z-index:4;display:flex;align-items:center;gap:14px 28px;padding:14px 20px;background:rgba(11,15,20,.94)}
+:global(body:has(.entete:not(.cache))) .s-barre{top:var(--entete-h)}
+@media (min-width:760px){.s-barre{position:static;padding:0;background:none}}
+.interrupteur{display:inline-flex;align-items:center;gap:14px;cursor:pointer;user-select:none;-webkit-user-select:none;font:700 1.0625rem/1 var(--f-titre);min-height:44px}
+.interrupteur input{position:absolute;opacity:0;width:1px;height:1px}
+.i-sans,.i-avec{transition:color var(--d-2)}
+.i-sans{color:var(--blanc)}
+.i-avec{color:var(--texte-scene-doux)}
+.piste{position:relative;flex:none;width:76px;height:42px;border-radius:999px;background:#3A3F47;box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);transition:background var(--d-3) var(--courbe-sortie)}
+.bouton{position:absolute;left:5px;top:5px;width:32px;height:32px;border-radius:999px;background:var(--blanc);box-shadow:0 4px 10px rgba(0,0,0,.4);transition:transform var(--d-3) var(--courbe-ressort)}
+.interrupteur:has(input:checked) .piste{background:var(--menthe)}
+.interrupteur:has(input:checked) .bouton{transform:translateX(34px)}
+.interrupteur:has(input:checked) .i-sans{color:var(--texte-scene-doux)}
+.interrupteur:has(input:checked) .i-avec{color:var(--menthe)}
+.interrupteur:has(input:focus-visible) .piste{outline:3px solid var(--menthe);outline-offset:3px}
+.indice{font-size:.875rem;color:var(--texte-scene);transition:opacity var(--d-3)}
+.indice :global(b){color:var(--blanc)}
+.semaine:has(#semaine-avec:checked) .indice{opacity:0;visibility:hidden}
+@media (max-width:759px){.indice{display:none}}
+.compteur{display:grid;grid-template-columns:auto auto;align-items:end;justify-content:start;gap:4px 14px;padding:6px 20px 18px}
+@media (min-width:760px){.compteur{justify-content:end;padding:0}}
+.c-val{display:grid;justify-items:start;font:800 clamp(2.75rem,1.6rem + 2.4vw,3.75rem)/.9 var(--f-titre);letter-spacing:-.03em}
+@media (min-width:900px){.c-val{justify-items:end}}
+.c-val>span,.c-rendu>span,.quoi>span,.comment>span,.duree>span,figcaption>span{grid-area:1/1}
+.c-val .avec{color:var(--menthe)}
+.c-lib{font:600 .9375rem/1.3 var(--f-texte);color:var(--texte-scene);max-width:12em}
+.c-rendu{grid-column:1/-1;display:grid;font:700 .9375rem/1.3 var(--f-titre);color:var(--menthe)}
+.c-pour{color:var(--texte-scene-doux);font-weight:600}
+@media (min-width:760px){.c-rendu{justify-items:end}}
+/* Les deux états du texte : un seul visible (visibility, pour les lecteurs d'écran aussi) */
+.sans,.avec{transition:opacity var(--d-3) var(--courbe-sortie),transform var(--d-3) var(--courbe-sortie),visibility 0s}
+.semaine .avec{opacity:0;visibility:hidden;transform:translateY(8px)}
+.semaine:has(#semaine-avec:checked) .avec{opacity:1;visibility:visible;transform:none}
+.semaine:has(#semaine-avec:checked) .sans{opacity:0;visibility:hidden;transform:translateY(-8px)}
+/* Les soirées ; sous la soirée choisie (téléphone) ou à droite (ordinateur), ce qu'il s'y passe */
+.soirs{display:grid;gap:8px;padding:14px 16px 20px}
+@media (min-width:900px){.soirs{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto repeat(5,auto) 1fr;column-gap:40px;row-gap:10px;padding:20px 40px 28px}}
+.soirs-tete{display:flex;justify-content:space-between;gap:12px;padding:0 16px 2px;font:600 .8125rem/1.2 var(--f-texte);color:var(--texte-scene-doux)}
+@media (min-width:900px){.soirs-tete{grid-column:1;grid-row:1;padding:0 20px 2px}}
+.soir{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:center;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--trait-scene);cursor:pointer;transition:background var(--d-2),border-color var(--d-2)}
+.soir:hover{background:rgba(255,255,255,.07)}
+.soir input{position:absolute;opacity:0;width:1px;height:1px}
+.soir:has(input:checked){background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.4)}
+.soir:has(input:focus-visible){outline:3px solid var(--menthe);outline-offset:2px}
+.jour{font:700 .75rem/1.2 var(--f-texte);letter-spacing:.06em;text-transform:uppercase;color:#FFC861}
+.semaine:has(#semaine-avec:checked) .jour{color:var(--menthe)}
+.quoi,.comment,.duree{display:grid}
+.quoi{grid-column:1/-1;font:700 1.0625rem/1.25 var(--f-titre)}
+.comment{grid-column:1/-1;font-size:.875rem;line-height:1.35;color:var(--texte-scene)}
+.duree{grid-column:2;grid-row:1;justify-items:end;font:800 1.25rem/1 var(--f-titre);white-space:nowrap}
+.duree .avec{color:var(--menthe)}
+.quoi :global(.coche){display:inline-block;width:16px;height:16px;margin-right:6px;vertical-align:-2px;fill:none;stroke:var(--menthe);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:900px){
+  .soir{grid-column:1;grid-row:var(--n);grid-template-columns:120px minmax(0,1fr) auto;padding:16px 20px}
+  .jour{grid-column:1;grid-row:1 / span 2}
+  .quoi{grid-column:2;grid-row:1}
+  .comment{grid-column:2;grid-row:2}
+  .duree{grid-column:3;grid-row:1 / span 2;font-size:1.375rem}
+}
+@media (min-width:900px){.tel-seul{display:none}}
+@media (max-width:899px){.ord-seul{display:none}}
+/* L'échelonnement des soirées, au basculement */
+.soir:nth-of-type(2) :is(.sans,.avec){transition-delay:90ms}
+.soir:nth-of-type(3) :is(.sans,.avec){transition-delay:180ms}
+.soir:nth-of-type(4) :is(.sans,.avec){transition-delay:270ms}
+.soir:nth-of-type(5) :is(.sans,.avec){transition-delay:360ms}
+/* La vue : le papier (sans), l'écran (avec) */
+.vue{display:none;margin:0 0 8px;height:420px;grid-template-rows:minmax(0,1fr) auto;gap:10px;padding:12px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid var(--trait-scene)}
+@media (min-width:900px){.vue{grid-column:2;grid-row:1 / -1;margin:0;height:auto;min-height:540px;padding:16px}}
+.semaine:has(input[value="0"]:checked) .vue[data-soir="0"],
+.semaine:has(input[value="1"]:checked) .vue[data-soir="1"],
+.semaine:has(input[value="2"]:checked) .vue[data-soir="2"],
+.semaine:has(input[value="3"]:checked) .vue[data-soir="3"],
+.semaine:has(input[value="4"]:checked) .vue[data-soir="4"]{display:grid}
+@media (prefers-reduced-motion:no-preference){.vue{animation:c-vue var(--d-3) var(--courbe-sortie)}}
+@keyframes c-vue{from{opacity:0}}
+.vue-cadre{position:relative;min-height:0;display:grid}
+.vue-cadre>.sans,.vue-cadre>.avec{grid-area:1/1;display:grid;place-items:center;min-height:0;container-type:size}
+.pile{position:relative;width:280px;height:250px}
+.objet{--o:.95;position:absolute;left:var(--x,0);top:var(--y,0);transform:rotate(var(--r,0deg));display:flex;flex-direction:column;gap:calc(5px * var(--o));width:calc(220px * var(--o));padding:calc(12px * var(--o)) calc(14px * var(--o));background:var(--blanc);color:var(--encre);border-radius:calc(12px * var(--o));box-shadow:var(--ombre-objet);font-size:calc(.8125rem * var(--o));line-height:1.3;text-align:left}
+@media (min-width:900px){.pile{width:380px;height:330px}.objet{--o:1.25}}
+.objet b{font:700 calc(.9375rem * var(--o))/1.2 var(--f-titre)}
+.objet .statut{align-self:flex-start;font-size:calc(.6875rem * var(--o));padding:calc(2px * var(--o)) calc(8px * var(--o))}
+.objet .trait{color:var(--gris)}
+.objet .montant{font:700 calc(1.0625rem * var(--o))/1 var(--f-titre)}
+.o-cheque{background:var(--lilas-pale)}
+.o-tableur{width:calc(240px * var(--o))}
+.o-relance{background:var(--alerte-pale)}
+.o-relance b{color:var(--alerte)}
+.o-message{background:var(--scene-2);color:var(--blanc);border:1px solid var(--trait-scene)}
+.o-message .heure{font:700 calc(.75rem * var(--o))/1 var(--f-texte);color:var(--menthe)}
+.grille-xls{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px}
+.grille-xls i{height:calc(10px * var(--o));background:#E7E2D6}
+.grille-xls i:nth-child(3n+1){background:#CFE9D8}
+.o-rentree{background:#FFF8E6}
+.v-tel,.v-fen{width:min(100cqw,calc(100cqh * var(--cw,var(--l)) / var(--ch,var(--h))))}
+.v-fen .echelle{border-radius:12px}
+.v-fen :global(.echelle-in){border-radius:12px}
+.v-mini{width:min(100%,380px);transform:scale(.8);transform-origin:50% 50%}
+.v-mini :global(.mini-ecran){margin:0}
+.v-mini :global(figcaption){display:none}
+.v-traduit{width:min(100%,400px);max-height:100%;overflow:hidden}
+@media (max-width:899px){.cr-tab{--cx:140;--cw:740}.cr-reins{--cx:452;--cw:428}.v-traduit{transform:scale(.82)}}
+@media (min-width:900px){.v-mini{transform:none}}
+figcaption{display:grid;font-size:.9375rem;line-height:1.45;color:var(--texte-scene);text-align:center;min-height:2.9em;align-content:center}
+figcaption :global(b){color:var(--blanc)}
+.s-pied{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding:0 20px 20px;font-size:.875rem;color:var(--texte-scene-doux)}
+@media (min-width:760px){.s-pied{padding:0 40px 28px}}
+/* Téléphone : la barre de l'interrupteur, collante, finit sa course en bas du panneau ; elle ne recouvre pas le pied. */
+@media (max-width:759px){.s-pied{padding-bottom:92px}}
+/* Le bouton pause ne sert que lorsqu'un écran animé est visible (« Avec OnClub ») ; le papier ne bouge pas. */
+.semaine:not(:has(#semaine-avec:checked)) .s-pied .pause{display:none}
+.s-hyp summary{display:inline-flex;align-items:center;min-height:44px;cursor:pointer;font-weight:700;color:var(--blanc)}
+.s-hyp[open]{flex-basis:100%}
+.s-hyp-corps{display:grid;gap:10px;max-width:44em;padding-bottom:8px;color:var(--texte-scene)}
+.s-hyp-corps :global(a){color:var(--menthe);font-weight:600}
+.s-hyp-corps :global(b){color:var(--blanc)}
+.s-lien{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 32px;margin-top:24px}
+@media (min-width:760px){.s-lien{max-width:var(--max-large);padding-inline:80px}}
+/* Le calculateur compact, en une ligne : « 61 h rendues chaque saison, pour [250] adhérents. » */
+.s-lien :global(.calc-compact){display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+/* La suite du compteur, pas un troisième « 61 h » en grand : le chiffre à la taille de la phrase. */
+.s-lien :global(.cc-chiffre){font:800 1.25rem/1.5 var(--f-titre);letter-spacing:0;color:var(--sapin)}
+.s-lien :global(.cc-barre){display:none}
+.s-lien :global(.cc-phrase){font-size:1.0625rem;text-wrap:balance}
+/* Le champ ressemble à un champ : un cadre et un fond. */
+.s-lien :global(.cc-champ){width:5ch;min-height:44px;margin:0 .2em;padding:0 .35em;border:1.5px solid var(--encre);border-radius:10px;background:var(--blanc);vertical-align:middle;cursor:text}
+.s-lien :global(.cc-champ:hover){border-color:var(--sapin)}
+/* Moins de vide avant le bento qui suit. */
+.semaine-section{padding-bottom:clamp(40px,2rem + 2vw,64px)}
+.s-lien .lien-fleche{color:var(--sapin)}
+</style>

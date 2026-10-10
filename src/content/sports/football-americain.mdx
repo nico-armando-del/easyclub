@@ -1,0 +1,124 @@
+---
+nom: "Football américain"
+ligne: "Du flag des plus jeunes aux équipes casquées, la rentrée se fait en ligne"
+ordre: 50
+titreSeo: "Inscription club de football américain et flag en ligne | OnClub"
+description: "Club de football américain ou de flag : dossiers prêts avant le 15 octobre, cotisation en plusieurs fois, certificat suivi. Licence sur l’extranet FFFA."
+titre: "Club de football américain : renouveler avant le 15 octobre"
+chapo: "Passé le 15 octobre, un renouvellement coûte le double à la FFFA. En ligne, les joueurs paient et déposent leurs pièces dès septembre : le bureau sait qui saisir."
+temps:
+  cles: [pieces, paiements, relances]
+  titre: "Ce que la rentrée rend au bureau d’un club de football américain"
+fonctionnalites: [liste-des-licences, pieces-justificatives, paiement-en-ligne, relance-un-clic, inscription-en-ligne, convocations]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+articles: [dossier-complet-avant-la-rentree]
+maj: 2026-10-10
+faq:
+  - question: "Que change le 15 octobre pour un club de football américain ?"
+    reponse: "Pour la saison 2026-2027, la FFFA double le tarif d’une licence en renouvellement à partir du 15 octobre 2026, sauf pour les arbitres et juges, les dirigeants et les bénévoles. Dans OnClub, l’écran Licences montre dès septembre qui a payé et déposé ses pièces : ce sont les dossiers à saisir en premier sur l’extranet."
+  - question: "OnClub dessine-t-il les formations d’attaque et de défense ?"
+    reponse: "Non. OnClub ne dessine aucun terrain de football américain et ne propose pas de liste de postes pour ce sport. L’entraîneur convoque, les joueurs répondent, il fait l’appel ; le plan de jeu reste sur son tableau blanc."
+  - question: "Un joueur adulte doit-il fournir un nouveau certificat médical ?"
+    reponse: "Selon la FAQ de la FFFA, un certificat est demandé à la première licence prise comme majeur, puis tous les trois ans ; il n’est pas obligatoire pour un mineur. Dans OnClub, le certificat se dépose en photo, le bureau le contrôle et sa date de fin de validité est suivie."
+  - question: "Flag et football américain dans la même famille, c’est deux dossiers ?"
+    reponse: "Non. La famille inscrit tous ses membres dans un seul dossier, et un joueur qui pratique les deux ajoute le flag comme seconde section. Une réduction prévue pour la seconde section s’applique d’elle-même. Les licences, elles, se prennent toujours sur l’extranet de la FFFA."
+sources:
+  - titre: "FFFA, Foire aux questions (licences, certificat médical, surclassement, chiffres)"
+    url: "https://www.fffa.org/faq/"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## Renouvellement de licence avant le 15 octobre : les dossiers prêts d’abord
+
+Pour 2026-2027, la FFFA double le tarif d’un renouvellement de licence à partir du 15 octobre 2026. Le bureau a tout intérêt à boucler les dossiers des anciens en septembre.
+
+<Idee visuel="droite">
+
+L’écran Licences range chaque joueur : prêt à être saisi, en attente de paiement, en attente de pièces. On saisit les prêts, on relance les autres.
+
+<Repli>
+
+- **Prêt** veut dire payé, ou à jour de son échéancier, sans aucune pièce à redemander.
+- **Renouvellement ou nouveau** : la liste les distingue dès que la saison passée est dans OnClub ou que votre tableur a été repris.
+- **Arbitres, juges, dirigeants et bénévoles** échappent au doublement, d’après la FAQ fédérale.
+- **Un versement en retard** se [relance d’un bouton](/fonctionnalites/relance-un-clic), message relu avant l’envoi ; une pièce manquante se réclame de la même façon.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de football américain"
+  titre="Licences · à saisir avant le 15 octobre"
+  sousTitre="Équipe seniors · saison 2026-2027"
+  lignes={[
+    { nom: 'Yanis T.', detail: 'Payé, certificat reçu', statut: 'Prêt', ton: 'ok' },
+    { nom: 'Hugo L.', detail: 'Certificat à contrôler', statut: 'Pièces', ton: 'neutre' },
+    { nom: 'Nora B.', detail: 'Deuxième versement en retard', statut: 'Paiement', ton: 'ko' },
+  ]}
+  bouton="Exporter la liste"
+  legende="Les licences d’une équipe vues par le bureau : qui peut être saisi aujourd’hui. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Licence FFFA : l’extranet reste l’outil, OnClub ne saisit rien
+
+Chaque licence se saisit par le club sur l’extranet de la FFFA. OnClub n’y envoie aucun fichier et ne remplit aucun champ : il vous dit dans quel ordre travailler.
+
+La [liste des licences](/fonctionnalites/liste-des-licences) s’exporte en tableur : nom, prénom, année de naissance, équipe, numéro de licence, mail et téléphone du dossier.
+
+<Repli>
+
+- **Le surclassement simple** se pose sur l’extranet par le club, avec un certificat ; le double passe par un dossier validé par le médecin fédéral.
+- **Côté OnClub**, le surclassement peut porter un frais qui ne s’applique que dans ce cas, et le certificat se demande comme une [pièce du dossier](/fonctionnalites/pieces-justificatives).
+- **Un majeur** fournit un certificat à sa première licence d’adulte, puis tous les trois ans ; le bureau voit la date de fin de chaque certificat.
+
+</Repli>
+
+## Inscription au football américain en ligne : flag, jeunes et seniors
+
+Chaque équipe porte les bornes d’années de naissance que le club lui donne : le parent ne voit que les équipes ouvertes à son enfant, avec les places restantes.
+
+<Repli>
+
+- **Le flag et le contact** : deux équipes distinctes, et une seconde section possible dans le même dossier.
+- **La séance d’essai** se réserve depuis la page du club ; chaque équipe décide si elle en accepte, même complète.
+- **Un mineur** est inscrit par un responsable légal majeur ; un senior seul donne un contact d’urgence.
+- **Vos questions** s’ajoutent au formulaire : taille de maillot, pointure, déjà joué au flag.
+- **La fédération compte** plus de 33 500 licences en 2025 et près de 220 associations affiliées, d’après sa FAQ.
+
+</Repli>
+
+## Cotisation de football américain en plusieurs fois
+
+Un acompte à l’inscription, puis des versements : la famille lit chaque date et chaque montant avant de valider, et le trésorier suit l’encaissé, l’à venir et le retard.
+
+<Repli>
+
+- **Frères et sœurs** : les réductions du deuxième et du troisième enfant se déclenchent seules.
+- **Le [Pass’Sport](/guides/pass-sport)** se coche et se déduit, et son justificatif est demandé.
+- **Chèques et espèces** se notent au centime dans le dossier, sans commission.
+
+</Repli>
+
+## Convocation de match : présents, excusés, à cocher
+
+L’entraîneur convoque pour un match ou un entraînement ; chaque famille répond depuis le mail, sans créer de compte.
+
+<Repli>
+
+- **Pour un match**, un joueur sans réponse reste à cocher : personne n’est aligné d’office.
+- **L’annulation** prévient toutes les familles, avec un mot si besoin : terrain impraticable, car en panne.
+- **L’espace encadrant** s’ouvre par un lien personnel ; l’entraîneur n’y voit ni adresse ni téléphone.
+
+</Repli>
+
+## Ce qu’OnClub ne fait pas pour le football américain
+
+Pas de terrain dessiné ni de liste de postes, pas de prêt de casques ou d’épaulières, pas de feuille de match ni de classement : ces sujets restent chez la fédération et sur le bord du terrain.
+
+Pour voir le reste avec vos équipes : [demander une démo](/demo?type=sport), ou lire [les tarifs](/tarifs).

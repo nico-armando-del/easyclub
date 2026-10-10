@@ -1,0 +1,113 @@
+---
+nom: "Yoga"
+ligne: "Des cours à l’année où chaque tapis compte, de l’essai à la réinscription"
+ordre: 50
+titreSeo: "Inscription aux cours de yoga en ligne, places limitées | OnClub"
+description: "Club ou section de yoga : inscription en ligne aux cours de la semaine, places comptées, séance d’essai, liste d’attente et cotisation en plusieurs fois."
+titre: "Club de yoga : chaque tapis compte, l’inscription aussi"
+chapo: "Le hatha du mardi affiche complet, le vinyasa du jeudi a encore trois tapis : les pratiquants le voient en ligne et s’inscrivent seuls."
+temps:
+  cles: [attente, relances]
+  titre: "Le temps rendu au bureau d’un club de yoga, chaque saison"
+fonctionnalites: [inscription-en-ligne, seances-essai, liste-attente, paiement-en-ligne, reinscriptions, evenements-stages, pieces-justificatives]
+profils: [tresorier]
+guides: [certificat-medical-sport, prix-cotisation-association]
+maj: 2026-10-10
+faq:
+  - question: "Nos pratiquants sont des adultes : faut-il remplir un responsable légal ?"
+    reponse: "Non. Un adulte s’inscrit pour lui-même et laisse un contact d’urgence. Le responsable légal, qui doit être majeur, n’est demandé que pour un mineur : un adolescent que sa mère inscrit au cours du samedi, dans le même dossier qu’elle."
+  - question: "Peut-on vendre une carte de dix séances ou un cours à l’unité ?"
+    reponse: "Pas aujourd’hui. OnClub inscrit à la saison, payable en une fois ou en plusieurs versements, ou à un atelier daté avec l’offre Pro Max IA. Mieux vaut le savoir avant de nous montrer votre planning."
+  - question: "Une personne à l’essai prend-elle le tapis d’un inscrit ?"
+    reponse: "C’est le club qui règle ce point. Soit l’essai garde une place jusqu’à sa séance, soit il n’en prend aucune. Cours par cours, l’essai peut aussi n’être proposé que s’il reste de la place, ou jamais."
+  - question: "Un certificat médical est-il obligatoire pour pratiquer le yoga ?"
+    reponse: "Pour une licence, c’est la fédération à laquelle le club est affilié qui fixe la règle d’un majeur. Sans licence, l’association décide de ce qu’elle demande. Dans OnClub, l’adulte peut remplir le QS-SPORT en ligne, ou déposer la photo d’un certificat que le bureau contrôle."
+sources:
+  - titre: "Ministère des Sports, Les 119 fédérations sportives et 22 groupements nationaux (mise à jour au 13 janvier 2026)"
+    url: "https://www.sports.gouv.fr/media/5951/download"
+    consulte: "2026-10-10"
+  - titre: "Code du sport, article L231-2 (licence et certificat médical)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045293846"
+    consulte: "2026-10-10"
+---
+
+## Inscription aux cours de yoga en ligne : chaque cours compte ses tapis
+
+<Idee visuel="droite">
+
+Une salle de yoga se remplit à quelques tapis près. Chaque cours porte ses places, son niveau, son professeur et ses horaires, et la page du club montre ceux qui ont encore de la place.
+
+<Repli>
+
+- **Cours plein** : avec l’offre Pro, le pratiquant suivant entre en [liste d’attente](/fonctionnalites/liste-attente) sans rien payer ; un tapis se libère, il lui est proposé d’un clic et il a un délai pour accepter et régler, 48 heures par défaut.
+- **La séance d’essai** se réserve sur une date du cours ; le club choisit si elle garde un tapis jusqu’au jour J.
+- **Après coup**, le bureau voit quels essais sont devenus des inscriptions.
+- **Un cours avancé** peut rester ouvert aux anciens seulement, ou sur invitation.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de yoga"
+  titre="Hatha · mardi 19:00"
+  sousTitre="Saison 2026-2027 · salle de l’étage"
+  lignes={[
+    { nom: 'Claire D.', detail: 'Inscrite · 3 × 70,00 €', statut: 'À jour', ton: 'ok' },
+    { nom: 'Marc L.', detail: 'Essai mardi 13 octobre · tapis gardé', statut: 'Essai', ton: 'neutre' },
+    { nom: 'Sophie R.', detail: 'Liste d’attente · première', statut: 'En attente', ton: 'neutre' },
+  ]}
+  pied={{ libelle: 'Tapis pris', valeur: '18 sur 18' }}
+  bouton="Voir la liste d’attente"
+  legende="Un cours complet vu par le bureau : les inscrits, l’essai de la semaine, la liste d’attente. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Cotisation de yoga en plusieurs fois, attestation pour l’employeur
+
+Une saison de cours hebdomadaires se règle en une fois ou en plusieurs, selon vos formules : un acompte à l’inscription, puis des versements dont la date et le montant s’affichent avant de valider.
+
+<Repli>
+
+- **Deux pratiques par semaine** : la réduction pour un second cours se calcule seule, le total exact s’affiche avant le paiement.
+- **Une attestation de paiement** pour l’employeur ou le CSE se télécharge depuis le dossier, établie sur ce qui a vraiment été encaissé.
+- **Le reçu de cotisation** se télécharge depuis le même dossier.
+- **Le trésorier** voit l’encaissé, l’à venir et le retard ; un versement en retard se relance d’un bouton, après relecture.
+
+</Repli>
+
+## Licence et santé : le yoga n’a pas de fédération délégataire
+
+Aucune des 119 fédérations sportives agréées par le ministère n’est une fédération de yoga. Un club affilié à une fédération multisport garde sa licence dans l’outil de celle-ci.
+
+OnClub n’y transmet rien : il prépare la [liste à reporter](/fonctionnalites/liste-des-licences), qui s’exporte en tableur.
+
+Pour un majeur, le code du sport laisse la fédération fixer ce qu’elle demande pour délivrer la licence ; sans licence, c’est l’association qui choisit ses pièces.
+
+<Repli>
+
+- **Le QS-SPORT** se remplit en ligne : les réponses restent sur le téléphone, seule l’attestation arrive au club.
+- **Un certificat** se dépose en photo ; le bureau le contrôle et sa date de fin de validité est suivie.
+- **Une pièce manquante** se réclame d’un bouton ; sauf choix contraire du club, elle ne bloque pas le paiement. Voir le guide du [certificat médical](/guides/certificat-medical-sport).
+
+</Repli>
+
+## Mai : les pratiquants fidèles gardent leur tapis pour la rentrée
+
+Avec l’offre Pro, le professeur coche dès mai les pratiquants qu’il garde dans son cours de l’an prochain : leur place est tenue avant que l’inscription s’ouvre aux nouveaux.
+
+<Repli>
+
+- **Un délai de réservation** de deux semaines par défaut, de 1 à 90 jours selon votre réglage.
+- **Le pratiquant confirme** par son lien et choisit son échéancier ; passé le délai, le tapis revient au public.
+- **Les cours de la saison** sont repris pour la suivante : il ne reste qu’à ajuster horaires et tarifs.
+
+</Repli>
+
+## Ateliers du dimanche et stages des vacances
+
+Un atelier respiration ou un stage des vacances a sa page d’inscription, sa date, son tarif, ses places et sa liste d’attente, réglé à part de la cotisation (offre Pro Max IA, voir [événements et stages](/fonctionnalites/evenements-stages)).
+
+OnClub n’a pas de carte de séances, pas de réservation séance par séance, pas de cours en visio ni de vidéos : un pratiquant est inscrit à son cours de la semaine pour toute la saison, ou à un atelier daté.
+
+Pour voir vos cours et vos tapis dans OnClub, [demandez une démo](/demo?type=sport) ; les prix sont sur la page [tarifs](/tarifs).

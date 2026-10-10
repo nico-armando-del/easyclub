@@ -1,19 +1,22 @@
 ---
 /*
   L'ACCUEIL, ÉCRAN PAR ÉCRAN (maquettes §B.2, récit §1, arbitrages du plan).
-  1. Le héros immersif : le titre, une phrase, un bouton ; la scène où le
-     désordre se range (66 h → ≈ 5 h, 61 h rendues). Note et hypothèses.
-  2. Le temps rendu : « Et chez vous ? », le champ « 250 ».
+  1. Le héros : le titre, une phrase, un bouton ; le produit en scène (trois
+     vrais écrans, trois légendes cliquables, le temps rendu). Rien d'épinglé.
+  2. Avec ou sans OnClub : la semaine du bureau, l'interrupteur que le visiteur
+     bascule lui-même ; « Calculer pour mon association ».
   3. Les fonctionnalités en bento (une carte par famille).
   4. Le produit qui tourne : onglets verticaux et écran.
   5. Les sites de club de démonstration (vitrine).
-  6. Les associations : la bande de photos, « Et la vôtre ? ».
+  6. Les associations : la bande de photos, les clubs de sport d'abord
+     (au moins 8), deux activités artistiques à la fin, « Et la vôtre ? ».
   7. Les offres : le temps d'abord. 8. La FAQ (six questions, JSON-LD).
   9. L'appel final : la case vide.
 */
 import Layout from '../layouts/Layout.astro'
 import SceneAccueil from '../components/SceneAccueil.astro'
-import TempsRendu from '../components/TempsRendu.astro'
+import SemaineBureau from '../components/SemaineBureau.astro'
+import MiniEcran from '../components/MiniEcran.astro'
 import Bento from '../components/Bento.astro'
 import OngletsProduit from '../components/OngletsProduit.astro'
 import VitrineClubs from '../components/VitrineClubs.astro'
@@ -21,12 +24,10 @@ import BandeAssociations from '../components/BandeAssociations.astro'
 import Offres from '../components/Offres.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
-import { photoDe } from '../data/photos'
+import { cartesSports, cartesArts } from '../i18n/bande'
 import { liste, url } from '../lib/collections'
 import { MISE_EN_ROUTE } from '../data/site'
 
-const sports = await liste('sports')
-const activites = await liste('activites')
 const guides = await liste('guides')
 const articles = await liste('articles')
 const comparatifs = await liste('comparatifs')
@@ -36,23 +37,20 @@ const ressources = [
   ...comparatifs.map((e) => ({ e, c: 'comparatifs' as const })),
 ].slice(0, 3)
 
-/* La bande : seulement les pages publiées qui ont une vraie photo, sport et culture mêlés (arbitrage 9). */
-const ORDRE = ['football', 'volley', 'ecole-de-musique', 'handball', 'theatre', 'tennis', 'chorale', 'danse', 'judo', 'club-d-echecs', 'arts-plastiques', 'rugby']
-const toutes = [...sports.map((e) => ({ e, c: 'sports' as const })), ...activites.map((e) => ({ e, c: 'activites' as const }))].filter(({ e }) => photoDe(e.id))
-const bande = [...ORDRE.flatMap((id) => toutes.filter(({ e }) => e.id === id)), ...toutes.filter(({ e }) => !ORDRE.includes(e.id))]
-  .slice(0, 12)
-  .map(({ e, c }) => ({ nom: e.data.nom, href: url(c, e.id), photo: e.id, ligne: e.data.ligne }))
+/* La bande : les clubs de sport d'abord (au moins 8), puis deux activités artistiques (Nico, 10 oct.). */
+const bande = [...(await cartesSports('fr')), ...(await cartesArts())]
 
+/* L'inscription et la relance sont déjà dans le héros : les onglets montrent la suite. Le visiteur clique (rien ne s'enchaîne seul). */
 const ONGLETS = [
-  { id: 'inscription', libelle: 'Inscription', ecran: 'inscription' as const, phrase: 'La famille s’inscrit depuis son canapé.', lien: { texte: 'Inscription en ligne', href: '/fonctionnalites/inscription-en-ligne' } },
-  { id: 'relance', libelle: 'Relance', ecran: 'relance' as const, phrase: 'Un retard, un clic, une relance.', lien: { texte: 'Relance d’un clic', href: '/fonctionnalites/relance-un-clic' } },
   { id: 'rentree', libelle: 'Rentrée suivante', ecran: 'reinscription' as const, phrase: 'La rentrée suivante, sans tout refaire.', lien: { texte: 'Saison suivante', href: '/fonctionnalites/saison-suivante' } },
   { id: 'compo', libelle: 'Compo du match', ecran: 'terrain' as const, phrase: 'Le samedi, la compo se fait d’un geste.', lien: { texte: 'Compo du match', href: '/fonctionnalites/compo-du-match' } },
+  { id: 'convocations', libelle: 'Convocations', ecran: 'terrain' as const, phrase: 'La famille répond présent ou absent depuis le mail, sans compte.', lien: { texte: 'Convocations en ligne', href: '/fonctionnalites/convocations' } },
+  { id: 'site', libelle: 'Site du club', ecran: 'site' as const, phrase: 'Le site du club se met à jour sans prestataire.', lien: { texte: 'Site de l’association', href: '/fonctionnalites/site-association' } },
 ]
 
 /* La FAQ : six questions, inchangées (arbitrage 14) ; le JSON-LD est construit à partir de la même liste. */
 const faq = [
-  { question: 'OnClub, c’est pour quelles associations ?', reponse: 'Pour toutes celles qui inscrivent des adhérents, avec des cours ou des équipes et des cotisations : clubs de sport, écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.' },
+  { question: 'OnClub, c’est pour quelles associations ?', reponse: 'Pour toutes celles qui inscrivent des adhérents, avec des équipes ou des cours et des cotisations : d’abord les clubs de sport (foot, basket, volley, judo, tennis…), aussi les écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.' },
   { question: 'Combien coûte OnClub ?', reponse: 'Un abonnement au pourcentage des cotisations encaissées en ligne : 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA, plus 2 % sur la boutique. Rien de fixe, et rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.' },
   { question: 'D’où viennent les 61 heures rendues ?', reponse: 'C’est une estimation OnClub pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnClub. Le calcul et les hypothèses sont sur la page du temps gagné.' },
   { question: 'Les familles doivent-elles créer un compte ?', reponse: 'Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien. Pour une convocation, elle répond présent ou absent depuis le mail.' },
@@ -61,21 +59,19 @@ const faq = [
 ]
 ---
 <Layout
-  titre="Inscriptions et cotisations d’association en ligne | OnClub"
-  description="Marre de passer vos soirées sur l’administratif ? OnClub prend les inscriptions, les cotisations et les relances de votre association : sport, musique, danse."
+  titre="Club de sport : inscriptions et cotisations en ligne | OnClub"
+  description="Club de sport ou association : OnClub met en ligne vos inscriptions, vos cotisations et vos relances. Foot, basket, volley, judo… et aussi la musique."
   chemin="/"
   faq={faq}
   langues={true}
 >
   <SceneAccueil
-    titre="Association sportive ou artistique ? La paperasse, c’est fini"
-    phrase="Inscriptions, cotisations, relances : tout se fait en ligne. Vos bénévoles reprennent leurs soirées."
+    titre="Club de sport ou association ? La paperasse, c’est fini"
+    phrase="OnClub met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées."
     cta={{ texte: 'Demander une démo', href: '/demo' }}
   />
 
-  <section class="section" aria-labelledby="t-temps">
-    <div class="enveloppe"><TempsRendu /></div>
-  </section>
+  <SemaineBureau />
 
   <section class="section" id="fonctionnalites" aria-labelledby="t-bento">
     <div class="enveloppe"><Bento /></div>
@@ -83,7 +79,22 @@ const faq = [
 
   <section class="section" aria-labelledby="onglets-titre">
     <div class="enveloppe sur-encre">
-      <OngletsProduit titre="Voyez-le tourner" onglets={ONGLETS} legende="Noms et montants fictifs." />
+      <OngletsProduit titre="Voyez-le tourner" onglets={ONGLETS} legende="Noms et montants fictifs." pause={{ pause: 'Mettre en pause', reprise: 'Relancer l’animation' }}>
+        <MiniEcran
+          slot="ecran-convocations"
+          association="Volley Club Démo"
+          titre="Convocation : match de samedi"
+          sousTitre="M15 filles · réponses depuis le mail"
+          lignes={[
+            { nom: 'Léa', detail: 'Réceptionneuse-attaquante', statut: 'Présente', ton: 'ok' },
+            { nom: 'Inès', detail: 'Passeuse', statut: 'Présente', ton: 'ok' },
+            { nom: 'Chloé', detail: 'Centrale', statut: 'Absente', ton: 'ko' },
+            { nom: 'Maëlys', detail: 'Libéro', statut: 'Pas encore répondu', ton: 'neutre' },
+          ]}
+          pied={{ libelle: 'Réponses', valeur: '9 sur 10' }}
+          bouton="Faire la compo"
+        />
+      </OngletsProduit>
     </div>
   </section>
 
@@ -93,8 +104,8 @@ const faq = [
 
   <section class="section accueil-bande" aria-labelledby="t-assos">
     <BandeAssociations
-      titre="Foot, musique, théâtre. Et toutes les autres"
-      phrase="Dès qu’il y a des inscriptions, des cours ou des équipes, et des cotisations."
+      titre="Foot, basket, judo, tennis. Et tous les autres"
+      phrase="Les clubs de sport d’abord. Aussi la musique et le théâtre : dès qu’il y a des inscriptions et des cotisations."
       items={bande}
       derniere={{ texte: 'Et la vôtre ?', href: '/pour-qui', nomAccessible: 'Et la vôtre ? Toutes les associations' }}
     />

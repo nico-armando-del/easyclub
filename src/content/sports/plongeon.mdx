@@ -1,0 +1,126 @@
+---
+nom: "Plongeon"
+ligne: "Du tremplin d’un mètre au haut-vol, le plongeon dans le même dossier que la natation"
+ordre: 50
+titreSeo: "Section plongeon : inscription en ligne au club | OnClub"
+description: "Section plongeon : seconde section du dossier de natation, catégories par âge, surclassement préparé par le bureau. La licence FFN reste dans extraNat."
+titre: "Section plongeon : l’inscription jointe à celle de natation"
+chapo: "Le nageur du mardi plonge aussi le mercredi. Le plongeon s’ajoute en seconde section dans le même dossier, la réduction se calcule, la famille paie une fois."
+temps:
+  cles: [fiches, paiements, rentree]
+  titre: "Ce que le bureau d’une section plongeon récupère, saison après saison"
+fonctionnalites: [inscription-en-ligne, reinscriptions, convocations, paiement-en-ligne, liste-des-licences, seances-essai]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+sports: [natation]
+maj: 2026-10-10
+faq:
+  - question: "Un plongeur benjamin peut-il concourir avec les minimes ?"
+    reponse: "Le dernier règlement plongeon publié par la FFN, celui de 2024-2025, l’autorise une fois : un benjamin s’engage dans deux catégories au plus, la sienne et celle du dessus ; un minime peut aller jusqu’à deux surclassements. Les engagements se font côté fédération, pas dans OnClub."
+  - question: "Un nageur du club peut-il ajouter le plongeon à son inscription ?"
+    reponse: "Oui. Le plongeon se déclare comme une seconde section du même dossier. Si le club accorde une réduction pour une seconde section, elle s’applique toute seule et la famille voit le total avant de payer."
+  - question: "OnClub remplit-il les feuilles de plongeon ?"
+    reponse: "Non. Ni feuille de plongeon, ni coefficient de difficulté, ni note des juges. OnClub prépare la rentrée, l’argent, les pièces et les convocations ; la compétition elle-même reste dans les outils de la fédération."
+  - question: "Faut-il un certificat médical pour plonger du tremplin ?"
+    reponse: "Le règlement médical de la FFN part du questionnaire de santé, pour les mineurs comme pour les majeurs. Si une réponse conduit à un examen, il faut un certificat de moins de six mois. Dans OnClub, le questionnaire se remplit en ligne et seule l’attestation arrive au club."
+sources:
+  - titre: "FFN, règlements sportifs plongeon 2024-2025 : catégories d’âge et surclassements"
+    url: "https://www.ffnatation.fr/sites/default/files/2024-10/R%C3%A8glements%20sportifs%20Plongeon%20FFN%202024-2025.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFN, page des règlements plongeon"
+    url: "https://www.ffnatation.fr/reglements-plongeon"
+    consulte: "2026-10-10"
+  - titre: "FFN, s’affilier : validité de la licence et extraNat"
+    url: "https://www.ffnatation.fr/saffilier"
+    consulte: "2026-10-10"
+  - titre: "FFN, règlement médical 2026"
+    url: "https://www.ffnatation.fr/sites/default/files/fiches-pdf/Reglement%20Medical%202026.docx_.pdf"
+    consulte: "2026-10-10"
+---
+
+## Section plongeon d’un club de natation : une seconde section, un seul dossier
+
+<Idee visuel="droite">
+
+Beaucoup de plongeurs viennent du bassin d’à côté. Dans OnClub, le plongeon s’ajoute comme seconde section au cours principal : un dossier, un paiement, et la réduction prévue par le club.
+
+<Repli>
+
+- **La seconde section** se coche dans le même formulaire, sans tout ressaisir.
+- **La réduction** pour une seconde section, ou pour un frère qui plonge aussi, se calcule seule.
+- **Une séance d’essai** au tremplin se propose, si le groupe l’ouvre ([séances d’essai](/fonctionnalites/seances-essai)).
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de natation"
+  titre="Dossier · Louis, né en 2014"
+  sousTitre="Saison 2026-2027 · deux sections"
+  lignes={[
+    { nom: 'Natation · perfectionnement', detail: 'Mardi 18:00 · bassin', statut: 'Principale', ton: 'ok' },
+    { nom: 'Plongeon · benjamins', detail: 'Mercredi 16:30 · fosse', statut: 'Seconde section', ton: 'ok' },
+    { nom: 'Réduction seconde section', detail: 'Appliquée au total', statut: '−30,00 €', ton: 'neutre' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '2 × 145,00 €' }}
+  bouton="Valider le dossier"
+  legende="Le dossier vu par la famille : la natation, le plongeon, la réduction. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Inscription en plongeon : poussins, benjamins, minimes, cadets
+
+Au plongeon, la FFN compte l’âge au 31 décembre de l’année de la compétition. Le club fixe les années de naissance de chaque groupe, et la famille ne voit que ceux qui conviennent.
+
+<Repli titre="Les catégories du règlement fédéral">
+
+- **Poussins** : 9 à 11 ans.
+- **Benjamins** : 12 et 13 ans.
+- **Minimes** : 14 et 15 ans.
+- **Cadets** : 16 à 18 ans.
+- **Juniors** : 20 ans et moins ; **Élite** : 14 ans et plus.
+
+</Repli>
+
+Le dernier règlement plongeon en ligne sur le site fédéral est celui de 2024-2025 : les années de naissance de 2026-2027 se déduisent de ces âges, et OnClub ne les calcule pas à votre place.
+
+## Surclassement : la place que le bureau réserve
+
+Un minime qui plonge avec les cadets n’entre pas dans les années du groupe. Avec l’offre Pro, le bureau lui réserve la place dès mai, même hors des années du groupe, et la famille confirme par son lien.
+
+<Repli>
+
+- **La place réservée** tient deux semaines par défaut, de 1 à 90 jours selon le réglage du club ([réinscriptions](/fonctionnalites/reinscriptions)).
+- **Un frais de surclassement**, si le club en demande un, ne s’ajoute que dans ce cas.
+- **Le formulaire garde** la place réservée, même hors des années du groupe.
+
+</Repli>
+
+## Cotisation de plongeon en plusieurs versements
+
+La famille choisit un acompte et des versements, voit chaque date avant de valider ; le trésorier suit ce qui est payé, ce qui vient et ce qui tarde.
+
+<Repli>
+
+- **Pass’Sport et aides locales** cochés et déduits, pièce demandée ([le guide](/guides/pass-sport)).
+- **Chèques et espèces** notés au centime, sans commission.
+
+</Repli>
+
+## Licence FFN : extraNat garde la licence et les engagements
+
+La licence se prend dans extraNat, du 1er septembre au 31 août, et OnClub n’y envoie rien. Il donne la liste des plongeurs prêts à licencier, l’export en tableur, et les attestations du questionnaire de santé ([le guide du certificat](/guides/certificat-medical-sport)).
+
+## Convocation aux compétitions, appel au pied du tremplin
+
+L’entraîneur convoque ses plongeurs ; les familles répondent depuis le mail, sans compte, et l’appel part de ces réponses. Un plongeur sans réponse reste à cocher.
+
+<Repli>
+
+- **Son lien personnel** ouvre la prochaine séance, tirée des créneaux de ses groupes.
+- **Pour voir l’écran** avec vos sections : [une démo pour un club de sport](/demo?type=sport), ou [les offres](/tarifs).
+
+</Repli>
+
+OnClub ne réserve pas la fosse ni les tremplins, et ne suit ni les plongeons appris ni les notes : la salle est un nom et une adresse, rien de plus.

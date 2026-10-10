@@ -1,0 +1,120 @@
+---
+nom: "Skateboard"
+ligne: "Des sessions U12 au créneau adultes, le skatepark se remplit en ligne"
+ordre: 50
+titreSeo: "Club de skate : inscription aux sessions en ligne | OnClub"
+description: "Club de skateboard : sessions par année de naissance, places comptées, essai au skatepark, liste d’attente, cotisation en plusieurs fois. Licence FFRS."
+titre: "Club de skate : les sessions se remplissent en ligne"
+chapo: "Au skatepark, une session pleine en septembre peut se libérer en cours d’année. Chaque session a ses places, l’essai se réserve, l’attente garde le rang."
+temps:
+  cles: [attente, fiches]
+  titre: "Ce que le bureau d’un club de skate récupère, chaque saison"
+fonctionnalites: [inscription-en-ligne, seances-essai, liste-attente, paiement-en-ligne, liste-des-licences, convocations]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "Un skateur né en 2016 peut-il concourir avec les U15 ?"
+    reponse: "La FFRS l’autorise par un simple surclassement, dans la catégorie de compétition immédiatement supérieure, à partir de six ans révolus, avec un certificat médical d’aptitude au surclassement que le club doit détenir. Dans OnClub, ce certificat se demande comme une pièce à déposer."
+  - question: "OnClub gère-t-il le prêt des planches et des casques ?"
+    reponse: "Non. Aucun suivi du matériel prêté. Le club peut demander dans le formulaire si le skateur vient avec sa planche et son casque ; la boutique, en Pro Max IA, vend des articles du club, elle ne prête rien."
+  - question: "Un adulte débutant peut-il s’inscrire seul ?"
+    reponse: "Oui. Il remplit son dossier, donne un contact d’urgence et paie. En loisir, la FFRS lui demande seulement d’attester avoir répondu non à tout le questionnaire QS-SPORT : il le remplit en ligne, et seule l’attestation arrive au club."
+  - question: "La licence FFRS couvre-t-elle toute l’année scolaire ?"
+    reponse: "Pour les disciplines de compétition, dont le skateboard, la licence FFRS va du 1er septembre au 31 août de l’année suivante. La saison du club, dans OnClub, se règle de son côté : septembre à juin par défaut, dates modifiables."
+sources:
+  - titre: "FFRS, Catégories d’âge saison 2026-2027"
+    url: "https://ffroller-skateboard.fr/download/1995/licences/111195/categories-dage-2026-2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Certificat médical et attestation"
+    url: "https://ffroller-skateboard.fr/cm-attestation/"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Prendre ma licence"
+    url: "https://ffroller-skateboard.fr/gerer-mon-club/creer-mon-club/prendre-ma-licence/"
+    consulte: "2026-10-10"
+---
+
+## Inscription au club de skate : une session, des places comptées
+
+Le skatepark ne prend qu’un nombre de riders à la fois : chaque session a ses places, et le parent ne voit que celles ouvertes à l’année de naissance de son enfant.
+
+<Idee visuel="droite">
+
+À zéro place, la session affiche complet ; avec l’offre Pro, la famille prend rang sur la [liste d’attente](/fonctionnalites/liste-attente) au lieu de repartir.
+
+<Repli>
+
+- **Une place se libère** en cours d’année : le bureau la propose d’un clic au suivant, qui paie en acceptant.
+- **Le créneau adultes** se gère comme les autres : ses années, ses places, son tarif.
+- **Vos questions** s’ajoutent au formulaire : planche personnelle, casque, protections.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de skate"
+  titre="Sessions · saison 2026-2027"
+  sousTitre="Skatepark"
+  lignes={[
+    { nom: 'Session U12 · mercredi 14:00', detail: 'Nés de 2016 à 2018', statut: '3 places', ton: 'ok' },
+    { nom: 'Session ados · samedi 10:00', detail: 'Nés de 2010 à 2015', statut: 'Complet', ton: 'ko' },
+    { nom: 'Adultes · jeudi 19:30', detail: 'Nés en 2008 et avant', statut: '6 places', ton: 'ok' },
+  ]}
+  bouton="Ouvrir la liste d’attente"
+  legende="Les sessions et leurs places, comme le bureau les suit. Chiffres fictifs."
+/>
+
+</Idee>
+
+## Séance d’essai au skatepark, puis l’adhésion
+
+Chaque session décide de son [essai](/fonctionnalites/seances-essai) : pas d’essai, essai s’il reste de la place, ou essai même complet. La famille réserve depuis la page du club, et l’inscription qui suit reste rattachée à l’essai.
+
+Le bureau voit ce que les essais ont rapporté, en adhésions et en cotisations.
+
+## Cotisation skate en plusieurs fois, Pass’Sport déduit
+
+Le parent choisit entre un paiement unique et un acompte suivi de versements, avec chaque montant affiché avant de valider.
+
+<Repli>
+
+- **Le [Pass’Sport](/guides/pass-sport)** se coche à l’inscription, se déduit du total, et sa pièce est demandée.
+- **Deux enfants** dans le même dossier : la réduction du deuxième s’applique seule.
+- **Le trésorier** suit l’encaissé, l’à venir et le retard, et note les chèques au centime.
+
+</Repli>
+
+## Licence FFRS : la demande se saisit dans Rolskanet
+
+La licence de skateboard se prend à la Fédération française de roller et skateboard, dans Rolskanet. OnClub ne saisit rien chez elle : il prépare la [liste des licences](/fonctionnalites/liste-des-licences), qui dit qui est prêt.
+
+<Repli titre="Les catégories de compétition skateboard 2026-2027">
+
+- **U12** : nés de 2016 à 2018.
+- **U15** : nés de 2013 à 2015.
+- **U18** : nés de 2010 à 2012.
+- **Senior** : nés en 2009 et avant.
+- **Le simple surclassement** permet de concourir dans la catégorie immédiatement supérieure, avec un certificat médical d’aptitude.
+
+</Repli>
+
+<Repli titre="Certificat ou questionnaire, selon la FFRS">
+
+- **Un rider mineur** : l’attestation du questionnaire de santé, chaque année ; la famille le remplit en ligne dans OnClub, et seule l’attestation arrive au club.
+- **Un adulte en loisir** : l’attestation du questionnaire QS-SPORT, remplie en ligne de la même façon.
+- **Un adulte en compétition** : un certificat de moins d’un an à la première licence, puis tous les trois ans ; il se dépose en photo, et le bureau suit sa date de fin de validité.
+
+</Repli>
+
+## Contest et compétition : la convocation des riders
+
+Pour un contest, l’encadrant convoque ses riders ; les parents répondent depuis le mail, sans compte, et l’appel se fait sur place depuis son téléphone.
+
+L’inscription au contest et les résultats restent chez l’organisateur ou la fédération : OnClub ne note aucune figure et ne tient aucun classement.
+
+<Repli>
+
+- **Le rider sans réponse** reste à cocher : on ne l’inscrit pas d’office sur la liste du départ.
+- **Un contest annulé** pour pluie prévient toutes les familles, avec un mot de l’encadrant.
+
+</Repli>

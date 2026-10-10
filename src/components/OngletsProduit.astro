@@ -4,10 +4,9 @@
   à droite, l'écran animé de l'onglet actif dans un panneau.
 
   Motif ARIA « tabs » : flèches, Début, Fin ; activation au focus.
-  Enchaînement automatique seulement à l'écran (IntersectionObserver, 0,5) ;
-  en pause au survol, au focus dans la section et onglet du navigateur caché ;
-  arrêté pour de bon au premier clic ou à la première touche.
-  Sous mouvement réduit : pas d'enchaînement, le premier onglet.
+  AUCUN enchaînement automatique (Nico, 10 oct. : « encore trop rapides ») :
+  c'est le visiteur qui change d'onglet. L'écran animé de l'onglet actif
+  s'arrête hors de la vue (son propre IntersectionObserver).
   Sans JS : les quatre panneaux se suivent, tous lisibles.
 */
 import EcranAnime from './EcranAnime.astro'
@@ -22,9 +21,11 @@ interface Props {
   fond?: 'encre' | 'papier'
   id?: string
   versFr?: string
+  /** Accueil (public/js/ecrans-ctrl.js chargé) : le bouton qui met les écrans en pause. */
+  pause?: { pause: string; reprise: string }
   /** Slot nommé « ecran-<id> » : un écran de remplacement (pages traduites). */
 }
-const { titre, onglets, legende, fond = 'encre', id = 'onglets', versFr } = Astro.props
+const { titre, onglets, legende, fond = 'encre', id = 'onglets', versFr, pause } = Astro.props
 const slots = Object.fromEntries(await Promise.all(onglets.map(async (o) => [o.id, Astro.slots.has(`ecran-${o.id}`) ? await Astro.slots.render(`ecran-${o.id}`) : null])))
 ---
 <div class:list={['onglets', `onglets-${fond}`]} data-onglets id={id}>
@@ -46,21 +47,20 @@ const slots = Object.fromEntries(await Promise.all(onglets.map(async (o) => [o.i
         <p class="panneau-phrase">{o.phrase} <a class="lien-fleche" href={o.lien.href} hreflang={versFr ? 'fr' : undefined}>{o.lien.texte}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a></p>
       </div>
     ))}
-    {legende && <p class="onglets-legende">{legende}</p>}
+    {(legende || pause) && (
+      <div class="onglets-pied">
+        {legende && <p class="onglets-legende">{legende}</p>}
+        {pause && <button class="pause" type="button" aria-pressed="false" data-pause-ecrans data-pause={pause.pause} data-reprise={pause.reprise}><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg><svg class="i-lecture" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2l9 5-9 5z"/></svg><span data-texte>{pause.pause}</span></button>}
+      </div>
+    )}
   </div>
 </div>
 <script is:inline>
-(function(){document.querySelectorAll('[data-onglets]:not([data-pret])').forEach(function(r){r.setAttribute('data-pret','');var tabs=[].slice.call(r.querySelectorAll('[role=tab]')),pans=[].slice.call(r.querySelectorAll('[role=tabpanel]')),liste=r.querySelector('[role=tablist]'),mm=window.matchMedia,reduit=mm&&mm('(prefers-reduced-motion: reduce)').matches,auto=!reduit,vu=false,i=0;
+(function(){document.querySelectorAll('[data-onglets]:not([data-pret])').forEach(function(r){r.setAttribute('data-pret','');var tabs=[].slice.call(r.querySelectorAll('[role=tab]')),pans=[].slice.call(r.querySelectorAll('[role=tabpanel]')),liste=r.querySelector('[role=tablist]'),mm=window.matchMedia;
 function ori(){var v=mm&&mm('(min-width: 760px)').matches;liste.setAttribute('aria-orientation',v?'vertical':'horizontal');return v}
-function montre(k,focus){i=k;tabs.forEach(function(t,j){var a=j===k;t.setAttribute('aria-selected',a);t.tabIndex=a?0:-1;t.classList.remove('court')});pans.forEach(function(p,j){var a=j===k;p.hidden=!a;p.classList.toggle('actif',a)});if(focus)tabs[k].focus();if(auto&&vu){void tabs[k].offsetWidth;tabs[k].classList.add('court')}}
-function arret(){if(!auto)return;auto=false;r.classList.add('arrete');tabs.forEach(function(t){t.classList.remove('court')})}
+function montre(k,focus){tabs.forEach(function(t,j){var a=j===k;t.setAttribute('aria-selected',a);t.tabIndex=a?0:-1});pans.forEach(function(p,j){var a=j===k;p.hidden=!a;p.classList.toggle('actif',a)});if(focus)tabs[k].focus()}
 pans.forEach(function(p,j){p.hidden=j!==0});ori();if(mm)mm('(min-width: 760px)').addEventListener('change',ori);
-tabs.forEach(function(t,j){t.addEventListener('click',function(){arret();montre(j)});t.addEventListener('animationend',function(e){if(auto&&e.target.parentNode&&e.target.parentNode.parentNode===t)montre((j+1)%tabs.length)});t.addEventListener('keydown',function(e){var k=e.key,n=tabs.length,v=liste.getAttribute('aria-orientation')==='vertical',d=null;if(k===(v?'ArrowDown':'ArrowRight'))d=(j+1)%n;else if(k===(v?'ArrowUp':'ArrowLeft'))d=(j-1+n)%n;else if(k==='Home')d=0;else if(k==='End')d=n-1;if(d===null)return;e.preventDefault();arret();montre(d,true)})});
-if(!auto){r.classList.add('arrete');return}
-function pause(p){r.classList.toggle('en-pause',p)}
-r.addEventListener('mouseenter',function(){pause(true)});r.addEventListener('mouseleave',function(){pause(r.contains(document.activeElement))});r.addEventListener('focusin',function(){pause(true)});r.addEventListener('focusout',function(e){if(!r.contains(e.relatedTarget))pause(false)});
-document.addEventListener('visibilitychange',function(){r.classList.toggle('cache',document.hidden)});
-if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){var x=e[0].isIntersecting;r.classList.toggle('hors-vue',!x);if(x&&!vu){vu=true;montre(i)}},{threshold:.5});o.observe(r)}else arret()})})()
+tabs.forEach(function(t,j){t.addEventListener('click',function(){montre(j)});t.addEventListener('keydown',function(e){var k=e.key,n=tabs.length,v=liste.getAttribute('aria-orientation')==='vertical',d=null;if(k===(v?'ArrowDown':'ArrowRight'))d=(j+1)%n;else if(k===(v?'ArrowUp':'ArrowLeft'))d=(j-1+n)%n;else if(k==='Home')d=0;else if(k==='End')d=n-1;if(d===null)return;e.preventDefault();montre(d,true)})})})})()
 </script>
 <style>
 .onglets{display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
@@ -92,7 +92,8 @@ if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){v
 .onglets-papier .panneau-phrase{color:var(--encre)}
 .panneau-phrase .lien-fleche{color:var(--menthe)}
 .onglets-papier .panneau-phrase .lien-fleche{color:var(--sapin)}
-.onglets-legende{margin-top:12px;font-size:var(--t-micro,.8125rem);color:var(--texte-scene-doux,#AEB4BE)}
+.onglets-pied{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-top:12px}
+.onglets-legende{font-size:var(--t-micro,.8125rem);color:var(--texte-scene-doux,#AEB4BE)}
 .onglets-papier .onglets-legende{color:var(--gris)}
 /* Avec JS : seul le panneau actif, dès le premier rendu (pas de saut). Sans JS : les quatre se suivent. */
 :global(.js) .panneau-onglet:not(.actif){display:none}
@@ -111,12 +112,6 @@ html:not(:global(.js)) .panneau-onglet + .panneau-onglet{margin-top:16px}
 }
 @media (prefers-reduced-motion: no-preference){
   .panneau-onglet.actif{animation:po-entre var(--d-2,320ms) var(--courbe-sortie,ease) both}
-  .onglet.court .onglet-piste>i{animation:po-remplit var(--duree) linear both}
-  @media (min-width:760px){.onglet.court .onglet-piste>i{animation-name:po-remplit-v}}
-  .onglets:is(.en-pause,.cache,.hors-vue) .onglet.court .onglet-piste>i{animation-play-state:paused}
 }
-.onglets.arrete .onglet[aria-selected=true] .onglet-piste>i{animation:none;transform:none}
 @keyframes po-entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes po-remplit{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes po-remplit-v{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 </style>

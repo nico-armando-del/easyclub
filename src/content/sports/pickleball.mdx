@@ -1,0 +1,118 @@
+---
+nom: "Pickleball"
+ligne: "Une section pickleball dans le club de tennis, ouverte et inscrite en ligne"
+ordre: 50
+titreSeo: "Section pickleball au club : inscriptions en ligne | OnClub"
+description: "Section pickleball : créneaux, séance d’essai réservée en ligne, seconde section du dossier de tennis, cotisation en plusieurs fois, licence Club FFT."
+titre: "Pickleball au club : la nouvelle section s’inscrit en ligne"
+chapo: "Quatre terrains de pickleball tiennent dans un court de tennis. Le club ouvre sa section : essai, inscription et paiement passent par le même lien."
+temps:
+  cles: [fiches, paiements]
+  titre: "Ce qu’une section pickleball épargne au bureau, chaque saison"
+fonctionnalites: [inscription-en-ligne, seances-essai, paiement-en-ligne, liste-des-licences, convocations, formulaire-sur-mesure]
+profils: [tresorier]
+guides: [certificat-medical-sport, inscriptions-en-ligne-association]
+maj: 2026-10-10
+faq:
+  - question: "Faut-il une licence à part pour jouer au pickleball dans un club FFT ?"
+    reponse: "Non. La FFT a obtenu la délégation du pickleball, et sa licence Club 2026-2027 couvre tennis, padel, beach tennis, pickleball et courte paume. Un joueur déjà licencié au tennis joue au pickleball avec la même licence."
+  - question: "Un retraité qui veut seulement essayer doit-il d’abord s’inscrire ?"
+    reponse: "Non. Si le créneau accepte les essais, il réserve sa séance depuis la page du club, sans dossier complet. S’il s’inscrit ensuite, son adhésion reste rattachée à l’essai, et le bureau voit combien de séances découverte ont donné une inscription."
+  - question: "Peut-on réserver un créneau aux membres du club de tennis ?"
+    reponse: "Oui. Chaque groupe choisit qui peut s’y inscrire : tout le monde, les anciens adhérents seulement, ou sur invitation. Une section qui démarre peut ainsi s’ouvrir d’abord aux membres, puis au public quand elle a trouvé son rythme."
+  - question: "OnClub organise-t-il des tournois de pickleball homologués ?"
+    reponse: "Non. Les tournois et le classement de pickleball relèvent de la FFT. Un tournoi interne organisé par le club peut avoir sa propre page d’inscription avec l’offre Pro Max IA, mais l’homologation reste une affaire fédérale."
+sources:
+  - titre: "FFT, La Fédération française de tennis obtient la délégation du pickleball"
+    url: "https://www.fft.fr/actualites/pickleball-delegation-fft-pratique"
+    consulte: "2026-10-10"
+  - titre: "FFT, Le pickleball"
+    url: "https://www.fft.fr/nos-sports/pickleball"
+    consulte: "2026-10-10"
+  - titre: "FFT, Licences : la licence Club FFT 2026-2027"
+    url: "https://www.fft.fr/la-federation/licences"
+    consulte: "2026-10-10"
+  - titre: "FFT, Le guide du dirigeant : ouverture de la pré-saisie des licences 2027"
+    url: "https://guidedudirigeant.fft.fr/ouverture-de-la-pre-saisie-des-licences-2027/"
+    consulte: "2026-10-10"
+---
+
+## Inscription à la section pickleball : un créneau, un niveau, des places
+
+Le pickleball se joue surtout en double, sur un terrain de 6,10 m sur 13,41 m : la FFT en compte quatre dans un court de tennis. Chaque créneau porte son niveau, son lieu et son nombre de places.
+
+<Repli>
+
+- **Une discipline qui grandit** : selon la FFT, près de 30 000 pratiquants en France pour 3 500 licences, et 850 clubs qui la proposent.
+- **Jeunes, seniors, familles** : la pratique mélange les âges ; un groupe peut ouvrir ses bornes d’années de naissance aussi large que vous le voulez.
+- **Le créneau découverte** peut accepter un essai même complet, si vous le réglez ainsi.
+- **Le prêt de raquettes** se demande par une question ajoutée au [formulaire](/fonctionnalites/formulaire-sur-mesure) ; OnClub ne gère pas le matériel du club.
+
+</Repli>
+
+## Le joueur de tennis ajoute le pickleball dans le même dossier
+
+Un membre de l’école de tennis adulte coche le pickleball en seconde section : un seul dossier, un seul paiement, et la réduction que vous avez prévue s’applique seule.
+
+<Idee visuel="droite">
+
+Le total s’affiche avant le paiement, ligne par ligne, sans calcul au bureau.
+
+<Repli>
+
+- **Deux sections, une fiche** : le joueur n’est saisi qu’une fois, et il n’a qu’une ligne dans la liste des licences.
+- **Le nouveau venu** qui ne joue qu’au pickleball s’inscrit directement à la section.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de tennis"
+  titre="Dossier · saison 2026-2027"
+  sousTitre="Tennis et pickleball"
+  lignes={[
+    { nom: 'Tennis adulte · mardi 19:00', detail: 'Section principale', statut: '210,00 €', ton: 'neutre' },
+    { nom: 'Pickleball · jeudi 10:00', detail: 'Seconde section', statut: '90,00 €', ton: 'neutre' },
+    { nom: 'Réduction seconde section', detail: 'Appliquée seule', statut: '− 20,00 €', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '280,00 €' }}
+  bouton="Payer en trois fois"
+  legende="Le dossier d’un joueur qui ajoute le pickleball au tennis. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Cotisation pickleball en plusieurs fois, part de licence comprise
+
+Le joueur règle par carte, en une fois ou par un acompte puis des versements, selon les formules du club : chaque date et chaque montant s’affichent avant de valider.
+
+<Repli>
+
+- **La part licence 2026-2027** : 33 € pour un adulte, 23 € de 7 à 18 ans, 13 € à 6 ans et moins, à glisser dans le tarif du créneau.
+- **Le chèque remis au club** se note dans le dossier, au centime, sans commission.
+- **Un versement en retard** se relance d’un bouton, après relecture du message.
+
+</Repli>
+
+## Licence Club FFT : une seule pour le tennis et le pickleball, saisie dans ADOC
+
+La licence Club FFT court du 1er septembre 2026 au 31 août 2027 et le club la saisit dans ADOC. OnClub n’y écrit rien et n’envoie aucun fichier à la fédération.
+
+<Repli>
+
+La [liste des licences](/fonctionnalites/liste-des-licences) dit qui est prêt, qui renouvelle et qui découvre le club, avec l’adresse mail à reporter, et s’exporte en tableur.
+
+</Repli>
+
+## Matchs amicaux et rencontres : la convocation part du club
+
+Pour une rencontre avec un club voisin, l’encadrant de la section convoque ses joueurs ; chacun répond présent ou absent depuis le mail, sans créer de compte.
+
+<Repli>
+
+- **L’appel** se fait depuis le lien personnel de l’encadrant, qui ne voit ni adresse ni téléphone.
+- **Une séance annulée** pour la pluie prévient les joueurs, avec un mot facultatif.
+- **Les tournois homologués**, le classement et le championnat de France restent à la FFT.
+- **Pour voir la section** avec vos créneaux : [demander une démo](/demo?type=sport) ou lire [les tarifs](/tarifs).
+
+</Repli>

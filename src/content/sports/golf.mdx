@@ -1,0 +1,114 @@
+---
+nom: "Golf"
+ligne: "L’association sportive du golf : école de golf et équipes, en ligne"
+ordre: 50
+titreSeo: "Association sportive de golf : adhésion en ligne | OnClub"
+description: "AS de golf : école de golf inscrite par millésime, cotisation en plusieurs fois, convocations des équipes. La licence ffgolf se prend au secrétariat du golf."
+titre: "AS de golf : l’école de golf et les équipes en ligne"
+chapo: "L’école de golf de l’AS accueille les jeunes par millésime, ses équipes jouent les compétitions par équipes. En ligne, les familles inscrivent et le capitaine convoque."
+temps:
+  cles: [paiements, fiches]
+  titre: "Le temps rendu au bureau d’une association sportive de golf, chaque saison"
+fonctionnalites: [inscription-en-ligne, liste-attente, paiement-en-ligne, convocations, espace-encadrant, liste-des-licences]
+profils: [tresorier]
+guides: [certificat-medical-sport, prix-cotisation-association]
+maj: 2026-10-10
+faq:
+  - question: "OnClub réserve-t-il les départs ou encaisse-t-il les green fees ?"
+    reponse: "Non. OnClub sert l’association sportive : l’adhésion à l’AS, l’école de golf, leurs paiements et les convocations des équipes. Les départs, les green fees et l’abonnement au parcours restent dans les outils du golf."
+  - question: "Un enfant de l’école de golf doit-il fournir un certificat médical ?"
+    reponse: "En général non. Selon la ffgolf, un mineur remplit le questionnaire de santé, en loisir comme en compétition comptant pour l’index ; le certificat est réservé aux épreuves avec droit de jeu fédéral. Dans OnClub, le questionnaire officiel du mineur se remplit en ligne et seule l’attestation arrive au club."
+  - question: "La licence ffgolf peut-elle être comprise dans la cotisation de l’AS ?"
+    reponse: "C’est au club d’en décider : il l’inclut dans son tarif ou la fait régler à part. La licence elle-même se prend au secrétariat du golf pour un membre de l’AS ; OnClub ne la commande pas, il donne la liste des membres prêts à licencier."
+  - question: "Combien coûte OnClub à une association sportive de golf ?"
+    reponse: "Rien de fixe : un pourcentage des cotisations payées en ligne, 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA. Ce que le trésorier note par chèque ou en espèces ne paie aucune commission."
+sources:
+  - titre: "ffgolf, commande de la licence (licence fin 2026 et 2027, membre de l’AS)"
+    url: "https://www.ffgolf.org/prendre-sa-licence/commande"
+    consulte: "2026-10-10"
+  - titre: "ffgolf, certificat médical et questionnaire de santé"
+    url: "https://www.ffgolf.org/prendre-sa-licence/certificat-medical-et-qs"
+    consulte: "2026-10-10"
+  - titre: "ffgolf, question de débutant : c’est quoi, les catégories d’âge au golf ?"
+    url: "https://www.ffgolf.org/parcours-detours/culture-golf/question-de-debutant-c-est-quoi-les-categories-d-age-au-golf"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## L’association sportive du golf, pas le golf lui-même
+
+Pour représenter un club dans les compétitions par équipes, un golfeur doit être membre de l’association sportive du golf ; sa licence se prend alors au secrétariat du golf.
+
+OnClub s’occupe de l’adhésion à l’AS, de l’école de golf et de leurs paiements. Il ne gère ni l’abonnement au parcours, ni les green fees, ni la réservation des départs.
+
+## Inscription à l’école de golf : le bon millésime d’office
+
+<Idee visuel="droite">
+
+Au golf, les catégories jeunes suivent le millésime de naissance, pas l’anniversaire : en 2026, un U12 est né en 2014 ou 2015, un U14 en 2012 ou 2013.
+
+<Repli>
+
+- **Chaque groupe** porte ses bornes d’années ; le formulaire ne montre à la famille que les groupes ouverts au millésime de l’enfant, avec les places restantes.
+- **Groupe complet** : avec l’offre Pro, la famille passe en [liste d’attente](/fonctionnalites/liste-attente), et la place libérée lui est proposée d’un clic.
+- **Une séance d’essai** se réserve depuis la page du club, si le groupe en accepte.
+- **Les adultes** changent de catégorie à leur anniversaire selon la ffgolf ; leur adhésion à l’AS n’en dépend pas.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre AS de golf"
+  titre="École de golf · rentrée 2026"
+  sousTitre="Practice et parcours école"
+  lignes={[
+    { nom: 'Groupe nés en 2016 et 2017', detail: 'Mercredi 14:00 · practice', statut: '3 places', ton: 'ok' },
+    { nom: 'Groupe nés en 2014 et 2015', detail: 'Mercredi 15:30 · parcours école', statut: 'Complet', ton: 'ko' },
+    { nom: 'Groupe nés en 2012 et 2013', detail: 'Samedi 10:00 · practice', statut: '5 places', ton: 'ok' },
+  ]}
+  bouton="Ouvrir la liste d’attente"
+  legende="Les groupes de l’école de golf vus par le bureau, par millésime. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Cotisation de l’AS en plusieurs fois, sans chèques à encaisser
+
+L’adhésion à l’AS et l’école de golf se paient par carte, en une fois ou avec un acompte puis des versements, le total affiché avant de valider.
+
+<Repli>
+
+- **Deux enfants à l’école de golf** : la réduction du deuxième s’applique seule.
+- **Un parent membre et un enfant de l’école de golf** se règlent dans le même dossier.
+- **Les chèques et les espèces** se notent au centime ; le tableau du trésorier sépare l’encaissé, l’à venir et le retard.
+- **Les reçus de cotisation** et les exports comptables attendent le trésorier en fin de saison.
+
+</Repli>
+
+## Licence ffgolf : fin 2026 et 2027, prise au golf
+
+Depuis le 1er septembre 2026, la ffgolf propose une licence qui couvre la fin de 2026 et l’année 2027. OnClub ne la commande pas : l’écran Licences donne au bureau la liste des membres prêts, exportable en tableur.
+
+<Repli>
+
+- **Une saison à votre rythme** : dans OnClub, la saison du club se règle librement, de septembre à juin pour l’école ou sur l’année civile pour l’AS.
+- **La santé selon la ffgolf** : un majeur qui joue en loisir ne fournit rien ; un mineur, ou un majeur en compétition comptant pour l’index, remplit le questionnaire de santé ; une épreuve avec droit de jeu fédéral demande un certificat.
+- **Un certificat déposé** en photo est contrôlé par le bureau et suivi jusqu’à sa date de fin.
+
+</Repli>
+
+## Convocation des équipes de l’AS pour les compétitions
+
+Le capitaine convoque son équipe ; chaque joueur répond présent ou absent depuis le mail, sans créer de compte, et les réponses s’affichent sur sa page.
+
+<Repli>
+
+- **Un lien personnel** ouvre la page du capitaine, sans mot de passe ; il n’y voit ni adresse ni téléphone.
+- **Une rencontre annulée** se signale aux convoqués, avec un mot facultatif.
+- **Les scores, l’index et les classements** restent chez la ffgolf : OnClub n’en tient aucun.
+
+</Repli>
+
+Pour voir l’ensemble, [demandez une démonstration](/demo?type=sport) ou comparez les [offres](/tarifs).

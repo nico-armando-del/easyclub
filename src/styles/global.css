@@ -230,3 +230,22 @@ body[data-fond="blanc"]{background:var(--blanc)}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:200ms}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ===== Accueil (refonte du héros, 10 oct.) : écrans mis à l'échelle et bouton pause =====
+   Un écran animé de taille fixe (--l × --h px) mis à l'échelle de son cadre par
+   public/js/ecrans-ctrl.js (--k), éventuellement recadré (--cx, --cy, --cw, --ch). */
+.echelle{position:relative;width:100%;aspect-ratio:var(--cw,var(--l)) / var(--ch,var(--h));overflow:hidden}
+.echelle-in{position:absolute;left:0;top:0;width:calc(var(--l) * 1px);height:calc(var(--h) * 1px);transform:scale(var(--k,.4)) translate(calc(var(--cx,0) * -1px),calc(var(--cy,0) * -1px));transform-origin:0 0}
+.echelle .ecran-anime{width:100%}
+.echelle .ec-inscription{max-width:none;width:340px}
+.echelle .ec-inscription .eci-scene{background:none;border:0;border-radius:0}
+.echelle .ec-relance,.echelle .ec-relancefixe{max-width:none;width:880px}
+.echelle .ec-relance .r-fond,.echelle .ec-relancefixe .r-fond{background:none;padding:0;border-radius:0}
+.echelle .ec-reinscription{max-width:none;width:880px}
+.ecrans-en-pause .ec *{animation-play-state:paused!important}
+.pause{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(11,15,20,.6);color:var(--texte-scene);font:600 .875rem/1 var(--f-texte);cursor:pointer}
+.pause:hover{color:var(--blanc);border-color:rgba(255,255,255,.55)}
+.pause:focus-visible{outline:3px solid var(--menthe);outline-offset:2px}
+.pause svg{width:14px;height:14px}
+.pause[aria-pressed="true"] .i-pause,.pause:not([aria-pressed="true"]) .i-lecture{display:none}
+@media (prefers-reduced-motion:reduce){.pause{display:none}}

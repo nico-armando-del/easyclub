@@ -1,0 +1,132 @@
+---
+nom: "Cyclisme"
+ligne: "De l’école de cyclisme aux coureurs du dimanche, la rentrée en ligne"
+ordre: 50
+titreSeo: "Inscription club de cyclisme en ligne, licence FFC | OnClub"
+description: "Club de cyclisme : groupes par année de naissance, cotisation en plusieurs fois, liste des licences prête pour la campagne FFC de l’année civile."
+titre: "Club de cyclisme : rentrée en septembre, licence en janvier"
+chapo: "La cotisation se règle à la rentrée, la licence FFC suit l’année civile. Le bureau garde une seule liste à jour pour les deux moments."
+temps:
+  cles: [paiements, fiches]
+  titre: "Ce que le bureau d’un club de cyclisme récupère, chaque saison"
+fonctionnalites: [liste-des-licences, inscription-en-ligne, paiement-en-ligne, pieces-justificatives, convocations, seances-essai]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "Un jeune inscrit en septembre doit-il reprendre une licence en janvier ?"
+    reponse: "Cela dépend. Selon la FFC, un nouveau licencié qui arrive à partir de septembre reçoit directement une licence 2027, valable seize mois. Un coureur déjà licencié en 2026 s’arrête au 31 décembre et reprend une licence 2027. Dans OnClub, la liste des licences sépare les renouvellements des nouveaux."
+  - question: "Les engagements aux courses passent-ils par OnClub ?"
+    reponse: "Non. L’engagement d’un coureur se fait auprès de l’organisateur ou de la fédération, et les résultats restent chez eux. OnClub sert avant : l’éducateur convoque son groupe, les parents répondent depuis le mail, et il sait qui roule dimanche."
+  - question: "Un enfant peut-il faire une sortie d’essai avant d’adhérer ?"
+    reponse: "Oui, si le groupe l’accepte : chaque groupe choisit entre pas d’essai, essai s’il reste de la place, ou essai même complet. La famille réserve depuis la page du club. Côté fédération, la FFC propose un Pass Accueil Jeune aux moins de dix-sept ans."
+  - question: "Un adulte doit-il fournir un certificat médical pour sa licence FFC ?"
+    reponse: "Pour la licence 2027, la FFC demande à l’adulte de remplir son module santé et de signer une attestation sur l’honneur. Le certificat, avec électrocardiogramme, n’est exigé que s’il signale des symptômes cardiaques dans l’année. Le club peut demander cette attestation signée comme une pièce à déposer."
+sources:
+  - titre: "FFC, Prendre une licence dans un club"
+    url: "https://velo.ffc.fr/se-licencier/licence-club/"
+    consulte: "2026-10-10"
+  - titre: "FFC, Licence Jeunesse : catégories d’âge"
+    url: "https://velo.ffc.fr/se-licencier/les-licences-ffc/licence-jeunesse/"
+    consulte: "2026-10-10"
+  - titre: "FFC, Tarifs des licences"
+    url: "https://velo.ffc.fr/se-licencier/tarifs/"
+    consulte: "2026-10-10"
+  - titre: "FFC, Demande de licence 2027 et note sur le certificat médical"
+    url: "https://ffc.fr/app/uploads/sites/2/2025/09/Demande-de-licence-2027_20260901.pdf"
+    consulte: "2026-10-10"
+---
+
+## Licence FFC à l’année civile : la liste prête pour décembre
+
+À la Fédération française de cyclisme, la licence court du 1er janvier au 31 décembre, alors que le club inscrit en septembre. Le nouveau licencié qui arrive à la rentrée reçoit directement une licence 2027, valable seize mois.
+
+La demande de licence se fait dans l’espace licence de la FFC, ou sur le formulaire papier que le comité régional valide. OnClub n’y envoie rien et ne saisit aucune licence : il prépare la [liste des licences](/fonctionnalites/liste-des-licences) que le bureau reporte.
+
+<Idee visuel="droite">
+
+Quand la campagne 2027 s’ouvre, l’écran Licences dit qui est prêt, qui attend encore un paiement ou une pièce, qui renouvelle et qui est nouveau au club.
+
+<Repli>
+
+- **Prêt** : cotisation payée ou échéancier à jour, plus aucune pièce à redemander.
+- **Une seule ligne** par coureur, même inscrit dans deux groupes.
+- **L’export en tableur** donne nom, prénom, année de naissance, groupe, numéro de licence et contacts.
+- **Plus de 2 300 clubs** sont affiliés à la FFC, selon la fédération : chacun fait sa campagne dans le même calendrier.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club cycliste"
+  titre="Licences 2027 · à reporter"
+  sousTitre="École de cyclisme et groupe route"
+  lignes={[
+    { nom: 'Léa B.', detail: 'École · renouvellement', statut: 'Prête', ton: 'ok' },
+    { nom: 'Hugo T.', detail: 'École · nouveau au club', statut: 'Paiement en cours', ton: 'neutre' },
+    { nom: 'Samir K.', detail: 'Route adultes · renouvellement', statut: 'Pièce manquante', ton: 'ko' },
+  ]}
+  bouton="Exporter la liste"
+  legende="La liste que le trésorier garde ouverte pendant la campagne de licences. Noms fictifs."
+/>
+
+</Idee>
+
+## Inscription à l’école de cyclisme : le groupe selon l’année de naissance
+
+La FFC compte l’âge au 31 décembre de la saison : en 2027, un enfant né en 2017 roule en U11. Le formulaire ne propose à la famille que les groupes ouverts à cette année, avec les places restantes.
+
+OnClub ne calcule pas la catégorie fédérale : le club nomme ses groupes et pose leurs années de naissance, une fois.
+
+<Repli titre="Les catégories jeunes FFC 2027">
+
+- **Baby vélo** : 2 à 4 ans, nés de 2023 à 2025.
+- **U7** : nés en 2021 et 2022.
+- **U9** : nés en 2019 et 2020.
+- **U11** : nés en 2017 et 2018.
+- **U13** : nés en 2015 et 2016.
+- **U15** : nés en 2013 et 2014.
+- **U17** : nés en 2011 et 2012 ; à dix-sept ans, le coureur passe sur une licence adulte, Compétition ou Sport.
+
+</Repli>
+
+Une [séance d’essai](/fonctionnalites/seances-essai) se réserve depuis la page du club, et l’inscription qui suit lui reste rattachée.
+
+## Cotisation du club cycliste en plusieurs fois
+
+Un acompte, puis des versements : la famille voit chaque date et chaque montant avant de valider, et la réduction du deuxième enfant est déjà comptée.
+
+<Repli>
+
+- **Le [Pass’Sport](/guides/pass-sport)** et les aides locales se cochent à l’inscription et se déduisent ; la pièce qui les justifie est demandée.
+- **Les chèques et les espèces** se notent dans le dossier, au centime, sans commission.
+- **Une famille en retard** se relance d’un bouton : le message porte le bon montant, et le bureau voit qui le recevra avant l’envoi.
+- **Le reçu de cotisation** se télécharge depuis le dossier.
+
+</Repli>
+
+## Questionnaire mineur en ligne, module santé FFC pour l’adulte
+
+Pour un mineur, la famille remplit le questionnaire de santé officiel depuis son téléphone : les réponses y restent, seule l’attestation signée arrive au club.
+
+<Repli>
+
+- **Une réponse positive** : la FFC demande alors un certificat médical de moins de six mois.
+- **L’adulte** remplit le module santé de la FFC et signe une attestation sur l’honneur ; le club peut la réclamer comme une pièce à déposer en photo.
+- **Le certificat avec électrocardiogramme** n’est exigé que si l’adulte signale des symptômes cardiaques dans l’année ; sa date de fin de validité est suivie.
+
+</Repli>
+
+## Convocation pour la course du dimanche, appel à l’entraînement
+
+L’éducateur convoque son groupe pour une course ou un entraînement ; les parents répondent présent ou absent depuis le mail, sans créer de compte.
+
+L’engagement à l’épreuve reste chez l’organisateur ou la fédération. OnClub ne chronomètre rien et ne publie aucun résultat.
+
+<Repli>
+
+- **L’[espace encadrant](/fonctionnalites/espace-encadrant)** s’ouvre par un lien personnel : la prochaine séance d’abord, puis l’appel, sans voir l’adresse ni le téléphone des familles.
+- **Une sortie annulée** (route verglacée, orage) prévient toutes les familles, avec un mot si l’éducateur le souhaite.
+- **Un jeune absent sans prévenir** trois fois sur les cinq derniers appels est signalé au bureau.
+
+</Repli>

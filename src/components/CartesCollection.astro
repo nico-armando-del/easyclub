@@ -10,6 +10,11 @@
   - `az` : au-delà de `limite`, la liste COMPLÈTE de A à Z, avec un filtre en
     amélioration progressive (attribut hidden sur les lignes écartées ; sans JS,
     tout est là). Chaque page publiée est ainsi liée.
+  - `azToujours` : la liste A-Z même sous `limite` (/pour-qui, sports : elle
+    grandit avec les pages publiées, rien n'est codé en dur) ; `limite={0}` ne
+    garde que la liste ;
+  - `vignettes` : une liste compacte (petite photo carrée + nom), pour les
+    activités artistiques, sous les sports.
 */
 import { liste, url, ETIQUETTE, type NomCollection } from '../lib/collections'
 import { photoDe } from '../data/photos'
@@ -19,17 +24,19 @@ interface Props {
   vide?: string
   portrait?: boolean
   limite?: number
-  az?: { titre: string; champ: string; id: string }
+  az?: { titre: string; champ: string; id: string; indice?: string }
+  azToujours?: boolean
+  vignettes?: boolean
 }
-const { collection, vide = 'Les premières pages arrivent.', portrait = false, limite, az } = Astro.props
+const { collection, vide = 'Les premières pages arrivent.', portrait = false, limite, az, azToujours = false, vignettes = false } = Astro.props
 const toutes = await liste(collection)
-const entrees = limite ? toutes.slice(0, limite) : toutes
+const entrees = limite !== undefined ? toutes.slice(0, limite) : toutes
 const avecPhotos = collection === 'sports' || collection === 'activites'
 const illustrees = avecPhotos ? entrees.filter((e: any) => photoDe(e.id)) : []
 const autres = avecPhotos ? entrees.filter((e: any) => !photoDe(e.id)) : entrees
 const etiquette = (e: any) => `${collection === 'articles' ? e.data.rubrique : ETIQUETTE[collection]}${e.data.lecture ? ` · ${e.data.lecture} min` : ''}`
 const plat = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-const montrerAz = az && limite !== undefined && toutes.length > limite
+const montrerAz = az && (azToujours || (limite !== undefined && toutes.length > limite))
 const parLettre = new Map<string, any[]>()
 if (montrerAz) {
   for (const e of [...toutes].sort((a: any, b: any) => a.data.nom.localeCompare(b.data.nom, 'fr'))) {
@@ -39,9 +46,13 @@ if (montrerAz) {
   }
 }
 ---
-{entrees.length > 0 ? (
+{toutes.length > 0 ? (
   <>
-    {illustrees.length > 0 && (
+    {vignettes ? (
+      <ul class="vignettes">
+        {entrees.map((e: any) => <li><a href={url(collection, e.id)}>{photoDe(e.id) ? <Photo nom={e.id} ratio="1/1" tailles="64px" /> : <span class="vg-vide" aria-hidden="true"></span>}<span class="vg-corps"><b>{e.data.nom}</b><span>{e.data.ligne}</span></span></a></li>)}
+      </ul>
+    ) : illustrees.length > 0 && (
       <ul class:list={['cartes', portrait ? 'grille-portraits' : 'grille-photos', portrait && illustrees.length <= 2 && 'portraits-peu']}>
         {illustrees.map((e: any) => portrait ? (
           <li><a class="carte-portrait" href={url(collection, e.id)}><Photo nom={e.id} ratio="4/5" tailles="(min-width: 1000px) 230px, (min-width: 700px) 30vw, 112px" /><span class="cp-corps"><b>{e.data.nom}</b><span>{e.data.ligne}</span></span></a></li>
@@ -50,7 +61,7 @@ if (montrerAz) {
         ))}
       </ul>
     )}
-    {autres.length > 0 && (illustrees.length > 0 ? (
+    {!vignettes && autres.length > 0 && (illustrees.length > 0 ? (
       <ul class="liste-compacte">
         {autres.map((e: any) => <li><a href={url(collection, e.id)}>{e.data.nom}</a></li>)}
       </ul>
@@ -62,11 +73,11 @@ if (montrerAz) {
       </ul>
     ))}
     {montrerAz && az && (
-      <div class="az" data-az>
+      <div class="az" id={az.id} data-az>
         <h3 id={`${az.id}-titre`} class="az-titre">{az.titre}</h3>
         <div class="az-filtre" data-az-filtre hidden>
           <label for={`${az.id}-champ`}>{az.champ}</label>
-          <input id={`${az.id}-champ`} type="search" autocomplete="off" spellcheck="false" data-az-champ>
+          <input id={`${az.id}-champ`} type="search" autocomplete="off" spellcheck="false" placeholder={az.indice} data-az-champ>
         </div>
         <div class="az-groupes">
           {[...parLettre.entries()].map(([lettre, items]) => (
@@ -138,6 +149,18 @@ if (montrerAz) {
   .portraits-peu .cp-corps b{font-size:1.5rem}
   .portraits-peu .cp-corps span{font-size:1rem}
 }
+
+/* Vignettes : liste compacte (activités artistiques sur /pour-qui) */
+.vignettes{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:8px}
+@media (min-width:700px){.vignettes{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px var(--col-gap)}}
+@media (min-width:1000px){.vignettes{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.vignettes a{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:center;min-height:44px;padding:8px;border-radius:var(--r-m);background:var(--blanc);border:1px solid var(--trait);text-decoration:none;color:var(--encre);transition:border-color var(--d-2)}
+.vignettes a:hover{border-color:var(--encre)}
+.vignettes :global(.photo){width:64px;height:64px;object-fit:cover;border-radius:10px}
+.vg-vide{width:64px;height:64px;border-radius:10px;background:var(--papier-2)}
+.vg-corps{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vg-corps b{font:700 1.0625rem/1.2 var(--f-titre)}
+.vg-corps span{font-size:.875rem;line-height:1.35;color:var(--gris)}
 
 /* Liste A-Z */
 .az{margin-top:var(--e-8)}

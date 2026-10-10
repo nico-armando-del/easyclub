@@ -1,0 +1,122 @@
+---
+nom: "Course d’orientation"
+ligne: "De l’école de CO aux courses du dimanche, le club d’orientation s’inscrit en ligne"
+ordre: 50
+titreSeo: "Club de course d’orientation : inscription en ligne | OnClub"
+description: "Club de course d’orientation : école de CO par année de naissance, convocations aux courses du dimanche, cotisation en plusieurs fois. Licence à la FFCO."
+titre: "Club de course d’orientation : l’école de CO en ligne"
+chapo: "Dimanche, course régionale en forêt : l’entraîneur doit savoir quels jeunes viennent. Les parents répondent depuis le mail, et le groupe part au complet."
+temps:
+  cles: [fiches, relances]
+  titre: "Ce que le bureau d’un club de course d’orientation récupère, chaque saison"
+fonctionnalites: [convocations, espace-encadrant, inscription-en-ligne, paiement-en-ligne, liste-des-licences, pieces-justificatives]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "OnClub suit-il les balises de couleur acquises par chaque jeune ?"
+    reponse: "Non. Le seul niveau connu est celui d’un groupe, que le club écrit lui-même : « groupe vert-bleu », « groupe jaune ». La progression de chaque orienteur, les balises obtenues et les circuits courus ne sont pas suivis."
+  - question: "Un adulte doit-il fournir un certificat médical pour sa licence FFCO ?"
+    reponse: "Selon le règlement médical de la FFCO, non : l’adulte remplit le questionnaire de santé fédéral et signe une attestation, licence compétition ou non. Pour un mineur, c’est le questionnaire de santé du mineur, et un oui impose un certificat."
+  - question: "Les engagements aux courses passent-ils par OnClub ?"
+    reponse: "Non. L’inscription aux courses du calendrier fédéral se fait sur le site de gestion de la FFCO. OnClub sert à savoir qui vient avec le club ce dimanche-là, par la convocation et ses réponses."
+  - question: "OnClub gère-t-il la puce électronique et les résultats de la course ?"
+    reponse: "Non. OnClub ne chronomètre rien, ne lit aucun pointage et ne publie aucun classement. Le contrôle des retours, à l’arrivée, reste l’affaire de l’organisateur et de son outil de course."
+sources:
+  - titre: "FFCO, page d’accueil (licenciés et clubs)"
+    url: "https://www.ffcorientation.fr/"
+    consulte: "2026-10-10"
+  - titre: "FFCO, Règlement médical (édition mai 2025)"
+    url: "https://www.ffcorientation.fr/document/1783941185_6a54c841260d5/"
+    consulte: "2026-10-10"
+  - titre: "FFCO, Règles techniques et de sécurité en course d’orientation (édition décembre 2025)"
+    url: "https://www.ffcorientation.fr/document/1783941185_6a54c8414c601/"
+    consulte: "2026-10-10"
+---
+
+## Convocation à la course du dimanche, réponse depuis le mail
+
+L’entraîneur convoque son groupe pour la course du dimanche ; chaque parent répond présent ou absent depuis le mail, sans créer de compte.
+
+<Idee visuel="droite">
+
+Le samedi soir, l’entraîneur sait qui monte dans les voitures : les présents, les excusés, et ceux qui n’ont pas encore répondu.
+
+<Repli>
+
+- **Un lien personnel** pour l’entraîneur, transmis par le bureau, sans mot de passe.
+- **L’appel** part des réponses : sans réponse, le jeune reste à cocher.
+- **La course annulée** pour une alerte météo : les familles sont prévenues, avec un mot.
+- **Vos questions** de covoiturage s’ajoutent au formulaire d’inscription.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club d’orientation"
+  titre="Convocation · dimanche 15 novembre"
+  sousTitre="Groupe jeunes · course régionale en forêt"
+  lignes={[
+    { nom: 'Léo M.', detail: 'A répondu présent', statut: 'Oui', ton: 'ok' },
+    { nom: 'Anaïs K.', detail: 'Sans réponse', statut: 'À cocher', ton: 'neutre' },
+    { nom: 'Tom B.', detail: 'Absent, prévenu', statut: 'Excusé', ton: 'ko' },
+  ]}
+  bouton="Faire l’appel"
+  legende="La convocation d’un groupe jeunes, vue par l’entraîneur. Noms fictifs."
+/>
+
+</Idee>
+
+## Inscription à l’école de course d’orientation, groupe par âge
+
+Le parent ne voit que les groupes ouverts à l’année de naissance de son enfant, avec les places restantes et les créneaux d’entraînement.
+
+<Repli titre="Les niveaux de la FFCO, selon l’âge">
+
+- **10 ans et moins** : circuits verts, bleus si le niveau bleu est acquis.
+- **11 et 12 ans** : bleus, jaunes si le niveau jaune est acquis.
+- **13 et 14 ans** : jaunes, orange si le niveau orange est acquis.
+- **15 à 18 ans** : orange, violets si le niveau violet est acquis ; le violet et le noir sont réservés aux 15 ans et plus expérimentés.
+
+</Repli>
+
+OnClub ne suit pas les balises de couleur de chaque jeune : le club nomme ses groupes (« groupe jaune ») et pose leurs années de naissance.
+
+## Cotisation du club d’orientation en plusieurs fois
+
+La famille voit le prix, la réduction du deuxième enfant et chaque versement avant de payer par carte : un acompte, puis la suite.
+
+<Repli>
+
+- **Le Pass’Sport** et les aides locales se cochent et se déduisent, justificatif demandé.
+- **Les adultes du club** paient de la même façon, ou par chèque noté dans le dossier.
+- **Le tableau de l’argent** montre l’encaissé, l’à venir et le retard ; un retard se relance d’un bouton.
+
+</Repli>
+
+## Licence FFCO : le site de gestion fédéral reste l’outil
+
+La licence se gère sur le site de la FFCO, qui annonce 10 000 licenciés et 200 clubs. OnClub ne saisit aucune licence et n’envoie aucun fichier.
+
+<Repli>
+
+- **La [liste des licences](/fonctionnalites/liste-des-licences)** : qui est prêt, qui renouvelle, qui est nouveau.
+- **L’export en tableur** se garde ouvert pendant la saisie fédérale.
+- **Le questionnaire de santé du mineur** se remplit en ligne : seule l’attestation arrive au club.
+- **Un certificat**, quand il est demandé, se dépose en photo comme [pièce](/fonctionnalites/pieces-justificatives).
+
+</Repli>
+
+## Stage des vacances et course organisée par le club
+
+Avec l’offre Pro Max IA, le stage de printemps ou la course que le club organise a sa [page d’inscription](/fonctionnalites/evenements-stages) : date, tarif, places et liste d’attente, réglés à part de la cotisation.
+
+<Repli>
+
+- **Le stage** peut rester réservé aux anciens du club, se donner sur invitation, ou s’ouvrir à tous.
+- **La course du club** reste une inscription, pas une vente de billets : le pointage et les résultats passent par l’outil de course de l’organisateur.
+- **Les bénévoles** du jour, traceur ou contrôleur, ne se planifient pas dans OnClub.
+
+</Repli>
+
+Pour voir un groupe jeunes convoqué pour le dimanche, [demandez une démo](/demo?type=sport).

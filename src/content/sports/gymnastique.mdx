@@ -1,0 +1,116 @@
+---
+nom: "Gymnastique"
+ligne: "De la baby gym aux groupes de compétition, chaque gymnaste inscrit et licencié"
+ordre: 50
+titreSeo: "Inscription club de gymnastique en ligne, baby gym | OnClub"
+description: "Club de gym : un groupe par âge et par discipline, places affichées, cotisation en plusieurs fois, liste des licences à jour. Licence prise sur FFGym Licence."
+titre: "Club de gym : tous les groupes inscrits, tous licenciés"
+chapo: "Baby gym le samedi, loisirs le mercredi, compétition le soir : une grille de petits groupes. La famille trouve le sien, paie, et le bureau sait qui licencier."
+temps:
+  cles: [fiches, pieces, evenements]
+  titre: "Ce que le bureau d’un club de gymnastique récupère chaque saison"
+fonctionnalites: [inscription-en-ligne, liste-des-licences, pieces-justificatives, seances-essai, evenements-stages, paiement-en-ligne]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "Peut-on inscrire en ligne un enfant de deux ans en baby gym ?"
+    reponse: "Oui. Le parent remplit le dossier depuis son téléphone et le groupe baby gym n’apparaît que pour les années de naissance que le club y a posées. Côté fédération, la licence Baby couvre les enfants de 15 mois à 6 ans selon le barème 2026-2027 d’un comité régional."
+  - question: "Un gymnaste adulte doit-il fournir un certificat médical ?"
+    reponse: "À la FFGym, oui : il est obligatoire pour la licence d’un majeur, puis redemandé tous les trois ans. Dans OnClub, il se dépose en photo à l’inscription, le bureau le contrôle et la date de fin de validité reste suivie d’une saison à l’autre."
+  - question: "Une gymnaste peut-elle faire de la GR et du trampoline la même saison ?"
+    reponse: "Oui : les deux groupes s’ajoutent au même dossier, la réduction pour plusieurs cours s’applique si le club la propose, et la famille voit le total avant de payer. Dans la liste des licences, elle n’occupe qu’une ligne."
+  - question: "OnClub suit-il les niveaux, les notes et les engagements en compétition ?"
+    reponse: "Non. OnClub ne connaît que le niveau du groupe, tel que le club l’a nommé. Les programmes, les notes des juges, les passages de niveau et les engagements restent dans les outils de la fédération."
+sources:
+  - titre: "FFGym, « Au cœur des clubs », le guide fédéral 2026-2027"
+    url: "https://moncompte.ffgym.fr/download/6ab26638faef16eb478b4567/Au%20coeur%20des%20clubs,%20votre%20guide%202026-2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFGym Région Sud, tarifs des licences 2026-2027 (licence Baby, licence standard)"
+    url: "https://www.ffgym-regionsud.fr/wp-content/uploads/2026/07/TARIFS-LICENCES-REGION-SUD-SAISON-2026.2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFGym Région Sud, la saison 2026-2027 ouvre le 1er septembre sur FFGym Licence"
+    url: "https://www.ffgym-regionsud.fr/tarifs-saison-2026-2027/"
+    consulte: "2026-10-10"
+  - titre: "FFGym Hauts-de-France, le certificat médical (page de la saison 2025-2026)"
+    url: "https://hauts-de-france.ffgym.fr/Comite-et-Clubs/Affiliation-Club-Licences/Certificat-medical"
+    consulte: "2026-10-10"
+---
+
+## Inscription club de gym : un groupe par âge et par discipline
+
+Un club de gym, c’est une grille de petits groupes : baby gym, artistique loisir, GR, trampoline, parkour, gym adultes. Chacun porte ses années de naissance, ses créneaux et ses places, et la famille ne voit que ceux de son enfant.
+
+<Repli>
+
+- **Les groupes de compétition** s’ouvrent aux anciens seulement, ou sur invitation de l’entraîneur.
+- **Une séance d’essai** se réserve depuis la page du club, si le groupe l’accepte, même complet quand le club le décide.
+- **Complet pour aujourd’hui** ou **complet pour la saison** : le club choisit ce que la famille lit.
+- **Vos questions** (taille de justaucorps, covoiturage aux compétitions) s’ajoutent au formulaire.
+
+</Repli>
+
+## Licence FFGym : tous licenciés, OnClub tient la liste à jour
+
+<Idee visuel="droite">
+
+La FFGym demande de licencier tous les adhérents du club, du plus petit au plus grand. La saison s’ouvre le 1er septembre sur FFGym Licence, où la licence se prend ; OnClub n’y saisit rien, il dit qui est prêt.
+
+<Repli>
+
+- **Une ligne par gymnaste**, même inscrit dans deux groupes : prêt, en attente de paiement, en attente de pièce.
+- **Renouvellement ou nouveau** au club, dès qu’une saison précédente est connue.
+- **L’export en tableur** avec l’année de naissance, utile pour choisir entre la licence Baby (de 15 mois à 6 ans, selon un barème régional) et la licence standard.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de gym"
+  titre="Licences · saison 2026-2027"
+  sousTitre="À reporter sur FFGym Licence"
+  lignes={[
+    { nom: 'Lina B.', detail: 'Baby gym · née en 2023', statut: 'Prête', ton: 'ok' },
+    { nom: 'Emma T.', detail: 'GR et trampoline · née en 2015', statut: 'Prête', ton: 'ok' },
+    { nom: 'Noé V.', detail: 'Parkour · né en 2011', statut: 'Paiement en cours', ton: 'neutre' },
+    { nom: 'Claire D.', detail: 'Gym adultes · certificat', statut: 'Pièce à fournir', ton: 'ko' },
+  ]}
+  bouton="Exporter la liste"
+  legende="L’écran Licences vu par le bureau : qui est prêt à être licencié, qui attend encore. Noms fictifs."
+/>
+
+</Idee>
+
+## Certificat ou questionnaire : selon l’âge et le niveau
+
+Pour un mineur, la FFGym ne demande plus de certificat, sauf si le questionnaire de santé y conduit. Un majeur en fournit un pour sa licence, renouvelé tous les trois ans ; les niveaux Performance et Élite, chaque année.
+
+<Repli>
+
+- **Le questionnaire du mineur** se remplit en ligne ; les réponses restent sur le téléphone, seule l’attestation arrive au club.
+- **Le certificat** se dépose en photo, le bureau le contrôle, sa fin de validité est suivie ([le guide du certificat](/guides/certificat-medical-sport)).
+- **Une pièce qui manque** n’empêche pas de payer : elle se réclame d’un bouton.
+
+</Repli>
+
+## Cotisation de gym en plusieurs fois, réductions comprises
+
+La famille règle en une fois ou en plusieurs versements, selon vos formules, et voit chaque échéance avant de valider.
+
+<Repli>
+
+- **Deux enfants, deux groupes** : réductions pour la fratrie ou pour plusieurs cours, sans calcul à la main.
+- **Le Pass’Sport** et les aides locales se déduisent, justificatif demandé ([aides déduites](/fonctionnalites/aides-deduites)).
+- **Le trésorier** voit l’encaissé et les retards, note les chèques, relance d’un bouton.
+
+</Repli>
+
+## Mai : l’entraîneur prépare ses groupes de l’an prochain
+
+Avec l’offre Pro, l’entraîneur coche les gymnastes qu’il garde et le groupe où il les attend ; la famille confirme ensuite par son lien, avant l’ouverture au public.
+
+## Stages des vacances : une inscription à part
+
+Avec l’offre Pro Max IA, un stage de gym pendant les vacances a sa page : date, tarif, places, liste d’attente, payé à part de la cotisation.
+
+OnClub ne suit ni les programmes, ni les notes, ni les passages de niveau : il inscrit, encaisse et prépare la liste des licences. Pour le voir avec vos groupes : [une démo pour un club de sport](/demo?type=sport).

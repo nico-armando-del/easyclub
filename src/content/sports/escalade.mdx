@@ -1,0 +1,123 @@
+---
+nom: "Escalade"
+ligne: "Du groupe U9 au créneau adultes, le mur se remplit en ligne"
+ordre: 50
+titreSeo: "Inscription club d’escalade en ligne, licence FFME | OnClub"
+description: "Club d’escalade : créneaux de mur par année de naissance, liste d’attente quand c’est complet, cotisation en plusieurs fois. La licence se prend dans myFFME."
+titre: "Club d’escalade : le créneau complet ne perd personne"
+chapo: "Le créneau du mardi affiche complet, et les familles écrivent encore au bureau. En ligne, elles prennent rang, et la place libérée leur est proposée."
+temps:
+  cles: [attente, fiches]
+  titre: "Ce que le bureau d’un club d’escalade récupère, chaque saison"
+fonctionnalites: [liste-attente, inscription-en-ligne, liste-des-licences, paiement-en-ligne, pieces-justificatives, convocations]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "Faut-il un certificat médical pour grimper en club cette saison ?"
+    reponse: "Selon la FFME, en 2026-2027, seulement dans trois cas : un oui au questionnaire de santé, un adulte qui grimpe en compétition à partir des demi-finales des championnats ou de la Coupe de France, et le ski-alpinisme en compétition adulte. Sinon, l’attestation de santé suffit."
+  - question: "Un grimpeur de 17 ans peut-il concourir chez les seniors ?"
+    reponse: "La FFME ne l’autorise qu’aux U19 et aux vétérans, avec une fiche de surclassement visée par un médecin et déposée sur MyCompet. Dans OnClub, rien n’empêche de l’ajouter au groupe adultes : le club pose les années de chaque groupe, ou y invite le grimpeur."
+  - question: "Une séance d’essai au mur se réserve-t-elle en ligne ?"
+    reponse: "Oui. Chaque groupe décide : pas d’essai, essai s’il reste de la place, ou essai même complet. La famille réserve depuis la page du club, et l’inscription qui suit est rattachée à l’essai. Pour un non-licencié, la FFME propose une licence découverte à la journée ou à la semaine."
+  - question: "OnClub réserve-t-il les créneaux du mur et suit-il les passeports escalade ?"
+    reponse: "Non. Le mur est déclaré comme une salle avec son adresse, sans réservation ni planning d’occupation. Les passeports et la progression du grimpeur ne sont pas suivis : le seul niveau connu est celui d’un groupe, écrit par le club."
+sources:
+  - titre: "FFME, Se licencier à la FFME"
+    url: "https://www.ffme.fr/ffme/licence/"
+    consulte: "2026-10-10"
+  - titre: "FFME, Règles de participation aux compétitions d’escalade 2026-2027"
+    url: "https://www.ffme.fr/wp-content/uploads/2026/09/Regles-de-participation-2026-2027_V01.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFME Auvergne-Rhône-Alpes, Inscription sur les compétitions escalade 2026-2027"
+    url: "https://www.ffmeaura.fr/2026/09/inscription-sur-les-competitions-escalade-2026-2027-les-choses-a-savoir/"
+    consulte: "2026-10-10"
+---
+
+## Créneau de mur complet : la liste d’attente garde chaque famille
+
+Un groupe affiché complet ne renvoie plus personne : la famille s’inscrit sur la [liste d’attente](/fonctionnalites/liste-attente), à son rang, au lieu d’écrire au bureau.
+
+<Idee visuel="droite">
+
+Une place se libère : le bureau la propose d’un clic au suivant, qui paie en acceptant. Rien n’est engagé sans son accord.
+
+<Repli>
+
+- **Un délai pour répondre**, réglable par le club ; passé ce délai, le bureau peut la proposer au suivant.
+- **Complet ou complet définitif** : la famille sait s’il reste une chance cette saison.
+- **La liste d’attente** est comprise dans l’offre Pro.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club d’escalade"
+  titre="Liste d’attente · mardi 18:30"
+  sousTitre="Groupe U13 · nés en 2015 et 2016 · mur"
+  lignes={[
+    { nom: 'Hugo L.', detail: '1er · place proposée', statut: 'Proposée', ton: 'ok' },
+    { nom: 'Maëlle R.', detail: '2e · inscrite le 3 septembre', statut: 'En attente', ton: 'neutre' },
+    { nom: 'Sacha T.', detail: '3e · inscrit le 5 septembre', statut: 'En attente', ton: 'neutre' },
+  ]}
+  bouton="Proposer la place suivante"
+  legende="La liste d’attente d’un groupe plein, vue par le bureau. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Inscription club d’escalade en ligne : les catégories de l’année civile
+
+En escalade, la catégorie se lit dans l’âge atteint pendant l’année civile qui débute en cours de saison : pour 2026-2027, c’est l’âge en 2027. Le formulaire ne montre au parent que les groupes ouverts à cette année de naissance.
+
+<Repli titre="Les catégories FFME 2026-2027">
+
+- **U9** : nés en 2019 et 2020 ; **U11** : 2017 et 2018 ; **U13** : 2015 et 2016.
+- **U15** : nés en 2013 et 2014 ; **U17** : 2011 et 2012 ; **U19** : 2009 et 2010.
+- **U21** : nés en 2007 et 2008 ; **seniors** : de 1988 à 2006.
+- **Vétérans 1** : de 1978 à 1987 ; **vétérans 2** : 1977 et avant.
+- **Le groupe compétition** peut rester sur invitation : invisible sur la page du club, il s’ouvre par un lien propre au groupe.
+
+</Repli>
+
+OnClub ne calcule pas la catégorie fédérale : le club nomme ses groupes et pose leurs bornes d’années.
+
+## Licence FFME : myFFME reste l’outil, OnClub prépare la liste
+
+La licence FFME court du 1er septembre au 31 août, et le club la crée ou la renouvelle dans myFFME : OnClub n’y saisit rien et ne transmet aucun fichier.
+
+<Repli>
+
+- **La [liste des licences](/fonctionnalites/liste-des-licences)** : qui est prêt, qui renouvelle, qui est nouveau, et l’adresse e-mail à saisir.
+- **Le niveau d’assurance** (Base, Base+ ou Base++) se demande par une question à choix dans le formulaire du club.
+- **L’export en tableur** se garde à côté de myFFME pendant la saisie.
+
+</Repli>
+
+L’engagement aux compétitions se fait sur MyCompet, hors d’OnClub.
+
+## Cotisation d’escalade en plusieurs fois, au total exact
+
+Le parent voit le prix du groupe et chaque versement avant de payer : un acompte, puis des versements, selon les formules du club.
+
+<Repli>
+
+- **Deux enfants grimpeurs** : la réduction du deuxième s’applique seule, le total est exact.
+- **Le Pass’Sport** et les aides locales se cochent à l’inscription et se déduisent, justificatif demandé.
+- **Le chèque d’un parent** se note dans le dossier ; un retard se relance d’un bouton, message relu avant l’envoi.
+
+</Repli>
+
+## Santé du grimpeur et convocations aux compétitions
+
+Pour un jeune, le questionnaire de santé se remplit en ligne : les réponses restent sur le téléphone, seule l’attestation arrive au club. Un certificat déposé en photo est contrôlé par le bureau, et sa date de fin suivie.
+
+<Repli>
+
+- **La convocation** d’un groupe pour une compétition ou une séance part par mail ; le parent répond présent ou absent, sans compte.
+- **L’encadrant** fait l’appel depuis son lien personnel, sans voir les coordonnées des familles.
+- **Une [pièce](/fonctionnalites/pieces-justificatives) manquante** n’arrête pas l’inscription : elle se réclame d’un bouton.
+
+</Repli>
+
+Pour voir un groupe de mur rempli de bout en bout, [demandez une démo](/demo?type=sport).

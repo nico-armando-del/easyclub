@@ -1,0 +1,126 @@
+---
+nom: "Voitures radiocommandées"
+ligne: "Pilotes loisir, compétition et bénévoles de la piste : le club RC adhère en ligne"
+ordre: 50
+titreSeo: "Inscription club de voitures RC en ligne, licence FFVRC | OnClub"
+description: "Club de voitures RC : adhésions pilote et bénévole en ligne, ados et adultes dans un dossier, cotisation en plusieurs fois. La licence FFVRC suit l’année."
+titre: "Club de voitures RC : pilotes et bénévoles adhèrent en ligne"
+chapo: "Le père pilote en thermique, la fille en électrique, l’oncle tient la buvette des jours de course. Une seule inscription en ligne pour les trois."
+temps:
+  cles: [paiements, relances]
+  titre: "Le temps rendu au bureau d’un club de voitures RC, chaque saison"
+fonctionnalites: [inscription-en-ligne, seances-essai, suivi-des-paiements, relance-un-clic, paiement-en-ligne, liste-des-licences, evenements-stages]
+profils: [tresorier]
+guides: [prix-cotisation-association, assurance-association]
+maj: 2026-10-10
+faq:
+  - question: "Un pilote de 16 ans prend-il la licence Compétition ou Compétition -17 ans ?"
+    reponse: "La FFVRC réserve la licence Compétition -17 ans aux pilotes qui ont moins de 17 ans au 1er janvier de l’année en cours. En 2027, cela vise en pratique les pilotes nés après le 1er janvier 2010. Dans OnClub, le club pose ces années de naissance sur sa formule jeune."
+  - question: "Les bénévoles de la buvette et du chronométrage ont-ils une licence à eux ?"
+    reponse: "La FFVRC a prévu la licence Passion pour les membres qui font vivre le club (organisation des courses, buvette, chronométrage) et pour les accompagnateurs ; elle ne permet pas de piloter. Dans OnClub, l’adhésion bénévole est une formule du catalogue, avec son tarif."
+  - question: "Faut-il un certificat médical pour piloter une voiture radiocommandée ?"
+    reponse: "Le code du sport exclut le modélisme automobile radioguidé des disciplines à contraintes particulières. Pour un mineur, la loi demande le questionnaire de santé ; pour un majeur, c’est la fédération qui fixe ses conditions. Le club choisit dans OnClub les pièces qu’il demande."
+  - question: "OnClub chronomètre-t-il les manches et publie-t-il les classements ?"
+    reponse: "Non. OnClub n’a ni chronométrage, ni résultats, ni classement, et ne gère pas l’occupation de la piste. Les inscriptions aux championnats passent par la plateforme de la fédération. OnClub tient les adhésions, l’argent et la liste des licences."
+sources:
+  - titre: "FFVRC, Les licences et les tarifs (saison 2026)"
+    url: "https://www.ffvrc.fr/fr/licencies/les-licences-et-les-tarifs.html"
+    consulte: "2026-10-10"
+  - titre: "FFVRC, Pourquoi être licencié ?"
+    url: "https://www.ffvrc.fr/fr/licencies/pourquoi-etre-licencie.html"
+    consulte: "2026-10-10"
+  - titre: "FFVRC, Règlement intérieur fédéral"
+    url: "https://www.ffvrc.fr/medias/fichiers/LA%20FEDERATION/STATUTS-REGLEMENT%20INTERIEUR/Rglement%20intrieur%20fdral.pdf"
+    consulte: "2026-10-10"
+  - titre: "Légifrance, code du sport, article D231-1-5 (version du 3 septembre 2023)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034417463"
+    consulte: "2026-10-10"
+  - titre: "Légifrance, code du sport, article L231-2"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045293846"
+    consulte: "2026-10-10"
+---
+
+## Une famille, trois adhésions : pilote, jeune pilote, bénévole
+
+<Idee visuel="droite">
+
+Une famille inscrit tous ses membres dans un seul dossier et paie dans la foulée ; chacun choisit sa formule, et le total s’affiche avant de payer.
+
+<Repli>
+
+- **Les formules** du club (pilote loisir, pilote de compétition, jeune, bénévole) sont des lignes du catalogue, chacune avec son tarif et ses années de naissance.
+- **Plusieurs adhésions** dans un dossier : les réductions prévues par le club s’appliquent seules.
+- **Un mineur** a toujours un responsable légal majeur ; un adulte seul donne un contact d’urgence.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club RC"
+  titre="Dossier famille · 3 adhésions"
+  sousTitre="Saison 2026 · 2027"
+  lignes={[
+    { nom: 'Marc L.', detail: 'Pilote loisir, adulte', statut: 'Inscrit', ton: 'ok' },
+    { nom: 'Lou L.', detail: 'Jeune pilote, née en 2012', statut: 'Inscrite', ton: 'ok' },
+    { nom: 'Paul D.', detail: 'Bénévole, ne pilote pas', statut: 'Inscrit', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Total, réduction comprise', valeur: '210,00 €' }}
+  legende="Un dossier à trois adhésions, vu par le bureau. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Inscription au club RC en ligne : la bonne formule selon l’âge
+
+Le formulaire ne propose à chacun que les formules ouvertes à son année de naissance ; le club les cale sur les licences de la FFVRC.
+
+<Repli titre="Les licences FFVRC, saison 2026">
+
+- **Compétition** : tous les championnats, toutes disciplines, et les grands prix EFRA en France.
+- **Compétition -17 ans** : moins de 17 ans au 1er janvier de l’année en cours.
+- **Loisir** : pratique libre et courses amicales.
+- **Passion** : organisation des courses, buvette, chronométrage, accompagnateurs ; elle ne permet pas de piloter.
+
+</Repli>
+
+## Essai sur la piste avant d’adhérer
+
+Un curieux arrive avec sa voiture achetée à Noël : il réserve une [séance d’essai](/fonctionnalites/seances-essai) depuis la page du club, et son inscription, s’il revient, reste rattachée à l’essai.
+
+<Repli>
+
+- **Chaque créneau décide** : jamais d’essai, essai s’il reste de la place, ou même complet.
+- **Le bureau voit** combien d’essais ont débouché sur une adhésion.
+- **Pour un mineur**, l’essai comme l’inscription passent par un responsable légal majeur.
+
+</Repli>
+
+## Cotisation du club RC en plusieurs fois, l’argent suivi
+
+En une fois ou en plusieurs versements, au choix de vos formules ; le trésorier lit sur un tableau ce qui est [encaissé, à venir ou en retard](/fonctionnalites/suivi-des-paiements).
+
+<Repli>
+
+- **Un retard** se [relance d’un bouton](/fonctionnalites/relance-un-clic) : le message porte le bon montant, vous le relisez, il part.
+- **Les espèces** de la permanence se notent dans le dossier, au centime, sans commission.
+- **Le prix de la cotisation** : voir le [guide pour la fixer](/guides/prix-cotisation-association).
+
+</Repli>
+
+## Licence FFVRC : l’année civile, une licence reçue par mail
+
+Selon le règlement intérieur de la FFVRC, la licence vaut pour l’année civile et expire le 31 décembre. Elle est dématérialisée et arrive par mail. OnClub ne saisit et n’envoie rien à la fédération.
+
+<Repli>
+
+- **La [liste des licences](/fonctionnalites/liste-des-licences)** dit qui est prêt, qui renouvelle, qui est nouveau ; elle s’exporte en tableur.
+- **L’assurance** est comprise dans chaque licence ; le club informe le licencié de la garantie complémentaire IA+.
+- **Le réseau** : la FFVRC annonce 15 ligues, 300 clubs et quelque 8 000 licenciés.
+
+</Repli>
+
+## Course amicale et stage des vacances : une page chacun
+
+Avec Pro Max IA, la course organisée par le club ou le stage des vacances des jeunes pilotes devient un [événement](/fonctionnalites/evenements-stages) : date, lieu, tarif, places et liste d’attente.
+
+OnClub ne chronomètre pas les manches, ne publie pas de classement et ne gère pas l’occupation de la piste.

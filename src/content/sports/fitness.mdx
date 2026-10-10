@@ -1,0 +1,125 @@
+---
+nom: "Fitness"
+ligne: "Cardio, renfo, step, Pilates : un planning chargé, une adhésion en ligne"
+ordre: 50
+titreSeo: "Adhésion en ligne association de fitness et de gym | OnClub"
+description: "Club de fitness et de gym : planning des cours collectifs en ligne, adhésion annuelle en plusieurs fois, coachs sans compte, attestation pour le CSE."
+titre: "Club de fitness : le planning en ligne, l’adhésion aussi"
+chapo: "Renfo le lundi midi, step le mardi soir : l’adhérent choisit ses cours entre deux réunions, et le coach trouve sa liste sans identifiant."
+temps:
+  cles: [paiements, messages, site]
+  titre: "Le temps rendu au bureau d’un club de fitness, chaque saison"
+fonctionnalites: [inscription-en-ligne, paiement-en-ligne, espace-encadrant, convocations, messages-familles, site-association, boutique-en-ligne, vente-au-comptoir]
+profils: [tresorier]
+guides: [certificat-medical-sport, tresorier-association]
+maj: 2026-10-10
+faq:
+  - question: "Un adhérent peut-il régler en espèces à l’accueil de la salle ?"
+    reponse: "Oui. Il s’inscrit en ligne comme les autres, puis le bureau note son règlement dans le dossier, au centime. Ce qui est payé en espèces ou par chèque ne passe pas par la commission d’OnClub."
+  - question: "Le coach doit-il créer un compte pour faire l’appel ?"
+    reponse: "Non. Le bureau lui transmet un lien personnel, qu’il peut retirer à tout moment. Le coach y trouve sa prochaine séance et la liste de son cours, fait l’appel, et ne voit jamais l’adresse ni le téléphone d’un adhérent."
+  - question: "Peut-on proposer une séance d’essai avant l’adhésion ?"
+    reponse: "Oui. La personne réserve une date sur le cours de son choix depuis la page du club. Chaque cours décide s’il accepte des essais, et le bureau voit ensuite quels essais ont mené à une adhésion."
+  - question: "Que coûte OnClub à un club de fitness ?"
+    reponse: "Un pourcentage des cotisations encaissées en ligne : 2,90 % en OnClub Mini, 4,90 % en Pro, 6,90 % en Pro Max IA, sans part fixe. La boutique, réservée à Pro Max IA, ajoute 2 % sur ses seules ventes. Les frais de carte restent à la charge de l’association."
+sources:
+  - titre: "Ministère des Sports, Les 119 fédérations sportives et 22 groupements nationaux (mise à jour au 13 janvier 2026)"
+    url: "https://www.sports.gouv.fr/media/5951/download"
+    consulte: "2026-10-10"
+  - titre: "Comité régional EPGV, La FFEPGV devient la Fédération Française de Sport Vitalité"
+    url: "https://www.coregepgv-sport.fr/33-blog/492-la-ffepgv-devient-la-federation-francaise-de-sport-vitalite"
+    consulte: "2026-10-10"
+  - titre: "FFEPGV, Certificat médical et questionnaire de santé"
+    url: "https://support.ffepgv.fr/support/solutions/articles/44002204907-certificat-m%C3%A9dical-et-questionnaire-de-sant%C3%A9"
+    consulte: "2026-10-10"
+---
+
+## Le planning des cours collectifs, saisi une fois, juste partout
+
+<Idee visuel="droite">
+
+Chaque cours porte ses créneaux de la semaine, jusqu’à six, sa salle, son coach, son niveau et sa jauge. Un créneau déplacé du mardi au mercredi se corrige à un seul endroit.
+
+<Repli>
+
+- **Le site du club**, avec l’offre Pro, affiche le planning, les tarifs et les places sans rien ressaisir.
+- **Chaque salle** a sa fiche : l’adresse, et la phrase que cherche l’adhérent qui arrive à 18 h 55, l’entrée côté parking ou le code du portail.
+- **Un cours plein** l’affiche, et « complet pour la saison » se distingue de « plus de place aujourd’hui ».
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de fitness"
+  titre="Planning · semaine du 12 octobre"
+  sousTitre="Saison 2026-2027 · cours collectifs"
+  lignes={[
+    { nom: 'Renfo · lundi 12:15', detail: 'Salle 1 · coach Nadia', statut: '6 places', ton: 'ok' },
+    { nom: 'Step · mardi 18:30', detail: 'Salle 2 · coach Karim', statut: 'Complet', ton: 'ko' },
+    { nom: 'Pilates · jeudi 19:00', detail: 'Salle 1 · coach Nadia', statut: '2 places', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Adhésion annuelle', valeur: '10 × 24,00 €' }}
+  bouton="Choisir mes cours"
+  legende="Le planning que voit un adulte avant de s’inscrire, places restantes comprises. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Inscription fitness en ligne : l’adhérent choisit ses cours seul
+
+Un adulte s’inscrit pour lui-même, depuis son téléphone : ses cours, un contact d’urgence, ses pièces, puis le paiement dans la foulée.
+
+<Repli>
+
+- **Les anciens d’abord**, avec l’offre Pro : la saison passée se réinscrit en priorité avec son lien, puis l’inscription s’ouvre au public.
+- **Les fichiers de l’an dernier**, tableur ou export d’une autre plateforme, sont [repris](/fonctionnalites/reprise-des-fichiers) : les anciens adhérents sont reconnus.
+- **Vos questions** s’ajoutent au formulaire : taille de tee-shirt, créneau préféré, comment il a connu le club.
+
+</Repli>
+
+## Cotisation fitness en plusieurs fois, le second cours remisé
+
+L’adhérent choisit parmi vos formules, comptant ou en plusieurs versements, et voit chaque date avant de valider. Renfo le lundi et Pilates le jeudi : la réduction pour plusieurs cours se calcule seule.
+
+<Repli>
+
+- **Le tableau du trésorier** : encaissé, à venir, en retard, et les exports comptables en tableur.
+- **Un versement en retard** se relance d’un bouton : le message porte le bon montant, vous le relisez, il part.
+- **Le reçu de cotisation** et l’attestation de paiement pour le CSE se téléchargent depuis le dossier de l’adhérent.
+
+</Repli>
+
+## Convocation de séance : le coach fait l’appel ou annule depuis son lien
+
+Le coach ouvre sa page par un lien personnel, sans identifiant : sa prochaine séance d’abord, puis l’appel du jour, sans jamais voir ni adresse ni téléphone.
+
+<Repli>
+
+- **Salle prise, séance annulée** : l’annulation prévient les adhérents convoqués, avec un mot si besoin.
+- **Deux cours le même soir** : il fait l’appel des deux depuis la même page.
+- **Un message au bon cours**, avec l’offre [Pro](/fonctionnalites/messages-familles) : les seuls inscrits du Pilates du jeudi, le nombre de destinataires annoncé avant l’envoi.
+
+</Repli>
+
+## Licence de gym volontaire ou de sport pour tous : elle reste à la fédération
+
+Un club de fitness peut s’affilier à une fédération multisport, gymnastique volontaire ou sport pour tous. La gymnastique volontaire, devenue en mars 2026 la Fédération française de Sport Vitalité, revendique plus de 480 000 licenciés dans 4 400 clubs.
+
+La licence se prend dans l’outil de la fédération, I-Réseau à la gymnastique volontaire d’après son support, pas dans OnClub.
+
+OnClub prépare la [liste à reporter](/fonctionnalites/liste-des-licences) et l’exporte en tableur. Côté santé, à la gymnastique volontaire, un adulte remet l’attestation de son questionnaire, ou à défaut un certificat de moins de six mois.
+
+<Repli>
+
+- **Le QS-SPORT** se remplit en ligne : les réponses restent sur le téléphone, seule l’attestation arrive au club.
+- **Un certificat** se dépose en photo, le bureau le contrôle et suit sa date de fin. Voir le guide du [certificat médical](/guides/certificat-medical-sport).
+
+</Repli>
+
+## Tee-shirts et gourdes : la boutique du club et la vente à l’accueil
+
+Avec l’offre Pro Max IA, la boutique vend tee-shirts et gourdes en ligne, avec le stock taille par taille et le retrait à la salle ; la vente à l’accueil puise dans le même stock.
+
+OnClub ne vend pas de carte de séances ni d’entrée à l’unité, ne réserve pas de séance une à une, ne gère ni badge ni contrôle d’accès, ni programme individuel, ni paie des coachs. L’adhésion vaut pour la saison.
+
+Pour voir votre planning monté dans OnClub, [demandez une démo](/demo?type=sport) ; les prix sont sur la page [tarifs](/tarifs).

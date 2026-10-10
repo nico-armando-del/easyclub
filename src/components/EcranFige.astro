@@ -1,0 +1,17 @@
+---
+/*
+  UN ÉCRAN DU PRODUIT FIGÉ À SON ÉTAT DE DÉPART (accueil : le tableau de bord du
+  trésorier). Même HTML que l'écran animé de src/ecrans/<nom>.html, sa classe
+  renommée « ec-<nom>fixe » : le script public/ecrans/<nom>.js ne s'y branche pas,
+  rien ne bouge. Décoratif : la phrase qui le décrit est portée par le parent.
+*/
+const ECRANS = import.meta.glob('../ecrans/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+interface Props { nom: 'relance' | 'reinscription' | 'inscription' }
+const { nom } = Astro.props
+const brut = ECRANS[`../ecrans/${nom}.html`]
+if (!brut) throw new Error(`Écran inconnu : ${nom}`)
+const html = brut
+  .replaceAll(`ec-${nom}`, `ec-${nom}fixe`)
+  .replace(new RegExp(`(class="ec ec-${nom}fixe") role="img" aria-label="[^"]*"`), '$1 aria-hidden="true"')
+---
+<Fragment set:html={html} />

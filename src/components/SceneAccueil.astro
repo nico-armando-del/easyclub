@@ -1,74 +1,77 @@
 ---
 /*
-  LE HÉROS IMMERSIF DE L'ACCUEIL (maquettes §A1, §A1b, §D.1).
+  LE HÉROS DE L'ACCUEIL : LE PRODUIT EN SCÈNE (concept A retenu le 10 oct. 2026,
+  après « au scroll ça va trop vite » et « on comprend pas bien » de Nico).
 
-  Le titre, une phrase, un bouton ; dessous, un grand panneau encre (lueur
-  menthe) qui s'agrandit au défilement jusqu'au plein écran. Dedans, le
-  désordre du bureau (fiche, chèque, tableur, relance, certificat, message de
-  23:47) se range dans OnClub, ligne par ligne ; le compteur passe de « 66 h »
-  à « ≈ 5 h » sans aucune valeur entre les deux (une barre menthe descend d'un
-  cran par objet rangé) ; puis « 61 h rendues » et ce qu'on en fait.
+  Le titre, une phrase, un bouton. Dessous, un panneau encre où trois vrais
+  écrans d'OnClub sont posés en profondeur : (1) le téléphone de la famille qui
+  s'inscrit (écran animé), (2) le tableau de bord du trésorier (figé sur son
+  accueil), (3) la relance telle que la famille la reçoit. Une carte dit le
+  temps rendu (src/data/temps.ts, jamais tapé). Trois légendes cliquables
+  expliquent chaque écran ; un clic met l'écran en avant, un second rend la scène.
 
-  TROIS CHEMINS, sans détection de navigateur :
-  1. Par défaut (sans JS, sans support, mouvement réduit) : L'ÉTAT FINAL, en
-     carte arrondie sous le texte. C'est le HTML tel quel.
-  2. animation-timeline (CSS pur) : la piste fait 150svh (G1 : 180 dépassait), l'étage est collant,
-     chaque élément a sa plage de défilement.
-  3. Repli IntersectionObserver : trois jalons règlent data-etape (0 à 3),
-     des transitions CSS font le reste. Aucun écouteur de défilement.
-  Le h1 n'est jamais animé à l'entrée (élément LCP). Les objets restent dans le
-  HTML final, glissés sous la fenêtre OnClub (rien de caché en CSS). Les
-  barres « Avant · Rangé · Rendu » ne sont créées que par le script, quand le
-  mouvement est permis : sans JS, elles n'existent pas.
+  Le mouvement : une entrée lente au chargement (1,1 s, 180 ms d'écart), une
+  fois. RIEN n'est épinglé, rien ne s'enchaîne seul : au défilement, la scène se
+  redresse seulement (8°) pendant qu'elle entre (scroll-timeline, repli
+  IntersectionObserver). L'écran animé s'arrête hors de la vue ; le bouton
+  « Mettre en pause » l'arrête pour de bon (WCAG 2.2.2), via
+  public/js/ecrans-ctrl.js, chargé ici AVANT les scripts des écrans (en différé).
+  Sous mouvement réduit : tout est à sa place, l'écran montre son état final.
+
+  Pages traduites (/en, /es) : mêmes props ; `t` porte les textes, et les slots
+  « ecran-tel » et « ecran-tab » remplacent les écrans français.
 */
-import CompteurHeures from './CompteurHeures.astro'
-import BlocTemps from './BlocTemps.astro'
-import { TOTAL, CINQ_TACHES, HYPOTHESES } from '../data/temps'
-import { INJEP } from '../data/site'
+import EcranAnime from './EcranAnime.astro'
+import EcranFige from './EcranFige.astro'
 import VersFr from './langue/VersFr.astro'
+import { TOTAL, ADHERENTS_REFERENCE } from '../data/temps'
 
 export type TextesScene = {
-  objets: {
-    fiche: string; ficheNom: string; ficheNe: string; ficheStatut: string
-    cheque: string; chequeDepot: string
-    tableur: string
-    relance: string; relanceTexte: string
-    certificat: string; certificatStatut: string
-    message: string
-  }
-  fenetre: string
-  lignes: [string, string, string, string, string, string]
-  vide: string
-  compteurAvant: string
-  compteurApres: string
-  rendu: string
-  moments: [string, string, string]
-  barres: [string, string, string]
-  aria: string
-  note: string
-  hypotheses: string
+  legendes: [{ titre: string; phrase: string }, { titre: string; phrase: string }, { titre: string; phrase: string }]
+  groupe: string
+  tableau: string
+  relance: { asso: string; quand: string; objet: string; texte: string; aria: string }
+  temps: { avant: string; rendu: string; note: string; lien: string }
+  pause: string
+  reprise: string
+  /** La ligne des sports sous le titre : les clubs de sport d'abord (Nico, 10 oct., 14 h 22). */
+  sports?: { liste: { texte: string; href?: string }[]; aussi: string }
 }
 
 const FR: TextesScene = {
-  objets: {
-    fiche: 'Fiche d’inscription', ficheNom: 'Nom : ……………', ficheNe: 'Né(e) le : … / … / ……', ficheStatut: 'À recopier',
-    cheque: 'Chèque n° 3 sur 4', chequeDepot: 'À déposer le 5 novembre',
-    tableur: 'cotisations_2026_FINAL(3).xlsx',
-    relance: 'Relance n° 3', relanceTexte: 'Cotisation de septembre, toujours rien',
-    certificat: 'Certificat médical', certificatStatut: 'Manquant',
-    message: 'Bonjour, il reste de la place le mercredi ?',
+  legendes: [
+    { titre: 'La famille s’inscrit', phrase: 'Depuis son téléphone : chaque enfant, son équipe ou son cours, la cotisation en une ou plusieurs fois.' },
+    { titre: 'Le trésorier voit tout', phrase: 'Ce qui est encaissé, à venir ou en retard, sans tableur à tenir.' },
+    { titre: 'Un retard, une relance', phrase: 'Le message est prêt : vous le relisez, il part d’un clic.' },
+  ],
+  groupe: 'Ce que montre la scène',
+  tableau: 'Le tableau de bord du club : 28 640 euros encaissés sur 40 395 attendus, quatre points à traiter. Montants fictifs.',
+  relance: {
+    asso: 'Volley Club Démo',
+    quand: 'maintenant',
+    objet: '110 € en retard de règlement',
+    texte: 'Bonjour Sophie, il manque 110 € sur l’inscription de Léa : la tranche du 28 septembre 2026 n’est pas arrivée.',
+    aria: 'La relance reçue par la famille : Volley Club Démo, 110 euros en retard de règlement. Données fictives.',
   },
-  fenetre: 'OnClub · Saison 2026-2027',
-  lignes: ['La famille s’inscrit seule', 'Payé en ligne', 'L’argent à jour', 'Relance d’un clic', 'Pièces en photo', 'Messages au bon groupe'],
-  vide: 'Votre association',
-  compteurAvant: 'd’administratif par saison, aujourd’hui',
-  compteurApres: 'd’administratif par saison, avec OnClub',
-  rendu: `${TOTAL.gain} rendues`,
-  moments: ['le samedi au bord du terrain', 'la répétition du jeudi', 'la soirée en famille'],
-  barres: ['Avant', 'Rangé', 'Rendu'],
-  aria: 'Illustration : le désordre administratif d’une association se range dans OnClub. Il reste environ 5 heures par saison au lieu de 66 ; les 61 heures rendues vont au samedi au bord du terrain, à la répétition du jeudi et à la soirée en famille.',
-  note: 'Estimation OnClub pour 250 adhérents, pas une étude.',
-  hypotheses: 'Voir les hypothèses',
+  temps: {
+    avant: 'd’administratif par saison',
+    rendu: 'rendues au bureau',
+    note: `Estimation pour ${ADHERENTS_REFERENCE} adhérents, pas une étude.`,
+    lien: 'Le calcul',
+  },
+  pause: 'Mettre en pause',
+  reprise: 'Relancer l’animation',
+  sports: {
+    liste: [
+      { texte: 'Foot', href: '/sport/football' },
+      { texte: 'basket', href: '/sport/basket' },
+      { texte: 'volley', href: '/sport/volley' },
+      { texte: 'handball', href: '/sport/handball' },
+      { texte: 'judo', href: '/sport/judo' },
+      { texte: 'tennis', href: '/sport/tennis' },
+    ],
+    aussi: 'et aussi la musique et le théâtre.',
+  },
 }
 
 interface Props {
@@ -81,282 +84,253 @@ interface Props {
   idTitre?: string
   /** /en, /es : le bouton mène à une page en français (étiquette « FR »). */
   ctaVersFr?: string
+  /** Où mène « Le calcul » (la semaine du bureau, juste dessous). */
+  lienCalcul?: string
 }
-const { titre, phrase, cta, t = FR, noteLangue, idTitre = 'titre', ctaVersFr } = Astro.props
+const { titre, phrase, cta, t = FR, noteLangue, idTitre = 'titre', ctaVersFr, lienCalcul = '#semaine' } = Astro.props
 const NB = String.fromCharCode(160)
-const fine = (s: string) => s.replace(/ ([?!:;])/g, `${NB}$1`)
-/* Le titre en deux temps : une ligne par phrase, aussi sur téléphone (pas de « La » orphelin). */
+const fine = (s: string) => s.replace(/ ([?!:;€])/g, `${NB}$1`).replace(/(\d) (h|€|min)\b/g, `$1${NB}$2`)
+/* Le titre en deux temps : une ligne par phrase, aussi sur téléphone. */
 const coupe = titre.match(/^(.+?[?.!])\s+(.+)$/)
 const parties = coupe ? [fine(coupe[1]), fine(coupe[2])] : [fine(titre)]
-const o = t.objets
+const telTraduit = Astro.slots.has('ecran-tel')
+const tabTraduit = Astro.slots.has('ecran-tab')
+const sigle = t.relance.asso.split(/\s+/).filter((m) => m.length > 3 || /^[A-Z]/.test(m)).map((m) => m[0].toUpperCase()).join('').slice(0, 2)
 ---
-<section class="piste" data-heros data-sans-bouton-fixe data-scene aria-labelledby={idTitre} data-barres={JSON.stringify(t.barres)}>
-  <div class="etage">
-    <div class="heros-texte" data-heros-texte>
-      <h1 id={idTitre}>{parties.map((p, i) => <span class="h1-partie">{i > 0 ? ' ' : ''}{p}</span>)}</h1>
-      <p class="heros-phrase">{fine(phrase)}</p>
-      <a class="btn btn-encre heros-btn" href={cta.href} hreflang={ctaVersFr ? 'fr' : undefined}>{cta.texte}{ctaVersFr && <VersFr sr={ctaVersFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
-      {noteLangue && <p class="heros-langue">{fine(noteLangue)}</p>}
-    </div>
-    <div class="panneau">
-      <div class="plateau" role="img" aria-label={t.aria}>
-        <div class="fenetre">
-          <p class="fen-tete"><svg aria-hidden="true"><use href="#boucle"/></svg>{t.fenetre}</p>
-          <ul class="fen-lignes">
-            {t.lignes.map((l, k) => (
-              <li class={`ligne l${k + 1}`}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4L16 6"/></svg>{l}</li>
-            ))}
-            <li class="ligne vide">{t.vide}</li>
-          </ul>
+<script is:inline src="/js/ecrans-ctrl.js"></script>
+<section class="heros" data-heros data-sans-bouton-fixe aria-labelledby={idTitre}>
+  <div class="heros-texte">
+    <h1 id={idTitre}>{parties.map((p, i) => <span class="h1-partie">{i > 0 ? ' ' : ''}{p}</span>)}</h1>
+    {t.sports && (
+      <p class="heros-sports"><span class="hs-liste">{t.sports.liste.map((x, i, a) => <>{i > 0 && (i === a.length - 1 ? `,${NB}` : ', ')}{x.href ? <a href={x.href}>{x.texte}</a> : x.texte}</>)}…</span> <span class="hs-aussi">{t.sports.aussi}</span></p>
+    )}
+    <p class="heros-phrase">{fine(phrase)}</p>
+    <a class="btn btn-encre heros-btn" href={cta.href} hreflang={ctaVersFr ? 'fr' : undefined}>{cta.texte}{ctaVersFr && <VersFr sr={ctaVersFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+    {noteLangue && <p class="heros-langue">{fine(noteLangue)}</p>}
+  </div>
+
+  <div class="scene" id="scene" data-scene>
+    <div class="plateau">
+      <div class="couche c-tab" style="--i:0" role="img" aria-label={t.tableau}>
+        <div class="c-in">
+          <span class="repere" aria-hidden="true">2</span>
+          {tabTraduit ? (
+            <div class="echelle traduit" data-echelle style="--l:760;--h:450"><div class="echelle-in"><slot name="ecran-tab" /></div></div>
+          ) : (
+            <div class="echelle fenetre" data-echelle style="--l:880;--h:520"><div class="echelle-in"><EcranFige nom="relance" /></div></div>
+          )}
         </div>
-        <div class="objet o1" style="--k:0"><div class="objet-carte"><b>{o.fiche}</b><span class="trait">{o.ficheNom}</span><span class="trait">{o.ficheNe}</span><span class="statut neutre">{o.ficheStatut}</span></div></div>
-        <div class="objet o2" style="--k:1"><div class="objet-carte"><b>{fine(o.cheque)}</b><span>{o.chequeDepot}</span><span class="montant num">45,00&nbsp;€</span></div></div>
-        <div class="objet o3" style="--k:2"><div class="objet-carte"><b>{o.tableur}</b><span class="grille-xls"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
-        <div class="objet o4" style="--k:3"><div class="objet-carte"><b>{fine(o.relance)}</b><span>{o.relanceTexte}</span></div></div>
-        <div class="objet o5" style="--k:4"><div class="objet-carte"><b>{o.certificat}</b><span class="statut ko">{o.certificatStatut}</span></div></div>
-        <div class="objet o6" style="--k:5"><div class="objet-carte"><span class="heure">23:47</span><span>{fine(o.message)}</span></div></div>
-        <div class="cote">
-          <div class="sc-cpt"><CompteurHeures deMin={TOTAL.avantMin} aMin={TOTAL.apresMin} libelleAvant={fine(t.compteurAvant)} libelleApres={fine(t.compteurApres)} declencheur="defilement" /></div>
-          <div class="rendu">
-            <p class="rendu-titre">{t.rendu}</p>
-            {t.moments.map((m, k) => <p class={`moment m${k + 1}`}>{m}</p>)}
+      </div>
+      <div class="couche c-tel" style="--i:1">
+        <div class="c-in">
+          <span class="repere" aria-hidden="true">1</span>
+          {telTraduit ? (
+            <div class="echelle traduit" data-echelle style="--l:420;--h:700"><div class="echelle-in"><slot name="ecran-tel" /></div></div>
+          ) : (
+            <div class="echelle" data-echelle style="--l:340;--h:640"><div class="echelle-in"><EcranAnime nom="inscription" /></div></div>
+          )}
+        </div>
+      </div>
+      <div class="couche c-notif" style="--i:2">
+        <div class="c-in">
+          <span class="repere" aria-hidden="true">3</span>
+          <div class="notif" role="img" aria-label={t.relance.aria}>
+            <p class="n-tete"><span class="n-sig" aria-hidden="true">{sigle}</span><b>{t.relance.asso}</b><span class="n-quand">{t.relance.quand}</span></p>
+            <p class="n-objet">{fine(t.relance.objet)}</p>
+            <p class="n-texte">{fine(t.relance.texte)}</p>
           </div>
         </div>
       </div>
-      <div class="barres" data-barres-place></div>
+      <div class="couche c-temps" style="--i:3">
+        <div class="c-in temps">
+          <p class="t-avant"><b>{TOTAL.avant}&nbsp;→ {TOTAL.apres}</b> {fine(t.temps.avant)}</p>
+          <p class="t-gros"><b class="num">{TOTAL.gain}</b><span>{t.temps.rendu}</span></p>
+          <span class="t-barre" aria-hidden="true"><i></i></span>
+          <p class="t-note">{fine(t.temps.note)} <a href={lienCalcul}>{t.temps.lien}</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="scene-pied">
+      <button class="pause" type="button" aria-pressed="false" data-pause-ecrans data-pause={t.pause} data-reprise={t.reprise}><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg><svg class="i-lecture" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2l9 5-9 5z"/></svg><span data-texte>{t.pause}</span></button>
     </div>
   </div>
-  <i class="jalon j1"></i><i class="jalon j2"></i><i class="jalon j3"></i>
+
+  <div class="legendes" role="group" aria-label={t.groupe}>
+    {t.legendes.map((l, k) => (
+      <button class="leg" type="button" aria-pressed="false" aria-controls="scene" data-cible={['tel', 'tab', 'notif'][k]}><span class="num-leg" aria-hidden="true">{k + 1}</span><span><b>{fine(l.titre)}</b><span class="l">{fine(l.phrase)}</span></span></button>
+    ))}
+  </div>
 </section>
 <script is:inline>
-(function(){var p=document.currentScript&&document.currentScript.previousElementSibling,m=window.matchMedia;if(!p||!p.hasAttribute('data-scene')||!m||m('(prefers-reduced-motion: reduce)').matches)return;
-var tx=p.querySelector('[data-heros-texte]');function haut(){p.style.setProperty('--haut',tx.offsetHeight+'px')}haut();if('ResizeObserver'in window)new ResizeObserver(haut).observe(tx);
-var css=window.CSS&&CSS.supports&&CSS.supports('animation-timeline','view()');
-if(!css){if(!('IntersectionObserver'in window))return;p.classList.add('repli-io');p.setAttribute('data-etape','0');var js=[].slice.call(p.querySelectorAll('.jalon'));var io=new IntersectionObserver(function(){var c=innerHeight/2,n=0;js.forEach(function(j){if(j.getBoundingClientRect().top<c)n++});p.setAttribute('data-etape',n)},{rootMargin:'-50% 0px -50% 0px'});js.forEach(function(j){io.observe(j)})}
-var b=p.querySelector('[data-barres-place]'),L=JSON.parse(p.getAttribute('data-barres')),P=[0,.7,1];
-L.forEach(function(l,k){var x=document.createElement('button');x.type='button';x.className='barre b'+(k+1);x.innerHTML='<span></span><i><i></i></i>';x.firstChild.textContent=l;x.addEventListener('click',function(){var h=p.offsetHeight-innerHeight;window.scrollTo({top:p.getBoundingClientRect().top+window.scrollY+P[k]*h+(k?2:0),behavior:'smooth'})});b.appendChild(x)})})()
+(function () {
+  var scene = document.getElementById('scene'); if (!scene) return
+  var legs = [].slice.call(document.querySelectorAll('.legendes .leg'))
+  var mm = window.matchMedia, reduit = !!(mm && mm('(prefers-reduced-motion: reduce)').matches)
+  /* Les légendes : un clic met un écran en avant, un second clic rend toute la scène. */
+  legs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = b.getAttribute('aria-pressed') !== 'true'
+      legs.forEach(function (x) { x.setAttribute('aria-pressed', 'false') })
+      if (on) { b.setAttribute('aria-pressed', 'true'); scene.setAttribute('data-focus', b.getAttribute('data-cible')) }
+      else scene.removeAttribute('data-focus')
+      /* L'écran mis en avant doit se voir : sur téléphone, les écrans sont l'un sous l'autre. */
+      var cible = on && scene.querySelector('.c-' + b.getAttribute('data-cible'))
+      if (cible) {
+        var r = cible.getBoundingClientRect(), pl = cible.parentNode.getBoundingClientRect(), mode = reduit ? 'auto' : 'smooth'
+        /* Téléphone : les écrans glissent côte à côte ; on amène celui de la légende. */
+        if (r.left < pl.left || r.right > pl.right + 1) cible.parentNode.scrollTo({ left: cible.offsetLeft - 20, behavior: mode })
+        if (r.top < 0 || r.bottom > window.innerHeight) scene.scrollIntoView({ behavior: mode, block: 'center' })
+      }
+    })
+  })
+  /* Repli sans animation-timeline : la scène se redresse une fois, quand elle entre. */
+  var IO = window.IONatif || window.IntersectionObserver
+  if (reduit || !IO || (window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()'))) return
+  scene.classList.add('repli-io')
+  new IO(function (es, o) { if (es[0].isIntersecting) { scene.classList.add('vue'); o.disconnect() } }, { threshold: .3 }).observe(scene)
+})()
 </script>
-<div class="enveloppe scene-note">
-  <p>{fine(t.note)}</p>
-  <details class="scene-hyp">
-    <summary>{t.hypotheses}</summary>
-    <div class="scene-hyp-corps">
-      <slot name="hypotheses">
-        <p>{HYPOTHESES}</p>
-        <BlocTemps cles={CINQ_TACHES} titre="Aujourd’hui → avec OnClub, pour 250 adhérents" />
-        <p class="scene-injep"><b>{INJEP.chiffre}</b> {INJEP.texte} <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a></p>
-      </slot>
-    </div>
-  </details>
-</div>
 
 <style>
-/* ================= 1. L'ÉTAT FINAL (par défaut) ================= */
-.piste{position:relative;--haut:360px;--cote:max(16px,calc((100vw - 1200px) / 2))}
-@media (min-width:760px){.piste{--haut:440px}}
-.etage{position:relative}
-.heros-texte{position:relative;z-index:1;max-width:var(--max);margin-inline:auto;padding:28px var(--g) 32px;display:flex;flex-direction:column;align-items:flex-start}
+/* ---- Le texte ---- */
+.heros-texte{max-width:var(--max);margin:0 auto;padding:28px var(--g) 0;display:flex;flex-direction:column;align-items:flex-start}
 h1{font-size:clamp(2.125rem,1.15rem + 4.4vw,4.6875rem);line-height:1;font-weight:800;letter-spacing:-.025em;max-width:none;text-wrap:balance}
-.heros-phrase{margin-top:16px;font-size:var(--t-chapo,clamp(1.0625rem,1rem + .3vw,1.25rem));line-height:1.5;color:var(--gris);max-width:34em;text-wrap:pretty}
+.h1-partie{display:block}
+.heros-sports{margin-top:14px;font:700 clamp(1.0625rem,1rem + .35vw,1.25rem)/1.4 var(--f-titre);color:var(--sapin);max-width:34em;text-wrap:balance}
+/* Six liens d'affilée : pas de soulignement au repos (la ligne resterait en pointillés), il revient au survol et au focus. */
+.heros-sports a{color:inherit;text-decoration:none;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.heros-sports a:hover,.heros-sports a:focus-visible{text-decoration:underline}
+.hs-aussi{font:500 .9375em var(--f-texte);color:var(--gris)}
+.heros-phrase{margin-top:16px;font-size:var(--t-chapo);line-height:1.5;color:var(--gris);max-width:34em;text-wrap:pretty}
 .heros-btn{margin-top:24px}
 .heros-langue{margin-top:14px;font-size:.875rem;color:var(--gris);max-width:40em}
 @media (max-width:759px){.heros-btn{align-self:stretch}}
-.h1-partie{display:block}
 @media (min-width:760px){
-  .heros-texte{align-items:center;text-align:center;padding:56px var(--g) 40px}
-  .heros-phrase{margin-top:24px}
-  .heros-btn{margin-top:32px}
-}
-.panneau{position:relative;margin:0 16px;border-radius:var(--r-panneau,24px);background:var(--scene,#0B0F14);background-image:var(--lueur,radial-gradient(70% 55% at 50% 112%,rgba(93,232,143,.42) 0%,rgba(93,232,143,.12) 45%,rgba(93,232,143,0) 72%));color:var(--blanc);padding:24px 16px 28px;overflow:hidden}
-@media (min-width:760px){.panneau{margin-inline:var(--cote);padding:48px}}
-.plateau{position:relative;display:grid;gap:16px;max-width:1120px;margin-inline:auto}
-@media (min-width:760px){.cote{gap:24px}}
-@media (min-width:1000px){.plateau{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:center}}
-
-/* La fenêtre OnClub */
-.fenetre{position:relative;z-index:2;background:var(--scene-2,#121821);border:1px solid var(--trait-scene,rgba(255,255,255,.10));border-radius:20px;box-shadow:var(--ombre-fenetre,0 40px 80px -40px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06));overflow:hidden}
-@media (min-width:760px){.fenetre{border-radius:var(--r-l)}}
-.fen-tete{display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;font:700 .9375rem/1 var(--f-titre);color:var(--blanc);border-bottom:1px solid var(--trait-scene,rgba(255,255,255,.10))}
-.fen-tete svg{width:30px;height:15px;color:var(--menthe);flex:none}
-.fen-lignes{list-style:none;margin:0;padding:4px 0 10px}
-.ligne{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 16px;font-size:.875rem;font-weight:600;color:var(--texte-scene,#D7DBE1);border-bottom:1px solid var(--trait-scene,rgba(255,255,255,.10))}
-.ligne svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--menthe);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:20;stroke-dashoffset:0}
-.ligne.vide{margin:10px 12px 0;padding-inline:12px;border:1.5px dashed rgba(255,255,255,.28);border-radius:10px;color:var(--texte-scene-doux,#AEB4BE)}
-@media (min-width:760px){.fen-tete{height:56px;padding:0 24px;font-size:1.0625rem}.ligne{min-height:50px;padding:0 24px;font-size:1.0625rem}.ligne.vide{margin:12px 16px 0;padding-inline:20px}}
-
-/* Les objets du désordre : à l'état final, glissés sous la fenêtre (couverts par elle). */
-.objet{position:absolute;z-index:1;left:var(--fx);top:var(--fy);transform-origin:0 0;transform:scale(.6)}
-.objet-carte{display:flex;flex-direction:column;gap:4px;width:150px;padding:10px 12px;background:var(--blanc);color:var(--encre);border-radius:var(--r-s,12px);box-shadow:var(--ombre-objet,0 18px 30px -18px rgba(11,15,20,.55));font-size:.75rem;line-height:1.3}
-@media (min-width:760px){.objet-carte{width:210px;font-size:.8125rem;padding:12px 14px}}
-.objet-carte b{font:700 .8125rem/1.2 var(--f-titre)}
-@media (min-width:760px){.objet-carte b{font-size:.9375rem}}
-.objet-carte .statut{align-self:flex-start;font-size:.6875rem;padding:2px 8px}
-.trait{color:var(--gris)}
-.montant{font:700 1rem/1 var(--f-titre)}
-.o2 .objet-carte{background:var(--lilas-pale)}
-.o3 .objet-carte{width:170px}
-@media (min-width:760px){.o3 .objet-carte{width:230px}}
-.o4 .objet-carte{background:var(--alerte-pale)}
-.o4 b{color:var(--alerte)}
-.o6 .objet-carte{background:var(--scene-2,#121821);color:var(--blanc);border:1px solid var(--trait-scene,rgba(255,255,255,.12))}
-.heure{font:700 .75rem/1 var(--f-texte);color:var(--menthe)}
-.grille-xls{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px}
-.grille-xls i{height:9px;background:#E7E2D6}
-.grille-xls i:nth-child(3n+1){background:#CFE9D8}
-/* Positions finales (sous la fenêtre) : téléphone */
-.o1{--fx:12px;--fy:56px}.o2{--fx:170px;--fy:60px}.o3{--fx:16px;--fy:150px}.o4{--fx:176px;--fy:160px}.o5{--fx:20px;--fy:240px}.o6{--fx:170px;--fy:244px}
-@media (min-width:760px){.o1{--fx:40px;--fy:80px}.o2{--fx:300px;--fy:90px}.o3{--fx:50px;--fy:200px}.o4{--fx:310px;--fy:210px}.o5{--fx:60px;--fy:320px}.o6{--fx:300px;--fy:320px}}
-
-/* Le compteur et le temps rendu */
-.cote{position:relative;z-index:2;display:grid;gap:16px;align-content:center}
-.sc-cpt{--cpt-taille:clamp(3.5rem,1.5rem + 8vw,8.5rem);--cpt-piste:rgba(255,255,255,.12)}
-.sc-cpt :global(.cpt){width:100%}
-.sc-cpt :global(.cpt-lib){font-size:1rem;color:var(--texte-scene,#D7DBE1);font-weight:600}
-.sc-cpt :global(.cpt-barre){max-width:360px}
-.rendu{display:grid;gap:6px}
-.rendu-titre{font:800 clamp(1.75rem,1rem + 3.4vw,3.5rem)/1 var(--f-titre);letter-spacing:-.02em;color:var(--menthe);margin-bottom:6px}
-.moment{font:700 clamp(1.125rem,.7rem + 1.6vw,2rem)/1.2 var(--f-titre);color:var(--blanc)}
-
-/* Les barres (créées par le script) et les jalons */
-.barres{display:none}
-.jalon{position:absolute;left:0;width:1px;height:1px;pointer-events:none}
-.j1{top:38%}.j2{top:50%}.j3{top:60%}
-
-/* La note sous la scène */
-.scene-note{display:flex;flex-wrap:wrap;align-items:center;gap:0 20px;padding-top:8px;font-size:var(--t-micro,.8125rem);color:var(--gris)}
-.scene-hyp summary{display:inline-flex;align-items:center;min-height:44px;cursor:pointer;font-weight:700;color:var(--encre)}
-.scene-hyp[open]{flex-basis:100%}
-.scene-hyp-corps{display:grid;gap:16px;padding:8px 0 16px;font-size:.9375rem;color:var(--encre)}
-.scene-hyp-corps > :global(p){max-width:var(--lecture)}
-.scene-injep a{font-weight:600}
-
-/* ================= 2 et 3. LE MOUVEMENT (jamais sous mouvement réduit) ================= */
-@media (prefers-reduced-motion: no-preference){
-  /* — Mise en scène commune aux deux chemins : piste épinglée, panneau plein écran — */
-  @supports (animation-timeline: view()){
-    :global(html.js) .piste{height:150svh;view-timeline:--piste block;view-timeline-inset:0px}
-    :global(html.js) .etage{position:sticky;top:0;height:100svh;overflow:hidden}
-    :global(html.js) .panneau{position:absolute;inset:0;z-index:2;margin:0;border-radius:0;display:flex;flex-direction:column;justify-content:center;padding:24px 16px 76px;clip-path:inset(0 0 0 0)}
-    :global(html.js) .barres{display:grid}
-    :global(html.js) .objet{z-index:3}
-  }
-  .piste:global(.repli-io){height:150svh}
-  .piste:global(.repli-io) .etage{position:sticky;top:0;height:100svh;overflow:hidden}
-  .piste:global(.repli-io) .panneau{position:absolute;inset:0;z-index:2;margin:0;border-radius:0;display:flex;flex-direction:column;justify-content:center;padding:24px 16px 76px;clip-path:inset(0 0 0 0 round 0)}
-  .piste:global(.repli-io) .barres{display:grid}
-  .piste:global(.repli-io) .objet{z-index:3}
-  @media (min-width:760px){
-    @supports (animation-timeline: view()){
-    :global(html.js) .panneau{padding:40px 48px 84px}}
-    .piste:global(.repli-io) .panneau{padding:40px 48px 84px}
-  }
-
-  /* Les barres « Avant · Rangé · Rendu » */
-  .barres{position:absolute;left:16px;right:16px;bottom:16px;z-index:4;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1120px;margin-inline:auto}
-  @media (min-width:760px){.barres{left:48px;right:48px;bottom:24px;gap:20px}}
-  .barres :global(.barre){display:grid;gap:8px;min-height:44px;align-content:end;padding:0;border:0;background:none;color:var(--texte-scene-doux,#AEB4BE);font:600 var(--t-micro,.8125rem)/1.2 var(--f-texte);text-align:left;cursor:pointer}
-  .barres :global(.barre:hover){color:var(--blanc)}
-  .barres :global(.barre:focus-visible){outline:3px solid var(--menthe);outline-offset:4px;border-radius:4px}
-  .barres :global(.barre>i){display:block;height:2px;background:var(--trait-scene,rgba(255,255,255,.18));overflow:hidden}
-  .barres :global(.barre>i>i){display:block;height:100%;background:var(--menthe);transform-origin:left;transform:scaleX(0)}
-
-  /* L'entrée, jouée une fois au chargement (pas de JS ; jamais sur le h1) */
-  @supports (animation-timeline: view()){
-    :global(html.js) .objet-carte{animation:sc-entree var(--d-3,600ms) var(--courbe-sortie,cubic-bezier(.16,1,.3,1)) calc(var(--k) * 80ms) both}
-    :global(html.js) .o6 .objet-carte{animation:sc-notif 900ms var(--courbe-ressort,cubic-bezier(.34,1.56,.64,1)) 1500ms both}
-  }
-  .piste:global(.repli-io) .objet-carte{animation:sc-entree var(--d-3,600ms) var(--courbe-sortie,cubic-bezier(.16,1,.3,1)) calc(var(--k) * 80ms) both}
-  .piste:global(.repli-io) .o6 .objet-carte{animation:sc-notif 900ms var(--courbe-ressort,cubic-bezier(.34,1.56,.64,1)) 1500ms both}
-
-  /* — Chemin 2 : le défilement pilote tout, en CSS — */
-  @supports (animation-timeline: view()){
-    :global(html.js) .heros-texte{animation:sc-texte-monte linear both;animation-range:contain 0% contain 12%}
-    /* Dès 1000 px, le plateau part centré dans la partie visible du panneau (sous le texte), puis remonte : aucun papier tranché au premier écran. */
-    @media (min-width:1000px){:global(html.js) .plateau{animation:sc-plateau linear both;animation-range:contain 0% contain 25%}}
-    :global(html.js) .panneau{animation:sc-croissance linear both;animation-range:contain 0% contain 25%}
-    :global(html.js) .fenetre{animation:sc-fenetre-monte linear both;animation-range:contain 25% contain 35%}
-    :global(html.js) .objet{animation:sc-ranger linear both}
-    :global(html.js) .o1{animation-range:contain 35% contain 40%}
-    :global(html.js) .o2{animation-range:contain 40% contain 45%}
-    :global(html.js) .o3{animation-range:contain 45% contain 50%}
-    :global(html.js) .o4{animation-range:contain 50% contain 55%}
-    :global(html.js) .o5{animation-range:contain 55% contain 60%}
-    :global(html.js) .o6{animation-range:contain 60% contain 65%}
-    :global(html.js) .ligne:not(.vide){animation:sc-ligne-apparait linear both}
-    :global(html.js) .ligne:not(.vide) svg{animation:sc-coche linear both}
-    :global(html.js) .l1,:global(html.js) .l1 svg{animation-range:contain 35% contain 40%}
-    :global(html.js) .l2,:global(html.js) .l2 svg{animation-range:contain 40% contain 45%}
-    :global(html.js) .l3,:global(html.js) .l3 svg{animation-range:contain 45% contain 50%}
-    :global(html.js) .l4,:global(html.js) .l4 svg{animation-range:contain 50% contain 55%}
-    :global(html.js) .l5,:global(html.js) .l5 svg{animation-range:contain 55% contain 60%}
-    :global(html.js) .l6,:global(html.js) .l6 svg{animation-range:contain 60% contain 65%}
-    :global(html.js) .ligne.vide{animation:sc-ligne-apparait linear both;animation-range:contain 65% contain 72%}
-    :global(html.js) .sc-cpt :global(.cpt-barre>i){animation:sc-cpt-scene-barre steps(6,end) both;animation-range:contain 35% contain 65%}
-    :global(html.js) .sc-cpt :global(:is(.cpt-val,.cpt-lib)>span){animation:sc-cpt-scene-apres step-end both;animation-range:contain 35% contain 65%}
-    :global(html.js) .sc-cpt :global(:is(.cpt-val,.cpt-lib))::before{animation:sc-cpt-scene-avant step-end both;animation-range:contain 35% contain 65%}
-    :global(html.js) .rendu-titre,:global(html.js) .moment{animation:sc-rendu linear both}
-    :global(html.js) .rendu-titre{animation-range:contain 72% contain 77%}
-    :global(html.js) .m1{animation-range:contain 78% contain 82%}
-    :global(html.js) .m2{animation-range:contain 84% contain 88%}
-    :global(html.js) .m3{animation-range:contain 90% contain 94%}
-    :global(html.js) .barres :global(.barre>i>i){animation:sc-barre linear both}
-    :global(html.js) .barres :global(.b1>i>i){animation-range:contain 0% contain 35%}
-    :global(html.js) .barres :global(.b2>i>i){animation-range:contain 35% contain 72%}
-    :global(html.js) .barres :global(.b3>i>i){animation-range:contain 72% contain 100%}
-    /* La ligne de temps à part, plus spécifique (html.js .piste …) : le minifieur ne peut pas la fondre dans le raccourci « animation ». */
-    :global(html.js) .piste :is(.heros-texte,.plateau,.panneau,.fenetre,.objet,.ligne,.ligne svg,.rendu-titre,.moment),:global(html.js) .piste .sc-cpt :global(:is(.cpt-barre>i,.cpt-val>span,.cpt-lib>span,.cpt-val,.cpt-lib)),:global(html.js) .piste .sc-cpt :global(:is(.cpt-val,.cpt-lib))::before,:global(html.js) .piste .barres :global(.barre>i>i){animation-timeline:--piste}
-  }
-
-  /* — Chemin 3 : repli IntersectionObserver (data-etape 0 à 3), transitions — */
-  .piste:global(.repli-io) :is(.heros-texte,.panneau,.fenetre,.objet,.ligne,.ligne svg,.rendu-titre,.moment){transition:transform var(--d-3,600ms) var(--courbe-sortie,ease),opacity var(--d-3,600ms) var(--courbe-sortie,ease),clip-path var(--d-3,600ms) var(--courbe-sortie,ease),stroke-dashoffset var(--d-3,600ms)}
-  .piste:global(.repli-io) .objet{transition-delay:calc(var(--k) * 80ms)}
-  .piste:global(.repli-io) :global(.barre>i>i){transition:transform var(--d-3,600ms) var(--courbe-sortie,ease)}
-  .piste:global(.repli-io[data-etape="0"]) .panneau{clip-path:inset(var(--haut) var(--cote) 0 var(--cote) round var(--r-panneau,24px))}
-  .piste:global(.repli-io[data-etape="0"]) .fenetre{opacity:0;transform:translateY(40%)}
-  .piste:global(.repli-io:not([data-etape="0"])) .heros-texte{opacity:0;transform:translateY(-40px)}
-  .piste:global(.repli-io) .plateau{transition:transform var(--d-3,600ms) var(--courbe-sortie,ease)}
-  @media (min-width:1000px){.piste:global(.repli-io[data-etape="0"]) .plateau{transform:translateY(calc(var(--haut) / 2 + 40px))}}
-  .piste:global(.repli-io:is([data-etape="0"],[data-etape="1"])) .objet{transform:var(--depart)}
-  .piste:global(.repli-io:is([data-etape="2"],[data-etape="3"])) .objet{opacity:0}
-  .piste:global(.repli-io:is([data-etape="0"],[data-etape="1"])) .ligne{opacity:0}
-  .piste:global(.repli-io:is([data-etape="0"],[data-etape="1"])) .ligne svg{stroke-dashoffset:20}
-  .piste:global(.repli-io:is([data-etape="0"],[data-etape="1"])) .sc-cpt :global(:is(.cpt-val,.cpt-lib)>span){color:transparent}
-  .piste:global(.repli-io:is([data-etape="0"],[data-etape="1"])) .sc-cpt :global(:is(.cpt-val,.cpt-lib))::before{opacity:1}
-  .piste:global(.repli-io:is([data-etape="0"],[data-etape="1"])) .sc-cpt :global(.cpt-barre>i){transform:none}
-  .piste:global(.repli-io:not([data-etape="3"])) :is(.rendu-titre,.moment){opacity:0;transform:translateY(16px)}
-  .piste:global(.repli-io:not([data-etape="0"])) :global(.b1>i>i){transform:none}
-  .piste:global(.repli-io:is([data-etape="2"],[data-etape="3"])) :global(.b2>i>i){transform:none}
-  .piste:global(.repli-io[data-etape="3"]) :global(.b3>i>i){transform:none}
+  .heros-texte{align-items:center;text-align:center;padding-top:56px}
+  .heros-sports{margin-top:18px}
+  .heros-phrase{margin-top:18px}
+  .heros-btn{margin-top:30px}
 }
 
-/* Les départs du désordre (relatifs à la position finale) */
-.o1{--depart:translate(-4px,170px) rotate(-4deg)}
-.o2{--depart:translate(12px,172px) rotate(3deg)}
-.o3{--depart:translate(134px,320px) rotate(-2deg)}
-.o4{--depart:translate(-164px,320px) rotate(2deg)}
-.o5{--depart:translate(170px,340px) rotate(-3deg)}
-.o6{--depart:translate(-160px,336px) rotate(2deg)}
-@media (min-width:760px){
-  .o1{--depart:translate(-20px,150px) rotate(-4deg)}
-  .o2{--depart:translate(140px,120px) rotate(3deg)}
-  .o3{--depart:translate(560px,40px) rotate(-2deg)}
-  .o4{--depart:translate(-120px,150px) rotate(2deg)}
-  .o5{--depart:translate(520px,70px) rotate(-3deg)}
-  .o6{--depart:translate(380px,-120px) rotate(2deg)}
+/* ---- La scène ---- */
+.scene{position:relative;margin:36px 16px 0;border-radius:var(--r-panneau);background-color:var(--scene);background-image:var(--lueur),var(--lueur-haut);color:var(--blanc);overflow:hidden;padding:24px 16px 16px}
+@media (min-width:760px){.scene{width:calc(100% - 80px);max-width:var(--max-large);margin:52px auto 0;padding:40px 40px 24px}}
+.plateau{position:relative;display:grid;gap:22px;max-width:1120px;margin:0 auto;transform-origin:50% 0}
+.couche{position:relative;min-width:0}
+.c-in{position:relative;transition:opacity var(--d-3) var(--courbe-sortie)}
+/* Téléphone : les écrans l'un sous l'autre, rien ne se recouvre. Le téléphone en grand ;
+   le tableau de bord recadré sur l'argent (lisible) ; la relance ; le temps rendu. */
+.c-tel{justify-self:center;width:min(260px,80%);order:-1}
+.c-tab .fenetre{--cx:216;--cy:50;--cw:372;--ch:350}
+.c-tab .traduit{--l:440!important;--h:440!important}
+/* Écrans traduits (HTML fluide) : on les compose à la largeur voulue, sans vide sous le contenu. */
+.c-tel .traduit{--h:500!important}
+/* Téléphone : les quatre cartes côte à côte, que l'on fait glisser du doigt (le visiteur seul les
+   fait défiler) ; la suivante dépasse au bord. La scène tient en un écran : les légendes 1, 2, 3
+   suivent tout de suite les repères numérotés (une légende touchée amène son écran). */
+@media (max-width:759px){
+  .scene{padding:14px 0 12px}
+  .plateau{display:flex;align-items:center;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:20px;padding:16px 20px 8px;scrollbar-width:none}
+  .plateau::-webkit-scrollbar{display:none}
+  .couche{flex:0 0 82%;scroll-snap-align:start}
+  .c-tel{flex:0 0 auto;width:236px}
+  .scene-pied{padding-inline:16px}
 }
+/* Tablette : le téléphone à gauche, les trois autres à droite, en colonne. */
+@media (min-width:760px) and (max-width:1099px){
+  .plateau{grid-template-columns:minmax(0,34%) minmax(0,1fr);column-gap:28px;align-items:start}
+  .c-tel{grid-column:1;grid-row:1 / span 3;width:100%}
+  .c-tab,.c-notif,.c-temps{grid-column:2}
+  .c-tab .fenetre{--cx:200;--cy:34;--cw:680;--ch:486}
+  .c-tab .traduit{--l:620!important;--h:440!important}
+}
+/* Ordinateur : la scène en profondeur, mais sans recouvrement d'un contenu : le téléphone à
+   gauche, le tableau de bord (sans sa barre latérale) au centre, le temps et la relance à droite. */
+@media (min-width:1100px){
+  .plateau{display:block;height:560px}
+  /* Écrans traduits, plus courts : la scène se resserre. */
+  .plateau:has(.traduit){height:460px}
+  .couche{position:absolute}
+  .c-tel{left:0;top:44px;width:22%}
+  .c-tab{left:24.5%;top:24px;width:51%}
+  .c-tab .fenetre{--cx:200;--cy:34;--cw:680;--ch:486}
+  .c-tab .traduit{--l:760!important;--h:440!important}
+  /* La carte traduite s'aligne sur le haut du tableau de bord. */
+  .c-tel:has(.traduit){top:24px}
+  .c-temps{right:0;top:0;width:23%;z-index:4}
+  .c-notif{right:0;bottom:16px;width:24.5%;z-index:4}
+}
+.fenetre{border-radius:14px;box-shadow:0 50px 90px -40px rgba(0,0,0,.8)}
+.c-tel .c-in{filter:drop-shadow(0 40px 40px rgba(0,0,0,.45))}
+/* Le premier écran du site ne montre pas d'erreur : le rappel rouge « aucun cours sélectionné »
+   du formulaire vide est retiré de la scène (public/ecrans reste intact). */
+.c-tel :global(.eci-err){visibility:hidden}
+.traduit{border-radius:var(--r-l)}
+.traduit :global(.ml-cadre){max-width:none;box-shadow:none}
 
-@keyframes sc-texte-monte{60%{opacity:0}to{opacity:0;transform:translateY(-40px)}}
-@keyframes sc-plateau{from{transform:translateY(calc(var(--haut) / 2 + 40px))}to{transform:none}}
-@keyframes sc-croissance{from{clip-path:inset(var(--haut) var(--cote) 0 var(--cote) round var(--r-panneau,24px))}to{clip-path:inset(0 0 0 0 round 0)}}
-@keyframes sc-fenetre-monte{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
-@keyframes sc-ranger{from{transform:var(--depart);opacity:1}to{transform:scale(.6);opacity:0}}
-@keyframes sc-ligne-apparait{from{opacity:0}to{opacity:1}}
-@keyframes sc-coche{from{stroke-dashoffset:20}to{stroke-dashoffset:0}}
-@keyframes sc-cpt-scene-barre{from{transform:none}to{transform:scaleX(var(--ratio))}}
-@keyframes sc-cpt-scene-apres{from{color:transparent}to{color:inherit}}
-@keyframes sc-cpt-scene-avant{from{opacity:1}to{opacity:0}}
-@keyframes sc-rendu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes sc-barre{from{transform:scaleX(0)}to{transform:none}}
-@keyframes sc-entree{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
-@keyframes sc-notif{0%{opacity:0;transform:translateY(-16px)}55%{opacity:1;transform:none}63%{transform:translateX(-2px)}71%{transform:translateX(2px)}79%{transform:translateX(-2px)}87%{transform:translateX(2px)}95%{transform:translateX(-2px)}100%{opacity:1;transform:none}}
+/* Le repère numéroté de chaque écran (carré, jamais rond) */
+.repere{position:absolute;z-index:6;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--menthe);color:var(--encre);font:800 .875rem/1 var(--f-titre);box-shadow:0 6px 16px -6px rgba(0,0,0,.6)}
+/* Posé sur le coin du cadre, jamais sur un contenu. */
+.c-tel .repere,.c-tab .repere,.c-notif .repere{left:-10px;top:-10px}
+/* Écran traduit (carte blanche, sans cadre de téléphone) : le repère passe au-dessus du cadre, hors du logo. */
+@media (min-width:760px){.c-tel:has(.traduit) .repere{top:-14px;left:-14px;transform:translateY(-50%)}}
+
+/* La relance, telle que la famille la reçoit */
+.notif{background:#FAFAF7;color:var(--encre);border-radius:18px;padding:12px 14px;box-shadow:0 30px 50px -24px rgba(0,0,0,.7);font-size:.8125rem;line-height:1.35}
+.n-tete{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--gris)}
+.n-sig{width:22px;height:22px;border-radius:6px;background:#0F3D2A;color:var(--menthe);display:grid;place-items:center;font:800 .625rem var(--f-titre);flex:none}
+.n-tete b{color:var(--encre);font-weight:700}
+.n-quand{margin-left:auto}
+.n-objet{margin-top:8px;font:700 .875rem/1.25 var(--f-titre)}
+.n-texte{margin-top:3px;color:var(--gris)}
+@media (max-width:759px){.notif{padding:12px 14px;border-radius:14px}.c-tab .repere{left:auto;right:-10px}}
+@media (min-width:760px){.notif{padding:14px 16px;font-size:.875rem}.n-objet{font-size:.9375rem}}
+
+/* La carte du temps rendu */
+.temps{background:var(--blanc);color:var(--encre);border-radius:18px;padding:14px 16px;box-shadow:0 30px 50px -24px rgba(0,0,0,.7)}
+.t-avant{font-size:.8125rem;font-weight:600;color:var(--gris);line-height:1.3}
+.t-avant b{color:var(--encre);font-weight:700}
+.t-gros{margin-top:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.t-gros b{font:800 2.5rem/1 var(--f-titre);letter-spacing:-.02em;color:var(--sapin)}
+.t-gros span{font:700 .9375rem/1.2 var(--f-titre)}
+.t-barre{display:block;height:6px;margin-top:10px;background:#E7E2D6;border-radius:999px;overflow:hidden}
+.t-barre i{display:block;height:100%;width:92%;background:var(--menthe);border-radius:inherit}
+.t-note{margin-top:8px;font-size:.8125rem;line-height:1.35;color:var(--gris)}
+.t-note a{display:inline-block;padding-block:4px;font-weight:700;color:var(--encre)}
+@media (min-width:760px){.temps{padding:18px 20px}.t-gros b{font-size:3.5rem}.t-gros span{font-size:1.0625rem}.t-avant{font-size:.875rem}}
+
+.scene-pied{position:relative;z-index:7;display:flex;justify-content:flex-end;margin-top:8px}
+
+/* ---- Les trois légendes, cliquables ---- */
+.legendes{display:grid;gap:4px;max-width:var(--max);margin:16px auto 0;padding:0 var(--g)}
+@media (min-width:760px){.legendes{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px}}
+.leg{display:grid;grid-template-columns:28px minmax(0,1fr);gap:14px;align-items:start;padding:14px 4px 16px;border:0;border-top:2px solid var(--trait);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:border-color var(--d-2)}
+.leg:hover{border-top-color:var(--encre)}
+.leg[aria-pressed="true"]{border-top-color:var(--sapin)}
+.leg:focus-visible{outline:3px solid var(--sapin);outline-offset:2px;border-radius:4px}
+.num-leg{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--encre);color:var(--menthe);font:800 .875rem/1 var(--f-titre)}
+.leg[aria-pressed="true"] .num-leg{background:var(--menthe);color:var(--encre)}
+.leg b{display:block;font:700 1.1875rem/1.2 var(--f-titre)}
+.leg .l{display:block;margin-top:4px;font-size:1rem;line-height:1.45;color:var(--gris)}
+
+/* Le focus sur un écran : les autres s'effacent */
+.scene[data-focus] .couche .c-in{opacity:.22}
+.scene[data-focus="tel"] .c-tel .c-in,.scene[data-focus="tab"] .c-tab .c-in,.scene[data-focus="notif"] .c-notif .c-in{opacity:1}
+.scene[data-focus="tab"] .c-tab{z-index:5}
+
+/* ================= MOUVEMENT (jamais sous mouvement réduit) ================= */
+@media (prefers-reduced-motion:no-preference){
+  /* Entrée au chargement : lente, échelonnée, une seule fois */
+  :global(.js) .c-in{animation:a-entre 1100ms var(--courbe-sortie) backwards;animation-delay:calc(var(--i) * 180ms + 150ms)}
+  :global(.js) .c-notif .c-in{animation:a-notif 900ms var(--courbe-sortie) 2600ms backwards}
+  /* Le défilement redresse la scène (inclinée de 8°) pendant qu'elle entre ; rien n'est épinglé */
+  @supports (animation-timeline: view()){
+    :global(.js) .plateau{animation:a-redresse linear both;animation-timeline:view();animation-range:entry 20% cover 50%}
+  }
+  :global(.js) .repli-io .plateau{transform:perspective(2000px) rotateX(8deg) scale(.96);transition:transform 1400ms var(--courbe-sortie)}
+  :global(.js) .repli-io.vue .plateau{transform:none}
+}
+@keyframes a-entre{from{opacity:0;transform:translateY(40px)}}
+@keyframes a-notif{from{opacity:0;transform:translateY(-18px)}}
+@keyframes a-redresse{from{transform:perspective(2000px) rotateX(8deg) scale(.96)}to{transform:none}}
 </style>

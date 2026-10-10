@@ -1,0 +1,116 @@
+---
+nom: "Trottinette freestyle"
+ligne: "Des riders U9 aux seniors, la trottinette freestyle s’inscrit en ligne"
+ordre: 50
+titreSeo: "Club de trottinette freestyle : inscription en ligne | OnClub"
+description: "Club de trottinette freestyle : groupes par année de naissance dès U9, frères et sœurs dans un dossier, stages des vacances. Licence FFRS dans Rolskanet."
+titre: "Club de trottinette : frères et sœurs dans un seul dossier"
+chapo: "Au skatepark, une même famille inscrit parfois deux ou trois riders. Un seul dossier, une réduction calculée, un total lu avant de payer."
+temps:
+  cles: [paiements, evenements]
+  titre: "Ce que le bureau d’un club de trottinette récupère par saison"
+fonctionnalites: [inscription-en-ligne, paiement-en-ligne, aides-deduites, evenements-stages, liste-des-licences, seances-essai]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "À partir de quel âge un enfant peut-il concourir en trottinette freestyle ?"
+    reponse: "Selon le tableau 2026-2027 de la FFRS, la première catégorie de compétition en trottinette est U9, pour les riders nés en 2019 et 2020. Plus jeune, l’enfant peut rouler au club, dans un groupe dont les années sont fixées par le bureau."
+  - question: "Deux enfants inscrits : la réduction s’applique-t-elle d’elle-même ?"
+    reponse: "Oui, si le club l’a prévue : réduction pour le deuxième enfant, pour le troisième, ou pour plusieurs groupes, déclenchée dès que le dossier les réunit. La famille voit le total exact avant de payer, et peut régler en plusieurs fois."
+  - question: "Un enfant peut-il essayer une session avant de s’inscrire ?"
+    reponse: "Oui, si le groupe l’accepte : pas d’essai, essai s’il reste de la place, ou essai même complet, au choix du club. La famille réserve depuis la page du club ; l’inscription qui suit reste liée à cet essai."
+  - question: "OnClub vérifie-t-il le casque et les protections des riders ?"
+    reponse: "Non, rien ne se vérifie à distance. Le club peut poser la question dans le formulaire, protections et trottinette personnelle, et lire la réponse dans le dossier. OnClub ne gère pas non plus le prêt de matériel."
+sources:
+  - titre: "FFRS, Catégories d’âge saison 2026-2027"
+    url: "https://ffroller-skateboard.fr/download/1995/licences/111195/categories-dage-2026-2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Demande de licence club 2026-2027"
+    url: "https://ffroller-skateboard.fr/download/1995/licences/110691/demande-licence-club-2026-2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Certificat médical et attestation"
+    url: "https://ffroller-skateboard.fr/cm-attestation/"
+    consulte: "2026-10-10"
+---
+
+## Inscription trottinette : le groupe selon l’année de naissance
+
+Le formulaire ne montre au parent que les groupes ouverts à l’année de naissance de chaque enfant, avec les places restantes. Le club pose ces années une fois ; OnClub ne calcule pas la catégorie FFRS.
+
+<Repli titre="Les catégories de compétition trottinette 2026-2027">
+
+- **U9** : nés en 2019 et 2020, la première catégorie de compétition.
+- **U12** : nés de 2016 à 2018.
+- **U15** : nés de 2013 à 2015.
+- **U18** : nés de 2010 à 2012.
+- **Senior** : nés en 2009 et avant.
+
+</Repli>
+
+Une [séance d’essai](/fonctionnalites/seances-essai) se réserve depuis la page du club, avant de payer quoi que ce soit.
+
+<Repli>
+
+- **Vos questions** s’ajoutent au formulaire : trottinette personnelle, protections, droit à l’image.
+- **Un groupe complet** l’affiche franchement : complet pour l’instant, ou pour toute la saison, au choix du bureau.
+- **Un groupe peut n’accepter** que les anciens riders, ou seulement sur invitation.
+
+</Repli>
+
+## Cotisation pour deux riders de la même famille
+
+Les enfants d’une famille s’inscrivent dans un même dossier ; la réduction du deuxième et du troisième s’applique seule, et le parent lit le total exact avant de payer.
+
+<Idee visuel="droite">
+
+Un acompte, puis des versements, si le club propose plusieurs fois : chaque date et chaque montant s’affichent avant de valider.
+
+<Repli>
+
+- **Les [aides](/fonctionnalites/aides-deduites)**, dont le [Pass’Sport](/guides/pass-sport), se cochent et se déduisent, avec leur justificatif.
+- **Un responsable légal majeur** est demandé dès qu’un rider est mineur.
+- **Le reçu de cotisation** se télécharge depuis le dossier.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Votre club de trottinette"
+  titre="Dossier famille · 2 riders"
+  sousTitre="Saison 2026-2027"
+  lignes={[
+    { nom: 'Lina M.', detail: 'Groupe nés en 2019-2020', statut: '175,00 €', ton: 'neutre' },
+    { nom: 'Adam M.', detail: 'Groupe nés en 2016-2018', statut: '175,00 €', ton: 'neutre' },
+    { nom: 'Réduction', detail: 'Deuxième enfant', statut: '− 20,00 €', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Total en 3 fois', valeur: '3 × 110,00 €' }}
+  bouton="Payer l’acompte"
+  legende="Le total d’une famille de deux riders, réduction comprise. Noms et montants fictifs."
+/>
+
+</Idee>
+
+## Licence FFRS, discipline trottinette : Rolskanet garde la main
+
+La trottinette relève de la Fédération française de roller et skateboard ; la demande de licence se fait dans Rolskanet, discipline cochée. OnClub n’y envoie rien : la [liste des licences](/fonctionnalites/liste-des-licences) dit qui est prêt à être saisi.
+
+<Repli>
+
+- **Pour un rider mineur**, la FFRS demande l’attestation du questionnaire de santé, chaque année ; OnClub le fait remplir en ligne, seule l’attestation arrive au club.
+- **Un oui au questionnaire** appelle un certificat médical de moins de six mois, déposé en photo et contrôlé par le bureau.
+- **La licence** des disciplines de compétition va du 1er septembre au 31 août.
+- **La photo d’identité** demandée sur la licence FFRS peut se réclamer comme une pièce, déposée depuis le téléphone du parent.
+
+</Repli>
+
+## Stages des vacances au skatepark, réglés à part
+
+Avec Pro Max IA, un stage des vacances a sa propre page d’[inscription](/fonctionnalites/evenements-stages) : dates, tarif, places et liste d’attente, payé à part de la cotisation.
+
+<Repli>
+
+- **Un enfant non adhérent** peut s’y inscrire si le club ouvre le stage à tous.
+- **Les contests** officiels, eux, se gèrent chez l’organisateur ou la fédération : OnClub ne tient aucun classement.
+
+</Repli>

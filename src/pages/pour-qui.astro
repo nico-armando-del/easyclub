@@ -1,32 +1,42 @@
 ---
 /*
-  LE HUB « POUR QUI » (maquettes §B.4 et §F) : sports, autres activités, profils,
-  construits à partir des collections. Aucun annuaire de clubs.
-  C'est la page qui lie TOUTES les pages sports et activités : les 10 premières en
-  cartes photo, puis (au-delà de 10) la liste complète de A à Z avec son filtre.
-  L'en-tête et le pied de page n'en montrent que 10 et renvoient ici.
+  LE HUB « POUR QUI » (maquettes §B.4 et §F) : LES CLUBS DE SPORT D'ABORD
+  (Nico, 10 oct. : « faut mettre beaucoup plus en avant les clubs sportifs que
+  artistiques »), puis les activités artistiques, plus compactes, puis les profils.
+  Construit à partir des collections, rien de codé en dur. Aucun annuaire de clubs.
+  C'est la page qui lie TOUTES les pages sports et activités : les sports en
+  grandes photos (src/i18n/bande.ts : une page publiée y mène, sinon la photo
+  seule), puis TOUS les sports publiés de A à Z avec un filtre ; les activités
+  en vignettes. L'en-tête et le pied de page n'en montrent que 10 et renvoient ici.
 */
 import Layout from '../layouts/Layout.astro'
 import HerosCompact from '../components/HerosCompact.astro'
 import CartesCollection from '../components/CartesCollection.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
+import Photo from '../components/Photo.astro'
+import { cartesSports } from '../i18n/bande'
 import { liste, url } from '../lib/collections'
 
 const sports = await liste('sports')
 const activites = await liste('activites')
 const profils = await liste('profils')
+const dix = await cartesSports('fr', 10)
+const mosaique = dix.slice(0, 9)
+/* Ordinateur : la moitié droite de l'en-tête porte une photo de sport, autre que celles de la mosaïque. */
+const visuel = dix[9]
+const aPage = (href: string) => href.startsWith('/sport')
 
 const fil = [{ nom: 'Pour qui', url: '/pour-qui' }]
 const faq = [
-  { question: 'Mon activité n’est pas dans la liste : OnClub peut-il convenir ?', reponse: 'Probablement, s’il y a des inscriptions, des cours ou des groupes et des cotisations. Chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.' },
+  { question: 'Mon sport ou mon activité n’est pas dans la liste : OnClub peut-il convenir ?', reponse: 'Probablement, s’il y a des inscriptions, des équipes, des cours ou des groupes, et des cotisations. Chaque équipe ou cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.' },
   { question: 'Les adultes peuvent-ils s’inscrire seuls ?', reponse: 'Oui. Chaque cours est borné par années de naissance : un cours pour adultes s’ouvre aux années qui conviennent. Un adulte qui s’inscrit seul indique un contact d’urgence.' },
   { question: 'Je suis adhérent, pas au bureau : que puis-je faire ?', reponse: 'Transmettre OnClub à votre club : la page dédiée prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail.' },
 ]
 ---
 <Layout
-  titre="Pour quelles associations ? Sport, musique, danse | OnClub"
-  description="OnClub sert toutes les associations qui inscrivent : clubs de sport, écoles de musique, de danse, de théâtre, de langues. Et chaque rôle du bureau."
+  titre="Clubs de sport et associations qui inscrivent | OnClub"
+  description="OnClub sert d’abord les clubs de sport (foot, basket, volley, judo, danse…), aussi les écoles de musique, de théâtre, de langues. Et chaque rôle du bureau."
   chemin="/pour-qui"
   fil={fil}
   faq={faq}
@@ -34,34 +44,44 @@ const faq = [
   <HerosCompact
     fil={fil}
     surtitre="Pour qui"
-    titre="Toutes les associations qui inscrivent et cotisent"
-    phrase="Club de foot, école de musique, troupe de théâtre : dès qu’il y a des inscriptions et des cotisations, le bureau y laisse ses soirées."
+    titre="Clubs de sport et associations qui inscrivent"
+    phrase="Foot, basket, judo, natation, danse : dès qu’il y a des équipes, des inscriptions et des cotisations, le bureau y laisse ses soirées. Aussi la musique et le théâtre."
     cta={{ texte: 'Demander une démo', href: '/demo' }}
-  />
+  >
+    {visuel && <div class="pq-visuel"><Photo nom={visuel.photo} ratio="4/3" tailles="(min-width: 1000px) 520px, 1px" /></div>}
+  </HerosCompact>
 
-  <section class="section" id="sports" aria-labelledby="t-sports">
+  <section class="section pq-sports" id="sports" aria-labelledby="t-sports">
     <div class="enveloppe">
       <div class="tete-ligne">
         <div class="section-tete">
-          <h2 id="t-sports" class="h2-idee">Sports</h2>
+          <h2 id="t-sports" class="h2-idee pq-h2">Les clubs de sport</h2>
           <p>Catégories tirées de la date de naissance, convocations, compo du match, licences.</p>
         </div>
-        {sports.length > 10 && <a class="lien-fleche" href="#sports-az">Tous les sports ({sports.length}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+        {sports.length > 0 && <a class="lien-fleche" href="#sports-az">Tous les sports ({sports.length}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
       </div>
-      <CartesCollection collection="sports" portrait limite={10} az={{ titre: 'Tous les sports, de A à Z', champ: 'Chercher un sport', id: 'sports-az' }} />
+      <ul class="mosaique">
+        {mosaique.map((c, k) => (
+          <li class:list={[{ grande: k === 0 }]}>
+            {aPage(c.href) ? (
+              <a class="tuile" href={c.href}><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b><span>{c.ligne}</span></span></a>
+            ) : (
+              <div class="tuile"><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b></span></div>
+            )}
+          </li>
+        ))}
+      </ul>
+      <CartesCollection collection="sports" limite={0} azToujours az={{ titre: 'Tous les sports, de A à Z', champ: 'Chercher un sport', indice: 'Football, judo…', id: 'sports-az' }} />
     </div>
   </section>
 
-  <section class="section" id="activites" aria-labelledby="t-activites">
+  <section class="section pq-activites" id="activites" aria-labelledby="t-activites">
     <div class="enveloppe">
-      <div class="tete-ligne">
-        <div class="section-tete">
-          <h2 id="t-activites" class="h2-idee">Autres activités</h2>
-          <p>Des cours, des niveaux, des professeurs, des salles : les inscriptions de la rentrée, sans fiches à recopier.</p>
-        </div>
-        {activites.length > 10 && <a class="lien-fleche" href="#activites-az">Toutes les activités ({activites.length}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+      <div class="section-tete">
+        <h2 id="t-activites" class="pq-h2-petit">Musique, théâtre et les autres</h2>
+        <p>Des cours, des niveaux, des professeurs, des salles : les inscriptions de la rentrée, sans fiches à recopier.</p>
       </div>
-      <CartesCollection collection="activites" portrait limite={10} az={{ titre: 'Toutes les activités, de A à Z', champ: 'Chercher une activité', id: 'activites-az' }} />
+      <CartesCollection collection="activites" vignettes />
     </div>
   </section>
 
@@ -82,6 +102,35 @@ const faq = [
   <CaseVide compact />
 </Layout>
 <style>
+.pq-sports{padding-bottom:var(--e-8)}
+/* Le h2 reste sous le h1 de l'en-tête (hiérarchie). */
+.pq-h2{font-size:clamp(1.75rem,1.4rem + 1vw,2.125rem)}
+.pq-visuel{display:none}
+@media (min-width:1000px){
+  :global(.heros-compact:has(.pq-visuel) > .enveloppe){display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:64px;align-items:start}
+  :global(.heros-compact:has(.pq-visuel) > .enveloppe > *){grid-column:1}
+  .pq-visuel{display:block;grid-column:2!important;grid-row:1 / span 6;align-self:center;border-radius:var(--r-l);overflow:hidden}
+  .pq-visuel :global(.photo){width:100%;height:auto;object-fit:cover}
+}
+.mosaique{list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mosaique .grande{grid-column:1 / -1}
+.mosaique .grande :global(.photo){aspect-ratio:3/2!important}
+@media (min-width:700px){.mosaique{grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--col-gap)}.mosaique .grande{grid-column:span 2;grid-row:span 2}.mosaique .grande :global(.photo){aspect-ratio:auto!important;height:100%}}
+@media (min-width:1000px){.mosaique{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.tuile{position:relative;display:block;height:100%;border-radius:var(--r-l);overflow:hidden;background:var(--encre);color:var(--blanc);text-decoration:none}
+.tuile :global(.photo){width:100%;height:100%;object-fit:cover;transition:transform var(--d-3) var(--courbe-sortie)}
+a.tuile:hover :global(.photo){transform:scale(1.03)}
+a.tuile:focus-visible{outline:3px solid var(--sapin);outline-offset:3px}
+.tuile-nom{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:2px;padding:48px 14px 14px;background:linear-gradient(to top,rgba(11,15,20,.92) 0%,rgba(11,15,20,.78) 55%,rgba(11,15,20,0) 100%)}
+.tuile-nom b{font:700 1.125rem/1.15 var(--f-titre)}
+.tuile-nom span{font-size:.8125rem;line-height:1.35;color:var(--texte-scene)}
+/* Petites tuiles à l'ordinateur (environ 205 px) : la phrase tient en deux lignes, la photo se lit. */
+@media (min-width:1000px){.mosaique li:not(.grande) .tuile-nom{padding-top:36px}.mosaique li:not(.grande) .tuile-nom span{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
+.grande .tuile-nom{padding:64px 20px 20px}
+.grande .tuile-nom b{font-size:clamp(1.5rem,1.2rem + 1vw,2rem)}
+.grande .tuile-nom span{font-size:.9375rem}
+.pq-activites{padding-top:var(--e-8)}
+.pq-h2-petit{font-size:clamp(1.625rem,1.3rem + 1.2vw,2.25rem);line-height:1.1;max-width:22ch}
 .tete-ligne{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0 24px}
 .tete-ligne .section-tete{margin-bottom:0}
 .tete-ligne .lien-fleche{margin-bottom:4px}
