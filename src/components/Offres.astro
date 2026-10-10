@@ -24,11 +24,11 @@ const T = titre
 @media (min-width:960px){.offres{grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}}
 .offre{background:var(--blanc);border-radius:var(--r-l);padding:32px 28px;display:flex;flex-direction:column}
 .offre-phare{background:var(--encre);color:var(--blanc)}
-.offre-nom{font:800 1.5rem/1.1 var(--f-titre)}
+.offre-nom{font:700 1.5rem/1.1 var(--f-titre)}
 .offre-temps{margin-top:16px;padding:12px 14px;border-radius:var(--r-s);background:var(--menthe-pale);color:var(--sapin);font-weight:600}
 .offre-phare .offre-temps{background:var(--menthe);color:var(--encre)}
-.offre-temps b{font:800 1.75rem/1 var(--f-titre);margin-right:4px}
-.offre-taux{margin-top:20px;font:800 3rem/1 var(--f-titre)}
+.offre-temps b{font:700 1.75rem/1 var(--f-titre);margin-right:4px}
+.offre-taux{margin-top:20px;font:700 3rem/1 var(--f-titre)}
 .offre-phare .offre-taux{color:var(--menthe)}
 .offre-leg{margin-top:8px;font-size:.9375rem;color:var(--gris)}
 .offre-phare .offre-leg{color:var(--gris-nuit)}
@@ -37,5 +37,5 @@ const T = titre
 .offre li{padding-left:22px;position:relative}
 .offre li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:currentColor}
 .offre .btn{margin-top:auto;width:100%}
-.offres-note{margin-top:24px;max-width:none}
+.offres-note{margin-top:24px;max-width:var(--lecture)}
 </style>

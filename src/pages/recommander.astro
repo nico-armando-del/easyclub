@@ -35,7 +35,7 @@ const faq = [
       <div>
         <FilAriane fil={fil} />
         <p class="surtitre">Adhérent, élève ou parent</p>
-        <h1>Vos bénévoles méritent leurs soirées. Dites-le à votre club.</h1>
+        <h1>Vos bénévoles méritent leurs soirées. <span class="insec">Dites-le</span> à votre club.</h1>
         <p class="chapo">Vous voyez le bureau courir après les fiches, les chèques et les certificats&nbsp;? Envoyez-lui ce message&nbsp;: il part de chez vous, vers la personne de votre choix.</p>
       </div>
     </div>
@@ -94,6 +94,7 @@ const faq = [
 .tete-page{background:var(--lilas);padding-block:8px calc(var(--section) * .7)}
 .tete-page .surtitre{margin-top:20px}
 .tete-page h1{max-width:20ch}
+.insec{white-space:nowrap}
 .corps{display:grid;gap:clamp(56px,7vw,88px);padding-block:var(--section)}
 .boite-message{background:var(--blanc);border:2px solid var(--encre);border-radius:var(--r-l);padding:24px;box-shadow:0 6px 0 var(--encre);max-width:860px;display:grid;gap:18px}
 @media (min-width:760px){.boite-message{padding:36px 40px}}

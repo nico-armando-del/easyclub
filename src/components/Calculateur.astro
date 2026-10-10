@@ -42,13 +42,13 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
 </div>
 <script is:inline defer src="/js/calculateur.js"></script>
 <style>
-.calculateur{background:var(--blanc);border:2px solid var(--encre);border-radius:var(--r-l);padding:24px;display:grid;gap:28px;box-shadow:0 6px 0 var(--encre)}
+.calculateur{background:var(--blanc);border:1px solid var(--trait);border-radius:var(--r-l);padding:24px;display:grid;gap:28px;box-shadow:0 18px 40px -26px rgba(11,15,20,.38)}
 @media (min-width:960px){.calculateur.grand{grid-template-columns:.8fr 1.2fr;padding:40px;gap:48px}}
 .sans-entree .calc-entree{display:none}
 @media (min-width:960px){.calculateur.grand.sans-entree{grid-template-columns:1fr}}
 .calc-entree label{display:block;font:700 1.25rem/1.25 var(--f-titre)}
 .calc-champs{display:grid;gap:14px;margin-top:14px}
-.calc-champs input[type=number]{width:100%;max-width:220px;min-height:56px;border:2px solid var(--encre);border-radius:14px;padding:0 16px;font:700 1.5rem var(--f-titre);background:var(--papier);color:var(--encre)}
+.calc-champs input[type=number]{width:100%;max-width:220px;min-height:56px;border:1px solid var(--trait);border-radius:14px;padding:0 16px;font:700 1.5rem var(--f-titre);background:var(--papier);color:var(--encre)}
 .calc-champs input[type=number]:focus{outline:none;box-shadow:0 0 0 3px var(--menthe)}
 .calc-champs input[type=range]{width:100%;accent-color:var(--sapin);min-height:44px}
 .calc-sansjs{margin-top:8px;font-size:.9375rem;color:var(--gris)}
@@ -58,7 +58,7 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
 .calc-totaux{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .calc-totaux div{background:var(--papier);border-radius:var(--r-s);padding:14px}
 .calc-totaux span{display:block;font-size:.875rem;color:var(--gris)}
-.calc-totaux b{display:block;font:800 clamp(1.5rem,1.2rem + 1vw,2.25rem)/1.1 var(--f-titre)}
+.calc-totaux b{display:block;font:700 clamp(1.5rem,1.2rem + 1vw,2.25rem)/1.1 var(--f-titre)}
 .calc-totaux .calc-gain{grid-column:1/-1;background:var(--menthe)}
 .calc-totaux .calc-gain span{color:var(--encre)}
 .calc-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:.9375rem}
@@ -66,6 +66,7 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
 .calc-table thead th{font-size:.8125rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gris)}
 .calc-table td{white-space:nowrap;font-weight:700}
 .calc-table tbody th{font-weight:500}
+@media (max-width:520px){.calc-table tbody th{width:58%}.calc-table thead th{letter-spacing:0;text-transform:none;font-size:.875rem}}
 .calc-note{margin-top:14px;font-size:.875rem;color:var(--gris)}
 .calc-note a{font-weight:700}
 </style>

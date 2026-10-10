@@ -3,7 +3,7 @@
   UN MINI-ÉCRAN D'EXEMPLE, EN HTML/CSS, POUR LES ACTIVITÉS QUE LES ÉCRANS
   ANIMÉS (tous tirés d'un club de volley) ne montrent pas : une école de
   musique, de danse, une troupe de théâtre…  Données fictives, étiquette
-  « Exemple » toujours visible. Les lignes apparaissent l'une après l'autre
+  Données fictives, sans étiquette. Les lignes apparaissent l'une après l'autre
   (une fois, quand l'écran entre dans la vue ; immobile sous reduced-motion).
 
   <MiniEcran
@@ -17,12 +17,12 @@
 */
 interface Ligne { nom: string; detail?: string; statut?: string; ton?: 'ok' | 'ko' | 'neutre' }
 interface Props { association: string; titre: string; sousTitre?: string; lignes: Ligne[]; pied?: { libelle: string; valeur: string }; bouton?: string; legende?: string }
-const { association, titre, sousTitre, lignes, pied, bouton, legende = 'Écran d’exemple, données fictives.' } = Astro.props
+const { association, titre, sousTitre, lignes, pied, bouton, legende } = Astro.props
 const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[0].toUpperCase()).join('').slice(0, 2) || 'OC'
 ---
 <figure class="mini-ecran">
   <div class="me-cadre" data-mini-ecran>
-    <div class="me-tete"><span class="me-sigle" aria-hidden="true">{sigle}</span><span class="me-asso">{association}</span><span class="exemple">Exemple</span></div>
+    <div class="me-tete"><span class="me-sigle" aria-hidden="true">{sigle}</span><span class="me-asso">{association}</span></div>
     <p class="me-titre">{titre}</p>
     {sousTitre && <p class="me-sous">{sousTitre}</p>}
     <ul class="me-lignes">
@@ -33,7 +33,7 @@ const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[
     {pied && <p class="me-pied"><span>{pied.libelle}</span><b class="num">{pied.valeur}</b></p>}
     {bouton && <span class="me-bouton" aria-hidden="true">{bouton}</span>}
   </div>
-  <figcaption>{legende}</figcaption>
+  {legende && <figcaption>{legende}</figcaption>}
 </figure>
 <script is:inline>
 (function () {
@@ -48,11 +48,11 @@ const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[
 </script>
 <style>
 .mini-ecran{margin:0;max-width:420px}
-.me-cadre{background:var(--blanc);border:2px solid var(--encre);border-radius:28px;padding:20px;box-shadow:0 6px 0 var(--encre)}
+.me-cadre{background:var(--blanc);border:1px solid var(--trait);border-radius:28px;padding:20px;box-shadow:0 18px 40px -26px rgba(11,15,20,.38)}
 .me-tete{display:flex;align-items:center;gap:10px;font-size:.875rem;color:var(--gris)}
-.me-sigle{width:32px;height:32px;border-radius:9px;background:var(--sapin);color:var(--menthe);display:grid;place-items:center;font:800 .8125rem var(--f-titre);flex:none}
+.me-sigle{width:32px;height:32px;border-radius:9px;background:var(--sapin);color:var(--menthe);display:grid;place-items:center;font:700 .8125rem var(--f-titre);flex:none}
 .me-asso{flex:1;min-width:0}
-.me-titre{margin-top:14px;font:800 1.375rem/1.15 var(--f-titre)}
+.me-titre{margin-top:14px;font:700 1.375rem/1.15 var(--f-titre)}
 .me-sous{margin-top:4px;font-size:.875rem;color:var(--gris)}
 .me-lignes{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
 .me-lignes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--trait);border-radius:14px;background:var(--papier)}
@@ -60,7 +60,7 @@ const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[
 .me-nom b{font-size:.9375rem;line-height:1.25}
 .me-nom span{font-size:.8125rem;color:var(--gris)}
 .me-pied{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--trait)}
-.me-pied b{font:800 1.375rem/1 var(--f-titre)}
+.me-pied b{font:700 1.375rem/1 var(--f-titre)}
 .me-bouton{display:flex;align-items:center;justify-content:center;min-height:46px;margin-top:14px;border-radius:999px;background:var(--menthe);font-weight:700;font-size:.9375rem}
 .mini-ecran figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:14px;font-size:.875rem;color:var(--gris)}
 .me-attend .me-lignes li{opacity:0;transform:translateY(10px)}

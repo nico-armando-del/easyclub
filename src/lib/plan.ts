@@ -23,6 +23,7 @@ export const PAGES_FIXES: { chemin: string; nom: string; ligne: string; groupe: 
   { chemin: '/mentions-legales', nom: 'Mentions légales', ligne: 'Éditeur, hébergeur, contact.', groupe: 'Informations légales' },
   { chemin: '/confidentialite', nom: 'Confidentialité', ligne: 'Données, localisation avec consentement, droits.', groupe: 'Informations légales' },
   { chemin: '/conditions', nom: 'Conditions', ligne: 'Conditions d’utilisation et de service.', groupe: 'Informations légales' },
+  { chemin: '/credits-photos', nom: 'Crédits photos', ligne: 'Les photographes Unsplash dont les images illustrent le site.', groupe: 'Informations légales' },
 ]
 /** Pages en anglais et en espagnol (anciens fichiers gardés dans public/). Dans le sitemap, pas dans llms.txt. */
 export const PAGES_LANGUES = ['/en', '/es']

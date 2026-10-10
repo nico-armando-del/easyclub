@@ -1,0 +1,9 @@
+---
+/* L'étiquette « FR » d'un lien qui mène, depuis /en ou /es, vers une page en français. */
+interface Props { sr: string }
+const { sr } = Astro.props
+---
+<span class="vers-fr" aria-hidden="true">FR</span><span class="sr"> {sr}</span>
+<style>
+.vers-fr{display:inline-block;flex:none;white-space:nowrap;margin-left:8px;padding:2px 5px;border:1.5px solid currentColor;border-radius:4px;font:700 .6875rem/1 var(--f-texte);letter-spacing:.06em;vertical-align:.15em;text-decoration:none;color:inherit}
+</style>

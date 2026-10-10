@@ -1,6 +1,7 @@
 ---
 /*
-  UN ÉCRAN DE PRODUIT ANIMÉ, REPRIS DE /presentation, DONNÉES FICTIVES.
+  UN ÉCRAN DE PRODUIT ANIMÉ, REPRIS DE /presentation, DONNÉES FICTIVES (noms
+  inventés, sans étiquette « Exemple » : décision de Nico du 10 octobre).
   <EcranAnime nom="inscription" /> — noms : inscription, reinscription,
   relance, site, boutique, terrain, cluby. Le balisage et le style sont dans
   src/ecrans/<nom>.html, le script dans public/ecrans/<nom>.js (chargé en
@@ -16,12 +17,11 @@ if (!html) throw new Error(`Écran inconnu : ${nom}`)
 ---
 <figure class:list={['ecran-anime', `ecran-${nom}`, { sombre }]}>
   <Fragment set:html={html} />
-  <figcaption><span class="exemple">Exemple</span> {legende ?? 'Écran animé, données fictives.'}</figcaption>
+  {legende && <figcaption>{legende}</figcaption>}
 </figure>
 <script is:inline defer src={`/ecrans/${nom}.js`}></script>
 <style>
 .ecran-anime{margin:0;min-width:0}
 .ecran-anime figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;justify-content:center;margin-top:14px;font-size:.875rem;color:var(--gris);text-align:center}
 .ecran-anime.sombre figcaption{color:var(--gris-nuit)}
-.ecran-anime.sombre .exemple{color:var(--gris-nuit)}
 </style>

@@ -1,17 +1,45 @@
 ---
-/* Une grille de cartes pour une collection (hubs). Vide : un message, jamais un lien mort. */
+/*
+  Une grille de cartes pour une collection (hubs). Vide : un message, jamais un lien mort.
+  Sports et activités : les pages qui ont une photo passent en cartes photo,
+  les autres en liste compacte dessous, pour que la grille reste régulière.
+*/
 import { liste, url, ETIQUETTE, type NomCollection } from '../lib/collections'
+import { photoDe } from '../data/photos'
+import Photo from './Photo.astro'
 interface Props { collection: NomCollection; vide?: string }
 const { collection, vide = 'Les premières pages arrivent.' } = Astro.props
 const entrees = await liste(collection)
+const avecPhotos = collection === 'sports' || collection === 'activites'
+const illustrees = avecPhotos ? entrees.filter((e: any) => photoDe(e.id)) : []
+const autres = avecPhotos ? entrees.filter((e: any) => !photoDe(e.id)) : entrees
+const etiquette = (e: any) => `${collection === 'articles' ? e.data.rubrique : ETIQUETTE[collection]}${e.data.lecture ? ` · ${e.data.lecture} min` : ''}`
 ---
 {entrees.length > 0 ? (
-  <ul class="grille grille-3 cartes">
-    {entrees.map((e: any) => (
-      <li><a class="carte-lien" href={url(collection, e.id)}><small>{collection === 'articles' ? e.data.rubrique : ETIQUETTE[collection]}{e.data.lecture ? ` · ${e.data.lecture} min` : ''}</small><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>
+  <>
+    {illustrees.length > 0 && (
+      <ul class="grille-photos cartes">
+        {illustrees.map((e: any) => (
+          <li><a class="carte-lien carte-photo" href={url(collection, e.id)}><Photo nom={e.id} tailles="(min-width: 1000px) 360px, 50vw" /><span class="carte-corps"><b>{e.data.nom}</b><span>{e.data.ligne}</span></span></a></li>
+        ))}
+      </ul>
+    )}
+    {autres.length > 0 && (illustrees.length > 0 ? (
+      <ul class="liste-compacte">
+        {autres.map((e: any) => <li><a href={url(collection, e.id)}>{e.data.nom}</a></li>)}
+      </ul>
+    ) : (
+      <ul class="grille grille-3 cartes">
+        {autres.map((e: any) => (
+          <li><a class="carte-lien" href={url(collection, e.id)}><small>{etiquette(e)}</small><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>
+        ))}
+      </ul>
     ))}
-  </ul>
+  </>
 ) : <p class="note">{vide}</p>}
 <style>
 .cartes{list-style:none;padding:0;margin:28px 0 0}
+.liste-compacte{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.liste-compacte a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--blanc);border:1px solid var(--trait);font-weight:600;text-decoration:none;color:var(--encre)}
+.liste-compacte a:hover{border-color:var(--encre)}
 </style>

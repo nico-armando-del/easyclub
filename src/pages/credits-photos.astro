@@ -1,0 +1,33 @@
+---
+/* Les crédits des photos (src/data/photos.ts) : licence Unsplash, crédit facultatif mais donné. */
+import Layout from '../layouts/Layout.astro'
+import FilAriane from '../components/FilAriane.astro'
+import { PHOTOS } from '../data/photos'
+
+const fil = [{ nom: 'Crédits photos', url: '/credits-photos' }]
+const creditees = Object.values(PHOTOS).filter((p) => p.auteur).sort((a, b) => a.alt.localeCompare(b.alt, 'fr'))
+---
+<Layout titre="Crédits photos du site OnClub : photographes et licence" description="Les photographes dont les images illustrent onclub.app, avec le lien vers chaque photo, publiée sur Unsplash sous la licence Unsplash." chemin="/credits-photos" fil={fil}>
+  <div class="enveloppe legale">
+    <FilAriane fil={fil} />
+    <h1>Crédits photos</h1>
+    <p class="chapo">Les photos de sport et d’activités de ce site viennent d’<a href="https://unsplash.com" rel="noopener" target="_blank">Unsplash</a>, sous la <a href="https://unsplash.com/license" rel="noopener" target="_blank">licence Unsplash</a>. Merci à leurs auteurs. Elles illustrent une activité&nbsp;: les personnes et les lieux n’ont aucun lien avec OnClub ni avec un club client.</p>
+    <ul class="credits">
+      {creditees.map((p) => (
+        <li><span>{p.alt}</span><span><a href={p.page} rel="noopener" target="_blank">Photo</a> de <a href={p.profil} rel="noopener" target="_blank">{p.auteur}</a></span></li>
+      ))}
+    </ul>
+    <p class="legale-fin"><a href="/">Accueil</a> · <a href="/mentions-legales">Mentions légales</a> · <a href="/demo">Demander une démo</a></p>
+  </div>
+</Layout>
+<style>
+.legale{padding-block:16px var(--section)}
+.legale h1{margin-top:16px;font-size:clamp(2rem,1.5rem + 2vw,3rem)}
+.chapo{max-width:var(--lecture)}
+.chapo a,.credits a,.legale-fin a{font-weight:600}
+.credits{list-style:none;padding:0;margin:32px 0 0;max-width:820px;border-top:1px solid var(--trait)}
+.credits li{display:grid;gap:4px 24px;padding:14px 0;border-bottom:1px solid var(--trait);font-size:.9375rem}
+@media (min-width:700px){.credits li{grid-template-columns:1fr auto}}
+.credits li span:last-child{color:var(--gris)}
+.legale-fin{margin-top:40px;font-size:.9375rem}
+</style>

@@ -1,0 +1,10 @@
+---
+/* L'accueil en anglais : la traduction de src/pages/index.astro (textes : src/i18n/accueil.ts). */
+import LayoutLangue from '../layouts/LayoutLangue.astro'
+import AccueilLangue from '../components/langue/AccueilLangue.astro'
+import { TEXTES } from '../i18n/accueil'
+const l = TEXTES.en
+---
+<LayoutLangue l={l} langue="en" faq={l.faq}>
+  <AccueilLangue l={l} langue="en" />
+</LayoutLangue>

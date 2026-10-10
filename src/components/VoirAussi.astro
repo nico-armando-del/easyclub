@@ -4,18 +4,35 @@ import { voirAussi, type NomCollection } from '../lib/collections'
 interface Props { collection: NomCollection; id: string; min?: number; titre?: string }
 const { collection, id, min = 6, titre = 'Voir aussi' } = Astro.props
 const liens = await voirAussi(collection, id, min)
+// Au-delà de neuf, les liens restent dans la page mais repliés : la fin de page ne devient pas un mur de cartes.
+const VISIBLES = 9
 ---
 {liens.length > 0 && (
   <section class="voir-aussi" aria-labelledby="voir-aussi-titre">
     <h2 id="voir-aussi-titre">{titre}</h2>
     <ul class="grille grille-3">
-      {liens.map((l) => (
+      {liens.slice(0, VISIBLES).map((l) => (
         <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
       ))}
     </ul>
+    {liens.length > VISIBLES && (
+      <details class="va-plus">
+        <summary>{liens.length - VISIBLES} autres pages liées</summary>
+        <ul class="grille grille-3">
+          {liens.slice(VISIBLES).map((l) => (
+            <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
+          ))}
+        </ul>
+      </details>
+    )}
   </section>
 )}
 <style>
 .voir-aussi h2{font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem)}
 .voir-aussi ul{list-style:none;padding:0;margin:24px 0 0}
+.va-plus{margin-top:16px}
+.va-plus summary{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:2px solid var(--encre);border-radius:999px;font-weight:700;cursor:pointer;list-style:none}
+.va-plus summary::-webkit-details-marker{display:none}
+.va-plus[open] summary{margin-bottom:0}
+@media (max-width:640px){.voir-aussi .grille{gap:8px}.voir-aussi .carte-lien{padding:14px 18px;gap:2px}.voir-aussi .carte-lien span{display:none}}
 </style>

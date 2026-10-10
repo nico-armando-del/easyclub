@@ -17,6 +17,8 @@ import Encadre from './Encadre.astro'
 import TuileFonction from './TuileFonction.astro'
 import Calculateur from './Calculateur.astro'
 import MiniEcran from './MiniEcran.astro'
+import Photo from './Photo.astro'
+import { photoDe } from '../data/photos'
 import { HUB, ETIQUETTE, url, type NomCollection } from '../lib/collections'
 import { NOM_OFFRE } from '../data/site'
 
@@ -38,6 +40,8 @@ const ecran = d.ecran ?? (collection === 'fonctionnalites' ? ECRAN_FAMILLE[d.fam
 if (['fonctionnalites', 'sports', 'activites', 'profils'].includes(collection) && !ecran && !/<(EcranAnime|MiniEcran)\b/.test(entree.body ?? '')) {
   throw new Error(`${collection}/${entree.id} : ajoutez un écran d’exemple (champ « ecran », <EcranAnime> ou <MiniEcran> dans le texte). Voir REDIGER.md.`)
 }
+/* Sport ou activité : une vraie photo en tête de page quand il y en a une (src/data/photos.ts). */
+const photo = (collection === 'sports' || collection === 'activites') && photoDe(entree.id) ? entree.id : undefined
 const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
 ---
 <Layout
@@ -48,24 +52,27 @@ const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month:
   faq={d.faq}
   article={editorial ? { titre: d.titre, publie: d.publie, maj: d.maj } : undefined}
 >
-  <div class="tete-page">
-    <div class="enveloppe">
-      <FilAriane fil={fil} />
-      <p class="surtitre">
-        {collection === 'fonctionnalites' ? `${d.famille} · ${ETIQUETTE[collection]}` : collection === 'articles' ? d.rubrique : ETIQUETTE[collection]}
-      </p>
-      <h1>{d.titre}</h1>
-      <p class="chapo">{d.chapo}</p>
-      {collection === 'fonctionnalites' && (
-        <p class="tete-meta"><span class="pastille-offre">Dès {NOM_OFFRE[d.offre as 'mini' | 'pro' | 'max']}</span> <a href="/tarifs">Voir les offres</a></p>
-      )}
-      {editorial && (
-        <p class="tete-meta">Publié le <time datetime={d.publie.toISOString().slice(0, 10)}>{date(d.publie)}</time>{d.maj > d.publie && <>, mis à jour le <time datetime={d.maj.toISOString().slice(0, 10)}>{date(d.maj)}</time></>} · {d.lecture} min de lecture · L’équipe OnClub</p>
-      )}
-      <div class="actions">
-        <a class="btn btn-encre" href="/demo">Demander une démo</a>
-        <a class="btn btn-contour" href="/temps-gagne">Calculer mon temps gagné</a>
+  <div class:list={['tete-page', photo && 'avec-photo']}>
+    <div class:list={['enveloppe', photo && 'tete-grille']}>
+      <div class="tete-texte">
+        <FilAriane fil={fil} />
+        <p class="surtitre">
+          {collection === 'fonctionnalites' ? `${d.famille} · ${ETIQUETTE[collection]}` : collection === 'articles' ? d.rubrique : ETIQUETTE[collection]}
+        </p>
+        <h1>{d.titre}</h1>
+        <p class="chapo">{d.chapo}</p>
+        {collection === 'fonctionnalites' && (
+          <p class="tete-meta"><span class="pastille-offre">Dès {NOM_OFFRE[d.offre as 'mini' | 'pro' | 'max']}</span> <a href="/tarifs">Voir les offres</a></p>
+        )}
+        {editorial && (
+          <p class="tete-meta">Publié le <time datetime={d.publie.toISOString().slice(0, 10)}>{date(d.publie)}</time>{d.maj > d.publie && <>, mis à jour le <time datetime={d.maj.toISOString().slice(0, 10)}>{date(d.maj)}</time></>} · {d.lecture} min de lecture · L’équipe OnClub</p>
+        )}
+        <div class="actions">
+          <a class="btn btn-encre" href="/demo">Demander une démo</a>
+          <a class="btn btn-contour" href="/temps-gagne">Calculer mon temps gagné</a>
+        </div>
       </div>
+      {photo && <div class="tete-photo"><Photo nom={photo} tete tailles="(min-width: 900px) 44vw, 100vw" /></div>}
     </div>
   </div>
 
@@ -93,6 +100,9 @@ const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month:
 .tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .75)}
 .tete-page .surtitre{margin-top:20px}
 .tete-page h1{max-width:20ch}
+.avec-photo{padding-bottom:calc(var(--section) * 1.25)}
+.tete-grille{display:grid;gap:32px}
+@media (min-width:900px){.tete-grille{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:end;gap:56px}}
 .tete-meta{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:.9375rem}
 .tete-meta a{font-weight:700}
 .corps-page{display:grid;gap:clamp(48px,6vw,72px);padding-block:var(--section)}

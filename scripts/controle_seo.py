@@ -15,12 +15,13 @@ Ce qui est vérifié, page par page :
   - FAQ visible identique à son JSON-LD (questions et réponses entières) ;
   - liens internes : aucun lien cassé, aucune ancre absente ; au moins 5 liens
     sortants vers d'autres pages ; chaque page reçoit au moins 3 liens ;
+    chaque page mène à /demo ;
   - images : alt, dimensions, poids ; aucune police tierce ;
   - mots interdits dans le texte visible ;
   - taux de commission identiques partout (2,90 / 4,90 / 6,90 %) ;
   - le sitemap contient chaque page publique et rien d'autre ; robots.txt ; llms.txt ;
   - le calculateur de l'accueil redonne 66 h → 5 h pour 250 adhérents.
-Les pages anciennes gardées telles quelles (presentation, en, es) ne passent
+La page ancienne gardée telle quelle (presentation) ne passe
 que les contrôles de structure (sitemap, canonical, liens, mots interdits).
 """
 import json, os, re, sys, html
@@ -31,7 +32,7 @@ from urllib.parse import urljoin, urlparse
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "dist"
 BASE = "https://onclub.app"
 NOINDEX_ATTENDU = {"404.html"}
-ANCIENNES = {"presentation.html", "en.html", "es.html"}
+ANCIENNES = {"presentation.html"}
 MOTS_INTERDITS = [
     r"logiciel", r"torcy", r"frais bancaires inclus", r"relances? automatiques?",
     r"pr[ée]l[èe]vements? automatiques?", r"trouver un club", r"trouvez votre club",
@@ -192,6 +193,8 @@ for rel, p in sorted(pages.items()):
         if re.search(r"fonts\.(googleapis|gstatic)|fontshare|typekit", x.get("href", "")): err(rel, "POLICE_TIERCE", x["href"][:60])
     for st in p.styles:
         if re.search(r"fonts\.(googleapis|gstatic)|@import\s+url\(\s*['\"]?https?:", st): err(rel, "POLICE_TIERCE", "@import ou police distante dans un style")
+    if rel != "demo.html" and not any(urlparse(urljoin(url, h)).path in ("/demo", "/demo.html") for h in p.a):
+        err(rel, "DEMO", "aucun lien vers /demo")
     if len(sortants) < 5: err(rel, "LIENS_SORTANTS", f"{len(sortants)} liens internes vers d'autres pages (5 au moins)")
     # JSON-LD
     graphe = []

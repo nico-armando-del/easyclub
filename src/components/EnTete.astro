@@ -91,7 +91,7 @@ const actif = (p: string) => (chemin === p || chemin.startsWith(p + '/') ? 'page
 <style>
 .entete{background:var(--menthe);position:relative;z-index:40}
 .entete-barre{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;min-height:72px}
-.marque{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 1.375rem/1 var(--f-titre)}
+.marque{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 1.375rem/1 var(--f-titre)}
 .marque svg{width:44px;height:22px}
 .nav{display:none;align-items:center;gap:2px}
 .nav>a,.deroulant>summary{display:inline-flex;align-items:center;min-height:46px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;cursor:pointer;list-style:none}
@@ -116,7 +116,7 @@ const actif = (p: string) => (chemin === p || chemin.startsWith(p + '/') ? 'page
 .panneau-pied svg{width:18px;height:18px}
 .panneau :focus-visible{outline-color:var(--menthe)}
 .menu-tel{position:static}
-.menu-tel>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:999px;border:2px solid var(--encre);font-weight:700;background:var(--blanc)}
+.menu-tel>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--trait);font-weight:700;background:var(--blanc)}
 .menu-tel>summary::-webkit-details-marker{display:none}
 .menu-tel[open]>summary{background:var(--encre);color:var(--blanc)}
 .menu-tel-panneau{position:absolute;left:var(--g);right:var(--g);top:calc(100% - 4px);background:var(--encre);color:var(--blanc);border-radius:var(--r-m);padding:16px;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 100px);overflow:auto}
