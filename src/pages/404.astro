@@ -1,22 +1,25 @@
 ---
+/* LA PAGE INTROUVABLE (textes c) : une phrase, trois chemins, et la case vide pour la démo. */
 import Layout from '../layouts/Layout.astro'
+import CaseVide from '../components/CaseVide.astro'
 ---
 <Layout titre="Page introuvable — OnClub, l’association tout en un" description="Cette page n’existe pas ou plus. Retrouvez les fonctionnalités d’OnClub, les tarifs, les ressources, ou demandez une démo pour votre association." chemin="/404" noindex={true}>
-  <div class="enveloppe page-404">
+  <header class="enveloppe page-404" data-heros>
     <p class="surtitre">Erreur 404</p>
-    <h1>Cette page s’est perdue en chemin.</h1>
-    <p class="chapo">Pas vos soirées, promis. Reprenez par ici&nbsp;:</p>
-    <ul class="grille grille-3 liens">
-      <li><a class="carte-lien" href="/"><b>Accueil</b><span>Ce que fait OnClub.</span></a></li>
-      <li><a class="carte-lien" href="/fonctionnalites"><b>Fonctionnalités</b><span>Six familles.</span></a></li>
-      <li><a class="carte-lien" href="/tarifs"><b>Tarifs</b><span>Un pourcentage, rien de fixe.</span></a></li>
-      <li><a class="carte-lien" href="/ressources"><b>Ressources</b><span>Guides et articles.</span></a></li>
-      <li><a class="carte-lien" href="/temps-gagne"><b>Le temps gagné</b><span>Le calculateur.</span></a></li>
-      <li><a class="carte-lien" href="/demo"><b>Demander une démo</b><span>Cinq questions.</span></a></li>
+    <h1>Cette page n’existe pas, ou plus</h1>
+    <p class="chapo">Le reste du site est bien là.</p>
+    <ul class="liens">
+      <li><a class="lien-fleche" href="/">Accueil <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
+      <li><a class="lien-fleche" href="/fonctionnalites">Fonctionnalités <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
+      <li><a class="lien-fleche" href="/ressources">Ressources <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
     </ul>
-  </div>
+  </header>
+  <CaseVide compact />
 </Layout>
 <style>
-.page-404{padding-block:40px var(--section)}
-.liens{list-style:none;padding:0;margin:32px 0 0}
+.page-404{padding-block:var(--e-8) var(--e-6)}
+.page-404 .surtitre{color:var(--sapin)}
+.page-404 h1{font-size:var(--t-h1-produit);line-height:1.06;letter-spacing:-.02em;max-width:18ch}
+.page-404 .chapo{color:var(--gris)}
+.liens{list-style:none;padding:0;margin:var(--e-5) 0 0;display:flex;flex-wrap:wrap;gap:4px 32px}
 </style>

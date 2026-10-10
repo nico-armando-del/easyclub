@@ -1,57 +1,76 @@
 ---
-/* LE PIED DE PAGE : toutes les familles de pages, construites à partir des collections. */
-import { FAMILLES, EMAIL, lienWhatsApp, PHRASE_BUT } from '../data/site'
+/*
+  LE PIED DE PAGE (maquettes §B.1 et §F). Fond encre. La marque et ACCROCHE, puis
+  cinq colonnes : Fonctionnalités · Sports · Activités · Ressources · OnClub.
+  Sports et activités : les 10 premiers (ordre, puis nom), puis « Tous… (N) » vers
+  /pour-qui, qui lie TOUTES les pages : le pied ne grandit plus avec le catalogue.
+  Chaque colonne est un <details open> : sans JavaScript, tout est ouvert ; sous
+  760 px, un script les referme (accordéons du téléphone).
+*/
+import { FAMILLES, EMAIL, lienWhatsApp, ACCROCHE } from '../data/site'
 import { liste, url } from '../lib/collections'
+const LIMITE = 10
+const fonctions = await liste('fonctionnalites')
 const sports = await liste('sports')
 const activites = await liste('activites')
 const profils = await liste('profils')
 const annee = new Date().getFullYear()
 ---
-<footer class="pied sur-encre">
+<footer class="pied sur-encre" data-sans-bouton-fixe>
   <div class="enveloppe">
     <div class="pied-haut">
       <div class="pied-marque">
         <a class="marque" href="/" aria-label="OnClub, accueil"><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
-        <p>{PHRASE_BUT}</p>
-        <a class="btn btn-menthe btn-petit" href="/demo">Demander une démo</a>
+        <p class="pied-accroche">{ACCROCHE}</p>
+        <a class="btn btn-menthe btn-petit pied-demo" href="/demo">Demander une démo</a>
       </div>
       <nav class="pied-grille" aria-label="Plan du site">
-        <div>
-          <h2>Fonctionnalités</h2>
+        <details open class="pied-col">
+          <summary><h2>Fonctionnalités</h2></summary>
           <ul>
             {FAMILLES.map((f) => <li><a href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a></li>)}
-            <li><a href="/fonctionnalites">Toutes</a></li>
+            <li><a class="tous" href="/fonctionnalites">Toutes ({fonctions.length})</a></li>
           </ul>
-        </div>
-        <div>
-          <h2>Sports</h2>
-          <ul>{sports.map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}</ul>
-        </div>
-        <div>
-          <h2>Autres activités</h2>
-          <ul>{activites.map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}</ul>
-          <h2 class="h2-suite">Votre rôle</h2>
-          <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
-        </div>
-        <div>
-          <h2>Ressources</h2>
+        </details>
+        <details open class="pied-col">
+          <summary><h2>Sports</h2></summary>
+          <ul>
+            {sports.slice(0, LIMITE).map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}
+            {sports.length > 1
+              ? <li><a class="tous" href="/pour-qui#sports">Tous les sports ({sports.length})</a></li>
+              : <li><a class="tous" href="/pour-qui">Toutes les associations</a></li>}
+          </ul>
+        </details>
+        <details open class="pied-col">
+          <summary><h2>Activités</h2></summary>
+          <ul>
+            {activites.slice(0, LIMITE).map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}
+            <li><a class="tous" href="/pour-qui#activites">Toutes les activités ({activites.length})</a></li>
+          </ul>
+        </details>
+        <details open class="pied-col">
+          <summary><h2>Ressources</h2></summary>
           <ul>
             <li><a href="/ressources">Guides et articles</a></li>
             <li><a href="/ressources#comparatifs">Comparatifs</a></li>
             <li><a href="/temps-gagne">Le temps gagné</a></li>
-            <li><a href="/tarifs">Tarifs</a></li>
             <li><a href="/presentation">La présentation</a></li>
           </ul>
-        </div>
-        <div>
-          <h2>OnClub</h2>
+          {profils.length > 0 && <>
+            <h3 class="pied-sous">Votre rôle</h3>
+            <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
+          </>}
+        </details>
+        <details open class="pied-col">
+          <summary><h2>OnClub</h2></summary>
           <ul>
+            <li><a href="/tarifs">Tarifs</a></li>
             <li><a href="/demo">Demander une démo</a></li>
             <li><a href="/recommander">Transmettre à mon club</a></li>
-            <li><a href={`mailto:${EMAIL}`}>{EMAIL.split('@')[0]}<wbr />@{EMAIL.split('@')[1]}</a></li>
             <li><a href={lienWhatsApp()} rel="noopener" target="_blank">WhatsApp</a></li>
+            <li><a href={`mailto:${EMAIL}`}>Écrire un e-mail</a></li>
           </ul>
-        </div>
+        </details>
       </nav>
     </div>
     <div class="pied-bas">
@@ -61,28 +80,65 @@ const annee = new Date().getFullYear()
       <a href="/conditions">Conditions</a>
       <a href="/credits-photos">Crédits photos</a>
       <button type="button" class="pied-cookies" data-consentement-ouvrir>Cookies et localisation</button>
-      <a href="/en" hreflang="en" lang="en">English</a>
-      <a href="/es" hreflang="es" lang="es">Español</a>
+      <span class="pied-langues"><a href="/en" hreflang="en" lang="en">English</a><a href="/es" hreflang="es" lang="es">Español</a></span>
     </div>
   </div>
 </footer>
 
+<script>
+  /* Sous 760 px, les colonnes deviennent des accordéons fermés ; au-dessus, elles restent ouvertes. */
+  const etroit = matchMedia('(max-width:759px)')
+  const cols = document.querySelectorAll<HTMLDetailsElement>('.pied-col')
+  const regle = () => cols.forEach((d) => { d.open = !etroit.matches; const s = d.querySelector('summary'); if (s) s.tabIndex = etroit.matches ? 0 : -1 })
+  regle()
+  etroit.addEventListener('change', regle)
+  cols.forEach((d) => d.querySelector('summary')?.addEventListener('click', (e) => { if (!etroit.matches) e.preventDefault() }))
+</script>
+
 <style>
-.pied{background:var(--encre);color:#C3C8D0;padding-block:64px 40px;font-size:.9375rem}
-.pied-haut{display:grid;gap:48px}
-@media (min-width:1000px){.pied-haut{grid-template-columns:1fr 3fr;gap:56px}}
-.pied-marque{display:flex;flex-direction:column;align-items:flex-start;gap:18px;max-width:34ch}
-.pied .marque{display:inline-flex;align-items:center;gap:10px;color:var(--blanc);text-decoration:none;font:700 1.375rem/1 var(--f-titre)}
-.pied .marque svg{width:44px;height:22px;color:var(--menthe)}
-.pied-grille{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px}
-@media (min-width:760px){.pied-grille{grid-template-columns:repeat(5,minmax(0,1fr))}}
-.pied h2{font:700 1rem/1.3 var(--f-texte);color:var(--blanc);margin-bottom:8px;letter-spacing:0}
-.pied .h2-suite{margin-top:20px}
-.pied ul{list-style:none;padding:0}
-.pied ul a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;overflow-wrap:anywhere}
+.pied{background:var(--encre);color:var(--texte-scene);padding-block:40px 84px;font-size:.9375rem}
+@media (min-width:760px){.pied{padding-block:48px 20px}}
+.pied-haut{display:grid;gap:24px}
+@media (min-width:1000px){.pied-haut{grid-template-columns:repeat(12,minmax(0,1fr));gap:0 var(--col-gap)}.pied-marque{grid-column:1 / span 3}.pied-grille{grid-column:4 / span 9}}
+.pied-marque{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+@media (min-width:760px){.pied-marque{gap:16px}}
+.pied .marque{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--blanc);text-decoration:none;font:700 1.375rem/1 var(--f-titre)}
+.pied .marque svg{width:56px;height:28px;color:var(--menthe)}
+.pied-accroche{font:700 1.375rem/1.15 var(--f-titre);color:var(--blanc)}
+@media (min-width:1000px){.pied-accroche{font-size:1.75rem;max-width:11ch}}
+.pied-grille{display:grid;grid-template-columns:1fr}
+@media (min-width:760px){.pied-grille{grid-template-columns:repeat(5,minmax(0,1fr));gap:0 var(--col-gap)}}
+.pied-col summary{list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:48px;border-top:1px solid var(--trait-scene);cursor:pointer}
+.pied-col summary::-webkit-details-marker{display:none}
+.pied-col summary::after{content:"";width:8px;height:8px;margin-right:6px;border:solid var(--texte-scene-doux);border-width:0 2px 2px 0;transform:translateY(-3px) rotate(45deg);transition:transform var(--d-1) var(--courbe-sortie)}
+.pied-col[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.pied h2{font:700 var(--t-micro)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--texte-scene-doux)}
+.pied-sous{font:700 var(--t-micro)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--texte-scene-doux);margin:8px 0 4px}
+.pied ul{list-style:none;padding:0 0 12px;margin:0}
+.pied ul a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;overflow-wrap:anywhere;color:var(--texte-scene)}
 .pied ul a:hover{color:var(--menthe);text-decoration:underline}
-.pied-bas{margin-top:48px;padding-top:16px;border-top:1px solid #2A323D;display:flex;flex-wrap:wrap;align-items:center;gap:0 24px}
+.pied ul a.tous{font-weight:700;color:var(--blanc)}
+@media (min-width:760px){
+  .pied-col summary{min-height:0;border-top:0;cursor:default;padding-bottom:8px}
+  .pied-col summary::after{display:none}
+  .pied ul{padding:0}
+  .pied ul a{min-height:26px;line-height:1.3;padding-block:2px}
+}
+.pied-bas{margin-top:24px;padding-top:12px;border-top:1px solid var(--trait-scene);display:flex;flex-wrap:wrap;align-items:center;gap:0 20px;color:var(--texte-scene-doux)}
 .pied-bas a,.pied-bas span,.pied-cookies{display:inline-flex;align-items:center;min-height:44px}
-.pied-bas a:hover{color:var(--menthe)}
-.pied-cookies{background:none;border:0;color:inherit;font:inherit;padding:0;text-decoration:underline;cursor:pointer}
+.pied-bas a{color:var(--texte-scene);text-decoration:none}
+.pied-bas a:hover{color:var(--menthe);text-decoration:underline}
+.pied-langues{gap:20px}
+@media (min-width:1000px){.pied-langues{margin-left:auto}}
+/* Sur téléphone (tour 2, défaut 2) : le bouton du pied double la case vide juste au-dessus
+   et la colonne OnClub (« Demander une démo ») : il n'est dessiné qu'à partir de 760 px.
+   Les liens légaux, plus serrés, tiennent sur moins de lignes. */
+@media (max-width:759px){
+  .pied-demo{display:none}
+  .pied-marque{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:16px}
+  .pied-accroche{font-size:1.125rem}
+  .pied-bas{gap:0 14px;font-size:.875rem}
+}
+@media (min-width:760px){.pied-bas{margin-top:24px}.pied-bas a,.pied-bas span,.pied-cookies{min-height:36px}}
+.pied-cookies{background:none;border:0;color:var(--texte-scene);font:inherit;padding:0;text-decoration:underline;cursor:pointer}
 </style>

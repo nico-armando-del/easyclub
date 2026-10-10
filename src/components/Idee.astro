@@ -1,0 +1,28 @@
+---
+/*
+  UNE SECTION D'UNE IDÉE, AVEC SON VISUEL (composant MDX optionnel, maquettes §B.3).
+  <Idee visuel="droite">
+    Le texte de la section (paragraphes, liste).
+    <Fragment slot="ecran"><MiniEcran … /></Fragment>
+  </Idee>
+  « droite » : le texte à gauche (col 1-6), le visuel à droite (col 7-12) dès
+  1000 px ; « dessous » (défaut) : le visuel sous le texte. Sur téléphone, le
+  visuel vient toujours sous le texte.
+*/
+interface Props { visuel?: 'droite' | 'dessous' }
+const { visuel = 'dessous' } = Astro.props
+---
+<div class:list={['idee', `idee-${visuel}`]}>
+  <div class="idee-texte"><slot /></div>
+  {Astro.slots.has('ecran') && <div class="idee-visuel"><slot name="ecran" /></div>}
+</div>
+<style>
+.idee{display:grid;gap:var(--e-6,32px);margin-block:2em}
+.idee-texte>:global(*+*){margin-top:1em}
+.idee-texte>:global(*){max-width:var(--lecture)}
+.idee-visuel{min-width:0}
+@media (min-width:1000px){
+  .idee-droite{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--e-7,48px);align-items:start}
+  .idee-droite>.idee-texte{padding-top:8px}
+}
+</style>

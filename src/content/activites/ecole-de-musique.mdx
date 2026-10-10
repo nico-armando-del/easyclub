@@ -4,8 +4,8 @@ ligne: "Les cours, les niveaux et les professeurs, inscrits en ligne"
 ordre: 1
 titreSeo: "Inscription en ligne pour école de musique associative"
 description: "École de musique associative : chaque cours avec sa discipline, son niveau, son professeur et ses places, l’inscription et la cotisation en ligne."
-titre: "École de musique : les inscriptions de la rentrée, sans fiches à recopier"
-chapo: "Piano le mardi, formation musicale le mercredi, chorale le samedi : chaque élève a son emploi du temps, et chaque famille ses cours. OnClub prend les inscriptions et les cotisations, le bureau garde ses soirées."
+titre: "École de musique : la rentrée sans fiches"
+chapo: "Piano le mardi, formation musicale le mercredi : chaque élève a ses cours. OnClub prend inscriptions et cotisations ; le bureau garde ses soirées."
 temps:
   cles: [fiches, paiements, pieces]
   titre: "Le temps rendu au bureau d’une école de musique, chaque saison"
@@ -21,13 +21,19 @@ faq:
     reponse: "Oui. Vous décidez, cours par cours, si l’essai est fermé, ouvert tant qu’il reste de la place, ou toujours ouvert. Le nouvel élève réserve en ligne et le professeur sait qui vient."
 ---
 
-## Ce qu’OnClub sait d’un cours de musique
+## Chaque cours a son professeur, son niveau et ses places
+
+Le formulaire d’inscription lit votre catalogue : la famille ne voit que les cours ouverts à l’âge de l’élève, avec les places qui restent.
+
+<Repli>
 
 Dans OnClub, chaque cours porte **son nom**, **sa discipline** (piano, guitare, violon, chant, formation musicale, ce que vous enseignez), **son niveau**, **son ou ses professeurs**, **sa salle**, **ses créneaux** dans la semaine, **son nombre de places** et **son tarif**. Il est borné par années de naissance : l’éveil musical s’ouvre aux plus jeunes, l’atelier adultes aux plus grands.
 
-Le formulaire d’inscription lit ce catalogue. La famille ne voit que les cours ouverts à l’âge de l’élève, avec les places qui restent.
+</Repli>
 
-## L’inscription de la rentrée
+## L’inscription de la rentrée, en un seul formulaire
+
+<Idee visuel="droite">
 
 - **Un seul formulaire** pour toute la famille : deux enfants, un parent qui reprend la guitare.
 - **Plusieurs cours par élève**, avec les réductions de l’association appliquées toutes seules.
@@ -35,22 +41,31 @@ Le formulaire d’inscription lit ce catalogue. La famille ne voit que les cours
 - **La liste d’attente** quand le cours de piano du mercredi est plein : la place libérée part au suivant d’un clic (offre Pro).
 
 <MiniEcran
-  association="École de musique exemple"
+  slot="ecran"
+  association="Votre école de musique"
   titre="Inscription 2026-2027"
   sousTitre="Élève : Camille, née en 2015"
   lignes={[
-    { nom: 'Piano, 2e cycle', detail: 'Mardi 18 h 30 · salle 2 · cours individuel', statut: '2 places', ton: 'ok' },
-    { nom: 'Formation musicale, niveau 3', detail: 'Mercredi 14 h · salle 1', statut: '5 places', ton: 'ok' },
-    { nom: 'Chorale enfants', detail: 'Samedi 10 h · auditorium', statut: '1 place', ton: 'neutre' },
+    { nom: 'Piano, 2e cycle', detail: 'Mardi 18:30 · salle 2 · cours individuel', statut: '2 places', ton: 'ok' },
+    { nom: 'Formation musicale, niveau 3', detail: 'Mercredi 14:00 · salle 1', statut: '5 places', ton: 'ok' },
+    { nom: 'Chorale enfants', detail: 'Samedi 10:00 · auditorium', statut: '1 place', ton: 'neutre' },
   ]}
   pied={{ libelle: 'Total de la saison', valeur: '465,00 €' }}
   bouton="Payer en 3 fois"
-  legende="L’inscription vue par la famille : seuls les cours ouverts à l’âge de l’élève, avec les places qui restent. Données fictives."
+  legende="L’inscription vue par la famille : seuls les cours ouverts à l’âge de l’élève, avec les places qui restent. Noms et montants fictifs."
 />
+
+</Idee>
 
 ## La cotisation, en une ou plusieurs fois
 
-La famille paie par carte juste après l’inscription, en une fois ou en plusieurs échéances, et voit chaque versement avant de valider. Les aides de la commune ou du comité d’entreprise se cochent et se déduisent, avec leur justificatif. Les chèques et les espèces se notent dans le dossier, au centime, sans commission.
+La famille paie par carte juste après l’inscription, en une fois ou en plusieurs échéances, et voit chaque versement avant de valider.
+
+<Repli>
+
+Les aides de la commune ou du comité d’entreprise se cochent et se déduisent, avec leur justificatif. Les chèques et les espèces se notent dans le dossier, au centime, sans commission.
+
+</Repli>
 
 ## Le concert de fin d’année et les stages
 
@@ -60,6 +75,6 @@ Avec l’offre Pro Max IA, l’audition, le concert ou le stage des vacances a s
 
 Un professeur absent, une salle qui change : avec l’offre Pro, le message part aux familles d’un cours, ou de toute l’école, avec le suivi de qui l’a reçu.
 
-## Ce que vous en faites à la place
+## Le temps rendu va au concert et aux élèves
 
 Le temps que la secrétaire bénévole passait à recopier les fiches de septembre revient à l’école : préparer le concert, accueillir les nouveaux, écouter les élèves.

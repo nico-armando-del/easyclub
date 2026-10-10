@@ -1,0 +1,75 @@
+---
+/*
+  LA LISTE À FILETS (maquettes §B.5, §B.6) : « rubrique · durée », le titre, « date · auteur »,
+  séparés par des filets, sans cartes. Une colonne (les récents, « À lire ensuite ») ou deux
+  (les guides, avec leur couverture carrée). Toute la ligne mène à la page, par le lien du titre.
+*/
+import Couverture from './Couverture.astro'
+
+export interface EntreeFilet {
+  rubrique: string
+  duree?: string
+  titre: string
+  href: string
+  date?: string
+  auteur?: string
+  ligne?: string
+  couverture?: { rubrique: 'guides' | 'articles' | 'comparatifs'; donnee?: string; apres?: string; titreCourt?: string }
+}
+interface Props {
+  entrees: EntreeFilet[]
+  colonnes?: 1 | 2
+  titre?: string
+  niveau?: 'h2' | 'h3'
+  id?: string
+  /** Variante serrée (colonne « À lire aussi ») : titres plus petits. */
+  serree?: boolean
+}
+const { entrees, colonnes = 1, titre, niveau = 'h2', id, serree = false } = Astro.props
+const Titre = niveau
+const idTitre = id ? `${id}-titre` : undefined
+---
+<div class:list={['liste-filets', `lf-col-${colonnes}`, { 'lf-serree': serree }]} id={id}>
+  {titre && <Titre class="lf-titre-liste" id={idTitre}>{titre}</Titre>}
+  <ul class="lf-liste" aria-labelledby={idTitre}>
+    {entrees.map((e) => (
+      <li class:list={['lf-entree', { 'lf-avec-couv': e.couverture }]}>
+        {e.couverture && <Couverture format="carre" rubrique={e.couverture.rubrique} donnee={e.couverture.donnee} titreCourt={e.couverture.titreCourt} />}
+        <div class="lf-texte">
+          <p class="lf-rub">{e.rubrique}{e.duree && <> · {e.duree}</>}</p>
+          <p class="lf-titre"><a href={e.href}>{e.titre}</a></p>
+          {e.ligne && <p class="lf-ligne">{e.ligne}</p>}
+          {(e.date || e.auteur) && <p class="lf-date">{[e.date, e.auteur].filter(Boolean).join(' · ')}</p>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+<style>
+.lf-titre-liste{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.08;letter-spacing:-.02em;margin-bottom:var(--e-6,32px)}
+.lf-serree .lf-titre-liste{font:700 var(--t-micro,.8125rem)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.lf-liste{list-style:none;padding:0;margin:0;display:grid;border-top:1px solid var(--trait)}
+.lf-entree{position:relative;display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--trait)}
+.lf-texte{min-width:0;flex:1}
+.lf-rub{font:700 var(--t-micro,.8125rem)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--sapin)}
+.lf-titre{margin-top:6px;font:700 1.1875rem/1.25 var(--f-titre);letter-spacing:-.01em;text-wrap:balance}
+.lf-titre a{text-decoration:none;color:var(--encre)}
+.lf-titre a::after{content:"";position:absolute;inset:0}
+.lf-entree:hover .lf-titre a{text-decoration:underline}
+.lf-titre a:focus-visible{outline:none}
+.lf-entree:has(a:focus-visible){outline:3px solid var(--encre);outline-offset:4px;border-radius:4px}
+.lf-ligne{margin-top:6px;font-size:.9375rem;line-height:1.5;color:var(--gris);max-width:52ch}
+.lf-date{margin-top:6px;font-size:var(--t-micro,.8125rem);color:var(--gris)}
+.lf-serree .lf-titre{font-size:1.0625rem}
+.lf-serree .lf-entree{padding:14px 0}
+@media (min-width:760px){
+  .lf-col-1:not(.lf-serree) .lf-entree{display:grid;grid-template-columns:minmax(150px,2fr) minmax(0,7fr) minmax(150px,3fr);gap:24px;align-items:baseline;padding:16px 0}
+  .lf-col-1:not(.lf-serree) .lf-texte{display:contents}
+  .lf-col-1:not(.lf-serree) .lf-rub{grid-column:1}
+  .lf-col-1:not(.lf-serree) .lf-titre{grid-column:2;margin-top:0;font-size:1.375rem}
+  .lf-col-1:not(.lf-serree) .lf-ligne{grid-column:2}
+  .lf-col-1:not(.lf-serree) .lf-date{grid-column:3;grid-row:1;margin-top:0;text-align:right}
+  .lf-col-2 .lf-liste{grid-template-columns:1fr 1fr;column-gap:var(--e-7,48px);border-top:0}
+  .lf-col-2 .lf-entree:nth-child(-n+2){border-top:1px solid var(--trait)}
+}
+</style>

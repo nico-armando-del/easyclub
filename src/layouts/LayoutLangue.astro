@@ -201,12 +201,18 @@ const annee = new Date().getFullYear()
 
 <script is:inline src="/js/site.js" defer></script>
 <script is:inline defer src="/_vercel/insights/script.js"></script>
+<script is:inline>
+/* L'observateur partagé, comme dans Layout.astro : [data-vu] reçoit .vu une fois (35 %), [data-champ] .hors-champ hors de l'écran.
+   Le bouton de démo fixe se cache tant que le héros ou un bloc [data-sans-bouton-fixe] est à l'écran. */
+(function(){if(!('IntersectionObserver'in window))return;var v=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vu');v.unobserve(e.target)}})},{threshold:.35});var c=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('hors-champ',!e.isIntersecting)})});document.querySelectorAll('[data-vu]').forEach(function(x){v.observe(x)});document.querySelectorAll('[data-champ]').forEach(function(x){c.observe(x)});
+var f=document.querySelector('[data-demo-fixe]'),z=[].slice.call(document.querySelectorAll('[data-heros],[data-sans-bouton-fixe],footer')),vis=new Set();if(!f||!z.length)return;var o=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?vis.add(e.target):vis.delete(e.target)});f.classList.toggle('demo-fixe-cache',vis.size>0)});z.forEach(function(x){o.observe(x)})})()
+</script>
 </body>
 </html>
 
 <style>
 /* En-tête : repris d'EnTete.astro, sans les menus déroulants (une seule page traduite). */
-.entete{background:var(--menthe);position:relative;z-index:40}
+.entete{background:var(--papier);border-bottom:1px solid var(--trait);position:relative;z-index:40}
 .entete-barre{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;min-height:72px}
 .marque{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 1.375rem/1 var(--f-titre)}
 .marque svg{width:44px;height:22px}
@@ -245,6 +251,7 @@ const annee = new Date().getFullYear()
 .pied ul a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;overflow-wrap:anywhere}
 .pied ul a:hover{color:var(--menthe);text-decoration:underline}
 .pied-note{margin-top:40px;font-size:.875rem}
+@media (max-width:759px){.pied{padding-block:48px 32px}.pied-haut{gap:32px}.pied-grille{gap:16px}.pied-note{margin-top:24px}.pied-bas{column-gap:16px}}
 .pied-bas{margin-top:16px;padding-top:16px;border-top:1px solid #2A323D;display:flex;flex-wrap:wrap;align-items:center;gap:0 24px}
 .pied-bas a,.pied-bas span,.pied-cookies{display:inline-flex;align-items:center;min-height:44px}
 .pied-bas a:hover{color:var(--menthe)}
@@ -253,6 +260,8 @@ const annee = new Date().getFullYear()
 /* Bouton de démo fixe sur téléphone : repris de BoutonDemoFixe.astro. */
 .demo-fixe{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px var(--g) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--papier) 70%,rgba(245,242,234,0))}
 .demo-fixe .btn{width:100%;min-height:50px}
+.demo-fixe{transition:opacity .2s,transform .2s}
+.demo-fixe.demo-fixe-cache{opacity:0;transform:translateY(16px);pointer-events:none;visibility:hidden}
 :global(body){padding-bottom:84px}
 :global(html.consentement-ouvert) .demo-fixe{display:none}
 @media (min-width:760px){.demo-fixe{display:none}:global(body){padding-bottom:0}}

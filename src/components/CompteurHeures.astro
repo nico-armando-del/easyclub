@@ -1,0 +1,68 @@
+---
+/*
+  LE COMPTEUR D'HEURES : « 66 h » puis « ≈ 5 h », jamais rien entre les deux
+  (arbitrage 5 du plan : un arrêt de défilement ne doit montrer aucun chiffre
+  nouveau). Ce qui descend pas à pas, c'est la barre menthe sous le nombre :
+  elle raccourcit d'un sixième par étape, jusqu'au rapport aMin / deMin.
+
+  L'ÉTAT FINAL EST LE TEXTE DU HTML (« ≈ 5 h », libellé d'après). La valeur de
+  départ n'existe que dans un attribut, affichée par ::before (content: … / ""
+  la retire de l'arbre d'accessibilité) : rien de caché à l'état final.
+
+  declencheur :
+  - 'defilement' : le parent pilote (scène de l'accueil, animation-timeline) ;
+  - 'visible'    : bascule une fois quand le compteur entre à l'écran ;
+  - 'immediat'   : bascule peu après le chargement.
+  Sans JS ou sous mouvement réduit : l'état final, tout de suite.
+*/
+interface Props {
+  deMin: number
+  aMin: number
+  libelleAvant: string
+  libelleApres: string
+  declencheur?: 'defilement' | 'visible' | 'immediat'
+  /** « ≈ » devant la valeur d'arrivée (par défaut : oui). */
+  approx?: boolean
+  /** Étapes de la barre (par défaut 6 : un cran par objet rangé). */
+  etapes?: number
+  class?: string
+}
+const { deMin, aMin, libelleAvant, libelleApres, declencheur = 'visible', approx = true, etapes = 6, class: classe } = Astro.props
+const h = (m: number) => `${Math.round(m / 60)} h`
+const ratio = Math.max(0.02, Math.min(1, aMin / deMin))
+---
+<span class:list={['cpt', classe]} data-cpt data-declencheur={declencheur} style={`--ratio:${ratio.toFixed(3)};--etapes:${etapes}`}>
+  <b class="cpt-val num" data-avant={h(deMin)}><span>{approx ? '≈ ' : ''}{h(aMin)}</span></b>
+  <span class="cpt-lib" data-avant={libelleAvant}><span>{libelleApres}</span></span>
+  <i class="cpt-barre" aria-hidden="true"><i></i></i>
+</span>
+{declencheur !== 'defilement' && (
+  <script is:inline>
+  (function(){var m=window.matchMedia;if(!m||m('(prefers-reduced-motion: reduce)').matches)return;document.querySelectorAll('[data-cpt]:not([data-cpt-pret])').forEach(function(c){var d=c.getAttribute('data-declencheur');if(d==='defilement')return;c.setAttribute('data-cpt-pret','');var go=function(){c.classList.add('cpt-joue')};if(d==='immediat'){setTimeout(go,400);return}if(!('IntersectionObserver'in window)){go();return}var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){o.disconnect();go()}},{threshold:.6});o.observe(c)})})()
+  </script>
+)}
+<style>
+.cpt{display:inline-grid;gap:6px;justify-items:start}
+.cpt-val,.cpt-lib{display:grid}
+.cpt-val{font:800 var(--cpt-taille,clamp(3rem,2rem + 4vw,5rem))/1 var(--f-titre);letter-spacing:-.02em;white-space:nowrap}
+.cpt-lib{font-weight:600;line-height:1.3}
+/* La valeur de départ occupe la même case que la valeur finale. */
+.cpt-val::before,.cpt-lib::before{content:attr(data-avant) / "";grid-area:1/1;opacity:0;pointer-events:none}
+.cpt-val>span,.cpt-lib>span{grid-area:1/1}
+.cpt-barre{display:block;width:100%;min-width:120px;height:8px;background:var(--cpt-piste,rgba(255,255,255,.12));border-radius:999px;overflow:hidden}
+.cpt-barre>i{display:block;height:100%;background:var(--menthe);border-radius:inherit;transform-origin:left;transform:scaleX(var(--ratio))}
+
+/* Déclencheurs « visible » et « immédiat » : l'état de départ n'existe qu'avec JS et sans mouvement réduit. */
+@media (prefers-reduced-motion: no-preference){
+  :global(.js) .cpt:is([data-declencheur=visible],[data-declencheur=immediat]):not(.cpt-joue) :is(.cpt-val,.cpt-lib)>span{color:transparent}
+  :global(.js) .cpt:is([data-declencheur=visible],[data-declencheur=immediat]):not(.cpt-joue) .cpt-val::before,
+  :global(.js) .cpt:is([data-declencheur=visible],[data-declencheur=immediat]):not(.cpt-joue) .cpt-lib::before{opacity:1;color:var(--cpt-couleur,currentColor)}
+  :global(.js) .cpt:is([data-declencheur=visible],[data-declencheur=immediat]):not(.cpt-joue) .cpt-barre>i{transform:none}
+  .cpt.cpt-joue .cpt-barre>i{animation:cpt-descend 1.2s steps(var(--etapes),end) both}
+  .cpt.cpt-joue :is(.cpt-val,.cpt-lib)>span{animation:cpt-apparait 1.2s step-end both}
+  .cpt.cpt-joue .cpt-val::before,.cpt.cpt-joue .cpt-lib::before{animation:cpt-disparait 1.2s step-end both}
+}
+@keyframes cpt-descend{from{transform:none}to{transform:scaleX(var(--ratio))}}
+@keyframes cpt-apparait{from{color:transparent}to{color:inherit}}
+@keyframes cpt-disparait{from{opacity:1}to{opacity:0}}
+</style>

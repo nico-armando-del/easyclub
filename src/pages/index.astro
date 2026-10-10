@@ -1,55 +1,56 @@
 ---
 /*
-  L'ACCUEIL, DANS L'ESPRIT DE /presentation.
-  1. Ouverture : « Marre de passer vos soirées sur l'administratif ? » et
-     l'animation d'entrée (le désordre se range, 66 h → ≈ 5 h, le temps rendu).
-  2. Le temps : les cinq tâches, avant → après, hypothèses visibles.
-  3. Les fonctionnalités en tuiles courtes, par famille (construites à partir
-     de la collection : une fonctionnalité ajoutée apparaît ici toute seule).
-  4. Le produit qui tourne : quatre écrans animés.
-  5. Le calculateur. 6. Deux points de vue. 7. Pour toutes les associations.
-  8. Les offres. 9. Ressources. 10. FAQ. 11. Appel final.
+  L'ACCUEIL, ÉCRAN PAR ÉCRAN (maquettes §B.2, récit §1, arbitrages du plan).
+  1. Le héros immersif : le titre, une phrase, un bouton ; la scène où le
+     désordre se range (66 h → ≈ 5 h, 61 h rendues). Note et hypothèses.
+  2. Le temps rendu : « Et chez vous ? », le champ « 250 ».
+  3. Les fonctionnalités en bento (une carte par famille).
+  4. Le produit qui tourne : onglets verticaux et écran.
+  5. Les sites de club de démonstration (vitrine).
+  6. Les associations : la bande de photos, « Et la vôtre ? ».
+  7. Les offres : le temps d'abord. 8. La FAQ (six questions, JSON-LD).
+  9. L'appel final : la case vide.
 */
 import Layout from '../layouts/Layout.astro'
-import AnimationEntree from '../components/AnimationEntree.astro'
-import BlocTemps from '../components/BlocTemps.astro'
-import EcranAnime from '../components/EcranAnime.astro'
-import Calculateur from '../components/Calculateur.astro'
+import SceneAccueil from '../components/SceneAccueil.astro'
+import TempsRendu from '../components/TempsRendu.astro'
+import Bento from '../components/Bento.astro'
+import OngletsProduit from '../components/OngletsProduit.astro'
+import VitrineClubs from '../components/VitrineClubs.astro'
+import BandeAssociations from '../components/BandeAssociations.astro'
 import Offres from '../components/Offres.astro'
 import Faq from '../components/Faq.astro'
-import AppelDemo from '../components/AppelDemo.astro'
-import Photo from '../components/Photo.astro'
+import CaseVide from '../components/CaseVide.astro'
 import { photoDe } from '../data/photos'
-import { parFamille, liste, url } from '../lib/collections'
-import { ACCROCHE, PHRASE_BUT, INJEP, MISE_EN_ROUTE } from '../data/site'
-import { CINQ_TACHES, TOTAL } from '../data/temps'
+import { liste, url } from '../lib/collections'
+import { MISE_EN_ROUTE } from '../data/site'
 
-const familles = await parFamille()
-const nbFonctions = familles.reduce((s, f) => s + f.items.length, 0)
 const sports = await liste('sports')
 const activites = await liste('activites')
-const profils = await liste('profils')
 const guides = await liste('guides')
 const articles = await liste('articles')
 const comparatifs = await liste('comparatifs')
 const ressources = [
-  ...guides.map((e) => ({ e, c: 'guides' as const, et: 'Guide' })),
-  ...articles.map((e) => ({ e, c: 'articles' as const, et: 'Article' })),
-  ...comparatifs.map((e) => ({ e, c: 'comparatifs' as const, et: 'Comparatif' })),
+  ...guides.map((e) => ({ e, c: 'guides' as const })),
+  ...articles.map((e) => ({ e, c: 'articles' as const })),
+  ...comparatifs.map((e) => ({ e, c: 'comparatifs' as const })),
 ].slice(0, 3)
 
-/* « Pour toutes les associations » : des pages qui ont une vraie photo, sport et culture mêlés. */
-const VITRINE = ['football', 'volley', 'ecole-de-musique', 'handball', 'theatre', 'tennis', 'chorale', 'danse', 'judo', 'club-d-echecs', 'arts-plastiques', 'rugby']
+/* La bande : seulement les pages publiées qui ont une vraie photo, sport et culture mêlés (arbitrage 9). */
+const ORDRE = ['football', 'volley', 'ecole-de-musique', 'handball', 'theatre', 'tennis', 'chorale', 'danse', 'judo', 'club-d-echecs', 'arts-plastiques', 'rugby']
 const toutes = [...sports.map((e) => ({ e, c: 'sports' as const })), ...activites.map((e) => ({ e, c: 'activites' as const }))].filter(({ e }) => photoDe(e.id))
-const vitrine = [...VITRINE.flatMap((id) => toutes.filter(({ e }) => e.id === id)), ...toutes.filter(({ e }) => !VITRINE.includes(e.id))].slice(0, 7)
+const bande = [...ORDRE.flatMap((id) => toutes.filter(({ e }) => e.id === id)), ...toutes.filter(({ e }) => !ORDRE.includes(e.id))]
+  .slice(0, 12)
+  .map(({ e, c }) => ({ nom: e.data.nom, href: url(c, e.id), photo: e.id, ligne: e.data.ligne }))
 
-const ECRANS = [
-  { nom: 'inscription' as const, famille: 'Inscrire', titre: 'La famille s’inscrit depuis son canapé.', texte: 'Un seul formulaire pour toute la famille, les bons cours ou les bonnes équipes proposés selon l’année de naissance, le paiement dans la foulée. Le bureau ne recopie plus une fiche.', lien: '/fonctionnalites/inscription-en-ligne', lienNom: 'Inscription en ligne' },
-  { nom: 'relance' as const, famille: 'Encaisser', titre: 'Un retard, un clic, une relance.', texte: 'Le tableau de bord dit qui doit quoi. La relance est écrite avec le bon montant et le bon lien de paiement : vous la relisez, elle part.', lien: '/fonctionnalites/relance-un-clic', lienNom: 'Relance d’un clic' },
-  { nom: 'reinscription' as const, famille: 'Organiser', titre: 'La rentrée suivante, sans tout refaire.', texte: 'Les groupes de l’an dernier sont repris, les anciens se réinscrivent d’abord par leur lien, leur place est gardée.', lien: '/fonctionnalites/saison-suivante', lienNom: 'Saison suivante' },
-  { nom: 'terrain' as const, famille: 'Organiser', titre: 'Le samedi, la compo se fait d’un geste.', texte: 'L’encadrant voit qui a répondu à la convocation et place chacun à son poste depuis son téléphone, sans compte.', lien: '/fonctionnalites/compo-du-match', lienNom: 'Compo du match' },
+const ONGLETS = [
+  { id: 'inscription', libelle: 'Inscription', ecran: 'inscription' as const, phrase: 'La famille s’inscrit depuis son canapé.', lien: { texte: 'Inscription en ligne', href: '/fonctionnalites/inscription-en-ligne' } },
+  { id: 'relance', libelle: 'Relance', ecran: 'relance' as const, phrase: 'Un retard, un clic, une relance.', lien: { texte: 'Relance d’un clic', href: '/fonctionnalites/relance-un-clic' } },
+  { id: 'rentree', libelle: 'Rentrée suivante', ecran: 'reinscription' as const, phrase: 'La rentrée suivante, sans tout refaire.', lien: { texte: 'Saison suivante', href: '/fonctionnalites/saison-suivante' } },
+  { id: 'compo', libelle: 'Compo du match', ecran: 'terrain' as const, phrase: 'Le samedi, la compo se fait d’un geste.', lien: { texte: 'Compo du match', href: '/fonctionnalites/compo-du-match' } },
 ]
 
+/* La FAQ : six questions, inchangées (arbitrage 14) ; le JSON-LD est construit à partir de la même liste. */
 const faq = [
   { question: 'OnClub, c’est pour quelles associations ?', reponse: 'Pour toutes celles qui inscrivent des adhérents, avec des cours ou des équipes et des cotisations : clubs de sport, écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.' },
   { question: 'Combien coûte OnClub ?', reponse: 'Un abonnement au pourcentage des cotisations encaissées en ligne : 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA, plus 2 % sur la boutique. Rien de fixe, et rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.' },
@@ -66,281 +67,74 @@ const faq = [
   faq={faq}
   langues={true}
 >
-  <section class="ouverture" aria-labelledby="titre">
-    <div class="enveloppe ouverture-grille">
-      <div class="ouverture-tete">
-        <p class="surtitre">{ACCROCHE}</p>
-        <h1 id="titre">Marre de passer vos soirées sur l’administratif&nbsp;?</h1>
-      </div>
-      <div class="ouverture-texte">
-        <p class="chapo">OnClub prend en ligne les inscriptions, les cotisations, les relances et la rentrée de votre association. Les familles s’inscrivent et paient seules, le bureau ne recopie plus rien.</p>
-        <p class="ouverture-ville" data-ville-phrase="À {ville} comme ailleurs, les bénévoles ont mieux à faire que recopier des fiches.">Partout en France, les bénévoles ont mieux à faire que recopier des fiches.</p>
-        <div class="actions">
-          <a class="btn btn-encre" href="/demo">Demander une démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
-          <a class="btn btn-blanc" href="#combien">Calculer mon temps gagné</a>
-        </div>
-        <p class="ouverture-pour">Pour toutes les associations qui inscrivent&nbsp;: sport, musique, danse, théâtre, langues…</p>
-      </div>
-      <div class="ouverture-scene">
-        <AnimationEntree />
-      </div>
+  <SceneAccueil
+    titre="Association sportive ou artistique ? La paperasse, c’est fini"
+    phrase="Inscriptions, cotisations, relances : tout se fait en ligne. Vos bénévoles reprennent leurs soirées."
+    cta={{ texte: 'Demander une démo', href: '/demo' }}
+  />
+
+  <section class="section" aria-labelledby="t-temps">
+    <div class="enveloppe"><TempsRendu /></div>
+  </section>
+
+  <section class="section" id="fonctionnalites" aria-labelledby="t-bento">
+    <div class="enveloppe"><Bento /></div>
+  </section>
+
+  <section class="section" aria-labelledby="onglets-titre">
+    <div class="enveloppe sur-encre">
+      <OngletsProduit titre="Voyez-le tourner" onglets={ONGLETS} legende="Noms et montants fictifs." />
     </div>
   </section>
 
-  <section class="section temps" aria-labelledby="t-temps">
-    <div class="enveloppe temps-grille">
-      <div class="tete-section">
-        <p class="surtitre">Le temps</p>
-        <h2 id="t-temps">{TOTAL.avant} d’administratif par saison. Il en reste {TOTAL.apres}.</h2>
-        <p class="intro">Pour une association de 250 adhérents, recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée prend environ {TOTAL.avant} par saison. Avec OnClub, il en reste environ {TOTAL.apres}&nbsp;: {TOTAL.gain} rendues pour entraîner, répéter, jouer, ou simplement rentrer plus tôt.</p>
-        <p class="temps-injep"><b>{INJEP.chiffre}</b> {INJEP.texte} <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a></p>
-      </div>
-      <div class="temps-visuel">
-        <div class="barre-ligne"><span>Aujourd’hui</span><div class="barre"><i class="barre-avant"></i></div><b>{TOTAL.avant}</b></div>
-        <div class="barre-ligne"><span>Avec OnClub</span><div class="barre"><i class="barre-apres"></i></div><b>{TOTAL.apres}</b></div>
-        <p class="note-temps">Par saison, pour 250 adhérents. Estimation OnClub, pas une étude.</p>
-        <details class="detail-temps">
-          <summary>Voir le détail, tâche par tâche</summary>
-          <BlocTemps cles={CINQ_TACHES} titre="Aujourd’hui → avec OnClub, pour 250 adhérents" />
-        </details>
-      </div>
-    </div>
+  <section class="section">
+    <div class="enveloppe"><VitrineClubs /></div>
   </section>
 
-  <section class="section fonctions" id="fonctionnalites" aria-labelledby="t-fonctions">
+  <section class="section accueil-bande" aria-labelledby="t-assos">
+    <BandeAssociations
+      titre="Foot, musique, théâtre. Et toutes les autres"
+      phrase="Dès qu’il y a des inscriptions, des cours ou des équipes, et des cotisations."
+      items={bande}
+      derniere={{ texte: 'Et la vôtre ?', href: '/pour-qui', nomAccessible: 'Et la vôtre ? Toutes les associations' }}
+    />
+  </section>
+
+  <section class="section fond-blanc" aria-labelledby="t-offres">
     <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Les fonctionnalités</p>
-        <h2 id="t-fonctions">Tout ce qui prenait vos soirées, en {nbFonctions} gestes simples.</h2>
-        <p class="intro">Chacune a sa page, avec un exemple.</p>
+      <div class="accueil-tete">
+      <h2 class="h2-idee accueil-h2" id="t-offres">Un pourcentage. Rien de fixe</h2>
+      <p class="intro">Un pourcentage des cotisations encaissées en ligne. Rien sur les chèques ni les espèces. Frais de carte à la charge de l’association.</p>
       </div>
-      <div class="familles">
-        {familles.map((f) => (
-          <section class="famille" aria-labelledby={`fam-${f.ancre}`}>
-            <h3 id={`fam-${f.ancre}`}><a href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a></h3>
-            <p class="famille-phrase">{f.phrase}</p>
-            <ul>
-              {f.items.slice(0, 3).map((e) => (
-                <li><a href={url('fonctionnalites', e.id)}><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>
-              ))}
-            </ul>
-            {f.items.length > 3 && (
-              <details class="famille-plus">
-                <summary>{`+ ${f.items.length - 3} autre${f.items.length - 3 > 1 ? 's' : ''}`}</summary>
-                <ul>
-                  {f.items.slice(3).map((e) => (
-                    <li><a href={url('fonctionnalites', e.id)}><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>
-                  ))}
-                </ul>
-              </details>
-            )}
-          </section>
-        ))}
-      </div>
-      <a class="lien-fleche" href="/fonctionnalites">Toutes les fonctionnalités, famille par famille <svg aria-hidden="true"><use href="#fleche"/></svg></a>
-    </div>
-  </section>
-
-  <section class="section fond-encre sur-encre ecrans" aria-labelledby="t-ecrans">
-    <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">En vrai</p>
-        <h2 id="t-ecrans">Voyez-le tourner.</h2>
-        <p class="intro">Les écrans d’OnClub, tels que les familles et le bureau les voient. Les noms et les montants sont fictifs.</p>
-      </div>
-      <div class="ecrans-liste">
-        {ECRANS.map((x, i) => (
-          <article class:list={['ecran-ligne', { inverse: i % 2 === 1 }]}>
-            <div class="ecran-texte">
-              <p class="surtitre">{x.famille}</p>
-              <h3>{x.titre}</h3>
-              <p>{x.texte}</p>
-              <a class="lien-fleche" href={x.lien}>{x.lienNom} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
-            </div>
-            <EcranAnime nom={x.nom} sombre />
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section calcul" id="combien" aria-labelledby="t-calcul">
-    <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Le calculateur</p>
-        <h2 id="t-calcul">Combien de temps votre association va gagner&nbsp;?</h2>
-        <p class="intro">Indiquez votre nombre d’adhérents&nbsp;: les cinq tâches sont recalculées. Quatre suivent le nombre d’adhérents, la préparation de la rentrée reste fixe.</p>
-      </div>
-      <div class="calcul-boite"><Calculateur grand /></div>
-    </div>
-  </section>
-
-  <section class="section fond-blanc points" aria-labelledby="t-points">
-    <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Deux points de vue</p>
-        <h2 id="t-points">{PHRASE_BUT}</h2>
-      </div>
-      <div class="points-grille">
-        <article class="point">
-          <Photo nom="benevole" class="point-photo" tailles="(min-width: 900px) 520px, 100vw" />
-          <h3>Pour le bénévole</h3>
-          <p class="point-chapo">Vos soirées vous reviennent.</p>
-          <ul>
-            <li><b>Plus une fiche à recopier</b>&nbsp;: la famille saisit elle-même.</li>
-            <li><b>L’argent à jour sans tableur</b>&nbsp;: payé, à venir, en retard, d’un coup d’œil.</li>
-            <li><b>Une relance d’un bouton</b>, relue avant de partir.</li>
-            <li><b>Les pièces en photo</b>, contrôlées et relancées d’un clic.</li>
-            <li><b>La rentrée suivante</b> prête en 2 h au lieu de 12.</li>
-          </ul>
-          <a class="btn btn-encre" href="/demo">Demander une démo</a>
-        </article>
-        <article class="point point-lilas">
-          <Photo nom="handball" class="point-photo" tailles="(min-width: 900px) 520px, 100vw" />
-          <h3>Pour l’adhérent et le parent</h3>
-          <p class="point-chapo">Ce qui prenait des allers-retours se fait depuis le téléphone.</p>
-          <ul>
-            <li><b>S’inscrire depuis le canapé</b>, toute la famille dans un seul formulaire.</li>
-            <li><b>Payer en plusieurs fois</b>, par carte.</li>
-            <li><b>Répondre à une convocation</b> en un clic, sans compte.</li>
-            <li><b>Déposer le certificat</b> en photo.</li>
-            <li><b>Commander le maillot</b> en ligne, le retirer au club.</li>
-          </ul>
-          <a class="btn btn-contour" href="/recommander"><svg aria-hidden="true"><use href="#partage"/></svg>Transmettre à mon club</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section associations" aria-labelledby="t-assos">
-    <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Pour toutes les associations</p>
-        <h2 id="t-assos">Un club de foot, une école de musique, une troupe de théâtre.</h2>
-        <p class="intro">Dès qu’il y a des inscriptions, des cours ou des équipes et des cotisations, OnClub s’y adapte&nbsp;: chaque cours ou équipe a ses créneaux, sa salle, ses places et son tarif, et le formulaire d’inscription suit votre catalogue.</p>
-      </div>
-      <div class="assos-grille">
-        {vitrine.map(({ e, c }) => (
-          <a class="carte-lien carte-photo" href={url(c, e.id)}><Photo nom={e.id} tailles="(min-width: 1040px) 280px, 50vw" /><span class="carte-corps"><b>{e.data.nom}</b><span>{e.data.ligne}</span></span></a>
-        ))}
-        <a class="carte-lien carte-toutes" href="/pour-qui"><small>Et toutes les autres</small><b>Sport, musique, danse, théâtre, langues…</b><span>Voir toutes les associations</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section fond-menthe offres-accueil" aria-labelledby="t-offres">
-    <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Les offres</p>
-        <h2 id="t-offres">Un abonnement au pourcentage. Plus vous en confiez, plus vous gagnez de temps.</h2>
-        <p class="intro">Un pourcentage des cotisations encaissées en ligne, rien de fixe. Rien sur les chèques et les espèces.</p>
-      </div>
-      <Offres />
+      <div class="accueil-offres"><Offres mode="accueil" /></div>
       <a class="lien-fleche" href="/tarifs">Le détail des offres et un exemple chiffré <svg aria-hidden="true"><use href="#fleche"/></svg></a>
     </div>
   </section>
 
-  {ressources.length > 0 && (
-    <section class="section ressources-accueil" aria-labelledby="t-ressources">
-      <div class="enveloppe">
-        <div class="tete-section">
-          <p class="surtitre">Ressources</p>
-          <h2 id="t-ressources">Des guides pour le bureau, sans jargon.</h2>
-        </div>
-        <ul class="grille grille-3 liste-nue">
-          {ressources.map(({ e, c, et }) => (
-            <li><a class="carte-lien" href={url(c, e.id)}><small>{et}</small><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>
-          ))}
-        </ul>
-        <a class="lien-fleche" href="/ressources">Tous les guides et articles <svg aria-hidden="true"><use href="#fleche"/></svg></a>
-      </div>
-    </section>
-  )}
-
   <div class="section fond-blanc">
-    <div class="enveloppe"><Faq items={faq} /></div>
+    <div class="enveloppe">
+      <Faq items={faq} titre="Les questions du bureau" disposition="deux-colonnes">
+        {ressources.length > 0 && (
+          <p class="accueil-guides">
+            <span>Des guides pour le bureau&nbsp;:</span>
+            {ressources.map(({ e, c }) => <a href={url(c, e.id)}>{e.data.nom}</a>)}
+            <a class="lien-fleche" href="/ressources">Toutes les ressources <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+          </p>
+        )}
+      </Faq>
+    </div>
   </div>
 
-  <AppelDemo titre="Rendez leurs soirées à vos bénévoles." />
+  <CaseVide />
 </Layout>
 
 <style>
-.ouverture{background:var(--menthe)}
-.ouverture-grille{display:grid;gap:28px;padding-block:20px var(--section);grid-template-areas:'tete' 'scene' 'texte'}
-.ouverture-tete{grid-area:tete}.ouverture-texte{grid-area:texte}.ouverture-scene{grid-area:scene}
-.ouverture-texte .chapo{margin-top:0}
-@media (min-width:1040px){.ouverture-grille{grid-template-columns:1fr 1fr;grid-template-areas:'tete scene' 'texte scene';grid-template-rows:auto 1fr;column-gap:56px;row-gap:24px;padding-block:40px 96px}.ouverture-tete{align-self:end}}
-.ouverture .surtitre{font:700 1rem/1.2 var(--f-titre);letter-spacing:0;text-transform:none}
-.ouverture h1{max-width:13ch}
-.ouverture-ville{margin-top:16px;font-weight:600;max-width:var(--lecture)}
-.ouverture-pour{margin-top:20px;font-size:.9375rem}
-.ouverture-scene{min-width:0}
-
-.temps-grille{display:grid;gap:40px}
-@media (min-width:1040px){.temps-grille{grid-template-columns:.9fr 1.1fr;align-items:start;gap:56px}}
-.temps-injep{margin-top:24px;padding:16px 18px;border-left:4px solid var(--lilas);background:var(--blanc);border-radius:0 var(--r-s) var(--r-s) 0;font-size:.9375rem;max-width:var(--lecture)}
-.temps-injep b{font:700 1.5rem/1 var(--f-titre);margin-right:6px}
-.temps-injep a{font-weight:600}
-
-.temps-visuel{background:var(--blanc);border-radius:var(--r-l);padding:28px;display:grid;gap:18px}
-.barre-ligne{display:grid;grid-template-columns:7.5em 1fr auto;align-items:center;gap:14px}
-.barre-ligne span{font-weight:600}
-.barre-ligne b{font:700 clamp(1.5rem,1.2rem + 1vw,2rem)/1 var(--f-titre);font-variant-numeric:tabular-nums}
-.barre{height:14px;border-radius:7px;background:var(--papier);overflow:hidden}
-.barre i{display:block;height:100%;border-radius:7px}
-.barre-avant{width:100%;background:#C9C3B4}
-.barre-apres{width:8%;background:var(--menthe)}
-.note-temps{color:var(--gris);font-size:.9375rem}
-.detail-temps summary,.famille-plus summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
-.detail-temps[open] summary{margin-bottom:12px}
-.famille-plus summary{color:var(--sapin);font-size:.9375rem;padding-top:6px}
-.famille-plus ul{margin-top:4px}
-.familles{display:grid;gap:20px;margin-top:40px}
-@media (min-width:700px){.familles{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1040px){.familles{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.famille{background:var(--blanc);border-radius:var(--r-l);padding:24px}
-.famille h3 a{text-decoration:none}
-.famille h3 a:hover{text-decoration:underline}
-.famille-phrase{margin-top:6px;color:var(--gris);font-size:.9375rem}
-.famille ul{list-style:none;padding:0;margin:16px 0 0;border-top:1px solid var(--trait)}
-.famille li a{display:grid;gap:2px;padding:12px 0;border-bottom:1px solid var(--trait);text-decoration:none;min-height:44px}
-.famille li a b{font:700 1.0625rem/1.25 var(--f-titre)}
-.famille li a span{font-size:.9375rem;color:var(--gris);line-height:1.4}
-.famille li a:hover b{text-decoration:underline}
-.fonctions .lien-fleche{margin-top:24px}
-
-.ecrans-liste{display:grid;gap:72px;margin-top:48px}
-.ecran-ligne{display:grid;gap:28px;align-items:center}
-@media (min-width:960px){.ecran-ligne{grid-template-columns:1fr 1fr;gap:64px}.ecran-ligne.inverse .ecran-texte{order:2}}
-.ecran-texte h3{font-size:clamp(1.625rem,1.3rem + 1.2vw,2.25rem);line-height:1.12}
-.ecran-texte p:not(.surtitre){margin-top:14px;color:#D7DBE1;max-width:46ch}
-.ecran-texte .lien-fleche{margin-top:12px;color:var(--menthe)}
-
-.calcul-boite{margin-top:40px}
-
-.points-grille{display:grid;gap:20px;margin-top:40px}
-@media (min-width:900px){.points-grille{grid-template-columns:1fr 1fr;gap:24px}}
-.point{background:var(--papier);border-radius:var(--r-l);padding:28px;display:flex;flex-direction:column;align-items:flex-start}
-.point-lilas{background:var(--lilas-pale)}
-.point :global(.point-photo){margin-bottom:24px}
-.point-chapo{margin-top:8px;font-size:1.125rem}
-.point ul{list-style:none;padding:0;margin:20px 0 28px;display:grid;gap:12px;width:100%}
-.point li{padding-left:22px;position:relative}
-.point li::before{content:"";position:absolute;left:0;top:.68em;width:10px;height:3px;background:var(--sapin)}
-.point .btn{margin-top:auto}
-
-.assos-grille{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:40px}
-@media (min-width:700px){.assos-grille{gap:16px}}
-@media (min-width:700px) and (max-width:1039px){.assos-grille .carte-toutes{grid-column:1/-1}}
-@media (min-width:1040px){.assos-grille{grid-template-columns:repeat(5,1fr)}}
-.carte-toutes{background:var(--encre);color:var(--blanc)}
-.carte-toutes span{color:var(--gris-nuit)}
-.carte-toutes small{color:var(--menthe)}
-
-.offres-accueil :global(.offres){margin-top:40px}
-.offres-accueil .lien-fleche{margin-top:20px}
-.offres-accueil :global(.offres-note){color:var(--encre)}
-
-.liste-nue{list-style:none;padding:0;margin:32px 0 0}
-.ressources-accueil .lien-fleche{margin-top:20px}
+.accueil-h2{max-width:16ch}
+@media (min-width:1000px){.accueil-tete{display:grid;grid-template-columns:5fr 7fr;gap:var(--e-7,48px);align-items:end}.accueil-tete .intro{margin:0}}
+.accueil-offres{margin-top:40px}
+.accueil-offres + .lien-fleche{margin-top:12px}
+.accueil-guides{display:flex;flex-wrap:wrap;align-items:center;gap:4px 20px;margin-top:24px;font-size:.9375rem;color:var(--gris)}
+.accueil-guides span{font-weight:600;color:var(--encre)}
+.accueil-guides a:not(.lien-fleche){display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--encre);text-underline-offset:3px}
+.accueil-guides .lien-fleche{color:var(--sapin)}
 </style>

@@ -1,0 +1,22 @@
+---
+/*
+  LA CARTE ONCLUB DANS LA MARGE d'un guide ou d'un article (maquettes §B.5) :
+  discrète, fond papier, une phrase de 90 caractères au plus et un LIEN fléché (pas un bouton).
+  À 1280 elle est sous le sommaire collant ; à 390 un court script la pose dans le texte,
+  après la deuxième section (sans JS, elle reste sous le sommaire : rien n'est caché).
+*/
+interface Props { phrase: string; lien?: { texte: string; href: string } }
+const { phrase, lien = { texte: 'Demander une démo', href: '/demo' } } = Astro.props
+---
+<aside class="carte-marge" aria-label="OnClub" data-carte-marge>
+  <p class="cm-marque"><svg aria-hidden="true" width="22" height="22"><use href="#boucle"/></svg>OnClub</p>
+  <p class="cm-phrase">{phrase}</p>
+  <a class="lien-fleche cm-lien" href={lien.href}>{lien.texte} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+</aside>
+<style>
+.carte-marge{background:var(--papier);border-radius:var(--r-m,20px);padding:20px}
+.cm-marque{display:flex;align-items:center;gap:8px;font:700 1.0625rem/1.2 var(--f-titre)}
+.cm-marque svg{width:22px;height:22px;flex:none}
+p.cm-phrase{margin-top:10px;font-size:.9375rem;line-height:1.5;color:var(--gris);max-width:none}
+.cm-lien{margin-top:6px;font-size:.9375rem;color:var(--encre)}
+</style>

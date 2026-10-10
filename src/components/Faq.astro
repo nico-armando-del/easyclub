@@ -1,17 +1,30 @@
 ---
-/* La FAQ visible. Passez la MÊME liste au Layout (prop `faq`) : le JSON-LD est construit à partir d'elle. */
-interface Props { items: { question: string; reponse: string }[]; titre?: string; id?: string }
-const { items, titre = 'Questions fréquentes', id = 'questions' } = Astro.props
+/*
+  La FAQ visible. Passez la MÊME liste au Layout (prop `faq`) : le JSON-LD est construit à partir d'elle.
+  `disposition="deux-colonnes"` : le titre à gauche (collant), l'accordéon à droite, dès 1000 px.
+  Le slot se place sous l'accordéon (liens vers les guides, par exemple).
+  La balise <section class="faq"> reste telle quelle : scripts/ressemblance.py la lit.
+*/
+interface Props {
+  items: { question: string; reponse: string }[]
+  titre?: string
+  id?: string
+  disposition?: 'pleine' | 'deux-colonnes'
+}
+const { items, titre = 'Questions fréquentes', id = 'questions', disposition = 'pleine' } = Astro.props
 ---
-<section class="faq" aria-labelledby={`${id}-titre`} id={id}>
+<section class="faq" aria-labelledby={`${id}-titre`} id={id} data-disposition={disposition}>
   <h2 id={`${id}-titre`}>{titre}</h2>
-  <div class="faq-liste">
-    {items.map((q) => (
-      <details>
-        <summary>{q.question}</summary>
-        <p>{q.reponse}</p>
-      </details>
-    ))}
+  <div class="faq-corps">
+    <div class="faq-liste">
+      {items.map((q) => (
+        <details>
+          <summary><span>{q.question}</span><i class="faq-signe" aria-hidden="true"></i></summary>
+          <p>{q.reponse}</p>
+        </details>
+      ))}
+    </div>
+    <slot />
   </div>
 </section>
 <style>
@@ -19,8 +32,20 @@ const { items, titre = 'Questions fréquentes', id = 'questions' } = Astro.props
 .faq-liste{margin-top:24px;border-top:2px solid var(--encre);max-width:860px}
 .faq details{border-bottom:1px solid var(--trait)}
 .faq summary{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:64px;padding:14px 0;cursor:pointer;font:700 1.125rem/1.35 var(--f-titre);list-style:none}
+@media (min-width:760px){.faq summary{font-size:1.25rem}}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font:700 1.5rem/1 var(--f-texte);flex:none;width:24px;text-align:center}
-.faq details[open] summary::after{content:"−"}
+/* Le signe « + » en deux traits de 2 px ; le trait vertical tourne pour donner « − ». Sans rond. */
+.faq-signe{position:relative;flex:none;width:18px;height:18px}
+.faq-signe::before,.faq-signe::after{content:"";position:absolute;left:0;top:8px;width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform var(--d-2) var(--courbe-sortie)}
+.faq-signe::after{transform:rotate(90deg)}
+.faq details[open] .faq-signe::after{transform:rotate(0deg)}
 .faq details p{padding:0 0 20px;max-width:var(--lecture);color:var(--gris)}
+.faq details[open] p{animation:faq-fondu var(--d-1) ease-out}
+@keyframes faq-fondu{from{opacity:0}to{opacity:1}}
+@media (min-width:1000px){
+  .faq[data-disposition="deux-colonnes"]{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 var(--col-gap);align-items:start}
+  .faq[data-disposition="deux-colonnes"] h2{grid-column:1 / span 4;font-size:var(--t-h2-idee);line-height:1.06;letter-spacing:-.02em;position:sticky;top:calc(var(--entete-h) + 24px)}
+  .faq[data-disposition="deux-colonnes"] .faq-corps{grid-column:6 / span 7}
+  .faq[data-disposition="deux-colonnes"] .faq-liste{margin-top:0}
+}
 </style>

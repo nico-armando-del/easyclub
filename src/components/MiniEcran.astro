@@ -1,13 +1,12 @@
 ---
 /*
-  UN MINI-ÉCRAN D'EXEMPLE, EN HTML/CSS, POUR LES ACTIVITÉS QUE LES ÉCRANS
-  ANIMÉS (tous tirés d'un club de volley) ne montrent pas : une école de
-  musique, de danse, une troupe de théâtre…  Données fictives, étiquette
-  Données fictives, sans étiquette. Les lignes apparaissent l'une après l'autre
+  UN MINI-ÉCRAN EN HTML/CSS, POUR LES ACTIVITÉS QUE LES ÉCRANS ANIMÉS (tous
+  tirés d'un club de volley) ne montrent pas : une école de musique, de
+  danse, une troupe de théâtre…  Données fictives, sans étiquette. Les lignes apparaissent l'une après l'autre
   (une fois, quand l'écran entre dans la vue ; immobile sous reduced-motion).
 
   <MiniEcran
-    association="École de musique exemple"
+    association="Votre école de musique"
     titre="Inscription 2026-2027"
     lignes={[{ nom: 'Piano, niveau 2', detail: 'Mardi 18 h · salle 3', statut: '2 places', ton: 'ok' }]}
     pied={{ libelle: 'Total', valeur: '420,00 €' }}
@@ -17,7 +16,9 @@
 */
 interface Ligne { nom: string; detail?: string; statut?: string; ton?: 'ok' | 'ko' | 'neutre' }
 interface Props { association: string; titre: string; sousTitre?: string; lignes: Ligne[]; pied?: { libelle: string; valeur: string }; bouton?: string; legende?: string }
-const { association, titre, sousTitre, lignes, pied, bouton, legende } = Astro.props
+const { titre, sousTitre, lignes, pied, bouton, legende } = Astro.props
+/* « Compagnie exemple » s'affiche « Votre compagnie » (textes c) : la case vide, sans le mot « exemple ». */
+const association = Astro.props.association.replace(/^(.+?)\s+exemple$/i, (_, nom: string) => `Votre ${nom.charAt(0).toLowerCase()}${nom.slice(1)}`)
 const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[0].toUpperCase()).join('').slice(0, 2) || 'OC'
 ---
 <figure class="mini-ecran">

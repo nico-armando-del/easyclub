@@ -3,23 +3,49 @@
   Une grille de cartes pour une collection (hubs). Vide : un message, jamais un lien mort.
   Sports et activités : les pages qui ont une photo passent en cartes photo,
   les autres en liste compacte dessous, pour que la grille reste régulière.
+
+  Options du hub /pour-qui (maquettes §B.4 et §F) :
+  - `portrait` : cartes photo en 4:5 (5 par ligne à 1280), en liste à vignette sur téléphone ;
+  - `limite` : les N premières (ordre, puis nom) en cartes ;
+  - `az` : au-delà de `limite`, la liste COMPLÈTE de A à Z, avec un filtre en
+    amélioration progressive (attribut hidden sur les lignes écartées ; sans JS,
+    tout est là). Chaque page publiée est ainsi liée.
 */
 import { liste, url, ETIQUETTE, type NomCollection } from '../lib/collections'
 import { photoDe } from '../data/photos'
 import Photo from './Photo.astro'
-interface Props { collection: NomCollection; vide?: string }
-const { collection, vide = 'Les premières pages arrivent.' } = Astro.props
-const entrees = await liste(collection)
+interface Props {
+  collection: NomCollection
+  vide?: string
+  portrait?: boolean
+  limite?: number
+  az?: { titre: string; champ: string; id: string }
+}
+const { collection, vide = 'Les premières pages arrivent.', portrait = false, limite, az } = Astro.props
+const toutes = await liste(collection)
+const entrees = limite ? toutes.slice(0, limite) : toutes
 const avecPhotos = collection === 'sports' || collection === 'activites'
 const illustrees = avecPhotos ? entrees.filter((e: any) => photoDe(e.id)) : []
 const autres = avecPhotos ? entrees.filter((e: any) => !photoDe(e.id)) : entrees
 const etiquette = (e: any) => `${collection === 'articles' ? e.data.rubrique : ETIQUETTE[collection]}${e.data.lecture ? ` · ${e.data.lecture} min` : ''}`
+const plat = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+const montrerAz = az && limite !== undefined && toutes.length > limite
+const parLettre = new Map<string, any[]>()
+if (montrerAz) {
+  for (const e of [...toutes].sort((a: any, b: any) => a.data.nom.localeCompare(b.data.nom, 'fr'))) {
+    const l = plat((e as any).data.nom).charAt(0).toUpperCase()
+    if (!parLettre.has(l)) parLettre.set(l, [])
+    parLettre.get(l)!.push(e)
+  }
+}
 ---
 {entrees.length > 0 ? (
   <>
     {illustrees.length > 0 && (
-      <ul class="grille-photos cartes">
-        {illustrees.map((e: any) => (
+      <ul class:list={['cartes', portrait ? 'grille-portraits' : 'grille-photos', portrait && illustrees.length <= 2 && 'portraits-peu']}>
+        {illustrees.map((e: any) => portrait ? (
+          <li><a class="carte-portrait" href={url(collection, e.id)}><Photo nom={e.id} ratio="4/5" tailles="(min-width: 1000px) 230px, (min-width: 700px) 30vw, 112px" /><span class="cp-corps"><b>{e.data.nom}</b><span>{e.data.ligne}</span></span></a></li>
+        ) : (
           <li><a class="carte-lien carte-photo" href={url(collection, e.id)}><Photo nom={e.id} tailles="(min-width: 1000px) 360px, 50vw" /><span class="carte-corps"><b>{e.data.nom}</b><span>{e.data.ligne}</span></span></a></li>
         ))}
       </ul>
@@ -35,11 +61,99 @@ const etiquette = (e: any) => `${collection === 'articles' ? e.data.rubrique : E
         ))}
       </ul>
     ))}
+    {montrerAz && az && (
+      <div class="az" data-az>
+        <h3 id={`${az.id}-titre`} class="az-titre">{az.titre}</h3>
+        <div class="az-filtre" data-az-filtre hidden>
+          <label for={`${az.id}-champ`}>{az.champ}</label>
+          <input id={`${az.id}-champ`} type="search" autocomplete="off" spellcheck="false" data-az-champ>
+        </div>
+        <div class="az-groupes">
+          {[...parLettre.entries()].map(([lettre, items]) => (
+            <section class="az-groupe" id={`${az.id}-${lettre.toLowerCase()}`} aria-labelledby={`${az.id}-l-${lettre.toLowerCase()}`} data-az-groupe>
+              <h4 class="az-lettre" id={`${az.id}-l-${lettre.toLowerCase()}`}>{lettre}</h4>
+              <ul>{items.map((e: any) => <li data-az-nom={plat(e.data.nom)}><a href={url(collection, e.id)}>{e.data.nom}</a></li>)}</ul>
+            </section>
+          ))}
+        </div>
+        <p class="note" data-az-vide hidden>Aucune page ne correspond à cette recherche.</p>
+      </div>
+    )}
   </>
 ) : <p class="note">{vide}</p>}
+
+<script>
+  /* Le filtre A-Z : il masque (attribut hidden) les lignes qui ne correspondent pas, à la demande du visiteur. */
+  const plat = (t: string) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim()
+  document.querySelectorAll<HTMLElement>('[data-az]').forEach((bloc) => {
+    const zone = bloc.querySelector<HTMLElement>('[data-az-filtre]')
+    const champ = bloc.querySelector<HTMLInputElement>('[data-az-champ]')
+    const vide = bloc.querySelector<HTMLElement>('[data-az-vide]')
+    if (!zone || !champ) return
+    zone.hidden = false
+    champ.addEventListener('input', () => {
+      const q = plat(champ.value)
+      let n = 0
+      bloc.querySelectorAll<HTMLElement>('[data-az-groupe]').forEach((g) => {
+        let dans = 0
+        g.querySelectorAll<HTMLElement>('[data-az-nom]').forEach((li) => {
+          const ok = !q || (li.dataset.azNom ?? '').includes(q)
+          li.hidden = !ok; if (ok) dans++
+        })
+        g.hidden = dans === 0; n += dans
+      })
+      if (vide) vide.hidden = n > 0
+    })
+  })
+</script>
+
 <style>
 .cartes{list-style:none;padding:0;margin:28px 0 0}
 .liste-compacte{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-wrap:wrap;gap:10px}
 .liste-compacte a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--blanc);border:1px solid var(--trait);font-weight:600;text-decoration:none;color:var(--encre)}
 .liste-compacte a:hover{border-color:var(--encre)}
+
+/* Cartes portrait : liste à vignette sur téléphone, grille 4:5 dès 700 px. */
+.grille-portraits{display:grid;gap:12px}
+.carte-portrait{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:center;min-height:44px;padding:8px;background:var(--blanc);border-radius:var(--r-m);text-decoration:none;color:var(--encre);box-shadow:var(--ombre-carte);transition:box-shadow var(--d-2) var(--courbe-sortie),transform var(--d-2) var(--courbe-sortie)}
+.carte-portrait:hover{box-shadow:var(--ombre-carte-survol);transform:translateY(-2px)}
+.carte-portrait :global(.photo){aspect-ratio:1/1!important;border-radius:12px}
+.cp-corps{display:flex;flex-direction:column;gap:4px;padding-right:8px}
+.cp-corps b{font:700 1.125rem/1.2 var(--f-titre)}
+.cp-corps span{font-size:.875rem;line-height:1.4;color:var(--gris)}
+@media (min-width:700px){
+  .grille-portraits{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--col-gap)}
+  .carte-portrait{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;overflow:hidden;border-radius:var(--r-l);height:100%}
+  .carte-portrait :global(.photo){aspect-ratio:4/5!important;border-radius:0}
+  .cp-corps{padding:16px 18px 20px}
+}
+@media (min-width:1000px){.grille-portraits{grid-template-columns:repeat(5,minmax(0,1fr))}}
+/* Une ou deux cartes seulement : une carte large, photo à gauche et texte à droite (col 1-8),
+   plutôt qu'une vignette d'un sixième de largeur suivie d'une grille vide. */
+@media (min-width:700px){
+  .grille-portraits.portraits-peu{grid-template-columns:minmax(0,1fr);max-width:calc(100% * 8 / 12)}
+  .portraits-peu .carte-portrait{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}
+  .portraits-peu .carte-portrait :global(.photo){aspect-ratio:4/3!important;height:100%;object-fit:cover}
+  .portraits-peu .cp-corps{padding:24px 32px}
+  .portraits-peu .cp-corps b{font-size:1.5rem}
+  .portraits-peu .cp-corps span{font-size:1rem}
+}
+
+/* Liste A-Z */
+.az{margin-top:var(--e-8)}
+.az-titre{font-size:clamp(1.375rem,1.2rem + .6vw,1.625rem)}
+.az-filtre{margin-top:var(--e-5);display:grid;gap:8px;max-width:420px}
+.az-filtre[hidden]{display:none}
+.az-filtre label{font-weight:700}
+.az-filtre input{min-height:48px;border:2px solid var(--encre);border-radius:12px;padding:0 14px;font:500 1.0625rem var(--f-texte);background:var(--blanc);color:var(--encre)}
+.az-filtre input:focus{outline:none;box-shadow:0 0 0 3px var(--menthe)}
+.az-groupes{margin-top:var(--e-6);columns:2;column-gap:var(--col-gap)}
+@media (min-width:1000px){.az-groupes{columns:4}}
+.az-groupe{break-inside:avoid;margin-bottom:var(--e-5)}
+.az-groupe[hidden],.az-groupe li[hidden]{display:none}
+.az-lettre{font:700 1.75rem/1 var(--f-titre);color:var(--sapin);margin-bottom:4px}
+.az-groupe ul{list-style:none;padding:0;margin:0}
+.az-groupe a{display:inline-flex;align-items:center;min-height:44px;font-size:var(--t-petit);font-weight:600;text-decoration:none}
+@media (min-width:1000px){.az-groupe a{min-height:36px}}
+.az-groupe a:hover{text-decoration:underline}
 </style>

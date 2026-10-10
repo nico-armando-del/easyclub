@@ -1,41 +1,132 @@
 ---
-/* Les trois offres, avec le temps rendu en tête (51 / 75 / 97 h) et les hypothèses en note. */
-import { OFFRES } from '../data/site'
+/*
+  LES TROIS OFFRES : le temps rendu d'abord (51 / 75 / 97 h, barre au rapport
+  h / 97), le prix ensuite. Pro se distingue par son fond seul (pas de badge :
+  ce serait une affirmation sans preuve).
+
+  mode 'complet' (par défaut, /tarifs) : listes « ouvre » ouvertes, un bouton
+  de démo par offre, la note complète.
+  mode 'accueil' : listes repliées, pas de bouton, hypothèses repliées.
+  t : les mots, pour /en et /es (français par défaut).
+*/
+import { OFFRES, type CleOffre } from '../data/site'
 import { HYPOTHESES_OFFRES } from '../data/temps'
-interface Props { titre?: 'h2' | 'h3' }
-const { titre = 'h3' } = Astro.props
+
+export type TextesOffres = {
+  rendues: string
+  leg: string
+  boutique: string
+  ouvre: (nom: string) => string
+  note: string
+  comment: string
+  hypotheses: string
+  listes?: Partial<Record<CleOffre, string[]>>
+  demo: (nom: string) => string
+  noteComplete?: string
+  taux?: Partial<Record<CleOffre, string>>
+}
+interface Props { titre?: 'h2' | 'h3'; mode?: 'accueil' | 'complet'; t?: TextesOffres }
+const FR: TextesOffres = {
+  rendues: 'rendues par saison',
+  leg: 'des cotisations encaissées en ligne. Rien de fixe.',
+  boutique: 'sur la boutique',
+  ouvre: (n) => `Ce que ${n} ouvre`,
+  note: 'Estimation OnClub pour 250 adhérents, pas une étude.',
+  comment: 'Comment on compte ces heures',
+  hypotheses: HYPOTHESES_OFFRES,
+  demo: (n) => `Voir ${n} en démo`,
+}
+const { titre = 'h3', mode = 'complet', t = FR } = Astro.props
 const T = titre
+const MAX = Math.max(...OFFRES.map((o) => o.heures))
+const court = (n: string) => n.replace('OnClub ', '')
 ---
-<div class="offres">
-  {OFFRES.map((o) => (
-    <article class:list={['offre', { 'offre-phare sur-encre': o.phare }]}>
-      <T class="offre-nom">{o.nom}</T>
-      <p class="offre-temps"><b class="num">≈ {o.heures} h</b> rendues par saison*</p>
-      <p class="offre-taux num">{o.taux}</p>
-      <p class="offre-leg">des cotisations encaissées en ligne{o.tauxBoutique && <>, + {o.tauxBoutique} sur la boutique</>}. Rien de fixe.</p>
-      <ul>{o.ouvre.map((l) => <li>{l}</li>)}</ul>
-      <a class:list={['btn', o.phare ? 'btn-menthe' : 'btn-contour']} href={`/demo?offre=${o.cle}`}>Voir {o.nom.replace('OnClub ', '')} en démo</a>
-    </article>
-  ))}
+<div class:list={['offres', `offres-${mode}`]}>
+  {OFFRES.map((o) => {
+    const liste = t.listes?.[o.cle] ?? o.ouvre
+    return (
+      <article class:list={['offre', { 'offre-phare sur-encre': o.phare }]}>
+        <div class="offre-tete"><T class="offre-nom">{o.nom}</T>{mode === 'accueil' && <p class="offre-prix"><b class="offre-taux num">{t.taux?.[o.cle] ?? o.taux}</b></p>}{mode === 'accueil' && <p class="offre-boutique-ligne">{o.tauxBoutique ? `${o.tauxBoutique} ${t.boutique}` : ''}</p>}</div>
+        <p class="offre-temps"><b class="num">≈ {o.heures} h</b> <span>{t.rendues}</span></p>
+        <i class="offre-barre" aria-hidden="true" data-vu style={`--r:${(o.heures / MAX).toFixed(3)}`}><i></i></i>
+        {mode === 'complet' && <p class="offre-prix"><b class="offre-taux num">{o.taux}</b></p>}
+        {mode === 'complet' && <p class="offre-leg">{t.leg}</p>}
+        {/* La ligne de la boutique est réservée dans les trois cartes : descriptions et listes alignées (tour 2, défaut 6). */}
+        {mode === 'complet' && (o.tauxBoutique
+          ? <p class="offre-boutique-sous">+ {o.tauxBoutique} {t.boutique}</p>
+          : <p class="offre-boutique-sous" aria-hidden="true"></p>)}
+        <details class="offre-ouvre" open={mode === 'complet'}>
+          <summary>{t.ouvre(court(o.nom))} <span class="num">({liste.length})</span></summary>
+          <ul>{liste.map((l) => <li>{l}</li>)}</ul>
+        </details>
+        {mode === 'complet' && <a class:list={['btn', o.phare ? 'btn-menthe' : 'btn-contour']} href={`/demo?offre=${o.cle}`}>{t.demo(court(o.nom))}</a>}
+      </article>
+    )
+  })}
 </div>
-<p class="note offres-note">* Estimation OnClub pour une association de 250 adhérents, pas une étude. {HYPOTHESES_OFFRES} Rien n’est prélevé sur les chèques et les espèces. Les frais de carte bancaire sont à la charge de l’association : <a href="/tarifs#exemple">voir l’exemple chiffré</a>.</p>
+{mode === 'accueil' ? (
+  <div class="offres-pied">
+    <p class="offres-note">{t.note}</p>
+    <details class="offres-hyp">
+      <summary>{t.comment}</summary>
+      <p>{t.hypotheses}</p>
+    </details>
+  </div>
+) : (
+  <p class="note offres-note">{t.noteComplete ?? t.note}</p>
+)}
 <style>
-.offres{display:grid;gap:20px}
+.offres{display:grid;gap:16px}
 @media (min-width:960px){.offres{grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}}
-.offre{background:var(--blanc);border-radius:var(--r-l);padding:32px 28px;display:flex;flex-direction:column}
-.offre-phare{background:var(--encre);color:var(--blanc)}
-.offre-nom{font:700 1.5rem/1.1 var(--f-titre)}
-.offre-temps{margin-top:16px;padding:12px 14px;border-radius:var(--r-s);background:var(--menthe-pale);color:var(--sapin);font-weight:600}
-.offre-phare .offre-temps{background:var(--menthe);color:var(--encre)}
-.offre-temps b{font:700 1.75rem/1 var(--f-titre);margin-right:4px}
-.offre-taux{margin-top:20px;font:700 3rem/1 var(--f-titre)}
+.offre{background:var(--blanc);border:1px solid var(--trait);border-radius:var(--r-l);padding:28px 24px;display:flex;flex-direction:column}
+@media (min-width:760px){.offre{padding:32px}}
+.offre-phare{background:var(--encre);color:var(--blanc);border-color:var(--encre)}
+.offre-nom{font:700 .8125rem/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase}
+.offre-tete{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px}
+.offre-tete .offre-prix{margin-top:0}
+.offre-tete .offre-taux{font-size:1.25rem}
+.offre-tete .offre-boutique{font-size:.875rem}
+/* Le taux de la boutique a sa propre ligne, réservée dans les trois cartes : les « ≈ h » restent alignés. */
+.offre-boutique-ligne{flex-basis:100%;min-height:1.4em;text-align:right;font-size:.875rem;font-weight:600;line-height:1.4}
+.offres-accueil .offre{padding:24px}
+@media (min-width:960px){.offres-accueil{align-items:stretch}}
+.offres-accueil .offre-ouvre{margin-top:12px}
+.offres-accueil .offre-ouvre summary{min-height:44px}
+.offre-temps{margin-top:14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.offre-temps b{font:800 clamp(2.25rem,1.6rem + 2.2vw,3.25rem)/1 var(--f-titre);letter-spacing:-.02em}
+.offre-temps span{font-weight:600;color:var(--gris)}
+.offre-phare .offre-temps span{color:var(--texte-scene,#D7DBE1)}
+.offre-barre{display:block;height:8px;margin-top:16px;border-radius:999px;background:var(--papier-2,#EDE8DC);overflow:hidden}
+.offre-phare .offre-barre{background:var(--scene-3,#1A212B)}
+.offre-barre>i{display:block;height:100%;border-radius:inherit;background:var(--menthe);transform-origin:left;transform:scaleX(var(--r))}
+.offre-prix{margin-top:20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px}
+.offre-taux{font:700 1.75rem/1 var(--f-titre)}
 .offre-phare .offre-taux{color:var(--menthe)}
-.offre-leg{margin-top:8px;font-size:.9375rem;color:var(--gris)}
-.offre-phare .offre-leg{color:var(--gris-nuit)}
-.offre ul{list-style:none;margin:22px 0 28px;padding:18px 0 0;border-top:1px solid var(--trait);display:grid;gap:10px}
-.offre-phare ul{border-color:#2A323D}
+.offre-boutique{font-weight:600}
+.offre-leg{margin-top:6px;font-size:.9375rem;color:var(--gris)}
+.offre-phare .offre-leg{color:var(--texte-scene-doux,#AEB4BE)}
+.offre-ouvre{margin-top:18px;border-top:1px solid var(--trait)}
+.offre-phare .offre-ouvre{border-color:var(--trait-scene,rgba(255,255,255,.1))}
+.offre-ouvre summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding-top:6px;cursor:pointer;font-weight:700;list-style:none}
+.offre-ouvre summary::-webkit-details-marker{display:none}
+.offre-ouvre summary::after{content:"";flex:none;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-3px) rotate(45deg);transition:transform var(--d-1,160ms)}
+.offre-ouvre[open] summary::after{transform:translateY(2px) rotate(-135deg)}
+.offre-ouvre summary span{font-weight:500;color:var(--gris);margin-right:auto}
+.offre-phare .offre-ouvre summary span{color:var(--texte-scene-doux,#AEB4BE)}
+.offre ul{list-style:none;margin:6px 0 4px;padding:0;display:grid;gap:10px}
 .offre li{padding-left:22px;position:relative}
-.offre li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:currentColor}
+.offre li::before{content:"";position:absolute;left:0;top:.68em;width:10px;height:3px;background:currentColor}
 .offre .btn{margin-top:auto;width:100%}
+.offres-complet .offre-ouvre{margin-bottom:24px}
+.offre-boutique-sous{min-height:1.5em;margin-top:4px;font-size:.9375rem;font-weight:600;line-height:1.5}
 .offres-note{margin-top:24px;max-width:var(--lecture)}
+.offres-pied{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 24px}
+.offres-pied .offres-note{margin:0;font-size:.9375rem;color:var(--gris)}
+.offres-hyp summary{display:inline-flex;align-items:center;min-height:44px;cursor:pointer;font-weight:700;font-size:.9375rem}
+.offres-hyp p{max-width:var(--lecture);font-size:.9375rem;color:var(--gris);padding-bottom:8px}
+.offres-hyp[open]{flex-basis:100%}
+@media (prefers-reduced-motion: no-preference){
+  :global(.js) .offre-barre[data-vu]:not(:global(.vu))>i{transform:scaleX(0)}
+  .offre-barre:global(.vu)>i{transition:transform var(--d-4,900ms) var(--courbe-sortie,cubic-bezier(.16,1,.3,1))}
+}
 </style>

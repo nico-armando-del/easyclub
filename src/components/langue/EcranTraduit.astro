@@ -1,0 +1,45 @@
+---
+/*
+  UN ÉCRAN DU PRODUIT, TRADUIT (/en, /es), pour les onglets « Watch it run ».
+  Les écrans animés de src/ecrans/ sont en français ; ceux-ci reprennent les
+  données traduites de src/i18n/accueil.ts (noms et montants fictifs). Aucune
+  étiquette « Exemple ». État final par défaut ; sans mouvement réduit, les
+  lignes arrivent l'une après l'autre quand l'écran entre à l'écran (.vu,
+  observateur partagé du gabarit).
+*/
+import type { Ecran } from '../../i18n/accueil'
+interface Props { x: Ecran }
+const { x } = Astro.props
+---
+<div class="ml-cadre" data-vu aria-hidden="true">
+  <div class="ml-tete"><span class="ml-sigle">VC</span><span class="ml-asso">{x.asso}</span></div>
+  <p class="ml-titre">{x.ecranTitre}</p>
+  {x.ecranSous && <p class="ml-sous">{x.ecranSous}</p>}
+  <ul class="ml-lignes">
+    {x.lignes.map((g, j) => (
+      <li style={`--i:${j}`}><span class="ml-nom"><b>{g.nom}</b>{g.detail && <span>{g.detail}</span>}</span>{g.statut && <span class:list={['statut', g.ton ?? 'neutre']}>{g.statut}</span>}</li>
+    ))}
+  </ul>
+  {x.pied && <p class="ml-pied" style={`--i:${x.lignes.length}`}><span>{x.pied.libelle}</span><b class="num">{x.pied.valeur}</b></p>}
+  {x.bouton && <span class="ml-bouton" style={`--i:${x.lignes.length + 1}`}>{x.bouton}</span>}
+</div>
+<style>
+.ml-cadre{width:100%;max-width:440px;margin-inline:auto;background:var(--blanc);color:var(--encre);border-radius:var(--r-l);padding:20px;box-shadow:var(--ombre-fenetre)}
+.ml-tete{display:flex;align-items:center;gap:10px;font-size:.875rem;color:var(--gris)}
+.ml-sigle{width:32px;height:32px;border-radius:9px;background:var(--sapin);color:var(--menthe);display:grid;place-items:center;font:800 .8125rem var(--f-titre);flex:none}
+.ml-asso{flex:1;min-width:0}
+.ml-titre{margin-top:14px;font:800 1.375rem/1.15 var(--f-titre)}
+.ml-sous{margin-top:4px;font-size:.875rem;color:var(--gris)}
+.ml-lignes{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.ml-lignes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--trait);border-radius:14px;background:var(--papier)}
+.ml-nom{display:grid;gap:2px;min-width:0}
+.ml-nom b{font-size:.9375rem;line-height:1.25}
+.ml-nom span{font-size:.8125rem;color:var(--gris)}
+.ml-pied{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--trait)}
+.ml-pied b{font:800 1.375rem/1 var(--f-titre)}
+.ml-bouton{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;margin-top:14px;padding:0 16px;border-radius:999px;background:var(--menthe);font-weight:700;font-size:.9375rem}
+@media (prefers-reduced-motion: no-preference){
+  .ml-cadre:global(.vu) :is(.ml-lignes li,.ml-pied,.ml-bouton){animation:et-arrive .45s var(--courbe-sortie,ease) calc(var(--i) * .2s) both}
+}
+@keyframes et-arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>

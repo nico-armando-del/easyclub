@@ -1,0 +1,122 @@
+---
+/*
+  LA COUVERTURE TYPOGRAPHIQUE des guides, articles et comparatifs (maquettes §B.5, §B.6).
+  Couleur par rubrique : guides menthe, articles lilas, comparatifs encre. Une donnée TIRÉE DU
+  TEXTE en très grand (champ `couverture.donnee`), sinon le titre court. Aucune photo, aucun motif.
+  Variante compteur quand `apres` est donné : « 66 h » → « 5 h » (valeurs de TOTAL, temps.ts) ;
+  seuls les deux nombres s'affichent, la barre se vide une fois au chargement (jamais de chiffre
+  intermédiaire). La couverture est décorative (aria-hidden) : le titre est déjà dans la page.
+  Sous un compteur, une ligne visible dit « pas une étude ».
+*/
+import { TOTAL, ADHERENTS_REFERENCE } from '../data/temps'
+
+interface Props {
+  rubrique: 'guides' | 'articles' | 'comparatifs'
+  donnee?: string
+  sous?: string
+  avant?: string
+  apres?: string
+  format?: 'bande' | 'une' | 'carre'
+  titreCourt?: string
+  /** Libellé de rubrique affiché en petit (par défaut : Guide, Article, Comparatif). */
+  etiquette?: string
+}
+const { rubrique, donnee, sous, apres, format = 'bande', titreCourt, etiquette } = Astro.props
+const ETIQUETTE = { guides: 'Guide', articles: 'Article', comparatifs: 'Comparatif' }
+const avant = Astro.props.avant ?? (apres ? donnee : undefined)
+const compteur = Boolean(avant && apres) && format !== 'carre'
+
+/** « 66 h », « 12 h 30 », « 40 min » → minutes. */
+const enMinutes = (s?: string) => {
+  const t = (s ?? '').replace(/\s+/g, ' ').trim()
+  const h = t.match(/^(\d+) ?h(?: ?(\d+))?$/)
+  if (h) return Number(h[1]) * 60 + Number(h[2] ?? 0)
+  const m = t.match(/^(\d+) ?min$/)
+  return m ? Number(m[1]) : NaN
+}
+const deTotal = avant === TOTAL.avant && apres === TOTAL.apres
+const ratio = compteur
+  ? deTotal ? TOTAL.apresMin / TOTAL.avantMin : enMinutes(apres) / enMinutes(avant)
+  : 1
+const fin = Number.isFinite(ratio) ? Math.min(1, Math.max(0.02, ratio)).toFixed(3) : '1'
+/* Vignette carrée : une donnée de plus de 6 signes devient illisible ; le titre court la remplace.
+   Trois paliers de taille selon la longueur, pour que les vignettes d'une liste se ressemblent. */
+const donneeVue = format === 'carre' && donnee && [...donnee].length > 6 && titreCourt ? undefined : donnee
+const texte = donneeVue ?? titreCourt ?? ''
+const n = Math.max(3, [...texte].length)
+const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
+---
+<div class:list={['couv', `couv-${rubrique}`, `couv-${format}`, `couv-${palier}`, { 'couv-compteur': compteur, 'couv-titre-seul': !donneeVue && !compteur }]} aria-hidden="true" style={`--n:${n};--fin:${fin}`}>
+  {format !== 'carre' && <span class="couv-rub">{etiquette ?? ETIQUETTE[rubrique]}</span>}
+  {compteur ? (
+    <span class="couv-cpt">
+      <span class="couv-avant">{avant}</span>
+      <svg class="couv-fleche"><use href="#fleche" /></svg>
+      <span class="couv-apres">{apres}</span>
+      <span class="couv-lib couv-lib-avant">aujourd’hui</span>
+      <span class="couv-lib couv-lib-apres">avec OnClub</span>
+      <span class="couv-pistes"><span class="couv-piste couv-piste-avant"><i></i></span><span class="couv-piste"><i></i></span></span>
+    </span>
+  ) : donneeVue ? (
+    <span class="couv-donnee">{donneeVue}</span>
+  ) : (
+    <span class="couv-titre">{titreCourt}</span>
+  )}
+  {sous && format !== 'carre' && <span class="couv-sous">{sous}</span>}
+</div>
+{compteur && format !== 'carre' && (
+  <p class="couv-note">{deTotal ? `Estimation OnClub pour ${ADHERENTS_REFERENCE} adhérents, par saison, pas une étude.` : 'Estimation OnClub, pas une étude.'}</p>
+)}
+<style>
+.couv{container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:var(--encre);background:var(--menthe);overflow:hidden;font-family:var(--f-titre)}
+.couv-articles{background:var(--lilas)}
+.couv-comparatifs{background:var(--encre);color:var(--blanc)}
+
+/* Formats */
+.couv-bande{min-height:200px;padding:20px 24px;border-radius:var(--r-panneau,24px)}
+@media (min-width:760px){.couv-bande{min-height:clamp(240px,23vw,300px);padding:32px 40px;border-radius:var(--r-xl,40px)}}
+.couv-une{aspect-ratio:16/10;padding:20px 24px;border-radius:var(--r-l,28px)}
+@media (min-width:760px){.couv-une{aspect-ratio:5/6;padding:28px}}
+.couv-carre{width:56px;height:56px;flex:none;padding:6px;justify-content:center;align-items:center;border-radius:12px;gap:0}
+@media (min-width:760px){.couv-carre{width:72px;height:72px}}
+
+/* Petit libellé de rubrique */
+.couv-rub{font:700 var(--t-micro,.8125rem)/1.2 var(--f-texte);letter-spacing:.08em;text-transform:uppercase}
+.couv-comparatifs .couv-rub{color:var(--texte-scene-doux,#AEB4BE)}
+
+/* La donnée : grande, mais jamais plus large que la couverture */
+.couv-donnee{font-weight:800;line-height:.92;letter-spacing:-.035em;white-space:nowrap;font-size:min(var(--t-chiffre,10rem),calc((100cqi - 8px) / (var(--n) * .6)))}
+.couv-carre .couv-donnee{font-size:24px;letter-spacing:-.02em;text-align:center}
+.couv-carre.couv-p2 .couv-donnee{font-size:18px}
+.couv-carre.couv-p3 .couv-donnee{font-size:14px}
+@media (min-width:760px){.couv-carre .couv-donnee{font-size:30px}.couv-carre.couv-p2 .couv-donnee{font-size:22px}.couv-carre.couv-p3 .couv-donnee{font-size:17px}}
+.couv-titre{font-weight:700;line-height:1.02;letter-spacing:-.02em;font-size:clamp(1.75rem,1.2rem + 2vw,2.5rem);max-width:16ch;text-wrap:balance}
+.couv-une .couv-titre{font-size:min(2.5rem,11cqi)}
+.couv-carre .couv-titre{font:700 11px/1.05 var(--f-titre);text-align:center;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word;letter-spacing:0}
+@media (min-width:760px){.couv-carre .couv-titre{font-size:12px}}
+.couv-sous{font:600 var(--t-petit,.9375rem)/1.35 var(--f-texte);max-width:36ch}
+.couv-comparatifs .couv-sous{color:var(--texte-scene,#D7DBE1)}
+
+/* Le compteur : « 66 h → 5 h » côte à côte, un libellé sous chaque nombre, deux barres
+   proportionnelles (66 et 5) ; la seconde se vide une fois. Aucune valeur intermédiaire. */
+.couv-cpt{display:grid;grid-template-columns:auto auto auto;justify-content:start;align-items:end;column-gap:.25em;row-gap:8px;font-size:min(var(--t-chiffre,10rem),14cqi)}
+.couv-avant,.couv-apres{font-weight:800;line-height:.9;letter-spacing:-.035em;white-space:nowrap;font-size:1em}
+.couv-une .couv-cpt{font-size:min(var(--t-chiffre,10rem),17cqi)}
+.couv-fleche{width:.7em;height:.7em;align-self:center;fill:none;stroke:currentColor;color:currentColor}
+.couv-lib{font:600 var(--t-micro,.8125rem)/1.2 var(--f-texte);letter-spacing:0}
+.couv-lib-avant{grid-column:1}
+.couv-lib-apres{grid-column:3}
+.couv-pistes{grid-column:1/-1;display:grid;gap:6px;margin-top:6px;width:100%}
+.couv-piste{display:block;height:8px;border-radius:999px;background:rgba(11,15,20,.12)}
+.couv-piste i{display:block;height:100%;border-radius:inherit;background:var(--encre);transform-origin:left center;transform:scaleX(var(--fin))}
+.couv-piste-avant i{transform:none;opacity:.45;animation:none!important}
+.couv-comparatifs .couv-piste{background:rgba(255,255,255,.14)}
+.couv-comparatifs .couv-piste i{background:var(--menthe)}
+/* Dès 1000 px, la bande garde la largeur de la colonne de lecture : plus d'aplat vide à droite. */
+@media (min-width:1000px){.couv-bande{max-width:760px}}
+@media (prefers-reduced-motion:no-preference){
+  .couv-piste i{animation:couv-vide var(--d-4,900ms) var(--courbe-sortie,cubic-bezier(.16,1,.3,1)) .35s both}
+  @keyframes couv-vide{from{transform:scaleX(1)}to{transform:scaleX(var(--fin))}}
+}
+.couv-note{margin-top:10px;font:400 var(--t-micro,.8125rem)/1.4 var(--f-texte);color:var(--gris)}
+</style>

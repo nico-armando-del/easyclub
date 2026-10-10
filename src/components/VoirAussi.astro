@@ -1,38 +1,75 @@
 ---
-/* « Voir aussi » : construit par lib/collections.ts (liens déclarés, liens inverses, voisines). */
+/*
+  « Pour aller plus loin » : construit par lib/collections.ts (liens déclarés,
+  liens inverses, voisines).
+  variante="rangee" (défaut, maquettes §B.3) : une rangée de 4 pilules au
+  plus, le nom de la page seulement ; les autres pages liées restent dans la
+  page, repliées (le maillage ne perd aucun lien).
+  variante="cartes" : la grille de cartes d'avant (9 visibles, le reste replié).
+*/
 import { voirAussi, type NomCollection } from '../lib/collections'
-interface Props { collection: NomCollection; id: string; min?: number; titre?: string }
-const { collection, id, min = 6, titre = 'Voir aussi' } = Astro.props
+interface Props { collection: NomCollection; id: string; min?: number; titre?: string; variante?: 'cartes' | 'rangee' }
+const { collection, id, min = 6, variante = 'rangee' } = Astro.props
+const rangee = variante === 'rangee'
+const titre = Astro.props.titre ?? (rangee ? 'Pour aller plus loin' : 'Voir aussi')
 const liens = await voirAussi(collection, id, min)
-// Au-delà de neuf, les liens restent dans la page mais repliés : la fin de page ne devient pas un mur de cartes.
-const VISIBLES = 9
+const VISIBLES = rangee ? 4 : 9
+const uid = `voir-aussi-${variante}`
 ---
 {liens.length > 0 && (
-  <section class="voir-aussi" aria-labelledby="voir-aussi-titre">
-    <h2 id="voir-aussi-titre">{titre}</h2>
-    <ul class="grille grille-3">
-      {liens.slice(0, VISIBLES).map((l) => (
-        <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
-      ))}
-    </ul>
-    {liens.length > VISIBLES && (
-      <details class="va-plus">
-        <summary>{liens.length - VISIBLES} autres pages liées</summary>
+  <section class:list={['voir-aussi', `va-${variante}`]} aria-labelledby={`${uid}-titre`}>
+    <h2 id={`${uid}-titre`}>{titre}</h2>
+    {rangee ? (
+      <>
+        <ul class="va-pilules">
+          {liens.slice(0, VISIBLES).map((l) => <li><a class="btn btn-contour btn-petit" href={l.url}>{l.nom}</a></li>)}
+        </ul>
+        {liens.length > VISIBLES && (
+          <details class="va-plus">
+            <summary>{liens.length - VISIBLES === 1 ? 'Une autre page liée' : `${liens.length - VISIBLES} autres pages liées`}</summary>
+            <ul class="va-pilules">
+              {liens.slice(VISIBLES).map((l) => <li><a class="btn btn-contour btn-petit" href={l.url}>{l.nom}</a></li>)}
+            </ul>
+          </details>
+        )}
+      </>
+    ) : (
+      <>
         <ul class="grille grille-3">
-          {liens.slice(VISIBLES).map((l) => (
+          {liens.slice(0, VISIBLES).map((l) => (
             <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
           ))}
         </ul>
-      </details>
+        {liens.length > VISIBLES && (
+          <details class="va-plus">
+            <summary>{liens.length - VISIBLES} autres pages liées</summary>
+            <ul class="grille grille-3">
+              {liens.slice(VISIBLES).map((l) => (
+                <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </>
     )}
   </section>
 )}
 <style>
 .voir-aussi h2{font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem)}
 .voir-aussi ul{list-style:none;padding:0;margin:24px 0 0}
-.va-plus{margin-top:16px}
-.va-plus summary{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:2px solid var(--encre);border-radius:999px;font-weight:700;cursor:pointer;list-style:none}
+.va-rangee h2{font-size:clamp(1.375rem,1.2rem + .8vw,1.75rem)}
+.va-pilules{display:flex;flex-wrap:wrap;gap:8px}
+.va-rangee .va-pilules{margin-top:16px}
+/* Sous 760 px : une seule rangée qui défile en x, au lieu de deux lignes de pilules (tour 2, défaut 2). */
+@media (max-width:759px){
+  .va-rangee>.va-pilules{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin-inline:calc(var(--g) * -1);padding-inline:var(--g);scroll-padding-inline:var(--g)}
+  .va-rangee>.va-pilules::-webkit-scrollbar{display:none}
+  .va-rangee>.va-pilules>li{flex:none;scroll-snap-align:start}
+  .va-rangee>.va-pilules a{white-space:nowrap}
+}
+.va-plus{margin-top:12px}
+.va-plus summary{display:inline-flex;align-items:center;min-height:44px;cursor:pointer;list-style:none;font-weight:600;font-size:.9375rem;color:var(--gris);text-decoration:underline;text-underline-offset:3px}
 .va-plus summary::-webkit-details-marker{display:none}
-.va-plus[open] summary{margin-bottom:0}
-@media (max-width:640px){.voir-aussi .grille{gap:8px}.voir-aussi .carte-lien{padding:14px 18px;gap:2px}.voir-aussi .carte-lien span{display:none}}
+.va-cartes .va-plus summary{padding:0 20px;border:2px solid var(--encre);border-radius:999px;font-weight:700;color:inherit;text-decoration:none;font-size:1rem}
+@media (max-width:640px){.va-cartes .grille{gap:8px}.va-cartes .carte-lien{padding:14px 18px;gap:2px}.va-cartes .carte-lien span{font-size:.875rem;line-height:1.4}}
 </style>

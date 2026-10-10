@@ -5,17 +5,19 @@
   par WhatsApp (la personne choisit le contact), par e-mail ou par le partage
   du téléphone. Rien n'est envoyé à OnClub, rien n'est stocké.
   Si la localisation a été acceptée, la ville entre dans le message.
-  Logique : public/js/recommander.js.
+  Logique : public/js/recommander.js (inchangée).
+  Mise en page (maquettes §B.7) : un écran. À gauche le titre, le champ, le bouton ;
+  à droite le message tel qu'il partira, dans une bulle qui s'écrit en direct
+  (sur téléphone : la bulle seule, sous le champ). « Modifier le message » replié.
 */
 import Layout from '../layouts/Layout.astro'
 import FilAriane from '../components/FilAriane.astro'
-import BlocTemps from '../components/BlocTemps.astro'
-import EcranAnime from '../components/EcranAnime.astro'
+import Repli from '../components/Repli.astro'
 import Faq from '../components/Faq.astro'
 import { SITE } from '../data/site'
-import { CINQ_TACHES } from '../data/temps'
 
-const message = `Bonjour, je suis adhérent du club. J’ai vu OnClub, une plateforme pour les associations : les familles s’inscrivent et paient en ligne, le bureau relance d’un bouton et ne recopie plus de fiches. Leur estimation : environ 61 heures rendues aux bénévoles chaque saison pour 250 adhérents. Ça pourrait nous aider ? ${SITE}`
+const message = `Bonjour, je suis adhérent du club. J’ai vu OnClub, une plateforme pour les associations : les familles s’inscrivent et paient en ligne, le bureau relance d’un bouton et ne recopie plus de fiches. Leur estimation, pas une étude : environ 61 heures rendues aux bénévoles chaque saison pour 250 adhérents. Ça pourrait nous aider ? ${SITE}`
+const morceaux = message.split('61 heures')
 const fil = [{ nom: 'Transmettre à mon club', url: '/recommander' }]
 const faq = [
   { question: 'Est-ce que mon club saura que le message vient d’OnClub ?', reponse: 'Le message part de votre téléphone ou de votre messagerie, à votre nom, vers la personne que vous choisissez. OnClub ne reçoit rien et ne contacte pas votre club de lui-même.' },
@@ -29,35 +31,45 @@ const faq = [
   chemin="/recommander"
   fil={fil}
   faq={faq}
+  sansBoutonFixe={true}
 >
-  <div class="tete-page">
-    <div class="enveloppe tete-grille">
-      <div>
-        <FilAriane fil={fil} />
-        <p class="surtitre">Adhérent, élève ou parent</p>
-        <h1>Vos bénévoles méritent leurs soirées. <span class="insec">Dites-le</span> à votre club.</h1>
-        <p class="chapo">Vous voyez le bureau courir après les fiches, les chèques et les certificats&nbsp;? Envoyez-lui ce message&nbsp;: il part de chez vous, vers la personne de votre choix.</p>
+  <div class="enveloppe ecran" data-recommander data-heros>
+    <div class="ecran-tete">
+      <FilAriane fil={fil} />
+      <p class="surtitre">Adhérent, élève ou parent</p>
+      <h1>Vos bénévoles méritent leurs soirées. <span class="nw">Dites-le</span> à votre club</h1>
+      <p class="chapo">Le bureau court après les fiches, les chèques et les certificats ? Envoyez-lui ce message, de chez vous, à la personne de votre choix.</p>
+    </div>
+
+    <label class="champ ecran-champ"><span>Le nom de votre club <i>(facultatif)</i></span><input type="text" maxlength="80" data-club autocomplete="off"></label>
+
+    <div class="ecran-bulle">
+      <div class="tel" aria-hidden="true">
+        <div class="tel-ecran">
+          <div class="bulle" data-bulle>{morceaux[0]}{morceaux.length > 1 && <><mark>61 heures</mark>{morceaux.slice(1).join('61 heures')}</>}</div>
+        </div>
       </div>
+      <p class="bulle-legende">Le message tel qu’il partira. 61 h : estimation OnClub pour 250 adhérents, pas une étude.</p>
+    </div>
+
+    <div class="ecran-actions">
+      <div class="partager">
+        <a class="btn btn-encre" href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener" data-wa data-envoi><svg aria-hidden="true"><use href="#wa"/></svg>Envoyer sur WhatsApp</a>
+        <a class="lien-fleche" href={`mailto:?subject=${encodeURIComponent('Une idée pour le club : OnClub')}&body=${encodeURIComponent(message)}`} data-mail data-envoi><svg aria-hidden="true"><use href="#courriel"/></svg>Envoyer par e-mail</a>
+        <button type="button" class="action-texte" data-partage hidden><svg aria-hidden="true"><use href="#partage"/></svg>Partager</button>
+        <button type="button" class="action-texte" data-copier hidden>Copier le message</button>
+      </div>
+      <Repli titre="Modifier le message">
+        <label class="champ"><span>Le message</span><textarea rows="7" data-message data-base={message}>{message}</textarea></label>
+      </Repli>
+      <p class="message-ville" hidden data-ville-note></p>
+      <p class="note" aria-live="polite" data-etat>Rien n’est envoyé à OnClub : WhatsApp ou votre messagerie s’ouvre, vous choisissez le destinataire.</p>
     </div>
   </div>
 
-  <div class="enveloppe corps">
-    <section class="boite-message" aria-labelledby="t-message" data-recommander>
-      <h2 id="t-message">Le message, prêt à partir</h2>
-      <label class="champ"><span>Le nom de votre club <i>(facultatif)</i></span><input type="text" maxlength="80" data-club autocomplete="off"></label>
-      <label class="champ"><span>Le message</span><textarea rows="7" data-message data-base={message}>{message}</textarea></label>
-      <p class="message-ville" hidden data-ville-note></p>
-      <div class="partager">
-        <a class="btn btn-encre" href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener" data-wa><svg aria-hidden="true"><use href="#wa"/></svg>Envoyer sur WhatsApp</a>
-        <a class="btn btn-contour" href={`mailto:?subject=${encodeURIComponent('Une idée pour le club : OnClub')}&body=${encodeURIComponent(message)}`} data-mail><svg aria-hidden="true"><use href="#courriel"/></svg>Envoyer par e-mail</a>
-        <button type="button" class="btn btn-contour" data-partage hidden><svg aria-hidden="true"><use href="#partage"/></svg>Partager</button>
-        <button type="button" class="btn btn-contour" data-copier hidden>Copier le message</button>
-      </div>
-      <p class="note" aria-live="polite" data-etat>Rien n’est envoyé à OnClub&nbsp;: WhatsApp ou votre messagerie s’ouvre, vous choisissez le destinataire.</p>
-    </section>
-
-    <section class="ce-que" aria-labelledby="t-change">
-      <h2 id="t-change">Ce que ça change, pour vous et pour le bureau</h2>
+  <section class="section ce-que" aria-labelledby="t-change">
+    <div class="enveloppe">
+      <h2 id="t-change" class="h2-idee">Pour vous, pour le bureau</h2>
       <div class="ce-que-grille">
         <div>
           <h3>Pour vous</h3>
@@ -78,41 +90,89 @@ const faq = [
           </ul>
         </div>
       </div>
-      <EcranAnime nom="inscription" legende="L’inscription vue par la famille, données fictives." />
-    </section>
+    </div>
+  </section>
 
-    <BlocTemps cles={CINQ_TACHES} titre="Le temps rendu aux bénévoles, pour 250 adhérents" />
-
-    <Faq items={faq} />
-
-    <p class="liens-fin">À transmettre aussi&nbsp;: <a href="/tarifs">les tarifs</a>, <a href="/temps-gagne">le calcul du temps gagné</a>, <a href="/fonctionnalites">les fonctionnalités</a>, <a href="/presentation">la présentation</a>. Vous êtes au bureau&nbsp;? <a href="/demo">Demander une démo</a>.</p>
-  </div>
+  <div class="section"><div class="enveloppe">
+    <Faq items={faq} disposition="deux-colonnes">
+      <p class="liens-fin">À transmettre aussi : <a href="/tarifs">les tarifs</a>, <a href="/temps-gagne">le calcul du temps gagné</a>, <a href="/fonctionnalites">les fonctionnalités</a>. Vous êtes au bureau ? <a href="/demo">Demander une démo</a>.</p>
+    </Faq>
+  </div></div>
   <script is:inline defer src="/js/recommander.js"></script>
 </Layout>
 
+<script>
+  /*
+    La bulle recopie le message tel qu'il partira (recommander.js l'écrit dans le champ),
+    « 61 heures » surligné. Au retour sur la page après un envoi, la note remercie.
+  */
+  const boite = document.querySelector<HTMLElement>('[data-recommander]')
+  const zone = boite?.querySelector<HTMLTextAreaElement>('[data-message]')
+  const bulle = boite?.querySelector<HTMLElement>('[data-bulle]')
+  const etat = boite?.querySelector<HTMLElement>('[data-etat]')
+  if (boite && zone && bulle) {
+    const ecrit = () => {
+      bulle.textContent = ''
+      zone.value.split('61 heures').forEach((morceau, i) => {
+        if (i > 0) { const m = document.createElement('mark'); m.textContent = '61 heures'; bulle.append(m) }
+        bulle.append(morceau)
+      })
+    }
+    const plusTard = () => setTimeout(ecrit, 0)
+    boite.addEventListener('input', plusTard)
+    document.addEventListener('onclub:ville', plusTard)
+    plusTard()
+    let envoye = false
+    boite.querySelectorAll('[data-envoi]').forEach((a) => a.addEventListener('click', () => { envoye = true }))
+    document.addEventListener('visibilitychange', () => {
+      if (envoye && document.visibilityState === 'visible' && etat) {
+        etat.textContent = 'Merci. Le bureau vous devra peut-être quelques soirées.'
+        envoye = false
+      }
+    })
+  }
+</script>
+
 <style>
-.tete-page{background:var(--lilas);padding-block:8px calc(var(--section) * .7)}
-.tete-page .surtitre{margin-top:20px}
-.tete-page h1{max-width:20ch}
-.insec{white-space:nowrap}
-.corps{display:grid;gap:clamp(56px,7vw,88px);padding-block:var(--section)}
-.boite-message{background:var(--blanc);border:2px solid var(--encre);border-radius:var(--r-l);padding:24px;box-shadow:0 6px 0 var(--encre);max-width:860px;display:grid;gap:18px}
-@media (min-width:760px){.boite-message{padding:36px 40px}}
-.boite-message h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.125rem)}
+.ecran{display:grid;gap:var(--e-5);padding-block:var(--e-5) var(--section)}
+@media (min-width:1000px){
+  .ecran{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);row-gap:var(--e-5);align-items:start;padding-top:var(--e-7)}
+  .ecran-tete,.ecran-champ,.ecran-actions{grid-column:1 / span 6}
+  .ecran-bulle{grid-column:8 / span 5;grid-row:1 / span 3}
+}
+.ecran-tete .surtitre{margin-top:var(--e-4);color:var(--sapin)}
+.ecran-tete h1{font-size:var(--t-h1-produit);line-height:1.06;letter-spacing:-.02em;max-width:20ch}
+.ecran-tete .chapo{margin-top:var(--e-4);color:var(--gris)}
 .champ span{display:block;font-weight:700;margin-bottom:6px}
 .champ i{font-style:normal;font-weight:500;color:var(--gris)}
-.champ input,.champ textarea{width:100%;min-height:52px;border:2px solid var(--encre);border-radius:12px;padding:12px 14px;font:500 1rem/1.5 var(--f-texte);background:var(--papier);color:var(--encre)}
+.champ input,.champ textarea{width:100%;min-height:52px;border:2px solid var(--encre);border-radius:12px;padding:12px 14px;font:500 1rem/1.5 var(--f-texte);background:var(--blanc);color:var(--encre)}
 .champ textarea{resize:vertical}
 .champ input:focus,.champ textarea:focus{outline:none;box-shadow:0 0 0 3px var(--menthe)}
-.message-ville{font-size:.9375rem;color:var(--sapin);font-weight:600}
-.partager{display:grid;gap:12px}
-@media (min-width:700px){.partager{grid-template-columns:1fr 1fr}}
+.ecran-champ{max-width:520px}
+/* La bulle : seule sur téléphone, dans un cadre de téléphone dès 1000 px (sans marque, sans rond). */
+.tel-ecran{background:var(--papier-2);border-radius:var(--r-l);padding:20px 16px}
+.bulle{background:var(--blanc);border-radius:var(--r-m) var(--r-m) var(--r-m) 6px;padding:14px 16px;font-size:var(--t-petit);line-height:1.5;box-shadow:var(--ombre-carte);max-width:34ch;overflow-wrap:anywhere}
+.bulle :global(mark){background:var(--menthe-pale);color:var(--sapin);font-weight:700;padding:0 3px;border-radius:4px}
+.bulle-legende{margin-top:var(--e-3);font-size:var(--t-micro);color:var(--gris)}
+@media (min-width:1000px){
+  .tel{width:300px;min-height:600px;margin-inline:auto;border:10px solid var(--encre);border-radius:var(--r-appareil);background:var(--papier-2);box-shadow:var(--ombre-appareil);position:relative;padding-top:44px;overflow:hidden}
+  .tel::before{content:"";position:absolute;top:10px;left:35%;width:30%;height:22px;border-radius:999px;background:var(--encre)}
+  .tel-ecran{border-radius:0;padding:16px 14px}
+  .bulle-legende{text-align:center}
+}
+.partager{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px}
+@media (max-width:599px){.partager .btn{width:100%}}
 .partager [hidden]{display:none}
-.ce-que h2{font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem)}
-.ce-que-grille{display:grid;gap:20px;margin:28px 0 48px}
+.action-texte{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0;background:none;border:0;color:var(--encre);font:700 1rem/1.2 var(--f-texte);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.action-texte svg{width:18px;height:18px}
+.ecran-actions{display:grid;gap:var(--e-4)}
+.ecran-actions :global(.repli){max-width:560px}
+.message-ville{font-size:.9375rem;color:var(--sapin);font-weight:600}
+.ce-que{padding-top:0}
+.ce-que-grille{display:grid;gap:var(--col-gap);margin-top:var(--e-6)}
 @media (min-width:760px){.ce-que-grille{grid-template-columns:1fr 1fr}}
-.ce-que-grille>div{background:var(--blanc);border-radius:var(--r-l);padding:24px}
+.ce-que-grille>div{background:var(--blanc);border-radius:var(--r-l);box-shadow:var(--ombre-carte);padding:24px}
 .ce-que-grille ul{margin-top:12px;padding-left:1.2em;display:grid;gap:8px}
-.liens-fin{max-width:var(--lecture)}
+.liens-fin{margin-top:var(--e-6);max-width:var(--lecture)}
 .liens-fin a{font-weight:700}
 </style>

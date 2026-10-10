@@ -1,0 +1,93 @@
+---
+/*
+  LE SOMMAIRE d'un guide ou d'un article (maquettes §B.5), tiré des titres de niveau 2
+  du texte MDX (`headings` de render()). « À retenir » n'y est pas : il ne vient pas du MDX.
+  - 8 entrées au plus ; au-delà, un repli « Afficher plus ».
+  - À 1280 : colonne collante, l'entrée lue porte aria-current et une barre menthe.
+  - Sous 1000 px : barre collante « Sommaire · <section lue> », qui s'ouvre sur la liste ;
+    un tap mène au titre et referme. Sans JS : la liste est ouverte, rien n'est caché.
+  Suivi de l'entrée lue : IntersectionObserver sur les h2, sans écouteur de défilement.
+*/
+interface Props { titres: { slug: string; text: string }[]; max?: number }
+const { titres, max = 8 } = Astro.props
+const premiers = titres.slice(0, max)
+const suite = titres.slice(max)
+---
+{titres.length > 1 && (
+  <nav class="sommaire" aria-label="Sommaire" data-sommaire>
+    <details class="som-repli" open>
+      <summary class="som-tete">
+        <span class="som-label">Sommaire</span><span class="som-lu" data-som-lu></span>
+        <svg class="som-chevron" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <ol class="som-liste">
+        {premiers.map((t) => <li><a href={`#${t.slug}`}>{t.text}</a></li>)}
+      </ol>
+      {suite.length > 0 && (
+        <details class="som-plus">
+          <summary>Afficher plus</summary>
+          <ol class="som-liste">{suite.map((t) => <li><a href={`#${t.slug}`}>{t.text}</a></li>)}</ol>
+        </details>
+      )}
+    </details>
+  </nav>
+)}
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-sommaire]')
+  if (nav) {
+    const repli = nav.querySelector<HTMLDetailsElement>('.som-repli')!
+    const lu = nav.querySelector<HTMLElement>('[data-som-lu]')!
+    const liens = [...nav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')]
+    const large = matchMedia('(min-width: 1000px)')
+    let actif: HTMLAnchorElement | undefined
+    const ecrireLu = () => { lu.textContent = !large.matches && actif ? actif.textContent ?? '' : '' }
+    const disposer = () => { repli.open = large.matches; ecrireLu() }
+    disposer()
+    large.addEventListener('change', disposer)
+    // À 1280, la liste reste ouverte : le titre « Sommaire » n'est qu'un libellé.
+    nav.querySelector('.som-tete')!.addEventListener('click', (e) => { if (large.matches) e.preventDefault() })
+    // Sur téléphone, un tap mène au titre et referme la barre.
+    for (const a of liens) a.addEventListener('click', () => { if (!large.matches) repli.open = false })
+    const marquer = (a?: HTMLAnchorElement) => {
+      if (!a || a === actif) return
+      actif?.removeAttribute('aria-current')
+      a.setAttribute('aria-current', 'true')
+      actif = a
+      ecrireLu()
+    }
+    const parId = new Map(liens.map((a) => [decodeURIComponent(a.hash.slice(1)), a]))
+    const titres = [...parId.keys()].map((id) => document.getElementById(id)).filter((t): t is HTMLElement => !!t)
+    const vus = new IntersectionObserver((entrees) => {
+      for (const e of entrees) if (e.isIntersecting) marquer(parId.get(e.target.id))
+    }, { rootMargin: '-20% 0px -70% 0px' })
+    titres.forEach((t) => vus.observe(t))
+  }
+</script>
+<style>
+.sommaire{font-size:.9375rem;line-height:1.4}
+.som-tete{display:flex;align-items:center;gap:6px;list-style:none;font:700 var(--t-micro,.8125rem)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--encre)}
+.som-tete::-webkit-details-marker{display:none}
+.som-lu{font:600 .9375rem/1.3 var(--f-texte);letter-spacing:0;text-transform:none;color:var(--encre)}
+.som-lu:not(:empty)::before{content:"· ";font-weight:700}
+.som-chevron{margin-left:auto;flex:none;transition:transform var(--d-1,160ms) var(--courbe-sortie,ease)}
+.som-repli[open]>.som-tete .som-chevron{transform:rotate(180deg)}
+.som-liste{list-style:none;padding:0;margin:14px 0 0;border-left:3px solid var(--trait);display:grid;gap:2px}
+.som-liste a{display:flex;align-items:center;min-height:36px;padding:4px 0 4px 14px;margin-left:-3px;border-left:3px solid transparent;color:var(--gris);text-decoration:none}
+.som-liste a:hover{color:var(--encre);text-decoration:underline}
+.som-liste a[aria-current]{color:var(--encre);font-weight:600;border-left-color:var(--menthe)}
+.som-plus>summary{display:flex;align-items:center;min-height:44px;padding-left:17px;cursor:pointer;font-weight:600;color:var(--encre)}
+
+/* Sous 1000 px : la barre collante, ouverte sur la liste au tap */
+@media (max-width:999px){
+  .sommaire{margin-inline:calc(var(--g) * -1);padding:0 var(--g);background:rgba(255,255,255,.92);border-block:1px solid var(--trait);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  :global(.js) .sommaire{position:sticky;top:0;z-index:30}
+  .som-tete{min-height:48px;cursor:pointer;flex-wrap:wrap;row-gap:0}
+  .som-repli[open] .som-liste{max-height:min(60vh,420px);overflow:auto}
+  .som-liste a{min-height:44px}
+  .som-repli>.som-liste,.som-plus{margin-bottom:12px}
+}
+@media (min-width:1000px){
+  .som-tete{cursor:default}
+  .som-chevron{display:none}
+}
+</style>

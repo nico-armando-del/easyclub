@@ -1,0 +1,35 @@
+---
+/*
+  « L'ÉCRAN EN GRAND DANS UN CADRE » (composant MDX, maquettes §C.1).
+  <Cadre type="panneau" fond="menthe" legende="Noms et montants fictifs."><EcranAnime nom="relance" /></Cadre>
+  type : fenetre (cadre de navigateur), telephone, panneau (aplat seul).
+  fond : menthe (défaut), lilas, encre, papier. Aucune étiquette « Exemple » :
+  une seule ligne sous le cadre, la légende.
+*/
+import CadreNavigateur from './CadreNavigateur.astro'
+import CadreTelephone from './CadreTelephone.astro'
+interface Props { type?: 'fenetre' | 'telephone' | 'panneau'; fond?: 'menthe' | 'lilas' | 'encre' | 'papier'; legende?: string; titre?: string; class?: string }
+const { type = 'panneau', fond = 'menthe', legende, titre, class: classe } = Astro.props
+---
+<figure class:list={['cadre', `cadre-${type}`, `cadre-fond-${fond}`, fond === 'encre' && 'sur-encre', classe]}>
+  <div class="cadre-scene">
+    {type === 'fenetre' ? (
+      <CadreNavigateur titre={titre} ratio="auto"><slot /></CadreNavigateur>
+    ) : type === 'telephone' ? (
+      <CadreTelephone largeur={300}><slot /></CadreTelephone>
+    ) : (
+      <slot />
+    )}
+  </div>
+  {legende && <figcaption>{legende}</figcaption>}
+</figure>
+<style>
+.cadre{margin:0;min-width:0}
+.cadre-scene{display:grid;place-items:center;padding:clamp(20px,1rem + 3vw,56px) clamp(16px,.5rem + 3vw,56px);border-radius:var(--r-panneau,clamp(24px,1rem + 2vw,40px));background:var(--menthe);overflow:hidden}
+.cadre-scene>:global(*){width:100%;min-width:0}
+.cadre-telephone .cadre-scene>:global(*){width:auto}
+.cadre-fond-lilas .cadre-scene{background:var(--lilas)}
+.cadre-fond-encre .cadre-scene{background:var(--encre) var(--lueur,none);color:var(--blanc)}
+.cadre-fond-papier .cadre-scene{background:var(--papier-2,#EDE8DC)}
+.cadre figcaption{margin-top:12px;font-size:var(--t-micro,.8125rem);color:var(--gris);text-align:center}
+</style>

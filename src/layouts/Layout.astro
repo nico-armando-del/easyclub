@@ -31,12 +31,14 @@ interface Props {
   langues?: boolean
   sansBoutonFixe?: boolean
   noindex?: boolean
+  /** Fond de la page : papier (défaut) ou blanc (pages éditoriales). L'en-tête prend le même. */
+  fond?: 'papier' | 'blanc'
 }
 
 const {
   titre, description, chemin, fil, faq, article,
   image = '/img/og.jpg', imageAlt = 'Le logo OnClub sur fond menthe',
-  langues = false, sansBoutonFixe = false, noindex = false,
+  langues = false, sansBoutonFixe = false, noindex = false, fond = 'papier',
 } = Astro.props
 
 const adresse = chemin === '/' ? `${SITE}/` : `${SITE}${chemin}`
@@ -124,10 +126,10 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <script is:inline>document.documentElement.classList.add('js')</script>
 <slot name="tete" />
 </head>
-<body>
+<body data-fond={fond}>
 <Sprite />
 <a class="saut" href="#contenu">Aller au contenu</a>
-<EnTete chemin={chemin} />
+<EnTete chemin={chemin} fond={fond} />
 <main id="contenu">
   <slot />
 </main>
@@ -136,5 +138,25 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <Consentement />
 <script is:inline src="/js/site.js" defer></script>
 <script is:inline defer src="/_vercel/insights/script.js"></script>
+<script>
+  /*
+    L'OBSERVATEUR PARTAGÉ (un seul pour toute la page, sans minuterie ni écouteur de défilement) :
+    - [data-vu] reçoit .vu une fois, quand 35 % de l'élément entre à l'écran (apparitions jouées une fois) ;
+    - [data-champ] reçoit .hors-champ tant qu'il est hors de l'écran (pause d'une animation qu'on ne voit pas).
+    Les composants ajoutés plus tard (onglets, scène) sont pris par l'événement « onclub:observer ».
+  */
+  const vus = new IntersectionObserver((entrees) => {
+    for (const e of entrees) if (e.isIntersecting) { e.target.classList.add('vu'); vus.unobserve(e.target) }
+  }, { threshold: 0.35 })
+  const champ = new IntersectionObserver((entrees) => {
+    for (const e of entrees) e.target.classList.toggle('hors-champ', !e.isIntersecting)
+  })
+  const observer = (racine: ParentNode = document) => {
+    racine.querySelectorAll('[data-vu]:not(.vu)').forEach((el) => vus.observe(el))
+    racine.querySelectorAll('[data-champ]').forEach((el) => champ.observe(el))
+  }
+  observer()
+  document.addEventListener('onclub:observer', () => observer())
+</script>
 </body>
 </html>

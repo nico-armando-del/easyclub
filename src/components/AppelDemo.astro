@@ -1,5 +1,5 @@
 ---
-/* Le bloc de fin de chaque page : la démo, en clair, et ses deux raccourcis. */
+/* ANCIEN bloc de fin de page, remplacé par CaseVide. Gardé tant que des pages l'importent (plan §2.4). */
 import { lienWhatsApp, EMAIL, MISE_EN_ROUTE } from '../data/site'
 interface Props { titre?: string; texte?: string; message?: string }
 const {
@@ -16,7 +16,7 @@ const {
       <p class="intro">{texte}</p>
     </div>
     <div class="appel-actions">
-      <a class="btn btn-menthe" href="/demo">Préparer ma démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+      <a class="btn btn-menthe" href="/demo">Demander une démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
       <a class="btn btn-contour" href={lienWhatsApp(message)} target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Écrire sur WhatsApp</a>
       <a class="btn btn-contour" href={`mailto:${EMAIL}?subject=${encodeURIComponent('Démo OnClub')}`}><svg aria-hidden="true"><use href="#courriel"/></svg>Écrire un e-mail</a>
       <p class="appel-membre">Vous êtes adhérent ou parent ? <a href="/recommander">Transmettre à mon club</a></p>

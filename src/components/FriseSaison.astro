@@ -1,0 +1,55 @@
+---
+/*
+  LA FRISE DE LA SAISON (P2, maquettes §B.3, page sport) : une bande collante
+  sous l'en-tête, « Mai · Septembre · Octobre · Licences · Samedi · Vacances »,
+  chaque étape est un lien vers sa section. L'étape active est soulignée et
+  une barre de 2 px avance d'un cran par étape (IntersectionObserver, sans
+  écouteur de défilement). Sans JS : des ancres simples. À 390, la frise
+  défile en x. Sous mouvement réduit, la barre change sans glisser.
+  <FriseSaison etapes={[{ ancre: 'mai-…', nom: 'Mai' }, …]} />
+*/
+interface Props { etapes: { ancre: string; nom: string }[]; libelle?: string }
+const { etapes, libelle = 'La saison, étape par étape' } = Astro.props
+---
+{etapes.length > 0 && (
+  <nav class="frise" aria-label={libelle} data-frise data-defile-x>
+    <ol>
+      {etapes.map((e) => <li><a href={`#${e.ancre}`} data-etape={e.ancre}>{e.nom}</a></li>)}
+    </ol>
+    <span class="frise-barre" aria-hidden="true"></span>
+  </nav>
+)}
+<script>
+  /* L'étape active : la dernière section dont le titre est passé sous la frise. */
+  const frise = document.querySelector<HTMLElement>('[data-frise]')
+  if (frise && 'IntersectionObserver' in window) {
+    const liens = [...frise.querySelectorAll<HTMLAnchorElement>('[data-etape]')]
+    const barre = frise.querySelector<HTMLElement>('.frise-barre')
+    const titres = liens.map((a) => document.getElementById(a.dataset.etape!)).filter(Boolean) as HTMLElement[]
+    const maj = () => {
+      let actif = ''
+      for (const t of titres) if (t.getBoundingClientRect().top < innerHeight * 0.5) actif = t.id
+      liens.forEach((a) => { if (a.dataset.etape === actif) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current') })
+      const rang = liens.findIndex((a) => a.dataset.etape === actif)
+      barre?.style.setProperty('transform', `scaleX(${(rang + 1) / liens.length})`)
+      const courant = liens.find((a) => a.dataset.etape === actif)
+      if (courant && frise.scrollWidth > frise.clientWidth) frise.scrollTo({ left: courant.offsetLeft - 16, behavior: 'auto' })
+    }
+    const o = new IntersectionObserver(maj, { rootMargin: '0px 0px -50% 0px' })
+    titres.forEach((t) => o.observe(t))
+  }
+</script>
+<style>
+.frise{position:sticky;top:var(--entete-h,60px);z-index:calc(var(--z-entete,50) - 1);margin-inline:calc(var(--g) * -1);padding-inline:var(--g);background:rgba(245,242,234,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--trait);overflow-x:auto;scrollbar-width:none;transition:top var(--d-2,320ms) var(--courbe-sortie,ease)}
+.frise::-webkit-scrollbar{display:none}
+:global(body:has([data-entete].cache)) .frise{top:0}
+.frise ol{list-style:none;margin:0;padding:0;display:flex;gap:4px;min-width:max-content}
+.frise a{display:inline-flex;align-items:center;min-height:48px;padding:0 12px;font:600 .9375rem/1 var(--f-texte);text-decoration:none;color:var(--gris)}
+.frise a:hover{color:var(--encre);text-decoration:underline;text-underline-offset:4px}
+/* Un seul trait sous la frise : son filet, que la barre de progression remplit. L'étape active passe en encre gras. */
+.frise a[aria-current]{color:var(--encre);font-weight:700}
+/* Dès 1000 px, la frise tient dans la gouttière du contenu (x = 80 à 1280), pas au ras de l'écran. */
+@media (min-width:1000px){.frise{margin-inline:0;padding-inline:0}.frise ol{margin-left:-12px}}
+.frise-barre{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--sapin);transform-origin:0 50%;transform:scaleX(0)}
+.frise-barre{transition:transform var(--d-3,600ms) var(--courbe-sortie,ease)}
+</style>

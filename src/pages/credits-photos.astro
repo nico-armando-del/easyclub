@@ -3,6 +3,7 @@
 import Layout from '../layouts/Layout.astro'
 import FilAriane from '../components/FilAriane.astro'
 import { PHOTOS } from '../data/photos'
+import { FREEPIK_VOLTA } from '../data/clubs'
 
 const fil = [{ nom: 'Crédits photos', url: '/credits-photos' }]
 const creditees = Object.values(PHOTOS).filter((p) => p.auteur).sort((a, b) => a.alt.localeCompare(b.alt, 'fr'))
@@ -17,6 +18,16 @@ const creditees = Object.values(PHOTOS).filter((p) => p.auteur).sort((a, b) => a
         <li><span>{p.alt}</span><span><a href={p.page} rel="noopener" target="_blank">Photo</a> de <a href={p.profil} rel="noopener" target="_blank">{p.auteur}</a></span></li>
       ))}
     </ul>
+    <section class="clubs" id="clubs" aria-labelledby="clubs-titre">
+      <h2 id="clubs-titre">Sites de clubs de démonstration</h2>
+      <p class="clubs-phrase">Le Volta Volley Club et l’AS Montclar sont des clubs inventés pour montrer un site branché sur OnClub. Les photos du Volta Volley Club viennent de Freepik&nbsp;:</p>
+      <ul class="credits">
+        {FREEPIK_VOLTA.map((lien, i) => (
+          <li><span>Photo {i + 1} du Volta Volley Club</span><span><a href={lien} rel="noopener" target="_blank">Image Freepik<span class="sr"> {i + 1}</span></a></span></li>
+        ))}
+      </ul>
+      <p class="clubs-note">L’AS Montclar n’utilise aucune photo, seulement de la typographie.</p>
+    </section>
     <p class="legale-fin"><a href="/">Accueil</a> · <a href="/mentions-legales">Mentions légales</a> · <a href="/demo">Demander une démo</a></p>
   </div>
 </Layout>
@@ -30,4 +41,9 @@ const creditees = Object.values(PHOTOS).filter((p) => p.auteur).sort((a, b) => a
 @media (min-width:700px){.credits li{grid-template-columns:1fr auto}}
 .credits li span:last-child{color:var(--gris)}
 .legale-fin{margin-top:40px;font-size:.9375rem}
+.clubs{margin-top:var(--section)}
+.clubs h2{font-size:clamp(1.625rem,1.3rem + 1.2vw,2.25rem)}
+.clubs-phrase{margin-top:16px;max-width:var(--lecture)}
+.clubs .credits{margin-top:24px}
+.clubs-note{margin-top:16px;font-size:.9375rem;color:var(--gris);max-width:var(--lecture)}
 </style>

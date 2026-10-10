@@ -1,0 +1,44 @@
+---
+/*
+  LE HÉROS COMPACT des hubs et de /demo (maquettes §B.4) : fil d'Ariane, surtitre,
+  h1 (≤ 2 lignes à 1280), une phrase (≤ 25 mots), UN bouton plein au plus, et un lien.
+  Le slot reçoit un complément visuel (le chiffre de /temps-gagne, une note).
+*/
+import FilAriane from './FilAriane.astro'
+interface Lien { nom: string; url: string }
+interface Props {
+  surtitre?: string
+  titre: string
+  phrase?: string
+  cta?: { texte: string; href: string }
+  lien?: { texte: string; href: string }
+  fil?: Lien[]
+  /** Titre en HTML (espaces insécables, retour à la ligne voulu). */
+  titreHtml?: string
+}
+const { surtitre, titre, phrase, cta, lien, fil, titreHtml } = Astro.props
+---
+<header class="heros-compact" data-heros>
+  <div class="enveloppe">
+    {fil && <FilAriane fil={fil} />}
+    {surtitre && <p class="surtitre hc-surtitre">{surtitre}</p>}
+    {titreHtml ? <h1 class="hc-titre" set:html={titreHtml} /> : <h1 class="hc-titre">{titre}</h1>}
+    {phrase && <p class="chapo hc-phrase">{phrase}</p>}
+    {(cta || lien) && (
+      <div class="hc-actions">
+        {cta && <a class="btn btn-encre" href={cta.href}>{cta.texte}</a>}
+        {lien && <a class="lien-fleche" href={lien.href}>{lien.texte} <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+      </div>
+    )}
+    <slot />
+  </div>
+</header>
+<style>
+.heros-compact{padding-block:var(--e-6) var(--e-6)}
+@media (min-width:760px){.heros-compact{padding-block:var(--e-7) var(--e-7)}}
+.hc-surtitre{margin-top:var(--e-4);color:var(--sapin)}
+.hc-titre{font-size:var(--t-h1-produit);line-height:1.06;letter-spacing:-.02em;max-width:20ch}
+.hc-phrase{margin-top:var(--e-4);color:var(--gris)}
+.hc-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:var(--e-5)}
+@media (max-width:759px){.hc-actions .btn{width:100%}}
+</style>

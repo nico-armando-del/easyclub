@@ -1,0 +1,21 @@
+---
+/*
+  UN CADRE DE TÉLÉPHONE (maquettes §E.2) : rectangle aux coins arrondis,
+  bordure encre de 10 px, encoche en pilule. Aucun rond décoratif.
+  <CadreTelephone largeur={300}>…</CadreTelephone>
+  `largeur` est la largeur maximale en px ; le cadre se réduit avec son
+  conteneur. L'écran garde le rapport 9/19 et coupe ce qui dépasse.
+*/
+interface Props { largeur?: number; class?: string }
+const { largeur = 300, class: classe } = Astro.props
+---
+<div class:list={['cadre-telephone', classe]} style={`--largeur-tel:${largeur}px`}>
+  <div class="ct-ecran"><slot /></div>
+  <span class="ct-encoche" aria-hidden="true"></span>
+</div>
+<style>
+.cadre-telephone{position:relative;width:100%;max-width:var(--largeur-tel);border:10px solid var(--encre);border-radius:var(--r-appareil,clamp(28px,1.4rem + 1vw,40px));background:var(--encre);box-shadow:var(--ombre-appareil,0 30px 60px -30px rgba(11,15,20,.45),0 0 0 1px rgba(11,15,20,.08));overflow:hidden}
+.ct-ecran{position:relative;aspect-ratio:9/19;overflow:hidden;border-radius:calc(var(--r-appareil,32px) - 12px);background:var(--blanc)}
+.ct-ecran>:global(img){display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.ct-encoche{position:absolute;top:6px;left:35%;width:30%;height:clamp(12px,4.5%,22px);border-radius:999px;background:var(--encre);z-index:2}
+</style>

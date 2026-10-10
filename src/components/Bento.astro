@@ -1,0 +1,82 @@
+---
+/*
+  LES FONCTIONNALITÉS EN BENTO : six cartes de tailles différentes, une par
+  famille (FAMILLES, src/data/site.ts), chacune vers /fonctionnalites#ancre.
+  Sous la grille : « Les {n} fonctionnalités », n calculé sur la collection.
+  Sans intro (maquettes §A3). titre / niveau / lienTout : pour les hubs.
+*/
+import CarteFamille from './CarteFamille.astro'
+import { FAMILLES, type Famille } from '../data/site'
+import { liste } from '../lib/collections'
+import VersFr from './langue/VersFr.astro'
+
+interface Props {
+  titre?: string
+  niveau?: 'h2' | 'h3'
+  lienTout?: boolean
+  /** /en, /es : noms et phrases traduits, libellé du lien. */
+  langue?: 'fr' | 'en' | 'es'
+  familles?: Partial<Record<Famille, { nom: string; phrase: string }>>
+  lienTexte?: (n: number) => string
+  id?: string
+  versFr?: string
+}
+const {
+  titre = 'Tout ce qui prenait vos soirées', niveau = 'h2', lienTout = true,
+  langue = 'fr', familles, lienTexte = (n: number) => `Les ${n} fonctionnalités`, id = 't-bento', versFr,
+} = Astro.props
+const n = (await liste('fonctionnalites')).length
+const H = niveau
+const carteNiveau = niveau === 'h2' ? 'h3' : 'h4'
+const DISPO = {
+  Inscrire: { disposition: 'haute', fond: 'menthe', fragment: 'telephone' },
+  Encaisser: { disposition: 'large', fond: 'encre', fragment: 'chiffres' },
+  Organiser: { disposition: 'normale', fond: 'blanc', fragment: 'groupes' },
+  Communiquer: { disposition: 'normale', fond: 'blanc', fragment: 'bulle' },
+  Vendre: { disposition: 'normale', fond: 'blanc', fragment: 'commande' },
+  Piloter: { disposition: 'normale', fond: 'blanc', fragment: 'export' },
+} as const
+---
+<div class="bento-bloc">
+  {titre && <H class="bento-titre" id={id}>{titre}</H>}
+  <div class="bento">
+    {FAMILLES.map((f) => {
+      const d = DISPO[f.cle]
+      return (
+        <CarteFamille
+          famille={f.cle}
+          disposition={d.disposition}
+          fond={d.fond}
+          fragment={d.fragment}
+          href={`/fonctionnalites#${f.ancre}`}
+          niveau={carteNiveau}
+          nom={familles?.[f.cle]?.nom}
+          phrase={familles?.[f.cle]?.phrase}
+          langue={langue}
+          versFr={versFr}
+        />
+      )
+    })}
+  </div>
+  {lienTout && <a class="lien-fleche bento-tout" href="/fonctionnalites" hreflang={versFr ? 'fr' : undefined}>{lienTexte(n)}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+</div>
+<style>
+.bento-titre{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.05;max-width:24ch}
+@media (min-width:1000px){.bento-titre{max-width:none}}
+.bento{display:grid;gap:var(--col-gap,16px);margin-top:32px}
+.bento > :global(.carte-haute){min-height:380px}
+@media (min-width:760px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:40px}
+  .bento > :global(.carte-haute),.bento > :global(.carte-large){grid-column:1/-1}
+  .bento > :global(.carte-haute){min-height:300px}
+  .bento > :global(.carte){min-height:220px}
+}
+@media (min-width:1000px){
+  /* Des rangées d'au moins 236 px qui s'allongent si un fragment l'exige : jamais une ligne coupée (tour 2, défaut 12). */
+  .bento{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(236px,auto) minmax(236px,auto)}
+  .bento > :global(.carte-haute){grid-column:1;grid-row:1/3;min-height:0}
+  .bento > :global(.carte-large){grid-column:2/4;grid-row:1}
+  .bento > :global(.carte){min-height:0}
+}
+.bento-tout{margin-top:20px}
+</style>

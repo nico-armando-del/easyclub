@@ -1,0 +1,222 @@
+---
+/*
+  LA VITRINE DES SITES DE CLUB (« faut montrer nos exemples »), maquettes
+  §A5, §D.3 et §E. Deux clubs INVENTÉS, branchés sur OnClub : la légende le
+  dit, sans badge « Exemple », sans lien vers ces sites, sans URL dans le cadre.
+
+  <VitrineClubs />                    accueil : Volta et Montclar, titre et texte
+  <VitrineClubs variante="page" />    site-association : trois onglets, sans titre
+
+  Ce qui bouge (une fois, quand la vitrine est à l'écran) : le bouton
+  « S'inscrire » du club s'allume, puis le téléphone glisse vers le
+  formulaire d'inscription OnClub et revient au bout de 4 s. La capture longue
+  défile lentement, en pause au survol, au focus et hors de l'écran. Sous
+  mouvement réduit : la capture courte, figée, et la longue n'est pas chargée.
+  Sans JavaScript : les clubs s'affichent les uns sous les autres, immobiles.
+*/
+import CadreNavigateur from './CadreNavigateur.astro'
+import CadreTelephone from './CadreTelephone.astro'
+import MiniEcran from './MiniEcran.astro'
+import { CLUBS, CLUBS_PAGE, LEGENDE_VITRINE, type Club, type ImageClub } from '../data/clubs'
+
+interface Props {
+  titre?: string
+  phrase?: string
+  clubs?: Club[]
+  legende?: string
+  lien?: { texte: string; href: string } | null
+  variante?: 'accueil' | 'page'
+  niveau?: 'h2' | 'h3'
+  /** Les mots du cadre, pour /en et /es (français par défaut). */
+  mots?: { aria: string; site: string; credit: string; onglets: Record<string, string> }
+}
+const { variante = 'accueil', niveau = 'h2', mots } = Astro.props
+const page = variante === 'page'
+const {
+  titre = page ? undefined : 'Le site du club, branché sur OnClub',
+  phrase = page ? undefined : 'Équipes, agenda et inscriptions viennent d’OnClub. Un cours complet s’affiche complet, sans que personne ne le mette à jour.',
+  clubs = page ? CLUBS_PAGE : CLUBS,
+  /* Sur la page, la phrase « Les inscriptions restent dans OnClub » se fond dans la légende (tour 2, défaut 24). */
+  legende = page ? `${LEGENDE_VITRINE} Les inscriptions restent dans OnClub : le site les affiche.` : LEGENDE_VITRINE,
+  lien = page ? null : { texte: 'Le site de l’association, dès Pro', href: '/fonctionnalites/site-association' },
+} = Astro.props
+const Titre = niveau
+const uid = `vitrine-${variante}`
+const srcset = (i: ImageClub) => i.tailles.map((t) => `${t.src} ${t.w}w`).join(', ')
+const taillesOrdi = page ? '(min-width: 1000px) 900px, 92vw' : '(min-width: 1000px) 680px, 92vw'
+const taillesTel = page ? '(min-width: 760px) 220px, 124px' : '(min-width: 760px) 190px, 124px'
+/* Le formulaire d'inscription OnClub dans le téléphone : trois champs fictifs et le total
+   (maquettes §D.3), pour ne jamais montrer un écran à moitié vide. */
+const lignesInscription = (c: Club) => c.sport === 'football'
+  ? [
+      { nom: 'Nolan R.', detail: 'U11 · né en 2016', statut: 'Ouvert', ton: 'ok' as const },
+      { nom: 'Paiement', detail: 'En 3 fois', statut: 'Carte', ton: 'neutre' as const },
+      { nom: 'Questionnaire de santé', detail: 'Attestation signée en ligne', statut: 'Reçue', ton: 'ok' as const },
+    ]
+  : [
+      { nom: 'Léa M.', detail: 'Volley M13, mercredi', statut: '2 places', ton: 'ok' as const },
+      { nom: 'Paiement', detail: 'En 3 fois', statut: 'Carte', ton: 'neutre' as const },
+      { nom: 'Questionnaire de santé', detail: 'Attestation signée en ligne', statut: 'Reçue', ton: 'ok' as const },
+    ]
+---
+<div class:list={['vitrine', `vitrine-${variante}`]} data-vitrine data-vu data-champ>
+  {(titre || phrase) && (
+    <div class="vc-texte">
+      {titre && <Titre class="vc-titre">{titre}</Titre>}
+      {phrase && <p class="vc-phrase">{phrase}</p>}
+    </div>
+  )}
+  {clubs.length > 1 && (
+    <div class="vc-onglets" role="tablist" aria-label={mots?.aria ?? 'Sites de clubs de démonstration'} hidden>
+      {clubs.map((c, i) => (
+        <button type="button" role="tab" id={`${uid}-onglet-${c.id}`} aria-controls={`${uid}-${c.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class="vc-onglet">{mots?.onglets[c.id] ?? c.onglet}</button>
+      ))}
+    </div>
+  )}
+  <div class="vc-scene">
+    {clubs.map((c) => (
+      <div class="vc-panneau" role="tabpanel" id={`${uid}-${c.id}`} aria-labelledby={`${uid}-onglet-${c.id}`} tabindex="0">
+        <div class="vc-compo">
+          <CadreNavigateur titre={`${c.nom} · ${mots?.site ?? 'site de démonstration'}`} class="vc-ordi">
+            <div class="vc-defile">
+              {c.ordiLong ? (
+                <picture>
+                  <source media="(prefers-reduced-motion: reduce)" srcset={srcset(c.ordi)} sizes={taillesOrdi} width={c.ordi.width} height={c.ordi.height} />
+                  <img class="vc-long" src={c.ordiLong.src} srcset={srcset(c.ordiLong)} sizes={taillesOrdi} width={c.ordiLong.width} height={c.ordiLong.height} alt={c.alt} loading="lazy" decoding="async" />
+                </picture>
+              ) : (
+                <img src={c.ordi.src} srcset={srcset(c.ordi)} sizes={taillesOrdi} width={c.ordi.width} height={c.ordi.height} alt={c.alt} loading="lazy" decoding="async" />
+              )}
+              <span class="vc-cible" aria-hidden="true" style={`left:${c.cible.x}%;top:${c.cible.y}%;width:${c.cible.l}%;height:${c.cible.h}%`}></span>
+            </div>
+          </CadreNavigateur>
+          <div class="vc-tel">
+            <CadreTelephone largeur={page ? 220 : 190}>
+              <img class="vc-tel-capture" src={c.tel.src} srcset={srcset(c.tel)} sizes={taillesTel} width={c.tel.width} height={c.tel.height} alt={c.altTel} loading="lazy" decoding="async" />
+              <div class="vc-inscription" aria-hidden="true">
+                <div class="vc-mini">
+                  <MiniEcran association={c.nom} titre="Inscription · Saison 2026-2027" lignes={lignesInscription(c)} pied={{ libelle: 'Total', valeur: '3 × 65 €' }} bouton="Valider l’inscription" />
+                </div>
+              </div>
+            </CadreTelephone>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="vc-pied">
+    <p class="vc-legende">{legende} <a href="/credits-photos#clubs" hreflang={mots ? 'fr' : undefined}>{mots?.credit ?? 'Photos des clubs : Freepik'}</a></p>
+    {lien && <a class="lien-fleche vc-lien" href={lien.href}>{lien.texte} <svg aria-hidden="true"><use href="#fleche" /></svg></a>}
+  </div>
+</div>
+<script is:inline>
+(function () {
+  var reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  document.querySelectorAll('[data-vitrine]:not([data-pret])').forEach(function (v) {
+    v.setAttribute('data-pret', '')
+    var onglets = [].slice.call(v.querySelectorAll('[role=tab]'))
+    var panneaux = [].slice.call(v.querySelectorAll('[role=tabpanel]'))
+    var liste = v.querySelector('[role=tablist]')
+    var actif = 0, vu = false
+    function jouer(p) {
+      if (reduit || !vu || p.hasAttribute('data-joue')) return
+      p.setAttribute('data-joue', '')
+      p.classList.add('vc-allume')
+      setTimeout(function () {
+        p.classList.add('vc-inscrit')
+        setTimeout(function () { p.classList.remove('vc-inscrit') }, 4000)
+      }, 1300)
+    }
+    function choisir(i, focus) {
+      actif = i
+      onglets.forEach(function (o, j) {
+        var a = i === j
+        o.setAttribute('aria-selected', a ? 'true' : 'false')
+        o.tabIndex = a ? 0 : -1
+      })
+      panneaux.forEach(function (p, j) { p.hidden = i !== j })
+      if (focus) onglets[i].focus()
+      jouer(panneaux[i])
+    }
+    if (liste && panneaux.length > 1) {
+      liste.hidden = false
+      onglets.forEach(function (o, i) {
+        o.addEventListener('click', function () { choisir(i) })
+        o.addEventListener('keydown', function (e) {
+          var n = onglets.length
+          var j = e.key === 'ArrowRight' ? (i + 1) % n : e.key === 'ArrowLeft' ? (i - 1 + n) % n : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : -1
+          if (j < 0) return
+          e.preventDefault(); choisir(j, true)
+        })
+      })
+      choisir(0)
+    }
+    if (!('IntersectionObserver' in window)) { v.classList.add('vu'); return }
+    v.classList.add('hors-champ')
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        v.classList.toggle('hors-champ', !e.isIntersecting)
+        if (e.intersectionRatio >= 0.35 && !vu) { vu = true; v.classList.add('vu'); jouer(panneaux[actif]) }
+      })
+    }, { threshold: [0, 0.35] }).observe(v)
+  })
+})()
+</script>
+<style>
+.vitrine{display:grid;gap:24px;min-width:0}
+.vc-titre{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.08}
+.vc-phrase{margin-top:20px;font-size:1.0625rem;max-width:var(--lecture);text-wrap:pretty}
+.vitrine-page .vc-phrase{margin-top:0;font-weight:600}
+.vc-onglets{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:2}
+/* Des onglets, pas des boutons : contour fin, l'actif en encre sur menthe pâle (jamais un aplat encre, G5). */
+.vc-onglet{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid rgba(11,15,20,.45);border-radius:999px;background:transparent;color:var(--encre);font:600 .9375rem/1.2 var(--f-texte);cursor:pointer;white-space:nowrap}
+.vc-onglet:hover{border-color:var(--encre)}
+.vc-onglet[aria-selected=true]{background:var(--menthe-pale);border-color:var(--sapin);color:var(--encre)}
+.vc-onglet:focus-visible{outline:3px solid var(--sapin);outline-offset:2px}
+.vc-onglets[hidden]{display:none}
+.vc-scene{display:grid;gap:56px;min-width:0}
+.vc-panneau{min-width:0;outline-offset:6px}
+.vc-panneau[hidden]{display:none}
+.vc-panneau:not([hidden]){animation:vc-fondu var(--d-2,320ms) ease both}
+@keyframes vc-fondu{from{opacity:0}}
+.vc-compo{position:relative;padding-bottom:72px;--tel:124px;--k:.325}
+.vc-compo :global(.vc-ordi){width:100%}
+.vc-tel{position:absolute;right:-6px;bottom:0;width:var(--tel)}
+.vc-defile{position:absolute;inset:0;container-type:size;overflow:hidden}
+.vc-defile picture,.vc-defile img{display:block;width:100%;height:auto}
+.vc-long{animation:vc-defiler 24s var(--courbe-va-vient,cubic-bezier(.65,0,.35,1)) 1.6s infinite alternate both;animation-play-state:paused;will-change:transform}
+@keyframes vc-defiler{to{transform:translateY(calc(-100% + 100cqh))}}
+.vitrine.vu .vc-long{animation-play-state:running}
+.vitrine.hors-champ .vc-long,.vc-compo:hover .vc-long,.vc-compo:focus-within .vc-long,.vc-panneau:focus .vc-long{animation-play-state:paused}
+.vc-cible{position:absolute;border:3px solid var(--menthe);border-radius:var(--r-s,12px);box-shadow:0 0 0 2px var(--encre);opacity:0;pointer-events:none}
+.vc-allume .vc-cible{animation:vc-allume .6s ease-in-out 2}
+@keyframes vc-allume{50%{opacity:1}}
+.vc-tel-capture{transition:transform var(--d-3,600ms) var(--courbe-sortie,cubic-bezier(.16,1,.3,1))}
+.vc-inscription{position:absolute;inset:0;padding:30px 0 0;background:var(--papier);transform:translateX(100%);transition:transform var(--d-3,600ms) var(--courbe-sortie,cubic-bezier(.16,1,.3,1));overflow:hidden}
+.vc-mini{width:320px;padding:0 8px;transform-origin:0 0;transform:scale(var(--k))}
+.vc-mini :global(.me-cadre){box-shadow:none}
+/* Dans le téléphone, les lignes sont là d'emblée : l'écran glisse, il ne se remplit pas. */
+.vc-mini :global(.me-attend .me-lignes li){opacity:1;transform:none}
+.vc-inscrit .vc-tel-capture{transform:translateX(-100%)}
+.vc-inscrit .vc-inscription{transform:translateX(0)}
+.vc-pied{display:grid;gap:8px;justify-items:start}
+.vc-legende{font-size:var(--t-micro,.8125rem);color:var(--gris);max-width:var(--lecture);line-height:1.5}
+.vc-legende a{color:var(--encre);font-weight:600;white-space:nowrap;display:inline-block;padding-block:12px;margin-block:-12px}
+@media (min-width:760px){
+  .vc-compo{padding-right:13%;padding-bottom:48px;--tel:190px;--k:.531}
+  .vitrine-page .vc-compo{--tel:220px;--k:.625}
+  .vc-tel{right:0}
+}
+@media (min-width:1000px){
+  .vitrine-accueil{grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:var(--col-gap,24px);align-items:start}
+  .vitrine-accueil .vc-texte,.vitrine-accueil .vc-onglets,.vitrine-accueil .vc-pied{grid-column:1}
+  .vitrine-accueil .vc-scene{grid-column:2;grid-row:1 / span 3}
+  .vitrine-accueil .vc-onglets{flex-direction:column;align-items:flex-start}
+  .vitrine-page .vc-pied{grid-template-columns:minmax(0,1fr) auto;align-items:center}
+  /* Dans le héros de site-association : le téléphone ne chevauche que le bas du cadre de
+     navigateur, jamais les onglets ni la barre (tour 2, défauts 1, 24 et 35). */
+  .vitrine-page{gap:16px}
+  .vitrine-page .vc-onglets{flex-wrap:nowrap}
+  .vitrine-page .vc-compo{--tel:150px;--k:.41;padding-right:18%;padding-bottom:40px}
+}
+</style>

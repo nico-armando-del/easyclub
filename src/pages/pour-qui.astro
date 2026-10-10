@@ -1,12 +1,21 @@
 ---
-/* LE HUB « POUR QUI » : sports, autres activités, profils, construits à partir des collections. Aucun annuaire de clubs. */
+/*
+  LE HUB « POUR QUI » (maquettes §B.4 et §F) : sports, autres activités, profils,
+  construits à partir des collections. Aucun annuaire de clubs.
+  C'est la page qui lie TOUTES les pages sports et activités : les 10 premières en
+  cartes photo, puis (au-delà de 10) la liste complète de A à Z avec son filtre.
+  L'en-tête et le pied de page n'en montrent que 10 et renvoient ici.
+*/
 import Layout from '../layouts/Layout.astro'
-import FilAriane from '../components/FilAriane.astro'
+import HerosCompact from '../components/HerosCompact.astro'
 import CartesCollection from '../components/CartesCollection.astro'
-import BlocTemps from '../components/BlocTemps.astro'
 import Faq from '../components/Faq.astro'
-import AppelDemo from '../components/AppelDemo.astro'
-import { CINQ_TACHES } from '../data/temps'
+import CaseVide from '../components/CaseVide.astro'
+import { liste, url } from '../lib/collections'
+
+const sports = await liste('sports')
+const activites = await liste('activites')
+const profils = await liste('profils')
 
 const fil = [{ nom: 'Pour qui', url: '/pour-qui' }]
 const faq = [
@@ -22,53 +31,65 @@ const faq = [
   fil={fil}
   faq={faq}
 >
-  <div class="tete-page">
-    <div class="enveloppe">
-      <FilAriane fil={fil} />
-      <p class="surtitre">Pour qui</p>
-      <h1>Toutes les associations qui inscrivent, cotisent et se retrouvent</h1>
-      <p class="chapo">Un club de foot, une école de musique, une troupe de théâtre, un cours de langues&nbsp;: dès qu’il y a des inscriptions, des cours ou des équipes et des cotisations, le bureau passe trop de soirées sur l’administratif.</p>
-    </div>
-  </div>
+  <HerosCompact
+    fil={fil}
+    surtitre="Pour qui"
+    titre="Toutes les associations qui inscrivent et cotisent"
+    phrase="Club de foot, école de musique, troupe de théâtre : dès qu’il y a des inscriptions et des cotisations, le bureau y laisse ses soirées."
+    cta={{ texte: 'Demander une démo', href: '/demo' }}
+  />
+
   <section class="section" id="sports" aria-labelledby="t-sports">
     <div class="enveloppe">
-      <h2 id="t-sports">Sports</h2>
-      <p class="intro">Catégories tirées de la date de naissance, convocations, compo du match, licences.</p>
-      <CartesCollection collection="sports" />
+      <div class="tete-ligne">
+        <div class="section-tete">
+          <h2 id="t-sports" class="h2-idee">Sports</h2>
+          <p>Catégories tirées de la date de naissance, convocations, compo du match, licences.</p>
+        </div>
+        {sports.length > 10 && <a class="lien-fleche" href="#sports-az">Tous les sports ({sports.length}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+      </div>
+      <CartesCollection collection="sports" portrait limite={10} az={{ titre: 'Tous les sports, de A à Z', champ: 'Chercher un sport', id: 'sports-az' }} />
     </div>
   </section>
-  <section class="section fond-blanc" id="activites" aria-labelledby="t-activites">
+
+  <section class="section" id="activites" aria-labelledby="t-activites">
     <div class="enveloppe">
-      <h2 id="t-activites">Musique, danse, théâtre et autres activités</h2>
-      <p class="intro">Des cours, des niveaux, des professeurs, des salles&nbsp;: les inscriptions de la rentrée, sans fiches à recopier.</p>
-      <CartesCollection collection="activites" />
+      <div class="tete-ligne">
+        <div class="section-tete">
+          <h2 id="t-activites" class="h2-idee">Autres activités</h2>
+          <p>Des cours, des niveaux, des professeurs, des salles : les inscriptions de la rentrée, sans fiches à recopier.</p>
+        </div>
+        {activites.length > 10 && <a class="lien-fleche" href="#activites-az">Toutes les activités ({activites.length}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+      </div>
+      <CartesCollection collection="activites" portrait limite={10} az={{ titre: 'Toutes les activités, de A à Z', champ: 'Chercher une activité', id: 'activites-az' }} />
     </div>
   </section>
+
   <section class="section" id="profils" aria-labelledby="t-profils">
     <div class="enveloppe">
-      <h2 id="t-profils">Votre rôle dans l’association</h2>
-      <p class="intro">Trésorier, président, secrétaire, encadrant, parent&nbsp;: ce que chacun récupère.</p>
-      <CartesCollection collection="profils" />
-      <p class="membre">Vous êtes adhérent ou parent&nbsp;? <a href="/recommander">Transmettre à mon club</a></p>
+      <div class="section-tete">
+        <h2 id="t-profils" class="h2-idee">Votre rôle</h2>
+        <p>Ce que chaque rôle récupère, à commencer par le trésorier. Parent ou adhérent : transmettez à votre club.</p>
+      </div>
+      <ul class="pilules">
+        {profils.map((e) => <li><a href={url('profils', e.id)}><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>)}
+        <li><a class="pilule-membre" href="/recommander"><b>Adhérent ou parent ?</b><span>Transmettre à mon club</span></a></li>
+      </ul>
     </div>
   </section>
-  <section class="section fond-encre sur-encre" aria-labelledby="t-temps">
-    <div class="enveloppe">
-      <h2 id="t-temps">Quelle que soit l’activité, le même temps perdu.</h2>
-      <div class="temps-boite"><BlocTemps cles={CINQ_TACHES} sombre /></div>
-    </div>
-  </section>
-  <div class="section"><div class="enveloppe"><Faq items={faq} /><p class="liens-fin">Voir aussi&nbsp;: <a href="/fonctionnalites">les fonctionnalités</a>, <a href="/tarifs">les tarifs</a>, <a href="/ressources">les ressources</a>.</p></div></div>
-  <AppelDemo />
+
+  <div class="section"><div class="enveloppe"><Faq items={faq} disposition="deux-colonnes" /></div></div>
+  <CaseVide compact />
 </Layout>
 <style>
-.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
-.tete-page .surtitre{margin-top:20px}
-.tete-page h1{max-width:22ch}
-.fond-blanc :global(.carte-lien){background:var(--papier)}
-.membre{margin-top:28px;font-weight:600}
-.membre a{font-weight:700}
-.temps-boite{margin-top:32px}
-.liens-fin{margin-top:32px}
-.liens-fin a{font-weight:700}
+.tete-ligne{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0 24px}
+.tete-ligne .section-tete{margin-bottom:0}
+.tete-ligne .lien-fleche{margin-bottom:4px}
+.pilules{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px}
+.pilules a{display:inline-flex;flex-direction:column;justify-content:center;gap:2px;min-height:56px;padding:10px 22px;border-radius:var(--r-m);background:var(--blanc);box-shadow:var(--ombre-carte);text-decoration:none;max-width:420px;transition:box-shadow var(--d-2) var(--courbe-sortie)}
+.pilules a:hover{box-shadow:var(--ombre-carte-survol)}
+.pilules b{font:700 1.125rem/1.2 var(--f-titre)}
+.pilules span{font-size:var(--t-petit);color:var(--gris);line-height:1.4}
+.pilules .pilule-membre{background:var(--lilas-pale);box-shadow:none}
+.pilules .pilule-membre span{color:var(--encre);font-weight:600}
 </style>

@@ -1,29 +1,21 @@
 ---
 /*
-  LE HUB DES FONCTIONNALITÉS, PAR FAMILLES. Construit à partir de la
-  collection : une fonctionnalité ajoutée dans src/content/fonctionnalites/
-  apparaît ici, dans le menu, le pied de page et le plan du site.
+  LE HUB DES FONCTIONNALITÉS, PAR FAMILLES (maquettes §B.4). Construit à partir de la
+  collection : une fonctionnalité ajoutée dans src/content/fonctionnalites/ apparaît
+  ici, dans le menu, le pied de page et le plan du site.
+  Ordre : héros compact, bento des six familles (lot B), une section par famille
+  (tuiles sur 3 colonnes), la FAQ, la case vide compacte.
 */
 import Layout from '../layouts/Layout.astro'
-import FilAriane from '../components/FilAriane.astro'
+import HerosCompact from '../components/HerosCompact.astro'
 import TuileFonction from '../components/TuileFonction.astro'
-import EcranAnime from '../components/EcranAnime.astro'
-import BlocTemps from '../components/BlocTemps.astro'
 import Faq from '../components/Faq.astro'
-import AppelDemo from '../components/AppelDemo.astro'
+import CaseVide from '../components/CaseVide.astro'
+import Bento from '../components/Bento.astro'
 import { parFamille, url } from '../lib/collections'
-import { CINQ_TACHES } from '../data/temps'
 
 const familles = await parFamille()
 const total = familles.reduce((s, f) => s + f.items.length, 0)
-const ECRAN: Record<string, { nom: 'inscription' | 'relance' | 'terrain' | 'site' | 'boutique' | 'reinscription'; legende: string }> = {
-  Inscrire: { nom: 'inscription', legende: 'L’inscription vue par la famille, données fictives.' },
-  Encaisser: { nom: 'relance', legende: 'Le tableau de l’argent et la relance, données fictives.' },
-  Organiser: { nom: 'terrain', legende: 'La compo du match sur le téléphone de l’encadrant, données fictives.' },
-  Communiquer: { nom: 'site', legende: 'Le site de l’association retouché en le demandant, données fictives.' },
-  Vendre: { nom: 'boutique', legende: 'La boutique vue par la famille, données fictives.' },
-  Piloter: { nom: 'reinscription', legende: 'La saison suivante et les réinscriptions, données fictives.' },
-}
 const fil = [{ nom: 'Fonctionnalités', url: '/fonctionnalites' }]
 const faq = [
   { question: 'Faut-il prendre toutes les fonctionnalités ?', reponse: 'Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances et les pièces. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.' },
@@ -39,63 +31,46 @@ const faq = [
   fil={fil}
   faq={faq}
 >
-  <div class="tete-page">
-    <div class="enveloppe">
-      <FilAriane fil={fil} />
-      <p class="surtitre">Les fonctionnalités</p>
-      <h1>Chaque soirée perdue a sa fonctionnalité.</h1>
-      <p class="chapo">{total} fonctionnalités, rangées en six familles. Pour chacune, son nom en deux ou trois mots et ce qu’elle vous fait gagner. Cliquez pour voir l’écran et le détail.</p>
-      <nav class="sommaire" aria-label="Les six familles">
-        {familles.map((f) => <a href={`#${f.ancre}`}>{f.cle} <span>{f.items.length}</span></a>)}
-      </nav>
-    </div>
-  </div>
+  <HerosCompact
+    fil={fil}
+    surtitre="Les fonctionnalités"
+    titre="Chaque soirée perdue a sa fonctionnalité"
+    phrase={`${total} fonctionnalités en six familles, chacune avec le temps qu’elle vous rend. Estimation pour 250 adhérents, pas une étude.`}
+    cta={{ texte: 'Demander une démo', href: '/demo' }}
+    lien={{ texte: 'Voir les offres', href: '/tarifs' }}
+  />
 
-  {familles.map((f, i) => (
-    <section class:list={['section', 'famille', { 'fond-blanc': i % 2 === 1 }]} id={f.ancre} aria-labelledby={`t-${f.ancre}`}>
-      <div class="enveloppe famille-grille">
-        <div>
-          <p class="surtitre">Famille {i + 1} sur 6</p>
-          <h2 id={`t-${f.ancre}`}>{f.cle}</h2>
-          <p class="intro">{f.phrase}</p>
-          <ul class="tuiles">
-            {f.items.map((e) => (
-              <li><TuileFonction nom={e.data.nom} ligne={e.data.ligne} href={url('fonctionnalites', e.id)} offre={e.data.offre} /></li>
-            ))}
-          </ul>
+  <section class="section section-bento" aria-labelledby="t-familles">
+    <div class="enveloppe">
+      <Bento titre="Les six familles" niveau="h2" lienTout={false} id="t-familles" />
+      <p class="note">Estimation OnClub pour 250 adhérents, pas une étude. <a href="/temps-gagne">Le détail du calcul</a></p>
+    </div>
+  </section>
+
+  {familles.map((f) => (
+    <section class="section famille" id={f.ancre} aria-labelledby={`t-${f.ancre}`}>
+      <div class="enveloppe">
+        <div class="section-tete">
+          <h2 id={`t-${f.ancre}`} class="h2-idee">{f.cle}</h2>
+          <p>{f.phrase}</p>
         </div>
-        {ECRAN[f.cle] && <EcranAnime nom={ECRAN[f.cle].nom} legende={ECRAN[f.cle].legende} />}
+        <ul class="tuiles">
+          {f.items.map((e) => (
+            <li><TuileFonction nom={e.data.nom} ligne={e.data.ligne} href={url('fonctionnalites', e.id)} offre={e.data.offre} /></li>
+          ))}
+        </ul>
       </div>
     </section>
   ))}
 
-  <section class="section fond-encre sur-encre" aria-labelledby="t-temps">
-    <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Le temps</p>
-        <h2 id="t-temps">Ce que l’ensemble vous rend, chaque saison.</h2>
-      </div>
-      <div class="temps-boite"><BlocTemps cles={CINQ_TACHES} sombre /></div>
-      <p class="note"><a href="/temps-gagne">Calculer pour votre nombre d’adhérents</a> · <a href="/tarifs">Ce que chaque offre ouvre</a></p>
-    </div>
-  </section>
-
-  <div class="section"><div class="enveloppe"><Faq items={faq} /></div></div>
-  <AppelDemo />
+  <div class="section"><div class="enveloppe"><Faq items={faq} disposition="deux-colonnes" /></div></div>
+  <CaseVide compact />
 </Layout>
 
 <style>
-.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
-.tete-page .surtitre{margin-top:20px}
-.tete-page h1{max-width:18ch}
-.sommaire{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
-.sommaire a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--blanc);border:2px solid var(--encre);font-weight:700;text-decoration:none}
-.sommaire a span{font-weight:600;color:var(--gris)}
-.sommaire a:hover{background:var(--encre);color:var(--blanc)}
-.famille-grille{display:grid;gap:48px}
-@media (min-width:1040px){.famille-grille{grid-template-columns:1.25fr .75fr;gap:64px;align-items:start}}
-.tuiles{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:14px}
-@media (min-width:640px){.tuiles{grid-template-columns:1fr 1fr}}
-.fond-blanc :global(.tuile-fonction){background:var(--papier)}
-.temps-boite{margin-top:32px}
+.section-bento{padding-top:var(--e-5)}
+.famille .section-tete{margin-bottom:var(--e-6)}
+.tuiles{list-style:none;padding:0;margin:0;display:grid;gap:var(--col-gap)}
+@media (min-width:640px){.tuiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.tuiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>

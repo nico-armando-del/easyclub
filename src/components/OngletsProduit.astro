@@ -1,0 +1,118 @@
+---
+/*
+  LE PRODUIT QUI TOURNE : des onglets verticaux (horizontaux sous 760 px) et,
+  à droite, l'écran animé de l'onglet actif dans un panneau.
+
+  Motif ARIA « tabs » : flèches, Début, Fin ; activation au focus.
+  Enchaînement automatique seulement à l'écran (IntersectionObserver, 0,5) ;
+  en pause au survol, au focus dans la section et onglet du navigateur caché ;
+  arrêté pour de bon au premier clic ou à la première touche.
+  Sous mouvement réduit : pas d'enchaînement, le premier onglet.
+  Sans JS : les quatre panneaux se suivent, tous lisibles.
+*/
+import EcranAnime from './EcranAnime.astro'
+import VersFr from './langue/VersFr.astro'
+
+type NomEcran = 'inscription' | 'reinscription' | 'relance' | 'site' | 'boutique' | 'terrain' | 'cluby'
+interface Onglet { id: string; libelle: string; phrase: string; lien: { texte: string; href: string }; ecran: NomEcran; duree?: number }
+interface Props {
+  titre: string
+  onglets: Onglet[]
+  legende?: string
+  fond?: 'encre' | 'papier'
+  id?: string
+  versFr?: string
+  /** Slot nommé « ecran-<id> » : un écran de remplacement (pages traduites). */
+}
+const { titre, onglets, legende, fond = 'encre', id = 'onglets', versFr } = Astro.props
+const slots = Object.fromEntries(await Promise.all(onglets.map(async (o) => [o.id, Astro.slots.has(`ecran-${o.id}`) ? await Astro.slots.render(`ecran-${o.id}`) : null])))
+---
+<div class:list={['onglets', `onglets-${fond}`]} data-onglets id={id}>
+  <h2 class="onglets-titre" id={`${id}-titre`}>{titre}</h2>
+  <div class="onglets-liste" role="tablist" aria-labelledby={`${id}-titre`} aria-orientation="vertical">
+    {onglets.map((o, i) => (
+      <button type="button" role="tab" class="onglet" id={`${id}-tab-${o.id}`} aria-controls={`${id}-pan-${o.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} style={`--duree:${o.duree ?? 7000}ms`}>
+        <span class="onglet-libelle">{o.libelle}</span>
+        <i class="onglet-piste" aria-hidden="true"><i></i></i>
+      </button>
+    ))}
+  </div>
+  <div class="onglets-panneaux">
+    {onglets.map((o, i) => (
+      <div role="tabpanel" class:list={['panneau-onglet', { actif: i === 0 }]} id={`${id}-pan-${o.id}`} aria-labelledby={`${id}-tab-${o.id}`}>
+        <div class="panneau-ecran">
+          {slots[o.id] ? <Fragment set:html={slots[o.id]} /> : <EcranAnime nom={o.ecran} sombre={fond === 'encre'} />}
+        </div>
+        <p class="panneau-phrase">{o.phrase} <a class="lien-fleche" href={o.lien.href} hreflang={versFr ? 'fr' : undefined}>{o.lien.texte}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a></p>
+      </div>
+    ))}
+    {legende && <p class="onglets-legende">{legende}</p>}
+  </div>
+</div>
+<script is:inline>
+(function(){document.querySelectorAll('[data-onglets]:not([data-pret])').forEach(function(r){r.setAttribute('data-pret','');var tabs=[].slice.call(r.querySelectorAll('[role=tab]')),pans=[].slice.call(r.querySelectorAll('[role=tabpanel]')),liste=r.querySelector('[role=tablist]'),mm=window.matchMedia,reduit=mm&&mm('(prefers-reduced-motion: reduce)').matches,auto=!reduit,vu=false,i=0;
+function ori(){var v=mm&&mm('(min-width: 760px)').matches;liste.setAttribute('aria-orientation',v?'vertical':'horizontal');return v}
+function montre(k,focus){i=k;tabs.forEach(function(t,j){var a=j===k;t.setAttribute('aria-selected',a);t.tabIndex=a?0:-1;t.classList.remove('court')});pans.forEach(function(p,j){var a=j===k;p.hidden=!a;p.classList.toggle('actif',a)});if(focus)tabs[k].focus();if(auto&&vu){void tabs[k].offsetWidth;tabs[k].classList.add('court')}}
+function arret(){if(!auto)return;auto=false;r.classList.add('arrete');tabs.forEach(function(t){t.classList.remove('court')})}
+pans.forEach(function(p,j){p.hidden=j!==0});ori();if(mm)mm('(min-width: 760px)').addEventListener('change',ori);
+tabs.forEach(function(t,j){t.addEventListener('click',function(){arret();montre(j)});t.addEventListener('animationend',function(e){if(auto&&e.target.parentNode&&e.target.parentNode.parentNode===t)montre((j+1)%tabs.length)});t.addEventListener('keydown',function(e){var k=e.key,n=tabs.length,v=liste.getAttribute('aria-orientation')==='vertical',d=null;if(k===(v?'ArrowDown':'ArrowRight'))d=(j+1)%n;else if(k===(v?'ArrowUp':'ArrowLeft'))d=(j-1+n)%n;else if(k==='Home')d=0;else if(k==='End')d=n-1;if(d===null)return;e.preventDefault();arret();montre(d,true)})});
+if(!auto){r.classList.add('arrete');return}
+function pause(p){r.classList.toggle('en-pause',p)}
+r.addEventListener('mouseenter',function(){pause(true)});r.addEventListener('mouseleave',function(){pause(r.contains(document.activeElement))});r.addEventListener('focusin',function(){pause(true)});r.addEventListener('focusout',function(e){if(!r.contains(e.relatedTarget))pause(false)});
+document.addEventListener('visibilitychange',function(){r.classList.toggle('cache',document.hidden)});
+if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){var x=e[0].isIntersecting;r.classList.toggle('hors-vue',!x);if(x&&!vu){vu=true;montre(i)}},{threshold:.5});o.observe(r)}else arret()})})()
+</script>
+<style>
+.onglets{display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
+.onglets-titre{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.05;max-width:14ch}
+.onglets-encre{color:var(--blanc);background:var(--scene,#0B0F14);border-radius:var(--r-panneau,24px);padding:32px 16px 24px}
+@media (min-width:760px){.onglets-encre{padding:48px 48px 32px}}
+.onglets-liste{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;order:3}
+.onglet{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:8px;min-height:52px;padding:8px 0;border:0;background:none;color:var(--texte-scene-doux,#AEB4BE);font:700 1rem/1.2 var(--f-titre);text-align:left;cursor:pointer}
+.onglets-papier .onglet{color:var(--gris)}
+.onglet[aria-selected=true]{color:var(--blanc)}
+.onglets-papier .onglet[aria-selected=true]{color:var(--encre)}
+.onglet:hover .onglet-libelle{text-decoration:underline;text-underline-offset:3px}
+.onglet-piste{display:block;height:2px;background:var(--trait-scene,rgba(255,255,255,.1));overflow:hidden}
+.onglets-papier .onglet-piste{background:var(--trait)}
+.onglet-piste>i{display:block;height:100%;background:var(--menthe);transform-origin:left;transform:scaleX(0)}
+.onglet[aria-selected=true] .onglet-piste>i{transform:none}
+.onglet:focus-visible{outline:3px solid var(--menthe);outline-offset:2px;border-radius:4px}
+.onglets-panneaux{order:2;min-width:0}
+.panneau-onglet{border-radius:var(--r-panneau,24px);background:var(--scene-2,#121821);background-image:var(--lueur-haut,radial-gradient(60% 45% at 50% -10%,rgba(93,232,143,.22) 0%,rgba(93,232,143,0) 70%));padding:20px 16px;display:grid;gap:16px}
+.onglets-papier .panneau-onglet{background:var(--blanc)}
+.panneau-onglet:focus-visible{outline:3px solid var(--menthe);outline-offset:3px}
+.panneau-ecran{display:grid;place-items:center;min-height:0}
+.panneau-ecran :global(.ecran-anime){width:100%;max-width:720px}
+.panneau-phrase{font-size:1.0625rem;color:var(--texte-scene,#D7DBE1);display:flex;flex-wrap:wrap;align-items:center;gap:0 14px;padding-inline:4px}
+.onglets-papier .panneau-phrase{color:var(--encre)}
+.panneau-phrase .lien-fleche{color:var(--menthe)}
+.onglets-papier .panneau-phrase .lien-fleche{color:var(--sapin)}
+.onglets-legende{margin-top:12px;font-size:var(--t-micro,.8125rem);color:var(--texte-scene-doux,#AEB4BE)}
+.onglets-papier .onglets-legende{color:var(--gris)}
+/* Avec JS : seul le panneau actif, dès le premier rendu (pas de saut). Sans JS : les quatre se suivent. */
+:global(.js) .panneau-onglet:not(.actif){display:none}
+html:not(:global(.js)) .panneau-onglet + .panneau-onglet{margin-top:16px}
+@media (min-width:760px){
+  .onglets{grid-template-columns:minmax(0,4fr) minmax(0,8fr);grid-template-rows:auto 1fr;column-gap:var(--e-7,48px);row-gap:32px;align-items:start}
+  .onglets-titre{grid-column:1;grid-row:1}
+  .onglets-liste{grid-column:1;grid-row:2;grid-template-columns:1fr;gap:4px;order:0;align-self:start}
+  .onglets-panneaux{grid-column:2;grid-row:1/3;order:0}
+  .onglet{flex-direction:row;align-items:center;justify-content:flex-start;min-height:64px;padding:12px 0 12px 22px;font-size:1.375rem}
+  .onglet-piste{position:absolute;left:0;top:0;bottom:0;width:2px;height:auto}
+  .onglet-piste>i{transform-origin:top;transform:scaleY(0)}
+  .onglet[aria-selected=true] .onglet-piste>i{transform:none}
+  .panneau-onglet{padding:24px 24px 16px;align-content:center}
+  .panneau-ecran{zoom:.72}
+}
+@media (prefers-reduced-motion: no-preference){
+  .panneau-onglet.actif{animation:po-entre var(--d-2,320ms) var(--courbe-sortie,ease) both}
+  .onglet.court .onglet-piste>i{animation:po-remplit var(--duree) linear both}
+  @media (min-width:760px){.onglet.court .onglet-piste>i{animation-name:po-remplit-v}}
+  .onglets:is(.en-pause,.cache,.hors-vue) .onglet.court .onglet-piste>i{animation-play-state:paused}
+}
+.onglets.arrete .onglet[aria-selected=true] .onglet-piste>i{animation:none;transform:none}
+@keyframes po-entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes po-remplit{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes po-remplit-v{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+</style>

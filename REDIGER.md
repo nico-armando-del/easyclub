@@ -12,6 +12,8 @@ npm run dev            # http://localhost:4321, rechargement à chaque sauvegard
 npm run build          # build + contrôle SEO + ressemblance : DOIT finir sans défaut
 ```
 
+Quand plusieurs personnes ou agents travaillent en même temps dans le dépôt, ne lancez pas `npm run build` (il écrit `dist/`, partagé) : construisez dans votre propre dossier, `npx astro build --outDir <votre-dossier>`, puis `python3 scripts/controle_seo.py <votre-dossier>` et `python3 scripts/ressemblance.py <votre-dossier>`.
+
 `npm run build` échoue au premier défaut (titre trop long, lien cassé, FAQ différente de son JSON-LD, mot interdit, page trop ressemblante…). Lisez le message, corrigez, relancez. Pour voir une page contre toutes les autres : `python3 scripts/ressemblance.py dist sport/judo`.
 
 ## 2. Les adresses
@@ -40,9 +42,9 @@ Tous les champs sont vérifiés au build (schéma Zod, `src/content.config.ts`).
 ```yaml
 titreSeo: "Le besoin d'abord, 30 à 65 caractères | OnClub"
 description: "110 à 160 caractères. Ce que la page apporte, la recherche à laquelle elle répond, sans ellipse finale."
-titre: "Le h1 de la page (8 à 90 caractères)"
-chapo: "Une ou deux phrases sous le h1 (40 à 320 caractères) : le problème, puis ce qui change."
-temps:                       # OBLIGATOIRE : le bloc « temps gagné » en tête de page
+titre: "Le h1 : 60 caractères au plus, 2 lignes à l'écran, la réponse au besoin"
+chapo: "25 mots au plus (pages produit), 30 (guides, articles) : une scène, puis ce qui change."
+temps:                       # OBLIGATOIRE : la ligne du temps gagné, sous le héros
   cles: [fiches, relances]   # des clés de src/data/temps.ts (1 à 5)…
   titre: "Titre du bloc (facultatif)"
 # … ou, quand aucun chiffre n'existe pour ce sujet :
@@ -68,7 +70,9 @@ articles: [soirees-du-tresorier]
 brouillon: false             # true : la page n'est pas construite
 ```
 
-Les clés de `temps.cles` : `fiches` (25 h → 0 h), `paiements` (12 h 30 → 1 h), `relances` (10 h → 40 min), `pieces` (6 h 40 → 1 h 30), `rentree` (12 h → 2 h), `messages`, `attente`, `site`, `boutique`, `evenements`. Le chiffre, le calcul et l'hypothèse s'affichent ensemble : **vous ne tapez jamais un chiffre de temps**.
+`titreSeo` et `description` portent la longue traîne : quand on raccourcit le h1 ou le chapô, on ne les touche pas.
+
+Les clés de `temps.cles` : `fiches` (25 h → 0 h), `paiements` (12 h 30 → 1 h), `relances` (10 h → 40 min), `pieces` (6 h 40 → 1 h 30), `rentree` (12 h → 2 h), `messages`, `attente`, `site`, `boutique`, `evenements`. Une clé donne la ligne forte (« 25 h → 0 h de saisie par saison »), plusieurs clés des pastilles ; dessous, « Estimation pour 250 adhérents, pas une étude. » et le repli « Le calcul ». **Vous ne tapez jamais un chiffre de temps**, ni dans le texte, ni dans un titre.
 
 ### Fonctionnalité (`fonctionnalites/`)
 
@@ -92,6 +96,8 @@ ordre: 1
 # + les champs communs
 ```
 
+**Ordre des sports** dans les menus (champ `ordre`) : football 1, tennis 2, basket 3, handball 4, judo 5, rugby 6, natation 7, gymnastique 8, volley 9, badminton 10. Les autres sports gardent la valeur par défaut (50) et passent après. Aujourd'hui, seul `football.mdx` existe.
+
 ### Comparatif (`comparatifs/`)
 
 ```yaml
@@ -108,18 +114,41 @@ ligne: "Qui y a droit, comment le déduire"   # 12 à 120 caractères
 publie: 2026-10-09
 lecture: 5                      # minutes de lecture affichées
 rubrique: "Cotisations"         # ARTICLES SEULEMENT, 3 à 30 caractères
+aRetenir:                       # facultatif : l'encadré « À retenir » en tête, 3 à 5 phrases de 20 à 140 caractères
+  - "Un fait du texte, 20 mots au plus, aucun fait nouveau."
+couverture:                     # facultatif : la couverture typographique
+  donnee: "50 €"                # 12 caractères au plus, TIRÉ DU TEXTE
+  sous: "par enfant éligible"   # facultatif, 60 caractères au plus
+  # apres: "5 h"                # variante compteur (donnee « 66 h », apres « 5 h ») : valeurs de TOTAL dans src/data/temps.ts
+une: false                      # true : à la une de /ressources (une seule entrée ; sinon la plus récente)
 # + les champs communs
 ```
 
+Un « En bref » ou « … en trois phrases » dans le texte DEVIENT `aRetenir` et sort du MDX : on ne double pas.
+
 ## 4. L'ordre d'une page (imposé par le gabarit)
 
-Fil d'Ariane → h1 + chapô → **bloc temps** (champ `temps`) → écran animé (champ `ecran`) → votre texte → sources → FAQ → Voir aussi → **appel démo**. Le bloc temps en tête et l'appel démo en fin sont automatiques : ne les réécrivez pas.
+**Pages produit** (fonctionnalité, sport, activité, profil, comparatif ; `GabaritProduit.astro`) : héros (fil d'Ariane, surtitre, h1, chapô, « Dès {offre} », UN bouton « Demander une démo ») avec l'écran animé (champ `ecran`) ou la photo du sport → **ligne du temps** (champ `temps`) → votre texte → sources → FAQ → « Pour aller plus loin » (une rangée de liens) → la case vide « Votre association ». Le héros, la ligne du temps et la fin sont automatiques : ne les réécrivez pas. Sur une page sport, la frise de la saison se tire des h2 (mots repérés : « mai », « inscription », « cotisation », « licence », « convocation » ou « match », « vacances » ou « maillot ») : gardez-les dans vos h2.
+
+**Guides et articles** (`GabaritEditorial.astro`) : en-tête sans bouton ni tableau du temps, couverture, « À retenir » (champ `aRetenir`), sommaire collant tiré des h2, carte OnClub dans la marge, votre texte, sources, FAQ, articles liés.
 
 ## 5. Les composants dans le texte
 
 Utilisables directement dans le `.mdx`, sans `import` :
 
 ```mdx
+<Repli>
+La suite d'une section dont la première phrase suffit (titre par défaut : « Le détail »).
+</Repli>
+<Repli titre="Le calcul">…</Repli>
+
+<Idee visuel="droite">
+Le texte de la section.
+<Fragment slot="ecran"><MiniEcran … /></Fragment>
+</Idee>
+
+<Cadre type="fenetre" fond="menthe" legende="Noms et montants fictifs."><EcranAnime nom="relance" /></Cadre>
+
 <BlocTemps cles={['fiches', 'pieces']} titre="Le temps rendu s'additionne" />
 <BlocTemps geste="Le parent répond présent depuis le mail, sans compte." />
 
@@ -134,11 +163,22 @@ Une pièce manquante n'empêche ni l'inscription ni le paiement.
 <Calculateur />
 ```
 
-Écrans animés disponibles (repris de /presentation, données fictives, étiquette « Exemple ») : `inscription`, `reinscription`, `relance`, `site`, `boutique`, `terrain`, `cluby`. **Chaque page de fonctionnalité, de sport, d'activité et de profil montre au moins un écran** (champ `ecran` ou `<EcranAnime>`).
+- `Repli` : un `<details>` ouvrable, jamais du texte caché. Laissez une ligne vide après la balise ouvrante et avant la fermante, sinon les listes ne se forment pas.
+- `BlocTemps` dans le texte : toujours dans un `<Repli>`, jamais avant le premier h2 (la ligne du temps du héros suffit).
+- `Idee` : une section d'une idée avec son visuel, à droite (`visuel="droite"`) ou dessous. Le visuel se pose dans `<Fragment slot="ecran">` : jamais `slot="visuel"`, qui écraserait la prop du même nom.
+- `Cadre` : l'écran en grand, `type` fenetre, telephone ou panneau ; `fond` menthe, lilas, encre ou papier ; une seule ligne de légende sous le cadre.
+- `MiniEcran` : `association="Votre club"`, « Votre école », « Votre compagnie »… jamais un nom réel, jamais le mot « exemple ». La légende dit ce qu'on voit, puis « Noms et montants fictifs. ».
+
+Écrans animés disponibles (repris de /presentation, données fictives, sans étiquette) : `inscription`, `reinscription`, `relance`, `site`, `boutique`, `terrain`, `cluby`. **Chaque page de fonctionnalité, de sport, d'activité et de profil montre au moins un écran** (champ `ecran` ou `<EcranAnime>`).
 
 ## 6. Longueur et forme
 
-- Fonctionnalité : 500 à 900 mots. Sport, activité, profil : 900 à 1 500. Guide, article, comparatif : 1 000 à 2 000.
+- **h1** : 60 caractères au plus (2 lignes à 1280 px). **Chapô** : 25 mots au plus sur une page produit, 30 sur un guide ou un article.
+- **Paragraphes** : 4 lignes au plus (environ 45 mots). Au-delà : une phrase visible, le reste en liste ou dans un `<Repli>`.
+- **Intertitres** : ils disent la réponse, pas le sujet (« Ce que le bureau ne fait plus » devient « Plus de catégorie ni de réduction à calculer »), en gardant les mots-clés SEO déjà présents.
+- **Listes** dès 3 éléments ; chaque puce commence par le mot fort en gras.
+- **Ce qui se replie** (`<Repli>`) : la suite d'une section (« Le détail »), le calcul, les cas particuliers. **Ce qui reste visible** : la première phrase de chaque section, ce qu'OnClub ne fait pas (Footclubs, billetterie…), les sources, les montants et dates d'un guide, le tableau d'un comparatif et les arguments pour l'autre option.
+- Le texte replié compte pour le SEO : rien ne se supprime sans raison, rien ne se cache (pas de `display:none`, pas d'opacité nulle).
 - Des h2 qui reprennent les vraies recherches (« Inscription club de foot en ligne », « Comment relancer une cotisation impayée »). Jamais de h1 dans le texte : le h1 vient de `titre`.
 - Paragraphes courts, listes quand il y a des étapes, une idée par paragraphe.
 - **Au moins 5 liens internes** dans la page (les liens croisés du frontmatter en fournissent déjà ; ajoutez des liens dans le texte vers des pages qui existent).
@@ -153,7 +193,7 @@ Une pièce manquante n'empêche ni l'inscription ni le paiement.
 
 **Les offres** : Mini 2,90 %, Pro 4,90 %, Pro Max IA 6,90 % (+ 2 % sur la boutique) des cotisations encaissées en ligne. Rien de fixe, rien sur les chèques et les espèces. Cluby : pas dans Mini, Pro 100 questions par mois, Pro Max IA sans limite. Boutique et événements : Pro Max IA. Site, liste d'attente, campagnes, saisons : Pro. Les frais de carte sont **à la charge de l'association** (souvent couverts par des frais de dossier inclus dans le prix, pour toutes les familles).
 
-**Mots et promesses interdits** (le build échoue) : « logiciel », « frais bancaires inclus », « relances automatiques », « prélèvement automatique », « Trouver un club » ; le nom d'une association réelle (Torcy ou autre). Interdits aussi : faux témoignage, faux avis, faux client, faux chiffre, enfant identifiable, annuaire de clubs, dénigrement d'un concurrent, « paiement en 10 fois » en accroche. On dit « relancer d'un bouton ».
+**Mots et promesses interdits** (le build échoue) : « logiciel », « frais bancaires inclus », « relances automatiques », « prélèvement automatique », « Trouver un club » ; un badge ou un nom d'association « … exemple » ; le nom d'une association réelle (Torcy ou autre). Interdits aussi : faux témoignage, faux avis, faux client, faux chiffre, enfant identifiable, annuaire de clubs, dénigrement d'un concurrent, « paiement en 10 fois » en accroche. On dit « relancer d'un bouton ».
 
 **Vérifier avant d'écrire.** Une fonctionnalité s'appuie sur `ancien/site/fonctionnalites.html` (faits vérifiés) ou sur le code du produit (`/Users/bertone/Dev/onclub`, en lecture seule). Ce qui n'est pas vérifié ne s'écrit pas. Pour une activité hors sport : le produit connaît, pour chaque cours, la discipline, le niveau, les professeurs, la salle, les créneaux, les places, le tarif, l'essai et les événements ponctuels (stage, gala) — `lib/catalogue/schema.ts`. Le vocabulaire affiché est « Cours / Équipe » (`lib/mots.ts`).
 
@@ -167,7 +207,7 @@ Une pièce manquante n'empêche ni l'inscription ni le paiement.
 
 - `src/data/site.ts` : taux, offres, contacts, familles, frais de carte, INJEP. `src/data/temps.ts` : les seuls chiffres de temps et le calcul.
 - `src/lib/collections.ts` (adresses, menu, Voir aussi), `src/lib/plan.ts` (sitemap, llms.txt).
-- `src/components/` : Layout (dans `src/layouts/`), EnTete, PiedDePage, AnimationEntree, BlocTemps, EcranAnime, TuileFonction, Calculateur, Offres, Faq, FilAriane, VoirAussi, AppelDemo, BoutonDemoFixe, Consentement, Encadre, PageCollection, PageLegale, CartesCollection, Sprite.
+- `src/components/` : Layout (dans `src/layouts/`), GabaritProduit, GabaritEditorial, LigneTemps, Repli, Idee, Cadre, CaseVide, VitrineClubs, FriseSaison, EnTete, PiedDePage, BlocTemps, EcranAnime, TuileFonction, Calculateur, Offres, Faq, FilAriane, VoirAussi, AppelDemo, BoutonDemoFixe, Consentement, Encadre, PageCollection, PageLegale, CartesCollection, Sprite.
 - **Consentement et ville** : le bandeau (Consentement.astro + `public/js/site.js`) propose Accepter / Refuser à égalité, refus par défaut, choix gardé 180 jours dans le cookie `onclub_consentement`, modifiable par « Cookies et localisation » en pied de page. Seulement après « Accepter », le navigateur appelle `/api/ville` : la fonction Vercel `api/ville.js` (à la racine du dépôt, déployée à côté de `dist/` sans adaptateur) lit `x-vercel-ip-city` et renvoie la ville, sans rien journaliser ni stocker. La ville personnalise trois choses : la phrase `data-ville-phrase` de l'accueil, le champ `data-ville-champ` de /demo, le message de /recommander.
 - `astro.config.mjs` : sortie statique, `build.format: 'file'`, espaces insécables posées après le build. `vercel.json` : `cleanUrls`, `trailingSlash: false`, redirections www, `/blog/cotisation-en-plusieurs-fois` → `/articles/…` (308).
 - `public/presentation.html`, `public/en.html`, `public/es.html` : anciens fichiers gardés tels quels.

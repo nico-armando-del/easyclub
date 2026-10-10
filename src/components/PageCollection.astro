@@ -1,115 +1,20 @@
 ---
 /*
-  LE GABARIT COMMUN DES PAGES DE COLLECTION (fonctionnalité, sport, activité,
-  profil, comparatif, guide, article). Ordre imposé :
-    fil d'Ariane → h1 + chapô → BLOC TEMPS → écran animé (si `ecran`) →
-    texte MDX → FAQ (si `faq`) → Voir aussi → APPEL DÉMO.
+  L'AIGUILLAGE DES PAGES DE COLLECTION (maquettes §C.2) :
+    guides, articles            → GabaritEditorial (lot D) ;
+    fonctionnalités, sports,
+    activités, profils,
+    comparatifs                 → GabaritProduit.
+  Les routes peuvent importer directement le gabarit qui leur revient ; cet
+  aiguillage reste pour la compatibilité (même props : collection, entree).
 */
-import { render } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
-import FilAriane from './FilAriane.astro'
-import BlocTemps from './BlocTemps.astro'
-import EcranAnime from './EcranAnime.astro'
-import Faq from './Faq.astro'
-import VoirAussi from './VoirAussi.astro'
-import AppelDemo from './AppelDemo.astro'
-import Encadre from './Encadre.astro'
-import TuileFonction from './TuileFonction.astro'
-import Calculateur from './Calculateur.astro'
-import MiniEcran from './MiniEcran.astro'
-import Photo from './Photo.astro'
-import { photoDe } from '../data/photos'
-import { HUB, ETIQUETTE, url, type NomCollection } from '../lib/collections'
-import { NOM_OFFRE } from '../data/site'
+import GabaritProduit from './GabaritProduit.astro'
+import GabaritEditorial from './GabaritEditorial.astro'
+import type { NomCollection } from '../lib/collections'
 
 interface Props { collection: NomCollection; entree: any }
 const { collection, entree } = Astro.props
-const d = entree.data
-const { Content } = await render(entree)
-const chemin = url(collection, entree.id)
-const fil = [HUB[collection], { nom: d.nom, url: chemin }]
-const editorial = collection === 'guides' || collection === 'articles'
-/*
-  RÈGLE « PAS DE PAGE DE TEXTE SEUL » : une fonctionnalité, un sport, une
-  activité ou un profil montre au moins un écran d'exemple. Sans champ `ecran`,
-  une fonctionnalité prend l'écran de sa famille ; les autres doivent déclarer
-  `ecran` ou poser <EcranAnime> ou <MiniEcran> dans le texte, sinon le build s'arrête.
-*/
-const ECRAN_FAMILLE: Record<string, string> = { Inscrire: 'inscription', Encaisser: 'relance', Organiser: 'terrain', Communiquer: 'site', Vendre: 'boutique', Piloter: 'relance' }
-const ecran = d.ecran ?? (collection === 'fonctionnalites' ? ECRAN_FAMILLE[d.famille] : undefined)
-if (['fonctionnalites', 'sports', 'activites', 'profils'].includes(collection) && !ecran && !/<(EcranAnime|MiniEcran)\b/.test(entree.body ?? '')) {
-  throw new Error(`${collection}/${entree.id} : ajoutez un écran d’exemple (champ « ecran », <EcranAnime> ou <MiniEcran> dans le texte). Voir REDIGER.md.`)
-}
-/* Sport ou activité : une vraie photo en tête de page quand il y en a une (src/data/photos.ts). */
-const photo = (collection === 'sports' || collection === 'activites') && photoDe(entree.id) ? entree.id : undefined
-const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
 ---
-<Layout
-  titre={d.titreSeo}
-  description={d.description}
-  chemin={chemin}
-  fil={fil}
-  faq={d.faq}
-  article={editorial ? { titre: d.titre, publie: d.publie, maj: d.maj } : undefined}
->
-  <div class:list={['tete-page', photo && 'avec-photo']}>
-    <div class:list={['enveloppe', photo && 'tete-grille']}>
-      <div class="tete-texte">
-        <FilAriane fil={fil} />
-        <p class="surtitre">
-          {collection === 'fonctionnalites' ? `${d.famille} · ${ETIQUETTE[collection]}` : collection === 'articles' ? d.rubrique : ETIQUETTE[collection]}
-        </p>
-        <h1>{d.titre}</h1>
-        <p class="chapo">{d.chapo}</p>
-        {collection === 'fonctionnalites' && (
-          <p class="tete-meta"><span class="pastille-offre">Dès {NOM_OFFRE[d.offre as 'mini' | 'pro' | 'max']}</span> <a href="/tarifs">Voir les offres</a></p>
-        )}
-        {editorial && (
-          <p class="tete-meta">Publié le <time datetime={d.publie.toISOString().slice(0, 10)}>{date(d.publie)}</time>{d.maj > d.publie && <>, mis à jour le <time datetime={d.maj.toISOString().slice(0, 10)}>{date(d.maj)}</time></>} · {d.lecture} min de lecture · L’équipe OnClub</p>
-        )}
-        <div class="actions">
-          <a class="btn btn-encre" href="/demo">Demander une démo</a>
-          <a class="btn btn-contour" href="/temps-gagne">Calculer mon temps gagné</a>
-        </div>
-      </div>
-      {photo && <div class="tete-photo"><Photo nom={photo} tete tailles="(min-width: 900px) 44vw, 100vw" /></div>}
-    </div>
-  </div>
-
-  <div class="enveloppe corps-page">
-    <div class="corps-temps">
-      {'cles' in d.temps ? <BlocTemps cles={d.temps.cles} titre={d.temps.titre} /> : <BlocTemps geste={d.temps.geste} titre={d.temps.titre} />}
-    </div>
-    {ecran && <div class="corps-ecran"><EcranAnime nom={ecran} /></div>}
-    <article class="prose" data-contenu>
-      <Content components={{ BlocTemps, EcranAnime, Encadre, TuileFonction, Calculateur, MiniEcran }} />
-    </article>
-    {d.sources?.length > 0 && (
-      <aside class="sources" aria-labelledby="sources-titre">
-        <h2 id="sources-titre">Sources</h2>
-        <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank">{s.titre}</a>, consulté le {date(new Date(s.consulte))}</li>)}</ul>
-      </aside>
-    )}
-    {d.faq?.length > 0 && <Faq items={d.faq} />}
-    <VoirAussi collection={collection} id={entree.id} />
-  </div>
-  <AppelDemo />
-</Layout>
-
-<style>
-.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .75)}
-.tete-page .surtitre{margin-top:20px}
-.tete-page h1{max-width:20ch}
-.avec-photo{padding-bottom:calc(var(--section) * 1.25)}
-.tete-grille{display:grid;gap:32px}
-@media (min-width:900px){.tete-grille{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:end;gap:56px}}
-.tete-meta{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:.9375rem}
-.tete-meta a{font-weight:700}
-.corps-page{display:grid;gap:clamp(48px,6vw,72px);padding-block:var(--section)}
-.corps-temps{margin-top:calc(var(--section) * -1.1);max-width:960px}
-.corps-ecran{max-width:960px}
-.sources h2{font-size:1.5rem}
-.sources ul{margin-top:12px;padding-left:1.2em;font-size:.9375rem;color:var(--gris)}
-.sources li+li{margin-top:6px}
-.sources a{font-weight:600;color:var(--encre)}
-</style>
+{collection === 'guides' || collection === 'articles'
+  ? <GabaritEditorial collection={collection} entree={entree} />
+  : <GabaritProduit collection={collection} entree={entree} />}

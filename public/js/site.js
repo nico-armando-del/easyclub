@@ -68,12 +68,19 @@
   })
   var choix = lire()
   if (choix !== 'accepte' && choix !== 'refuse') {
-    // Sur l'accueil, le bandeau attend la fin de l'animation d'entrée (ou le premier défilement) pour ne pas la cacher.
-    if (document.querySelector('[data-scene]')) {
-      var ouvert = false
-      var une = function () { if (ouvert) return; ouvert = true; window.removeEventListener('scroll', une); ouvrir() }
-      setTimeout(une, 5600)
-      window.addEventListener('scroll', une, { passive: true })
+    // Sur l'accueil, le bandeau ne couvre jamais la scène : il s'ouvre quand la scène a quitté
+    // l'écran, ou au bout de 5,6 s si le visiteur n'a pas encore défilé.
+    var scene = document.querySelector('[data-scene]')
+    if (scene) {
+      var ouvert = false, defile = false
+      var une = function () { if (ouvert) return; ouvert = true; ouvrir() }
+      window.addEventListener('scroll', function () { defile = true }, { passive: true, once: true })
+      setTimeout(function () { if (!defile) une() }, 5600)
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es, o) {
+          es.forEach(function (e) { if (!e.isIntersecting && defile) { o.disconnect(); une() } })
+        }).observe(scene)
+      } else window.addEventListener('scroll', une, { passive: true, once: true })
     } else ouvrir()
   }
 

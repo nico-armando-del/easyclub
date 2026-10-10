@@ -1,0 +1,54 @@
+---
+/*
+  LES BARRES D'ÉTAPES (maquettes §C.1) : /demo, et les barres de la scène de l'accueil.
+  Une barre par étape, son nom visible dessous. Les classes .fait et .en-cours se
+  posent au rendu à partir de `actuelle` (1 = première) ; un script peut les déplacer
+  (public/js/demo.js le fait avec data-pas). Les autres attributs passent à la liste
+  (ex. data-etapes-fil pour /demo).
+*/
+interface Props {
+  etapes: string[]
+  actuelle: number
+  cliquable?: boolean
+  libelle?: string
+  sombre?: boolean
+  [attr: string]: unknown
+}
+const { etapes, actuelle, cliquable = false, libelle = 'Les étapes', sombre = false, ...reste } = Astro.props
+---
+<ol class:list={['progression', { sombre, cliquable }]} aria-label={libelle} {...reste}>
+  {etapes.map((e, i) => {
+    const n = i + 1
+    const etat = n < actuelle ? 'fait' : n === actuelle ? 'en-cours' : undefined
+    return (
+      <li data-pas={n} class={etat} aria-current={n === actuelle ? 'step' : undefined}>
+        {cliquable
+          ? <button type="button" class="pe-bouton" data-pas-cible={n}><span class="pe-barre" aria-hidden="true"></span><span class="pe-nom">{e}</span></button>
+          : <><span class="pe-barre" aria-hidden="true"></span><span class="pe-nom">{e}</span></>}
+      </li>
+    )
+  })}
+</ol>
+<style>
+.progression{list-style:none;padding:0;margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px}
+.progression li{min-width:0}
+.pe-barre{display:block;height:4px;border-radius:999px;background:var(--trait);transition:background-color var(--d-2) var(--courbe-sortie)}
+.progression li.fait .pe-barre{background:var(--sapin)}
+.progression li.en-cours .pe-barre{background:var(--encre)}
+.pe-nom{display:block;margin-top:8px;font:600 .75rem/1.25 var(--f-texte);color:var(--gris);overflow-wrap:normal;hyphens:manual}
+@media (min-width:640px){.pe-nom{font-size:var(--t-micro)}}
+.progression li.fait .pe-nom,.progression li.en-cours .pe-nom{color:var(--encre)}
+.sombre .pe-barre{background:var(--scene-3)}
+.sombre li.fait .pe-barre,.sombre li.en-cours .pe-barre{background:var(--menthe)}
+.sombre .pe-nom{color:var(--texte-scene-doux)}
+.sombre li.fait .pe-nom,.sombre li.en-cours .pe-nom{color:var(--blanc)}
+.pe-bouton{display:block;width:100%;min-height:44px;padding:12px 0 0;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+/* Sous 600 px, cinq libellés ne tiennent pas dans cinq colonnes sans couper un mot :
+   seul le libellé de l'étape en cours s'affiche, sur toute la largeur, sous les barres ;
+   les autres restent lus par les lecteurs d'écran (doublage permis : « Étape n sur 5 » suit). */
+@media (max-width:599px){
+  .progression:not(.sombre){position:relative;padding-bottom:26px}
+  .progression:not(.sombre) li:not(.en-cours) .pe-nom{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .progression:not(.sombre) li.en-cours .pe-nom{position:absolute;left:0;right:0;bottom:0;margin:0;font-size:var(--t-micro,.8125rem)}
+}
+</style>

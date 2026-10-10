@@ -1,9 +1,14 @@
 ---
-/* Une photo du site (src/data/photos.ts) : deux tailles, 3:2, chargée tard sauf en tête de page. */
+/*
+  Une photo du site (src/data/photos.ts) : deux tailles, 3:2 par défaut, chargée tard sauf en tête de page.
+  `ratio` recadre (ex. "4/5" pour une carte portrait, "16/9" pour un bandeau) ; `priorite`
+  (ou l'ancien `tete`) la charge tout de suite avec fetchpriority=high : la photo du héros.
+*/
 import { photoDe, srcset } from '../data/photos'
-interface Props { nom: string; tailles?: string; tete?: boolean; class?: string }
-const { nom, tailles = '(min-width: 900px) 560px, 100vw', tete = false, class: classe } = Astro.props
+interface Props { nom: string; tailles?: string; tete?: boolean; priorite?: boolean; ratio?: string; class?: string }
+const { nom, tailles = '(min-width: 900px) 560px, 100vw', tete = false, priorite = false, ratio, class: classe } = Astro.props
 const p = photoDe(nom)
+const vite = tete || priorite
 ---
 {p && (
   <img
@@ -14,9 +19,10 @@ const p = photoDe(nom)
     width="1280"
     height="853"
     alt={p.alt}
-    loading={tete ? 'eager' : 'lazy'}
-    fetchpriority={tete ? 'high' : undefined}
-    decoding="async"
+    loading={vite ? 'eager' : 'lazy'}
+    fetchpriority={vite ? 'high' : undefined}
+    decoding={vite ? 'sync' : 'async'}
+    style={ratio ? `aspect-ratio:${ratio}` : undefined}
   />
 )}
 <style>

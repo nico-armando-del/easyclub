@@ -1,0 +1,25 @@
+---
+/*
+  UN CADRE DE FENÊTRE DE NAVIGATEUR (maquettes §E.2), pour montrer un écran
+  ou un site « en grand dans un cadre ».
+  <CadreNavigateur titre="Volta Volley Club · site de démonstration">…</CadreNavigateur>
+  Pas d'URL ni de nom de domaine (un faux domaine pourrait être réel), pas de
+  trois ronds de couleur : une barre, un titre centré, la zone d'affichage.
+  `ratio` fixe la zone d'affichage (16/10 par défaut) ; `ratio="auto"` la
+  laisse suivre son contenu.
+*/
+interface Props { titre?: string; ratio?: string; class?: string }
+const { titre, ratio = '16/10', class: classe } = Astro.props
+---
+<div class:list={['cadre-navigateur', classe]}>
+  <div class="cn-barre"><span class="cn-titre">{titre}</span></div>
+  <div class="cn-vue" style={ratio === 'auto' ? undefined : `aspect-ratio:${ratio}`}><slot /></div>
+</div>
+<style>
+.cadre-navigateur{background:var(--blanc);border-radius:var(--r-l,28px) var(--r-l,28px) 8px 8px;box-shadow:var(--ombre-appareil,0 30px 60px -30px rgba(11,15,20,.45),0 0 0 1px rgba(11,15,20,.08));overflow:hidden;min-width:0}
+.cn-barre{display:flex;align-items:center;justify-content:center;height:28px;padding-inline:16px;background:var(--papier-2,#EDE8DC);border-bottom:1px solid var(--trait)}
+@media (min-width:760px){.cn-barre{height:36px}}
+.cn-titre{font:500 .75rem/1.2 var(--f-texte);color:var(--gris);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.cn-vue{position:relative;overflow:hidden;background:var(--papier)}
+.cn-vue>:global(img){display:block;width:100%;height:auto}
+</style>

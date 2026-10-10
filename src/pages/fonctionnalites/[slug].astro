@@ -1,6 +1,6 @@
 ---
-/* Une page par fichier de src/content/fonctionnalites/. Le gabarit commun : components/PageCollection.astro. */
-import PageCollection from '../../components/PageCollection.astro'
+/* Une page par fichier de src/content/fonctionnalites/. Le gabarit : components/GabaritProduit.astro (maquettes §B.3). */
+import GabaritProduit from '../../components/GabaritProduit.astro'
 import { liste } from '../../lib/collections'
 export async function getStaticPaths() {
   const entrees = await liste('fonctionnalites')
@@ -8,4 +8,4 @@ export async function getStaticPaths() {
 }
 const { entree } = Astro.props
 ---
-<PageCollection collection="fonctionnalites" entree={entree} />
+<GabaritProduit collection="fonctionnalites" entree={entree} />

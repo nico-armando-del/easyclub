@@ -1,0 +1,238 @@
+---
+/*
+  LE GABARIT ÉDITORIAL des guides et des articles (maquettes §B.5, récit §5).
+  « On entre dans une autre pièce : on lit. » Fond blanc, aucun aplat, aucun bouton,
+  aucun tableau du temps en tête. Ordre :
+    en-tête (fil, « rubrique · n min de lecture », h1, chapô, « Publié le … · L'équipe OnClub »)
+    → couverture en bande
+    → [marge : sommaire collant + carte OnClub] [texte : À retenir, MDX, écran, sources, FAQ]
+    → À lire ensuite (3 filets) · Pour aller plus loin → bande « Et chez vous, combien ? ».
+  Le JSON-LD (BlogPosting, FAQ, fil) est construit par Layout avec les MÊMES props qu'avant.
+*/
+import { render } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+import FilAriane from './FilAriane.astro'
+import Faq from './Faq.astro'
+import Couverture from './Couverture.astro'
+import ARetenir from './ARetenir.astro'
+import Sommaire from './Sommaire.astro'
+import CarteMarge from './CarteMarge.astro'
+import ListeFilets, { type EntreeFilet } from './ListeFilets.astro'
+import BarreTache from './BarreTache.astro'
+import Repli from './Repli.astro'
+import BlocTemps from './BlocTemps.astro'
+import EcranAnime from './EcranAnime.astro'
+import Encadre from './Encadre.astro'
+import TuileFonction from './TuileFonction.astro'
+import Calculateur from './Calculateur.astro'
+import MiniEcran from './MiniEcran.astro'
+import Photo from './Photo.astro'
+import { HUB, ETIQUETTE, url, liste, voirAussi, type NomCollection } from '../lib/collections'
+
+interface Props { collection: 'guides' | 'articles'; entree: any }
+const { collection, entree } = Astro.props
+const d = entree.data
+const { Content, headings } = await render(entree)
+const chemin = url(collection, entree.id)
+const fil = [HUB[collection], { nom: d.nom, url: chemin }]
+
+/* Les composants MDX du gabarit produit (lot C) : pris s'ils existent, sans casser le build sinon. */
+const optionnels = import.meta.glob<{ default: any }>('./{Idee,Cadre}.astro', { eager: true })
+const enPlus = Object.fromEntries(Object.entries(optionnels).map(([f, m]) => [f.replace(/^\.\/|\.astro$/g, ''), m.default]))
+const composants = { BlocTemps, EcranAnime, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, BarreTache, ...enPlus }
+
+const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+const dateCourte = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+const iso = (x: Date) => x.toISOString().slice(0, 10)
+const rubriqueDe = (c: 'guides' | 'articles', e: any) => (c === 'articles' ? e.data.rubrique : ETIQUETTE[c])
+
+/* Le sommaire : les h2 du texte MDX seulement (« À retenir » n'en fait pas partie). */
+const titres = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }))
+
+/* La carte OnClub : la ligne de la première fonctionnalité liée, si elle ne porte pas un chiffre de temps. */
+const fonctions = await liste('fonctionnalites')
+const premiere = (d.fonctionnalites ?? []).map((r: { id: string }) => fonctions.find((f) => f.id === r.id)).find(Boolean) as any
+const PHRASE_PAR_DEFAUT = 'Les familles s’inscrivent et paient seules.'
+const ligne = premiere?.data?.ligne as string | undefined
+const phraseCarte = ligne && ligne.length <= 90 && !/\d\s?(h|min)\b/.test(ligne) ? ligne : PHRASE_PAR_DEFAUT
+
+/* « À lire ensuite » : 3 guides ou articles, ceux que la page cite ou qui la citent d'abord. */
+const liens = await voirAussi(collection, entree.id)
+const editoriales: { c: 'guides' | 'articles'; e: any }[] = [
+  ...(await liste('articles')).map((e) => ({ c: 'articles' as const, e })),
+  ...(await liste('guides')).map((e) => ({ c: 'guides' as const, e })),
+]
+const parUrl = new Map(editoriales.map((x) => [url(x.c, x.e.id), x]))
+const choisis: { c: 'guides' | 'articles'; e: any }[] = []
+for (const l of liens) { const x = parUrl.get(l.url); if (x && choisis.length < 3) choisis.push(x) }
+for (const x of editoriales.filter((x) => x.c === collection).concat(editoriales.filter((x) => x.c !== collection))) {
+  if (choisis.length >= 3) break
+  if (x.e.id === entree.id && x.c === collection) continue
+  if (!choisis.includes(x)) choisis.push(x)
+}
+const ensuite: EntreeFilet[] = choisis.map(({ c, e }) => ({
+  rubrique: rubriqueDe(c, e), duree: `${e.data.lecture} min`, titre: e.data.titre, href: url(c, e.id),
+  date: dateCourte(e.data.publie), auteur: 'L’équipe OnClub',
+}))
+/* « Pour aller plus loin » : les pages produit liées, en une rangée de noms (textes c). */
+const plusLoin = liens.filter((l) => !parUrl.has(l.url)).slice(0, 6)
+
+const surtitre = `${rubriqueDe(collection, entree)} · ${d.lecture} min de lecture`
+const couv = d.couverture
+---
+<Layout
+  titre={d.titreSeo}
+  description={d.description}
+  chemin={chemin}
+  fil={fil}
+  faq={d.faq}
+  article={{ titre: d.titre, publie: d.publie, maj: d.maj }}
+  fond="blanc"
+  sansBoutonFixe
+>
+  <div class="editorial">
+    <header class="ed-tete enveloppe">
+      <FilAriane fil={fil} />
+      <p class="surtitre ed-rub">{surtitre}</p>
+      <h1 class="ed-h1">{d.titre}</h1>
+      <p class="chapo">{d.chapo}</p>
+      <p class="ed-meta">Publié le <time datetime={iso(d.publie)}>{date(d.publie)}</time>{d.maj > d.publie && <>, mis à jour le <time datetime={iso(d.maj)}>{date(d.maj)}</time></>} · L’équipe OnClub</p>
+    </header>
+
+    <div class="enveloppe ed-couv">
+      <Couverture
+        format="bande"
+        rubrique={collection}
+        etiquette={rubriqueDe(collection, entree)}
+        donnee={couv?.donnee}
+        sous={couv?.sous}
+        apres={couv?.apres}
+        titreCourt={d.nom}
+      />
+    </div>
+
+    <div class="enveloppe ed-corps">
+      <div class="ed-marge">
+        <div class="ed-collant">
+          <Sommaire titres={titres} />
+          <CarteMarge phrase={phraseCarte} />
+        </div>
+      </div>
+
+      <article class="prose article-texte" data-contenu>
+        <ARetenir items={d.aRetenir} />
+        <Content components={composants} />
+      </article>
+
+      {d.ecran && (
+        <div class="ed-ecran">
+          <EcranAnime nom={d.ecran} />
+          <p class="ed-legende">Noms et montants fictifs.</p>
+        </div>
+      )}
+
+      {d.sources?.length > 0 && (
+        <section class="ed-sources" aria-labelledby="sources-titre">
+          <h2 id="sources-titre">Sources</h2>
+          <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank">{s.titre}</a>, consulté le {date(new Date(s.consulte))}</li>)}</ul>
+        </section>
+      )}
+
+      {d.faq?.length > 0 && <div class="ed-faq"><Faq items={d.faq} /></div>}
+    </div>
+
+    <div class="enveloppe ed-fin">
+      {ensuite.length > 0 && <ListeFilets entrees={ensuite} titre="À lire ensuite" niveau="h2" id="a-lire-ensuite" />}
+      {plusLoin.length > 0 && (
+        <nav class="ed-plus-loin" aria-label="Pour aller plus loin">
+          <p class="ed-plus-loin-titre">Pour aller plus loin</p>
+          <ul>{plusLoin.map((l) => <li><a href={l.url}>{l.nom}</a></li>)}</ul>
+        </nav>
+      )}
+    </div>
+
+    <section class="ed-bande" aria-label="Le temps gagné chez vous" data-sans-bouton-fixe>
+      <div class="enveloppe ed-bande-in">
+        <p class="ed-bande-texte">Et chez vous, combien ?</p>
+        <a class="lien-fleche" href="/temps-gagne">Faire le calcul <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  /* Sous 1000 px, la carte OnClub quitte la marge et se pose dans le texte, après la 2e section. */
+  const carte = document.querySelector<HTMLElement>('[data-carte-marge]')
+  const texte = document.querySelector<HTMLElement>('.article-texte')
+  const marge = carte?.parentElement
+  if (carte && texte && marge) {
+    const large = matchMedia('(min-width: 1000px)')
+    const poser = () => {
+      if (large.matches) { if (carte.parentElement !== marge) marge.append(carte); return }
+      const h2 = [...texte.querySelectorAll(':scope > h2')].filter((h) => !h.closest('.a-retenir'))
+      const avant = h2[2]
+      if (avant) avant.before(carte)
+      else texte.append(carte)
+    }
+    poser()
+    large.addEventListener('change', poser)
+  }
+  /* Un tableau qui défile à l'horizontale doit pouvoir prendre le focus (clavier). */
+  for (const t of document.querySelectorAll<HTMLElement>('.article-texte table')) {
+    if (t.scrollWidth > t.clientWidth + 1) t.tabIndex = 0
+  }
+</script>
+
+<style>
+.editorial{background:var(--blanc);--lecture-ed:26.5em} /* 18 px : ≤ 68 caractères par ligne, mesuré (G15) */
+.ed-tete{padding-top:8px}
+.ed-rub{margin-top:var(--e-4,16px);font-size:var(--t-micro,.8125rem);letter-spacing:.08em;color:var(--sapin)}
+.ed-h1{font-size:var(--t-h1-produit,clamp(2.25rem,1.6rem + 2.2vw,3.25rem));line-height:1.06;letter-spacing:-.02em;max-width:20ch}
+.ed-tete .chapo{margin-top:var(--e-4,16px);color:var(--gris);max-width:36em}
+.ed-meta{margin-top:var(--e-4,16px);font-size:var(--t-micro,.8125rem);color:var(--gris)}
+.ed-couv{margin-top:var(--e-6,32px)}
+
+.ed-corps{margin-top:var(--e-7,48px);padding-bottom:var(--e-9,96px)}
+.ed-marge,.ed-collant{display:contents}
+.ed-corps>*+*,.ed-collant>*+*{margin-top:var(--e-6,32px)}
+
+/* Le texte : 18 / 1,65, ≤ 68 caractères par ligne */
+.article-texte{max-width:var(--lecture-ed);font-size:var(--t-article,1.125rem);line-height:1.65}
+.article-texte>:is(p,ul,ol,h2,h3,h4,blockquote,dl){max-width:var(--lecture-ed)}
+.article-texte :global(h2){font-size:1.875rem;line-height:1.15;margin-top:2.2em;scroll-margin-top:calc(var(--entete-h,72px) + 24px)}
+.article-texte :global(h3){font-size:1.375rem;line-height:1.25;margin-top:1.8em;scroll-margin-top:calc(var(--entete-h,72px) + 24px)}
+.article-texte>:global(.a-retenir)+:global(h2){margin-top:1.6em}
+.article-texte :global(h3+.barre-tache){margin-top:.6em}
+.article-texte :global(.carte-marge){margin-block:2em}
+.ed-ecran{max-width:var(--lecture-ed)}
+.ed-legende{margin-top:10px;font-size:var(--t-micro,.8125rem);color:var(--gris)}
+.ed-sources{max-width:var(--lecture-ed)}
+.ed-sources h2{font-size:1.5rem}
+.ed-sources ul{margin-top:12px;padding-left:1.2em;font-size:.9375rem;color:var(--gris)}
+.ed-sources li+li{margin-top:6px}
+.ed-sources a{font-weight:600;color:var(--encre)}
+.ed-faq{max-width:var(--lecture-ed)}
+
+.ed-fin{padding-bottom:var(--e-9,96px)}
+.ed-fin :global(.lf-titre-liste){font-size:clamp(1.75rem,1.4rem + 1.4vw,2.25rem)}
+.ed-plus-loin{margin-top:var(--e-6,32px);display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px}
+.ed-plus-loin-titre{font:700 var(--t-micro,.8125rem)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--sapin)}
+.ed-plus-loin ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:0 16px}
+.ed-plus-loin a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+
+.ed-bande{background:var(--papier-2,#EDE8DC)}
+.ed-bande-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 24px;min-height:96px;padding-block:16px}
+.ed-bande-texte{font:700 clamp(1.25rem,1.1rem + .6vw,1.5rem)/1.2 var(--f-titre)}
+
+@media (min-width:1000px){
+  .ed-corps{display:grid;grid-template-columns:240px minmax(0,29.8125rem);column-gap:var(--e-8,64px);align-items:start}
+  .ed-corps>*+*{margin-top:0}
+  .ed-corps>:not(.ed-marge){grid-column:2}
+  .ed-corps>.ed-ecran,.ed-corps>.ed-sources,.ed-corps>.ed-faq{margin-top:var(--e-8,64px)}
+  .ed-marge{display:block;grid-column:1;grid-row:1/span 4;align-self:stretch}
+  .ed-collant{display:block;position:sticky;top:calc(var(--entete-h,72px) + 24px)}
+  .ed-collant>*+*{margin-top:var(--e-6,32px)}
+  .ed-fin{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:var(--e-8,64px)}
+  .ed-fin>:global(*){grid-column:2}
+}
+</style>

@@ -1,0 +1,110 @@
+---
+/*
+  LE TEMPS RENDU, EN UNE LIGNE (pages produit, maquettes §B.3, textes c).
+  Une clé       → la ligne forte : « 25 h → 0 h de saisie par saison ».
+  Deux clés et +→ des pastilles : « Fiches · 25 h → 0 h ».
+  Les cinq tâches de l'estimation principale → la ligne forte « 66 h → 5 h ».
+  Sans clé      → le geste, en une ligne, sans autre mention.
+  Dessous : « Estimation pour 250 adhérents, pas une étude. » et le repli
+  « Le calcul » (le BlocTemps des clés, son hypothèse et le lien vers le
+  calculateur). Les chiffres viennent seulement de src/data/temps.ts : ici,
+  seulement des MOTS (les libellés courts), jamais un chiffre tapé.
+*/
+import BlocTemps from './BlocTemps.astro'
+import { TACHES, TOTAL, CINQ_TACHES, ADHERENTS_REFERENCE, duree, type CleTemps } from '../data/temps'
+
+interface Props { cles?: CleTemps[]; geste?: string; adherents?: number; titre?: string }
+const { cles = [], geste, adherents = ADHERENTS_REFERENCE, titre } = Astro.props
+
+/* Les libellés courts : la pastille, et le complément de la ligne forte. */
+const COURT: Record<CleTemps, { pastille: string; forte: string }> = {
+  fiches: { pastille: 'Fiches', forte: 'de saisie' },
+  paiements: { pastille: 'Paiements', forte: 'de suivi des paiements' },
+  relances: { pastille: 'Relances', forte: 'de relances' },
+  pieces: { pastille: 'Pièces', forte: 'de pièces à réclamer' },
+  rentree: { pastille: 'Rentrée', forte: 'de rentrée' },
+  messages: { pastille: 'Messages', forte: 'de messages aux familles' },
+  attente: { pastille: 'Liste d’attente', forte: 'de liste d’attente' },
+  site: { pastille: 'Site', forte: 'de mises à jour du site' },
+  boutique: { pastille: 'Boutique', forte: 'de vente des maillots' },
+  evenements: { pastille: 'Événements', forte: 'd’événements' },
+}
+
+const cinq = cles.length === CINQ_TACHES.length && CINQ_TACHES.every((c) => cles.includes(c))
+const lignes = cles.map((c) => {
+  const t = TACHES[c]
+  const rendu = t.avantMin === null || t.apresMin === null
+  return { cle: c, ...COURT[c], rendu, avant: rendu ? '' : duree(t.avantMin!), apres: rendu ? duree(t.gainMin) : duree(t.apresMin!) }
+})
+const forte = cinq
+  ? { avant: TOTAL.avant, apres: TOTAL.apres, complement: 'd’administratif par saison', rendu: false }
+  : lignes.length === 1
+    ? { avant: lignes[0].avant, apres: lignes[0].apres, complement: lignes[0].rendu ? `${lignes[0].forte} rendues par saison` : `${lignes[0].forte} par saison`, rendu: lignes[0].rendu }
+    : null
+const note = forte ? `Estimation pour ${adherents} adhérents, pas une étude.` : `Par saison, estimation pour ${adherents} adhérents, pas une étude.`
+---
+{cles.length > 0 ? (
+  <section class="ligne-temps" aria-label="Le temps rendu">
+    {forte ? (
+      <p class="lt-forte">
+        {!forte.rendu && <><span class="lt-chiffre num">{forte.avant}</span> <svg class="lt-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg><span class="sr">devient</span> </>}
+        <span class="lt-chiffre num">{forte.apres}</span> <span class="lt-complement">{forte.complement}</span>
+      </p>
+    ) : (
+      <ul class="lt-pastilles">
+        {lignes.map((l) => (
+          <li>
+            <span class="lt-lib">{l.pastille}</span>
+            {l.rendu
+              ? <b class="num">{l.apres} <span class="lt-rendues">rendues</span></b>
+              : <b class="num">{l.avant} <svg class="lt-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg><span class="sr">devient</span> {l.apres}</b>}
+          </li>
+        ))}
+      </ul>
+    )}
+    <div class="lt-pied">
+      <p class="lt-note">{note}</p>
+      <details class="lt-calcul">
+        <summary>Le calcul</summary>
+        <div class="lt-corps">
+          <BlocTemps cles={cles} titre={titre} />
+          <a class="lien-fleche" href="/temps-gagne">Refaire le calcul avec vos chiffres <svg aria-hidden="true"><use href="#fleche" /></svg></a>
+        </div>
+      </details>
+    </div>
+  </section>
+) : geste ? (
+  <section class="ligne-temps lt-sans-chiffre" aria-label="Le geste qui fait gagner du temps">
+    <p class="lt-geste">{geste}</p>
+  </section>
+) : null}
+<style>
+.ligne-temps{border-block:1px solid var(--trait);padding-block:20px 12px}
+.lt-forte{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.35em;font:700 var(--t-ligne-forte,clamp(2rem,1.2rem + 3.4vw,3.5rem))/1.08 var(--f-titre);letter-spacing:-.02em}
+.lt-chiffre{white-space:nowrap}
+.lt-fleche{display:inline-block;width:.7em;height:.7em;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.04em}
+.lt-complement{flex-basis:100%;font:600 1.0625rem/1.4 var(--f-texte);letter-spacing:0;margin-top:4px}
+@media (min-width:760px){.lt-complement{flex-basis:auto;font:700 .5em/1.2 var(--f-titre);margin-top:0;margin-left:.15em}}
+.lt-pastilles{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+@media (min-width:760px){.lt-pastilles{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}}
+.lt-pastilles li{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:6px 16px;background:var(--papier-2,#EDE8DC);border-radius:var(--r-s,12px)}
+@media (min-width:760px){.lt-pastilles li{flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:64px;padding:16px 20px;border-radius:var(--r-m,20px)}}
+.lt-lib{font-size:var(--t-petit,.9375rem);font-weight:600;color:var(--gris)}
+.lt-pastilles b{font:700 1.5rem/1.1 var(--f-titre);white-space:nowrap}
+@media (min-width:760px){.lt-pastilles b{font-size:1.75rem}}
+.lt-rendues{font-size:.6em}
+.lt-pied{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;column-gap:24px;margin-top:8px}
+.lt-note{font-size:var(--t-micro,.8125rem);color:var(--gris);padding-block:4px}
+.lt-calcul{min-width:0}
+.lt-calcul[open]{flex-basis:100%}
+.lt-calcul>summary{display:inline-flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;list-style:none;font:700 .9375rem/1.2 var(--f-texte)}
+.lt-calcul>summary::-webkit-details-marker{display:none}
+.lt-calcul>summary::after{content:"";width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg);transition:transform var(--d-1,160ms) ease}
+.lt-calcul[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+.lt-corps{display:grid;gap:12px;justify-items:start;padding:8px 0 16px;animation:lt-fondu var(--d-1,160ms) ease-out}
+.lt-corps :global(.bloc-temps){width:100%;max-width:960px}
+@keyframes lt-fondu{from{opacity:0}}
+.lt-sans-chiffre{padding-block:20px}
+.lt-geste{font:700 clamp(1.25rem,1.1rem + .6vw,1.625rem)/1.3 var(--f-titre);max-width:40ch}
+@media (max-width:759px){.lt-pastilles{gap:6px}.lt-pastilles b{font-size:1.25rem}}
+</style>

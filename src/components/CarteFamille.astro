@@ -1,0 +1,210 @@
+---
+/*
+  UNE CARTE DU BENTO : le nom de la famille, sa phrase (FAMILLES, mot pour
+  mot), un fragment d'interface en HTML et CSS (décoratif, aria-hidden). Toute
+  la carte est un lien (lien étiré sur le h3) vers /fonctionnalites#ancre.
+
+  Le fragment montre son état final par défaut ; son geste (une fois à
+  l'entrée à l'écran, rejoué au survol) n'existe que sous
+  prefers-reduced-motion: no-preference. Noms et montants fictifs, aucun
+  chiffre de temps.
+*/
+import { FAMILLES, type Famille } from '../data/site'
+import VersFr from './langue/VersFr.astro'
+
+type Fragment = 'telephone' | 'chiffres' | 'groupes' | 'bulle' | 'commande' | 'export'
+interface Props {
+  famille: Famille
+  disposition: 'haute' | 'large' | 'normale'
+  fond: 'menthe' | 'encre' | 'blanc'
+  fragment: Fragment
+  href: string
+  niveau?: 'h3' | 'h4'
+  /** Nom et phrase traduits (/en, /es) ; sinon ceux de FAMILLES. */
+  nom?: string
+  phrase?: string
+  langue?: 'fr' | 'en' | 'es'
+  versFr?: string
+}
+const { famille, disposition, fond, fragment, href, niveau = 'h3', nom, phrase, langue = 'fr', versFr } = Astro.props
+const f = FAMILLES.find((x) => x.cle === famille)!
+const H = niveau
+
+const MOTS = {
+  fr: { inscription: 'Inscription', prenom: 'Prénom', cours: 'Cours', coursV: 'Éveil, mercredi', paiement: 'Paiement', paiementV: 'En 3 fois', total: 'Total',
+    encaisse: 'Encaissé', avenir: 'À venir', retard: 'En retard', rien: 'Rien versé',
+    g1: 'Foot U11', g2: 'Guitare débutants', g3: 'Théâtre ados', places: 'places', place: 'place', complet: 'Complet',
+    a: 'À', bulle: 'Entraînement décalé samedi, même terrain.', produit: 'Maillot domicile · M', retrait: 'Retrait au club', fichier: 'export_saison.csv' },
+  en: { inscription: 'Registration', prenom: 'First name', cours: 'Class', coursV: 'Beginners, Wednesday', paiement: 'Payment', paiementV: 'In 3 instalments', total: 'Total',
+    encaisse: 'Collected', avenir: 'Upcoming', retard: 'Late', rien: 'Nothing paid',
+    g1: 'Football U11', g2: 'Guitar beginners', g3: 'Teen drama', places: 'places', place: 'place', complet: 'Full',
+    a: 'To', bulle: 'Training moved to Saturday, same pitch.', produit: 'Home shirt · M', retrait: 'Collect at the club', fichier: 'export_season.csv' },
+  es: { inscription: 'Inscripción', prenom: 'Nombre', cours: 'Clase', coursV: 'Iniciación, miércoles', paiement: 'Pago', paiementV: 'En 3 plazos', total: 'Total',
+    encaisse: 'Cobrado', avenir: 'Por venir', retard: 'Con retraso', rien: 'Sin pagar',
+    g1: 'Fútbol U11', g2: 'Guitarra inicial', g3: 'Teatro jóvenes', places: 'plazas', place: 'plaza', complet: 'Completo',
+    a: 'Para', bulle: 'Entrenamiento movido al sábado, mismo campo.', produit: 'Camiseta local · M', retrait: 'Recogida en el club', fichier: 'export_temporada.csv' },
+}[langue]
+---
+<article class:list={['carte', `carte-${disposition}`, `carte-${fond}`, `frag-${fragment}`, { 'sur-encre': fond === 'encre' }]} data-vu>
+  <div class="carte-texte">
+    <H class="carte-nom"><a href={href} hreflang={versFr ? 'fr' : undefined}>{nom ?? f.cle}{versFr && <VersFr sr={versFr} />}</a></H>
+    <p class="carte-phrase">{phrase ?? f.phrase}</p>
+  </div>
+  <div class="fragment" aria-hidden="true">
+    {fragment === 'telephone' && (
+      <div class="tel">
+        <span class="tel-encoche"></span>
+        <b class="tel-titre">{MOTS.inscription}</b>
+        <span class="champ c1"><small>{MOTS.prenom}</small>Léa</span>
+        <span class="champ c2"><small>{MOTS.cours}</small>{MOTS.coursV}</span>
+        <span class="champ c3"><small>{MOTS.paiement}</small>{MOTS.paiementV}</span>
+        <span class="tel-total"><small>{MOTS.total}</small><b class="num bascule" data-avant="0,00 €"><span>180,00 €</span></b></span>
+      </div>
+    )}
+    {fragment === 'chiffres' && (
+      <div class="chiffres">
+        <span class="col"><small>{MOTS.encaisse}</small><b class="num">182</b><i style="--h:1"></i></span>
+        <span class="col"><small>{MOTS.avenir}</small><b class="num">41</b><i style="--h:.45"></i></span>
+        <span class="col"><small>{MOTS.retard}</small><b class="num">6</b><i class="alerte" style="--h:.16"></i></span>
+        <span class="col"><small>{MOTS.rien}</small><b class="num">2</b><i class="alerte" style="--h:.08"></i></span>
+        <span class="transfert"></span>
+      </div>
+    )}
+    {fragment === 'groupes' && (
+      <ul class="groupes">
+        <li><span>{MOTS.g1}</span><em class="num">2 {MOTS.places}</em></li>
+        <li><span>{MOTS.g2}</span><em class="num">1 {MOTS.place}</em></li>
+        <li><span>{MOTS.g3}</span><em class="bascule complet" data-avant={`1 ${MOTS.place}`}><span>{MOTS.complet}</span></em></li>
+      </ul>
+    )}
+    {fragment === 'bulle' && (
+      <div class="bulle"><small>{MOTS.a} : U11</small><span>{MOTS.bulle}</span></div>
+    )}
+    {fragment === 'commande' && (
+      <div class="commande">
+        <span class="cmd-texte"><b>{MOTS.produit}</b><small>{MOTS.retrait}</small></span>
+        <svg class="cmd-case" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="6"/><path d="M7 14.5l4.5 4.5L21 9.5"/></svg>
+      </div>
+    )}
+    {fragment === 'export' && (
+      <div class="export">
+        <span class="fichier"><i class="fichier-icone"></i><b>{MOTS.fichier}</b></span>
+        <span class="charge"><i></i></span>
+      </div>
+    )}
+  </div>
+</article>
+<style>
+.carte{position:relative;display:flex;flex-direction:column;gap:16px;min-width:0;padding:24px;border-radius:var(--r-l);background:var(--blanc);box-shadow:var(--ombre-carte,0 1px 0 rgba(11,15,20,.04),0 14px 32px -22px rgba(11,15,20,.30));overflow:hidden;transition:transform var(--d-2,320ms) var(--courbe-sortie,ease),box-shadow var(--d-2,320ms)}
+@media (min-width:1000px){.carte{padding:28px}}
+.carte-menthe{background:var(--menthe)}
+.carte-encre{background:var(--encre);color:var(--blanc)}
+.carte-nom{font:700 1.25rem/1.15 var(--f-titre)}
+@media (min-width:760px){.carte-nom{font-size:1.5rem}}
+.carte-nom a{color:inherit;text-decoration:none}
+.carte-nom a::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:2}
+.carte-nom a:focus-visible{outline:none}
+.carte:has(a:focus-visible){outline:3px solid var(--encre);outline-offset:3px}
+.carte-encre:has(a:focus-visible){outline-color:var(--sapin)}
+.carte-phrase{margin-top:6px;font-size:1rem;line-height:1.45;color:var(--gris);max-width:30ch}
+.carte-menthe .carte-phrase{color:var(--encre)}
+.carte-encre .carte-phrase{color:var(--texte-scene,#D7DBE1)}
+.carte:hover{transform:translateY(-4px);box-shadow:var(--ombre-carte-survol,0 1px 0 rgba(11,15,20,.04),0 24px 44px -24px rgba(11,15,20,.40))}
+.carte:hover .carte-nom a{text-decoration:underline;text-underline-offset:3px}
+.fragment{margin-top:auto;min-width:0;font-size:.8125rem;line-height:1.3}
+small{display:block;font-size:.6875rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gris)}
+.carte-encre small{color:var(--texte-scene-doux,#AEB4BE)}
+.bascule{display:inline-grid}
+.bascule>span{grid-area:1/1}
+.bascule::before{content:attr(data-avant) / "";grid-area:1/1;opacity:0}
+
+/* — Téléphone (Inscrire) — */
+.tel{position:relative;width:200px;max-width:100%;margin-inline:auto;margin-bottom:-60px;padding:30px 12px 70px;border:8px solid var(--encre);border-bottom:0;border-radius:var(--r-appareil,28px) var(--r-appareil,28px) 0 0;background:var(--blanc);display:grid;gap:8px}
+.tel-encoche{position:absolute;top:6px;left:35%;width:30%;height:14px;border-radius:999px;background:var(--encre)}
+.tel-titre{font:700 .9375rem/1.2 var(--f-titre)}
+.champ{display:grid;gap:2px;padding:7px 9px;border:1px solid var(--trait);border-radius:10px;font-weight:600}
+.tel-total{display:flex;justify-content:space-between;align-items:center;margin-top:4px;padding:9px;border-radius:10px;background:var(--menthe-pale);font-weight:600}
+.tel-total small{color:var(--sapin)}
+.tel-total b{font:700 1rem/1 var(--f-titre)}
+
+/* — Chiffres (Encaisser) — */
+.chiffres{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:end}
+.col{display:grid;gap:6px}
+.col b{font:700 1.5rem/1 var(--f-titre)}
+.col i{display:block;height:44px;border-radius:6px;background:var(--scene-3,#1A212B);position:relative;overflow:hidden}
+.col i::after{content:"";position:absolute;inset:0;background:var(--menthe);transform-origin:bottom;transform:scaleY(var(--h))}
+.col i.alerte::after{background:#F08A74}
+.transfert{position:absolute;left:calc(50% + 5px);bottom:0;width:calc(25% - 7.5px);height:8px;border-radius:4px;background:var(--menthe);opacity:0}
+
+/* — Groupes (Organiser) — */
+.groupes{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.groupes li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--papier);font-weight:600}
+.groupes em{font-style:normal;font-weight:700;color:var(--sapin);white-space:nowrap}
+.groupes .complet{color:var(--encre)}
+
+/* — Bulle (Communiquer) — */
+.bulle{display:grid;gap:4px;max-width:240px;padding:12px 14px;border-radius:16px 16px 16px 4px;background:var(--lilas-pale);font-weight:600}
+.bulle small{color:var(--encre)}
+
+/* — Commande (Vendre) — */
+.commande{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-radius:12px;border:1px solid var(--trait);background:var(--blanc)}
+.cmd-texte{display:grid;gap:2px}
+.cmd-texte small{color:var(--sapin);text-transform:none;letter-spacing:0;font-size:.8125rem}
+.cmd-case{width:28px;height:28px;flex:none}
+.cmd-case rect{fill:var(--menthe);stroke:var(--encre);stroke-width:1.5}
+.cmd-case path{fill:none;stroke:var(--encre);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:0}
+
+/* — Export (Piloter) — */
+.export{display:grid;gap:10px}
+.fichier{display:flex;align-items:center;gap:10px;font-weight:600}
+.fichier b{font:600 .8125rem/1.2 var(--f-texte);overflow-wrap:anywhere}
+.fichier-icone{flex:none;width:24px;height:30px;border:2px solid var(--encre);border-radius:4px 10px 4px 4px;background:linear-gradient(var(--sapin),var(--sapin)) 4px 9px/12px 2px no-repeat,linear-gradient(var(--sapin),var(--sapin)) 4px 15px/12px 2px no-repeat}
+.charge{display:block;height:8px;border-radius:999px;background:var(--papier-2,#EDE8DC);overflow:hidden}
+.charge i{display:block;height:100%;background:var(--sapin);transform-origin:left}
+
+/* — Les dispositions — */
+@media (max-width:759px){
+  .carte-normale{flex-direction:row;align-items:center;gap:14px;padding:20px}
+  .carte-normale .carte-texte{flex:1 1 55%;min-width:0}
+  .carte-normale .fragment{flex:0 0 42%;margin-top:0}
+  .carte-normale .carte-phrase{font-size:.9375rem}
+  .carte-haute .fragment{display:flex;justify-content:center}
+  .tel{margin-bottom:-24px;padding-bottom:28px}
+}
+/* Sous 520 px, le fragment passe sous le texte, en pleine largeur : plus de libellés sur trois lignes. */
+@media (max-width:519px){
+  .carte-normale{flex-direction:column;align-items:stretch}
+  .carte-normale .carte-texte{flex:none}
+  .carte-normale .fragment{flex:none;margin-top:16px}
+  /* Les quatre libellés des chiffres tiennent chacun sur une ligne (tour 2, défaut 46). */
+  .chiffres{gap:6px}
+  .chiffres small{letter-spacing:0;white-space:nowrap;font-size:.625rem}
+}
+@media (min-width:760px) and (max-width:999px){
+  .carte-haute{flex-direction:row;align-items:flex-start}
+  .carte-haute .carte-texte{flex:1}
+  .carte-haute .fragment{flex:0 0 220px;margin-top:0}
+  .carte-haute .tel{margin-bottom:-120px}
+}
+
+/* — Les gestes : une fois à l'entrée (.vu), rejoués au survol — */
+@media (prefers-reduced-motion: no-preference){
+  .carte:global(.vu) .bascule>span,.carte:hover .bascule>span{animation:cf-montre var(--d-4,900ms) step-end both}
+  .carte:global(.vu) .bascule::before,.carte:hover .bascule::before{animation:cf-cache var(--d-4,900ms) step-end both}
+  .carte:global(.vu) .champ,.carte:hover .champ{animation:cf-champ var(--d-3,600ms) var(--courbe-sortie,ease) both}
+  .carte:global(.vu) .c2,.carte:hover .c2{animation-delay:120ms}
+  .carte:global(.vu) .c3,.carte:hover .c3{animation-delay:240ms}
+  .carte:global(.vu) .transfert,.carte:hover .transfert{animation:cf-transfert 1.1s var(--courbe-va-vient,ease-in-out) both}
+  .carte:global(.vu) .bulle,.carte:hover .bulle{animation:cf-bulle 1.2s var(--courbe-va-vient,ease-in-out) both}
+  .carte:global(.vu) .cmd-case path,.carte:hover .cmd-case path{animation:cf-coche var(--d-3,600ms) var(--courbe-sortie,ease) .2s both}
+  .carte:global(.vu) .charge i,.carte:hover .charge i{animation:cf-charge 1.2s var(--courbe-sortie,ease) both}
+  .carte:active{transform:scale(.98)}
+}
+@keyframes cf-montre{from{color:transparent}to{color:inherit}}
+@keyframes cf-cache{from{opacity:1}to{opacity:0}}
+@keyframes cf-champ{from{opacity:.25;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes cf-transfert{0%{opacity:1;transform:none}70%{opacity:1;transform:translateX(-200%) translateX(-20px)}100%{opacity:0;transform:translateX(-200%) translateX(-20px)}}
+@keyframes cf-bulle{0%{transform:none;opacity:1}45%{transform:translateX(48px);opacity:0}55%{transform:translateX(-16px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes cf-coche{from{stroke-dashoffset:24}to{stroke-dashoffset:0}}
+@keyframes cf-charge{from{transform:scaleX(0)}to{transform:none}}
+</style>

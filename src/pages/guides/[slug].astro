@@ -1,6 +1,6 @@
 ---
-/* Une page par fichier de src/content/guides/. Le gabarit commun : components/PageCollection.astro. */
-import PageCollection from '../../components/PageCollection.astro'
+/* Une page par fichier de src/content/guides/. Le gabarit éditorial : components/GabaritEditorial.astro. */
+import GabaritEditorial from '../../components/GabaritEditorial.astro'
 import { liste } from '../../lib/collections'
 export async function getStaticPaths() {
   const entrees = await liste('guides')
@@ -8,4 +8,4 @@ export async function getStaticPaths() {
 }
 const { entree } = Astro.props
 ---
-<PageCollection collection="guides" entree={entree} />
+<GabaritEditorial collection="guides" entree={entree} />

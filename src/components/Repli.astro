@@ -1,0 +1,12 @@
+---
+/*
+  LE REPLI : le contenu secondaire se déplie, il n'est jamais caché (direction §1 et §5).
+  Utilisable dans le MDX : <Repli titre="Le calcul">…</Repli>. Styles communs : .repli (global.css).
+*/
+interface Props { titre?: string; ouvert?: boolean; class?: string; id?: string }
+const { titre = 'Le détail', ouvert = false, class: classe, id } = Astro.props
+---
+<details class:list={['repli', classe]} open={ouvert} id={id}>
+  <summary>{titre}</summary>
+  <div class="repli-corps"><slot /></div>
+</details>

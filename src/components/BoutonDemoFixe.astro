@@ -1,13 +1,40 @@
 ---
-/* Le bouton de démo, fixé en bas de l'écran sur téléphone. Il s'efface quand le bandeau de consentement est ouvert. */
+/*
+  Le bouton de démo fixé en bas de l'écran, sur téléphone seulement (< 760 px).
+  Il apparaît quand le héros ([data-heros]) est sorti de l'écran, et s'efface dès
+  qu'un élément [data-sans-bouton-fixe] est visible (scène, case vide, pied de page)
+  ou que le bandeau de consentement est ouvert. Absent de /demo et /recommander
+  (Layout, prop sansBoutonFixe). Sans JavaScript : toujours là sur téléphone.
+*/
 ---
 <div class="demo-fixe" data-demo-fixe>
   <a class="btn btn-encre" href="/demo">Demander une démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
 </div>
+<script>
+  const bloc = document.querySelector<HTMLElement>('[data-demo-fixe]')
+  if (bloc) {
+    const heros = document.querySelector('[data-heros]') || document.querySelector('main > *')
+    let herosVisible = true
+    const gardes = new Set<Element>()
+    const maj = () => {
+      const montre = !herosVisible && gardes.size === 0
+      bloc.classList.toggle('montre', montre)
+    }
+    if (heros) new IntersectionObserver(([e]) => { herosVisible = e.isIntersecting; maj() }).observe(heros)
+    else herosVisible = false
+    const obs = new IntersectionObserver((entrees) => {
+      for (const e of entrees) { if (e.isIntersecting) gardes.add(e.target); else gardes.delete(e.target) }
+      maj()
+    })
+    document.querySelectorAll('[data-sans-bouton-fixe]').forEach((el) => obs.observe(el))
+    maj()
+  }
+</script>
 <style>
-.demo-fixe{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px var(--g) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--papier) 70%,rgba(245,242,234,0))}
-.demo-fixe .btn{width:100%;min-height:50px}
-:global(body){padding-bottom:84px}
+.demo-fixe{position:fixed;left:0;right:0;bottom:0;z-index:var(--z-bouton-fixe);padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--papier) 70%,rgba(245,242,234,0));transition:opacity var(--d-2) var(--courbe-sortie),transform var(--d-2) var(--courbe-sortie),display var(--d-2) allow-discrete}
+.demo-fixe .btn{width:100%;min-height:52px}
+:global(.js) .demo-fixe:not(.montre){display:none;opacity:0;transform:translateY(16px)}
+@starting-style{.demo-fixe{opacity:0;transform:translateY(16px)}}
 :global(html.consentement-ouvert) .demo-fixe{display:none}
-@media (min-width:760px){.demo-fixe{display:none}:global(body){padding-bottom:0}}
+@media (min-width:760px){.demo-fixe,:global(.js) .demo-fixe.montre{display:none}}
 </style>

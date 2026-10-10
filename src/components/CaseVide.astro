@@ -1,0 +1,138 @@
+---
+/*
+  LA CASE VIDE (maquettes §A9 et §B.3) : l'appel final. Une fenêtre OnClub « Saison
+  2026-2027 » dont la seule ligne est une case pointillée « Votre association », avec
+  le bouton « Demander une démo ». Tour 2 : les six coches rangées sont retirées (elles
+  redisaient la scène du héros ; arbitrage 13 « un bouton, une phrase »).
+
+  Mouvement (joué une fois, quand la case entre à l'écran : .vu posé par le Layout) :
+  la notification de 23:47 descend et tremble, la réponse s'écrit dessous, la case
+  « respire ». Rien ne disparaît : l'état final montre la notification ET sa réponse.
+  Sans JS ou sous mouvement réduit : l'état final, directement.
+
+  Variante `compact` (fin des pages produit) : sans fenêtre ni notification. Sous 760 px,
+  le titre et le bouton pleine largeur seulement (la case pointillée n'est dessinée
+  qu'à partir de 760 px).
+*/
+import { HEURE_DU_SOIR } from '../data/site'
+interface Props {
+  titre?: string
+  bouton?: { texte: string; href: string }
+  phrase?: string
+  lienSecondaire?: { texte: string; href: string } | false
+  compact?: boolean
+  notification?: boolean
+  id?: string
+}
+const {
+  titre = 'Rendez leurs soirées à vos bénévoles',
+  bouton = { texte: 'Demander une démo', href: '/demo' },
+  phrase = 'Cinq questions, et la démo commence par ce qui vous prend le plus de temps.',
+  lienSecondaire = { texte: 'Adhérent ou parent ? Transmettre à mon club', href: '/recommander' },
+  compact = false,
+  id = 'case-vide',
+} = Astro.props
+const notification = Astro.props.notification ?? !compact
+---
+<section class:list={['case-vide', { compact }]} aria-labelledby={`${id}-titre`} data-sans-bouton-fixe>
+  <div class="enveloppe-large">
+    <div class="cv-panneau sur-encre" data-vu>
+      {notification && (
+        <div class="cv-notif-zone">
+          {HEURE_DU_SOIR && <p class="cv-heure" data-heure-soir></p>}
+          <div class="cv-notif" aria-hidden="true">
+            <p class="cv-notif-texte"><b class="num">23:47</b> Bonjour, il reste de la place le mercredi ?</p>
+            <p class="cv-notif-reponse">Les places qui restent s’affichent dans le formulaire.</p>
+          </div>
+        </div>
+      )}
+      <h2 id={`${id}-titre`} class="cv-titre">{titre}</h2>
+      {compact ? (
+        <div class="cv-case cv-case-seule">
+          <span class="cv-case-nom" aria-hidden="true">Votre association</span>
+          <a class="btn btn-menthe" href={bouton.href}>{bouton.texte}</a>
+        </div>
+      ) : (
+        <div class="cv-fenetre">
+          <p class="cv-fenetre-barre">OnClub · Saison 2026-2027</p>
+          <div class="cv-case">
+            <span class="cv-case-nom">Votre association</span>
+            <a class="btn btn-menthe" href={bouton.href}>{bouton.texte}</a>
+          </div>
+        </div>
+      )}
+      {phrase && !compact && <p class="cv-phrase">{phrase}</p>}
+      {lienSecondaire && <p class="cv-lien"><a href={lienSecondaire.href}>{lienSecondaire.texte}</a></p>}
+    </div>
+  </div>
+</section>
+
+{HEURE_DU_SOIR && notification && (
+  <script>
+    const el = document.querySelector<HTMLElement>('[data-heure-soir]')
+    const d = new Date(); const h = d.getHours()
+    if (el && (h >= 20 || h < 2)) el.textContent = `Il est ${h} h ${String(d.getMinutes()).padStart(2, '0')}.`
+  </script>
+)}
+
+<style>
+.case-vide{padding-block:var(--section)}
+.enveloppe-large{max-width:var(--max);margin-inline:auto;padding-inline:16px}
+@media (min-width:760px){.enveloppe-large{padding-inline:var(--g)}}
+.cv-panneau{position:relative;background:var(--scene);background-image:var(--lueur);color:var(--blanc);border-radius:var(--r-panneau);padding:var(--e-7) 20px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden}
+@media (min-width:760px){.cv-panneau{padding:var(--e-8) var(--e-8) var(--e-8)}}
+.cv-notif-zone{width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:var(--e-5)}
+.cv-heure{font:600 var(--t-petit)/1.4 var(--f-texte);color:var(--texte-scene-doux)}
+.cv-heure:empty{display:none}
+.cv-notif{background:var(--scene-2);border:1px solid var(--trait-scene);border-radius:var(--r-m);padding:12px 16px;text-align:left;box-shadow:var(--ombre-objet);max-width:100%}
+.cv-notif-texte{font-size:var(--t-petit);line-height:1.45;color:var(--blanc)}
+.cv-notif-texte b{color:var(--menthe);margin-right:6px}
+.cv-notif-reponse{margin-top:6px;padding-top:6px;border-top:1px solid var(--trait-scene);font-size:var(--t-micro);line-height:1.45;color:var(--texte-scene-doux)}
+.cv-titre{font-size:clamp(2.125rem,1.4rem + 3vw,4.5rem);line-height:1.04;letter-spacing:-.02em;max-width:16ch;color:var(--blanc)}
+.cv-fenetre{margin-top:var(--e-6);width:100%;max-width:720px;background:var(--scene-2);border:1px solid var(--trait-scene);border-radius:var(--r-l);box-shadow:var(--ombre-fenetre);text-align:left;overflow:hidden}
+.cv-fenetre-barre{padding:12px 20px;font:600 var(--t-micro)/1.3 var(--f-texte);color:var(--texte-scene-doux);border-bottom:1px solid var(--trait-scene)}
+.cv-case{margin:16px;border:2px dashed var(--menthe);border-radius:var(--r-m);padding:16px;display:flex;flex-direction:column;gap:12px;align-items:stretch;view-transition-name:case-vide}
+@media (min-width:640px){.cv-case{flex-direction:row;align-items:center;justify-content:space-between;min-height:88px;padding:12px 12px 12px 24px}}
+.cv-case-nom{font:700 1.25rem/1.2 var(--f-titre);color:var(--blanc)}
+.cv-case .btn{border-color:var(--menthe)}
+@media (max-width:639px){.cv-case .btn{width:100%}}
+.cv-case-seule{margin:var(--e-6) 0 0;width:100%;max-width:560px;text-align:left}
+.cv-phrase{margin-top:var(--e-5);max-width:var(--lecture);color:var(--texte-scene);font-size:var(--t-chapo);text-wrap:pretty}
+.cv-lien{margin-top:var(--e-2)}
+.cv-lien a{display:inline-flex;align-items:center;min-height:44px;color:var(--blanc);font-weight:700}
+/* Compact (fin des pages produit) : la section d'avant donne déjà la marge du haut ;
+   un titre, la case et son bouton, le lien dessous. Pas de phrase. Deux colonnes dès 1000 px. */
+.case-vide.compact{padding-block:0 var(--section)}
+.compact .cv-panneau{padding:32px 24px;align-items:stretch;text-align:left}
+.compact .cv-titre{font-size:1.75rem;line-height:1.1;max-width:none}
+.compact .cv-case-seule{margin-top:var(--e-5,24px);max-width:none}
+.compact .cv-lien a{min-height:44px}
+/* Sous 760 px : le titre, puis le bouton pleine largeur, sans la case pointillée (tour 2, défauts 2 et 37). */
+@media (max-width:759px){
+  .compact .cv-case-seule{border:0;padding:0;gap:0}
+  .compact .cv-case-nom{display:none}
+  .compact .cv-case-seule .btn{width:100%}
+  .compact .cv-lien{margin-top:4px}
+}
+@media (min-width:760px){.compact .cv-panneau{padding:var(--e-7,48px) var(--e-8,64px);align-items:center;text-align:center}.compact .cv-titre{font-size:var(--t-h2-idee);max-width:16ch}.compact .cv-case-seule{max-width:560px}}
+@media (min-width:1000px){
+  .compact .cv-panneau{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;column-gap:var(--e-8,64px);align-items:center;text-align:left}
+  .compact .cv-titre{grid-column:1;grid-row:1/3;max-width:18ch}
+  .compact .cv-case-seule{grid-column:2;grid-row:1;margin:0;max-width:none;align-self:end}
+  .compact .cv-lien{grid-column:2;grid-row:2;align-self:start;margin-top:var(--e-2,8px)}
+}
+
+/* Le mouvement, joué une fois, avec JavaScript seulement (avant .vu : état de départ). */
+@media (prefers-reduced-motion:no-preference){
+  :global(.js) .cv-panneau:not(.vu) .cv-notif{opacity:0;transform:translateY(-16px)}
+  :global(.js) .cv-panneau:not(.vu) .cv-notif-reponse{opacity:0}
+  :global(.js) .cv-panneau:not(.vu) .cv-case{border-color:rgba(93,232,143,.4)}
+  .cv-panneau.vu .cv-notif{animation:cv-arrive var(--d-3) var(--courbe-ressort) both,cv-tremble 70ms linear 3 var(--d-3)}
+  .cv-panneau.vu .cv-notif-reponse{animation:cv-fondu var(--d-2) ease-out 600ms both}
+  .cv-panneau.vu .cv-case{animation:cv-respire var(--d-4) var(--courbe-va-vient) 1200ms both}
+}
+@keyframes cv-arrive{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes cv-tremble{0%,100%{translate:0}25%{translate:-2px}75%{translate:2px}}
+@keyframes cv-fondu{from{opacity:0}to{opacity:1}}
+@keyframes cv-respire{from{border-color:rgba(93,232,143,.4)}to{border-color:var(--menthe)}}
+</style>

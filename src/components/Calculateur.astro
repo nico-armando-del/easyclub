@@ -5,15 +5,43 @@
   public/js/calculateur.js recalcule pour le nombre saisi, avec la même
   méthode que calculer() (src/data/temps.ts) : quatre tâches proportionnelles
   au nombre d'adhérents, la rentrée suivante fixe (12 h → 2 h).
+
+  compact (accueil, écran « Et chez vous ? ») : le seul total rendu, en géant,
+  et le nombre d'adhérents en champ dans la phrase. Même donnée
+  (data-calculateur, lue par scripts/controle_seo.py), même méthode, dans un
+  script en ligne de quelques lignes ; data-calc-pret écarte
+  public/js/calculateur.js. Sans JS, le champ est en lecture seule (250).
 */
 import { calculer, duree, TACHES, CINQ_TACHES, ADHERENTS_REFERENCE } from '../data/temps'
-interface Props { grand?: boolean; id?: string; entree?: boolean }
-const { grand = false, id = 'calculateur', entree = true } = Astro.props
+interface Props {
+  grand?: boolean; id?: string; entree?: boolean
+  /** Version en une phrase (accueil). */
+  compact?: boolean
+  /** Mots de la version compacte (français par défaut ; /en et /es). */
+  mots?: { avant: string; apres: string; etiquette: string }
+  /** Sur /temps-gagne : la note renvoie aux hypothèses juste en dessous, pas à la page elle-même. */
+  surPageTemps?: boolean
+}
+const {
+  grand = false, id = 'calculateur', entree = true, compact = false, surPageTemps = false,
+  mots = { avant: 'rendues chaque saison, pour', apres: 'adhérents.', etiquette: 'Nombre d’adhérents' },
+} = Astro.props
 const r = calculer(ADHERENTS_REFERENCE)
 const h = (m: number) => `${Math.round(m / 60)} h`
 const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c].avantMin, apres: TACHES[c].apresMin, prop: TACHES[c].proportionnelle })))
 ---
+{compact ? (
+<div class="calc-compact" id={id} data-calculateur={donnees} data-calc-pret="1" data-calc-compact>
+  <p class="cc-chiffre num"><span aria-live="polite" data-cc-gain>{h(r.gain)}</span></p>
+  <i class="cc-barre" aria-hidden="true"></i>
+  <p class="cc-phrase">{mots.avant} <label class="sr" for={`${id}-n`}>{mots.etiquette}</label><input id={`${id}-n`} class="cc-champ num" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" size="4" autocomplete="off" value={ADHERENTS_REFERENCE} readonly data-cc-n> {mots.apres}</p>
+</div>
+<script is:inline>
+(function(){document.querySelectorAll('[data-calc-compact]').forEach(function(r){var t=JSON.parse(r.getAttribute('data-calculateur')),c=r.querySelector('[data-cc-n]'),o=r.querySelector('[data-cc-gain]'),f,der=250;c.readOnly=false;function lu(){return parseInt(c.value.replace(/\D/g,''),10)}function maj(n){var k=n/250,g=0;t.forEach(function(x){g+=(x.avant-x.apres)*(x.prop?k:1)});o.textContent=Math.round(g/60)+' h'}c.addEventListener('input',function(){clearTimeout(f);f=setTimeout(function(){var v=lu();if(v>=10&&v<=5000){der=v;maj(v)}},150)});c.addEventListener('change',function(){var v=lu();if(isNaN(v))v=der;v=Math.max(10,Math.min(5000,v));c.value=v;der=v;maj(v)})})})()
+</script>
+) : (
 <div class:list={['calculateur', { grand, 'sans-entree': !entree }]} id={id} data-calculateur={donnees}>
+  <div class="calc-gauche">
   <div class="calc-entree">
     <label for={`${id}-n`}>Nombre d’adhérents de votre association</label>
     <div class="calc-champs">
@@ -22,12 +50,14 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
     </div>
     <p class="calc-sansjs">Calcul affiché pour 250 adhérents.</p>
   </div>
+  <!-- Les trois totaux sous le curseur, dans la colonne de gauche (tour 2, défaut 14). -->
+  <div class="calc-totaux" aria-live="polite">
+    <div><span>Aujourd’hui</span><b class="num" data-calc-avant>≈ {h(r.avant)}</b></div>
+    <div><span>Avec OnClub</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
+    <div class="calc-gain"><span>Rendues chaque saison</span><b class="num" data-calc-gain>≈ {h(r.gain)}</b></div>
+  </div>
+  </div>
   <div class="calc-resultat" aria-live="polite">
-    <div class="calc-totaux">
-      <div><span>Aujourd’hui</span><b class="num" data-calc-avant>≈ {h(r.avant)}</b></div>
-      <div><span>Avec OnClub</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
-      <div class="calc-gain"><span>Rendues chaque saison</span><b class="num" data-calc-gain>≈ {h(r.gain)}</b></div>
-    </div>
     <table class="calc-table">
       <caption class="sr">Les cinq tâches recalculées</caption>
       <thead><tr><th scope="col">Tâche</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th></tr></thead>
@@ -37,11 +67,20 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
         ))}
       </tbody>
     </table>
-    <p class="calc-note">Estimation, pas une promesse : la méthode et les hypothèses sont sur <a href="/temps-gagne#hypotheses">la page du temps gagné</a>.</p>
+    {surPageTemps
+      ? <p class="calc-note">Estimation, pas une promesse : la méthode et les hypothèses sont <a href="#hypotheses">juste en dessous</a>.</p>
+      : <p class="calc-note">Estimation, pas une promesse : la méthode et les hypothèses sont sur <a href="/temps-gagne#hypotheses">la page du temps gagné</a>.</p>}
   </div>
 </div>
-<script is:inline defer src="/js/calculateur.js"></script>
+)}
+{!compact && <script is:inline defer src="/js/calculateur.js"></script>}
 <style>
+.calc-compact{display:grid;gap:14px;justify-items:start}
+.cc-chiffre{font:800 clamp(4.5rem,2rem + 10vw,10rem)/.9 var(--f-titre);letter-spacing:-.03em;color:var(--encre)}
+.cc-barre{display:block;width:min(100%,360px);height:10px;border-radius:999px;background:var(--menthe)}
+.cc-phrase{font-size:clamp(1.125rem,1rem + .5vw,1.25rem);line-height:1.5;max-width:26em}
+.cc-champ{display:inline-block;width:4.5ch;min-height:44px;margin:0 .15em;padding:0 .1em;border:0;border-bottom:2px dotted var(--encre);border-radius:0;background:transparent;font:700 1em/1 var(--f-titre);color:var(--encre);text-align:center;vertical-align:baseline}
+.cc-champ:focus{outline:none;background:var(--papier-2,#EDE8DC);box-shadow:0 0 0 3px var(--menthe)}
 .calculateur{background:var(--blanc);border:1px solid var(--trait);border-radius:var(--r-l);padding:24px;display:grid;gap:28px;box-shadow:0 18px 40px -26px rgba(11,15,20,.38)}
 @media (min-width:960px){.calculateur.grand{grid-template-columns:.8fr 1.2fr;padding:40px;gap:48px}}
 .sans-entree .calc-entree{display:none}
@@ -55,13 +94,14 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
 :global(.js) .calc-sansjs{display:none}
 .calc-champs{display:none}
 :global(.js) .calc-champs{display:grid}
+.calc-gauche{display:grid;gap:24px;align-content:start;min-width:0}
 .calc-totaux{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .calc-totaux div{background:var(--papier);border-radius:var(--r-s);padding:14px}
 .calc-totaux span{display:block;font-size:.875rem;color:var(--gris)}
 .calc-totaux b{display:block;font:700 clamp(1.5rem,1.2rem + 1vw,2.25rem)/1.1 var(--f-titre)}
 .calc-totaux .calc-gain{grid-column:1/-1;background:var(--menthe)}
 .calc-totaux .calc-gain span{color:var(--encre)}
-.calc-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:.9375rem}
+.calc-table{width:100%;border-collapse:collapse;font-size:.9375rem}
 .calc-table th,.calc-table td{padding:10px 6px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
 .calc-table thead th{font-size:.8125rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gris)}
 .calc-table td{white-space:nowrap;font-weight:700}

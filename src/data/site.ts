@@ -13,6 +13,13 @@ export const EMAIL = 'onclub.contact@gmail.com'
 export const WHATSAPP = '33645049227'
 export const WHATSAPP_AFFICHE = '+33 6 45 04 92 27'
 export const ACCROCHE = 'Votre club, tout en un.'
+
+/**
+  « Il est 23 h 04. » (récit §9.2, maquettes §H.9) : l'heure de l'appareil, le soir
+  seulement (20 h à 2 h), au-dessus de la notification de la case vide. Rien ne part
+  nulle part. ÉTEINT tant que Nico ne l'a pas validé.
+*/
+export const HEURE_DU_SOIR = false
 export const PHRASE_BUT = 'Le but d’un club, c’est de créer des moments. Pas de subir l’administratif.'
 
 /** Message par défaut d'une demande de démo. */

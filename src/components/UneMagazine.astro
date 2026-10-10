@@ -1,0 +1,62 @@
+---
+/*
+  « À LA UNE » de /ressources (maquettes §B.6) : une grande carte blanche (couverture + rubrique,
+  titre, date) et, à côté, « À lire aussi » en filets. Si « À lire aussi » est vide, la colonne
+  disparaît (textes c, états vides).
+*/
+import Couverture from './Couverture.astro'
+import ListeFilets, { type EntreeFilet } from './ListeFilets.astro'
+
+interface Props {
+  entree: EntreeFilet & { couverture: NonNullable<EntreeFilet['couverture']> & { sous?: string } }
+  aussi?: EntreeFilet[]
+}
+const { entree, aussi = [] } = Astro.props
+const c = entree.couverture
+---
+<section class:list={['une', { 'une-seule': aussi.length === 0 }]} aria-labelledby="une-titre">
+  <h2 class="une-etiquette" id="une-titre">À la une</h2>
+  <div class="une-grille">
+    <article class="une-carte">
+      <div class="une-couv">
+        <Couverture format="une" rubrique={c.rubrique} donnee={c.donnee} apres={c.apres} sous={c.sous} titreCourt={c.titreCourt} etiquette={entree.rubrique} />
+      </div>
+      <div class="une-texte">
+        <p class="une-rub">{entree.rubrique}{entree.duree && <> · {entree.duree}</>}</p>
+        <h3 class="une-titre"><a href={entree.href}>{entree.titre}</a></h3>
+        {entree.ligne && <p class="une-ligne">{entree.ligne}</p>}
+        <p class="une-date">{[entree.date, entree.auteur].filter(Boolean).join(' · ')}</p>
+      </div>
+    </article>
+    {aussi.length > 0 && (
+      <div class="une-aussi">
+        <ListeFilets entrees={aussi} titre="À lire aussi" niveau="h3" serree id="a-lire-aussi" />
+      </div>
+    )}
+  </div>
+</section>
+<style>
+.une-etiquette{font:700 var(--t-micro,.8125rem)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--sapin);margin-bottom:16px}
+.une-grille{display:grid;gap:var(--e-6,32px)}
+.une-carte{position:relative;display:grid;gap:20px;background:var(--blanc);border-radius:var(--r-xl,40px);padding:16px 16px 24px;box-shadow:var(--ombre-carte,none);transition:box-shadow var(--d-2,320ms) ease}
+.une-carte:hover{box-shadow:var(--ombre-carte-survol,none)}
+.une-texte{padding-inline:8px}
+.une-rub{font:700 var(--t-micro,.8125rem)/1.3 var(--f-texte);letter-spacing:.08em;text-transform:uppercase;color:var(--sapin)}
+.une-titre{margin-top:10px;font-size:clamp(1.5rem,1.2rem + 1.2vw,1.875rem);line-height:1.12;letter-spacing:-.015em}
+.une-titre a{text-decoration:none;color:var(--encre)}
+.une-titre a::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.une-carte:hover .une-titre a{text-decoration:underline}
+.une-titre a:focus-visible{outline:none}
+.une-carte:has(a:focus-visible){outline:3px solid var(--encre);outline-offset:4px}
+.une-ligne{margin-top:10px;color:var(--gris);max-width:44ch}
+.une-date{margin-top:12px;font-size:var(--t-micro,.8125rem);color:var(--gris)}
+.une-couv :global(.couv-note){padding-inline:8px}
+@media (min-width:760px){
+  .une-carte{grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:center;gap:32px;padding:20px 32px 20px 20px}
+  .une-texte{padding-inline:0}
+}
+@media (min-width:1000px){
+  .une-grille{grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:var(--e-7,48px);align-items:start}
+  .une-seule .une-grille{grid-template-columns:minmax(0,1fr)}
+}
+</style>

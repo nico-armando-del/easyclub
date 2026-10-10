@@ -1,134 +1,205 @@
 ---
 /*
-  L'EN-TÊTE. Le menu se construit à partir des collections : une fonctionnalité,
-  un sport ou un profil ajouté apparaît ici sans toucher à ce fichier.
-  Sans JavaScript, les menus déroulants sont des <details> qui s'ouvrent au clic ;
-  site.js les referme seulement au clic ailleurs ou sur Échap.
+  L'EN-TÊTE (maquettes §B.1 et §F). Le menu se construit à partir des collections :
+  une fonctionnalité, un sport ou un profil ajouté apparaît ici sans toucher à ce fichier.
+
+  - Une seule navigation, pour l'ordinateur et le téléphone (pas de liens en double) :
+    barre à partir de 1080 px, feuille plein écran en dessous (bouton « Menu »).
+  - Sports et activités : les 10 premiers (ordre, puis nom), puis « Tous les sports (N) ».
+  - Les menus déroulants sont des <details> : sans JavaScript, ils s'ouvrent au clic
+    (site.js les referme au clic ailleurs ou sur Échap), et la navigation s'affiche
+    en entier sous la marque sur téléphone.
+  - Il se cache en descendant (au-delà de 3 × --entete-h) et revient dès 8 px de
+    remontée ; jamais si un menu est ouvert ou si le focus est dedans.
 */
 import { parFamille, liste, url } from '../lib/collections'
 
-interface Props { chemin: string }
-const { chemin } = Astro.props
+interface Props { chemin: string; fond?: 'papier' | 'blanc' }
+const { chemin, fond = 'papier' } = Astro.props
+const LIMITE = 10
 const familles = await parFamille()
+const totalFonctions = familles.reduce((s, f) => s + f.items.length, 0)
 const sports = await liste('sports')
 const activites = await liste('activites')
 const profils = await liste('profils')
 const actif = (p: string) => (chemin === p || chemin.startsWith(p + '/') ? 'page' : undefined)
+const dans = (...bases: string[]) => (bases.some((b) => chemin === b || chemin.startsWith(b + '/')) ? 'page' : undefined)
 ---
-<header class="entete">
+<header class="entete" data-entete data-fond={fond}>
   <div class="enveloppe entete-barre">
     <a class="marque" href="/" aria-label="OnClub, accueil"><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
+    <button type="button" class="btn btn-contour btn-petit menu-bouton" aria-expanded="false" aria-controls="nav-principale" data-menu-bouton>Menu</button>
 
-    <nav class="nav" aria-label="Principale">
+    <nav class="nav" id="nav-principale" aria-label="Principale">
       <details class="deroulant">
         <summary aria-current={actif('/fonctionnalites')}>Fonctionnalités</summary>
-        <div class="panneau panneau-large">
+        <div class="panneau">
           <div class="panneau-grille six">
             {familles.map((f) => (
               <div>
                 <a class="panneau-titre" href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a>
-                <ul>{f.items.map((e) => <li><a href={url('fonctionnalites', e.id)}>{e.data.nom}</a></li>)}</ul>
+                <ul class="panneau-items">{f.items.map((e) => <li><a href={url('fonctionnalites', e.id)}>{e.data.nom}</a></li>)}</ul>
               </div>
             ))}
           </div>
-          <a class="panneau-pied" href="/fonctionnalites">Toutes les fonctionnalités <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+          <a class="panneau-pied" href="/fonctionnalites">Toutes les fonctionnalités ({totalFonctions}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>
         </div>
       </details>
       <details class="deroulant">
-        <summary aria-current={actif('/pour-qui')}>Pour qui</summary>
-        <div class="panneau">
+        <summary aria-current={dans('/pour-qui', '/sport', '/activites', '/pour')}>Pour qui</summary>
+        <div class="panneau panneau-etroit">
           <div class="panneau-grille trois">
             <div>
               <a class="panneau-titre" href="/pour-qui#sports">Sports</a>
-              <ul>{sports.map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}</ul>
+              <ul>
+                {sports.slice(0, LIMITE).map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}
+                {sports.length > 1
+                  ? <li><a class="tous" href="/pour-qui#sports">Tous les sports ({sports.length})</a></li>
+                  : <li><a class="tous" href="/pour-qui">Toutes les associations</a></li>}
+              </ul>
             </div>
             <div>
               <a class="panneau-titre" href="/pour-qui#activites">Autres activités</a>
-              <ul>{activites.map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}</ul>
+              <ul>
+                {activites.slice(0, LIMITE).map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}
+                <li><a class="tous" href="/pour-qui#activites">Toutes les activités ({activites.length})</a></li>
+              </ul>
             </div>
             <div>
               <a class="panneau-titre" href="/pour-qui#profils">Votre rôle</a>
               <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
             </div>
           </div>
-          <a class="panneau-pied" href="/pour-qui">Toutes les associations <svg aria-hidden="true"><use href="#fleche"/></svg></a>
         </div>
       </details>
-      <a href="/tarifs" aria-current={actif('/tarifs')}>Tarifs</a>
-      <a href="/ressources" aria-current={actif('/ressources')}>Ressources</a>
-      <a class="nav-discret" href="/recommander" aria-current={actif('/recommander')}>Transmettre à mon club</a>
-      <a class="btn btn-encre nav-btn" href="/demo">Demander une démo</a>
+      <a class="nav-lien" href="/tarifs" aria-current={actif('/tarifs')}>Tarifs</a>
+      <a class="nav-lien" href="/ressources" aria-current={dans('/ressources', '/guides', '/articles', '/comparatif')}>Ressources</a>
+      <a class="nav-lien nav-discret" href="/recommander" aria-current={actif('/recommander')}>Transmettre à mon club</a>
+      <a class="btn btn-encre btn-petit nav-btn" href="/demo">Demander une démo</a>
     </nav>
-
-    <details class="menu-tel">
-      <summary>Menu</summary>
-      <div class="menu-tel-panneau">
-        <a class="btn btn-menthe" href="/demo">Demander une démo</a>
-        <details>
-          <summary>Fonctionnalités</summary>
-          <ul>
-            {familles.map((f) => <li><a href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a></li>)}
-            <li><a href="/fonctionnalites">Toutes les fonctionnalités</a></li>
-          </ul>
-        </details>
-        <details>
-          <summary>Pour qui</summary>
-          <ul>
-            <li><a href="/pour-qui#sports">Sports</a></li>
-            <li><a href="/pour-qui#activites">Autres activités</a></li>
-            <li><a href="/pour-qui#profils">Votre rôle</a></li>
-          </ul>
-        </details>
-        <a class="menu-tel-lien" href="/tarifs">Tarifs</a>
-        <a class="menu-tel-lien" href="/temps-gagne">Le temps gagné</a>
-        <a class="menu-tel-lien" href="/ressources">Ressources</a>
-        <a class="menu-tel-lien discret" href="/recommander">Transmettre à mon club</a>
-      </div>
-    </details>
   </div>
 </header>
 
+<script>
+  const entete = document.querySelector<HTMLElement>('[data-entete]')
+  const bouton = document.querySelector<HTMLButtonElement>('[data-menu-bouton]')
+  if (entete && bouton) {
+    const racine = document.documentElement
+    const hauteur = () => entete.offsetHeight || 72
+    const feuilleOuverte = () => entete.classList.contains('ouvert')
+    const bloque = () => feuilleOuverte() || !!entete.querySelector('details[open]') || entete.contains(document.activeElement)
+
+    /* 1. Se cacher en descendant, revenir dès 8 px de remontée (un seul écouteur, régulé par rAF). */
+    let dernier = scrollY
+    let bas = scrollY
+    let attente = false
+    const regarde = () => {
+      attente = false
+      const y = Math.max(0, scrollY)
+      entete.classList.toggle('defile', y > 8)
+      if (y > dernier) {
+        bas = y
+        if (y > 3 * hauteur() && !bloque()) entete.classList.add('cache')
+      } else if (bas - y > 8 || y <= 8) {
+        entete.classList.remove('cache')
+        bas = y
+      }
+      dernier = y
+    }
+    addEventListener('scroll', () => { if (!attente) { attente = true; requestAnimationFrame(regarde) } }, { passive: true })
+    regarde()
+    entete.addEventListener('focusin', () => entete.classList.remove('cache'))
+    entete.addEventListener('toggle', () => entete.classList.remove('cache'), true)
+
+    /* 2. La feuille du téléphone : focus piégé, Échap la ferme et rend le focus au bouton « Menu ». */
+    const ouvrir = (oui: boolean) => {
+      entete.classList.toggle('ouvert', oui)
+      racine.classList.toggle('menu-ouvert', oui)
+      bouton.setAttribute('aria-expanded', String(oui))
+      bouton.textContent = oui ? 'Fermer' : 'Menu'
+      if (oui) entete.classList.remove('cache')
+      else entete.querySelectorAll('details[open]').forEach((d) => d.removeAttribute('open'))
+    }
+    bouton.addEventListener('click', () => ouvrir(!feuilleOuverte()))
+    const focusables = () => Array.from(entete.querySelectorAll<HTMLElement>('a[href],button,summary'))
+      .filter((el) => el.getClientRects().length > 0)
+    document.addEventListener('keydown', (e) => {
+      if (!feuilleOuverte()) return
+      if (e.key === 'Escape') { e.preventDefault(); ouvrir(false); bouton.focus(); return }
+      if (e.key !== 'Tab') return
+      const liste = focusables()
+      if (!liste.length) return
+      const premier = liste[0], dernierEl = liste[liste.length - 1]
+      if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernierEl.focus() }
+      else if (!e.shiftKey && document.activeElement === dernierEl) { e.preventDefault(); premier.focus() }
+    })
+    entete.querySelectorAll('.nav a[href]').forEach((a) => a.addEventListener('click', () => { if (feuilleOuverte()) ouvrir(false) }))
+    matchMedia('(min-width:1080px)').addEventListener('change', (m) => { if (m.matches && feuilleOuverte()) ouvrir(false) })
+  }
+</script>
+
 <style>
-.entete{background:var(--menthe);position:relative;z-index:40}
-.entete-barre{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;min-height:72px}
-.marque{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 1.375rem/1 var(--f-titre)}
-.marque svg{width:44px;height:22px}
-.nav{display:none;align-items:center;gap:2px}
-.nav>a,.deroulant>summary{display:inline-flex;align-items:center;min-height:46px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;cursor:pointer;list-style:none}
+.entete{position:sticky;top:0;z-index:var(--z-entete);background:transparent;transition:transform var(--d-2) var(--courbe-sortie),background-color var(--d-1) linear,box-shadow var(--d-1) linear}
+.entete.defile{background:rgba(245,242,234,.88);-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 1px 0 var(--trait)}
+.entete[data-fond="blanc"].defile{background:rgba(255,255,255,.9)}
+.entete.cache{transform:translateY(-100%)}
+.entete-barre{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 16px;min-height:var(--entete-h)}
+.marque{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;font:700 1.375rem/1 var(--f-titre)}
+.marque svg{width:56px;height:28px}
+.menu-bouton{display:none;position:relative;z-index:2}
+:global(.js) .menu-bouton{display:inline-flex}
+@media (min-width:1080px){:global(.js) .menu-bouton{display:none}}
+
+/* — Ordinateur — */
+.nav{display:flex;align-items:center;gap:0 28px}
+.nav-lien,.deroulant>summary{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font:600 .9375rem/1.2 var(--f-texte);cursor:pointer;list-style:none;text-underline-offset:8px}
 .deroulant>summary::-webkit-details-marker{display:none}
-.deroulant>summary::after{content:"";width:7px;height:7px;margin-left:9px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg)}
+.deroulant>summary::after{content:"";width:7px;height:7px;margin-left:9px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-2px) rotate(45deg);transition:transform var(--d-1) var(--courbe-sortie)}
 .deroulant[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
-.nav>a:hover,.deroulant>summary:hover,.deroulant[open]>summary{background:rgba(11,15,20,.08)}
-.nav [aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
-.nav-discret{font-weight:500!important;font-size:.9375rem;opacity:.85}
-.nav .nav-btn{margin-left:10px;min-height:46px;padding:0 22px}
-.nav .nav-btn:hover{background:var(--encre)}
+.nav-lien:hover,.deroulant>summary:hover{text-decoration:underline;text-decoration-thickness:2px}
+.nav [aria-current="page"]{text-decoration:underline;text-decoration-color:var(--sapin);text-decoration-thickness:2px}
+.nav-discret{color:var(--gris)}
+.nav .nav-btn{margin-left:4px}
 .deroulant{position:static}
-.panneau{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% - 6px);width:min(1120px,calc(100vw - 2 * var(--g)));background:var(--encre);color:var(--blanc);border-radius:var(--r-m);padding:28px;box-shadow:var(--ombre)}
-.panneau-grille{display:grid;gap:20px}
+.panneau{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% - 4px);width:min(1200px,calc(100vw - 2 * var(--g)));background:var(--blanc);color:var(--encre);border-radius:var(--r-l);padding:32px;box-shadow:var(--ombre)}
+.panneau-etroit{width:min(880px,calc(100vw - 2 * var(--g)))}
+.deroulant[open] .panneau{animation:panneau-entre var(--d-1) var(--courbe-sortie)}
+@keyframes panneau-entre{from{opacity:0;translate:0 -6px}to{opacity:1;translate:0 0}}
+.panneau-grille{display:grid;gap:24px}
 .panneau-grille.six{grid-template-columns:repeat(6,minmax(0,1fr))}
 .panneau-grille.trois{grid-template-columns:repeat(3,minmax(0,1fr))}
-.panneau ul{list-style:none;padding:0;margin:6px 0 0}
-.panneau li a{display:flex;align-items:center;min-height:40px;color:#D7DBE1;text-decoration:none;font-size:.9375rem;line-height:1.3}
-.panneau li a:hover{color:var(--menthe);text-decoration:underline}
-.panneau-titre{display:block;font:700 1rem/1.3 var(--f-titre);color:var(--menthe);text-decoration:none;padding-bottom:6px;border-bottom:1px solid #2A323D}
-.panneau-pied{display:inline-flex;align-items:center;gap:8px;margin-top:18px;min-height:44px;color:var(--blanc);font-weight:700;text-decoration:none}
+.panneau ul{list-style:none;padding:0;margin:8px 0 0}
+.panneau li a{display:flex;align-items:center;min-height:36px;color:var(--encre);text-decoration:none;font-size:.9375rem;line-height:1.3}
+.panneau li a:hover{text-decoration:underline}
+.panneau li a.tous{font-weight:700;color:var(--sapin)}
+.panneau-titre{display:flex;align-items:center;min-height:36px;font:700 1.0625rem/1.25 var(--f-titre);color:var(--encre);text-decoration:none;padding-bottom:6px;border-bottom:1px solid var(--trait)}
+.panneau-titre:hover{text-decoration:underline}
+.panneau-pied{display:inline-flex;align-items:center;gap:8px;margin-top:20px;min-height:44px;color:var(--encre);font-weight:700;text-decoration:none}
+.panneau-pied:hover{text-decoration:underline}
 .panneau-pied svg{width:18px;height:18px}
-.panneau :focus-visible{outline-color:var(--menthe)}
-.menu-tel{position:static}
-.menu-tel>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--trait);font-weight:700;background:var(--blanc)}
-.menu-tel>summary::-webkit-details-marker{display:none}
-.menu-tel[open]>summary{background:var(--encre);color:var(--blanc)}
-.menu-tel-panneau{position:absolute;left:var(--g);right:var(--g);top:calc(100% - 4px);background:var(--encre);color:var(--blanc);border-radius:var(--r-m);padding:16px;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 100px);overflow:auto}
-.menu-tel-panneau .btn{width:100%;margin-bottom:8px}
-.menu-tel-panneau summary,.menu-tel-lien{display:flex;align-items:center;min-height:48px;padding:0 12px;border-radius:12px;font-weight:600;text-decoration:none;cursor:pointer}
-.menu-tel-panneau summary{list-style:none}
-.menu-tel-panneau summary::-webkit-details-marker{display:none}
-.menu-tel-panneau summary::after{content:"+";margin-left:auto;font-size:1.3rem;color:var(--menthe)}
-.menu-tel-panneau details[open] summary::after{content:"−"}
-.menu-tel-panneau ul{list-style:none;padding:0 0 8px 12px}
-.menu-tel-panneau li a{display:flex;align-items:center;min-height:44px;padding:0 12px;color:#D7DBE1;text-decoration:none}
-.menu-tel-lien.discret{font-weight:500;color:#D7DBE1}
-.menu-tel-panneau :focus-visible{outline-color:var(--menthe)}
-@media (min-width:1080px){.nav{display:flex}.menu-tel{display:none}}
+
+/* — Téléphone et tablette : feuille plein écran (avec JS), liste dépliée sous la marque (sans JS) — */
+@media (max-width:1079px){
+  .nav{flex-basis:100%;flex-direction:column;align-items:stretch;gap:0;padding:0 0 16px}
+  :global(.js) .nav{display:none}
+  :global(.js) .entete.ouvert{transform:none;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--papier)}
+  :global(.js) .entete.ouvert .nav{display:flex;position:fixed;inset:0;z-index:1;padding:calc(var(--entete-h) + 8px) var(--g) 16px;background:var(--papier);overflow-y:auto;overscroll-behavior:contain;animation:feuille-entre var(--d-2) var(--courbe-sortie)}
+  .nav-lien,.deroulant>summary{display:flex;width:100%;min-height:56px;font-size:1.125rem;border-bottom:1px solid var(--trait);justify-content:space-between}
+  .nav-discret{color:var(--encre)}
+  .deroulant>summary::after{margin-right:6px}
+  .panneau{position:static;transform:none;width:auto;background:transparent;box-shadow:none;border-radius:0;padding:8px 0 16px}
+  .deroulant[open] .panneau{animation:none}
+  .panneau-grille.six,.panneau-grille.trois{grid-template-columns:1fr;gap:16px}
+  .panneau-grille.six{gap:0}
+  .panneau-grille.six .panneau-items{display:none} /* sur téléphone : les six familles ; chaque famille mène à sa section de /fonctionnalites */
+  .panneau-grille.six .panneau-titre{min-height:48px;border-bottom:0;padding:0;font:600 1rem/1.3 var(--f-texte)}
+  .panneau-titre{min-height:44px;font-size:1rem}
+  .panneau li a{min-height:44px;font-size:1rem}
+  .nav .nav-btn{margin:24px 0 0;min-height:52px;width:100%}
+  :global(.js) .entete.ouvert .nav-btn{margin-top:auto;position:sticky;bottom:0;box-shadow:0 -16px 16px var(--papier)}
+}
+@keyframes feuille-entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+:global(html.menu-ouvert){overflow:hidden}
+.entete :focus-visible{outline-color:var(--encre)}
+@media (prefers-reduced-motion:reduce){.entete{transition:none}}
 </style>

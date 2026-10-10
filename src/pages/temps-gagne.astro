@@ -3,14 +3,16 @@
   LE TEMPS GAGNÉ : le calculateur en grand, la méthode, les hypothèses
   (ancre #hypotheses, visée par chaque BlocTemps du site), l'INJEP sourcé.
   Tous les chiffres viennent de src/data/temps.ts.
+  C'est la page du calcul (maquettes §B.4) : ici, le tableau du temps est visible.
 */
 import Layout from '../layouts/Layout.astro'
-import FilAriane from '../components/FilAriane.astro'
+import HerosCompact from '../components/HerosCompact.astro'
 import Calculateur from '../components/Calculateur.astro'
 import BlocTemps from '../components/BlocTemps.astro'
+import Repli from '../components/Repli.astro'
 import Faq from '../components/Faq.astro'
-import AppelDemo from '../components/AppelDemo.astro'
-import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES, HYPOTHESES_OFFRES, duree } from '../data/temps'
+import CaseVide from '../components/CaseVide.astro'
+import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES_OFFRES, duree } from '../data/temps'
 import { INJEP, OFFRES, PHRASE_BUT } from '../data/site'
 
 const fil = [{ nom: 'Le temps gagné', url: '/temps-gagne' }]
@@ -27,101 +29,114 @@ const faq = [
   fil={fil}
   faq={faq}
 >
-  <div class="tete-page">
-    <div class="enveloppe">
-      <FilAriane fil={fil} />
-      <p class="surtitre">Le temps gagné</p>
-      <h1>Combien de temps votre association va gagner&nbsp;?</h1>
-      <p class="chapo">Pour une association de 250 adhérents, l’administratif prend environ {TOTAL.avant} par saison. Avec OnClub, il en reste environ {TOTAL.apres}. Faites le calcul pour la vôtre.</p>
-    </div>
-  </div>
+  <HerosCompact fil={fil} surtitre="Le temps gagné" titre="Combien de temps votre association va gagner ?">
+    <p class="chiffre num"><span>{TOTAL.avant}<span class="sr"> aujourd’hui,</span></span><span class="fleche" aria-hidden="true">→</span><span class="apres"><span class="sr">environ </span>{TOTAL.apres}<span class="sr"> avec OnClub</span></span></p>
+    <p class="chiffre-note">Par saison, pour 250 adhérents. Estimation OnClub, pas une étude.</p>
+    <div class="hc-actions-temps"><a class="btn btn-encre" href="/demo">Demander une démo</a></div>
+  </HerosCompact>
 
-  <section class="section" aria-labelledby="t-calc">
+  <section class="section section-calcul" aria-labelledby="t-calc">
     <div class="enveloppe">
-      <h2 id="t-calc" class="sr">Le calculateur</h2>
-      <Calculateur grand />
+      <div class="carte-calcul">
+        <h2 id="t-calc" class="h2-calc">Faites le calcul pour la vôtre</h2>
+        <Calculateur grand surPageTemps />
+      </div>
     </div>
   </section>
 
   <section class="section fond-blanc" id="hypotheses" aria-labelledby="t-hyp">
     <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">La méthode</p>
-        <h2 id="t-hyp">Les hypothèses, tâche par tâche</h2>
-        <p class="intro">{HYPOTHESES}</p>
+      <div class="section-tete">
+        <h2 id="t-hyp" class="h2-idee">Les hypothèses, tâche par tâche</h2>
       </div>
-      <div class="tableau-defile">
-        <table class="tableau-hyp">
-          <caption class="sr">Les cinq tâches de l’estimation, pour 250 adhérents</caption>
-          <thead><tr><th scope="col">Tâche</th><th scope="col">Le calcul</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th><th scope="col">Ce qui change</th></tr></thead>
-          <tbody>
-            {CINQ_TACHES.map((c) => { const t = TACHES[c]; return (
-              <tr><th scope="row">{t.tache}</th><td>{t.calcul}</td><td class="num">{duree(t.avantMin ?? 0)}</td><td class="num">{duree(t.apresMin ?? 0)}</td><td>{t.comment}</td></tr>
-            ) })}
-            <tr class="total"><th scope="row">Total</th><td>Les cinq tâches</td><td class="num">≈ {TOTAL.avant}</td><td class="num">≈ {TOTAL.apres}</td><td>≈ {TOTAL.gain} rendues</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <div class="bloc-hyp"><BlocTemps cles={CINQ_TACHES} titre="Les cinq tâches, pour 250 adhérents" /></div>
       <ul class="methode">
-        <li><b>Proportionnel.</b> Recopier les fiches, suivre les paiements, relancer et réclamer les pièces suivent le nombre d’adhérents&nbsp;: le calculateur les multiplie par (vos adhérents ÷ 250).</li>
+        <li><b>Proportionnel.</b> Recopier les fiches, suivre les paiements, relancer et réclamer les pièces suivent le nombre d’adhérents : le calculateur les multiplie par (vos adhérents ÷ 250).</li>
         <li><b>Fixe.</b> La préparation de la rentrée suivante reste à 12 h → 2 h quel que soit le nombre d’adhérents.</li>
         <li><b>Arrondi.</b> Les totaux sont arrondis à l’heure, les lignes à la minute.</li>
       </ul>
+      <Repli titre="Le détail, tâche par tâche">
+        <div class="tableau-defile" data-defile-x>
+          <table class="tableau-hyp">
+            <caption class="sr">Les cinq tâches de l’estimation, pour 250 adhérents</caption>
+            <thead><tr><th scope="col">Tâche</th><th scope="col">Le calcul</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th><th scope="col">Ce qui change</th></tr></thead>
+            <tbody>
+              {CINQ_TACHES.map((c) => { const t = TACHES[c]; return (
+                <tr><th scope="row">{t.tache}</th><td>{t.calcul}</td><td class="num">{duree(t.avantMin ?? 0)}</td><td class="num">{duree(t.apresMin ?? 0)}</td><td>{t.comment}</td></tr>
+              ) })}
+              <tr class="total"><th scope="row">Total</th><td>Les cinq tâches</td><td class="num">≈ {TOTAL.avant}</td><td class="num">≈ {TOTAL.apres}</td><td>≈ {TOTAL.gain} rendues</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Repli>
     </div>
   </section>
 
   <section class="section" aria-labelledby="t-offres">
     <div class="enveloppe">
-      <div class="tete-section">
-        <p class="surtitre">Par offre</p>
-        <h2 id="t-offres">Plus l’offre en prend, plus elle en rend.</h2>
+      <div class="section-tete">
+        <h2 id="t-offres" class="h2-idee">Plus l’offre en prend, plus elle en rend</h2>
       </div>
       <ul class="par-offre">
         {OFFRES.map((o) => <li><b class="num">≈ {o.heures} h</b><span>{o.nom}</span></li>)}
       </ul>
-      <p class="note">Estimation OnClub pour 250 adhérents, pas une étude. {HYPOTHESES_OFFRES}</p>
-      <div class="detail-pro"><BlocTemps cles={['messages', 'attente', 'site', 'boutique', 'evenements']} titre="Ce que Pro et Pro Max IA ajoutent" /></div>
+      <p class="note">Estimation OnClub pour 250 adhérents, pas une étude.</p>
+      <Repli titre="Comment on arrive à 51, 75 et 97 h">
+        <ul>{HYPOTHESES_OFFRES.split(/(?<=\))\.\s+/).map((phrase) => <li>{phrase.replace(/\.$/, '')}.</li>)}</ul>
+      </Repli>
+      <Repli titre="Ce que Pro et Pro Max IA ajoutent">
+        <BlocTemps cles={['messages', 'attente', 'site', 'boutique', 'evenements']} titre="Les cinq tâches de plus, pour 250 adhérents" />
+      </Repli>
     </div>
   </section>
 
   <section class="section fond-encre sur-encre" aria-labelledby="t-injep">
     <div class="enveloppe injep">
       <div>
-        <p class="surtitre">Ce que disent les bénévoles</p>
-        <h2 id="t-injep"><span class="injep-chiffre">{INJEP.chiffre}</span> {INJEP.texte}</h2>
-        <p class="note">Source&nbsp;: <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a>, consultée le 9 octobre 2026.</p>
+        <h2 id="t-injep" class="h2-idee">Ce que disent les bénévoles</h2>
+        <p class="injep-texte"><span class="injep-chiffre num">{INJEP.chiffre}</span> {INJEP.texte}</p>
+        <p class="note">Source : <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a>, consultée le 9 octobre 2026.</p>
       </div>
       <p class="injep-phrase">{PHRASE_BUT}</p>
     </div>
   </section>
 
-  <div class="section"><div class="enveloppe"><Faq items={faq} /><p class="liens-fin">Pour aller plus loin&nbsp;: <a href="/fonctionnalites">les fonctionnalités</a>, <a href="/tarifs">les tarifs</a>, <a href="/ressources">les guides</a>, <a href="/demo">préparer ma démo</a>.</p></div></div>
-  <AppelDemo />
+  <div class="section"><div class="enveloppe"><Faq items={faq} disposition="deux-colonnes" /></div></div>
+  <CaseVide compact />
 </Layout>
 
 <style>
-.tete-page{background:var(--menthe);padding-block:8px calc(var(--section) * .7)}
-.tete-page .surtitre{margin-top:20px}
-.tete-page h1{max-width:18ch}
-.tableau-defile{overflow-x:auto;margin-top:32px}
+.chiffre{margin-top:var(--e-5);display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .25em;font:800 var(--t-chiffre)/.95 var(--f-titre);letter-spacing:-.04em}
+.chiffre .fleche{font-weight:600;color:var(--sapin)}
+.chiffre .apres{color:var(--sapin)}
+.chiffre-note{margin-top:var(--e-3);color:var(--gris);font-size:var(--t-petit)}
+.hc-actions-temps{margin-top:var(--e-5)}
+@media (max-width:759px){.hc-actions-temps .btn{width:100%}}
+.section-calcul{padding-top:0}
+.carte-calcul{background:var(--blanc);border-radius:var(--r-xl);box-shadow:var(--ombre-carte);padding:var(--e-5) 20px}
+@media (min-width:760px){.carte-calcul{padding:var(--e-7)}}
+.h2-calc{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-bottom:var(--e-5)}
+.carte-calcul :global(.calculateur){border:0;box-shadow:none;background:transparent;padding:0}
+.bloc-hyp{max-width:960px}
+.methode{margin:var(--e-6) 0;padding-left:1.2em;display:grid;gap:10px;max-width:var(--lecture)}
+.tableau-defile{overflow-x:auto}
 .tableau-hyp{width:100%;min-width:720px;border-collapse:collapse;font-size:.9375rem}
 .tableau-hyp th,.tableau-hyp td{padding:12px 10px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
 .tableau-hyp thead th{font-size:.8125rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gris);border-bottom:2px solid var(--encre)}
 .tableau-hyp tbody th{font-weight:700}
 .tableau-hyp td.num{font-weight:700;white-space:nowrap}
 .tableau-hyp .total th,.tableau-hyp .total td{border-bottom:0;font-weight:800;background:var(--menthe-pale)}
-.methode{margin-top:28px;padding-left:1.2em;display:grid;gap:10px;max-width:var(--lecture)}
-.par-offre{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:12px}
+/* Les trois replis de la page ont la même largeur : toute l'enveloppe (tour 2, défaut 4). */
+.section :global(.repli){max-width:none}
+.par-offre{list-style:none;padding:0;margin:0;display:grid;gap:var(--col-gap)}
 @media (min-width:760px){.par-offre{grid-template-columns:repeat(3,1fr)}}
-.par-offre li{background:var(--blanc);border-radius:var(--r-l);padding:24px;display:grid;gap:4px}
+.par-offre li{background:var(--blanc);border-radius:var(--r-l);box-shadow:var(--ombre-carte);padding:24px;display:grid;gap:4px}
 .par-offre b{font:800 2.5rem/1 var(--f-titre)}
-.detail-pro{margin-top:40px;max-width:960px}
 .injep{display:grid;gap:32px}
-@media (min-width:960px){.injep{grid-template-columns:1.5fr 1fr;align-items:end;gap:64px}}
-.injep h2{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.375rem);line-height:1.2}
-.injep-chiffre{display:block;font-size:clamp(4rem,3rem + 4vw,6.5rem);line-height:1;color:var(--menthe)}
+.injep{max-width:var(--lecture-large,46rem)}
+.injep-phrase{padding-left:20px;border-left:3px solid var(--menthe)}
+.injep-texte{margin-top:var(--e-5);font:700 clamp(1.25rem,1.1rem + .8vw,1.75rem)/1.3 var(--f-titre);max-width:30ch}
+.injep-chiffre{display:block;font-size:clamp(4rem,3rem + 4vw,6.5rem);line-height:1;color:var(--menthe);margin-bottom:8px}
 .injep .note a{color:var(--blanc)}
 .injep-phrase{font:700 clamp(1.25rem,1.1rem + .6vw,1.625rem)/1.3 var(--f-titre);color:var(--menthe)}
-.liens-fin{margin-top:32px}
-.liens-fin a{font-weight:700}
 </style>

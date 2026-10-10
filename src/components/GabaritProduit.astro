@@ -1,0 +1,322 @@
+---
+/*
+  LE GABARIT DES PAGES PRODUIT (maquettes §B.3) : fonctionnalités, sports,
+  activités, profils, comparatifs. Ordre imposé :
+    1. le héros [data-heros] : fil, surtitre, h1, chapô, UN bouton (+ « Dès
+       {offre} » et « Voir les offres » sur une fonctionnalité) ;
+         - fonctionnalité, profil : l'écran de TÉLÉPHONE en grand dans un panneau
+           menthe ; un écran de BUREAU (fenêtre) sort du héros et se pose en
+           pleine largeur sous la ligne du temps, à une échelle lisible (tour 2) ;
+         - sport : la photo pleine largeur, texte sur un voile ≥ 70 % ;
+         - activité : héros scindé, la photo à droite ;
+         - comparatif, et les pages de PAGES_VITRINE : texte seul ;
+    2. la ligne du temps (LigneTemps : une ligne forte ou des pastilles, le
+       calcul replié) ;
+    3. le visuel, s'il n'est pas dans le héros (l'écran dans un Cadre, ou la
+       vitrine des sites de club sur les pages de PAGES_VITRINE) ;
+    4. le texte MDX, en sections d'une idée (.prose-produit) ;
+    5. les sources, 6. la FAQ, 7. « Pour aller plus loin » (rangée),
+    8. la case vide compacte.
+  Aucune étiquette « Exemple » : une ligne « Noms et montants fictifs. »
+  RÈGLE « PAS DE PAGE DE TEXTE SEUL » : voir plus bas.
+*/
+import { render } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+import FilAriane from './FilAriane.astro'
+import BlocTemps from './BlocTemps.astro'
+import EcranAnime from './EcranAnime.astro'
+import Faq from './Faq.astro'
+import VoirAussi from './VoirAussi.astro'
+import CaseVide from './CaseVide.astro'
+import Encadre from './Encadre.astro'
+import TuileFonction from './TuileFonction.astro'
+import Calculateur from './Calculateur.astro'
+import MiniEcran from './MiniEcran.astro'
+import Photo from './Photo.astro'
+import Repli from './Repli.astro'
+import Idee from './Idee.astro'
+import Cadre from './Cadre.astro'
+import LigneTemps from './LigneTemps.astro'
+import VitrineClubs from './VitrineClubs.astro'
+import FriseSaison from './FriseSaison.astro'
+import { photoDe } from '../data/photos'
+import { PAGES_VITRINE } from '../data/clubs'
+import { HUB, ETIQUETTE, url, type NomCollection } from '../lib/collections'
+import { NOM_OFFRE } from '../data/site'
+
+interface Props { collection: Exclude<NomCollection, 'guides' | 'articles'>; entree: any }
+const { collection, entree } = Astro.props
+const d = entree.data
+const { Content, headings } = await render(entree)
+const chemin = url(collection, entree.id)
+const fil = [HUB[collection], { nom: d.nom, url: chemin }]
+
+/*
+  RÈGLE « PAS DE PAGE DE TEXTE SEUL » : une fonctionnalité, un sport, une
+  activité ou un profil montre au moins un écran. Sans champ `ecran`, une
+  fonctionnalité prend l'écran de sa famille ; les autres doivent déclarer
+  `ecran` ou poser <EcranAnime> ou <MiniEcran> dans le texte, sinon le build s'arrête.
+*/
+const ECRAN_FAMILLE: Record<string, string> = { Inscrire: 'inscription', Encaisser: 'relance', Organiser: 'terrain', Communiquer: 'site', Vendre: 'boutique', Piloter: 'relance' }
+const ecran = d.ecran ?? (collection === 'fonctionnalites' ? ECRAN_FAMILLE[d.famille] : undefined)
+if (['fonctionnalites', 'sports', 'activites', 'profils'].includes(collection) && !ecran && !/<(EcranAnime|MiniEcran)\b/.test(entree.body ?? '')) {
+  throw new Error(`${collection}/${entree.id} : ajoutez un écran (champ « ecran », <EcranAnime> ou <MiniEcran> dans le texte). Voir REDIGER.md.`)
+}
+
+const vitrine = collection === 'fonctionnalites' && PAGES_VITRINE.includes(entree.id)
+const TELEPHONES = ['inscription', 'terrain', 'boutique']
+const formeEcran = (nom?: string) => (nom && TELEPHONES.includes(nom) ? 'telephone' : 'fenetre')
+const photo = (collection === 'sports' || collection === 'activites') && photoDe(entree.id) ? entree.id : undefined
+type Heros = 'panneau' | 'sport' | 'activite' | 'vitrine' | 'seul'
+const heros: Heros = vitrine ? 'vitrine'
+  : collection === 'comparatifs'
+  ? 'seul'
+  : collection === 'sports' && photo ? 'sport'
+  : collection === 'activites' && photo ? 'activite'
+  : ecran && formeEcran(ecran) === 'telephone' ? 'panneau' : 'seul'
+/* L'écran de téléphone va dans le héros (panneau) ; sinon juste après la ligne du temps. */
+const ecranCorps = !vitrine && heros !== 'panneau' ? ecran : undefined
+/* Un écran de bureau se montre en pleine largeur, jamais réduit à 6 px dans une colonne. */
+const ecranLarge = Boolean(ecranCorps) && formeEcran(ecranCorps) === 'fenetre'
+
+const surtitre = collection === 'fonctionnalites' ? `${d.famille} · ${ETIQUETTE[collection]}` : ETIQUETTE[collection]
+const offre = collection === 'fonctionnalites' ? NOM_OFFRE[d.offre as 'mini' | 'pro' | 'max'] : undefined
+/* L'écran « terrain » (src/ecrans/, gelé) montre une compo de VOLLEY : le décor et le libellé
+   « du samedi » sont réservés à la page du même sport, jamais au football ni au handball. */
+const SPORT_DE_L_ECRAN: Record<string, string> = { terrain: 'volley-ball' }
+const ecranDuSport = collection === 'sports' && !!ecranCorps && SPORT_DE_L_ECRAN[ecranCorps] === entree.id
+const lienEcran = ecranCorps ? { texte: ecranDuSport ? 'Voir l’écran du samedi' : 'Voir l’écran', href: '#ecran' } : undefined
+
+/* La fin de page : la phrase du récit pour quelques pages, sinon le titre par défaut de la case vide. */
+const FIN_DE_PAGE: Record<string, string> = {
+  'sports/football': 'Le samedi au bord du terrain, sans le classeur',
+  'activites/theatre': 'La répétition du jeudi, sans les papiers',
+}
+/* P2, page sport : la frise de la saison, tirée des h2 du texte (rien si moins de 4 étapes trouvées). */
+const ETAPES: [string, RegExp][] = [['Mai', /\bmai\b/i], ['Septembre', /inscription/i], ['Octobre', /cotisation/i], ['Licences', /licence/i], ['Samedi', /convocation|match/i], ['Vacances', /vacances|maillot/i]]
+const prises = new Set<string>()
+const etapesFrise = collection === 'sports'
+  ? ETAPES.flatMap(([nom, motif]) => {
+      const h = headings.find((t) => t.depth === 2 && !prises.has(t.slug) && motif.test(t.text))
+      if (!h) return []
+      prises.add(h.slug)
+      return [{ ancre: h.slug, nom }]
+    })
+  : []
+const frise = etapesFrise.length >= 4 ? etapesFrise : []
+/* P2 : sur une page sport, l'écran du samedi se joue sur fond encre, devant la photo du terrain. */
+const samedi = ecranDuSport && ecranCorps === 'terrain' && photoDe('terrain')
+const titreFin = FIN_DE_PAGE[`${collection}/${entree.id}`]
+/* Dès 1000 px, l'écran du corps se tient à droite du texte (collant) au lieu d'un bloc pleine
+   largeur au-dessus : sauf si le texte porte déjà ses propres écrans (Idee). */
+const duo = Boolean(ecranCorps) && !ecranLarge && !/<Idee\b/.test(entree.body ?? '')
+const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+const composants = { BlocTemps, EcranAnime, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, Idee, Cadre }
+const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
+---
+<Layout titre={d.titreSeo} description={d.description} chemin={chemin} fil={fil} faq={d.faq}>
+  <section class:list={['gp-heros', `gp-heros-${heros}`, heros === 'sport' && 'sur-encre']} data-heros>
+    {heros === 'sport' && <div class="gp-photo-pleine"><Photo nom={photo!} tete priorite tailles="100vw" /></div>}
+    {heros === 'activite' && <div class="gp-photo-scindee"><Photo nom={photo!} tete priorite tailles="(min-width: 1000px) 50vw, 100vw" /></div>}
+    <div class="enveloppe gp-heros-grille">
+      <div class="gp-heros-texte">
+        <FilAriane fil={fil} />
+        <p class="surtitre">{surtitre}</p>
+        <h1>{d.titre}</h1>
+        <p class="chapo">{d.chapo}</p>
+        {offre && <p class="gp-offre"><span class="pastille-offre">Dès {offre}</span> <a href="/tarifs">Voir les offres</a></p>}
+        <div class="gp-actions">
+          <a class={btnClasse} href="/demo">Demander une démo</a>
+          {lienEcran && <a class="lien-fleche" href={lienEcran.href}>{lienEcran.texte} <svg aria-hidden="true"><use href="#fleche" /></svg></a>}
+        </div>
+      </div>
+      {heros === 'vitrine' && <div class="gp-vitrine"><VitrineClubs variante="page" /></div>}
+      {heros === 'panneau' && (
+        <figure class:list={['gp-panneau', `gp-ecran-${formeEcran(ecran)}`]}>
+          <EcranAnime nom={ecran} />
+          <figcaption>Noms et montants fictifs.</figcaption>
+        </figure>
+      )}
+    </div>
+  </section>
+
+  <div class="enveloppe gp-temps">
+    {'cles' in d.temps ? <LigneTemps cles={d.temps.cles} titre={d.temps.titre} /> : <LigneTemps geste={d.temps.geste} />}
+  </div>
+
+  <div class="enveloppe gp-corps">
+    {frise.length > 0 && <FriseSaison etapes={frise} />}
+    <div class:list={['gp-bloc', duo && 'gp-duo']}>
+      {ecranCorps && (samedi ? (
+        <section class="gp-visuel gp-samedi sur-encre" id="ecran" aria-label="L’écran du samedi">
+          <div class="gp-samedi-photo"><Photo nom="terrain" tailles="(min-width: 1000px) 980px, 100vw" /></div>
+          <figure class="gp-samedi-ecran"><EcranAnime nom={ecranCorps} sombre /><figcaption>Noms et montants fictifs.</figcaption></figure>
+        </section>
+      ) : (
+        <section class:list={['gp-visuel', `gp-ecran-${formeEcran(ecranCorps)}`, ecranLarge && 'gp-large']} id="ecran" aria-label="L’écran d’OnClub">
+          <Cadre type="panneau" fond="menthe" legende="Noms et montants fictifs."><EcranAnime nom={ecranCorps} /></Cadre>
+        </section>
+      ))}
+      <article class:list={['prose', 'prose-produit', !duo && 'prose-grille']} data-contenu>
+        <Content components={composants} />
+      </article>
+    </div>
+    {d.sources?.length > 0 && (
+      <aside class="gp-sources" aria-labelledby="sources-titre">
+        <h2 id="sources-titre">Sources</h2>
+        <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank">{s.titre}</a>, consulté le {date(new Date(s.consulte))}</li>)}</ul>
+      </aside>
+    )}
+    {d.faq?.length > 0 && <Faq items={d.faq} disposition="deux-colonnes" />}
+    <VoirAussi collection={collection} id={entree.id} variante="rangee" />
+  </div>
+  <CaseVide compact titre={titreFin} />
+</Layout>
+
+<style>
+/* ===== 1. Le héros ===== */
+.gp-heros{position:relative;padding-block:8px var(--e-7,48px)}
+.gp-heros-texte{min-width:0}
+.gp-heros .surtitre{margin-top:16px}
+.gp-heros h1{font-size:var(--t-h1-produit,clamp(2.25rem,1.6rem + 2.2vw,3.25rem));line-height:1.08;max-width:22ch;text-wrap:balance}
+.gp-heros .chapo{margin-top:20px}
+.gp-offre{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:20px;font-size:var(--t-petit,.9375rem)}
+.gp-offre a{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.gp-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:24px}
+@media (max-width:759px){.gp-actions .btn{width:100%}}
+
+/* Le panneau menthe : l'écran de téléphone en grand, posé directement sur l'aplat.
+   Un seul cadre (l'appareil) : la carte claire de l'écran est neutralisée (tour 2, défaut 3). */
+.gp-heros-grille{display:grid;gap:var(--e-6,32px)}
+.gp-panneau{position:relative;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;border-radius:var(--r-panneau,24px);background:var(--menthe);overflow:hidden}
+.gp-panneau :global(.ecran-anime){width:100%}
+.gp-panneau :global(.eci-scene){background:none;border:0;--s:1.08}
+.gp-panneau figcaption{margin-top:12px;font-size:var(--t-micro,.8125rem);text-align:center;color:var(--encre)}
+.gp-ecran-telephone :global(.ecran-anime){zoom:.68}
+@media (min-width:760px){.gp-ecran-telephone :global(.ecran-anime){zoom:.74}}
+@media (min-width:1000px){
+  .gp-heros{padding-block:8px var(--e-7,48px)}
+  .gp-heros-panneau .gp-heros-grille{grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--col-gap,24px);align-items:center}
+  .gp-panneau{border-radius:var(--r-xl,40px)}
+  .gp-ecran-telephone :global(.ecran-anime){zoom:.78}
+}
+
+
+/* Le sport : la photo pleine largeur, le texte sur le voile (≥ 70 % encre sous tout le texte). */
+.gp-heros-sport{background:var(--encre);color:var(--blanc);padding:0}
+.gp-heros-sport .gp-heros-grille{position:relative;z-index:1;padding-block:8px var(--e-7,48px)}
+.gp-photo-pleine{position:relative;aspect-ratio:16/11;overflow:hidden}
+.gp-photo-pleine::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,15,20,1) 0,rgba(11,15,20,.6) 40%,rgba(11,15,20,.1) 100%)}
+.gp-photo-pleine :global(.photo){width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 40%;border-radius:0}
+.gp-heros-sport .chapo{color:var(--texte-scene,#D7DBE1)}
+.gp-heros-sport .surtitre{color:var(--menthe)}
+.gp-heros-sport .gp-heros-texte{max-width:760px}
+@media (min-width:760px){
+  .gp-heros-sport{display:flex;align-items:flex-end;min-height:min(520px,66svh)}
+  .gp-heros-sport .gp-heros-grille{width:100%;padding-block:72px var(--e-7,48px)}
+  .gp-photo-pleine{position:absolute;inset:0;aspect-ratio:auto}
+  /* Le voile descend du texte (bas, dense) vers la photo (haut, claire) : la photo de sport se voit (tour 2, défaut 48). */
+  .gp-photo-pleine::after{background:linear-gradient(to top,rgba(11,15,20,.92) 0,rgba(11,15,20,.8) 45%,rgba(11,15,20,.58) 70%,rgba(11,15,20,.2) 100%)}
+}
+
+/* L'activité : héros scindé, la photo à droite jusqu'au bord de l'écran. */
+.gp-photo-scindee{aspect-ratio:16/10;overflow:hidden}
+.gp-photo-scindee :global(.photo){width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0}
+@media (max-width:999px){.gp-heros-activite{padding-top:0}.gp-heros-activite .gp-heros-grille{padding-top:8px}}
+@media (min-width:1000px){
+  .gp-heros-activite{min-height:560px;display:flex;align-items:center;padding-block:var(--e-5,24px) var(--e-7,48px)}
+  .gp-heros-activite .gp-heros-grille{width:100%}
+  .gp-heros-activite .gp-heros-texte{max-width:calc(50% - 32px)}
+  .gp-photo-scindee{position:absolute;top:var(--e-5,24px);bottom:var(--e-7,48px);left:calc(50% + 12px);right:0;aspect-ratio:auto;border-radius:var(--r-xl,40px) 0 0 var(--r-xl,40px)}
+}
+
+/* Site de l'association : la vitrine des clubs de démonstration monte dans le héros,
+   à droite dès 1000 px (« montrer nos exemples » sans défiler), juste sous le bouton sur téléphone. */
+.gp-vitrine{min-width:0}
+@media (min-width:1000px){
+  .gp-heros-vitrine .gp-heros-grille{grid-template-columns:minmax(0,6fr) minmax(0,6fr);column-gap:var(--e-7,48px);align-items:start}
+  /* Le haut des onglets se cale sur le surtitre (le fil d'Ariane fait ≈ 44 px), jamais au ras de l'en-tête. */
+  .gp-vitrine{margin-top:56px}
+}
+/* Comparatif : texte seul, col 1 à 9. */
+.gp-heros-seul .gp-heros-texte{max-width:860px}
+
+/* ===== 2. La ligne du temps ===== */
+.gp-temps{margin-top:0}
+
+/* ===== 3 à 7. Le corps ===== */
+.gp-corps{display:grid;gap:var(--e-7,48px);padding-block:var(--e-7,48px) var(--section)}
+.gp-corps>*{min-width:0}
+.gp-visuel{max-width:980px;width:100%;scroll-margin-top:calc(var(--entete-h,60px) + 16px)}
+.gp-visuel :global(.ecran-anime){width:100%}
+.gp-visuel :global(.eci-scene),.gp-samedi :global(.eci-scene){background:none;border:0}
+.gp-visuel :global(.r-fond){background:none;padding:0}
+/* L'écran de bureau en grand : toute la largeur, à l'échelle 1 dès 1000 px (texte ≥ 11 px). */
+.gp-large{max-width:none}
+.gp-visuel.gp-ecran-telephone :global(.ecran-anime){zoom:.7}
+.gp-visuel.gp-ecran-fenetre :global(.ecran-anime){zoom:.6}
+@media (min-width:760px){.gp-visuel.gp-ecran-telephone :global(.ecran-anime){zoom:.85}.gp-visuel.gp-ecran-fenetre :global(.ecran-anime){zoom:.85}}
+@media (min-width:1000px){.gp-visuel.gp-large :global(.ecran-anime){zoom:1}}
+.gp-sources h2{font-size:1.5rem}
+.gp-sources ul{margin-top:12px;padding-left:1.2em;font-size:.9375rem;color:var(--gris)}
+.gp-sources li+li{margin-top:6px}
+.gp-sources a{font-weight:600;color:var(--encre)}
+
+/* P2 : l'écran du samedi, sur fond encre devant la photo du terrain (le seul moment sombre de la page). */
+.gp-samedi{position:relative;display:grid;place-items:center;padding:var(--e-7,48px) 16px;border-radius:var(--r-panneau,24px);background:var(--encre);overflow:hidden;isolation:isolate}
+.gp-samedi-photo{position:absolute;inset:0;z-index:-1}
+.gp-samedi-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(11,15,20,.55),rgba(11,15,20,.85))}
+.gp-samedi-photo :global(.photo){width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0}
+.gp-samedi-ecran{margin:0;width:100%;max-width:300px}
+.gp-samedi-ecran :global(.ecran-anime){zoom:.9}
+.gp-samedi-ecran figcaption{margin-top:12px;font-size:var(--t-micro,.8125rem);text-align:center;color:var(--texte-scene-doux,#AEB4BE)}
+@media (min-width:760px){.gp-samedi{padding-block:var(--e-8,64px)}.gp-samedi-ecran :global(.ecran-anime){zoom:1}}
+
+/* ===== 4. La prose « une idée par section » ===== */
+.prose-produit{max-width:980px}
+.prose-produit>:global(h2){margin-top:var(--e-7,48px);padding-top:var(--e-5,24px);border-top:1px solid var(--trait);font-size:clamp(1.75rem,1.3rem + 1.6vw,2.5rem);line-height:1.1;letter-spacing:-.015em}
+.prose-produit>:global(h2:first-child){margin-top:0;padding-top:0;border-top:0}
+.prose-produit>:global(h2+p){font-size:1.1875rem;line-height:1.5;color:var(--encre)}
+.prose-produit>:global(h3){margin-top:1.6em}
+.prose-produit>:global(ul){list-style:none;padding-left:0}
+.prose-produit>:global(ul>li){position:relative;padding-left:24px}
+.prose-produit>:global(ul>li)::before{content:"";position:absolute;left:0;top:.8em;width:12px;height:2px;background:var(--sapin)}
+.prose-produit>:global(:is(.ecran-anime,.cadre,.idee,.photo,figure:not(.mini-ecran))){max-width:980px;margin-block:2em}
+.prose-produit>:global(.mini-ecran){margin-block:2em}
+.prose-produit>:global(.repli){max-width:var(--lecture)}
+/* Un repli qui ferme une section garde son filet haut : le filet de la section suivante suffit. */
+.prose-produit>:global(.repli:has(+ h2)){border-bottom:0}
+.prose-produit>:global(table){max-width:980px}
+@media (min-width:760px){.prose-produit>:global(h2){margin-top:var(--e-8,64px);padding-top:var(--e-6,32px)}}
+@media (min-width:1000px){.prose-produit>:global(h2){margin-top:var(--e-9,96px)}}
+/* Dès 1000 px, chaque section se lit sur deux colonnes : l'intertitre à gauche (col 1-5),
+   le texte, les replis et les listes à droite (col 6-12) ; les visuels prennent toute la
+   largeur. La première ligne du texte s'aligne sur l'intertitre, et le filet de section
+   court sur les deux colonnes. Plus de demi-page vide à droite d'une colonne étroite. */
+@media (min-width:1000px){
+  .prose-grille{max-width:none;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:0;align-items:start}
+  .prose-grille>:global(*){grid-column:6/-1;min-width:0}
+  .prose-grille>:global(h2){grid-column:1/6;padding-right:var(--e-7,48px);max-width:none;margin-top:var(--e-7,48px);font-size:clamp(1.625rem,1rem + 1.2vw,2.125rem)}
+  .prose-grille>:global(h2+:is(p,ul,ol,h3,blockquote,.repli,.encadre,.bloc-temps)){margin-top:var(--e-7,48px);padding-top:var(--e-6,32px);border-top:1px solid var(--trait)}
+  /* Le filet court jusqu'au bout de la colonne 6-12 ; le texte garde sa mesure (tour 2, défauts 4 et 45). */
+  .prose-grille>:global(h2+*){max-width:none;padding-right:max(0px,calc(100% - var(--lecture)))}
+  .prose-grille>:global(h2+.repli){padding-right:0}
+  .prose-grille>:global(.repli){max-width:none}
+  .prose-grille>:global(h2:first-child+*){margin-top:0;padding-top:0;border-top:0}
+  .prose-grille>:global(:is(.ecran-anime,.cadre,.idee,.photo,figure:not(.mini-ecran),table)){grid-column:1/-1;max-width:none}
+  /* Un intertitre suivi d'une section à visuel (Idee) prend toute la largeur : jamais d'intertitre seul à gauche d'un vide. */
+  .prose-grille>:global(h2:has(+ .idee)){grid-column:1/-1}
+  .prose-grille>:global(table){display:table;max-width:980px;margin-inline:auto}
+}
+.gp-bloc{display:grid;gap:var(--e-8,64px)}
+.gp-bloc>*{min-width:0}
+@media (min-width:1000px){
+  .gp-duo{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--e-8,64px);align-items:start}
+  .gp-duo>.prose-produit{grid-column:1;grid-row:1}
+  .gp-duo>.prose-produit>:global(h2){margin-top:40px;padding-top:var(--e-6,32px);font-size:clamp(1.625rem,1rem + 1.2vw,2.125rem)}
+  .gp-duo>.prose-produit>:global(h2:first-child){margin-top:0;padding-top:0}
+  .gp-duo>.gp-visuel{grid-column:2;grid-row:1;position:sticky;top:calc(var(--entete-h,72px) + 24px)}
+  .gp-duo>.gp-visuel.gp-ecran-telephone :global(.ecran-anime){zoom:.72}
+  .gp-duo>.gp-visuel.gp-ecran-fenetre :global(.ecran-anime){zoom:.5}
+}
+</style>

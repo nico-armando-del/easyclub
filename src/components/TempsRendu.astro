@@ -1,0 +1,53 @@
+---
+/*
+  LE TEMPS RENDU, ÉCRAN 2 DE L'ACCUEIL : « Et chez vous ? », le chiffre géant
+  (61 h pour 250 adhérents), le nombre d'adhérents en champ dans la phrase
+  (Calculateur compact : même calcul que calculer() de temps.ts), la note
+  « pas une étude », le lien vers le calcul complet et la photo du terrain.
+*/
+import Calculateur from './Calculateur.astro'
+import VersFr from './langue/VersFr.astro'
+import { photoDe, srcset } from '../data/photos'
+
+interface Props {
+  photo?: string
+  adherents?: number
+  titre?: string
+  id?: string
+  /** /en, /es */
+  note?: string
+  lien?: { texte: string; href: string }
+  mots?: { avant: string; apres: string; etiquette: string }
+  /** /en, /es : le lien mène à une page en français (étiquette « FR »). */
+  versFr?: string
+}
+const {
+  photo = 'terrain', titre = 'Et chez vous ?', id = 't-temps',
+  note = 'Changez le nombre : le calcul suit. Estimation OnClub, pas une étude.',
+  lien = { texte: 'Le calcul complet', href: '/temps-gagne' }, mots, versFr,
+} = Astro.props
+const p = photoDe(photo)
+const NB = String.fromCharCode(160)
+const titreAffiche = titre.replace(/ ([?!:;])/g, `${NB}$1`)
+const noteAffichee = note.replace(/ ([?!:;])/g, `${NB}$1`)
+---
+<div class="tr">
+  <div class="tr-texte">
+    <h2 class="tr-titre" id={id}>{titreAffiche}</h2>
+    <Calculateur compact id="combien" mots={mots} />
+    <p class="tr-note">{noteAffichee}</p>
+    <a class="lien-fleche" href={lien.href} hreflang={versFr ? 'fr' : undefined}>{lien.texte}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+  </div>
+  {p && (
+    <img class="tr-photo" src={`/img/photos/${p.fichier}-640.webp`} srcset={srcset(p)} sizes="(min-width: 1000px) 680px, calc(100vw - 48px)" width="1280" height="853" alt={p.alt} loading="lazy" decoding="async" />
+  )}
+</div>
+<style>
+.tr{display:grid;gap:32px;align-items:center}
+@media (min-width:1000px){.tr{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--e-7,48px)}}
+.tr-titre{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.05;margin-bottom:20px}
+.tr-note{margin-top:16px;font-size:.9375rem;color:var(--gris);max-width:34ch}
+.tr .lien-fleche{margin-top:4px}
+.tr-photo{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:var(--r-m);background:var(--menthe-pale)}
+@media (min-width:1000px){.tr-photo{aspect-ratio:16/10;border-radius:var(--r-l)}}
+</style>

@@ -45,9 +45,9 @@ const base = {
   /** La meta description : 110 à 160 caractères. */
   description: z.string().min(110).max(160),
   /** Le h1 de la page. */
-  titre: z.string().min(8).max(90),
+  titre: z.string().min(8).max(70),
   /** Le chapô sous le h1 : une ou deux phrases. */
-  chapo: z.string().min(40).max(320),
+  chapo: z.string().min(40).max(220),
   temps,
   faq,
   sources: z.array(source).default([]),
@@ -123,6 +123,17 @@ const editorial = {
   publie: z.coerce.date(),
   /** Minutes de lecture, affichées. */
   lecture: z.number().int().min(1).max(40),
+  /** « À retenir », en tête du texte : 3 à 5 phrases de 20 à 140 caractères (remplace la section « En bref »). */
+  aRetenir: z.array(z.string().min(20).max(140)).min(3).max(5).optional(),
+  /**
+   * La couverture typographique : une donnée TIRÉE DU TEXTE (« 50 € »), une sous-ligne,
+   * et `apres` pour la variante compteur (« 66 h » → « 5 h », valeurs de TOTAL dans src/data/temps.ts).
+   */
+  couverture: z
+    .object({ donnee: z.string().max(12), sous: z.string().max(60).optional(), apres: z.string().max(12).optional() })
+    .optional(),
+  /** À la une de /ressources (une seule entrée ; sinon la plus récente). */
+  une: z.boolean().default(false),
 }
 
 const guides = defineCollection({
