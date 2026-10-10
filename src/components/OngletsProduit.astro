@@ -67,7 +67,8 @@ if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){v
 .onglets-titre{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.05;max-width:14ch}
 .onglets-encre{color:var(--blanc);background:var(--scene,#0B0F14);border-radius:var(--r-panneau,24px);padding:32px 16px 24px}
 @media (min-width:760px){.onglets-encre{padding:48px 48px 32px}}
-.onglets-liste{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;order:3}
+/* Sous 760 px, les onglets viennent juste sous le titre, au-dessus de l'écran qu'ils commandent (tour 2, défaut 10). */
+.onglets-liste{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;order:1}
 .onglet{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:8px;min-height:52px;padding:8px 0;border:0;background:none;color:var(--texte-scene-doux,#AEB4BE);font:700 1rem/1.2 var(--f-titre);text-align:left;cursor:pointer}
 .onglets-papier .onglet{color:var(--gris)}
 .onglet[aria-selected=true]{color:var(--blanc)}
@@ -84,6 +85,9 @@ if('IntersectionObserver'in window){var o=new IntersectionObserver(function(e){v
 .panneau-onglet:focus-visible{outline:3px solid var(--menthe);outline-offset:3px}
 .panneau-ecran{display:grid;place-items:center;min-height:0}
 .panneau-ecran :global(.ecran-anime){width:100%;max-width:720px}
+/* Un seul cadre autour du produit : la carte claire des écrans est neutralisée (tour 2, défaut 3). */
+.panneau-onglet :global(.eci-scene){background:none;border:0}
+.panneau-onglet :global(.r-fond){background:none;padding:0}
 .panneau-phrase{font-size:1.0625rem;color:var(--texte-scene,#D7DBE1);display:flex;flex-wrap:wrap;align-items:center;gap:0 14px;padding-inline:4px}
 .onglets-papier .panneau-phrase{color:var(--encre)}
 .panneau-phrase .lien-fleche{color:var(--menthe)}

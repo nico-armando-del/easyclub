@@ -55,7 +55,7 @@ const faq = [
     fil={fil}
     surtitre="Tarifs"
     titre="Un abonnement au pourcentage. Rien de fixe"
-    phrase="Un pourcentage de ce que l’association encaisse en ligne. Rien sur les chèques ni les espèces. Plus l’offre est complète, plus elle rend de temps."
+    phrase="Une part de ce que l’association encaisse en ligne. Rien sur les chèques ni les espèces. Plus l’offre est complète, plus elle rend de temps."
     cta={{ texte: 'Demander une démo', href: '/demo' }}
     lien={{ texte: 'L’exemple chiffré', href: '#exemple' }}
   />
@@ -110,7 +110,7 @@ const faq = [
       </div>
       <div class="frais">
         <h3>Les frais de carte</h3>
-        <p>Les frais de dossier sont inclus dans le prix d’inscription et appliqués à toutes les familles, quel que soit le moyen de paiement. Une famille qui paie par chèque règle aussi {euros(b.prix)}, sans commission ni frais de carte.</p>
+        <p>Dans la seconde colonne, l’association ajoute {euros(DOSSIER)} de frais de dossier au prix d’inscription, pour toutes les familles, quel que soit le moyen de paiement. Une famille qui paie par chèque règle aussi {euros(b.prix)}, sans commission ni frais de carte.</p>
         <p class="note">Exemple, pas un devis. Frais de carte : tarif standard de Stripe pour les cartes de l’Espace économique européen, <a href={FRAIS_CARTE.source} target="_blank" rel="noopener">grille tarifaire Stripe</a>, consultée le {FRAIS_CARTE.consulte}. Les cotisations payées en plusieurs fois suivent la même règle, échéance par échéance.</p>
       </div>
     </div>

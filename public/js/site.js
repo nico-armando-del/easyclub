@@ -68,20 +68,15 @@
   })
   var choix = lire()
   if (choix !== 'accepte' && choix !== 'refuse') {
-    // Sur l'accueil, le bandeau ne couvre jamais la scène : il s'ouvre quand la scène a quitté
-    // l'écran, ou au bout de 5,6 s si le visiteur n'a pas encore défilé.
-    var scene = document.querySelector('[data-scene]')
-    if (scene) {
-      var ouvert = false, defile = false
-      var une = function () { if (ouvert) return; ouvert = true; ouvrir() }
-      window.addEventListener('scroll', function () { defile = true }, { passive: true, once: true })
-      setTimeout(function () { if (!defile) une() }, 5600)
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (es, o) {
-          es.forEach(function (e) { if (!e.isIntersecting && defile) { o.disconnect(); une() } })
-        }).observe(scene)
-      } else window.addEventListener('scroll', une, { passive: true, once: true })
-    } else ouvrir()
+    // Le bandeau ne s'ouvre qu'au geste qui a besoin de la ville : le premier focus dans le
+    // formulaire qui porte un champ « ville » (/demo). Ailleurs, il ne coupe jamais la lecture ;
+    // le lien « Cookies et localisation » du pied l'ouvre à tout moment.
+    var besoin = document.querySelector('[data-ville-champ],[data-ville-phrase],[data-ville-usage]')
+    if (besoin) {
+      var zone = besoin.closest('form') || besoin
+      var une = function () { zone.removeEventListener('focusin', une); ouvrir() }
+      zone.addEventListener('focusin', une)
+    }
   }
 
   /* ---------- 3. Ville ---------- */

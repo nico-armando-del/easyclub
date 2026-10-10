@@ -33,7 +33,7 @@ const faq = [
   faq={faq}
   sansBoutonFixe={true}
 >
-  <div class="enveloppe ecran" data-recommander data-heros>
+  <div class="enveloppe ecran" data-recommander data-heros data-ville-usage>
     <div class="ecran-tete">
       <FilAriane fil={fil} />
       <p class="surtitre">Adhérent, élève ou parent</p>
@@ -81,7 +81,7 @@ const faq = [
           </ul>
         </div>
         <div>
-          <h3>Pour les bénévoles</h3>
+          <h3>Pour le bureau</h3>
           <ul>
             <li>Plus de fiches à recopier.</li>
             <li>L’argent à jour sans tableur.</li>
@@ -137,11 +137,13 @@ const faq = [
 .ecran{display:grid;gap:var(--e-5);padding-block:var(--e-5) var(--section)}
 @media (min-width:1000px){
   .ecran{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);row-gap:var(--e-5);align-items:start;padding-top:var(--e-7)}
-  .ecran-tete,.ecran-champ,.ecran-actions{grid-column:1 / span 6}
-  .ecran-bulle{grid-column:8 / span 5;grid-row:1 / span 3}
+  .ecran-tete,.ecran-champ,.ecran-actions{grid-column:1 / span 8}
+  .ecran-bulle{grid-column:9 / span 4;grid-row:1 / span 3}
 }
 .ecran-tete .surtitre{margin-top:var(--e-4);color:var(--sapin)}
 .ecran-tete h1{font-size:var(--t-h1-produit);line-height:1.06;letter-spacing:-.02em;max-width:20ch}
+/* Le h1 tient sur deux lignes à 1280 et 1440 (G4, tour 2 défaut 41) : colonne de 8/12, taille plafonnée. */
+@media (min-width:1000px){.ecran-tete h1{max-width:none;font-size:min(var(--t-h1-produit),2.75rem);text-wrap:balance}}
 .ecran-tete .chapo{margin-top:var(--e-4);color:var(--gris)}
 .champ span{display:block;font-weight:700;margin-bottom:6px}
 .champ i{font-style:normal;font-weight:500;color:var(--gris)}

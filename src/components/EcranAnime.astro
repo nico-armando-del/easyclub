@@ -20,6 +20,20 @@ if (!html) throw new Error(`Écran inconnu : ${nom}`)
   {legende && <figcaption>{legende}</figcaption>}
 </figure>
 <script is:inline defer src={`/ecrans/${nom}.js`}></script>
+<script>
+  /* Sous mouvement réduit, l'écran montre son état final : les étapes restées en opacité 0
+     sont retirées de la lecture (aria-hidden) et de l'affichage (visibility), sans bouger la
+     mise en page. src/ecrans/ est gelé : on agit ici (tour 2, défaut 18). */
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    addEventListener('load', () => setTimeout(() => {
+      document.querySelectorAll('.ecran-anime *').forEach((el) => {
+        if (el.closest('[aria-hidden="true"]') || getComputedStyle(el).opacity !== '0') return
+        el.setAttribute('aria-hidden', 'true')
+        ;(el as HTMLElement).style.visibility = 'hidden'
+      })
+    }, 120))
+  }
+</script>
 <style>
 .ecran-anime{margin:0;min-width:0}
 .ecran-anime figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;justify-content:center;margin-top:14px;font-size:.875rem;color:var(--gris);text-align:center}

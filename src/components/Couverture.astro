@@ -65,7 +65,7 @@ const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
   {sous && format !== 'carre' && <span class="couv-sous">{sous}</span>}
 </div>
 {compteur && format !== 'carre' && (
-  <p class="couv-note">{deTotal ? `Estimation OnClub pour ${ADHERENTS_REFERENCE} adhérents, par saison, pas une étude.` : 'Estimation OnClub, pas une étude.'}</p>
+  <p class="couv-note">{deTotal && !/adhérents/.test(sous ?? '') ? `Estimation OnClub pour ${ADHERENTS_REFERENCE} adhérents, par saison, pas une étude.` : 'Estimation OnClub, pas une étude.'}</p>
 )}
 <style>
 .couv{container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:var(--encre);background:var(--menthe);overflow:hidden;font-family:var(--f-titre)}
@@ -77,6 +77,8 @@ const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
 @media (min-width:760px){.couv-bande{min-height:clamp(240px,23vw,300px);padding:32px 40px;border-radius:var(--r-xl,40px)}}
 .couv-une{aspect-ratio:16/10;padding:20px 24px;border-radius:var(--r-l,28px)}
 @media (min-width:760px){.couv-une{aspect-ratio:5/6;padding:28px}}
+/* Sous 760 px, la une grandit avec son texte : la ligne « sous » n'est jamais rognée (tour 2, défaut 39). */
+@media (max-width:759px){.couv-une{aspect-ratio:auto;min-height:220px}}
 .couv-carre{width:56px;height:56px;flex:none;padding:6px;justify-content:center;align-items:center;border-radius:12px;gap:0}
 @media (min-width:760px){.couv-carre{width:72px;height:72px}}
 

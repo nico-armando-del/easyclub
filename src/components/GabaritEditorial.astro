@@ -191,6 +191,8 @@ const couv = d.couverture
 .ed-tete .chapo{margin-top:var(--e-4,16px);color:var(--gris);max-width:36em}
 .ed-meta{margin-top:var(--e-4,16px);font-size:var(--t-micro,.8125rem);color:var(--gris)}
 .ed-couv{margin-top:var(--e-6,32px)}
+/* Dès 1000 px, la couverture va du bord gauche de la marge au bord droit de la colonne de lecture (tour 2, défaut 15). */
+@media (min-width:1000px){.ed-couv :global(.couv-bande){max-width:calc(240px + var(--e-8,64px) + 29.8125rem)}}
 
 .ed-corps{margin-top:var(--e-7,48px);padding-bottom:var(--e-9,96px)}
 .ed-marge,.ed-collant{display:contents}

@@ -224,7 +224,7 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 .gp-photo-scindee :global(.photo){width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0}
 @media (max-width:999px){.gp-heros-activite{padding-top:0}.gp-heros-activite .gp-heros-grille{padding-top:8px}}
 @media (min-width:1000px){
-  .gp-heros-activite{min-height:560px;display:flex;align-items:center;padding-block:var(--e-5,24px) var(--e-7,48px)}
+  .gp-heros-activite{min-height:500px;display:flex;align-items:center;padding-block:var(--e-5,24px) var(--e-7,48px)}
   .gp-heros-activite .gp-heros-grille{width:100%}
   .gp-heros-activite .gp-heros-texte{max-width:calc(50% - 32px)}
   .gp-photo-scindee{position:absolute;top:var(--e-5,24px);bottom:var(--e-7,48px);left:calc(50% + 12px);right:0;aspect-ratio:auto;border-radius:var(--r-xl,40px) 0 0 var(--r-xl,40px)}
@@ -246,7 +246,9 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 
 /* ===== 3 à 7. Le corps ===== */
 .gp-corps{display:grid;gap:var(--e-7,48px);padding-block:var(--e-7,48px) var(--section)}
-.gp-corps>*{min-width:0}
+/* :global : les racines de composants (frise, « Pour aller plus loin ») n'ont pas l'attribut de portée ;
+   sans min-width:0, leur rangée défilante élargit la grille au-delà de l'écran. */
+.gp-corps>:global(*){min-width:0}
 .gp-visuel{max-width:980px;width:100%;scroll-margin-top:calc(var(--entete-h,60px) + 16px)}
 .gp-visuel :global(.ecran-anime){width:100%}
 .gp-visuel :global(.eci-scene),.gp-samedi :global(.eci-scene){background:none;border:0}
@@ -306,6 +308,7 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
   .prose-grille>:global(:is(.ecran-anime,.cadre,.idee,.photo,figure:not(.mini-ecran),table)){grid-column:1/-1;max-width:none}
   /* Un intertitre suivi d'une section à visuel (Idee) prend toute la largeur : jamais d'intertitre seul à gauche d'un vide. */
   .prose-grille>:global(h2:has(+ .idee)){grid-column:1/-1}
+  .prose-grille>:global(div.idee){margin-block:var(--e-5,24px)}
   .prose-grille>:global(table){display:table;max-width:980px;margin-inline:auto}
 }
 .gp-bloc{display:grid;gap:var(--e-8,64px)}

@@ -81,7 +81,9 @@ const suite = titres.slice(max)
 @media (max-width:999px){
   .sommaire{margin-inline:calc(var(--g) * -1);padding:0 var(--g);background:rgba(255,255,255,.92);border-block:1px solid var(--trait);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
   :global(.js) .sommaire{position:sticky;top:0;z-index:30}
-  .som-tete{min-height:48px;cursor:pointer;flex-wrap:wrap;row-gap:0}
+  /* Une seule ligne : le titre lu se coupe en « … », jamais de « · » en tête de ligne (tour 2, défaut 16). */
+  .som-tete{min-height:48px;cursor:pointer;flex-wrap:nowrap;min-width:0}
+  .som-lu{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .som-repli[open] .som-liste{max-height:min(60vh,420px);overflow:auto}
   .som-liste a{min-height:44px}
   .som-repli>.som-liste,.som-plus{margin-bottom:12px}

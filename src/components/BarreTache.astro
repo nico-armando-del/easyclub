@@ -32,8 +32,9 @@ const pct = (m: number, max: number) => `${Math.max(1.5, (m / max) * 100).toFixe
   )}
 </div>
 <style>
-.barre-tache{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;max-width:var(--lecture-article,33em)}
-.bta-pistes{flex:1 1 160px;display:grid;gap:4px;min-width:120px}
+.barre-tache{display:grid;gap:6px;max-width:var(--lecture-article,33em)}
+/* Les pistes ont toutes la même longueur (toute la colonne) : les barres se comparent d'une tâche à l'autre (tour 2, défaut 15). */
+.bta-pistes{display:grid;gap:4px;width:100%}
 .bta-piste{display:block;height:6px;border-radius:999px;overflow:hidden}
 .bta-piste i{display:block;height:100%;border-radius:inherit}
 .bta-avant i{background:var(--trait)}

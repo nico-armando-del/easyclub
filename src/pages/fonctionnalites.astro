@@ -43,7 +43,6 @@ const faq = [
   <section class="section section-bento" aria-labelledby="t-familles">
     <div class="enveloppe">
       <Bento titre="Les six familles" niveau="h2" lienTout={false} id="t-familles" />
-      <p class="note">Estimation OnClub pour 250 adhérents, pas une étude. <a href="/temps-gagne">Le détail du calcul</a></p>
     </div>
   </section>
 
@@ -52,7 +51,6 @@ const faq = [
       <div class="enveloppe">
         <div class="section-tete">
           <h2 id={`t-${f.ancre}`} class="h2-idee">{f.cle}</h2>
-          <p>{f.phrase}</p>
         </div>
         <ul class="tuiles">
           {f.items.map((e) => (
