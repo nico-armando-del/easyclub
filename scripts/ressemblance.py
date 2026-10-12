@@ -8,6 +8,10 @@ Compare, mot à mot (difflib), le contenu PROPRE de chaque page de collection :
 le h1, le chapô, le texte rédigé (article[data-contenu]) et la FAQ. Les blocs
 communs (en-tête, pied, bloc temps, appel démo, « voir aussi ») sont écartés :
 ils sont identiques par construction. Objectif : moins de 0,35 partout.
+
+LANGUE PAR LANGUE : les pages françaises sont comparées entre elles, les pages
+espagnoles (dist/es/<dossier>/) entre elles. Une page et sa traduction ne se
+comparent pas (elles disent la même chose, par définition).
 """
 import difflib, html, os, re, sys
 
@@ -29,10 +33,12 @@ def propre(f):
 
 
 pages = []
-for d in DOSSIERS:
-    dd = os.path.join(ROOT, d)
-    if os.path.isdir(dd):
-        pages += sorted(os.path.join(d, f) for f in os.listdir(dd) if f.endswith(".html"))
+for prefixe in ("", "es/"):
+    for d in DOSSIERS:
+        dd = os.path.join(ROOT, prefixe + d)
+        if os.path.isdir(dd):
+            pages += sorted(os.path.join(prefixe + d, f) for f in os.listdir(dd) if f.endswith(".html"))
+langue = lambda p: "es" if p.startswith("es/") else "fr"
 mots = {p: propre(os.path.join(ROOT, p)) for p in pages}
 cibles = [c if c.endswith(".html") else c + ".html" for c in CIBLES] or pages
 pire, defauts, vus = 0.0, [], set()
@@ -40,12 +46,13 @@ for c in cibles:
     if c not in mots:
         print(f"page inconnue : {c}"); sys.exit(1)
     for p in pages:
-        if p == c or (p, c) in vus: continue
+        if p == c or (p, c) in vus or langue(p) != langue(c): continue
         vus.add((c, p))
         r = difflib.SequenceMatcher(None, mots[c], mots[p], autojunk=False).ratio()
         if r > pire: pire = r
         if r >= SEUIL: defauts.append((r, c, p))
-print(f"ressemblance : {len(pages)} pages de contenu, {len(vus)} paires, maximum {pire:.2f} (seuil {SEUIL})")
+nb_es = sum(1 for p in pages if langue(p) == "es")
+print(f"ressemblance : {len(pages)} pages de contenu ({len(pages) - nb_es} fr, {nb_es} es), {len(vus)} paires de même langue, maximum {pire:.2f} (seuil {SEUIL})")
 for r, a, b in sorted(defauts, reverse=True):
     print(f"  [RESSEMBLANCE] {a} ~ {b} : {r:.2f}")
 sys.exit(1 if defauts else 0)

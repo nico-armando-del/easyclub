@@ -58,6 +58,8 @@ const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[
 .me-lignes{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
 .me-lignes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--trait);border-radius:14px;background:var(--papier)}
 .me-nom{display:grid;gap:2px;min-width:0}
+/* Un statut long (« Licence pas encore validée à la fédération ») passe à la ligne au lieu de déborder à 390 px. */
+.me-lignes .statut{white-space:normal;text-align:right;min-width:0;max-width:62%}
 .me-nom b{font-size:.9375rem;line-height:1.25;color:var(--encre)}
 .me-nom span{font-size:.8125rem;color:var(--gris)}
 .me-pied{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--trait)}

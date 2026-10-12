@@ -75,12 +75,10 @@ const base = {
   brouillon: z.boolean().default(false),
 }
 
-const fonctionnalites = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/fonctionnalites' }),
-  schema: z.object({
+/** Le nom d'une tuile : 2 ou 3 mots en français, 2 à 4 en espagnol (« Recordatorio en un clic »). */
+const schemaFonctionnalite = (maxMots: number) => z.object({
     ...base,
-    /** Le nom de la tuile : 2 ou 3 mots. */
-    nom: z.string().refine((s) => mots(s) >= 2 && mots(s) <= 3, 'Le nom d’une fonctionnalité fait 2 ou 3 mots.'),
+    nom: z.string().refine((s) => mots(s) >= 2 && mots(s) <= maxMots, `Le nom d’une fonctionnalité fait 2 à ${maxMots} mots.`),
     /** La ligne de la tuile : à quoi ça sert, ou le temps gagné. 70 caractères au plus. */
     ligne: z.string().min(12).max(70),
     famille: z.enum(CLES_FAMILLES),
@@ -88,7 +86,10 @@ const fonctionnalites = defineCollection({
     offre: z.enum(['mini', 'pro', 'max']),
     /** Ordre dans sa famille. */
     ordre: z.number().int().default(50),
-  }),
+  })
+const fonctionnalites = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/fonctionnalites' }),
+  schema: schemaFonctionnalite(3),
 })
 
 const discipline = {
@@ -154,4 +155,25 @@ const articles = defineCollection({
   schema: z.object({ ...editorial, rubrique: z.string().min(3).max(30) }),
 })
 
-export const collections = { fonctionnalites, sports, activites, profils, comparatifs, guides, articles }
+/*
+  LES COLLECTIONS ESPAGNOLES : src/content/es/<collection>/<slug>.mdx, MÊME SCHÉMA,
+  MÊME SLUG que le fichier français (la page /es/sport/football traduit
+  src/content/sports/football.mdx). Les références (fonctionnalites, sports…)
+  restent les slugs français. Le fichier espagnol n'est construit que si la page
+  française est publiée. Guide : la tête de src/i18n/liens.ts et le guide des traducteurs.
+*/
+const es = (nom: string, schema: any) => defineCollection({ loader: glob({ pattern: '*.mdx', base: `./src/content/es/${nom}` }), schema })
+const schemaDiscipline = z.object({ ...discipline })
+/* En espagnol, deux disciplines ont un nom plus long que le français (« handisport » et
+   « sport adapté » n'ont pas de nom court distinct en castillan) : nom et titre un peu plus longs. */
+const schemaDisciplineEs = z.object({ ...discipline, nom: z.string().min(3).max(75), titre: z.string().min(8).max(110) })
+export const collections = {
+  fonctionnalites, sports, activites, profils, comparatifs, guides, articles,
+  fonctionnalites_es: es('fonctionnalites', schemaFonctionnalite(4)),
+  sports_es: es('sports', schemaDisciplineEs),
+  activites_es: es('activites', schemaDiscipline),
+  profils_es: es('profils', schemaDiscipline),
+  comparatifs_es: es('comparatifs', z.object({ ...base, nom: z.string().min(3).max(40), ligne: z.string().min(12).max(90) })),
+  guides_es: es('guides', z.object({ ...editorial })),
+  articles_es: es('articles', z.object({ ...editorial, rubrique: z.string().min(3).max(30) })),
+}

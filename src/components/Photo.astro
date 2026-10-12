@@ -5,10 +5,12 @@
   (ou l'ancien `tete`) la charge tout de suite avec fetchpriority=high : la photo du héros.
 */
 import { photoDe, srcset } from '../data/photos'
+import { i18n } from '../i18n/ui'
 interface Props { nom: string; tailles?: string; tete?: boolean; priorite?: boolean; ratio?: string; class?: string }
 const { nom, tailles = '(min-width: 900px) 560px, 100vw', tete = false, priorite = false, ratio, class: classe } = Astro.props
 const p = photoDe(nom)
 const vite = tete || priorite
+const { t } = i18n(Astro.url)
 ---
 {p && (
   <img
@@ -18,7 +20,7 @@ const vite = tete || priorite
     sizes={tailles}
     width="1280"
     height="853"
-    alt={p.alt}
+    alt={t(p.alt)}
     loading={vite ? 'eager' : 'lazy'}
     fetchpriority={vite ? 'high' : undefined}
     decoding={vite ? 'sync' : 'async'}

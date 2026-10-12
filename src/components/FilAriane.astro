@@ -2,9 +2,11 @@
 /* Le fil d'Ariane visible. Le même fil est balisé en JSON-LD par le Layout (prop `fil`). */
 interface Props { fil: { nom: string; url: string }[] }
 const { fil } = Astro.props
-const etapes = [{ nom: 'Accueil', url: '/' }, ...fil]
+const { t, lien } = i18n(Astro.url)
+const etapes = [{ nom: t('Accueil'), url: lien('/') }, ...fil]
+import { i18n } from '../i18n/ui'
 ---
-<nav class="fil" aria-label="Fil d’Ariane">
+<nav class="fil" aria-label={t('Fil d’Ariane')}>
   <ol>
     {etapes.map((e, i) => (
       <li>{i < etapes.length - 1 ? <a href={e.url}>{e.nom}</a> : <span aria-current="page">{e.nom}</span>}</li>

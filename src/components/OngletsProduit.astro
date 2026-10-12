@@ -44,7 +44,7 @@ const slots = Object.fromEntries(await Promise.all(onglets.map(async (o) => [o.i
         <div class="panneau-ecran">
           {slots[o.id] ? <Fragment set:html={slots[o.id]} /> : <EcranAnime nom={o.ecran} sombre={fond === 'encre'} />}
         </div>
-        <p class="panneau-phrase">{o.phrase} <a class="lien-fleche" href={o.lien.href} hreflang={versFr ? 'fr' : undefined}>{o.lien.texte}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a></p>
+        <p class="panneau-phrase">{o.phrase} <a class="lien-fleche" href={o.lien.href} hreflang={versFr && !o.lien.href.startsWith('/es') ? 'fr' : undefined}>{o.lien.texte}{versFr && !o.lien.href.startsWith('/es') && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a></p>
       </div>
     ))}
     {(legende || pause) && (

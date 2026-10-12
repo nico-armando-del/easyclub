@@ -1,0 +1,79 @@
+---
+nom: "Recordatorio con un clic"
+ligne: "10 h de recordatorios de pago reducidas a 40 min"
+famille: Encaisser
+offre: mini
+ordre: 2
+titreSeo: "Reclamar las cuotas impagadas con un clic | OnClub"
+description: "Una familia con retraso o todo un equipo: el correo de recordatorio de pago está listo, usted lo revisa y sale. La junta directiva deja de hacer de cobrador."
+titre: "Una cuota con retraso se reclama con un botón"
+chapo: "Se acabó perseguir a los padres. El recordatorio de pago se redacta con el importe correcto: usted lo revisa y sale."
+temps:
+  cles: [relances]
+ecranFonction: true
+fonctionnalites: [suivi-des-paiements, paiement-en-ligne, messages-familles]
+profils: [tresorier]
+comparatifs: [tableur-excel]
+articles: [relancer-sans-se-facher]
+maj: 2026-10-10
+faq:
+  - question: "¿Qué recibe la familia a la que se reclama?"
+    reponse: "Un correo en nombre del club: la cantidad atrasada o pendiente de pago, el enlace a su expediente y la posibilidad de pagar en el club. Termina con una frase para la familia que ya ha pagado: en ese caso, el mensaje ya no tiene razón de ser."
+  - question: "¿Se puede reclamar a todo un equipo de una vez?"
+    reponse: "Sí. Filtre el equipo en la lista de inscripciones, seleccione las familias y después «Reclamar a la selección». El plan nombra a cada familia, su dirección y la cantidad reclamada, y no sale nada antes de «Confirmar el envío». Un recordatorio agrupado cuenta 50 expedientes como máximo."
+  - question: "¿OnClub reclama a las familias en mi lugar?"
+    reponse: "No. Cada recordatorio de pago sale de una acción de la junta directiva, después de revisarlo. Un expediente también puede ponerse en pausa, con un motivo: entonces la familia ya no recibe ningún recordatorio, ni desde su ficha ni desde una selección."
+  - question: "¿Y la familia que ha pagado con cheque?"
+    reponse: "Anote el cheque en el expediente con «Cobrar un cheque»: la familia sale de las impagadas. OnClub no puede saber que un cheque ha llegado a la junta directiva sin que se haya introducido, y lo recuerda antes de cada recordatorio agrupado."
+---
+
+## Quién debe qué, sin buscar
+
+La página de inicio del panel muestra el dinero de la temporada: lo cobrado frente a lo previsto, y después dos líneas que llevan directamente a los expedientes.
+
+- **«3 familias con retraso en el pago · 330 €»**: un plazo ha vencido.
+- **«4 expedientes sin ningún pago · 1.520 €»**: todavía no ha entrado nada.
+- **Los próximos plazos**, que se cobran a mano, en su fecha.
+
+En la lista de inscripciones, la pestaña «Impagadas» reúne los retrasos. El detalle está en el [seguimiento de pagos](/fonctionnalites/suivi-des-paiements).
+
+## Una familia: el mensaje revisado, y después enviado
+
+En la ficha del expediente, «Reclamar a la familia» abre el mensaje tal como saldrá, encima de dos botones.
+
+- **La dirección exacta** del responsable, y el asunto del correo.
+- **El importe correcto**: el plazo atrasado, y el saldo pendiente si siguen otros plazos.
+- **El enlace a su expediente**, y la posibilidad de pagar en el club.
+- **«Enviar este mensaje»**: no sale nada antes.
+
+El mensaje termina con una frase para la familia que acaba de pagar: «Si su pago ya está en camino, este mensaje ya no tiene razón de ser». Así, la familia que ya ha dejado un cheque en el buzón del club no se siente ofendida.
+
+## El mismo recordatorio reclama también los justificantes
+
+Un expediente saldado al que le falta un certificado o una foto recibe «Justificante pendiente», con la lista de los justificantes debidos. El dinero va primero: un solo mensaje cada vez, el justificante llega una vez saldado el expediente. Vea los [justificantes](/fonctionnalites/pieces-justificatives).
+
+## Un equipo: un plan de envío, y después una confirmación
+
+El lunes siguiente a la fecha de vencimiento, el tesorero del club de fútbol filtra el equipo U13, marca las familias con retraso y después «Reclamar a la selección».
+
+<EcranFonction nom="relance-un-clic-equipe" legende="El recordatorio de pago a un equipo: tres familias marcadas, y el plan de lo que sale. Nombres e importes ficticios." />
+
+El plan nombra a cada familia, su dirección exacta y lo que reclama el mensaje. «Confirmar el envío»: un mensaje por familia, nunca uno por hijo, y 50 expedientes como máximo por envío.
+
+Los expedientes descartados se enumeran con su motivo: ninguna dirección de correo, dirección dada de baja, expediente en pausa, inscripción anulada, nada que reclamar, o guardado para el próximo envío.
+
+## La junta directiva mantiene el control
+
+- **No sale nada por sí solo**: cada recordatorio de pago es una acción de la junta directiva, después de revisarlo.
+- **Poner el expediente en pausa**, con un motivo obligatorio: ya no sale ningún recordatorio hacia esa familia, mientras dure un acuerdo.
+- **Cobrar un cheque** en cuanto llega: la familia sale de las impagadas, y el recordatorio siguiente ya no la incluye.
+- **Sus palabras en el correo**: en la pantalla «Correos», la junta directiva escribe su frase de apertura y su nota final. El importe y el enlace siguen siendo los del expediente.
+
+Para un mensaje libre a todas las familias que todavía deben dinero, los [mensajes a las familias](/fonctionnalites/messages-familles) del plan Pro toman el relevo.
+
+## Lo que OnClub no hace (todavía)
+
+- **Cobrar un plazo atrasado desde el enlace**: el expediente solo se paga con tarjeta en un solo pago, sin nada abonado. En varios plazos, la familia paga con el club.
+- **Mostrar el texto de cada correo en un recordatorio agrupado**: el plan dice quién recibe qué, no el mensaje.
+- **Reclamar más de 50 expedientes de una vez**.
+- **Saber que ha llegado un cheque** mientras no se introduzca en el expediente.

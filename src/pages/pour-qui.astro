@@ -15,38 +15,43 @@ import CartesCollection from '../components/CartesCollection.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
 import Photo from '../components/Photo.astro'
+import VersFr from '../components/langue/VersFr.astro'
 import { cartesSports } from '../i18n/bande'
-import { liste, url } from '../lib/collections'
+import { catalogue } from '../lib/collections'
+import { i18n, SR_FR } from '../i18n/ui'
 
-const sports = await liste('sports')
-const activites = await liste('activites')
-const profils = await liste('profils')
-const dix = await cartesSports('fr', 10)
+/* Une seule page pour les deux langues : /es/pour-qui l'importe, les textes passent par t(). */
+const { langue, t, lien } = i18n(Astro.url)
+const sports = await catalogue('sports', langue)
+const activites = await catalogue('activites', langue)
+const profils = await catalogue('profils', langue)
+const dix = await cartesSports(langue, 10)
 const mosaique = dix.slice(0, 9)
 /* Ordinateur : la moitié droite de l'en-tête porte une photo de sport, autre que celles de la mosaïque. */
 const visuel = dix[9]
-const aPage = (href: string) => href.startsWith('/sport')
+const aPage = (href: string) => /^(\/es)?\/sport\//.test(href)
 
-const fil = [{ nom: 'Pour qui', url: '/pour-qui' }]
+const fil = [{ nom: t('Pour qui'), url: lien('/pour-qui') }]
 const faq = [
-  { question: 'Mon sport ou mon activité n’est pas dans la liste : OnClub peut-il convenir ?', reponse: 'Probablement, s’il y a des inscriptions, des équipes, des cours ou des groupes, et des cotisations. Chaque équipe ou cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.' },
-  { question: 'Les adultes peuvent-ils s’inscrire seuls ?', reponse: 'Oui. Chaque cours est borné par années de naissance : un cours pour adultes s’ouvre aux années qui conviennent. Un adulte qui s’inscrit seul indique un contact d’urgence.' },
-  { question: 'Je suis adhérent, pas au bureau : que puis-je faire ?', reponse: 'Transmettre OnClub à votre club : la page dédiée prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail.' },
+  { question: t('Mon sport ou mon activité n’est pas dans la liste : OnClub peut-il convenir ?'), reponse: t('Probablement, s’il y a des inscriptions, des équipes, des cours ou des groupes, et des cotisations. Chaque équipe ou cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.') },
+  { question: t('Les adultes peuvent-ils s’inscrire seuls ?'), reponse: t('Oui. Chaque cours est borné par années de naissance : un cours pour adultes s’ouvre aux années qui conviennent. Un adulte qui s’inscrit seul indique un contact d’urgence.') },
+  { question: t('Je suis adhérent, pas au bureau : que puis-je faire ?'), reponse: t('Transmettre OnClub à votre club : la page dédiée prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail.') },
 ]
+const fr = (x: { fr?: boolean }) => (x.fr ? 'fr' : undefined)
 ---
 <Layout
-  titre="Clubs de sport et associations qui inscrivent | OnClub"
-  description="OnClub sert d’abord les clubs de sport (foot, basket, volley, judo, danse…), aussi les écoles de musique, de théâtre, de langues. Et chaque rôle du bureau."
-  chemin="/pour-qui"
+  titre={t('Clubs de sport et associations qui inscrivent | OnClub')}
+  description={t('OnClub sert d’abord les clubs de sport (foot, basket, volley, judo, danse…), aussi les écoles de musique, de théâtre, de langues. Et chaque rôle du bureau.')}
+  chemin={lien('/pour-qui')}
   fil={fil}
   faq={faq}
 >
   <HerosCompact
     fil={fil}
-    surtitre="Pour qui"
-    titre="Clubs de sport et associations qui inscrivent"
-    phrase="Foot, basket, judo, natation, danse : dès qu’il y a des équipes, des inscriptions et des cotisations, le bureau y laisse ses soirées. Aussi la musique et le théâtre."
-    cta={{ texte: 'Demander une démo', href: '/demo' }}
+    surtitre={t('Pour qui')}
+    titre={t('Clubs de sport et associations qui inscrivent')}
+    phrase={t('Foot, basket, judo, natation, danse : dès qu’il y a des équipes, des inscriptions et des cotisations, le bureau y laisse ses soirées. Aussi la musique et le théâtre.')}
+    cta={{ texte: t('Demander une démo'), href: lien('/demo') }}
   >
     {visuel && <div class="pq-visuel"><Photo nom={visuel.photo} ratio="4/3" tailles="(min-width: 1000px) 520px, 1px" /></div>}
   </HerosCompact>
@@ -55,31 +60,31 @@ const faq = [
     <div class="enveloppe">
       <div class="tete-ligne">
         <div class="section-tete">
-          <h2 id="t-sports" class="h2-idee pq-h2">Les clubs de sport</h2>
-          <p>Équipes bornées par année de naissance, convocations, compo du match, licences.</p>
+          <h2 id="t-sports" class="h2-idee pq-h2">{t('Les clubs de sport')}</h2>
+          <p>{t('Équipes bornées par année de naissance, convocations, compo du match, licences.')}</p>
         </div>
-        {sports.length > 0 && <a class="lien-fleche" href="#sports-az">Tous les sports ({sports.length}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+        {sports.length > 0 && <a class="lien-fleche" href="#sports-az">{t('Tous les sports ({n})', { n: sports.length })} <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
       </div>
       <ul class="mosaique">
         {mosaique.map((c, k) => (
           <li class:list={[{ grande: k === 0 }]}>
             {aPage(c.href) ? (
-              <a class="tuile" href={c.href}><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b>{k === 0 && <span>{c.ligne}</span>}</span></a>
+              <a class="tuile" href={c.href} hreflang={fr(c)}><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}{c.fr && <VersFr sr={SR_FR} />}</b>{k === 0 && <span>{c.ligne}</span>}</span></a>
             ) : (
               <div class="tuile"><Photo nom={c.photo} ratio="4/5" tailles={k === 0 ? '(min-width: 1000px) 460px, 100vw' : '(min-width: 1000px) 230px, 50vw'} /><span class="tuile-nom"><b>{c.nom}</b></span></div>
             )}
           </li>
         ))}
       </ul>
-      <CartesCollection collection="sports" limite={0} azToujours az={{ titre: 'Tous les sports, de A à Z', champ: 'Chercher un sport', indice: 'Football, judo…', id: 'sports-az' }} />
+      <CartesCollection collection="sports" limite={0} azToujours az={{ titre: t('Tous les sports, de A à Z'), champ: t('Chercher un sport'), indice: t('Football, judo…'), id: 'sports-az' }} />
     </div>
   </section>
 
   <section class="section pq-activites" id="activites" aria-labelledby="t-activites">
     <div class="enveloppe">
       <div class="section-tete">
-        <h2 id="t-activites" class="pq-h2-petit">Musique, théâtre et les autres</h2>
-        <p>Des cours, des niveaux, des professeurs, des salles : les inscriptions de la rentrée, sans fiches à recopier.</p>
+        <h2 id="t-activites" class="pq-h2-petit">{t('Musique, théâtre et les autres')}</h2>
+        <p>{t('Des cours, des niveaux, des professeurs, des salles : les inscriptions de la rentrée, sans fiches à recopier.')}</p>
       </div>
       <CartesCollection collection="activites" vignettes />
     </div>
@@ -88,12 +93,12 @@ const faq = [
   <section class="section" id="profils" aria-labelledby="t-profils">
     <div class="enveloppe">
       <div class="section-tete">
-        <h2 id="t-profils" class="h2-idee">Votre rôle</h2>
-        <p>Le trésorier d’abord : ce qu’il récupère. Parent ou adhérent : transmettez à votre club.</p>
+        <h2 id="t-profils" class="h2-idee">{t('Votre rôle')}</h2>
+        <p>{t('Le trésorier d’abord : ce qu’il récupère. Parent ou adhérent : transmettez à votre club.')}</p>
       </div>
       <ul class="pilules">
-        {profils.map((e) => <li><a href={url('profils', e.id)}><b>{e.data.nom}</b><span>{e.data.ligne}</span></a></li>)}
-        <li><a class="pilule-membre" href="/recommander"><b>Adhérent ou parent ?</b><span>Transmettre à mon club</span></a></li>
+        {profils.map((e) => <li><a href={e.url} hreflang={fr(e)}><b>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</b><span>{e.ligne}</span></a></li>)}
+        <li><a class="pilule-membre" href={lien('/recommander')}><b>{t('Adhérent ou parent ?')}</b><span>{t('Transmettre à mon club')}</span></a></li>
       </ul>
     </div>
   </section>

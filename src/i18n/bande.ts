@@ -8,11 +8,12 @@
   mène à /pour-qui#sports (jamais un lien mort). L'ordre ci-dessous ne sert qu'à
   choisir les premiers ; les autres pages sport publiées suivent.
 */
-import { liste, url } from '../lib/collections'
+import { liste, url, catalogue } from '../lib/collections'
 import { photoDe } from '../data/photos'
 
 type L = 'fr' | 'en' | 'es'
-export type CarteBande = { nom: string; ligne: string; href: string; photo: string }
+/** fr : depuis une page espagnole, la carte mène à une page restée en français (étiquette « FR »). */
+export type CarteBande = { nom: string; ligne: string; href: string; photo: string; fr?: boolean }
 
 /** Les sports montrés d'abord, avec leur nom dans chaque langue (les pages publiées gardent leur nom en français). */
 const PREMIERS: { id: string; fr: string; en: string; es: string }[] = [
@@ -38,22 +39,27 @@ const ARTS = ['ecole-de-musique', 'theatre']
 /** Les cartes sport (10 par défaut ; 9 sur /pour-qui, pour une mosaïque sans trou), dans l'ordre : pages publiées d'abord parmi les premiers, puis les autres pages, puis les photos seules. */
 export async function cartesSports(l: L, nb = NB_SPORTS): Promise<CarteBande[]> {
   const pages = (await liste('sports')).filter((e) => photoDe(e.id))
+  /* Espagnol : le nom et la ligne de la page espagnole si elle existe, sinon le nom de src/i18n/noms.ts. */
+  const fiches = l === 'es' ? new Map((await catalogue('sports', 'es')).map((f) => [f.id, f])) : null
+  const href = (id: string) => (l === 'es' ? fiches!.get(id)!.url : url('sports', id))
+  const ligneDe = (id: string, ligneFr: string) => (l === 'fr' ? ligneFr : l === 'es' && !fiches!.get(id)!.fr ? fiches!.get(id)!.ligne ?? LIGNE.es : LIGNE[l])
+  const frDe = (id: string) => (l === 'es' ? fiches!.get(id)!.fr : undefined)
   const fichier = (id: string) => photoDe(id)?.fichier ?? id
   const vus = new Set<string>()
   const out: CarteBande[] = []
   const ajoute = (c: CarteBande) => { const f = fichier(c.photo); if (vus.has(f) || out.length >= nb) return; vus.add(f); out.push(c) }
-  const nomDe = (id: string, nomFr: string) => { const p = PREMIERS.find((x) => fichier(x.id) === fichier(id)); return l === 'fr' ? nomFr : (p?.[l] ?? nomFr) }
+  const nomDe = (id: string, nomFr: string) => { if (l === 'es') return fiches!.get(id)!.nom; const p = PREMIERS.find((x) => fichier(x.id) === fichier(id)); return l === 'fr' ? nomFr : (p?.[l] ?? nomFr) }
   for (const p of PREMIERS) {
     const e = pages.find((x) => fichier(x.id) === fichier(p.id))
-    if (e) ajoute({ nom: nomDe(e.id, e.data.nom), ligne: l === 'fr' ? e.data.ligne : LIGNE[l], href: url('sports', e.id), photo: e.id })
+    if (e) ajoute({ nom: nomDe(e.id, e.data.nom), ligne: ligneDe(e.id, e.data.ligne), href: href(e.id), photo: e.id, fr: frDe(e.id) })
   }
-  for (const e of pages) ajoute({ nom: nomDe(e.id, e.data.nom), ligne: l === 'fr' ? e.data.ligne : LIGNE[l], href: url('sports', e.id), photo: e.id })
-  for (const p of PREMIERS) if (photoDe(p.id)) ajoute({ nom: p[l], ligne: LIGNE[l], href: '/pour-qui#sports', photo: p.id })
+  for (const e of pages) ajoute({ nom: nomDe(e.id, e.data.nom), ligne: ligneDe(e.id, e.data.ligne), href: href(e.id), photo: e.id, fr: frDe(e.id) })
+  for (const p of PREMIERS) if (photoDe(p.id)) ajoute({ nom: p[l], ligne: LIGNE[l], href: l === 'es' ? '/es/pour-qui#sports' : '/pour-qui#sports', photo: p.id })
   return out
 }
 
 /** Les activités artistiques, à la fin (pages publiées seulement). */
-export async function cartesArts(): Promise<CarteBande[]> {
-  const acts = await liste('activites')
-  return ARTS.flatMap((id) => acts.filter((e) => e.id === id && photoDe(e.id)).map((e) => ({ nom: e.data.nom, ligne: e.data.ligne, href: url('activites', e.id), photo: e.id })))
+export async function cartesArts(l: 'fr' | 'es' = 'fr'): Promise<CarteBande[]> {
+  const acts = await catalogue('activites', l)
+  return ARTS.flatMap((id) => acts.filter((e) => e.id === id && photoDe(e.id)).map((e) => ({ nom: e.nom, ligne: e.ligne ?? '', href: e.url, photo: e.id, fr: e.fr || undefined })))
 }

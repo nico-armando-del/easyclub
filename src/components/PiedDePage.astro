@@ -7,80 +7,100 @@
   Chaque colonne est un <details open> : sans JavaScript, tout est ouvert ; sous
   760 px, un script les referme (accordéons du téléphone).
 */
-import { FAMILLES, EMAIL, lienWhatsApp, ACCROCHE } from '../data/site'
-import { liste, url } from '../lib/collections'
+import { FAMILLES, EMAIL, lienWhatsApp, ACCROCHE, MESSAGE_DEMO } from '../data/site'
+import { catalogue } from '../lib/collections'
+import { i18n, SR_FR } from '../i18n/ui'
+import { jumelles } from '../i18n/liens'
+import VersFr from './langue/VersFr.astro'
+const { langue, t, lien, versFr } = i18n(Astro.url)
 const LIMITE = 10
-const fonctions = await liste('fonctionnalites')
-const sports = await liste('sports')
-const activites = await liste('activites')
-const profils = await liste('profils')
+const fonctions = await catalogue('fonctionnalites', langue)
+const sports = await catalogue('sports', langue)
+const activites = await catalogue('activites', langue)
+const profils = await catalogue('profils', langue)
+/* Le sélecteur de langue : la page jumelle (même chemin), sinon l'accueil de l'autre langue. */
+interface Props { chemin?: string }
+const paire = jumelles(Astro.props.chemin ?? (langue === 'es' ? '/es' : '/'))
+const fr = (x: { fr: boolean }) => (x.fr ? 'fr' : undefined)
+/** Un lien fixe du pied : l'adresse dans la langue, et l'étiquette « FR » s'il reste en français. */
+const L = (chemin: string) => ({ href: lien(chemin), hreflang: versFr(chemin) ? 'fr' : undefined, fr: versFr(chemin) })
+const lignes = {
+  ressources: L('/ressources'), comparatifs: L('/ressources#comparatifs'), temps: L('/temps-gagne'), presentation: L('/presentation'),
+  tarifs: L('/tarifs'), demo: L('/demo'), recommander: L('/recommander'),
+  mentions: L('/mentions-legales'), confidentialite: L('/confidentialite'), conditions: L('/conditions'), credits: L('/credits-photos'),
+}
 const annee = new Date().getFullYear()
 ---
 <footer class="pied sur-encre" data-sans-bouton-fixe>
   <div class="enveloppe">
     <div class="pied-haut">
       <div class="pied-marque">
-        <a class="marque" href="/" aria-label="OnClub, accueil"><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
-        <p class="pied-accroche">{ACCROCHE}</p>
-        <a class="btn btn-menthe btn-petit pied-demo" href="/demo">Demander une démo</a>
+        <a class="marque" href={lien('/')} aria-label={t('OnClub, accueil')}><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
+        <p class="pied-accroche">{t(ACCROCHE)}</p>
+        <a class="btn btn-menthe btn-petit pied-demo" href={lignes.demo.href}>{t('Demander une démo')}</a>
       </div>
-      <nav class="pied-grille" aria-label="Plan du site">
+      <nav class="pied-grille" aria-label={t('Plan du site')}>
         <details open class="pied-col">
-          <summary><h2>Fonctionnalités</h2></summary>
+          <summary><h2>{t('Fonctionnalités')}</h2></summary>
           <ul>
-            {FAMILLES.map((f) => <li><a href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a></li>)}
-            <li><a class="tous" href="/fonctionnalites">Toutes ({fonctions.length})</a></li>
+            {FAMILLES.map((f) => <li><a href={lien(`/fonctionnalites#${f.ancre}`)}>{t(f.cle)}</a></li>)}
+            <li><a class="tous" href={lien('/fonctionnalites')}>{t('Toutes ({n})', { n: fonctions.length })}</a></li>
           </ul>
         </details>
         <details open class="pied-col">
-          <summary><h2>Sports</h2></summary>
+          <summary><h2>{t('Sports')}</h2></summary>
           <ul>
-            {sports.slice(0, LIMITE).map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}
+            {sports.slice(0, LIMITE).map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}
             {sports.length > 1
-              ? <li><a class="tous" href="/pour-qui#sports">Tous les sports ({sports.length})</a></li>
-              : <li><a class="tous" href="/pour-qui">Toutes les associations</a></li>}
+              ? <li><a class="tous" href={lien('/pour-qui#sports')}>{t('Tous les sports ({n})', { n: sports.length })}</a></li>
+              : <li><a class="tous" href={lien('/pour-qui')}>{t('Toutes les associations')}</a></li>}
           </ul>
         </details>
         <details open class="pied-col">
-          <summary><h2>Activités</h2></summary>
+          <summary><h2>{t('Activités')}</h2></summary>
           <ul>
-            {activites.slice(0, LIMITE).map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}
-            <li><a class="tous" href="/pour-qui#activites">Toutes les activités ({activites.length})</a></li>
+            {activites.slice(0, LIMITE).map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}
+            <li><a class="tous" href={lien('/pour-qui#activites')}>{t('Toutes les activités ({n})', { n: activites.length })}</a></li>
           </ul>
         </details>
         <details open class="pied-col">
-          <summary><h2>Ressources</h2></summary>
+          <summary><h2>{t('Ressources')}</h2></summary>
           <ul>
-            <li><a href="/ressources">Guides et articles</a></li>
-            <li><a href="/ressources#comparatifs">Comparatifs</a></li>
-            <li><a href="/temps-gagne">Le temps gagné</a></li>
-            <li><a href="/presentation">La présentation</a></li>
+            <li><a href={lignes.ressources.href} hreflang={lignes.ressources.hreflang}>{t('Guides et articles')}{lignes.ressources.fr && <VersFr sr={SR_FR} />}</a></li>
+            <li><a href={lignes.comparatifs.href} hreflang={lignes.comparatifs.hreflang}>{t('Comparatifs')}{lignes.comparatifs.fr && <VersFr sr={SR_FR} />}</a></li>
+            <li><a href={lignes.temps.href} hreflang={lignes.temps.hreflang}>{t('Le temps gagné')}{lignes.temps.fr && <VersFr sr={SR_FR} />}</a></li>
+            {langue !== 'es' && <li><a href={lignes.presentation.href} hreflang={lignes.presentation.hreflang}>{t('La présentation')}{lignes.presentation.fr && <VersFr sr={SR_FR} />}</a></li>}
           </ul>
           {profils.length > 0 && <>
-            <h3 class="pied-sous">Votre rôle</h3>
-            <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
+            <h3 class="pied-sous">{t('Votre rôle')}</h3>
+            <ul>{profils.map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}</ul>
           </>}
         </details>
         <details open class="pied-col">
           <summary><h2>OnClub</h2></summary>
           <ul>
-            <li><a href="/tarifs">Tarifs</a></li>
-            <li><a href="/demo">Demander une démo</a></li>
-            <li><a href="/recommander">Transmettre à mon club</a></li>
-            <li><a href={lienWhatsApp()} rel="noopener" target="_blank">WhatsApp</a></li>
-            <li><a href={`mailto:${EMAIL}`}>Écrire un e-mail</a></li>
+            <li><a href={lignes.tarifs.href} hreflang={lignes.tarifs.hreflang}>{t('Tarifs')}{lignes.tarifs.fr && <VersFr sr={SR_FR} />}</a></li>
+            <li><a href={lignes.demo.href} hreflang={lignes.demo.hreflang}>{t('Demander une démo')}{lignes.demo.fr && <VersFr sr={SR_FR} />}</a></li>
+            <li><a href={lignes.recommander.href} hreflang={lignes.recommander.hreflang}>{t('Transmettre à mon club')}{lignes.recommander.fr && <VersFr sr={SR_FR} />}</a></li>
+            <li><a href={lienWhatsApp(t(MESSAGE_DEMO))} rel="noopener" target="_blank">WhatsApp</a></li>
+            <li><a href={`mailto:${EMAIL}`}>{t('Écrire un e-mail')}</a></li>
           </ul>
         </details>
       </nav>
     </div>
     <div class="pied-bas">
       <span>© {annee} OnClub</span>
-      <a href="/mentions-legales">Mentions légales</a>
-      <a href="/confidentialite">Confidentialité</a>
-      <a href="/conditions">Conditions</a>
-      <a href="/credits-photos">Crédits photos</a>
-      <button type="button" class="pied-cookies" data-consentement-ouvrir>Cookies et localisation</button>
-      <span class="pied-langues"><a href="/en" hreflang="en" lang="en">English</a><a href="/es" hreflang="es" lang="es">Español</a></span>
+      <a href={lignes.mentions.href} hreflang={lignes.mentions.hreflang}>{t('Mentions légales')}{lignes.mentions.fr && <VersFr sr={SR_FR} />}</a>
+      <a href={lignes.confidentialite.href} hreflang={lignes.confidentialite.hreflang}>{t('Confidentialité')}{lignes.confidentialite.fr && <VersFr sr={SR_FR} />}</a>
+      <a href={lignes.conditions.href} hreflang={lignes.conditions.hreflang}>{t('Conditions')}{lignes.conditions.fr && <VersFr sr={SR_FR} />}</a>
+      <a href={lignes.credits.href} hreflang={lignes.credits.hreflang}>{t('Crédits photos')}{lignes.credits.fr && <VersFr sr={SR_FR} />}</a>
+      <button type="button" class="pied-cookies" data-consentement-ouvrir>{t('Cookies et localisation')}</button>
+      <span class="pied-langues" role="group" aria-label={t('Langue')}>
+        {langue === 'fr'
+          ? <><span class="pied-langue-active" lang="fr" aria-current="true">Français</span><a href={paire.es ?? '/es'} hreflang="es" lang="es">Español</a></>
+          : <><a href={paire.fr} hreflang="fr" lang="fr">Français</a><span class="pied-langue-active" lang="es" aria-current="true">Español</span></>}
+        <a href="/en" hreflang="en" lang="en">English</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -129,6 +149,7 @@ const annee = new Date().getFullYear()
 .pied-bas a{color:var(--texte-scene);text-decoration:none}
 .pied-bas a:hover{color:var(--menthe);text-decoration:underline}
 .pied-langues{gap:20px}
+.pied-langue-active{color:var(--blanc);font-weight:700}
 @media (min-width:1000px){.pied-langues{margin-left:auto}}
 /* Sur téléphone (tour 2, défaut 2) : le bouton du pied double la case vide juste au-dessus
    et la colonne OnClub (« Demander une démo ») : il n'est dessiné qu'à partir de 760 px.

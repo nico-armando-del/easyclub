@@ -1,0 +1,126 @@
+---
+nom: "Coches radiocontrolados"
+ligne: "Pilotos de ocio, de competición y voluntarios: el club RC se hace socio en línea"
+ordre: 50
+titreSeo: "Club de coches RC: inscripción en línea, licencia FFVRC | OnClub"
+description: "Club de coches RC: altas de piloto y de voluntario en línea, adolescentes y adultos en un expediente, cuota en varios plazos. La licencia FFVRC sigue el año."
+titre: "Club de coches RC: pilotos y voluntarios se hacen socios en línea"
+chapo: "El padre pilota de combustión, la hija de eléctrico, el tío lleva el bar los días de carrera. Una sola inscripción en línea para los tres."
+temps:
+  cles: [paiements, relances]
+  titre: "El tiempo que recupera la directiva de un club de coches RC, cada temporada"
+fonctionnalites: [inscription-en-ligne, seances-essai, suivi-des-paiements, relance-un-clic, paiement-en-ligne, liste-des-licences, evenements-stages]
+profils: [tresorier]
+guides: [prix-cotisation-association, assurance-association]
+maj: 2026-10-10
+faq:
+  - question: "¿Un piloto de 16 años saca la licencia Compétition o Compétition -17 ans?"
+    reponse: "La FFVRC reserva la licencia Compétition -17 ans a los pilotos que tienen menos de 17 años a 1 de enero del año en curso. En 2027, eso afecta en la práctica a los pilotos nacidos después del 1 de enero de 2010. En OnClub, el club fija esos años de nacimiento en su modalidad para jóvenes."
+  - question: "¿Los voluntarios del bar y del cronometraje tienen su propia licencia?"
+    reponse: "La FFVRC ha previsto la licencia Passion para los socios que dan vida al club (organización de carreras, bar, cronometraje) y para los acompañantes; no permite pilotar. En OnClub, el alta de voluntario es una modalidad del catálogo, con su precio."
+  - question: "¿Hace falta un certificado médico para pilotar un coche radiocontrolado?"
+    reponse: "El código del deporte francés excluye el modelismo automovilístico radiocontrolado de las disciplinas de riesgo particular. Para un menor, la ley pide el cuestionario de salud; para un mayor de edad, es la federación la que fija sus condiciones. El club elige en OnClub los documentos que pide."
+  - question: "¿OnClub cronometra las mangas y publica las clasificaciones?"
+    reponse: "No. OnClub no tiene ni cronometraje, ni resultados, ni clasificación, y no gestiona la ocupación de la pista. Las inscripciones en los campeonatos pasan por la plataforma de la federación. OnClub lleva las altas de socios, el dinero y la lista de licencias."
+sources:
+  - titre: "FFVRC, Les licences et les tarifs (saison 2026)"
+    url: "https://www.ffvrc.fr/fr/licencies/les-licences-et-les-tarifs.html"
+    consulte: "2026-10-10"
+  - titre: "FFVRC, Pourquoi être licencié ?"
+    url: "https://www.ffvrc.fr/fr/licencies/pourquoi-etre-licencie.html"
+    consulte: "2026-10-10"
+  - titre: "FFVRC, Règlement intérieur fédéral"
+    url: "https://www.ffvrc.fr/medias/fichiers/LA%20FEDERATION/STATUTS-REGLEMENT%20INTERIEUR/Rglement%20intrieur%20fdral.pdf"
+    consulte: "2026-10-10"
+  - titre: "Légifrance, code du sport, article D231-1-5 (version du 3 septembre 2023)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034417463"
+    consulte: "2026-10-10"
+  - titre: "Légifrance, code du sport, article L231-2"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045293846"
+    consulte: "2026-10-10"
+---
+
+## Una familia, tres altas: piloto, piloto joven, voluntario
+
+<Idee visuel="droite">
+
+Una familia inscribe a todos sus miembros en un solo expediente y paga a continuación; cada uno elige su modalidad, y el total aparece antes de pagar.
+
+<Repli>
+
+- **Las modalidades** del club (piloto de ocio, piloto de competición, joven, voluntario) son líneas del catálogo, cada una con su precio y sus años de nacimiento.
+- **Varias altas** en un expediente: los descuentos previstos por el club se aplican solos.
+- **Un menor** siempre tiene un responsable legal mayor de edad; un adulto solo indica un contacto de emergencia.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club RC"
+  titre="Expediente familiar · 3 altas"
+  sousTitre="Temporada 2026 · 2027"
+  lignes={[
+    { nom: 'Marc L.', detail: 'Piloto de ocio, adulto', statut: 'Inscrito', ton: 'ok' },
+    { nom: 'Lou L.', detail: 'Piloto joven, nacida en 2012', statut: 'Inscrita', ton: 'ok' },
+    { nom: 'Paul D.', detail: 'Voluntario, no pilota', statut: 'Inscrito', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '210 €' }}
+  legende="Un expediente con tres altas, visto por la junta directiva. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Inscripción en línea en el club RC: la modalidad correcta según la edad
+
+El formulario solo ofrece a cada uno las modalidades abiertas a su año de nacimiento; el club las ajusta a las licencias de la FFVRC.
+
+<Repli titre="Las licencias FFVRC, temporada 2026">
+
+- **Compétition**: todos los campeonatos, todas las disciplinas, y los grandes premios EFRA en Francia.
+- **Compétition -17 ans**: menos de 17 años a 1 de enero del año en curso.
+- **Loisir**: práctica libre y carreras amistosas.
+- **Passion**: organización de carreras, bar, cronometraje, acompañantes; no permite pilotar.
+
+</Repli>
+
+## Prueba en la pista antes de hacerse socio
+
+Un curioso llega con el coche que le regalaron en Navidad: reserva una [sesión de prueba](/fonctionnalites/seances-essai) desde la página del club, y su inscripción, si vuelve, queda vinculada a la prueba.
+
+<Repli>
+
+- **Cada horario decide**: nunca prueba, prueba si queda sitio, o incluso completo.
+- **La junta directiva ve** cuántas pruebas han terminado en un alta de socio.
+- **Para un menor**, tanto la prueba como la inscripción pasan por un responsable legal mayor de edad.
+
+</Repli>
+
+## Cuota del club RC en varios plazos, con el dinero controlado
+
+En un solo pago o en varios pagos, a elección de sus modalidades; el tesorero lee en un cuadro lo [cobrado, lo pendiente o lo atrasado](/fonctionnalites/suivi-des-paiements).
+
+<Repli>
+
+- **Un retraso** se [reclama con un botón](/fonctionnalites/relance-un-clic): el mensaje lleva el importe correcto, usted lo relee y sale.
+- **El efectivo** de la permanencia se anota en el expediente, al céntimo, sin comisión.
+- **El precio de la cuota**: vea la [guía para fijarlo](/guides/prix-cotisation-association).
+
+</Repli>
+
+## Licencia FFVRC: el año natural, una licencia recibida por correo
+
+Según el reglamento interno de la FFVRC, la licencia vale para el año natural y caduca el 31 de diciembre. Es digital y llega por correo. OnClub no registra ni envía nada a la federación.
+
+<Repli>
+
+- **La [lista de licencias](/fonctionnalites/liste-des-licences)** dice quién está listo, quién renueva, quién es nuevo; se exporta en hoja de cálculo.
+- **El seguro** va incluido en cada licencia; el club informa al federado de la garantía complementaria IA+.
+- **La red**: la FFVRC anuncia 15 ligas, 300 clubes y unos 8.000 jugadores federados.
+
+</Repli>
+
+## Carrera amistosa y día de cursillo: una página para cada uno
+
+Con Pro Max IA, la carrera organizada por el club o un día de cursillo de los pilotos jóvenes se convierte en un [evento](/fonctionnalites/evenements-stages): fecha, lugar, precio, plazas y lista de espera.
+
+OnClub no cronometra las mangas, no publica clasificaciones y no gestiona la ocupación de la pista.

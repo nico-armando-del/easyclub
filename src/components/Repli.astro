@@ -4,7 +4,9 @@
   Utilisable dans le MDX : <Repli titre="Le calcul">…</Repli>. Styles communs : .repli (global.css).
 */
 interface Props { titre?: string; ouvert?: boolean; class?: string; id?: string }
-const { titre = 'Le détail', ouvert = false, class: classe, id } = Astro.props
+const { t } = i18n(Astro.url)
+const { titre = t('Le détail'), ouvert = false, class: classe, id } = Astro.props
+import { i18n } from '../i18n/ui'
 ---
 <details class:list={['repli', classe]} open={ouvert} id={id}>
   <summary>{titre}</summary>

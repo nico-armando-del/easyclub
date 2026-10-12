@@ -1,0 +1,118 @@
+---
+nom: "Tiro deportivo"
+ligne: "Carabina, pistola, plato: cada tirador sube su certificado en línea"
+ordre: 50
+titreSeo: "Inscripción en línea en un club de tiro deportivo | OnClub"
+description: "Club de tiro deportivo: inscripción en línea, certificado médico subido y controlado para cada tirador, cuota en varios plazos. Licencia FFTir en ITAC."
+titre: "Club de tiro: inscripciones y certificados en línea"
+chapo: "En la galería de tiro, cada tirador, adultos incluidos, debe presentar un certificado médico de menos de un año. En línea, lo sube en foto y la junta directiva ve quién falta."
+temps:
+  cles: [pieces, fiches]
+  titre: "El tiempo que recupera la directiva de un club de tiro deportivo, cada temporada"
+fonctionnalites: [pieces-justificatives, inscription-en-ligne, paiement-en-ligne, liste-des-licences, convocations, espace-encadrant]
+profils: [tresorier]
+guides: [certificat-medical-sport, inscriptions-en-ligne-association]
+maj: 2026-10-10
+faq:
+  - question: "¿OnClub crea las licencias en ITAC?"
+    reponse: "No. Las altas y renovaciones se siguen haciendo en ITAC, donde el club valida también la existencia del certificado médico. OnClub prepara la lista que seguir: quién ha pagado, de quién ha llegado el certificado, quién es nuevo en el club. Se exporta en hoja de cálculo, con ITAC abierto al lado."
+  - question: "¿Un tirador adulto puede rellenar el cuestionario de salud en lugar del certificado?"
+    reponse: "No. La FFTir exige un certificado médico de menos de un año a todos, jóvenes y adultos, tanto en el alta como en la renovación. En OnClub, el documento de un club de tiro se configura como certificado que subir: ningún cuestionario rellenado en línea lo sustituye."
+  - question: "El certificado caduca a mitad de temporada: ¿se pierde la licencia?"
+    reponse: "Según la FFTir, una licencia renovada con un certificado válido sigue siendo válida hasta el final de la temporada, aunque el certificado caduque por el camino. Para competir, en cambio, tiene que estar al día. OnClub guarda la fecha de caducidad de cada certificado subido, para que la junta directiva vea venir el vencimiento."
+  - question: "¿Cuánto le cuesta OnClub a un club de tiro deportivo?"
+    reponse: "Sin cuota fija: un porcentaje de las cuotas pagadas en línea, 2,90 % con OnClub Mini, 4,90 % con Pro, 6,90 % con Pro Max IA. Una cuota pagada con cheque o en efectivo y anotada por el tesorero no paga nada."
+sources:
+  - titre: "FFTir, protocole licences 2026-2027"
+    url: "https://www.fftir.org/protocole-licences-fftir/"
+    consulte: "2026-10-10"
+  - titre: "FFTir, le certificat médical"
+    url: "https://www.fftir.org/certificat-medical/"
+    consulte: "2026-10-10"
+  - titre: "FFTir, règlement général sportif 2025-2026 (catégories d’âge et surclassements)"
+    url: "https://www.fftir.org/wp-content/uploads/2026/03/RGS-VN-2025-2026-V3.pdf"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## El inicio de temporada en la galería: un certificado por tirador, cada temporada
+
+<Idee visuel="droite">
+
+En la FFTir, el certificado médico de menos de un año es obligatorio para todos, jóvenes y adultos, tanto en el alta como en la renovación: sin él, no hay licencia.
+
+<Repli>
+
+- **Subido en foto**: el tirador lo envía desde su móvil y la junta directiva lo revisa en pantalla.
+- **Su fecha de caducidad queda controlada**: los certificados que van a vencer se localizan de un vistazo.
+- **Ningún cuestionario en su lugar**: el tiro con armas de fuego es una disciplina de riesgo particular; el documento se configura como certificado que subir, sin botón «Rellenar».
+- **Un documento que falta** no impide pagar la cuota; se reclama con un botón.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de tiro"
+  titre="Certificados médicos · temporada 2026-2027"
+  sousTitre="Sección de pistola · adultos"
+  lignes={[
+    { nom: 'Marc L.', detail: 'Certificado del 2 de septiembre de 2026', statut: 'Revisado', ton: 'ok' },
+    { nom: 'Sophie R.', detail: 'Subido esta mañana', statut: 'Por revisar', ton: 'neutre' },
+    { nom: 'Paul G.', detail: 'Ningún certificado recibido', statut: 'Por reclamar', ton: 'ko' },
+  ]}
+  bouton="Reclamar el documento"
+  legende="Los certificados de una sección vistos por la junta directiva, antes de registrar las licencias. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+El detalle de los documentos y de su seguimiento está en la página de [justificantes](/fonctionnalites/pieces-justificatives), y las reglas generales en la [guía del certificado médico](/guides/certificat-medical-sport).
+
+## Inscripción en línea en un club de tiro: escuela de tiro y adultos
+
+El tirador, o sus padres, elige la sección abierta a su año de nacimiento: la escuela de tiro para los más jóvenes, y después la carabina, la pistola o el plato.
+
+<Repli>
+
+- **Las categorías de la FFTir**: poussins, benjamins y minimes en la escuela de tiro, y después cadets, juniors, y tres categorías de damas y séniores.
+- **Los límites de años se fijan por clase**: el RGS 2025-2026 situaba a los minimes nacidos en 2012 y 2013; consulte la tabla 2026-2027 de la federación antes de abrir la temporada.
+- **El cambio de categoría de un menor** requiere, según el RGS, una autorización de los padres y un certificado específico, distinto del de la licencia. Está prohibido en las pruebas de la escuela de tiro.
+- **Para un menor**, un responsable legal mayor de edad rellena el expediente; un adulto que se inscribe solo indica un contacto de emergencia.
+
+</Repli>
+
+## Cuota del club de tiro en varios plazos
+
+El precio del club, licencia incluida si la incluye, aparece como total antes del pago, que se hace con tarjeta en un solo pago o con un anticipo y después varios pagos.
+
+<Repli>
+
+- **Dos disciplinas**: la pistola añadida a la carabina se declara como segunda sección, con su descuento si el club prevé uno.
+- **Cheques y efectivo** se anotan en el expediente, al céntimo, sin comisión.
+- **El cuadro del tesorero** separa lo cobrado, lo pendiente y lo atrasado; un pago atrasado se reclama con un botón, tras releer el mensaje.
+
+</Repli>
+
+## Licencia FFTir: ITAC sigue siendo la herramienta, OnClub prepara la lista
+
+Las altas y renovaciones se hacen en ITAC, la intranet de los clubes, abierta para 2026-2027 desde el lunes 24 de agosto de 2026; el tirador encuentra después su licencia en su espacio EDEN. OnClub no envía nada a ITAC.
+
+Allí el club valida la existencia del certificado antes de expedir la licencia. La pantalla Licencias de OnClub dice quién está listo, es decir, pagado y sin documentos pendientes de reclamar, quién renueva y quién es nuevo. La lista se exporta en hoja de cálculo.
+
+## Convocatoria a los campeonatos y lo que OnClub no hace
+
+Para un campeonato departamental, el entrenador convoca a sus tiradores; cada uno responde presente o ausente desde el correo, sin crear cuenta.
+
+OnClub no gestiona ni las armas del club, ni la reserva de puestos de tiro, ni los resultados: se queda en la cuota de socio, el dinero y los documentos.
+
+<Repli>
+
+- **Un enlace personal** abre la página del entrenador, sin contraseña; allí no ve ni la dirección ni el teléfono de las familias.
+- **El pase de lista** parte de las respuestas: un tirador que ha avisado queda como justificado, no ausente.
+- **Un campeonato anulado** se comunica a los convocados, con una nota opcional.
+
+</Repli>
+
+Para verlo todo en un club de tiro, [solicite una demostración](/demo?type=sport) o compare los [planes y precios](/tarifs).

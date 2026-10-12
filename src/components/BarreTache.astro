@@ -6,9 +6,11 @@
   Usage MDX : <BarreTache cle="fiches" />
 */
 import { TACHES, duree, type CleTemps } from '../data/temps'
+import { i18n } from '../i18n/ui'
 
 interface Props { cle: CleTemps }
 const { cle } = Astro.props
+const { t: tr, langue } = i18n(Astro.url)
 const t = TACHES[cle]
 if (!t) throw new Error(`BarreTache : clé de temps inconnue « ${cle} » (voir src/data/temps.ts).`)
 const avant = t.avantMin
@@ -22,12 +24,12 @@ const pct = (m: number, max: number) => `${Math.max(1.5, (m / max) * 100).toFixe
         <span class="bta-piste bta-avant"><i style="width:100%"></i></span>
         <span class="bta-piste bta-apres"><i style={`width:${pct(apres, avant)}`}></i></span>
       </span>
-      <span class="bta-lib">Aujourd’hui <b>{duree(avant)}</b> · Avec OnClub <b>{duree(apres)}</b></span>
+      <span class="bta-lib">{tr('Aujourd’hui')} <b>{duree(avant, langue)}</b> · {tr('Avec OnClub')} <b>{duree(apres, langue)}</b></span>
     </>
   ) : (
     <>
       <span class="bta-pistes" aria-hidden="true"><span class="bta-piste bta-apres"><i style="width:100%"></i></span></span>
-      <span class="bta-lib">Rendues <b>{duree(t.gainMin)}</b> par saison</span>
+      <span class="bta-lib">{tr('Rendues')} <b>{duree(t.gainMin, langue)}</b> {tr('par saison')}</span>
     </>
   )}
 </div>

@@ -19,10 +19,12 @@
   animé : l'écran est un état, pas une démonstration.
 */
 import { lireEcranFonction } from '../lib/ecransFonction'
+import { i18n } from '../i18n/ui'
 
 interface Props { nom: string; legende?: string; nu?: boolean; class?: string }
 const { nom, legende, nu = false, class: classe } = Astro.props
-const e = lireEcranFonction(nom)
+const { langue, t } = i18n(Astro.url)
+const e = lireEcranFonction(nom, langue)
 
 /* Le menu d'un club de sport en offre Pro, tel que lib/dashboard/ecrans.ts le construit
    (libellés de lib/mots.ts, vocabulaire « Cours / Équipes »). Une entrée réservée à Max n'y est pas,
@@ -42,24 +44,24 @@ const saisons = e.menu === 'Saisons'
 if (e.menu && !saisons && !MENU.some((g) => g.entrees.includes(e.menu!))) {
   throw new Error(`src/ecrans/fonctions/${nom}.html : data-menu « ${e.menu} » n’est pas une entrée du menu (${MENU.flatMap((g) => g.entrees).join(', ')}).`)
 }
-const CLUB = 'Votre club'
-const SIGLE = 'VC'
+const CLUB = t('Votre club')
+const SIGLE = t('VC')
 const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
 ---
 <figure class:list={['ecran-fonction', `ef-${e.forme}`, { 'ef-nu': nu }, classe]} data-ecran-fonction={nom} style={hauteur}>
   <div class="ef-fond">
     {e.forme === 'fenetre' ? (
       <div class="ef-fen" role="img" aria-label={e.description}>
-        <div class="ef-chr" aria-hidden="true"><i></i><span class="ef-tit">{e.menu ? `${e.menu} — ${CLUB}` : CLUB}</span></div>
+        <div class="ef-chr" aria-hidden="true"><i></i><span class="ef-tit">{e.menu ? `${t(e.menu)} — ${CLUB}` : CLUB}</span></div>
         <div class="ef-app">
           {e.menu && (
             <div class="ef-menu">
               <div class="ef-id"><span class="ef-sig">{SIGLE}</span>{CLUB}</div>
-              <div class:list={['ef-sais', { 'ef-sais-act': saisons }]}><span class="ef-lib">Saisons</span><span class="ef-pas">2026-2027 · se joue</span></div>
+              <div class:list={['ef-sais', { 'ef-sais-act': saisons }]}><span class="ef-lib">{t('Saisons')}</span><span class="ef-pas">{t('2026-2027 · se joue')}</span></div>
               {MENU.map((g) => (
                 <div>
-                  {g.groupe && <span class="ef-lib">{g.groupe}</span>}
-                  {g.entrees.map((x) => <div class:list={['ef-ln', { 'ef-act': x === e.menu }]}>{x}</div>)}
+                  {g.groupe && <span class="ef-lib">{t(g.groupe)}</span>}
+                  {g.entrees.map((x) => <div class:list={['ef-ln', { 'ef-act': x === e.menu }]}>{t(x)}</div>)}
                 </div>
               ))}
             </div>

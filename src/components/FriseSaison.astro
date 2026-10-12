@@ -8,8 +8,10 @@
   défile en x. Sous mouvement réduit, la barre change sans glisser.
   <FriseSaison etapes={[{ ancre: 'mai-…', nom: 'Mai' }, …]} />
 */
+import { i18n } from '../i18n/ui'
 interface Props { etapes: { ancre: string; nom: string }[]; libelle?: string }
-const { etapes, libelle = 'La saison, étape par étape' } = Astro.props
+const { t } = i18n(Astro.url)
+const { etapes, libelle = t('La saison, étape par étape') } = Astro.props
 ---
 {etapes.length > 0 && (
   <nav class="frise" aria-label={libelle} data-frise data-defile-x>

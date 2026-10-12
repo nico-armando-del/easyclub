@@ -15,24 +15,27 @@
   var base = zone.getAttribute('data-base')
   var modifie = false
   var ville = window.onclubVille || null
+  // Les mots ajoutés au message, dans la langue de la page (data-textes, posé par src/pages/recommander.astro).
+  var T = { duClub: 'adhérent du club', deClub: 'adhérent de {club}', aVille: ', à {ville}', sujet: 'Une idée pour le club : OnClub', villeNote: 'Votre ville ({ville}) est ajoutée au message. Vous pouvez la retirer en modifiant le texte.', copie: 'Message copié. Collez-le où vous voulez.' }
+  try { var lus = JSON.parse(boite.getAttribute('data-textes') || '{}'); for (var k in lus) T[k] = lus[k] } catch (x) {}
 
   function compose() {
     var t = base
     var c = (club.value || '').trim()
-    var ou = c ? 'adhérent de ' + c : 'adhérent du club'
-    if (ville) ou += ', à ' + ville
-    return t.replace('adhérent du club', ou)
+    var ou = c ? T.deClub.replace('{club}', c) : T.duClub
+    if (ville) ou += T.aVille.replace('{ville}', ville)
+    return t.replace(T.duClub, ou)
   }
   function liens() {
     var t = zone.value
     boite.querySelector('[data-wa]').href = 'https://wa.me/?text=' + encodeURIComponent(t)
-    boite.querySelector('[data-mail]').href = 'mailto:?subject=' + encodeURIComponent('Une idée pour le club : OnClub') + '&body=' + encodeURIComponent(t)
+    boite.querySelector('[data-mail]').href = 'mailto:?subject=' + encodeURIComponent(T.sujet) + '&body=' + encodeURIComponent(t)
   }
   function maj() {
     if (!modifie) zone.value = compose()
     if (note) {
       note.hidden = !ville
-      note.textContent = ville ? 'Votre ville (' + ville + ') est ajoutée au message. Vous pouvez la retirer en modifiant le texte.' : ''
+      note.textContent = ville ? T.villeNote.replace('{ville}', ville) : ''
     }
     liens()
   }
@@ -51,7 +54,7 @@
   if (navigator.clipboard && copier) {
     copier.hidden = false
     copier.addEventListener('click', function () {
-      navigator.clipboard.writeText(zone.value).then(function () { etat.textContent = 'Message copié. Collez-le où vous voulez.' }).catch(function () {})
+      navigator.clipboard.writeText(zone.value).then(function () { etat.textContent = T.copie }).catch(function () {})
     })
   }
   maj()

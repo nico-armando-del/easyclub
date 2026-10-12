@@ -14,79 +14,91 @@ import Layout from '../layouts/Layout.astro'
 import FilAriane from '../components/FilAriane.astro'
 import Repli from '../components/Repli.astro'
 import Faq from '../components/Faq.astro'
+import VersFr from '../components/langue/VersFr.astro'
 import { SITE } from '../data/site'
+import { i18n, SR_FR } from '../i18n/ui'
 
-const message = `Bonjour, je suis adhérent du club. J’ai vu OnClub, une plateforme pour les associations : les familles s’inscrivent et paient en ligne, le bureau relance d’un bouton et ne recopie plus de fiches. Leur estimation, pas une étude : environ 61 heures rendues aux bénévoles chaque saison pour 250 adhérents. Ça pourrait nous aider ? ${SITE}`
-const morceaux = message.split('61 heures')
-const fil = [{ nom: 'Transmettre à mon club', url: '/recommander' }]
+/* Une seule page pour les deux langues : /es/recommander l'importe. Le message et les mots que
+   public/js/recommander.js y ajoute (nom du club, ville) passent par t() ; le lien mène à l'accueil de la langue. */
+const { t, lien, versFr } = i18n(Astro.url)
+const message = t('Bonjour, je suis adhérent du club. J’ai vu OnClub, une plateforme pour les associations : les familles s’inscrivent et paient en ligne, le bureau relance d’un bouton et ne recopie plus de fiches. Leur estimation, pas une étude : environ 61 heures rendues aux bénévoles chaque saison pour 250 adhérents. Ça pourrait nous aider ? {site}', { site: `${SITE}${lien('/') === '/' ? '' : lien('/')}` })
+const surligne = t('61 heures')
+const morceaux = message.split(surligne)
+const textes = JSON.stringify({
+  duClub: t('adhérent du club'), deClub: t('adhérent de {club}'), aVille: t(', à {ville}'),
+  sujet: t('Une idée pour le club : OnClub'), villeNote: t('Votre ville ({ville}) est ajoutée au message. Vous pouvez la retirer en modifiant le texte.'),
+  copie: t('Message copié. Collez-le où vous voulez.'),
+})
+const fil = [{ nom: t('Transmettre à mon club'), url: lien('/recommander') }]
 const faq = [
-  { question: 'Est-ce que mon club saura que le message vient d’OnClub ?', reponse: 'Le message part de votre téléphone ou de votre messagerie, à votre nom, vers la personne que vous choisissez. OnClub ne reçoit rien et ne contacte pas votre club de lui-même.' },
-  { question: 'Qu’est-ce que ça change pour moi, adhérent ou parent ?', reponse: 'Vous vous inscrivez depuis votre téléphone, toute la famille dans un seul formulaire, vous payez par carte, ou en plusieurs fois selon l’échéancier du club, vous déposez le certificat en photo et vous répondez aux convocations en un clic, sans créer de compte.' },
-  { question: 'Combien ça coûte au club ?', reponse: 'Un pourcentage des cotisations encaissées en ligne, de 2,90 % à 6,90 % selon l’offre, rien de fixe et rien sur les chèques ni les espèces. Le détail est sur la page des tarifs, à transmettre au trésorier.' },
+  { question: t('Est-ce que mon club saura que le message vient d’OnClub ?'), reponse: t('Le message part de votre téléphone ou de votre messagerie, à votre nom, vers la personne que vous choisissez. OnClub ne reçoit rien et ne contacte pas votre club de lui-même.') },
+  { question: t('Qu’est-ce que ça change pour moi, adhérent ou parent ?'), reponse: t('Vous vous inscrivez depuis votre téléphone, toute la famille dans un seul formulaire, vous payez par carte, ou en plusieurs fois selon l’échéancier du club, vous déposez le certificat en photo et vous répondez aux convocations en un clic, sans créer de compte.') },
+  { question: t('Combien ça coûte au club ?'), reponse: t('Un pourcentage des cotisations encaissées en ligne, de 2,90 % à 6,90 % selon l’offre, rien de fixe et rien sur les chèques ni les espèces. Le détail est sur la page des tarifs, à transmettre au trésorier.') },
 ]
+const L = (chemin: string) => ({ href: lien(chemin), hreflang: versFr(chemin) ? 'fr' : undefined, fr: versFr(chemin) })
 ---
 <Layout
-  titre="Proposer OnClub à son club ou son association"
-  description="Adhérent, élève ou parent : envoyez au bureau de votre association un message prêt à partir, avec le temps que les bénévoles gagneraient avec OnClub."
-  chemin="/recommander"
+  titre={t('Proposer OnClub à son club ou son association')}
+  description={t('Adhérent, élève ou parent : envoyez au bureau de votre association un message prêt à partir, avec le temps que les bénévoles gagneraient avec OnClub.')}
+  chemin={lien('/recommander')}
   fil={fil}
   faq={faq}
   sansBoutonFixe={true}
 >
-  <div class="enveloppe ecran" data-recommander data-heros data-ville-usage>
+  <div class="enveloppe ecran" data-recommander data-heros data-ville-usage data-textes={textes} data-surligne={surligne}>
     <div class="ecran-tete">
       <FilAriane fil={fil} />
-      <p class="surtitre">Adhérent, élève ou parent</p>
-      <h1>Vos bénévoles méritent leurs soirées. <span class="nw">Dites-le</span> à votre club</h1>
-      <p class="chapo">Le bureau court après les fiches, les chèques et les certificats ? Envoyez-lui ce message, de chez vous, à la personne de votre choix.</p>
+      <p class="surtitre">{t('Adhérent, élève ou parent')}</p>
+      <h1>{t('Vos bénévoles méritent leurs soirées.')} <span class="nw">{t('Dites-le')}</span> {t('à votre club')}</h1>
+      <p class="chapo">{t('Le bureau court après les fiches, les chèques et les certificats ? Envoyez-lui ce message, de chez vous, à la personne de votre choix.')}</p>
     </div>
 
-    <label class="champ ecran-champ"><span>Le nom de votre club <i>(facultatif)</i></span><input type="text" maxlength="80" data-club autocomplete="off"></label>
+    <label class="champ ecran-champ"><span>{t('Le nom de votre club')} <i>{t('(facultatif)')}</i></span><input type="text" maxlength="80" data-club autocomplete="off"></label>
 
     <div class="ecran-bulle">
       <div class="tel" aria-hidden="true">
         <div class="tel-ecran">
-          <div class="bulle" data-bulle>{morceaux[0]}{morceaux.length > 1 && <><mark>61 heures</mark>{morceaux.slice(1).join('61 heures')}</>}</div>
+          <div class="bulle" data-bulle>{morceaux[0]}{morceaux.length > 1 && <><mark>{surligne}</mark>{morceaux.slice(1).join(surligne)}</>}</div>
         </div>
       </div>
-      <p class="bulle-legende">Le message tel qu’il partira. 61 h : estimation OnClub pour 250 adhérents, pas une étude.</p>
+      <p class="bulle-legende">{t('Le message tel qu’il partira. 61 h : estimation OnClub pour 250 adhérents, pas une étude.')}</p>
     </div>
 
     <div class="ecran-actions">
       <div class="partager">
-        <a class="btn btn-encre" href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener" data-wa data-envoi><svg aria-hidden="true"><use href="#wa"/></svg>Envoyer sur WhatsApp</a>
-        <a class="lien-fleche" href={`mailto:?subject=${encodeURIComponent('Une idée pour le club : OnClub')}&body=${encodeURIComponent(message)}`} data-mail data-envoi><svg aria-hidden="true"><use href="#courriel"/></svg>Envoyer par e-mail</a>
-        <button type="button" class="action-texte" data-partage hidden><svg aria-hidden="true"><use href="#partage"/></svg>Partager</button>
-        <button type="button" class="action-texte" data-copier hidden>Copier le message</button>
+        <a class="btn btn-encre" href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener" data-wa data-envoi><svg aria-hidden="true"><use href="#wa"/></svg>{t('Envoyer sur WhatsApp')}</a>
+        <a class="lien-fleche" href={`mailto:?subject=${encodeURIComponent(t('Une idée pour le club : OnClub'))}&body=${encodeURIComponent(message)}`} data-mail data-envoi><svg aria-hidden="true"><use href="#courriel"/></svg>{t('Envoyer par e-mail')}</a>
+        <button type="button" class="action-texte" data-partage hidden><svg aria-hidden="true"><use href="#partage"/></svg>{t('Partager')}</button>
+        <button type="button" class="action-texte" data-copier hidden>{t('Copier le message')}</button>
       </div>
-      <Repli titre="Modifier le message">
-        <label class="champ"><span>Le message</span><textarea rows="7" data-message data-base={message}>{message}</textarea></label>
+      <Repli titre={t('Modifier le message')}>
+        <label class="champ"><span>{t('Le message')}</span><textarea rows="7" data-message data-base={message}>{message}</textarea></label>
       </Repli>
       <p class="message-ville" hidden data-ville-note></p>
-      <p class="note" aria-live="polite" data-etat>Rien n’est envoyé à OnClub : WhatsApp ou votre messagerie s’ouvre, vous choisissez le destinataire.</p>
+      <p class="note" aria-live="polite" data-etat data-merci={t('Merci. Le bureau vous devra peut-être quelques soirées.')}>{t('Rien n’est envoyé à OnClub : WhatsApp ou votre messagerie s’ouvre, vous choisissez le destinataire.')}</p>
     </div>
   </div>
 
   <section class="section ce-que" aria-labelledby="t-change">
     <div class="enveloppe">
-      <h2 id="t-change" class="h2-idee">Pour vous, pour le bureau</h2>
+      <h2 id="t-change" class="h2-idee">{t('Pour vous, pour le bureau')}</h2>
       <div class="ce-que-grille">
         <div>
-          <h3>Pour vous</h3>
+          <h3>{t('Pour vous')}</h3>
           <ul>
-            <li>S’inscrire depuis le canapé, toute la famille d’un coup.</li>
-            <li>Payer par carte, ou en plusieurs fois.</li>
-            <li>Déposer le certificat en photo.</li>
-            <li>Répondre à une convocation en un clic, sans compte.</li>
+            <li>{t('S’inscrire depuis le canapé, toute la famille d’un coup.')}</li>
+            <li>{t('Payer par carte, ou en plusieurs fois.')}</li>
+            <li>{t('Déposer le certificat en photo.')}</li>
+            <li>{t('Répondre à une convocation en un clic, sans compte.')}</li>
           </ul>
         </div>
         <div>
-          <h3>Pour le bureau</h3>
+          <h3>{t('Pour le bureau')}</h3>
           <ul>
-            <li>Plus de fiches à recopier.</li>
-            <li>L’argent à jour sans tableur.</li>
-            <li>Une relance d’un bouton.</li>
-            <li>La rentrée suivante sans tout refaire.</li>
+            <li>{t('Plus de fiches à recopier.')}</li>
+            <li>{t('L’argent à jour sans tableur.')}</li>
+            <li>{t('Une relance d’un bouton.')}</li>
+            <li>{t('La rentrée suivante sans tout refaire.')}</li>
           </ul>
         </div>
       </div>
@@ -95,7 +107,7 @@ const faq = [
 
   <div class="section"><div class="enveloppe">
     <Faq items={faq} disposition="deux-colonnes">
-      <p class="liens-fin">À transmettre aussi : <a href="/tarifs">les tarifs</a>, <a href="/temps-gagne">le calcul du temps gagné</a>, <a href="/fonctionnalites">les fonctionnalités</a>. Vous êtes au bureau ? <a href="/demo">Demander une démo</a>.</p>
+      <p class="liens-fin">{t('À transmettre aussi :')} <a href={L('/tarifs').href} hreflang={L('/tarifs').hreflang}>{t('les tarifs')}{L('/tarifs').fr && <VersFr sr={SR_FR} />}</a>, <a href={L('/temps-gagne').href} hreflang={L('/temps-gagne').hreflang}>{t('le calcul du temps gagné')}{L('/temps-gagne').fr && <VersFr sr={SR_FR} />}</a>, <a href={L('/fonctionnalites').href} hreflang={L('/fonctionnalites').hreflang}>{t('les fonctionnalités')}{L('/fonctionnalites').fr && <VersFr sr={SR_FR} />}</a>. {t('Vous êtes au bureau ?')} <a href={L('/demo').href} hreflang={L('/demo').hreflang}>{t('Demander une démo')}{L('/demo').fr && <VersFr sr={SR_FR} />}</a>.</p>
     </Faq>
   </div></div>
   <script is:inline defer src="/js/recommander.js"></script>
@@ -111,10 +123,11 @@ const faq = [
   const bulle = boite?.querySelector<HTMLElement>('[data-bulle]')
   const etat = boite?.querySelector<HTMLElement>('[data-etat]')
   if (boite && zone && bulle) {
+    const surligne = boite.dataset.surligne || '61 heures'
     const ecrit = () => {
       bulle.textContent = ''
-      zone.value.split('61 heures').forEach((morceau, i) => {
-        if (i > 0) { const m = document.createElement('mark'); m.textContent = '61 heures'; bulle.append(m) }
+      zone.value.split(surligne).forEach((morceau, i) => {
+        if (i > 0) { const m = document.createElement('mark'); m.textContent = surligne; bulle.append(m) }
         bulle.append(morceau)
       })
     }
@@ -126,7 +139,7 @@ const faq = [
     boite.querySelectorAll('[data-envoi]').forEach((a) => a.addEventListener('click', () => { envoye = true }))
     document.addEventListener('visibilitychange', () => {
       if (envoye && document.visibilityState === 'visible' && etat) {
-        etat.textContent = 'Merci. Le bureau vous devra peut-être quelques soirées.'
+        etat.textContent = etat.dataset.merci || 'Merci. Le bureau vous devra peut-être quelques soirées.'
         envoye = false
       }
     })

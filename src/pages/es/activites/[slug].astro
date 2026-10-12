@@ -1,0 +1,11 @@
+---
+/* La version espagnole des pages de src/content/activites/ : une page par fichier de src/content/es/activites/ (même slug). Même gabarit que le français. */
+import GabaritProduit from '../../../components/GabaritProduit.astro'
+import { liste } from '../../../lib/collections'
+export async function getStaticPaths() {
+  const entrees = await liste('activites', 'es')
+  return entrees.map((entree) => ({ params: { slug: entree.id }, props: { entree } }))
+}
+const { entree } = Astro.props
+---
+<GabaritProduit collection="activites" entree={entree} />

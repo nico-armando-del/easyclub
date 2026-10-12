@@ -9,6 +9,8 @@
   Sous un compteur, une ligne visible dit « pas une étude ».
 */
 import { TOTAL, ADHERENTS_REFERENCE } from '../data/temps'
+import { i18n } from '../i18n/ui'
+const { t } = i18n(Astro.url)
 
 interface Props {
   rubrique: 'guides' | 'articles' | 'comparatifs'
@@ -22,7 +24,7 @@ interface Props {
   etiquette?: string
 }
 const { rubrique, donnee, sous, apres, format = 'bande', titreCourt, etiquette } = Astro.props
-const ETIQUETTE = { guides: 'Guide', articles: 'Article', comparatifs: 'Comparatif' }
+const ETIQUETTE = { guides: t('Guide'), articles: t('Article'), comparatifs: t('Comparatif') }
 const avant = Astro.props.avant ?? (apres ? donnee : undefined)
 const compteur = Boolean(avant && apres) && format !== 'carre'
 
@@ -53,8 +55,8 @@ const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
       <span class="couv-avant">{avant}</span>
       <svg class="couv-fleche"><use href="#fleche" /></svg>
       <span class="couv-apres">{apres}</span>
-      <span class="couv-lib couv-lib-avant">aujourd’hui</span>
-      <span class="couv-lib couv-lib-apres">avec OnClub</span>
+      <span class="couv-lib couv-lib-avant">{t('aujourd’hui')}</span>
+      <span class="couv-lib couv-lib-apres">{t('avec OnClub')}</span>
       <span class="couv-pistes"><span class="couv-piste couv-piste-avant"><i></i></span><span class="couv-piste"><i></i></span></span>
     </span>
   ) : donneeVue ? (
@@ -65,7 +67,7 @@ const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
   {sous && format !== 'carre' && <span class="couv-sous">{sous}</span>}
 </div>
 {compteur && format !== 'carre' && (
-  <p class="couv-note">{deTotal && !/adhérents/.test(sous ?? '') ? `Estimation OnClub pour ${ADHERENTS_REFERENCE} adhérents, par saison, pas une étude.` : 'Estimation OnClub, pas une étude.'}</p>
+  <p class="couv-note">{deTotal && !/adhérents|socios/.test(sous ?? '') ? t('Estimation OnClub pour {n} adhérents, par saison, pas une étude.', { n: ADHERENTS_REFERENCE }) : t('Estimation OnClub, pas une étude.')}</p>
 )}
 <style>
 .couv{container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:var(--encre);background:var(--menthe);overflow:hidden;font-family:var(--f-titre)}

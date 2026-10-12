@@ -28,42 +28,48 @@ import TuileFonction from './TuileFonction.astro'
 import Calculateur from './Calculateur.astro'
 import MiniEcran from './MiniEcran.astro'
 import Photo from './Photo.astro'
-import { HUB, ETIQUETTE, url, liste, voirAussi, type NomCollection } from '../lib/collections'
+import { HUB, ETIQUETTE, url, liste, catalogue, voirAussi, type NomCollection } from '../lib/collections'
+import { i18n, SR_FR } from '../i18n/ui'
+import VersFr from './langue/VersFr.astro'
+import LienTexte from './langue/LienTexte.astro'
 
 interface Props { collection: 'guides' | 'articles'; entree: any }
 const { collection, entree } = Astro.props
 const d = entree.data
+const { langue, t, lien, locale } = i18n(Astro.url)
 const { Content, headings } = await render(entree)
-const chemin = url(collection, entree.id)
-const fil = [HUB[collection], { nom: d.nom, url: chemin }]
+const chemin = url(collection, entree.id, langue)
+const fil = [{ nom: t(HUB[collection].nom), url: lien(HUB[collection].url) }, { nom: d.nom, url: chemin }]
 
 /* Les composants MDX du gabarit produit (lot C) : pris s'ils existent, sans casser le build sinon. */
 const optionnels = import.meta.glob<{ default: any }>('./{Idee,Cadre}.astro', { eager: true })
 const enPlus = Object.fromEntries(Object.entries(optionnels).map(([f, m]) => [f.replace(/^\.\/|\.astro$/g, ''), m.default]))
-const composants = { BlocTemps, EcranAnime, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, BarreTache, ...enPlus }
+const composants = { BlocTemps, EcranAnime, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, BarreTache, ...enPlus, ...(langue === 'es' ? { a: LienTexte } : {}) }
 
-const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-const dateCourte = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+const date = (x: Date) => x.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+const dateCourte = (x: Date) => x.toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 const iso = (x: Date) => x.toISOString().slice(0, 10)
-const rubriqueDe = (c: 'guides' | 'articles', e: any) => (c === 'articles' ? e.data.rubrique : ETIQUETTE[c])
+const rubriqueDe = (c: 'guides' | 'articles', e: any) => (c === 'articles' ? e.data.rubrique : t(ETIQUETTE[c]))
 
 /* Le sommaire : les h2 du texte MDX seulement (« À retenir » n'en fait pas partie). */
 const titres = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }))
 
 /* La carte OnClub : la ligne de la première fonctionnalité liée, si elle ne porte pas un chiffre de temps. */
-const fonctions = await liste('fonctionnalites')
+const fonctions = await catalogue('fonctionnalites', langue)
 const premiere = (d.fonctionnalites ?? []).map((r: { id: string }) => fonctions.find((f) => f.id === r.id)).find(Boolean) as any
-const PHRASE_PAR_DEFAUT = 'Les familles s’inscrivent et paient seules.'
-const ligne = premiere?.data?.ligne as string | undefined
+const PHRASE_PAR_DEFAUT = t('Les familles s’inscrivent et paient seules.')
+const ligne = premiere?.ligne as string | undefined
 const phraseCarte = ligne && ligne.length <= 90 && !/\d\s?(h|min)\b/.test(ligne) ? ligne : PHRASE_PAR_DEFAUT
 
 /* « À lire ensuite » : 3 guides ou articles, ceux que la page cite ou qui la citent d'abord. */
-const liens = await voirAussi(collection, entree.id)
+const liens = await voirAussi(collection, entree.id, 6, langue)
+/* En espagnol, « À lire ensuite » ne propose que des guides et articles traduits (une liste en filets
+   ne porte pas d'étiquette « FR ») ; les autres restent dans « Pour aller plus loin ». */
 const editoriales: { c: 'guides' | 'articles'; e: any }[] = [
-  ...(await liste('articles')).map((e) => ({ c: 'articles' as const, e })),
-  ...(await liste('guides')).map((e) => ({ c: 'guides' as const, e })),
+  ...(await liste('articles', langue)).map((e) => ({ c: 'articles' as const, e })),
+  ...(await liste('guides', langue)).map((e) => ({ c: 'guides' as const, e })),
 ]
-const parUrl = new Map(editoriales.map((x) => [url(x.c, x.e.id), x]))
+const parUrl = new Map(editoriales.map((x) => [url(x.c, x.e.id, langue), x]))
 const choisis: { c: 'guides' | 'articles'; e: any }[] = []
 for (const l of liens) { const x = parUrl.get(l.url); if (x && choisis.length < 3) choisis.push(x) }
 for (const x of editoriales.filter((x) => x.c === collection).concat(editoriales.filter((x) => x.c !== collection))) {
@@ -72,13 +78,13 @@ for (const x of editoriales.filter((x) => x.c === collection).concat(editoriales
   if (!choisis.includes(x)) choisis.push(x)
 }
 const ensuite: EntreeFilet[] = choisis.map(({ c, e }) => ({
-  rubrique: rubriqueDe(c, e), duree: `${e.data.lecture} min`, titre: e.data.titre, href: url(c, e.id),
-  date: dateCourte(e.data.publie), auteur: 'L’équipe OnClub',
+  rubrique: rubriqueDe(c, e), duree: `${e.data.lecture} min`, titre: e.data.titre, href: url(c, e.id, langue),
+  date: dateCourte(e.data.publie), auteur: t('L’équipe OnClub'),
 }))
 /* « Pour aller plus loin » : les pages produit liées, en une rangée de noms (textes c). */
 const plusLoin = liens.filter((l) => !parUrl.has(l.url)).slice(0, 6)
 
-const surtitre = `${rubriqueDe(collection, entree)} · ${d.lecture} min de lecture`
+const surtitre = `${rubriqueDe(collection, entree)} · ${t('{n} min de lecture', { n: d.lecture })}`
 const couv = d.couverture
 ---
 <Layout
@@ -97,7 +103,7 @@ const couv = d.couverture
       <p class="surtitre ed-rub">{surtitre}</p>
       <h1 class="ed-h1">{d.titre}</h1>
       <p class="chapo">{d.chapo}</p>
-      <p class="ed-meta">Publié le <time datetime={iso(d.publie)}>{date(d.publie)}</time>{d.maj > d.publie && <>, mis à jour le <time datetime={iso(d.maj)}>{date(d.maj)}</time></>} · L’équipe OnClub</p>
+      <p class="ed-meta">{t('Publié le')} <time datetime={iso(d.publie)}>{date(d.publie)}</time>{d.maj > d.publie && <>{t(', mis à jour le')} <time datetime={iso(d.maj)}>{date(d.maj)}</time></>} · {t('L’équipe OnClub')}</p>
     </header>
 
     <div class="enveloppe ed-couv">
@@ -127,19 +133,19 @@ const couv = d.couverture
 
       {d.ecranFonction ? (
         <div class="ed-ecran">
-          <EcranFonction nom={d.ecranFonction === true ? entree.id : d.ecranFonction} legende="Noms et montants fictifs." />
+          <EcranFonction nom={d.ecranFonction === true ? entree.id : d.ecranFonction} legende={t('Noms et montants fictifs.')} />
         </div>
       ) : d.ecran && (
         <div class="ed-ecran">
           <EcranAnime nom={d.ecran} />
-          <p class="ed-legende">Noms et montants fictifs.</p>
+          <p class="ed-legende">{t('Noms et montants fictifs.')}</p>
         </div>
       )}
 
       {d.sources?.length > 0 && (
         <section class="ed-sources" aria-labelledby="sources-titre">
-          <h2 id="sources-titre">Sources</h2>
-          <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank">{s.titre}</a>, consulté le {date(new Date(s.consulte))}</li>)}</ul>
+          <h2 id="sources-titre">{t('Sources')}</h2>
+          <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank" lang={langue === 'es' ? 'fr' : undefined} hreflang={langue === 'es' ? 'fr' : undefined}>{s.titre}</a>{langue === 'es' && t(' (en francés)')}{t(', consulté le {date}', { date: date(new Date(s.consulte)) })}</li>)}</ul>
         </section>
       )}
 
@@ -147,19 +153,19 @@ const couv = d.couverture
     </div>
 
     <div class="enveloppe ed-fin">
-      {ensuite.length > 0 && <ListeFilets entrees={ensuite} titre="À lire ensuite" niveau="h2" id="a-lire-ensuite" />}
+      {ensuite.length > 0 && <ListeFilets entrees={ensuite} titre={t('À lire ensuite')} niveau="h2" id="a-lire-ensuite" />}
       {plusLoin.length > 0 && (
-        <nav class="ed-plus-loin" aria-label="Pour aller plus loin">
-          <p class="ed-plus-loin-titre">Pour aller plus loin</p>
-          <ul>{plusLoin.map((l) => <li><a href={l.url}>{l.nom}</a></li>)}</ul>
+        <nav class="ed-plus-loin" aria-label={t('Pour aller plus loin')}>
+          <p class="ed-plus-loin-titre">{t('Pour aller plus loin')}</p>
+          <ul>{plusLoin.map((l) => <li><a href={l.url} hreflang={l.fr ? 'fr' : undefined}>{l.nom}{l.fr && <VersFr sr={SR_FR} />}</a></li>)}</ul>
         </nav>
       )}
     </div>
 
-    <section class="ed-bande" aria-label="Le temps gagné chez vous" data-sans-bouton-fixe>
+    <section class="ed-bande" aria-label={t('Le temps gagné chez vous')} data-sans-bouton-fixe>
       <div class="enveloppe ed-bande-in">
-        <p class="ed-bande-texte">Et chez vous, combien ?</p>
-        <a class="lien-fleche" href="/temps-gagne">Faire le calcul <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+        <p class="ed-bande-texte">{t('Et chez vous, combien ?')}</p>
+        <a class="lien-fleche" href={lien('/temps-gagne')}>{t('Faire le calcul')} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
       </div>
     </section>
   </div>

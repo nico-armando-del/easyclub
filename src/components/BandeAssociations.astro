@@ -8,8 +8,10 @@
 */
 import { photoDe, srcset } from '../data/photos'
 import VersFr from './langue/VersFr.astro'
+import { i18n, SR_FR } from '../i18n/ui'
 
-interface Item { nom: string; href: string; photo: string; ligne: string }
+/** fr : la carte mène, depuis une page espagnole, à une page restée en français. */
+interface Item { nom: string; href: string; photo: string; ligne: string; fr?: boolean }
 interface Props {
   titre: string
   phrase?: string
@@ -20,9 +22,10 @@ interface Props {
   suivant?: string
   versFr?: string
 }
-const { titre, phrase, items, derniere, id = 't-assos', precedent = 'Précédent', suivant = 'Suivant', versFr } = Astro.props
+const { langue, t } = i18n(Astro.url)
+const { titre, phrase, items, derniere, id = 't-assos', precedent = t('Précédent'), suivant = t('Suivant'), versFr } = Astro.props
 const NB = String.fromCharCode(160)
-const fine = (x: string) => x.replace(/ ([?!:;])/g, `${NB}$1`)
+const fine = (x: string) => (langue === 'es' ? x : x.replace(/ ([?!:;])/g, `${NB}$1`))
 const cartes = items.map((i) => ({ ...i, p: photoDe(i.photo) })).filter((i) => i.p)
 ---
 <div class="bande-bloc" data-bande>
@@ -39,9 +42,9 @@ const cartes = items.map((i) => ({ ...i, p: photoDe(i.photo) })).filter((i) => i
   <ul class="bande" data-defile-x aria-labelledby={id}>
     {cartes.map((c) => (
       <li class="bande-carte">
-        <a href={c.href} hreflang={versFr ? 'fr' : undefined}>
+        <a href={c.href} hreflang={versFr || c.fr ? 'fr' : undefined}>
           <img src={`/img/photos/${c.p!.fichier}-640.webp`} srcset={srcset(c.p!)} sizes="(min-width: 760px) 240px, 200px" width="640" height="427" alt="" loading="lazy" decoding="async" />
-          <span class="bande-texte"><b>{c.nom}{versFr && <VersFr sr={versFr} />}</b><span>{c.ligne}</span></span>
+          <span class="bande-texte"><b>{c.nom}{(versFr || c.fr) && <VersFr sr={versFr ?? SR_FR} />}</b><span>{c.ligne}</span></span>
         </a>
       </li>
     ))}

@@ -7,7 +7,7 @@
     if (m === 0) return '0 h'
     if (m < 60) return m + ' min'
     var h = Math.floor(m / 60), r = m % 60
-    return r ? h + ' h ' + (r < 10 ? '0' + r : r) : h + ' h'
+    return r ? h + ' h ' + (r < 10 ? '0' + r : r) + (document.documentElement.lang === 'es' ? ' min' : '') : h + ' h'
   }
   function heures(min) { return '≈ ' + Math.round(min / 60) + ' h' }
   function brancher(root) {

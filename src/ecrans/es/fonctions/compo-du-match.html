@@ -1,0 +1,47 @@
+<div class="ef-vue" data-forme="telephone" data-description="La página del entrenador en su móvil: la alineación del partido de los U13, sábado 17 de octubre a las 14:00, en fútbol 8, sistema 3-3-1. 11 presentes, 2 ausentes, 1 sin respuesta. Ocho jugadores están colocados en el campo; Théo, centrocampista, juega de lateral izquierdo, su etiqueta de puesto es naranja; Sami lleva el brazalete de capitán. La alineación está guardada.">
+<style>
+.ecran-fonction .cm-pile{display:flex;flex-direction:column;gap:8px}
+.ecran-fonction .cm-carte{padding:10px 10px 12px}
+.ecran-fonction .cm-match{background:#3DDC97;color:#0F3D2A}
+.ecran-fonction .cm-quand{font-size:12.5px;font-weight:700}
+.ecran-fonction .cm-liens{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;font-weight:700}
+.ecran-fonction .cm-liens span{text-decoration:underline;text-underline-offset:2px}
+.ecran-fonction .cm-reglage{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border:1px solid #D9D6CC;border-radius:10px;background:#fff;font-size:12px}
+.ecran-fonction .cm-outils{display:flex;flex-wrap:wrap;align-items:center;gap:5px 4px}
+.ecran-fonction .cm-outils .ef-bt{height:26px;padding:0 8px;font-size:11px}
+.ecran-fonction .cm-outils .ef-quiet{padding:0 6px}
+.ecran-fonction .cm-eteint{opacity:.45}
+.ecran-fonction .cm-etat{margin-left:auto;padding-right:4px;font-size:11.5px;color:var(--ef-gris)}
+.ecran-fonction .cm-terrain{position:relative;width:100%;max-width:190px;margin:2px auto 0;aspect-ratio:2/3;border-radius:14px;overflow:hidden;background:#2f6d43}
+.ecran-fonction .cm-terrain svg{position:absolute;inset:0;width:100%;height:100%}
+.ecran-fonction .cm-p{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px}
+.ecran-fonction .cm-rond{position:relative;display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#fff;color:#14211a;font:800 12px/1 var(--ef-h1);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.ecran-fonction .cm-poste{position:absolute;top:-5px;right:-9px;min-width:15px;padding:0 3px;border-radius:6px;background:#14211a;color:#fff;font:800 10px/14px var(--ef-h1);text-align:center;box-shadow:0 0 0 1.5px #fff}
+.ecran-fonction .cm-poste.cm-hors{background:#ff7a00}
+.ecran-fonction .cm-cap{position:absolute;top:-6px;left:-12px;padding:0 3px;border-radius:6px;background:#f5c518;color:#14211a;font:800 9px/13px var(--ef-h1);box-shadow:0 0 0 1.5px #fff}
+.ecran-fonction .cm-nom{max-width:58px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 5px;border-radius:6px;background:rgba(0,0,0,.6);color:#fff;font-size:9px;font-weight:600;line-height:12px}
+</style>
+
+<div class="ef-carte cm-carte cm-pile">
+<div class="ef-ligne"><span class="ef-badge cm-match">Partido</span><span class="cm-quand">sábado 17 de octubre a las 14:00</span><span class="ef-mu">Estadio de los Álamos</span></div>
+<p class="ef-p">11 presentes · 2 ausentes · 1 sin respuesta</p>
+<div class="cm-liens"><span>Ver las respuestas</span><span>Ocultar la alineación</span></div>
+
+<span class="cm-reglage">Fútbol 8 · 3-3-1 <span aria-hidden="true">▾</span></span>
+<div class="cm-outils">
+<span class="ef-bt cm-eteint">Completar por puestos</span><span class="ef-bt ef-quiet">Vaciar todo</span><span class="ef-bt ef-quiet">Deshacer</span><span class="ef-bt ef-quiet">Compartir la alineación</span><span class="cm-etat">Guardado</span>
+</div>
+
+<div class="cm-terrain">
+<svg viewBox="0 0 100 150" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="0.6"><rect x="4" y="4" width="92" height="142"/><line x1="4" y1="75" x2="96" y2="75"/><circle cx="50" cy="75" r="11"/><rect x="22" y="4" width="56" height="22"/><rect x="36" y="4" width="28" height="8"/><rect x="22" y="124" width="56" height="22"/><rect x="36" y="138" width="28" height="8"/><rect x="43" y="1.5" width="14" height="2.5"/><rect x="43" y="146" width="14" height="2.5"/></g></svg>
+<span class="cm-p" style="left:50%;top:22%"><span class="cm-rond">9<span class="cm-poste">DL</span></span><span class="cm-nom">Rayan</span></span>
+<span class="cm-p" style="left:20%;top:48%"><span class="cm-rond">6<span class="cm-poste">MC</span></span><span class="cm-nom">Ilyes</span></span>
+<span class="cm-p" style="left:50%;top:52%"><span class="cm-rond">8<span class="cm-poste">MC</span><span class="cm-cap">Cap</span></span><span class="cm-nom">Sami</span></span>
+<span class="cm-p" style="left:80%;top:48%"><span class="cm-rond">10<span class="cm-poste">MC</span></span><span class="cm-nom">Noé</span></span>
+<span class="cm-p" style="left:22%;top:72%"><span class="cm-rond">7<span class="cm-poste cm-hors">MC</span></span><span class="cm-nom">Théo</span></span>
+<span class="cm-p" style="left:50%;top:75%"><span class="cm-rond">4<span class="cm-poste">DF</span></span><span class="cm-nom">Nathan</span></span>
+<span class="cm-p" style="left:78%;top:72%"><span class="cm-rond">5<span class="cm-poste">DF</span></span><span class="cm-nom">Lucas</span></span>
+<span class="cm-p" style="left:50%;top:92.5%"><span class="cm-rond">1<span class="cm-poste">POR</span></span><span class="cm-nom">Mathis</span></span>
+</div>
+</div>
+</div>

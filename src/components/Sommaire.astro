@@ -12,12 +12,14 @@ interface Props { titres: { slug: string; text: string }[]; max?: number }
 const { titres, max = 8 } = Astro.props
 const premiers = titres.slice(0, max)
 const suite = titres.slice(max)
+import { i18n } from '../i18n/ui'
+const { t, lien } = i18n(Astro.url)
 ---
 {titres.length > 1 && (
-  <nav class="sommaire" aria-label="Sommaire" data-sommaire>
+  <nav class="sommaire" aria-label={t('Sommaire')} data-sommaire>
     <details class="som-repli" open>
       <summary class="som-tete">
-        <span class="som-label">Sommaire</span><span class="som-lu" data-som-lu></span>
+        <span class="som-label">{t('Sommaire')}</span><span class="som-lu" data-som-lu></span>
         <svg class="som-chevron" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4.5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </summary>
       <ol class="som-liste">
@@ -25,7 +27,7 @@ const suite = titres.slice(max)
       </ol>
       {suite.length > 0 && (
         <details class="som-plus">
-          <summary>Afficher plus</summary>
+          <summary>{t('Afficher plus')}</summary>
           <ol class="som-liste">{suite.map((t) => <li><a href={`#${t.slug}`}>{t.text}</a></li>)}</ol>
         </details>
       )}

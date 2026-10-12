@@ -1,0 +1,126 @@
+---
+nom: "Saltos"
+ligne: "Del trampolín de un metro a la plataforma, los saltos en el expediente de natación"
+ordre: 50
+titreSeo: "Sección de saltos: inscripción en línea en el club | OnClub"
+description: "Sección de saltos: segunda sección del expediente de natación, categorías por edad, subida de categoría preparada. La licencia FFN sigue en extraNat."
+titre: "Sección de saltos: la inscripción unida a la de natación"
+chapo: "El nadador del martes también salta el miércoles. Los saltos se añaden como segunda sección en el mismo expediente, el descuento se calcula y la familia paga una sola vez."
+temps:
+  cles: [fiches, paiements, rentree]
+  titre: "Lo que recupera la directiva de una sección de saltos, temporada tras temporada"
+fonctionnalites: [inscription-en-ligne, reinscriptions, convocations, paiement-en-ligne, liste-des-licences, seances-essai]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+sports: [natation]
+maj: 2026-10-10
+faq:
+  - question: "¿Un saltador benjamín puede competir con los minimes?"
+    reponse: "El último reglamento de saltos publicado por la FFN, el de 2024-2025, lo autoriza una vez: un benjamín se inscribe como mucho en dos categorías, la suya y la superior; un minime puede llegar a subir dos categorías. Las inscripciones se hacen en la federación, no en OnClub."
+  - question: "¿Un nadador del club puede añadir los saltos a su inscripción?"
+    reponse: "Sí. Los saltos se declaran como una segunda sección del mismo expediente. Si el club concede un descuento por segunda sección, se aplica solo y la familia ve el total antes de pagar."
+  - question: "¿OnClub rellena las hojas de saltos?"
+    reponse: "No. Ni hoja de saltos, ni coeficiente de dificultad, ni nota de los jueces. OnClub prepara el inicio de temporada, el dinero, los documentos y las convocatorias; la competición en sí se queda en las herramientas de la federación."
+  - question: "¿Hace falta un certificado médico para saltar desde el trampolín?"
+    reponse: "El reglamento médico de la FFN parte del cuestionario de salud, tanto para los menores como para los mayores de edad. Si una respuesta lleva a un reconocimiento, hace falta un certificado de menos de seis meses. En OnClub, el cuestionario se rellena en línea y solo la declaración llega al club."
+sources:
+  - titre: "FFN, règlements sportifs plongeon 2024-2025 : catégories d’âge et surclassements"
+    url: "https://www.ffnatation.fr/sites/default/files/2024-10/R%C3%A8glements%20sportifs%20Plongeon%20FFN%202024-2025.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFN, page des règlements plongeon"
+    url: "https://www.ffnatation.fr/reglements-plongeon"
+    consulte: "2026-10-10"
+  - titre: "FFN, s’affilier : validité de la licence et extraNat"
+    url: "https://www.ffnatation.fr/saffilier"
+    consulte: "2026-10-10"
+  - titre: "FFN, règlement médical 2026"
+    url: "https://www.ffnatation.fr/sites/default/files/fiches-pdf/Reglement%20Medical%202026.docx_.pdf"
+    consulte: "2026-10-10"
+---
+
+## Sección de saltos de un club de natación: una segunda sección, un solo expediente
+
+<Idee visuel="droite">
+
+Muchos saltadores vienen de la piscina de al lado. En OnClub, los saltos se añaden como segunda sección a la clase principal: un expediente, un pago, y el descuento previsto por el club.
+
+<Repli>
+
+- **La segunda sección** se marca en el mismo formulario, sin volver a introducirlo todo.
+- **El descuento** por segunda sección, o por un hermano que también salta, se calcula solo.
+- **Una sesión de prueba** en el trampolín se propone, si el grupo la abre ([sesiones de prueba](/fonctionnalites/seances-essai)).
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de natación"
+  titre="Expediente · Louis, nacido en 2014"
+  sousTitre="Temporada 2026-2027 · dos secciones"
+  lignes={[
+    { nom: 'Natación · perfeccionamiento', detail: 'Martes 18:00 · piscina', statut: 'Principal', ton: 'ok' },
+    { nom: 'Saltos · benjamines', detail: 'Miércoles 16:30 · foso', statut: 'Segunda sección', ton: 'ok' },
+    { nom: 'Descuento segunda sección', detail: 'Aplicado al total', statut: '−30 €', ton: 'neutre' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '290 €' }}
+  bouton="Confirmar el expediente"
+  legende="El expediente visto por la familia: la natación, los saltos, el descuento. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Inscripción en saltos: «poussins», «benjamins», «minimes» y «cadets»
+
+En saltos, la FFN cuenta la edad a 31 de diciembre del año de la competición. El club fija los años de nacimiento de cada grupo, y la familia solo ve los que le corresponden.
+
+<Repli titre="Las categorías del reglamento federativo">
+
+- **Poussins**: de 9 a 11 años.
+- **Benjamines**: 12 y 13 años.
+- **Minimes**: 14 y 15 años.
+- **Cadetes**: de 16 a 18 años.
+- **Júniors**: 20 años o menos; **Élite**: 14 años o más.
+
+</Repli>
+
+El último reglamento de saltos publicado en la web federativa es el de 2024-2025: los años de nacimiento de 2026-2027 se deducen de esas edades, y OnClub no los calcula por usted.
+
+## Subida de categoría: la plaza que reserva la junta directiva
+
+Un minime que salta con los cadetes no entra en los años del grupo. Con el plan Pro, la junta directiva le reserva la plaza desde mayo, aunque esté fuera de los años del grupo, y la familia confirma con su enlace.
+
+<Repli>
+
+- **La plaza reservada** se mantiene dos semanas por defecto, de 1 a 90 días según la configuración del club ([renovaciones](/fonctionnalites/reinscriptions)).
+- **Un cargo por subida de categoría**, si el club lo pide, solo se añade en ese caso.
+- **El formulario conserva** la plaza reservada, aunque esté fuera de los años del grupo.
+
+</Repli>
+
+## Cuota de saltos en varios plazos
+
+La familia elige un anticipo y varios pagos, y ve cada fecha antes de confirmar; el tesorero sigue lo pagado, lo que viene y lo que se retrasa.
+
+<Repli>
+
+- **Pass’Sport y ayudas locales** marcados y descontados, con el justificante pedido ([la guía](/guides/pass-sport)).
+- **Cheques y efectivo** anotados al céntimo, sin comisión.
+
+</Repli>
+
+## Licencia FFN: extraNat guarda la licencia y las inscripciones
+
+La licencia se tramita en extraNat, del 1 de septiembre al 31 de agosto, y OnClub no envía nada allí. Da la lista de saltadores listos para federarse, la exportación en hoja de cálculo y las declaraciones del cuestionario de salud ([la guía del certificado](/guides/certificat-medical-sport)).
+
+## Convocatoria a las competiciones, pase de lista al pie del trampolín
+
+El entrenador convoca a sus saltadores; las familias responden desde el correo, sin cuenta, y el pase de lista parte de esas respuestas. Un saltador sin respuesta queda por marcar.
+
+<Repli>
+
+- **Su enlace personal** abre la próxima sesión, sacada de los horarios de sus grupos.
+- **Para ver la pantalla** con sus secciones: [una demo para un club deportivo](/demo?type=sport), o [los planes](/tarifs).
+
+</Repli>
+
+OnClub no reserva ni el foso ni los trampolines, y no sigue ni los saltos aprendidos ni las notas: la instalación es un nombre y una dirección, nada más.

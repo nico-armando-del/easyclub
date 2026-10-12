@@ -1,0 +1,69 @@
+<div class="ef-vue ef-bb" data-forme="fenetre" data-menu="Boutique" data-hauteur="640" data-description="La pestaña «Stock y pedidos» de la tienda de un club de fútbol. Cuatro indicadores: 6 tallas controladas, 1 sin stock, 2 a punto de agotarse, 708 euros en estantería a precio de venta. La tabla del stock da, para cada artículo y cada talla, lo que se ha puesto a la venta, vendido o reservado, y lo que queda: la camiseta de 14 años está sin stock, la de 10 años y el pantalón corto a punto de agotarse. Debajo, dos pedidos pagados por preparar, con «Paquete entregado» y «Anular».">
+<div class="ef-tete"><div class="ef-h1">Tienda</div><div class="ef-sous ef-cache-etroit">Lo que queda en estantería, los paquetes por preparar y lo que usted vende de verdad.</div></div>
+
+<div class="bb-onglets"><span class="ef-bt ef-pri">Stock y pedidos</span><span class="ef-bt ef-quiet">Vender en el club</span><span class="ef-bt ef-quiet ef-cache-etroit">Lo que se vende</span><span class="ef-bt ef-quiet ef-cache-etroit">Mis artículos</span></div>
+
+<div class="bb-tuiles">
+<div class="ef-carte"><span class="ef-lib">Variantes</span><b>6</b><span class="ef-mu">Tallas controladas</span></div>
+<div class="ef-carte bb-retard"><span class="ef-lib">Sin stock</span><b>1</b><span class="ef-mu">Nada más que vender</span></div>
+<div class="ef-carte"><span class="ef-lib">A punto de agotarse</span><b>2</b><span class="ef-mu">Bajo el umbral de alerta</span></div>
+<div class="ef-carte"><span class="ef-lib">Valor en estantería</span><b>708&nbsp;€</b><span class="ef-mu">A precio de venta</span></div>
+</div>
+
+<div class="ef-carte">
+<div class="ef-h3">El stock</div>
+<p class="ef-p">Por variante: cada talla tiene su propio recuento</p>
+<table class="ef-table bb-table">
+<thead><tr><th>Artículo</th><th>Variante</th><th class="ef-n ef-cache-etroit">Puestos a la venta</th><th class="ef-n ef-cache-moyen">Vendidos o reservados</th><th class="ef-n">Quedan</th><th>Estado</th></tr></thead>
+<tbody>
+<tr><td><b>Camiseta de partido</b></td><td>10 años</td><td class="ef-n ef-cache-etroit">12</td><td class="ef-n ef-cache-moyen">9</td><td class="ef-n"><b>3</b></td><td><span class="ef-badge ef-attention">A punto de agotarse</span></td></tr>
+<tr><td><b>Camiseta de partido</b></td><td>12 años</td><td class="ef-n ef-cache-etroit">15</td><td class="ef-n ef-cache-moyen">10</td><td class="ef-n"><b>5</b></td><td><span class="ef-badge ef-succes">En stock</span></td></tr>
+<tr><td><b>Camiseta de partido</b></td><td>14 años</td><td class="ef-n ef-cache-etroit">10</td><td class="ef-n ef-cache-moyen">10</td><td class="ef-n"><b>0</b></td><td><span class="ef-badge ef-erreur">Sin stock</span></td></tr>
+<tr><td><b>Pantalón corto de entrenamiento</b></td><td>12 años</td><td class="ef-n ef-cache-etroit">8</td><td class="ef-n ef-cache-moyen">6</td><td class="ef-n"><b>2</b></td><td><span class="ef-badge ef-attention">A punto de agotarse</span></td></tr>
+<tr><td><b>Bufanda del club</b></td><td>Talla única</td><td class="ef-n ef-cache-etroit">30</td><td class="ef-n ef-cache-moyen">12</td><td class="ef-n"><b>18</b></td><td><span class="ef-badge ef-succes">En stock</span></td></tr>
+<tr><td><b>Cantimplora</b></td><td>Talla única</td><td class="ef-n ef-cache-etroit">30</td><td class="ef-n ef-cache-moyen">8</td><td class="ef-n"><b>22</b></td><td><span class="ef-badge ef-succes">En stock</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ef-carte">
+<div class="ef-h3">Por preparar</div>
+<p class="ef-p">2 pedidos pagados por entregar</p>
+<div class="bb-cde">
+<div class="ef-ligne"><b>Claire Martin</b><span class="ef-badge ef-attention">Por preparar</span><span class="ef-mu">8 oct., 19:42</span><span class="ef-badge">Tarjeta</span><span class="ef-montant ef-droite bb-paye">47&nbsp;€</span></div>
+<p class="ef-p">1 × Camiseta de partido · 12 años <span class="ef-mu">— 35&nbsp;€</span><br>1 × Bufanda del club · Talla única <span class="ef-mu">— 12&nbsp;€</span></p>
+<span class="ef-mu">claire.martin@exemple.fr · 06 39 98 48 30</span>
+<div class="ef-bts"><span class="ef-bt ef-pri">Paquete entregado</span><span class="ef-bt ef-danger">Anular</span></div>
+</div>
+<div class="bb-cde">
+<div class="ef-ligne"><b>Karim Benali</b><span class="ef-badge ef-attention">Por preparar</span><span class="ef-mu">10 oct., 11:05</span><span class="ef-badge">Tarjeta</span><span class="ef-montant ef-droite bb-paye">36&nbsp;€</span></div>
+<p class="ef-p">2 × Pantalón corto de entrenamiento · 12 años <span class="ef-mu">— 36&nbsp;€</span></p>
+<span class="ef-mu">karim.benali@exemple.fr</span>
+<div class="ef-bts"><span class="ef-bt ef-pri">Paquete entregado</span><span class="ef-bt ef-danger">Anular</span></div>
+</div>
+</div>
+
+<style>
+.ecran-fonction .bb-onglets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ecran-fonction .bb-tuiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.ecran-fonction .bb-tuiles .ef-carte{margin:0;padding:10px 12px}
+.ecran-fonction .bb-tuiles b{display:block;margin-top:4px;font:800 22px/1.1 var(--ef-h1)}
+.ecran-fonction .bb-tuiles .ef-mu{display:block;margin-top:2px;font-size:11px}
+.ecran-fonction .bb-tuiles .ef-lib{font-size:10px}
+.ecran-fonction .bb-retard{background:#FDECEC;border-color:#EBB0AD}
+.ecran-fonction .bb-retard .ef-lib,.ecran-fonction .bb-retard b{color:#9B2C28}
+.ecran-fonction .bb-table{margin-top:8px}
+.ecran-fonction .bb-table td{vertical-align:middle}
+.ecran-fonction .bb-table td>.ef-badge{display:inline-flex}
+.ecran-fonction .bb-cde{display:flex;flex-direction:column;gap:6px;margin-top:10px;padding:10px 12px;border:1px solid var(--ef-trait);border-radius:12px}
+.ecran-fonction .bb-cde .ef-ligne{margin:0}
+.ecran-fonction .bb-paye{color:var(--ef-ok)}
+@container (max-width:759px){.ecran-fonction .bb-tuiles{grid-template-columns:1fr 1fr}}
+@container (max-width:519px){
+  .ecran-fonction .bb-table th,.ecran-fonction .bb-table td{font-size:11.5px}
+  .ecran-fonction .bb-table td b{font-size:12px}
+  .ecran-fonction .bb-table td>.ef-badge{height:auto;padding:2px 6px;font-size:10.5px;line-height:1.2;white-space:normal}
+  .ecran-fonction .bb-table th{white-space:normal}
+}
+</style>
+</div>

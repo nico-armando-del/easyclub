@@ -45,13 +45,16 @@ import { PAGES_VITRINE } from '../data/clubs'
 import { HUB, ETIQUETTE, url, type NomCollection } from '../lib/collections'
 import { NOM_OFFRE } from '../data/site'
 import { lireEcranFonction } from '../lib/ecransFonction'
+import { i18n } from '../i18n/ui'
+import LienTexte from './langue/LienTexte.astro'
 
 interface Props { collection: Exclude<NomCollection, 'guides' | 'articles'>; entree: any }
 const { collection, entree } = Astro.props
 const d = entree.data
+const { langue, t, lien, date } = i18n(Astro.url)
 const { Content, headings } = await render(entree)
-const chemin = url(collection, entree.id)
-const fil = [HUB[collection], { nom: d.nom, url: chemin }]
+const chemin = url(collection, entree.id, langue)
+const fil = [{ nom: t(HUB[collection].nom), url: lien(HUB[collection].url) }, { nom: d.nom, url: chemin }]
 
 /*
   RÈGLE « PAS DE PAGE DE TEXTE SEUL » : une fonctionnalité, un sport, une
@@ -66,7 +69,7 @@ const fil = [HUB[collection], { nom: d.nom, url: chemin }]
 */
 const ECRAN_FAMILLE: Record<string, string> = { Inscrire: 'inscription', Encaisser: 'relance', Organiser: 'terrain', Communiquer: 'site', Vendre: 'boutique', Piloter: 'relance' }
 const nomFonction: string | undefined = d.ecranFonction === true ? entree.id : d.ecranFonction
-const ecranFonction = nomFonction ? lireEcranFonction(nomFonction) : undefined
+const ecranFonction = nomFonction ? lireEcranFonction(nomFonction, langue) : undefined
 const ecran: string | undefined = ecranFonction ? undefined : d.ecran ?? (collection === 'fonctionnalites' ? ECRAN_FAMILLE[d.famille] : undefined)
 if (['fonctionnalites', 'sports', 'activites', 'profils'].includes(collection) && !ecranFonction && !ecran && !/<(EcranAnime|EcranFonction|MiniEcran)\b/.test(entree.body ?? '')) {
   throw new Error(`${collection}/${entree.id} : ajoutez un écran (champ « ecranFonction » ou « ecran », <EcranFonction>, <EcranAnime> ou <MiniEcran> dans le texte). Voir REDIGER.md.`)
@@ -94,39 +97,43 @@ const fonctionCorps = auCorps ? ecranFonction : undefined
 /* Un écran de bureau se montre en pleine largeur, jamais réduit à 6 px dans une colonne. */
 const ecranLarge = auCorps && forme === 'fenetre'
 
-const surtitre = collection === 'fonctionnalites' ? `${d.famille} · ${ETIQUETTE[collection]}` : ETIQUETTE[collection]
+const surtitre = collection === 'fonctionnalites' ? `${t(d.famille)} · ${t(ETIQUETTE[collection])}` : t(ETIQUETTE[collection])
 const offre = collection === 'fonctionnalites' ? NOM_OFFRE[d.offre as 'mini' | 'pro' | 'max'] : undefined
 /* L'écran « terrain » (src/ecrans/, gelé) montre une compo de VOLLEY : le décor et le libellé
    « du samedi » sont réservés à la page du même sport, jamais au football ni au handball. */
 const SPORT_DE_L_ECRAN: Record<string, string> = { terrain: 'volley' }
 const ecranDuSport = collection === 'sports' && !!ecranCorps && SPORT_DE_L_ECRAN[ecranCorps] === entree.id
-const lienEcran = auCorps ? { texte: ecranDuSport ? 'Voir l’écran du samedi' : 'Voir l’écran', href: '#ecran' } : undefined
+const lienEcran = auCorps ? { texte: ecranDuSport ? t('Voir l’écran du samedi') : t('Voir l’écran'), href: '#ecran' } : undefined
 
 /* La fin de page : la phrase du récit pour quelques pages, sinon le titre par défaut de la case vide. */
 const FIN_DE_PAGE: Record<string, string> = {
   'sports/football': 'Le samedi au bord du terrain, sans le classeur',
   'activites/theatre': 'La répétition du jeudi, sans les papiers',
 }
-/* P2, page sport : la frise de la saison, tirée des h2 du texte (rien si moins de 4 étapes trouvées). */
-const ETAPES: [string, RegExp][] = [['Mai', /\bmai\b/i], ['Septembre', /inscription/i], ['Octobre', /cotisation/i], ['Licences', /licence/i], ['Samedi', /convocation|match/i], ['Vacances', /vacances|maillot/i]]
+/* P2, page sport : la frise de la saison, tirée des h2 du texte (rien si moins de 4 étapes trouvées).
+   En espagnol, les mêmes repères, lus dans les intertitres traduits. */
+const ETAPES: [string, RegExp][] = langue === 'es'
+  ? [['Mai', /\bmayo\b/i], ['Septembre', /inscripci[oó]n/i], ['Octobre', /cuota/i], ['Licences', /licencia/i], ['Samedi', /convocatoria|partido/i], ['Vacances', /vacaciones|camiseta|equipaci[oó]n/i]]
+  : [['Mai', /\bmai\b/i], ['Septembre', /inscription/i], ['Octobre', /cotisation/i], ['Licences', /licence/i], ['Samedi', /convocation|match/i], ['Vacances', /vacances|maillot/i]]
 const prises = new Set<string>()
 const etapesFrise = collection === 'sports'
   ? ETAPES.flatMap(([nom, motif]) => {
       const h = headings.find((t) => t.depth === 2 && !prises.has(t.slug) && motif.test(t.text))
       if (!h) return []
       prises.add(h.slug)
-      return [{ ancre: h.slug, nom }]
+      return [{ ancre: h.slug, nom: t(nom) }]
     })
   : []
 const frise = etapesFrise.length >= 4 ? etapesFrise : []
 /* P2 : sur une page sport, l'écran du samedi se joue sur fond encre, devant la photo du terrain. */
 const samedi = ecranDuSport && ecranCorps === 'terrain' && photoDe('terrain')
-const titreFin = FIN_DE_PAGE[`${collection}/${entree.id}`]
+const titreFin = FIN_DE_PAGE[`${collection}/${entree.id}`] ? t(FIN_DE_PAGE[`${collection}/${entree.id}`]) : undefined
 /* Dès 1000 px, l'écran du corps se tient à droite du texte (collant) au lieu d'un bloc pleine
    largeur au-dessus : sauf si le texte porte déjà ses propres écrans (Idee). */
 const duo = auCorps && !ecranLarge && !/<Idee\b/.test(entree.body ?? '')
-const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-const composants = { BlocTemps, EcranAnime, EcranFonction, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, Idee, Cadre }
+/* Dans le texte d'une page espagnole, un lien interne écrit avec le chemin français mène à la page espagnole si elle existe (LienTexte). */
+const composants = { BlocTemps, EcranAnime, EcranFonction, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, Idee, Cadre, ...(langue === 'es' ? { a: LienTexte } : {}) }
+const fictifs = t('Noms et montants fictifs.')
 const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 ---
 <Layout titre={d.titreSeo} description={d.description} chemin={chemin} fil={fil} faq={d.faq}>
@@ -139,9 +146,9 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
         <p class="surtitre">{surtitre}</p>
         <h1>{d.titre}</h1>
         <p class="chapo">{d.chapo}</p>
-        {offre && <p class="gp-offre"><span class="pastille-offre">Dès {offre}</span> <a href="/tarifs">Voir les offres</a></p>}
+        {offre && <p class="gp-offre"><span class="pastille-offre">{t('Dès {offre}', { offre })}</span> <a href={lien('/tarifs')}>{t('Voir les offres')}</a></p>}
         <div class="gp-actions">
-          <a class={btnClasse} href="/demo">Demander une démo</a>
+          <a class={btnClasse} href={lien('/demo')}>{t('Demander une démo')}</a>
           {lienEcran && <a class="lien-fleche" href={lienEcran.href}>{lienEcran.texte} <svg aria-hidden="true"><use href="#fleche" /></svg></a>}
         </div>
       </div>
@@ -149,7 +156,7 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
       {heros === 'panneau' && (
         <figure class:list={['gp-panneau', `gp-ecran-${forme}`]}>
           {ecranFonction ? <EcranFonction nom={ecranFonction.nom} nu /> : <EcranAnime nom={ecran!} />}
-          <figcaption>Noms et montants fictifs.</figcaption>
+          <figcaption>{fictifs}</figcaption>
         </figure>
       )}
     </div>
@@ -163,18 +170,18 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
     {frise.length > 0 && <FriseSaison etapes={frise} />}
     <div class:list={['gp-bloc', duo && 'gp-duo']}>
       {fonctionCorps && (
-        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label="L’écran d’OnClub">
-          <Cadre type="panneau" fond="menthe" legende="Noms et montants fictifs."><EcranFonction nom={fonctionCorps.nom} nu /></Cadre>
+        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label={t('L’écran d’OnClub')}>
+          <Cadre type="panneau" fond="menthe" legende={fictifs}><EcranFonction nom={fonctionCorps.nom} nu /></Cadre>
         </section>
       )}
       {ecranCorps && (samedi ? (
-        <section class="gp-visuel gp-samedi sur-encre" id="ecran" aria-label="L’écran du samedi">
+        <section class="gp-visuel gp-samedi sur-encre" id="ecran" aria-label={t('L’écran du samedi')}>
           <div class="gp-samedi-photo"><Photo nom="terrain" tailles="(min-width: 1000px) 980px, 100vw" /></div>
-          <figure class="gp-samedi-ecran"><EcranAnime nom={ecranCorps} sombre /><figcaption>Noms et montants fictifs.</figcaption></figure>
+          <figure class="gp-samedi-ecran"><EcranAnime nom={ecranCorps} sombre /><figcaption>{fictifs}</figcaption></figure>
         </section>
       ) : (
-        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label="L’écran d’OnClub">
-          <Cadre type="panneau" fond="menthe" legende="Noms et montants fictifs."><EcranAnime nom={ecranCorps} /></Cadre>
+        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label={t('L’écran d’OnClub')}>
+          <Cadre type="panneau" fond="menthe" legende={fictifs}><EcranAnime nom={ecranCorps} /></Cadre>
         </section>
       ))}
       <article class:list={['prose', 'prose-produit', !duo && 'prose-grille']} data-contenu>
@@ -183,8 +190,8 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
     </div>
     {d.sources?.length > 0 && (
       <aside class="gp-sources" aria-labelledby="sources-titre">
-        <h2 id="sources-titre">Sources</h2>
-        <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank">{s.titre}</a>, consulté le {date(new Date(s.consulte))}</li>)}</ul>
+        <h2 id="sources-titre">{t('Sources')}</h2>
+        <ul>{d.sources.map((s: any) => <li><a href={s.url} rel="noopener" target="_blank" lang={langue === 'es' ? 'fr' : undefined} hreflang={langue === 'es' ? 'fr' : undefined}>{s.titre}</a>{langue === 'es' && t(' (en francés)')}{t(', consulté le {date}', { date: date(new Date(s.consulte)) })}</li>)}</ul>
       </aside>
     )}
     {d.faq?.length > 0 && <Faq items={d.faq} disposition="deux-colonnes" />}

@@ -1,0 +1,150 @@
+---
+nom: "Bádminton"
+ligne: "Del Minibad a los interclubes, cada horario del pabellón cuenta sus plazas"
+ordre: 9
+titreSeo: "Club de bádminton: inscripción en línea por horario | OnClub"
+description: "Club de bádminton: inscripción en línea por horario y año de nacimiento, cuota en varios plazos, convocatorias de interclubes. Poona lleva la licencia."
+titre: "Club de bádminton: horarios completos, sin hoja de cálculo"
+chapo: "El pabellón solo tiene sus pistas: cada horario cuenta sus plazas, y tanto los jóvenes como los adultos de ocio se inscriben desde el móvil."
+temps:
+  cles: [fiches, attente, paiements]
+  titre: "El tiempo que recupera la directiva de un club de bádminton, cada temporada"
+fonctionnalites: [inscription-en-ligne, liste-attente, seances-essai, convocations, paiement-en-ligne, liste-des-licences, reinscriptions]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "¿Un jugador puede tener dos horarios a la semana, el martes por la noche y el jueves?"
+    reponse: "Sí, si el club los convierte en dos clases: marca las dos en el mismo expediente. Si el club concede un descuento a partir de la segunda clase, se calcula solo, y el jugador ve el total exacto antes de pagar, en un solo pago o en varios."
+  - question: "¿OnClub tramita la licencia en Poona en lugar del club?"
+    reponse: "No. La licencia FFBaD se gestiona en Poona, el espacio de directivos de la federación, y OnClub no envía allí ningún fichero. Le da la lista que trasladar: quién está listo, quién espera todavía un pago o un justificante, quién renueva y quién llega al club. Se exporta en hoja de cálculo."
+  - question: "¿Un adulto que juega por ocio tiene que traer un certificado médico?"
+    reponse: "Según la FFBaD, cada federado rellena un cuestionario de salud; solo se pide un certificado de menos de seis meses en caso de respuesta positiva. En OnClub, el adulto rellena el cuestionario QS-SPORT en línea: sus respuestas se quedan en su móvil y solo la declaración llega al club."
+  - question: "¿Se pueden reservar las pistas del pabellón con OnClub?"
+    reponse: "No. OnClub no reserva ni pistas ni horas de sala. Allí, un horario es una cita fija de la semana, con su pabellón, su dirección, su entrenador y su número de plazas: es ese número el que cierra la inscripción cuando el horario está completo."
+sources:
+  - titre: "FFBaD, Licence de badminton : comment se licencier"
+    url: "https://www.ffbad.org/pratiquer-se-licencier-licence"
+    consulte: "2026-10-10"
+  - titre: "FFBaD, FAQ : validité de la licence, Poona et MyFFBaD"
+    url: "https://www.ffbad.org/faq"
+    consulte: "2026-10-10"
+  - titre: "FFBaD, Certificat médical et questionnaire de santé"
+    url: "https://www.ffbad.org/pratiquer-se-licencier-informations-medicales"
+    consulte: "2026-10-10"
+  - titre: "Comité de badminton du Rhône, Catégories d’âge 2026-2027 (d’après le Guide du Badminton FFBaD)"
+    url: "https://comitebadminton69.fr/categories-dage/"
+    consulte: "2026-10-10"
+  - titre: "FFBaD, Interclubs : compétition de badminton en France"
+    url: "https://www.ffbad.org/pratiquer-competitions-interclubs"
+    consulte: "2026-10-10"
+  - titre: "FFBaD, 1037 clubs labellisés École française de badminton pour la saison 2026-2027"
+    url: "https://www.ffbad.org/actualites/actus-24/2026/1037-clubs-labellises-ecole-francaise-de-badminton-pour-la-saison-2026-2027"
+    consulte: "2026-10-10"
+---
+
+## Inscripción de bádminton por horario: tantas plazas como pistas
+
+<Idee visuel="droite">
+
+Un pabellón solo tiene un número de pistas. Por eso cada horario lleva sus plazas, y el padre o la madre solo ve los horarios abiertos al año de nacimiento de su hijo, con lo que queda.
+
+<Repli>
+
+- **Horario completo**: con el plan Pro, el jugador siguiente entra en [lista de espera](/fonctionnalites/liste-attente) en lugar de marcharse. Si se libera una plaza, la junta directiva se la ofrece con un clic.
+- **Clase de prueba**: cada clase elige, nunca, solo si queda sitio, o aunque esté completa.
+- **El grupo de competición** puede abrirse solo a los antiguos socios, o por invitación.
+- **El pabellón** se declara una vez, con su dirección y la forma de acceder.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de bádminton"
+  titre="Horarios abiertos · nacido en 2015"
+  sousTitre="Temporada 2026-2027 · categoría alevines"
+  lignes={[
+    { nom: 'Jóvenes 1 · miércoles 17:00', detail: 'Pabellón · Minibad a alevines', statut: '4 plazas', ton: 'ok' },
+    { nom: 'Jóvenes 2 · sábado 10:00', detail: 'Pabellón · alevines e infantiles', statut: 'Completo', ton: 'ko' },
+    { nom: 'Jóvenes competición · viernes 18:30', detail: 'Pabellón · alevines a cadetes', statut: 'Por invitación', ton: 'neutre' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '150 €' }}
+  bouton="Elegir este horario"
+  legende="Lo que ve un padre o una madre para un niño nacido en 2015: solo los horarios abiertos a su año. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Del Minibad a los júniors: las categorías FFBaD 2026-2027
+
+En bádminton, la categoría sigue el año de nacimiento y cambia cada 1 de septiembre. El club fija los límites de años de cada horario: un niño no deja su grupo el día de su cumpleaños.
+
+<Repli titre="Las categorías 2026-2027">
+
+- **Minibad**: nacidos en 2019 y después.
+- **Benjamines**: nacidos en 2017 y 2018.
+- **Alevines**: nacidos en 2015 y 2016.
+- **Infantiles**: nacidos en 2013 y 2014.
+- **Cadetes**: nacidos en 2011 y 2012.
+- **Júniors**: nacidos en 2009 y 2010.
+- **Séniores**: nacidos de 1992 a 2008; **veteranos**: nacidos en 1991 y antes.
+- **Cambio de categoría**: una franja de años marcada de más en el horario, y un cargo reservado a ese caso si el club lo prevé.
+
+</Repli>
+
+## Cuota de bádminton en varios plazos, padres e hijos juntos
+
+El padre o la madre que juega el martes por la noche y el niño del miércoles se inscriben en el mismo expediente: un anticipo y después varios pagos, cada importe y las fechas de inicio y fin mostrados antes de confirmar.
+
+<Repli>
+
+- **Los descuentos se aplican solos**: segundo hijo, tercer hijo, segunda clase en la semana.
+- **El [Pass’Sport](/guides/pass-sport)** y las ayudas locales se marcan en la inscripción y se descuentan; se pide el justificante correspondiente.
+- **Los cheques y el efectivo** se anotan en el expediente, al céntimo, sin comisión.
+- **Un vencimiento atrasado** se reclama con un botón, después de revisar el mensaje.
+
+</Repli>
+
+## Licencia FFBaD: Poona sigue siendo la herramienta, OnClub prepara la lista
+
+La licencia FFBaD vale del 1 de septiembre al 31 de agosto. Se gestiona en Poona, el espacio de directivos de la federación, y el jugador encuentra la suya en MyFFBaD. OnClub no envía nada allí ni introduce nada.
+
+La pantalla [Licencias](/fonctionnalites/liste-des-licences) de OnClub da la lista que trasladar a Poona: quién está listo, quién espera un pago o un justificante, quién renueva, quién llega. Se exporta en hoja de cálculo.
+
+En cuanto a la salud, la FFBaD pide a cada federado un cuestionario, y un certificado de menos de seis meses solo en caso de respuesta positiva.
+
+<Repli>
+
+- **El cuestionario en línea**: el del menor, rellenado con sus padres, o el QS-SPORT del adulto. Las respuestas se quedan en el móvil y solo la declaración llega al club.
+- **Un certificado enviado en foto** lo revisa la junta directiva, que sigue su fecha de caducidad. El detalle está en la guía del [certificado médico](/guides/certificat-medical-sport).
+
+</Repli>
+
+## Convocatoria de los interclubes: el equipo del sábado responde desde el correo
+
+Un encuentro de interclubes nacionales se juega en ocho partidos: individuales, dobles y dos dobles mixtos. El entrenador convoca al equipo, y cada jugador responde presente o ausente desde el correo, sin cuenta.
+
+<Repli>
+
+- **El pase de lista** parte de las respuestas: para un encuentro, un jugador que no ha respondido queda por marcar, no se alinea de oficio.
+- **Una anulación** avisa a todo el equipo, con una nota si hace falta («pabellón cerrado»).
+- **La plantilla** guarda para cada uno un puesto escrito libremente, «individual femenino» o «doble mixto», y un estado.
+- **El entrenador** abre su página con un enlace personal: primero la próxima sesión, nunca la dirección ni el teléfono de un jugador.
+
+</Repli>
+
+OnClub no reserva las pistas, no lleva ni clasificaciones ni resultados, no inscribe en los torneos federativos y no gestiona los volantes ni el material prestado. La web del club, con el plan Pro, solo enlaza a la página del grupo en la federación.
+
+## Mayo: la escuela de bádminton reserva a sus jóvenes para la temporada siguiente
+
+La FFBaD ha otorgado el sello «École française de badminton» a 1.037 clubes para 2026-2027. Con el plan Pro, el entrenador de la escuela marca desde mayo a los jóvenes que conserva y elige su horario del año que viene.
+
+<Repli>
+
+- **La plaza se reserva** dos semanas por defecto, de 1 a 90 días según su configuración.
+- **La familia confirma** con su enlace y elige su calendario de pagos; sin respuesta, la plaza vuelve al público.
+- **Después, la inscripción se abre** a los nuevos, sin [volver a introducir](/fonctionnalites/reprise-des-fichiers) a los antiguos socios.
+
+</Repli>
+
+Para ver sus horarios montados en OnClub, [solicite una demo](/demo?type=sport); los precios están en la página de [precios](/tarifs).

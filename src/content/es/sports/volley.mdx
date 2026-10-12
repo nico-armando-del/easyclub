@@ -1,0 +1,131 @@
+---
+nom: "Voleibol"
+ligne: "De los M7 a los séniores, pista y playa: el inicio de temporada del vóley se hace en línea"
+ordre: 2
+titreSeo: "Club de vóley: inscripción en línea, cuota y licencia | OnClub"
+description: "Club de vóley: inscripción en línea por categoría FFvolley, cuota en varios plazos, exportación del Espace Club cotejada con los expedientes, convocatorias."
+titre: "Club de vóley: sus licencias FFvolley comprobadas"
+chapo: "Las solicitudes MyFFvolley llegan al Espace Club. Suba su exportación: cada licencia se coloca frente al expediente del jugador, y usted ve quién falta."
+temps:
+  cles: [pieces, fiches, paiements]
+  titre: "El tiempo que recupera la junta directiva de un club de vóley, cada temporada"
+ecran: terrain
+fonctionnalites: [liste-des-licences, inscription-en-ligne, compo-du-match, convocations, paiement-en-ligne, pieces-justificatives]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "¿OnClub sustituye a MyFFvolley o al Espace Club?"
+    reponse: "No. El jugador sigue solicitando su licencia desde su Espace Personnel MyFFvolley, y el club la valida en su Espace Club. OnClub no transmite nada a la federación: lleva la inscripción en el club, los documentos y la cuota, y después le ayuda a comprobar que cada inscrito tiene su licencia."
+  - question: "¿Qué fichero hay que subir para comparar las licencias del club?"
+    reponse: "La exportación de licencias del Espace Club, en el apartado Utilitaires, en XML o en CSV. Un libro de Excel se guarda primero en CSV. El XML conserva intactos los números de licencia. Nada se guarda en OnClub: la comprobación se repite tantas veces como haga falta."
+  - question: "Un jugador hace vóley en pista y vóley playa en verano: ¿dos expedientes?"
+    reponse: "Uno solo. El vóley playa se añade como segunda sección en el mismo expediente, y el descuento que el club ha previsto para una segunda sección se aplica solo. En la federación, la práctica del vóley playa corresponde a la extensión Outdoor de la licencia."
+  - question: "Nuestros M11 juegan a cuatro: ¿la alineación lo sigue?"
+    reponse: "Sí. Un equipo cuyos mayores tienen trece años como máximo empieza en vóley a cuatro, dos delante y dos detrás; un clic lo pasa a seis. El vóley playa tiene su formato por parejas, una pareja por pestaña."
+sources:
+  - titre: "FFvolley, récapitulatif des catégories d’âges et surclassements, saison 2026/2027"
+    url: "https://extranet.ffvb.org/data/Files/documents/licences/FFvolley_Categories_2026-27.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFvolley, règlement général des licences et des GSA, saison 2026/2027"
+    url: "https://extranet.ffvb.org/data/Files/manuel_juridique/2026-2027/FFvolley_RGLIGA_2026-27.pdf"
+    consulte: "2026-10-10"
+---
+
+## Licencia FFvolley: la exportación del Espace Club frente a sus expedientes
+
+El jugador solicita su licencia desde su Espace Personnel MyFFvolley, el club la valida en su Espace Club. OnClub no introduce ni transmite ninguna licencia: prepara antes, y comprueba después.
+
+<Idee visuel="droite">
+
+Antes de abrir el Espace Club, la pantalla [Licencias](/fonctionnalites/liste-des-licences) dice quién está listo: cuota pagada o calendario de pagos al día, sin ningún documento pendiente de reclamar. También marca quién renueva y quién es nuevo.
+
+<Repli>
+
+- **La temporada de licencia** va del 1 de septiembre al 31 de agosto: una licencia sacada entre el 1 de junio y el 31 de agosto se homologa el 1 de septiembre.
+- **La exportación**: en el Espace Club, apartado Utilitaires, la exportación de licencias, en XML o en CSV.
+- **La subida**: cada licencia del fichero se coloca frente al expediente del jugador en su club.
+- **Las validaciones** de la federación se leen en el fichero: un jugador solo está «en regla» si su validación figura en él.
+- **La duda**: dos homónimos o un número dudoso quedan «por comprobar», nunca emparejados al azar.
+- **Nada se guarda**: la comprobación se repite después de cada tanda de validaciones.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club"
+  titre="Licencias · exportación del Espace Club"
+  sousTitre="Temporada 2026-2027 · 62 licencias leídas"
+  lignes={[
+    { nom: 'Hugo B.', detail: 'Séniores 2', statut: 'Licencia aún no validada en la federación', ton: 'neutre' },
+    { nom: 'Sami K.', detail: 'M18 chicos', statut: 'Inscrito en el club, sin licencia en la federación', ton: 'ko' },
+    { nom: 'Chloé R.', detail: 'Ocio', statut: 'Por comprobar', ton: 'neutre' },
+    { nom: 'Léa D.', detail: 'M15 chicas', statut: 'En regla', ton: 'ok' },
+  ]}
+  bouton="Comparar otro fichero"
+  legende="La comparación vista por el secretario: primero, lo que requiere una acción. Nombres ficticios."
+/>
+
+</Idee>
+
+## Inscripción en línea en un club de vóley, del baby-vóley a los séniores
+
+La FFvolley clasifica a sus jugadores por año de nacimiento: el formulario solo ofrece a la familia los equipos abiertos a ese año, con las plazas que quedan.
+
+<Repli titre="Las categorías FFvolley 2026-2027">
+
+- **Baby / M7**: nacidos en 2020 y después.
+- **M9**: 2018 y 2019. **M11**: 2016 y 2017. **M13**: 2014 y 2015. **M15**: 2012 y 2013.
+- **M18**: 2009 a 2011. **M21**: 2006 a 2008.
+- **Séniores**: 2005 y antes; **Masters**: 1986 y antes.
+
+</Repli>
+
+<Repli>
+
+- **Chicas, chicos o mixto**: «M13F» solo se muestra a las jugadoras de 2014 y 2015; la pregunta solo se hace si un equipo de esa edad la plantea.
+- **Un cambio de categoría** se solicita según la tabla federal; la junta directiva reserva ella misma la plaza en el equipo superior y envía el enlace a la familia.
+- **El cuestionario de salud** se rellena en línea; solo la declaración llega al club. Una respuesta positiva exige un certificado de menos de seis meses, según el reglamento federal.
+- **La sesión de prueba** se reserva desde la página del club, antes de comprometerse.
+
+</Repli>
+
+## Cuota de vóley en varios plazos, vóley playa incluido
+
+La familia elige su modalidad, ve cada pago y su total, y después paga con tarjeta: un anticipo, y luego vencimientos en las fechas del club.
+
+<Repli>
+
+- **La pista y la playa** en un solo expediente, descuento de segunda sección incluido.
+- **Hermanos**: el descuento del segundo y del tercer hijo se calcula solo.
+- **El [Pass’Sport](/guides/pass-sport)** se marca en la inscripción y se descuenta, con su justificante.
+- **El tesorero** ve lo cobrado, lo pendiente y lo atrasado; cheques y efectivo se anotan al céntimo, un pago atrasado se reclama con un botón.
+
+</Repli>
+
+## Convocatoria del partido: el seis inicial parte de las respuestas
+
+El entrenador convoca para el partido del sábado desde su enlace personal, sin cuenta; las familias responden presente o ausente desde el correo, y la alineación se llena con los que vienen.
+
+<Repli>
+
+- **Vóley a seis** en 5-1, colocador en zona 1, o en 4-2 con dos colocadores; el líbero aparte.
+- **Vóley a cuatro** por defecto en los más pequeños, dos delante, dos detrás.
+- **Capitán y capitán en curso**, números del 1 al 99; un número repetido queda señalado.
+- **El pase de lista** en el pabellón: presente, ausente o justificado; tres ausencias sin avisar en los últimos cinco pases de lista se señalan a la junta directiva.
+- **Los resultados**: la página del equipo lleva a su grupo en la federación, OnClub no copia ni resultados ni clasificación.
+
+</Repli>
+
+## Vóley playa en verano y campus de vacaciones
+
+Cuando termina la temporada en pista, el campus de vóley playa o el torneo del club tiene su página de inscripción, con su fecha, su precio y sus plazas: es el plan [Pro Max IA](/tarifs).
+
+<Repli>
+
+- **Un campus**, que se paga aparte de la cuota, con su lista de espera.
+- **Las camisetas** y los pantalones se venden en la tienda del club, con existencias talla por talla y recogida en el club.
+
+</Repli>
+
+Lo que OnClub no hace para un club de vóley: la solicitud y la validación de la licencia, los cambios de categoría federales, las actas de partido y las clasificaciones siguen en la FFvolley y sus ligas. Para verlo todo con sus equipos, [solicite una demo](/demo?type=sport).

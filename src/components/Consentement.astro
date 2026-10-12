@@ -15,16 +15,19 @@
   ville approximative déduite de la connexion, pour personnaliser trois
   phrases. Sans « Accepter », aucune requête n'est faite. Logique : public/js/site.js.
 */
+import { i18n, SR_FR } from '../i18n/ui'
+import VersFr from './langue/VersFr.astro'
+const { t, lien, versFr, langue } = i18n(Astro.url)
 ---
 <section class="consentement" data-consentement hidden aria-labelledby="consentement-titre" role="region">
   <div class="consentement-boite">
     <div class="consentement-texte">
-      <h2 id="consentement-titre">Adapter le site à votre ville&nbsp;?</h2>
-      <p>Si vous acceptez, nous déduisons votre ville approximative de votre connexion. Rien n’est enregistré, aucun service tiers. <a href="/confidentialite#localisation">En savoir plus</a></p>
+      <h2 id="consentement-titre">{t('Adapter le site à votre ville ?')}</h2>
+      <p>{t('Si vous acceptez, nous déduisons votre ville approximative de votre connexion. Rien n’est enregistré, aucun service tiers.')} <a href={lien('/confidentialite#localisation')} hreflang={versFr('/confidentialite') ? 'fr' : undefined}>{langue === 'es' ? t('En savoir plus sur la localisation') : t('En savoir plus')}{versFr('/confidentialite') && <VersFr sr={SR_FR} />}</a></p>
     </div>
     <div class="consentement-choix">
-      <button type="button" class="btn btn-blanc" data-consentement-choix="refuse">Refuser</button>
-      <button type="button" class="btn btn-blanc" data-consentement-choix="accepte">Accepter</button>
+      <button type="button" class="btn btn-blanc" data-consentement-choix="refuse">{t('Refuser')}</button>
+      <button type="button" class="btn btn-blanc" data-consentement-choix="accepte">{t('Accepter')}</button>
     </div>
   </div>
 </section>

@@ -1,0 +1,84 @@
+---
+nom: "Pago en línea"
+ligne: "La cuota pagada con tarjeta, desde la inscripción"
+famille: Encaisser
+offre: mini
+ordre: 1
+titreSeo: "Pago de la cuota en línea, en varios plazos | OnClub"
+description: "La familia paga su cuota con tarjeta justo después de la inscripción, con los descuentos aplicados. En varios plazos, ve cada importe antes de confirmar."
+titre: "La cuota pagada con tarjeta desde la inscripción"
+chapo: "Se acabó el «le doy el cheque la semana que viene». La familia ve el total exacto, descuentos incluidos, y paga con tarjeta a continuación."
+temps:
+  geste: "La familia paga con tarjeta justo después de inscribirse: ya no hay que ir a buscar cheques."
+ecranFonction: true
+fonctionnalites: [aides-deduites, relance-un-clic, suivi-des-paiements]
+profils: [tresorier]
+articles: [cotisation-en-plusieurs-fois]
+sources:
+  - titre: "Tarifs de Stripe pour les paiements par carte"
+    url: "https://stripe.com/fr/pricing"
+    consulte: "2026-10-09"
+maj: 2026-10-10
+faq:
+  - question: "¿Quién paga las comisiones de la tarjeta, la familia o la asociación?"
+    reponse: "La asociación. La familia paga el precio indicado. Las comisiones de tarjeta de Stripe (1,5 % + 0,25 € por pago) y la comisión de OnClub del plan se retienen del abono. Un cheque, el efectivo o una transferencia anotados por la junta directiva no tienen ninguna comisión."
+  - question: "¿Se puede ofrecer el pago en varios plazos?"
+    reponse: "Sí, por ejemplo en 3 o en 10 plazos, con o sin anticipo, según lo que elija la asociación en la puesta en marcha con el equipo de OnClub. La familia ve cada importe antes de confirmar, y después el calendario de pagos con fechas en «Mi expediente». Los plazos siguientes los cobra la junta directiva, en su fecha."
+  - question: "¿Qué ocurre si falla el pago con tarjeta?"
+    reponse: "La inscripción ya está registrada: queda a la espera. En un solo pago, la familia encuentra el pago en su expediente y no paga dos veces. El club también puede cobrar de otra forma, con cheque o por transferencia, y anotarlo en el expediente."
+  - question: "¿Cómo se reembolsa a una familia?"
+    reponse: "Desde la ficha del expediente, con «Reembolsar»: un importe y un motivo son obligatorios. Lo que llegó con tarjeta vuelve a la tarjeta; un cheque o el efectivo los tiene que devolver el club, y la pantalla lo indica. La comisión de OnClub se devuelve a prorrata."
+---
+
+## El cheque prometido no llega
+
+En septiembre, el expediente llega sin el pago. El tesorero apunta quién ha prometido un cheque, lo reclama a pie de campo, vuelve a contar el efectivo de la jornada de presentación. El pago en línea resuelve la cuestión en el momento en que la familia se inscribe.
+
+## El total exacto, antes de pagar
+
+Al final del formulario, la familia abre «Su carrito». Lee en él, línea por línea, lo que va a pagar:
+
+- **Cada equipo o curso**, la licencia y la cuota de socio de la asociación.
+- **Los descuentos de la asociación**, aplicados solos: segundo hijo, varios cursos, segunda sección.
+- **La ayuda marcada**, el Pass’Sport o la ayuda del municipio, restada del total: vea las [ayudas descontadas](/fonctionnalites/aides-deduites).
+- **El pago en varios plazos**, cuando la asociación lo ofrece: «3 pagos de 140 €, el primero hoy, los siguientes del … al …».
+
+En un club de fútbol que inscribe a dos hijos, la familia ve 420 € antes de tocar su tarjeta, y ninguna sorpresa después.
+
+## «Pagar y confirmar», y después la tarjeta en Stripe
+
+En un solo pago, la familia pulsa «Pagar y confirmar». Primero se registra la inscripción y después se abre el paso «Pago»: introduce su tarjeta en Stripe y lee «Pago aceptado».
+
+<EcranFonction nom="paiement-en-ligne-carte" legende="El paso de pago, justo después de «Pagar y confirmar». Nombres e importes ficticios." />
+
+- **Un pago que falla** no pierde nada: la inscripción espera, y el club puede cobrarla de otra forma.
+- **Una pestaña cerrada demasiado pronto**: la familia encuentra el pago en «Mi expediente», sin pagar dos veces.
+- **Los recibos** también la esperan en «Mi expediente»: aviso de cuota, recibo de cuota, certificado de pago para una empresa o un comité de empresa (CSE).
+- **Un correo confirma** la inscripción. Un pago hecho más tarde desde «Mi expediente» recibe «Pago recibido»; un cheque introducido por la junta directiva, ninguno.
+
+## El dinero llega a la cuenta de la asociación
+
+Los pagos con tarjeta se abonan en ella, menos la comisión de OnClub del plan (2,90 % en Mini) y las comisiones de tarjeta.
+
+- **La cuenta Stripe del club** se vincula en la puesta en marcha, con las transferencias activadas. Sin ella, no se pide ninguna tarjeta: el botón pasa a ser «Confirmar mi solicitud».
+- **Stripe procesa el pago**: ningún dato de tarjeta pasa por el club ni por OnClub.
+- **Las comisiones de tarjeta** de Stripe, 1,5 % + 0,25 € por pago, corren a cargo de la asociación.
+- **Cheque, efectivo, transferencia, ayuda o vale**: la junta directiva los anota en el expediente, al céntimo, con «Cobrar un cheque». Sin ninguna comisión.
+
+El [seguimiento de pagos](/fonctionnalites/suivi-des-paiements) muestra después, expediente por expediente, lo que ha entrado y lo que falta.
+
+## En varios plazos, el resto se paga con el club
+
+La asociación puede ofrecer el pago en varios plazos, por ejemplo en 3 o en 10 plazos, sin recargo para la familia.
+
+- **La tarjeta, solo para el primer plazo**, si la asociación lo ha elegido en la puesta en marcha.
+- **Si no, «Confirmar mi solicitud»**: la inscripción se registra, y el pago se hace con el club.
+- **Los plazos siguientes** los cobra la junta directiva, en su fecha. Un plazo vencido se [reclama con un clic](/fonctionnalites/relance-un-clic).
+- **El calendario de pagos completo** se lee después en «Mi expediente»: plazo, fecha, importe y estado. La junta directiva ve lo mismo en la ficha del expediente.
+
+## Lo que OnClub no hace (todavía)
+
+- **Cargar en la tarjeta los plazos siguientes**: en varios plazos, la familia paga el resto con el club.
+- **Pagar un plazo en línea desde «Mi expediente»**: solo un expediente en un solo pago, sin nada abonado, se paga allí con tarjeta.
+- **Mostrar cada fecha antes del pago**: la familia ve cada importe, la primera y la última fecha. El detalle con fechas llega después, en «Mi expediente».
+- **Configurar usted mismo los calendarios de pago**: el número de plazos, el anticipo y la tarjeta para el pago fraccionado se establecen con el equipo de OnClub.

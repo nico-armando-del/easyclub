@@ -16,13 +16,17 @@ import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
 import { OFFRES, FRAIS_CARTE, NOM_OFFRE, MISE_EN_ROUTE } from '../data/site'
 import { HYPOTHESES, HYPOTHESES_OFFRES } from '../data/temps'
-import { liste, url } from '../lib/collections'
+import VersFr from '../components/langue/VersFr.astro'
+import { catalogue } from '../lib/collections'
+import { i18n, SR_FR } from '../i18n/ui'
 
-const fonctions = await liste('fonctionnalites')
+/* Une seule page pour les deux langues : /es/tarifs l'importe, les textes passent par t(). */
+const { langue, t, lien, euros: eurosL } = i18n(Astro.url)
+const fonctions = await catalogue('fonctionnalites', langue)
 const RANG = { mini: 0, pro: 1, max: 2 } as const
 const cles = ['mini', 'pro', 'max'] as const
 
-const euros = (c: number) => (c / 100).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'
+const euros = (c: number) => eurosL(c)
 const pro = OFFRES.find((o) => o.cle === 'pro')!
 const tauxPro = parseFloat(pro.taux.replace(',', '.')) / 100
 function exemple(prixCents: number) {
@@ -35,56 +39,56 @@ const DOSSIER = 1000
 const a = exemple(COTISATION)
 const b = exemple(COTISATION + DOSSIER)
 
-const fil = [{ nom: 'Tarifs', url: '/tarifs' }]
+const fil = [{ nom: t('Tarifs'), url: lien('/tarifs') }]
 const faq = [
-  { question: 'Y a-t-il un abonnement fixe ou des frais d’installation ?', reponse: 'Non. L’abonnement est un pourcentage des cotisations encaissées en ligne, et rien d’autre : ni frais fixe, ni frais d’installation, ni coût par adhérent, ni minimum.' },
-  { question: 'Les chèques et les espèces sont-ils comptés ?', reponse: 'Non. Ce que le bureau note lui-même, en chèque ou en espèces, ne passe pas par la commission. Seul ce qui est payé en ligne compte.' },
-  { question: 'Qui paie les frais de carte bancaire ?', reponse: 'L’association. Beaucoup les couvrent par des frais de dossier inclus dans le prix d’inscription, appliqués à toutes les familles quel que soit le moyen de paiement. L’exemple chiffré de cette page montre les deux cas.' },
-  { question: 'Peut-on changer d’offre en cours de saison ?', reponse: 'Oui. Le changement vaut pour les encaissements suivants, sans effet rétroactif. En passant de Pro à Mini, l’association perd ce que Pro ouvre, Cluby compris.' },
-  { question: 'Quand l’association est-elle en ligne ?', reponse: MISE_EN_ROUTE },
+  { question: t('Y a-t-il un abonnement fixe ou des frais d’installation ?'), reponse: t('Non. L’abonnement est un pourcentage des cotisations encaissées en ligne, et rien d’autre : ni frais fixe, ni frais d’installation, ni coût par adhérent, ni minimum.') },
+  { question: t('Les chèques et les espèces sont-ils comptés ?'), reponse: t('Non. Ce que le bureau note lui-même, en chèque ou en espèces, ne passe pas par la commission. Seul ce qui est payé en ligne compte.') },
+  { question: t('Qui paie les frais de carte bancaire ?'), reponse: t('L’association. Beaucoup les couvrent par des frais de dossier inclus dans le prix d’inscription, appliqués à toutes les familles quel que soit le moyen de paiement. L’exemple chiffré de cette page montre les deux cas.') },
+  { question: t('Peut-on changer d’offre en cours de saison ?'), reponse: t('Oui. Le changement vaut pour les encaissements suivants, sans effet rétroactif. En passant de Pro à Mini, l’association perd ce que Pro ouvre, Cluby compris.') },
+  { question: t('Quand l’association est-elle en ligne ?'), reponse: t(MISE_EN_ROUTE) },
 ]
 ---
 <Layout
-  titre="Tarifs OnClub : un pourcentage, rien de fixe"
-  description="Les tarifs d’OnClub : 2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne, rien de fixe. Ce que chaque offre ouvre, le temps rendu, un exemple chiffré."
-  chemin="/tarifs"
+  titre={t('Tarifs OnClub : un pourcentage, rien de fixe')}
+  description={t('Les tarifs d’OnClub : 2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne, rien de fixe. Ce que chaque offre ouvre, le temps rendu, un exemple chiffré.')}
+  chemin={lien('/tarifs')}
   fil={fil}
   faq={faq}
 >
   <HerosCompact
     fil={fil}
-    surtitre="Tarifs"
-    titre="Un abonnement au pourcentage. Rien de fixe"
-    phrase="Une part de ce que l’association encaisse en ligne. Rien sur les chèques ni les espèces. Plus l’offre est complète, plus elle rend de temps."
-    cta={{ texte: 'Demander une démo', href: '/demo' }}
-    lien={{ texte: 'L’exemple chiffré', href: '#exemple' }}
+    surtitre={t('Tarifs')}
+    titre={t('Un abonnement au pourcentage. Rien de fixe')}
+    phrase={t('Une part de ce que l’association encaisse en ligne. Rien sur les chèques ni les espèces. Plus l’offre est complète, plus elle rend de temps.')}
+    cta={{ texte: t('Demander une démo'), href: lien('/demo') }}
+    lien={{ texte: t('L’exemple chiffré'), href: '#exemple' }}
   />
 
   <section class="section section-offres" aria-labelledby="t-offres">
     <div class="enveloppe">
-      <h2 id="t-offres" class="sr">Les trois offres</h2>
+      <h2 id="t-offres" class="sr">{t('Les trois offres')}</h2>
       <Offres mode="complet" />
       <div class="replis">
-        <Repli titre="Ce que chaque offre ouvre, fonctionnalité par fonctionnalité">
+        <Repli titre={t('Ce que chaque offre ouvre, fonctionnalité par fonctionnalité')}>
           <div class="tableau-defile" data-defile-x>
             <table class="tableau-offres">
-              <caption class="sr">Les fonctionnalités incluses dans chaque offre</caption>
-              <thead><tr><th scope="col">Fonctionnalité</th>{cles.map((k) => <th scope="col">{NOM_OFFRE[k]}</th>)}</tr></thead>
+              <caption class="sr">{t('Les fonctionnalités incluses dans chaque offre')}</caption>
+              <thead><tr><th scope="col">{t('Fonctionnalité')}</th>{cles.map((k) => <th scope="col">{NOM_OFFRE[k]}</th>)}</tr></thead>
               <tbody>
-                {fonctions.slice().sort((x, y) => RANG[x.data.offre] - RANG[y.data.offre] || x.data.nom.localeCompare(y.data.nom, 'fr')).map((f) => (
+                {fonctions.slice().sort((x, y) => RANG[x.data.offre as keyof typeof RANG] - RANG[y.data.offre as keyof typeof RANG] || x.nom.localeCompare(y.nom, langue)).map((f) => (
                   <tr>
-                    <th scope="row"><a href={url('fonctionnalites', f.id)}>{f.data.nom}</a><span>{f.data.ligne}</span></th>
-                    {cles.map((k) => RANG[k] >= RANG[f.data.offre] ? <td class="oui"><svg aria-hidden="true"><use href="#coche"/></svg><span class="sr">Incluse</span></td> : <td class="non"><span aria-hidden="true">—</span><span class="sr">Non incluse</span></td>)}
+                    <th scope="row"><a href={f.url} hreflang={f.fr ? 'fr' : undefined}>{f.nom}{f.fr && <VersFr sr={SR_FR} />}</a><span>{f.ligne}</span></th>
+                    {cles.map((k) => RANG[k] >= RANG[f.data.offre as keyof typeof RANG] ? <td class="oui"><svg aria-hidden="true"><use href="#coche"/></svg><span class="sr">{t('Incluse')}</span></td> : <td class="non"><span aria-hidden="true">—</span><span class="sr">{t('Non incluse')}</span></td>)}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </Repli>
-        <Repli titre="Comment on compte ces heures">
-          <p>{HYPOTHESES}</p>
-          <p>{HYPOTHESES_OFFRES}</p>
-          <p><a class="lien-fleche" href="/temps-gagne">Refaire le calcul avec vos chiffres <svg aria-hidden="true"><use href="#fleche"/></svg></a></p>
+        <Repli titre={t('Comment on compte ces heures')}>
+          <p>{t(HYPOTHESES)}</p>
+          <p>{t(HYPOTHESES_OFFRES)}</p>
+          <p><a class="lien-fleche" href={lien('/temps-gagne')}>{t('Refaire le calcul avec vos chiffres')} <svg aria-hidden="true"><use href="#fleche"/></svg></a></p>
         </Repli>
       </div>
     </div>
@@ -93,25 +97,25 @@ const faq = [
   <section class="section fond-blanc" id="exemple" aria-labelledby="t-exemple">
     <div class="enveloppe exemple-chiffre">
       <div class="section-tete">
-        <h2 id="t-exemple" class="h2-idee">Un exemple chiffré, au centime</h2>
-        <p>Une cotisation de {euros(COTISATION)} payée par carte, avec OnClub Pro. Les frais de carte sont à la charge de l’association.</p>
+        <h2 id="t-exemple" class="h2-idee">{t('Un exemple chiffré, au centime')}</h2>
+        <p>{t('Une cotisation de {montant} payée par carte, avec OnClub Pro. Les frais de carte sont à la charge de l’association.', { montant: euros(COTISATION) })}</p>
       </div>
       <div class="tableau-defile" data-defile-x>
         <table class="tableau-exemple">
-          <caption class="sr">Ce que l’association reçoit d’une cotisation de {euros(COTISATION)} payée par carte, sans puis avec des frais de dossier</caption>
-          <thead><tr><td></td><th scope="col">Sans frais de dossier</th><th scope="col">Avec {euros(DOSSIER)} de frais de dossier</th></tr></thead>
+          <caption class="sr">{t('Ce que l’association reçoit d’une cotisation de {montant} payée par carte, sans puis avec des frais de dossier', { montant: euros(COTISATION) })}</caption>
+          <thead><tr><td></td><th scope="col">{t('Sans frais de dossier')}</th><th scope="col">{t('Avec {montant} de frais de dossier', { montant: euros(DOSSIER) })}</th></tr></thead>
           <tbody>
-            <tr><th scope="row">La famille paie</th><td class="num">{euros(a.prix)}</td><td class="num">{euros(b.prix)}</td></tr>
+            <tr><th scope="row">{t('La famille paie')}</th><td class="num">{euros(a.prix)}</td><td class="num">{euros(b.prix)}</td></tr>
             <tr><th scope="row">OnClub Pro, {pro.taux}</th><td class="num">− {euros(a.commission)}</td><td class="num">− {euros(b.commission)}</td></tr>
-            <tr><th scope="row">Frais de carte, {FRAIS_CARTE.texte}</th><td class="num">− {euros(a.carte)}</td><td class="num">− {euros(b.carte)}</td></tr>
-            <tr class="total"><th scope="row">L’association reçoit</th><td class="num">{euros(a.recu)}</td><td class="num">{euros(b.recu)}</td></tr>
+            <tr><th scope="row">{t('Frais de carte, {texte}', { texte: t(FRAIS_CARTE.texte) })}</th><td class="num">− {euros(a.carte)}</td><td class="num">− {euros(b.carte)}</td></tr>
+            <tr class="total"><th scope="row">{t('L’association reçoit')}</th><td class="num">{euros(a.recu)}</td><td class="num">{euros(b.recu)}</td></tr>
           </tbody>
         </table>
       </div>
       <div class="frais">
-        <h3>Les frais de carte</h3>
-        <p>Dans la seconde colonne, l’association ajoute {euros(DOSSIER)} de frais de dossier au prix d’inscription, pour toutes les familles, quel que soit le moyen de paiement. Une famille qui paie par chèque règle aussi {euros(b.prix)}, sans commission ni frais de carte.</p>
-        <p class="note">Exemple, pas un devis. Frais de carte : tarif standard de Stripe pour les cartes de l’Espace économique européen, <a href={FRAIS_CARTE.source} target="_blank" rel="noopener">grille tarifaire Stripe</a>, consultée le {FRAIS_CARTE.consulte}. Les cotisations payées en plusieurs fois suivent la même règle, échéance par échéance.</p>
+        <h3>{t('Les frais de carte')}</h3>
+        <p>{t('Dans la seconde colonne, l’association ajoute {dossier} de frais de dossier au prix d’inscription, pour toutes les familles, quel que soit le moyen de paiement. Une famille qui paie par chèque règle aussi {total}, sans commission ni frais de carte.', { dossier: euros(DOSSIER), total: euros(b.prix) })}</p>
+        <p class="note">{t('Exemple, pas un devis. Frais de carte : tarif standard de Stripe pour les cartes de l’Espace économique européen,')} <a href={FRAIS_CARTE.source} target="_blank" rel="noopener">{t('grille tarifaire Stripe')}</a>{t(', consultée le {date}. Les cotisations payées en plusieurs fois suivent la même règle, échéance par échéance.', { date: t(FRAIS_CARTE.consulte) })}</p>
       </div>
     </div>
   </section>

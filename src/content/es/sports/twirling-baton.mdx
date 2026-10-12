@@ -1,0 +1,130 @@
+---
+nom: "Twirling bastón"
+ligne: "Campeonato, mini-twirl, majorettes: cada atleta saca la licencia correcta en línea"
+ordre: 50
+titreSeo: "Club de twirling bastón: inscripción en línea | OnClub"
+description: "Club de twirling bastón y majorettes: inscripción por año de nacimiento, modalidad según la licencia FFSTB, certificado controlado, competiciones convocadas."
+titre: "Club de twirling: la licencia correcta para cada atleta"
+chapo: "Campeonato, práctica deportiva, mini-twirl o majorettes: la FFSTB tiene varias licencias. En línea, la atleta elige su modalidad, y la junta directiva sabe cuál registrar."
+temps:
+  cles: [fiches, relances, pieces]
+  titre: "El tiempo que recupera la junta directiva de un club de twirling, cada temporada"
+fonctionnalites: [inscription-en-ligne, liste-des-licences, pieces-justificatives, paiement-en-ligne, convocations, evenements-stages]
+profils: [tresorier]
+guides: [certificat-medical-sport, rentree-association]
+maj: 2026-10-10
+faq:
+  - question: "¿Hasta cuándo cubre a una atleta la licencia del año pasado?"
+    reponse: "La licencia FFSTB vale del 1 de septiembre al 31 de agosto, con un margen hasta el 30 de septiembre para los practicantes, según el reglamento interno de la federación. Pasada esa fecha, la atleta debe tener la licencia de la nueva temporada: la lista de OnClub muestra quién está lista."
+  - question: "¿Una majorette saca la misma licencia que una atleta de campeonato?"
+    reponse: "No. La FFSTB distingue la licencia de campeonato, la licencia deportiva sin competición, la de práctica técnica, la licencia de majorettes, sin límite de edad, y la licencia de ocio mini-twirl hasta los 10 años inclusive. En el club, cada una puede convertirse en una modalidad con su precio."
+  - question: "¿El certificado médico se sube en OnClub o en la extranet?"
+    reponse: "En los dos, en dos momentos. La familia lo sube en OnClub al inscribirse, y la junta directiva lo revisa. Después, según el reglamento médico, es el presidente del club quien lo sube a la extranet federal: OnClub no lo transmite."
+  - question: "¿El club puede abrir un cursillo durante las vacaciones?"
+    reponse: "Con el plan Pro Max IA, un día de cursillo tiene su página de inscripción: fecha, precio, plazas y lista de espera, que se paga aparte de la cuota. Las atletas se inscriben en línea, como al inicio de temporada."
+sources:
+  - titre: "FFSTB, tarif et définition des licences"
+    url: "https://fftwirl.fr/wp-content/uploads/2026/02/5.-PANEL-LICENCES.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFSTB, règlement intérieur"
+    url: "https://fftwirl.fr/wp-content/uploads/2026/01/REGLEMENT-INTERIEUR-FFSTB.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFSTB, règlement médical"
+    url: "https://fftwirl.fr/wp-content/uploads/2026/02/Reglement-medical-2025.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFSTB, catégories d’âges 2025-2026"
+    url: "https://fftwirl.fr/wp-content/uploads/2026/02/6.-CATEGORIES_AGES_2025-2026.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFSTB, 25 000 licenciés"
+    url: "https://fftwirl.fr/25000-licencies/"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## Inscripción en el club de twirling: una modalidad por licencia
+
+La FFSTB anunciaba en febrero de 2026 más de 25.000 jugadores federados, y varias licencias de practicante. En el club, cada licencia se convierte en una modalidad: su precio, sus horarios, sus plazas y sus años de nacimiento.
+
+<Repli>
+
+- **Campeonato**: para las competiciones nacionales e internacionales.
+- **Deportiva**: para una práctica sin competición.
+- **Práctica técnica**, **majorettes** sin límite de edad, y **ocio mini-twirl** hasta los 10 años inclusive.
+- **El formulario** solo muestra a la familia las modalidades abiertas al año de nacimiento de la atleta.
+
+</Repli>
+
+La categoría se lee según el año de nacimiento, en la tabla que la federación publica para cada temporada: mini-twirl, poussins, benjamins, minimes, cadets, juniors y séniores.
+
+## Licencia FFSTB antes del 30 de septiembre: la lista de las atletas listas
+
+La licencia va del 1 de septiembre al 31 de agosto, con un margen hasta el 30 de septiembre. El club registra las solicitudes en la aplicación de la federación; OnClub no envía nada allí.
+
+<Idee visuel="droite">
+
+La pantalla Licencias dice, atleta por atleta, qué licencia puede registrarse: cuota pagada o calendario de pagos al día, sin ningún documento pendiente de reclamar.
+
+<Repli>
+
+- **La modalidad de cada una** figura en la lista: la junta directiva sabe qué licencia registrar.
+- **La exportación en hoja de cálculo** se tiene al lado de la extranet durante el registro.
+- **Las antiguas y las nuevas** se distinguen, si el club tiene su temporada pasada en OnClub o una lista importada.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de twirling"
+  titre="Licencias · temporada 2026-2027"
+  sousTitre="Por registrar antes del 30 de septiembre"
+  lignes={[
+    { nom: 'Lou B.', detail: 'Campeonato · renovación', statut: 'Lista', ton: 'ok' },
+    { nom: 'Maëlys T.', detail: 'Mini-twirl · nueva', statut: 'Faltan documentos', ton: 'ko' },
+    { nom: 'Chloé R.', detail: 'Majorettes · renovación', statut: 'Pago en curso', ton: 'neutre' },
+  ]}
+  bouton="Descargar la lista (hoja de cálculo)"
+  legende="La lista de licencias vista por la junta directiva, modalidad por modalidad. Nombres ficticios."
+/>
+
+</Idee>
+
+## Certificado o cuestionario: lo que pide la FFSTB
+
+Según el reglamento médico de la FFSTB, una atleta mayor de edad aporta un certificado de menos de tres años para la competición, o la declaración de respuestas negativas al cuestionario de salud. Para una menor, certificado o declaración del cuestionario.
+
+<Repli>
+
+- **El cuestionario del menor** se rellena en línea en OnClub: las respuestas se quedan en el móvil, solo la declaración llega al club.
+- **Un certificado** se sube en foto; la junta directiva lo revisa y su fecha de caducidad queda controlada.
+- **Después**, el presidente lo sube a la extranet del club: OnClub no lo transmite.
+
+</Repli>
+
+El marco común está en la [guía del certificado médico](/guides/certificat-medical-sport).
+
+## Cuota de las atletas en varios plazos, hermanas incluidas
+
+La familia paga con tarjeta, en un solo pago o con un anticipo y después varios pagos, y ve cada importe antes de confirmar.
+
+<Repli>
+
+- **Dos hermanas, o un hermano**, en el mismo expediente: el descuento previsto se aplica solo.
+- **Los cheques y el efectivo** se anotan en el expediente, al céntimo.
+- **Un vencimiento atrasado** se reclama con un botón, tras releer la lista.
+
+</Repli>
+
+## Convocatoria a las competiciones: solos, dúos y equipos
+
+Antes de un campeonato, el entrenador convoca a sus atletas; cada familia responde presente o ausente desde el correo, sin cuenta.
+
+<Repli>
+
+- **La página del entrenador** se abre con un enlace personal, con la próxima sesión arriba.
+- **Una competición anulada** se comunica a las convocadas, con una nota opcional.
+
+</Repli>
+
+OnClub no gestiona ni las notas de los jueces, ni las inscripciones en competición, ni el préstamo de bastones y trajes. Para seguir, vea el [inicio de temporada de la asociación](/guides/rentree-association), los [precios](/tarifs) o [solicite una demostración](/demo?type=sport).

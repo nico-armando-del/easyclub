@@ -5,10 +5,14 @@
   renommée « ec-<nom>fixe » : le script public/ecrans/<nom>.js ne s'y branche pas,
   rien ne bouge. Décoratif : la phrase qui le décrit est portée par le parent.
 */
+import { langueDe } from '../i18n/ui'
 const ECRANS = import.meta.glob('../ecrans/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+const ECRANS_ES = import.meta.glob('../ecrans/es/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
 interface Props { nom: 'relance' | 'reinscription' | 'inscription' }
 const { nom } = Astro.props
-const brut = ECRANS[`../ecrans/${nom}.html`]
+const es = langueDe(Astro.url) === 'es'
+const brut = es ? ECRANS_ES[`../ecrans/es/${nom}.html`] : ECRANS[`../ecrans/${nom}.html`]
+if (!brut && es) throw new Error(`src/ecrans/es/${nom}.html n’existe pas : une page espagnole montre l’écran traduit.`)
 if (!brut) throw new Error(`Écran inconnu : ${nom}`)
 const html = brut
   .replaceAll(`ec-${nom}`, `ec-${nom}fixe`)

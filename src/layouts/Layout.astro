@@ -15,6 +15,8 @@ import PiedDePage from '../components/PiedDePage.astro'
 import BoutonDemoFixe from '../components/BoutonDemoFixe.astro'
 import Consentement from '../components/Consentement.astro'
 import { SITE, NOM, EMAIL } from '../data/site'
+import { i18n, LOCALE, OG_LOCALE } from '../i18n/ui'
+import { jumelles } from '../i18n/liens'
 
 export type Etape = { nom: string; url: string }
 export type Question = { question: string; reponse: string }
@@ -28,6 +30,7 @@ interface Props {
   article?: { titre: string; publie: Date; maj: Date }
   image?: string
   imageAlt?: string
+  /** Obsolète : les hreflang se calculent seuls (page jumelle, et /en pour l'accueil). */
   langues?: boolean
   sansBoutonFixe?: boolean
   noindex?: boolean
@@ -38,8 +41,29 @@ interface Props {
 const {
   titre, description, chemin, fil, faq, article,
   image = '/img/og.jpg', imageAlt = 'Le logo OnClub sur fond menthe',
-  langues = false, sansBoutonFixe = false, noindex = false, fond = 'papier',
+  sansBoutonFixe = false, noindex = false, fond = 'papier',
 } = Astro.props
+const { langue, t, lien } = i18n(Astro.url)
+const imageAltLangue = imageAlt === 'Le logo OnClub sur fond menthe' ? t(imageAlt) : imageAlt
+
+/*
+  LES DEUX LANGUES. Une page a une jumelle quand l'autre version existe
+  (src/i18n/liens.ts) : hreflang fr, es et x-default (= le français), les
+  mêmes sur les deux pages (réciprocité vérifiée par scripts/controle_seo.py).
+  L'accueil garde en plus /en.
+*/
+const paire = jumelles(chemin)
+const accueil = paire.fr === '/'
+const alternes: { lang: string; href: string }[] = paire.es
+  ? [
+      { lang: 'fr', href: paire.fr },
+      ...(accueil ? [{ lang: 'en', href: '/en' }] : []),
+      { lang: 'es', href: paire.es },
+      { lang: 'x-default', href: paire.fr },
+    ]
+  : []
+const absolu = (c: string) => (c === '/' ? `${SITE}/` : `${SITE}${c}`)
+const inLanguage = LOCALE[langue]
 
 const adresse = chemin === '/' ? `${SITE}/` : `${SITE}${chemin}`
 const imageAbs = image.startsWith('http') ? image : `${SITE}${image}`
@@ -51,18 +75,18 @@ const graphe: Record<string, unknown>[] = [
     '@type': 'Organization', '@id': ORG, name: NOM, url: `${SITE}/`,
     logo: { '@type': 'ImageObject', url: `${SITE}/img/logo-512.png`, width: 512, height: 512 },
     email: EMAIL,
-    description: 'Plateforme française pour les associations qui inscrivent des adhérents : inscriptions en ligne, cotisations, relances, saisons, site et boutique.',
+    description: t('Plateforme française pour les associations qui inscrivent des adhérents : inscriptions en ligne, cotisations, relances, saisons, site et boutique.'),
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: ['fr'] },
   },
-  { '@type': 'WebSite', '@id': WEB, url: `${SITE}/`, name: NOM, inLanguage: 'fr-FR', publisher: { '@id': ORG } },
+  { '@type': 'WebSite', '@id': WEB, url: `${SITE}/`, name: NOM, inLanguage: ['fr-FR', 'es-ES', 'en'], publisher: { '@id': ORG } },
   {
     '@type': 'WebPage', '@id': `${adresse}#page`, url: adresse, name: titre, description,
-    inLanguage: 'fr-FR', isPartOf: { '@id': WEB }, about: { '@id': ORG },
+    inLanguage, isPartOf: { '@id': WEB }, about: { '@id': ORG },
     ...(fil ? { breadcrumb: { '@id': `${adresse}#fil` } } : {}),
   },
 ]
 if (fil) {
-  const etapes = [{ nom: 'Accueil', url: '/' }, ...fil]
+  const etapes = [{ nom: t('Accueil'), url: lien('/') }, ...fil]
   graphe.push({
     '@type': 'BreadcrumbList', '@id': `${adresse}#fil`,
     itemListElement: etapes.map((e, i) => ({
@@ -80,14 +104,14 @@ if (article) {
   graphe.push({
     '@type': 'BlogPosting', '@id': `${adresse}#article`, headline: article.titre, description,
     datePublished: article.publie.toISOString().slice(0, 10), dateModified: article.maj.toISOString().slice(0, 10),
-    inLanguage: 'fr-FR', image: imageAbs, mainEntityOfPage: adresse,
+    inLanguage, image: imageAbs, mainEntityOfPage: adresse,
     author: { '@id': ORG }, publisher: { '@id': ORG },
   })
 }
 const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graphe }).replace(/</g, '\\u003c')
 ---
 <!doctype html>
-<html lang="fr">
+<html lang={langue}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -95,12 +119,7 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <meta name="description" content={description}>
 <link rel="canonical" href={adresse}>
 {noindex && <meta name="robots" content="noindex">}
-{langues && <>
-  <link rel="alternate" hreflang="fr" href={`${SITE}/`}>
-  <link rel="alternate" hreflang="en" href={`${SITE}/en`}>
-  <link rel="alternate" hreflang="es" href={`${SITE}/es`}>
-  <link rel="alternate" hreflang="x-default" href={`${SITE}/`}>
-</>}
+{alternes.map((a) => <link rel="alternate" hreflang={a.lang} href={absolu(a.href)}>)}
 <link rel="preload" href="/polices/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/polices/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="theme-color" content="#5DE88F">
@@ -109,31 +128,32 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta property="og:type" content={article ? 'article' : 'website'}>
 <meta property="og:site_name" content={NOM}>
-<meta property="og:locale" content="fr_FR">
+<meta property="og:locale" content={OG_LOCALE[langue]}>
+{paire.es && <meta property="og:locale:alternate" content={OG_LOCALE[langue === 'fr' ? 'es' : 'fr']}>}
 <meta property="og:title" content={titre}>
 <meta property="og:description" content={description}>
 <meta property="og:url" content={adresse}>
 <meta property="og:image" content={imageAbs}>
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content={imageAlt}>
+<meta property="og:image:alt" content={imageAltLangue}>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content={titre}>
 <meta name="twitter:description" content={description}>
 <meta name="twitter:image" content={imageAbs}>
-<meta name="twitter:image:alt" content={imageAlt}>
+<meta name="twitter:image:alt" content={imageAltLangue}>
 <script type="application/ld+json" set:html={jsonld} />
 <script is:inline>document.documentElement.classList.add('js')</script>
 <slot name="tete" />
 </head>
 <body data-fond={fond}>
 <Sprite />
-<a class="saut" href="#contenu">Aller au contenu</a>
+<a class="saut" href="#contenu">{t('Aller au contenu')}</a>
 <EnTete chemin={chemin} fond={fond} />
 <main id="contenu">
   <slot />
 </main>
-<PiedDePage />
+<PiedDePage chemin={chemin} />
 {!sansBoutonFixe && <BoutonDemoFixe />}
 <Consentement />
 <script is:inline src="/js/site.js" defer></script>

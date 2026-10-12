@@ -1,0 +1,83 @@
+<div class="ef-vue ef-re" data-forme="fenetre" data-menu="Adhérents" data-hauteur="640" data-description="La pantalla Socios de un club de fútbol en junio, la temporada 2027-2028 está en preparación: 18 han vuelto de 42 antiguos, 6 plazas guardadas, 15 sin noticias, 3 no vuelven. Una plaza guardada espera a la familia 14 días. Hay nueve familias por avisar. Las tarjetas de los equipos U11, U13 y Séniores cuentan sus plazas. Cada tarjeta propone «Decidir para» sus antiguos sin noticias, «Enviar el enlace a los guardados» y «Escribir a los guardados».">
+<div class="ef-tete"><div class="ef-ligne"><span class="ef-h1">Socios</span><span class="ef-pas ef-re-prep">2027-2028 · en preparación</span></div><div class="ef-sous">18 han vuelto de 42 antiguos · 6 plazas guardadas · 15 sin noticias</div></div>
+
+<div class="ef-carte ef-re-barre">
+<div class="ef-re-pile"><i style="--n:18" class="ef-re-plein"></i><i style="--n:6" class="ef-re-garde"></i><i style="--n:15" class="ef-re-vide"></i><i style="--n:3" class="ef-re-gris"></i></div>
+<div class="ef-re-leg"><span><i class="ef-re-plein"></i>18 han vuelto</span><span><i class="ef-re-garde"></i>6 plazas guardadas</span><span><i class="ef-re-vide"></i><u>15 sin noticias</u></span><span><i class="ef-re-gris"></i>3 no vuelven</span></div>
+</div>
+
+<div class="ef-re-onglets"><span class="ef-re-actif"><b>Equipos</b>15 sin noticias</span><span><b>Jugadores</b>57 fichas</span><span><b>Familias</b>9 por avisar</span></div>
+
+<p class="ef-p ef-re-delai">Una plaza guardada espera a la familia 14 días, y después vuelve a quedar para los demás. <u>Modificar el plazo</u></p>
+<div class="ef-re-prevenir"><span class="ef-p"><b>9 familias por avisar</b>: enlace nunca recibido, o recibido hace más de una semana.</span><span class="ef-bt ef-pri">Avisar a 9 familias</span></div>
+
+<div class="ef-re-cartes">
+<div class="ef-carte"><div class="ef-ligne"><span class="ef-h3">U11</span><span class="ef-mu">12 de 18</span></div><div class="ef-re-jauge" style="--p:10;--g:2;--t:18"><i></i><i></i></div><p class="ef-p">2 plazas guardadas · 3 antiguos sin noticias · 6 plazas libres</p><div class="ef-bts"><span class="ef-bt">Decidir para 3 jugadores</span><span class="ef-bt ef-quiet">Enviar el enlace a los guardados</span><span class="ef-bt ef-quiet ef-cache-moyen">Escribir a los guardados</span></div></div>
+<div class="ef-carte"><div class="ef-ligne"><span class="ef-h3">U13</span><span class="ef-mu">15 de 20</span></div><div class="ef-re-jauge" style="--p:12;--g:3;--t:20"><i></i><i></i></div><p class="ef-p">3 plazas guardadas · 5 antiguos sin noticias · 5 plazas libres</p><div class="ef-bts"><span class="ef-bt">Decidir para 5 jugadores</span><span class="ef-bt ef-quiet">Enviar el enlace a los guardados</span><span class="ef-bt ef-quiet ef-cache-moyen">Escribir a los guardados</span></div></div>
+<div class="ef-carte"><div class="ef-ligne"><span class="ef-h3">Séniores</span><span class="ef-mu">19 de 22</span></div><div class="ef-re-jauge" style="--p:18;--g:1;--t:22"><i></i><i></i></div><p class="ef-p">1 plaza guardada · 7 antiguos sin noticias · 3 plazas libres</p><div class="ef-bts"><span class="ef-bt">Decidir para 7 jugadores</span><span class="ef-bt ef-quiet">Enviar el enlace a los guardados</span></div></div>
+</div>
+
+
+
+<style>
+.ecran-fonction .ef-vue.ef-re{position:relative}
+.ecran-fonction .ef-re .ef-tete{margin-bottom:10px}
+.ecran-fonction .ef-re-prep{border-color:#B9AEFF;background:#F3F0FF;color:#3A2E8F}
+.ecran-fonction .ef-re-prep::before{background:#7C6CF0}
+.ecran-fonction .ef-re-barre{padding:10px 14px}
+.ecran-fonction .ef-re-pile{display:flex;gap:2px;height:10px;border-radius:9px;overflow:hidden}
+.ecran-fonction .ef-re-pile i{flex:var(--n)}
+.ecran-fonction .ef-re-plein{background:#1F9D63}
+.ecran-fonction .ef-re-garde{background:repeating-linear-gradient(135deg,#1F9D63 0 3px,#BFEBD3 3px 6px)}
+.ecran-fonction .ef-re-vide{background:#fff;box-shadow:inset 0 0 0 1.5px #C9C6BC}
+.ecran-fonction .ef-re-gris{background:#C9C6BC}
+.ecran-fonction .ef-re-leg{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:4px 18px;margin-top:8px;font-size:12px}
+.ecran-fonction .ef-re-leg span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.ecran-fonction .ef-re-leg i{width:10px;height:10px;border-radius:3px}
+.ecran-fonction .ef-re-onglets{display:inline-flex;gap:3px;margin:12px 0 10px;padding:3px;border-radius:99px;background:var(--ef-creux)}
+.ecran-fonction .ef-re-onglets span{display:flex;flex-direction:column;padding:4px 14px;border-radius:99px;font-size:10.5px;color:var(--ef-mu);line-height:1.3}
+.ecran-fonction .ef-re-onglets b{font-size:12px;color:#0E1116}
+.ecran-fonction .ef-re-onglets .ef-re-actif{background:#0E1116;color:#ffffffcc}
+.ecran-fonction .ef-re-onglets .ef-re-actif b{color:#fff}
+.ecran-fonction .ef-re-delai{font-size:12px}
+.ecran-fonction .ef-re-prevenir{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:8px 0 12px;padding:9px 12px;border:1px solid var(--ef-trait);border-radius:12px;background:#fff}
+.ecran-fonction .ef-re-prevenir .ef-p{flex:1 1 260px;font-size:12px}
+.ecran-fonction .ef-re-cartes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ecran-fonction .ef-re-cartes .ef-carte{margin:0;padding:12px 14px;display:flex;flex-direction:column;gap:7px}
+.ecran-fonction .ef-re-cartes .ef-carte>.ef-ligne:first-child{margin-bottom:0}
+.ecran-fonction .ef-re-cartes .ef-p{font-size:12px}
+.ecran-fonction .ef-re-ouverte{border-color:var(--ef-vert)}
+.ecran-fonction .ef-re-jauge{display:flex;gap:2px;height:7px;border-radius:9px;background:var(--ef-creux);overflow:hidden}
+.ecran-fonction .ef-re-jauge i:first-child{width:calc(var(--p) / var(--t) * 100%);background:#1F9D63}
+.ecran-fonction .ef-re-jauge i:last-child{width:calc(var(--g) / var(--t) * 100%);background:repeating-linear-gradient(135deg,#1F9D63 0 3px,#BFEBD3 3px 6px)}
+.ecran-fonction .ef-re .ef-bt{height:27px;font-size:11.5px}
+.ecran-fonction .ef-re-voile{position:absolute;inset:0;background:#0E111640}
+.ecran-fonction .ef-re-volet{position:absolute;top:0;right:0;bottom:0;width:min(350px,62%);display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--ef-trait);border-radius:16px 0 0 16px;box-shadow:-12px 0 30px -12px #0E111640}
+.ecran-fonction .ef-re-vt{display:flex;justify-content:space-between;gap:10px;padding:14px 16px 10px;border-bottom:1px solid var(--ef-trait)}
+.ecran-fonction .ef-re-vt .ef-mu{margin-top:2px}
+.ecran-fonction .ef-re-x{flex:none;width:12px;height:12px;background:linear-gradient(45deg,transparent 45%,var(--ef-gris) 45% 55%,transparent 55%),linear-gradient(-45deg,transparent 45%,var(--ef-gris) 45% 55%,transparent 55%)}
+.ecran-fonction .ef-re-vc{flex:1;min-height:0;overflow:hidden;padding:10px 16px}
+.ecran-fonction .ef-re-vc>.ef-lib{font-size:10.5px}
+.ecran-fonction .ef-re-j{padding:6px 0;border-bottom:1px solid var(--ef-trait)}
+.ecran-fonction .ef-re-jl{display:flex;align-items:center;gap:9px}
+.ecran-fonction .ef-re-jl>div{flex:1;min-width:0}
+.ecran-fonction .ef-re-jl b{display:block;font-size:12.5px}
+.ecran-fonction .ef-re-jl .ef-mu,.ecran-fonction .ef-re-garde-l .ef-mu{display:block;font-size:11px}
+.ecran-fonction .ef-re-c{flex:none;width:15px;height:15px;border:1.5px solid #B8B5AA;border-radius:4px}
+.ecran-fonction .ef-re-coche{background:var(--ef-vert);border-color:var(--ef-vert);box-shadow:inset 0 0 0 2.5px #fff}
+.ecran-fonction .ef-re-eq{display:flex;align-items:center;gap:8px;margin-top:4px;padding-left:24px}
+.ecran-fonction .ef-re-pied .ef-re-eq{padding-left:0}
+.ecran-fonction .ef-re-sel{position:relative;flex:1;min-width:0;height:26px;line-height:23px;padding:0 24px 0 8px;border:1.5px solid #D9D6CC;border-radius:9px;font-size:12px;background:#fff;white-space:nowrap;overflow:hidden}
+.ecran-fonction .ef-re-sel::after{content:"";position:absolute;right:10px;top:8px;width:5px;height:5px;border:solid var(--ef-gris);border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+.ecran-fonction .ef-re-gl{margin-top:10px;font-size:10.5px}
+.ecran-fonction .ef-re-garde-l{display:flex;align-items:center;gap:8px;margin-top:5px;padding:6px 10px;border:1.5px dashed #C9C6BC;border-radius:10px}
+.ecran-fonction .ef-re-garde-l>div{flex:1;min-width:0}
+.ecran-fonction .ef-re-garde-l b{font-size:12.5px}
+.ecran-fonction .ef-re-pied{display:flex;flex-direction:column;gap:6px;padding:10px 16px 12px;border-top:1px solid var(--ef-trait);background:#fff}
+.ecran-fonction .ef-re-2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ecran-fonction .ef-re-2 .ef-bt{justify-content:center;height:30px}
+.ecran-fonction .ef-re-msg{justify-content:center}
+@container (max-width:759px){.ecran-fonction .ef-re-cartes{grid-template-columns:1fr}.ecran-fonction .ef-re-leg{grid-template-columns:repeat(2,auto)}.ecran-fonction .ef-re-volet{width:70%}}
+@container (max-width:519px){.ecran-fonction .ef-re-volet{display:flex;width:100%;border-radius:0;border-left:0}.ecran-fonction .ef-re-voile{display:block}.ecran-fonction .ef-re-vt,.ecran-fonction .ef-re-vc,.ecran-fonction .ef-re-pied{padding-left:12px;padding-right:12px}.ecran-fonction .ef-re-2{grid-template-columns:1fr}.ecran-fonction .ef-re-jl .ef-bt{height:24px;padding:0 8px;font-size:10.5px}.ecran-fonction .ef-re-eq{padding-left:0}}
+</style>
+</div>

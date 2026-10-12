@@ -1,0 +1,117 @@
+---
+nom: "Ultraligero (ULM)"
+ligne: "Paramotor, pendular, multieje: el alumno se hace socio y se federa antes de volar"
+ordre: 50
+titreSeo: "Club y escuela de ultraligero: alumnos socios en línea | OnClub"
+description: "Club de ultraligero: el alumno se hace socio en línea y se federa antes de volar, cuota en plazos, certificado controlado. Licencia FFPLUM en ffplum.fr."
+titre: "Club de ultraligero: el alumno se hace socio antes de su primer vuelo"
+chapo: "El alumno elige su clase de ultraligero, se hace socio y paga desde el móvil; antes del primer vuelo, la junta directiva ve quién está listo para federarse en la FFPLUM."
+temps:
+  cles: [fiches, pieces, relances]
+  titre: "El tiempo que recupera la junta directiva de un club de ultraligero, cada año"
+fonctionnalites: [inscription-en-ligne, liste-des-licences, pieces-justificatives, paiement-en-ligne, convocations, espace-encadrant]
+profils: [tresorier]
+guides: [certificat-medical-sport, assurance-association]
+maj: 2026-10-10
+faq:
+  - question: "¿OnClub saca la licencia FFPLUM en lugar de nuestros socios?"
+    reponse: "No. La licencia se suscribe en línea en ffplum.fr, en el espacio del federado, o con el boletín en papel. OnClub no envía nada a la federación: conserva la lista de los socios listos para federarse, pagados y sin documentos pendientes, para saber a quién reclamar antes del primer vuelo."
+  - question: "¿Por qué el alumno tiene que estar federado desde el inicio de su formación?"
+    reponse: "El boletín FFPLUM 2026 lo recuerda: para que la garantía de responsabilidad civil del instructor sea efectiva, sus alumnos deben estar federados en la FFPLUM desde el inicio de su formación. OnClub le muestra la lista; la comprobación antes del vuelo sigue siendo suya."
+  - question: "¿Qué documento médico hay que pedir a un piloto nuevo?"
+    reponse: "Para una primera licencia, la FFPLUM pide un certificado de no contraindicación para la práctica del ultraligero de menos de un año, que puede expedir cualquier médico, o un certificado aeronáutico de clase 1, clase 2 o LAPL válido. El club también puede pedirlo como documento: subido en foto, lo revisa la junta directiva."
+  - question: "¿Se puede gestionar la reserva de aparatos y las horas de vuelo?"
+    reponse: "No. OnClub no reserva ni los ultraligeros ni los instructores, no lleva ni libro de vuelo ni cómputo de horas, y no sigue el mantenimiento de los aparatos. Se ocupa de la cuota de socio, los documentos, la cuota, las convocatorias y la lista de licencias."
+sources:
+  - titre: "FFPLUM, souscription licence et assurances 2026 (bulletin)"
+    url: "https://ffplum.fr/images/Licence/2025/Souscription-Licence-2026.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFPLUM, pratiquer : le médical"
+    url: "https://ffplum.fr/pratiquer/medical"
+    consulte: "2026-10-10"
+  - titre: "Code du sport, article D231-1-5 (disciplines à contraintes particulières)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034417463"
+    consulte: "2026-10-10"
+---
+
+## Antes del primer vuelo: el alumno ya federado
+
+La FFPLUM lo escribe en su boletín 2026: para que el seguro del instructor cubra, el alumno debe estar federado desde el inicio de su formación. La junta directiva tiene que saber, por tanto, antes del primer vuelo, quién lo está ya.
+
+<Idee visuel="droite">
+
+La pantalla Licencias de OnClub clasifica a cada socio: listo para federarse, pendiente de pago, pendiente de documentos; nuevo o en renovación. El número de licencia aparece cuando procede del fichero de socios importado.
+
+<Repli>
+
+- **Una línea por socio**, aunque siga dos formaciones.
+- **La exportación en hoja de cálculo** recoge nombre, año de nacimiento, grupo, número de licencia y correo. Vea la [lista de licencias](/fonctionnalites/liste-des-licences).
+- **La primera licencia FFPLUM 2026** se abría desde octubre de 2025, con tres meses gratis: un alumno del otoño quedaba cubierto hasta el final del año siguiente.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de ultraligero"
+  titre="Licencias · alumnos de la temporada"
+  sousTitre="Por comprobar antes del primer vuelo"
+  lignes={[
+    { nom: 'Paul R.', detail: 'Multieje · renovación', statut: 'Listo', ton: 'ok' },
+    { nom: 'Inès K.', detail: 'Paramotor · nueva', statut: 'Pago', ton: 'neutre' },
+    { nom: 'Hugo D.', detail: 'Pendular · falta el certificado', statut: 'Documentos', ton: 'ko' },
+  ]}
+  bouton="Descargar la lista (hoja de cálculo)"
+  legende="La lista de alumnos vista por la junta directiva: quién está listo, quién tiene que pagar todavía, a quién le falta un documento. Nombres ficticios."
+/>
+
+</Idee>
+
+## Inscripción en línea en una escuela de ultraligero: paramotor, pendular, multieje
+
+Cada formación es un grupo con sus plazas y su precio: paramotor, pendular, multieje, autogiro. El alumno elige la suya, rellena su expediente y paga a continuación.
+
+<Repli>
+
+- **Sus preguntas** se añaden: título ya obtenido, otra licencia aeronáutica, propietario de un aparato o no.
+- **Un menor** lo inscribe un responsable legal mayor de edad; un adulto solo deja un contacto de emergencia.
+- **La sesión de iniciación** puede reservarse desde la página del club, si abre las [sesiones de prueba](/fonctionnalites/seances-essai).
+
+</Repli>
+
+## Cuota del club de ultraligero en varios plazos
+
+La cuota se paga con tarjeta, en un solo pago o con un anticipo seguido de varios pagos, con cada vencimiento a la vista antes de confirmar.
+
+<Repli>
+
+- **Los cheques y el efectivo** se anotan en el expediente, al céntimo.
+- **El tesorero** ve lo cobrado, lo pendiente y lo atrasado, y reclama con un botón tras releer.
+- **El precio de OnClub** se aplica sobre lo que se paga en línea: vea los [precios](/tarifs).
+
+</Repli>
+
+## Licencia FFPLUM: el espacio del federado sigue siendo la herramienta, OnClub controla el certificado
+
+La licencia 2026 se suscribe en línea en ffplum.fr, en el espacio del federado; sus garantías terminan el 31 de diciembre. OnClub no la registra: prepara la lista y controla los documentos.
+
+<Repli>
+
+- **Primera licencia**: certificado de no contraindicación para el ultraligero de menos de un año, expedido por cualquier médico, o certificado aeronáutico de clase 1, clase 2 o LAPL válido.
+- **Renovación**: el piloto responde al cuestionario de salud QS-SPORT; una respuesta positiva lo remite a su médico. En competición, el certificado es anual.
+- **En OnClub**, el certificado se sube en foto y la junta directiva lo revisa; el QS-SPORT de un adulto también puede rellenarse en línea, y solo la declaración llega al club. Vea los [justificantes](/fonctionnalites/pieces-justificatives).
+
+</Repli>
+
+## Convocatoria de los alumnos y pase de lista del día de escuela
+
+El instructor abre su página con un enlace personal, convoca a sus alumnos y pasa lista a partir de sus respuestas; no ve ni su dirección ni su teléfono.
+
+<Repli>
+
+- **Un ausente que ha avisado** queda como justificado, no ausente.
+- **Tres ausencias sin avisar** en los últimos cinco pases de lista se señalan a la junta directiva.
+- **El instructor** encuentra la próxima sesión arriba de su página. Vea el [espacio del entrenador](/fonctionnalites/espace-encadrant).
+
+</Repli>
+
+OnClub no reserva ni los aparatos ni los instructores, no lleva ni libro de vuelo ni cómputo de horas, y no asegura los ultraligeros: la responsabilidad civil de los aparatos forma parte de los seguros que ofrece la FFPLUM. Para ver el resto en su club, [solicite una demo](/demo?type=sport).

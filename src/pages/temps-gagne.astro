@@ -14,32 +14,35 @@ import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
 import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES_OFFRES, PART_RENDUE, duree } from '../data/temps'
 import { INJEP, OFFRES, PHRASE_BUT } from '../data/site'
+import { i18n } from '../i18n/ui'
 
-const fil = [{ nom: 'Le temps gagné', url: '/temps-gagne' }]
+/* Une seule page pour les deux langues : /es/temps-gagne l'importe ; chiffres de src/data/temps.ts, mots par t(). */
+const { langue, t, lien } = i18n(Astro.url)
+const fil = [{ nom: t('Le temps gagné'), url: lien('/temps-gagne') }]
 const faq = [
-  { question: 'Ces chiffres sont-ils une promesse ?', reponse: 'Non. C’est une estimation OnClub pour une association de 250 adhérents, pas une étude. Chaque hypothèse est écrite sur cette page : changez le nombre d’adhérents dans le calculateur, ou refaites le compte avec vos propres durées.' },
-  { question: 'Pourquoi la rentrée suivante ne dépend-elle pas du nombre d’adhérents ?', reponse: 'Parce que le travail de la rentrée tient surtout aux groupes, aux créneaux et aux places à rouvrir, pas au nombre de dossiers. Le calculateur la garde donc fixe : 12 heures aujourd’hui, 2 heures avec OnClub.' },
-  { question: 'Pourquoi le temps rendu change-t-il avec l’offre ?', reponse: 'Parce que chaque offre prend en charge plus de tâches. Mini couvre les fiches, les paiements, les relances et les pièces. Pro ajoute la rentrée, les messages, la liste d’attente et le site. Pro Max IA ajoute la boutique et les événements.' },
+  { question: t('Ces chiffres sont-ils une promesse ?'), reponse: t('Non. C’est une estimation OnClub pour une association de 250 adhérents, pas une étude. Chaque hypothèse est écrite sur cette page : changez le nombre d’adhérents dans le calculateur, ou refaites le compte avec vos propres durées.') },
+  { question: t('Pourquoi la rentrée suivante ne dépend-elle pas du nombre d’adhérents ?'), reponse: t('Parce que le travail de la rentrée tient surtout aux groupes, aux créneaux et aux places à rouvrir, pas au nombre de dossiers. Le calculateur la garde donc fixe : 12 heures aujourd’hui, 2 heures avec OnClub.') },
+  { question: t('Pourquoi le temps rendu change-t-il avec l’offre ?'), reponse: t('Parce que chaque offre prend en charge plus de tâches. Mini couvre les fiches, les paiements, les relances et les pièces. Pro ajoute la rentrée, les messages, la liste d’attente et le site. Pro Max IA ajoute la boutique et les événements.') },
 ]
 ---
 <Layout
-  titre="Temps gagné par les bénévoles d’une association | OnClub"
-  description="Combien de temps votre association va gagner avec OnClub : le calculateur, la méthode, les hypothèses tâche par tâche, et ce que disent les bénévoles (INJEP)."
-  chemin="/temps-gagne"
+  titre={t('Temps gagné par les bénévoles d’une association | OnClub')}
+  description={t('Combien de temps votre association va gagner avec OnClub : le calculateur, la méthode, les hypothèses tâche par tâche, et ce que disent les bénévoles (INJEP).')}
+  chemin={lien('/temps-gagne')}
   fil={fil}
   faq={faq}
 >
-  <HerosCompact fil={fil} surtitre="Le temps gagné" titre="Combien de temps votre association va gagner ?">
-    <p class="chiffre num"><span>{TOTAL.avant}<span class="sr"> aujourd’hui,</span></span><span class="fleche" aria-hidden="true">→</span><span class="apres"><span class="sr">environ </span>{TOTAL.apres}<span class="sr"> avec OnClub</span></span></p>
-    <p class="chiffre-part">{PART_RENDUE.fr} de l’administratif en moins</p>
-    <p class="chiffre-note">Par saison, pour 250 adhérents. Estimation OnClub, pas une étude.</p>
-    <div class="hc-actions-temps"><a class="btn btn-encre" href="/demo">Demander une démo</a></div>
+  <HerosCompact fil={fil} surtitre={t('Le temps gagné')} titre={t('Combien de temps votre association va gagner ?')}>
+    <p class="chiffre num"><span>{TOTAL.avant}<span class="sr">{t(' aujourd’hui,')}</span></span><span class="fleche" aria-hidden="true">→</span><span class="apres"><span class="sr">{t('environ ')}</span>{TOTAL.apres}<span class="sr">{t(' avec OnClub')}</span></span></p>
+    <p class="chiffre-part">{t('{part} de l’administratif en moins', { part: PART_RENDUE[langue] })}</p>
+    <p class="chiffre-note">{t('Par saison, pour 250 adhérents. Estimation OnClub, pas une étude.')}</p>
+    <div class="hc-actions-temps"><a class="btn btn-encre" href={lien('/demo')}>{t('Demander une démo')}</a></div>
   </HerosCompact>
 
   <section class="section section-calcul" aria-labelledby="t-calc">
     <div class="enveloppe">
       <div class="carte-calcul">
-        <h2 id="t-calc" class="h2-calc">Faites le calcul pour la vôtre</h2>
+        <h2 id="t-calc" class="h2-calc">{t('Faites le calcul pour la vôtre')}</h2>
         <Calculateur grand surPageTemps />
       </div>
     </div>
@@ -48,24 +51,24 @@ const faq = [
   <section class="section fond-blanc" id="hypotheses" aria-labelledby="t-hyp">
     <div class="enveloppe">
       <div class="section-tete">
-        <h2 id="t-hyp" class="h2-idee">Les hypothèses, tâche par tâche</h2>
+        <h2 id="t-hyp" class="h2-idee">{t('Les hypothèses, tâche par tâche')}</h2>
       </div>
-      <div class="bloc-hyp"><BlocTemps cles={CINQ_TACHES} titre="Les cinq tâches, pour 250 adhérents" /></div>
+      <div class="bloc-hyp"><BlocTemps cles={CINQ_TACHES} titre={t('Les cinq tâches, pour 250 adhérents')} /></div>
       <ul class="methode">
-        <li><b>Proportionnel.</b> Recopier les fiches, suivre les paiements, relancer et réclamer les pièces suivent le nombre d’adhérents : le calculateur les multiplie par (vos adhérents ÷ 250).</li>
-        <li><b>Fixe.</b> La préparation de la rentrée suivante reste à 12 h → 2 h quel que soit le nombre d’adhérents.</li>
-        <li><b>Arrondi.</b> Les totaux sont arrondis à l’heure, les lignes à la minute.</li>
+        <li><b>{t('Proportionnel.')}</b> {t('Recopier les fiches, suivre les paiements, relancer et réclamer les pièces suivent le nombre d’adhérents : le calculateur les multiplie par (vos adhérents ÷ 250).')}</li>
+        <li><b>{t('Fixe.')}</b> {t('La préparation de la rentrée suivante reste à 12 h → 2 h quel que soit le nombre d’adhérents.')}</li>
+        <li><b>{t('Arrondi.')}</b> {t('Les totaux sont arrondis à l’heure, les lignes à la minute.')}</li>
       </ul>
-      <Repli titre="Le détail, tâche par tâche">
+      <Repli titre={t('Le détail, tâche par tâche')}>
         <div class="tableau-defile" data-defile-x>
           <table class="tableau-hyp">
-            <caption class="sr">Les cinq tâches de l’estimation, pour 250 adhérents</caption>
-            <thead><tr><th scope="col">Tâche</th><th scope="col">Le calcul</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th><th scope="col">Ce qui change</th></tr></thead>
+            <caption class="sr">{t('Les cinq tâches de l’estimation, pour 250 adhérents')}</caption>
+            <thead><tr><th scope="col">{t('Tâche')}</th><th scope="col">{t('Le calcul')}</th><th scope="col">{t('Aujourd’hui')}</th><th scope="col">{t('Avec OnClub')}</th><th scope="col">{t('Ce qui change')}</th></tr></thead>
             <tbody>
-              {CINQ_TACHES.map((c) => { const t = TACHES[c]; return (
-                <tr><th scope="row">{t.tache}</th><td>{t.calcul}</td><td class="num">{duree(t.avantMin ?? 0)}</td><td class="num">{duree(t.apresMin ?? 0)}</td><td>{t.comment}</td></tr>
+              {CINQ_TACHES.map((c) => { const x = TACHES[c]; return (
+                <tr><th scope="row">{t(x.tache)}</th><td>{t(x.calcul)}</td><td class="num">{duree(x.avantMin ?? 0, langue)}</td><td class="num">{duree(x.apresMin ?? 0, langue)}</td><td>{t(x.comment)}</td></tr>
               ) })}
-              <tr class="total"><th scope="row">Total</th><td>Les cinq tâches</td><td class="num">≈ {TOTAL.avant}</td><td class="num">≈ {TOTAL.apres}</td><td>≈ {TOTAL.gain} rendues</td></tr>
+              <tr class="total"><th scope="row">{t('Total')}</th><td>{t('Les cinq tâches')}</td><td class="num">≈ {TOTAL.avant}</td><td class="num">≈ {TOTAL.apres}</td><td>≈ {TOTAL.gain} {t('rendues')}</td></tr>
             </tbody>
           </table>
         </div>
@@ -76,17 +79,17 @@ const faq = [
   <section class="section" aria-labelledby="t-offres">
     <div class="enveloppe">
       <div class="section-tete">
-        <h2 id="t-offres" class="h2-idee">Plus l’offre en prend, plus elle en rend</h2>
+        <h2 id="t-offres" class="h2-idee">{t('Plus l’offre en prend, plus elle en rend')}</h2>
       </div>
       <ul class="par-offre">
         {OFFRES.map((o) => <li><b class="num">≈ {o.heures} h</b><span>{o.nom}</span></li>)}
       </ul>
-      <p class="note">Estimation OnClub pour 250 adhérents, pas une étude.</p>
-      <Repli titre="Comment on arrive à 51, 75 et 97 h">
-        <ul>{HYPOTHESES_OFFRES.split(/(?<=\))\.\s+/).map((phrase) => <li>{phrase.replace(/\.$/, '')}.</li>)}</ul>
+      <p class="note">{t('Estimation OnClub pour 250 adhérents, pas une étude.')}</p>
+      <Repli titre={t('Comment on arrive à 51, 75 et 97 h')}>
+        <ul>{t(HYPOTHESES_OFFRES).split(/(?<=\))\.\s+/).map((phrase) => <li>{phrase.replace(/\.$/, '')}.</li>)}</ul>
       </Repli>
-      <Repli titre="Ce que Pro et Pro Max IA ajoutent">
-        <BlocTemps cles={['messages', 'attente', 'site', 'boutique', 'evenements']} titre="Les cinq tâches de plus, pour 250 adhérents" />
+      <Repli titre={t('Ce que Pro et Pro Max IA ajoutent')}>
+        <BlocTemps cles={['messages', 'attente', 'site', 'boutique', 'evenements']} titre={t('Les cinq tâches de plus, pour 250 adhérents')} />
       </Repli>
     </div>
   </section>
@@ -94,11 +97,11 @@ const faq = [
   <section class="section fond-encre sur-encre" aria-labelledby="t-injep">
     <div class="enveloppe injep">
       <div>
-        <h2 id="t-injep" class="h2-idee">Ce que disent les bénévoles</h2>
-        <p class="injep-texte"><span class="injep-chiffre num">{INJEP.chiffre}</span> {INJEP.texte}</p>
-        <p class="note">Source : <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a>, consultée le 9 octobre 2026.</p>
+        <h2 id="t-injep" class="h2-idee">{t('Ce que disent les bénévoles')}</h2>
+        <p class="injep-texte">{langue === 'es' && 'El '}<span class="injep-chiffre num">{INJEP.chiffre}</span> {t(INJEP.texte)}</p>
+        <p class="note">{t('Source :')} {langue === 'es' ? <a href={INJEP.source} target="_blank" rel="noopener" hreflang="fr"><span lang="fr">INJEP, Analyses & synthèses</span> n.º 71, octubre de 2023</a> : <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a>}{langue === 'es' && t(' (en francés)')}{t(', consultée le 9 octobre 2026.')}</p>
       </div>
-      <p class="injep-phrase">{PHRASE_BUT}</p>
+      <p class="injep-phrase">{t(PHRASE_BUT)}</p>
     </div>
   </section>
 

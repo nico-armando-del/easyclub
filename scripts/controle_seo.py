@@ -21,6 +21,16 @@ Ce qui est vérifié, page par page :
   - taux de commission identiques partout (2,90 / 4,90 / 6,90 %) ;
   - le sitemap contient chaque page publique et rien d'autre ; robots.txt ; llms.txt ;
   - le calculateur de l'accueil redonne 66 h → 5 h pour 250 adhérents.
+
+EN DEUX LANGUES (le français à la racine, l'espagnol sous /es) :
+  - mêmes exigences pour une page espagnole (longueurs, liens, FAQ, fil…) ;
+  - lang="es" et og:locale es_ES sous /es, lang="fr" et fr_FR ailleurs ;
+  - toute page espagnole a ses hreflang fr / es / x-default, réciproques, et les
+    mêmes alternates dans le sitemap ;
+  - mots interdits espagnols (« software », « recordatorios automáticos »…) ;
+  - FRANCAIS : une page espagnole ne laisse pas de phrase française hors d'un
+    élément lang="fr" (lien signalé « FR », titre d'une source) ;
+  - chaque adresse du sitemap est dans llms.txt (français) ou llms-es.txt (espagnol).
 La page ancienne gardée telle quelle (presentation) ne passe
 que les contrôles de structure (sitemap, canonical, liens, mots interdits).
 """
@@ -37,6 +47,15 @@ MOTS_INTERDITS = [
     r"logiciel", r"torcy", r"frais bancaires inclus", r"relances? automatiques?",
     r"pr[ée]l[èe]vements? automatiques?", r"trouver un club", r"trouvez votre club",
 ]
+# Pour les pages espagnoles, en plus : « plataforma », jamais « software » ni « programa informático » ;
+# jamais de recordatorios ni de domiciliación « automáticos » ; jamais de gastos bancarios « incluidos ».
+MOTS_INTERDITS_ES = [
+    r"\bsoftware\b", r"programas? inform[aá]ticos?", r"recordatorios? autom[aá]ticos?",
+    r"domiciliaci[oó]n(?:es)? autom[aá]ticas?", r"domiciliaciones autom[aá]ticas",
+    r"(?:gastos|comisiones) bancari[oa]s incluid[oa]s",
+]
+# Des mots-outils français qui n'existent pas en espagnol : leur présence signale une phrase non traduite.
+MOTS_FRANCAIS = re.compile(r"\b(avec|vous|votre|vos|une|des|aux|sont|être|cette|leurs?|nous|dans|chez|déjà|très|aussi|mais|où)\b", re.I)
 TAUX_AUTORISES = {"2,90", "4,90", "6,90"}
 # Adresses du site d'avant qui doivent exister avant la mise en ligne : un avertissement tant qu'elles manquent.
 HERITEES = ["/sport/" + s for s in ("football", "danse", "judo", "basket", "yoga", "fitness", "volley", "handball", "tennis")]
@@ -56,14 +75,22 @@ def norm(s):
     return re.sub(r"\s+", " ", html.unescape(s).replace(" ", " ").replace(" ", " ")).strip()
 
 
+VIDES = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
+
 class P(HTMLParser):
     def __init__(s):
         super().__init__(convert_charrefs=True)
         s.t = ""; s.it = False; s.meta = []; s.links = []; s.ld = []; s.inld = False; s.buf = ""
         s.imgs = []; s.a = []; s.h = []; s.ids = set(); s.lang = None; s.scripts = []; s.text = []; s.skip = 0
         s.fil = False; s.styles = []; s.instyle = False
+        s.pile = []; s.texte_langue = []  # le texte hors des éléments d'une autre langue (lang="fr" sur une page espagnole)
+    def handle_startendtag(s, t, a):
+        s.handle_starttag(t, a)
+        if t not in VIDES: s.handle_endtag(t)
     def handle_starttag(s, t, a):
         a = dict(a)
+        if t not in VIDES: s.pile.append((t, a.get("lang")))
         if a.get("id"): s.ids.add(a["id"])
         if t == "html": s.lang = a.get("lang")
         if t == "title": s.it = True
@@ -81,6 +108,9 @@ class P(HTMLParser):
         if t == "a" and a.get("href"): s.a.append(a["href"])
         if re.fullmatch(r"h[1-6]", t) and s.skip <= 0: s.h.append(int(t[1]))
     def handle_endtag(s, t):
+        if any(x[0] == t for x in s.pile):
+            while s.pile:
+                if s.pile.pop()[0] == t: break
         if t == "title": s.it = False
         if t == "script":
             if s.inld: s.inld = False; s.ld.append(s.buf)
@@ -91,7 +121,13 @@ class P(HTMLParser):
         if s.it: s.t += d
         elif s.inld: s.buf += d
         elif s.instyle: s.styles.append(d)
-        elif s.skip <= 0: s.text.append(d)
+        elif s.skip <= 0:
+            s.text.append(d)
+            if not any(l and l != s.lang for _, l in s.pile[1:]): s.texte_langue.append(d)
+
+
+def langue_de(rel):
+    return "es" if rel == "es.html" or rel.startswith("es/") else ("en" if rel == "en.html" else "fr")
 
 
 def url_of(rel):
@@ -115,8 +151,9 @@ for d, _, fs in os.walk(ROOT):
 
 # --- sitemap
 sm = ET.parse(os.path.join(ROOT, "sitemap.xml")).getroot()
-ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9", "x": "http://www.w3.org/1999/xhtml"}
 smap = {u.find("s:loc", ns).text: u.find("s:lastmod", ns).text for u in sm.findall("s:url", ns)}
+salt = {u.find("s:loc", ns).text: {x.get("hreflang"): x.get("href") for x in u.findall("x:link", ns)} for u in sm.findall("s:url", ns)}
 for u in smap:
     if not file_of(u): err("sitemap.xml", "SITEMAP", f"{u} n'existe pas")
 
@@ -127,10 +164,17 @@ for rel, p in sorted(pages.items()):
     noindex = "noindex" in " ".join(m("name", "robots"))
     url = url_of(rel)
     texte = norm(" ".join(p.text))
-    # mots interdits : partout, anciennes pages comprises
-    for mot in MOTS_INTERDITS:
+    lg = langue_de(rel)
+    # mots interdits : partout, anciennes pages comprises ; les espagnols en plus sur une page espagnole
+    for mot in MOTS_INTERDITS + (MOTS_INTERDITS_ES if lg == "es" else []):
         r = re.search(mot, texte, re.I)
         if r: err(rel, "MOT_INTERDIT", f"« {texte[max(0, r.start() - 30):r.end() + 30]} »")
+    if lg == "es":
+        propre_es = norm(" ".join(p.texte_langue))
+        trouves = list(MOTS_FRANCAIS.finditer(propre_es))
+        if len(trouves) >= 2:
+            r = trouves[0]
+            err(rel, "FRANCAIS", f"{len(trouves)} mots français hors lang=\"fr\", dont « {propre_es[max(0, r.start() - 40):r.end() + 40]} »")
     # liens internes (sortants), ancres, scripts locaux
     sortants = set()
     for h in p.a + p.scripts:
@@ -153,7 +197,13 @@ for rel, p in sorted(pages.items()):
     if url not in smap: err(rel, "SITEMAP", f"{url} absente du sitemap")
     can = [x.get("href") for x in p.links if x.get("rel") == "canonical"]
     if can != [url]: err(rel, "CANONICAL", f"{can} != {url}")
+    if lg in ("fr", "es") and rel not in ANCIENNES:
+        if p.lang != lg: err(rel, "LANGUE", f"lang=\"{p.lang}\" sur une page {lg}")
+        loc = [x.get("content") for x in p.meta if x.get("property") == "og:locale"]
+        if loc != [{"fr": "fr_FR", "es": "es_ES"}[lg]]: err(rel, "LANGUE", f"og:locale {loc}")
     hl = {x.get("hreflang"): x.get("href") for x in p.links if x.get("rel") == "alternate" and x.get("hreflang")}
+    if lg == "es" and not hl: err(rel, "HREFLANG", "page espagnole sans ses hreflang (fr, es, x-default)")
+    if hl and salt.get(url, {}) != hl: err(rel, "HREFLANG", f"alternates du sitemap différents de la page : {salt.get(url)}")
     if hl:
         if hl.get(p.lang) != url: err(rel, "HREFLANG", "pas d'auto-référence")
         if "x-default" not in hl: err(rel, "HREFLANG", "x-default absent")
@@ -193,7 +243,7 @@ for rel, p in sorted(pages.items()):
         if re.search(r"fonts\.(googleapis|gstatic)|fontshare|typekit", x.get("href", "")): err(rel, "POLICE_TIERCE", x["href"][:60])
     for st in p.styles:
         if re.search(r"fonts\.(googleapis|gstatic)|@import\s+url\(\s*['\"]?https?:", st): err(rel, "POLICE_TIERCE", "@import ou police distante dans un style")
-    if rel != "demo.html" and not any(urlparse(urljoin(url, h)).path in ("/demo", "/demo.html") for h in p.a):
+    if rel not in ("demo.html", "es/demo.html") and not any(urlparse(urljoin(url, h)).path in ("/demo", "/demo.html", "/es/demo", "/es/demo.html") for h in p.a):
         err(rel, "DEMO", "aucun lien vers /demo")
     if len(sortants) < 5: err(rel, "LIENS_SORTANTS", f"{len(sortants)} liens internes vers d'autres pages (5 au moins)")
     # JSON-LD
@@ -244,28 +294,38 @@ for bloc in re.split(r"(?im)^user-agent:", rb)[1:]:
     if re.search(r"(?im)^disallow:\s*/\s*$", bloc) and (agents == "*" or any(b.lower() in agents.lower() for b in BOTS)):
         err("robots.txt", "ROBOTS", f"{agents} bloqué")
 ll = open(os.path.join(ROOT, "llms.txt"), encoding="utf-8").read()
-for u in re.findall(r"https://onclub\.app[^\s)]*", ll):
-    if u not in smap: err("llms.txt", "LLMS", f"{u} hors sitemap")
+lles_f = os.path.join(ROOT, "llms-es.txt")
+lles = open(lles_f, encoding="utf-8").read() if os.path.isfile(lles_f) else ""
+est_es = lambda u: urlparse(u).path == "/es" or urlparse(u).path.startswith("/es/")
+for nom, contenu in (("llms.txt", ll), ("llms-es.txt", lles)):
+    for u in re.findall(r"https://onclub\.app[^\s)]*", contenu):
+        if u not in smap and u not in ("https://onclub.app/llms.txt", "https://onclub.app/llms-es.txt"): err(nom, "LLMS", f"{u} hors sitemap")
+    for taux in re.findall(r"(\d,\d0)\s?%", contenu):
+        if taux not in TAUX_AUTORISES: err(nom, "TAUX", f"taux {taux} % inconnu")
+    for mot in MOTS_INTERDITS + (MOTS_INTERDITS_ES if nom == "llms-es.txt" else []):
+        if re.search(mot, contenu, re.I): err(nom, "MOT_INTERDIT", mot)
 for u in smap:
-    if urlparse(u).path not in ("/en", "/es") and u not in ll: err("llms.txt", "LLMS", f"{u} absente de llms.txt")
-for taux in re.findall(r"(\d,\d0)\s?%", ll):
-    if taux not in TAUX_AUTORISES: err("llms.txt", "TAUX", f"taux {taux} % inconnu")
-for mot in MOTS_INTERDITS:
-    if re.search(mot, ll, re.I): err("llms.txt", "MOT_INTERDIT", mot)
+    if urlparse(u).path == "/en": continue
+    if est_es(u):
+        if f"({u})" not in lles: err("llms-es.txt", "LLMS", f"{u} absente de llms-es.txt")
+    elif u not in ll: err("llms.txt", "LLMS", f"{u} absente de llms.txt")
 
-# le calculateur de l'accueil : 66 h → 5 h pour 250 adhérents
-acc = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
-mc = re.search(r'data-calculateur="([^"]+)"', acc)
-if not mc: err("index.html", "CALCULATEUR", "calculateur absent de l'accueil")
-else:
-    taches = json.loads(html.unescape(mc.group(1)))
-    av, ap = sum(t["avant"] for t in taches), sum(t["apres"] for t in taches)
-    if (round(av / 60), round(ap / 60)) != (66, 5): err("index.html", "CALCULATEUR", f"{round(av/60)} h → {round(ap/60)} h au lieu de 66 h → 5 h")
+# le calculateur de l'accueil (et de l'accueil espagnol) : 66 h → 5 h pour 250 adhérents
+for accueil in ("index.html", "es.html"):
+    if not os.path.isfile(os.path.join(ROOT, accueil)): continue
+    acc = open(os.path.join(ROOT, accueil), encoding="utf-8").read()
+    mc = re.search(r'data-calculateur="([^"]+)"', acc)
+    if not mc: err(accueil, "CALCULATEUR", "calculateur absent de l'accueil")
+    else:
+        taches = json.loads(html.unescape(mc.group(1)))
+        av, ap = sum(t["avant"] for t in taches), sum(t["apres"] for t in taches)
+        if (round(av / 60), round(ap / 60)) != (66, 5): err(accueil, "CALCULATEUR", f"{round(av/60)} h → {round(ap/60)} h au lieu de 66 h → 5 h")
 
 for chemin in HERITEES:
     if not file_of(BASE + chemin): AVERT.append(f"{chemin} : adresse du site actuel pas encore réécrite (à faire avant la mise en ligne)")
 
-print(f"contrôle SEO : {len(pages)} pages, {len(smap)} adresses au sitemap, {len(ERR)} défaut(s)")
+nb_es = sum(1 for r in pages if langue_de(r) == "es")
+print(f"contrôle SEO : {len(pages)} pages ({nb_es} en espagnol), {len(smap)} adresses au sitemap, {len(ERR)} défaut(s)")
 for e in sorted(ERR, key=lambda x: (x[1], x[0])):
     print(f"  [{e[1]}] {e[0]} : {e[2]}")
 for a in AVERT:

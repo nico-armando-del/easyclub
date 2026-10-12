@@ -12,70 +12,86 @@
   - Il se cache en descendant (au-delà de 3 × --entete-h) et revient dès 8 px de
     remontée ; jamais si un menu est ouvert ou si le focus est dedans.
 */
-import { parFamille, liste, url } from '../lib/collections'
+import { parFamille, catalogue } from '../lib/collections'
+import { i18n, SR_FR } from '../i18n/ui'
+import { jumelles } from '../i18n/liens'
+import VersFr from './langue/VersFr.astro'
 
 interface Props { chemin: string; fond?: 'papier' | 'blanc' }
 const { chemin, fond = 'papier' } = Astro.props
+const { langue, t, lien } = i18n(Astro.url)
 const LIMITE = 10
-const familles = await parFamille()
+const familles = await parFamille(langue)
 const totalFonctions = familles.reduce((s, f) => s + f.items.length, 0)
-const sports = await liste('sports')
-const activites = await liste('activites')
-const profils = await liste('profils')
-const actif = (p: string) => (chemin === p || chemin.startsWith(p + '/') ? 'page' : undefined)
-const dans = (...bases: string[]) => (bases.some((b) => chemin === b || chemin.startsWith(b + '/')) ? 'page' : undefined)
+const sports = await catalogue('sports', langue)
+const activites = await catalogue('activites', langue)
+const profils = await catalogue('profils', langue)
+/* L'onglet actif se lit sur le chemin français (/es/tarifs est « Tarifs »). */
+const paire = jumelles(chemin)
+const ici = paire.fr
+const actif = (p: string) => (ici === p || ici.startsWith(p + '/') ? 'page' : undefined)
+const dans = (...bases: string[]) => (bases.some((b) => ici === b || ici.startsWith(b + '/')) ? 'page' : undefined)
+/* Le sélecteur de langue : la page jumelle, sinon l'accueil de l'autre langue. */
+const versEs = paire.es ?? '/es'
+const versFrancais = paire.fr
+const fr = (x: { fr: boolean }) => (x.fr ? 'fr' : undefined)
 ---
 <header class="entete" data-entete data-fond={fond}>
   <div class="enveloppe entete-barre">
-    <a class="marque" href="/" aria-label="OnClub, accueil"><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
-    <button type="button" class="btn btn-contour btn-petit menu-bouton" aria-expanded="false" aria-controls="nav-principale" data-menu-bouton>Menu</button>
+    <a class="marque" href={lien('/')} aria-label={t('OnClub, accueil')}><svg aria-hidden="true"><use href="#boucle"/></svg>OnClub</a>
+    <button type="button" class="btn btn-contour btn-petit menu-bouton" aria-expanded="false" aria-controls="nav-principale" data-menu-bouton data-texte-menu={t('Menu')} data-texte-fermer={t('Fermer')}>{t('Menu')}</button>
 
-    <nav class="nav" id="nav-principale" aria-label="Principale">
+    <nav class="nav" id="nav-principale" aria-label={t('Principale')}>
       <details class="deroulant">
-        <summary aria-current={actif('/fonctionnalites')}>Fonctionnalités</summary>
+        <summary aria-current={actif('/fonctionnalites')}>{t('Fonctionnalités')}</summary>
         <div class="panneau">
           <div class="panneau-grille six">
             {familles.map((f) => (
               <div>
-                <a class="panneau-titre" href={`/fonctionnalites#${f.ancre}`}>{f.cle}</a>
-                <ul class="panneau-items">{f.items.map((e) => <li><a href={url('fonctionnalites', e.id)}>{e.data.nom}</a></li>)}</ul>
+                <a class="panneau-titre" href={lien(`/fonctionnalites#${f.ancre}`)}>{t(f.cle)}</a>
+                <ul class="panneau-items">{f.items.map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}</ul>
               </div>
             ))}
           </div>
-          <a class="panneau-pied" href="/fonctionnalites">Toutes les fonctionnalités ({totalFonctions}) <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+          <a class="panneau-pied" href={lien('/fonctionnalites')}>{t('Toutes les fonctionnalités ({n})', { n: totalFonctions })} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
         </div>
       </details>
       <details class="deroulant">
-        <summary aria-current={dans('/pour-qui', '/sport', '/activites', '/pour')}>Pour qui</summary>
+        <summary aria-current={dans('/pour-qui', '/sport', '/activites', '/pour')}>{t('Pour qui')}</summary>
         <div class="panneau panneau-etroit">
           <div class="panneau-grille trois">
             <div>
-              <a class="panneau-titre" href="/pour-qui#sports">Sports</a>
+              <a class="panneau-titre" href={lien('/pour-qui#sports')}>{t('Sports')}</a>
               <ul>
-                {sports.slice(0, LIMITE).map((e) => <li><a href={url('sports', e.id)}>{e.data.nom}</a></li>)}
+                {sports.slice(0, LIMITE).map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}
                 {sports.length > 1
-                  ? <li><a class="tous" href="/pour-qui#sports">Tous les sports ({sports.length})</a></li>
-                  : <li><a class="tous" href="/pour-qui">Toutes les associations</a></li>}
+                  ? <li><a class="tous" href={lien('/pour-qui#sports')}>{t('Tous les sports ({n})', { n: sports.length })}</a></li>
+                  : <li><a class="tous" href={lien('/pour-qui')}>{t('Toutes les associations')}</a></li>}
               </ul>
             </div>
             <div>
-              <a class="panneau-titre" href="/pour-qui#activites">Autres activités</a>
+              <a class="panneau-titre" href={lien('/pour-qui#activites')}>{t('Autres activités')}</a>
               <ul>
-                {activites.slice(0, LIMITE).map((e) => <li><a href={url('activites', e.id)}>{e.data.nom}</a></li>)}
-                <li><a class="tous" href="/pour-qui#activites">Toutes les activités ({activites.length})</a></li>
+                {activites.slice(0, LIMITE).map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}
+                <li><a class="tous" href={lien('/pour-qui#activites')}>{t('Toutes les activités ({n})', { n: activites.length })}</a></li>
               </ul>
             </div>
             <div>
-              <a class="panneau-titre" href="/pour-qui#profils">Votre rôle</a>
-              <ul>{profils.map((e) => <li><a href={url('profils', e.id)}>{e.data.nom}</a></li>)}</ul>
+              <a class="panneau-titre" href={lien('/pour-qui#profils')}>{t('Votre rôle')}</a>
+              <ul>{profils.map((e) => <li><a href={e.url} hreflang={fr(e)}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a></li>)}</ul>
             </div>
           </div>
         </div>
       </details>
-      <a class="nav-lien" href="/tarifs" aria-current={actif('/tarifs')}>Tarifs</a>
-      <a class="nav-lien" href="/ressources" aria-current={dans('/ressources', '/guides', '/articles', '/comparatif')}>Ressources</a>
-      <a class="nav-lien nav-discret" href="/recommander" aria-current={actif('/recommander')}>Transmettre à mon club</a>
-      <a class="btn btn-encre btn-petit nav-btn" href="/demo">Demander une démo</a>
+      <a class="nav-lien" href={lien('/tarifs')} aria-current={actif('/tarifs')}>{t('Tarifs')}</a>
+      <a class="nav-lien" href={lien('/ressources')} aria-current={dans('/ressources', '/guides', '/articles', '/comparatif')}>{t('Ressources')}</a>
+      <a class="nav-lien nav-discret" href={lien('/recommander')} aria-current={actif('/recommander')}>{t('Transmettre à mon club')}</a>
+      <span class="nav-langues" role="group" aria-label={t('Langue')}>
+        {langue === 'fr'
+          ? <><span class="langue-active" lang="fr" aria-current="true">FR</span><a href={versEs} hreflang="es" lang="es" aria-label="Español">ES</a></>
+          : <><a href={versFrancais} hreflang="fr" lang="fr" aria-label="Français">FR</a><span class="langue-active" lang="es" aria-current="true">ES</span></>}
+      </span>
+      <a class="btn btn-encre btn-petit nav-btn" href={lien('/demo')}>{t('Demander une démo')}</a>
     </nav>
   </div>
 </header>
@@ -116,7 +132,7 @@ const dans = (...bases: string[]) => (bases.some((b) => chemin === b || chemin.s
       entete.classList.toggle('ouvert', oui)
       racine.classList.toggle('menu-ouvert', oui)
       bouton.setAttribute('aria-expanded', String(oui))
-      bouton.textContent = oui ? 'Fermer' : 'Menu'
+      bouton.textContent = (oui ? bouton.dataset.texteFermer : bouton.dataset.texteMenu) || (oui ? 'Fermer' : 'Menu')
       if (oui) entete.classList.remove('cache')
       else entete.querySelectorAll('details[open]').forEach((d) => d.removeAttribute('open'))
     }
@@ -160,6 +176,12 @@ const dans = (...bases: string[]) => (bases.some((b) => chemin === b || chemin.s
 .nav [aria-current="page"]{text-decoration:underline;text-decoration-color:var(--sapin);text-decoration-thickness:2px}
 .nav-discret{color:var(--gris)}
 .nav .nav-btn{margin-left:4px}
+/* Le sélecteur de langue : FR / ES, la langue de la page en gras, l'autre mène à la page jumelle. */
+.nav-langues{display:inline-flex;align-items:center;gap:2px;font:600 .8125rem/1 var(--f-texte);letter-spacing:.04em}
+.nav-langues a,.nav-langues .langue-active{display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:44px;padding:0 6px;border-radius:8px;text-decoration:none}
+.nav-langues .langue-active{color:var(--encre);text-decoration:underline;text-decoration-color:var(--sapin);text-decoration-thickness:2px;text-underline-offset:6px}
+.nav-langues a{color:var(--gris)}
+.nav-langues a:hover{color:var(--encre);text-decoration:underline}
 .deroulant{position:static}
 .panneau{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% - 4px);width:min(1200px,calc(100vw - 2 * var(--g)));background:var(--blanc);color:var(--encre);border-radius:var(--r-l);padding:32px;box-shadow:var(--ombre)}
 .panneau-etroit{width:min(880px,calc(100vw - 2 * var(--g)))}
@@ -186,6 +208,7 @@ const dans = (...bases: string[]) => (bases.some((b) => chemin === b || chemin.s
   :global(.js) .entete.ouvert .nav{display:flex;position:fixed;inset:0;z-index:1;padding:calc(var(--entete-h) + 8px) var(--g) 16px;background:var(--papier);overflow-y:auto;overscroll-behavior:contain;animation:feuille-entre var(--d-2) var(--courbe-sortie)}
   .nav-lien,.deroulant>summary{display:flex;width:100%;min-height:56px;font-size:1.125rem;border-bottom:1px solid var(--trait);justify-content:space-between}
   .nav-discret{color:var(--encre)}
+  .nav-langues{padding:8px 0;border-bottom:1px solid var(--trait);font-size:1rem}
   .deroulant>summary::after{margin-right:6px}
   .panneau{position:static;transform:none;width:auto;background:transparent;box-shadow:none;border-radius:0;padding:8px 0 16px}
   .deroulant[open] .panneau{animation:none}

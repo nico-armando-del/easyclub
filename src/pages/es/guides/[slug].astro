@@ -1,0 +1,11 @@
+---
+/* La version espagnole des pages de src/content/guides/ : une page par fichier de src/content/es/guides/ (même slug). Même gabarit que le français. */
+import GabaritEditorial from '../../../components/GabaritEditorial.astro'
+import { liste } from '../../../lib/collections'
+export async function getStaticPaths() {
+  const entrees = await liste('guides', 'es')
+  return entrees.map((entree) => ({ params: { slug: entree.id }, props: { entree } }))
+}
+const { entree } = Astro.props
+---
+<GabaritEditorial collection="guides" entree={entree} />

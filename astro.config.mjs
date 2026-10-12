@@ -19,6 +19,9 @@ import { fileURLToPath } from 'node:url'
     unité (25 h, 4,90 %, 45 €), dans le TEXTE des pages seulement (jamais dans
     un script, un style ou un attribut). Un titre ne commence donc jamais une
     ligne par « : ». Les rédacteurs tapent des espaces ordinaires.
+    Les pages espagnoles (/es) passent par la même règle : l'espagnol n'a pas
+    d'espace avant « : ; ? ! » ni dans «así», il n'y a donc rien à y poser ; seuls
+    les nombres et leurs unités (25 h, 2,90 %, 250 socios) sont liés.
 */
 
 const NBSP = ' '
@@ -26,7 +29,7 @@ function corrige(texte) {
   return texte
     .replace(/[  ]+([:;?!»])/g, `${NBSP}$1`)
     .replace(/«[  ]+/g, `«${NBSP}`)
-    .replace(/(\d) (?=(?:h|min|€|%|heures|adhérents|familles|ans)(?![\p{L}\d]))/gu, `$1${NBSP}`)
+    .replace(/(\d) (?=(?:h|min|€|%|heures|adhérents|familles|ans|horas|socios|familias|años)(?![\p{L}\d]))/gu, `$1${NBSP}`)
     .replace(/(\d) (\d{3})(?!\d)/g, `$1${NBSP}$2`)
 }
 function typographieHtml(html) {
@@ -43,7 +46,7 @@ async function fichiersHtml(dossier) {
   return res
 }
 /** Les pages laissées telles quelles (anciens fichiers recopiés depuis public/). */
-const INTOUCHABLES = new Set(['presentation.html', 'en.html', 'es.html'])
+const INTOUCHABLES = new Set(['presentation.html', 'en.html'])
 const typographie = () => ({
   name: 'onclub-typographie',
   hooks: {

@@ -1,0 +1,130 @@
+---
+nom: "Patinete freestyle"
+ligne: "De los riders U9 a los séniores, el patinete freestyle se inscribe en línea"
+ordre: 50
+titreSeo: "Club de patinete freestyle: inscripción en línea | OnClub"
+description: "Club de patinete freestyle: grupos por año de nacimiento desde U9, hermanos en un expediente, campus de vacaciones. Licencia FFRS en Rolskanet."
+titre: "Club de patinete: hermanos en un solo expediente"
+chapo: "En el skatepark, una misma familia inscribe a veces a dos o tres riders. Un solo expediente, un descuento calculado, un total leído antes de pagar."
+temps:
+  cles: [paiements, evenements]
+  titre: "Lo que recupera la junta directiva de un club de patinete por temporada"
+fonctionnalites: [inscription-en-ligne, paiement-en-ligne, aides-deduites, evenements-stages, liste-des-licences, seances-essai]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "¿A partir de qué edad puede un niño competir en patinete freestyle?"
+    reponse: "Según la tabla 2026-2027 de la FFRS, la primera categoría de competición en patinete es U9, para los riders nacidos en 2019 y 2020. Si es más pequeño, el niño puede patinar en el club, en un grupo cuyos años fija la junta directiva."
+  - question: "Dos hijos inscritos: ¿el descuento se aplica solo?"
+    reponse: "Sí, si el club lo ha previsto: descuento por el segundo hijo, por el tercero, o por varios grupos, que se activa en cuanto el expediente los reúne. La familia ve el total exacto antes de pagar, y puede pagar en varios plazos."
+  - question: "¿Un niño puede probar una sesión antes de inscribirse?"
+    reponse: "Sí, si el grupo lo acepta: sin prueba, prueba si queda sitio, o prueba incluso completo, a elección del club. La familia reserva desde la página del club; la inscripción que sigue queda vinculada a esa prueba."
+  - question: "¿OnClub comprueba el casco y las protecciones de los riders?"
+    reponse: "No, nada se comprueba a distancia. El club puede hacer la pregunta en el formulario, protecciones y patinete propio, y leer la respuesta en el expediente. OnClub tampoco gestiona el préstamo de material."
+sources:
+  - titre: "FFRS, Catégories d’âge saison 2026-2027"
+    url: "https://ffroller-skateboard.fr/download/1995/licences/111195/categories-dage-2026-2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Demande de licence club 2026-2027"
+    url: "https://ffroller-skateboard.fr/download/1995/licences/110691/demande-licence-club-2026-2027.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Certificat médical et attestation"
+    url: "https://ffroller-skateboard.fr/cm-attestation/"
+    consulte: "2026-10-10"
+  - titre: "FFRS, Prendre ma licence"
+    url: "https://ffroller-skateboard.fr/gerer-mon-club/creer-mon-club/prendre-ma-licence/"
+    consulte: "2026-10-10"
+---
+## Inscripción de patinete: el grupo según el año de nacimiento
+
+El formulario solo muestra al padre o la madre los grupos abiertos al año de nacimiento de cada hijo, con las plazas restantes. El club fija esos años una vez; OnClub no calcula la categoría FFRS.
+
+<Repli titre="Las categorías de competición de patinete 2026-2027">
+
+- **U9**: nacidos en 2019 y 2020, la primera categoría de competición.
+- **U12**: nacidos de 2016 a 2018.
+- **U15**: nacidos de 2013 a 2015.
+- **U18**: nacidos de 2010 a 2012.
+- **Sénior**: nacidos en 2009 y antes.
+
+</Repli>
+
+Una [sesión de prueba](/fonctionnalites/seances-essai) se reserva desde la página del club, antes de pagar nada.
+
+<Repli>
+
+- **Sus preguntas** se añaden al formulario: patinete propio, protecciones, derechos de imagen.
+- **Un grupo completo** lo indica claramente: completo por ahora, o para toda la temporada, a elección de la junta directiva.
+- **Un grupo puede aceptar solo** a los riders antiguos, o solo por invitación.
+
+</Repli>
+
+## Cuota para dos riders de la misma familia
+
+Los hijos de una familia se inscriben en un mismo expediente; el descuento del segundo y del tercero se aplica solo, y el padre o la madre lee el total exacto antes de pagar.
+
+<Idee visuel="droite">
+
+Un anticipo y después varios pagos, si el club ofrece pagar en plazos: cada importe y las fechas de inicio y fin aparecen antes de confirmar.
+
+<Repli>
+
+- **Las [ayudas](/fonctionnalites/aides-deduites)**, entre ellas el [Pass’Sport](/guides/pass-sport), se marcan y se descuentan, con su justificante.
+- **Se pide un responsable legal mayor de edad** en cuanto un rider es menor.
+- **El recibo de la cuota** se descarga desde el expediente.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de patinete"
+  titre="Expediente familiar · 2 riders"
+  sousTitre="Temporada 2026-2027"
+  lignes={[
+    { nom: 'Lina M.', detail: 'Grupo nacidos en 2019-2020', statut: '175 €', ton: 'neutre' },
+    { nom: 'Adam M.', detail: 'Grupo nacidos en 2016-2018', statut: '175 €', ton: 'neutre' },
+    { nom: 'Descuento', detail: 'Segundo hijo', statut: '− 20 €', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '330 €' }}
+  bouton="Pagar y confirmar"
+  legende="El total de una familia con dos riders, descuento incluido. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Licencia FFRS, disciplina de patinete: Rolskanet tiene el control
+
+El patinete depende de la Fédération française de roller et skateboard; la solicitud de licencia se hace en Rolskanet, con la disciplina marcada. OnClub no envía nada allí: la [lista de licencias](/fonctionnalites/liste-des-licences) dice quién está listo para registrarse.
+
+<Repli>
+
+- **Para un rider menor**, la FFRS pide la declaración del cuestionario de salud, cada año; OnClub lo hace rellenar en línea, solo la declaración llega al club.
+- **Un sí en el cuestionario** exige un certificado médico de menos de seis meses, subido en foto y revisado por la junta directiva.
+- **La licencia** de las disciplinas de competición va del 1 de septiembre al 31 de agosto.
+- **La foto de carné** que pide la licencia FFRS puede reclamarse como documento, subido desde el móvil del padre o la madre.
+
+</Repli>
+
+## Convocatoria al contest, pase de lista en el skatepark
+
+El entrenador convoca a su grupo para una sesión o un contest; cada padre o madre responde presente o ausente desde el correo, sin crear cuenta. La inscripción en el contest, en cambio, sigue en manos del organizador.
+
+<Repli>
+
+- **El pase de lista** parte de esas respuestas: un rider justificado no cuenta como ausente.
+- **Una sesión anulada**, por lluvia en el skatepark o rampa cerrada, avisa a todas las familias, con una nota si el entrenador lo desea.
+- **El [espacio del entrenador](/fonctionnalites/espace-encadrant)** se abre con un enlace personal, sin la dirección ni el teléfono de las familias.
+
+</Repli>
+
+## Campus de vacaciones en el skatepark, con pago aparte
+
+Con Pro Max IA, un día de campus de vacaciones tiene su propia página de [inscripción](/fonctionnalites/evenements-stages): fecha, precio, plazas y lista de espera, que se paga aparte de la cuota.
+
+<Repli>
+
+- **Un niño que no es socio** puede inscribirse si el club abre el campus a todos.
+- **Los contests** oficiales, por su parte, se gestionan en el organizador o en la federación: OnClub no lleva ninguna clasificación.
+
+</Repli>

@@ -11,6 +11,7 @@
 */
 import { FAMILLES, type Famille } from '../data/site'
 import VersFr from './langue/VersFr.astro'
+import { i18n } from '../i18n/ui'
 
 type Fragment = 'telephone' | 'chiffres' | 'groupes' | 'bulle' | 'commande' | 'export'
 interface Props {
@@ -26,7 +27,8 @@ interface Props {
   langue?: 'fr' | 'en' | 'es'
   versFr?: string
 }
-const { famille, disposition, fond, fragment, href, niveau = 'h3', nom, phrase, langue = 'fr', versFr } = Astro.props
+const { langue: langueUrl, t } = i18n(Astro.url)
+const { famille, disposition, fond, fragment, href, niveau = 'h3', nom, phrase, langue = langueUrl, versFr } = Astro.props
 const f = FAMILLES.find((x) => x.cle === famille)!
 const H = niveau
 
@@ -42,13 +44,13 @@ const MOTS = {
   es: { inscription: 'Inscripción', prenom: 'Nombre', cours: 'Equipo', coursV: 'U9 mixto, miércoles', paiement: 'Pago', paiementV: 'En 3 plazos', total: 'Total',
     encaisse: 'Cobrado', avenir: 'Por venir', retard: 'Con retraso', rien: 'Ningún pago',
     g1: 'Nathan B.', g2: 'Hugo A.', g3: 'Enzo G.', present: 'Presente', absent: 'Ausente', sans: 'Sin respuesta',
-    a: 'Para', bulle: 'Entrenamiento movido al sábado, mismo campo.', produit: 'Camiseta local · M', retrait: 'Recogida en el club', fichier: 'inscripciones-tu-club.csv' },
+    a: 'Para', bulle: 'Entrenamiento movido al sábado, mismo campo.', produit: 'Camiseta local · M', retrait: 'Recogida en el club', fichier: 'inscripciones-su-club.csv' },
 }[langue]
 ---
 <article class:list={['carte', `carte-${disposition}`, `carte-${fond}`, `frag-${fragment}`, { 'sur-encre': fond === 'encre' }]} data-vu>
   <div class="carte-texte">
-    <H class="carte-nom"><a href={href} hreflang={versFr ? 'fr' : undefined}>{nom ?? f.cle}{versFr && <VersFr sr={versFr} />}</a></H>
-    <p class="carte-phrase">{phrase ?? f.phrase}</p>
+    <H class="carte-nom"><a href={href} hreflang={versFr ? 'fr' : undefined}>{nom ?? t(f.cle)}{versFr && <VersFr sr={versFr} />}</a></H>
+    <p class="carte-phrase">{phrase ?? t(f.phrase)}</p>
   </div>
   <div class="fragment" aria-hidden="true">
     {fragment === 'telephone' && (
@@ -78,7 +80,7 @@ const MOTS = {
       </ul>
     )}
     {fragment === 'bulle' && (
-      <div class="bulle"><small>{MOTS.a} : U11</small><span>{MOTS.bulle}</span></div>
+      <div class="bulle"><small>{MOTS.a}{langue === 'fr' ? ' :' : ':'} U11</small><span>{MOTS.bulle}</span></div>
     )}
     {fragment === 'commande' && (
       <div class="commande">

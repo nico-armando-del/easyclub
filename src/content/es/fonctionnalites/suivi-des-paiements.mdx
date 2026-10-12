@@ -1,0 +1,91 @@
+---
+nom: "Seguimiento de pagos"
+ligne: "12 h 30 min de hoja de cálculo reducidas a 1 h"
+famille: Piloter
+offre: mini
+ordre: 1
+titreSeo: "Seguimiento del pago de cuotas sin hoja de cálculo | OnClub"
+description: "Cobrado, próximo, con retraso, sin ningún pago: la página de inicio muestra el dinero de la temporada. La tarjeta se anota sola; el cheque, en el expediente."
+titre: "El dinero de la temporada de un vistazo, sin hoja de cálculo"
+chapo: "El tesorero ya no lleva una hoja de cálculo. La página de inicio dice lo cobrado, lo que va con retraso y los expedientes sin ningún pago; la tarjeta se anota sola."
+temps:
+  cles: [paiements]
+ecranFonction: true
+fonctionnalites: [relance-un-clic, paiement-en-ligne, exports-comptables]
+profils: [tresorier]
+comparatifs: [tableur-excel]
+maj: 2026-10-12
+faq:
+  - question: "¿Los pagos con tarjeta se cuentan solos?"
+    reponse: "Sí. Un pago con tarjeta cuenta en cuanto Stripe lo confirma: el expediente de la familia, la lista de inscripciones y la página de inicio cambian a la vez, sin copiar nada."
+  - question: "¿Y los cheques, el efectivo, las transferencias?"
+    reponse: "La junta directiva los anota en el expediente de la familia, con «Cobrar un cheque»: el importe recibido y el medio (cheque, efectivo, transferencia, ayuda o vale). Mientras un cheque no se anote, OnClub no puede saber que ha llegado: la familia sigue en las impagadas."
+  - question: "¿El seguimiento de pagos está en el plan Mini?"
+    reponse: "Sí. La página de inicio y su bloque Dinero están abiertos en todos los planes, como la lista de inscripciones, el expediente de cada familia y el recordatorio de pago con un clic."
+  - question: "¿Se puede sacar la lista de impagados en hoja de cálculo?"
+    reponse: "Sí. Abra la pestaña «Impagadas» de la lista de inscripciones y después «Exportar estas 3 inscripciones» (el botón cuenta los expedientes mostrados): el archivo sigue el filtro, con el total, lo pagado y lo pendiente de cada expediente."
+---
+
+## Hoy: una hoja de cálculo siempre atrasada
+
+El extracto del banco por un lado, un sobre de cheques por otro, y una hoja de cálculo que se actualiza cuando hay tiempo. A pie de campo, nadie sabe realmente quién ha pagado su cuota.
+
+## Cobrado frente a previsto, en una barra
+
+La página de inicio del panel se abre con la temporada en curso. El bloque **Dinero** da una cifra grande: por ejemplo, «28.640 € cobrados de 40.360 € previstos · 71 %».
+
+<EcranFonction nom="suivi-des-paiements-accueil" legende="La página de inicio del panel: el dinero de la temporada, los jugadores, las plazas y lo que queda por hacer. Nombres e importes ficticios." />
+
+Debajo, una barra de cuatro colores clasifica cada euro previsto:
+
+- **Cobrado**: lo que ya ha entrado, tarjeta y cheques anotados.
+- **Próximo**: los plazos de las familias que pagan en varios plazos, que se cobran a mano, en su fecha.
+- **Con retraso**: un plazo vencido y sin pagar.
+- **Sin ningún pago**: los expedientes en los que todavía no ha entrado nada.
+
+## Dos líneas que llevan directamente a las familias
+
+Bajo la barra, unas líneas en las que se puede hacer clic dicen a quién mirar, con la cantidad en juego:
+
+- **«3 familias con retraso en el pago · 330 €»** abre la lista de inscripciones en la pestaña «Impagadas».
+- **«4 expedientes sin ningún pago · 1.520 €»** abre la pestaña «Ningún pago».
+- **«9.870 € por cobrar a mano, en su fecha»**, con el número de familias con pago fraccionado, abre la pestaña «Fraccionadas».
+
+En la lista, las columnas «Pagado / total» y «Pendiente» dan el detalle. Seleccione las familias con retraso y después «Reclamar a la selección»: es el [recordatorio de pago con un clic](/fonctionnalites/relance-un-clic).
+
+## La tarjeta se anota sola, el cheque se anota a mano
+
+Una familia que paga con tarjeta con el [pago en línea](/fonctionnalites/paiement-en-ligne) se cuenta en cuanto Stripe lo confirma. Nadie copia nada.
+
+El cheque entregado a pie de campo, el efectivo de un campus, la transferencia de un padre: la junta directiva los anota en el expediente, con «Cobrar un cheque».
+
+<EcranFonction nom="suivi-des-paiements-cheque" legende="Un cheque anotado en el expediente de una familia. Nombres e importes ficticios." />
+
+- **El importe recibido**: se propone el saldo pendiente, y usted lo corrige si hace falta.
+- **El medio**: cheque, efectivo, transferencia, o ayuda o vale.
+- **Ninguna comisión** sobre un cheque o el efectivo.
+
+Lo pagado del expediente cambia, el estado se recalcula, y la familia sale de las impagadas si se alcanza el saldo.
+
+## El expediente de una familia, al céntimo
+
+Cada expediente muestra tres indicadores: **Total debido**, **Ya pagado** con los medios utilizados, y **Pendiente**, con el número de recordatorios de pago ya enviados.
+
+Para una familia que paga en varios plazos, la tarjeta «Calendario de pagos» enumera los plazos y sus fechas. El tesorero lo lee todo en el mismo sitio, sin abrir el extracto.
+
+<Repli titre="El detalle">
+
+- **La página de inicio está reservada a la junta directiva**: una familia solo ve su propio expediente.
+- **Los asuntos pendientes** se cuentan en la cabecera de la página de inicio: familias con retraso, expedientes sin pago, expedientes incompletos, cursos sin entrenador.
+- **La temporada anterior** sigue pudiendo leerse en su balance, con el enlace «Balance de 2025-2026» al final de la página de inicio.
+- **La contabilidad del mes**, con la comisión y las comisiones de la tarjeta, se lee aparte: son las [exportaciones contables](/fonctionnalites/exports-comptables).
+- **La página de inicio también habla del club**: quién vuelve entre los antiguos jugadores, los jugadores frente a la temporada anterior, la ocupación de las plazas y, a final de temporada, el botón «Preparar el inicio de temporada».
+
+</Repli>
+
+## Lo que OnClub no hace (todavía)
+
+- **Cobrar los plazos en su lugar**: hoy, los plazos de un calendario de pagos se cobran a mano, en su fecha.
+- **Saber que ha llegado un cheque** mientras la junta directiva no lo haya anotado en el expediente.
+- **Anotar la fecha de ingreso en el banco** de un cheque desde el expediente.
+- **Contar las ayudas de la misma forma en todas partes**: la página de inicio clasifica una ayuda anotada como «Ayuda o vale» en lo cobrado, la pantalla Contabilidad la pone aparte, pendiente de cobrar del organismo.

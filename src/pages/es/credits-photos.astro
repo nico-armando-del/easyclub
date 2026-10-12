@@ -1,0 +1,51 @@
+---
+/* /es/credits-photos : la page des crédits (src/pages/credits-photos.astro) en espagnol ; les textes alternatifs passent par t(). */
+import Layout from '../../layouts/Layout.astro'
+import FilAriane from '../../components/FilAriane.astro'
+import { PHOTOS } from '../../data/photos'
+import { FREEPIK_VOLTA } from '../../data/clubs'
+import { traducteur } from '../../i18n/ui'
+
+const t = traducteur('es')
+const fil = [{ nom: 'Créditos de las fotos', url: '/es/credits-photos' }]
+const creditees = Object.values(PHOTOS).filter((p) => p.auteur).map((p) => ({ ...p, alt: t(p.alt) })).sort((a, b) => a.alt.localeCompare(b.alt, 'es'))
+---
+<Layout titre="Créditos de las fotos del sitio OnClub: fotógrafos y licencia" description="Los fotógrafos cuyas imágenes ilustran onclub.app, con el enlace a cada foto, publicada en Unsplash con la licencia de Unsplash." chemin="/es/credits-photos" fil={fil}>
+  <div class="enveloppe legale">
+    <FilAriane fil={fil} />
+    <h1>Créditos de las fotos</h1>
+    <p class="chapo">Las fotos de deporte y de actividades de este sitio proceden de <a href="https://unsplash.com" rel="noopener" target="_blank">Unsplash</a>, con la <a href="https://unsplash.com/license" rel="noopener" target="_blank">licencia de Unsplash</a>. Gracias a sus autores. Ilustran una actividad: las personas y los lugares no tienen ninguna relación con OnClub ni con ningún club cliente.</p>
+    <ul class="credits">
+      {creditees.map((p) => (
+        <li><span>{p.alt}</span><span><a href={p.page} rel="noopener" target="_blank">Foto</a> de <a href={p.profil} rel="noopener" target="_blank">{p.auteur}</a></span></li>
+      ))}
+    </ul>
+    <section class="clubs" id="clubs" aria-labelledby="clubs-titre">
+      <h2 id="clubs-titre">Webs de clubes de demostración</h2>
+      <p class="clubs-phrase">El Volta Volley Club y el AS Montclar son clubes inventados para mostrar una web conectada a OnClub. Las fotos del Volta Volley Club proceden de Freepik:</p>
+      <ul class="credits">
+        {FREEPIK_VOLTA.map((lien, i) => (
+          <li><span>Foto {i + 1} del Volta Volley Club</span><span><a href={lien} rel="noopener" target="_blank">Imagen de Freepik<span class="sr"> {i + 1}</span></a></span></li>
+        ))}
+      </ul>
+      <p class="clubs-note">El AS Montclar no utiliza ninguna foto, solo tipografía.</p>
+    </section>
+    <p class="legale-fin"><a href="/es">Inicio</a> · <a href="/es/mentions-legales">Aviso legal</a> · <a href="/es/demo">Solicitar una demo</a></p>
+  </div>
+</Layout>
+<style>
+.legale{padding-block:16px var(--section)}
+.legale h1{margin-top:16px;font-size:clamp(2rem,1.5rem + 2vw,3rem)}
+.chapo{max-width:var(--lecture)}
+.chapo a,.credits a,.legale-fin a{font-weight:600}
+.credits{list-style:none;padding:0;margin:32px 0 0;max-width:820px;border-top:1px solid var(--trait)}
+.credits li{display:grid;gap:4px 24px;padding:14px 0;border-bottom:1px solid var(--trait);font-size:.9375rem}
+@media (min-width:700px){.credits li{grid-template-columns:1fr auto}}
+.credits li span:last-child{color:var(--gris)}
+.legale-fin{margin-top:40px;font-size:.9375rem}
+.clubs{margin-top:var(--section)}
+.clubs h2{font-size:clamp(1.625rem,1.3rem + 1.2vw,2.25rem)}
+.clubs-phrase{margin-top:16px;max-width:var(--lecture)}
+.clubs .credits{margin-top:24px}
+.clubs-note{margin-top:16px;font-size:.9375rem;color:var(--gris);max-width:var(--lecture)}
+</style>

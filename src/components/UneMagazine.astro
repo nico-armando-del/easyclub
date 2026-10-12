@@ -6,6 +6,8 @@
 */
 import Couverture from './Couverture.astro'
 import ListeFilets, { type EntreeFilet } from './ListeFilets.astro'
+import VersFr from './langue/VersFr.astro'
+import { i18n, SR_FR } from '../i18n/ui'
 
 interface Props {
   entree: EntreeFilet & { couverture: NonNullable<EntreeFilet['couverture']> & { sous?: string } }
@@ -13,9 +15,10 @@ interface Props {
 }
 const { entree, aussi = [] } = Astro.props
 const c = entree.couverture
+const { t } = i18n(Astro.url)
 ---
 <section class:list={['une', { 'une-seule': aussi.length === 0 }]} aria-labelledby="une-titre">
-  <h2 class="une-etiquette" id="une-titre">À la une</h2>
+  <h2 class="une-etiquette" id="une-titre">{t('À la une')}</h2>
   <div class="une-grille">
     <article class="une-carte">
       <div class="une-couv">
@@ -23,14 +26,14 @@ const c = entree.couverture
       </div>
       <div class="une-texte">
         <p class="une-rub">{entree.rubrique}{entree.duree && <> · {entree.duree}</>}</p>
-        <h3 class="une-titre"><a href={entree.href}>{entree.titre}</a></h3>
+        <h3 class="une-titre"><a href={entree.href} hreflang={entree.fr ? 'fr' : undefined}>{entree.titre}{entree.fr && <VersFr sr={SR_FR} />}</a></h3>
         {entree.ligne && <p class="une-ligne">{entree.ligne}</p>}
         <p class="une-date">{[entree.date, entree.auteur].filter(Boolean).join(' · ')}</p>
       </div>
     </article>
     {aussi.length > 0 && (
       <div class="une-aussi">
-        <ListeFilets entrees={aussi} titre="À lire aussi" niveau="h3" serree id="a-lire-aussi" />
+        <ListeFilets entrees={aussi} titre={t('À lire aussi')} niveau="h3" serree id="a-lire-aussi" />
       </div>
     )}
   </div>

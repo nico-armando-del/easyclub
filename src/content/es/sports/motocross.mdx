@@ -1,0 +1,133 @@
+---
+nom: "Motocross y motoclub"
+ligne: "Entrenamiento o competición, certificado y licencia FFM: el motoclub se aclara"
+ordre: 50
+titreSeo: "Motoclub: inscripción en línea, motocross y licencia FFM | OnClub"
+description: "Motoclub: pilotos inscritos por año de nacimiento, certificado médico controlado hasta su caducidad, cuota en varios plazos. La licencia sigue en la FFM."
+titre: "Motoclub: cada certificado controlado hasta su caducidad"
+chapo: "Para correr en competición, cada piloto presenta un certificado de menos de un año. La junta directiva ve quién está al día, y reclama el resto con un botón."
+temps:
+  cles: [pieces]
+  titre: "El tiempo que recupera la junta directiva de un motoclub, cada temporada"
+fonctionnalites: [pieces-justificatives, inscription-en-ligne, reinscriptions, reprise-des-fichiers, paiement-en-ligne, convocations, liste-des-licences]
+profils: [tresorier]
+guides: [certificat-medical-sport, assurance-association]
+maj: 2026-10-10
+faq:
+  - question: "¿El certificado médico de un piloto de motocross vale para varias temporadas?"
+    reponse: "Para una licencia de competición FFM, no: se pide un nuevo certificado de menos de un año cada temporada. Para una licencia de entrenamiento de adulto, puede valer hasta cinco temporadas consecutivas, si el cuestionario de salud en línea es negativo. En OnClub, la duración de validez se configura justificante por justificante."
+  - question: "¿A partir de qué edad puede un niño rodar con el motoclub?"
+    reponse: "La FFM abre la licencia de competición desde los 6 años. Antes de los 6 años, la licencia de entrenamiento exige primero un certificado de práctica expedido por un entrenador titulado. El CASM, examen teórico y práctico, pasa a ser obligatorio para la competición a partir de los 12 años."
+  - question: "¿Un piloto nuevo federado en septiembre paga dos licencias?"
+    reponse: "La FFM ofrece una promoción a los que se federan por primera vez: una licencia anual sacada a partir del 1 de septiembre de 2026 dura hasta el 31 de diciembre de 2027, es decir, hasta dieciséis meses. Va dirigida a quienes nunca han estado federados o no renovaron en 2025 y 2026. Esto se hace en la federación, no en OnClub."
+  - question: "¿OnClub gestiona el CASM, los guidons y las inscripciones en las pruebas?"
+    reponse: "No. El CASM y los guidons siguen en la federación, y las inscripciones en las pruebas también. OnClub no reserva la pista del club, no cronometra y no asigna dorsales. Lleva las inscripciones, los certificados, el dinero y la lista de licencias."
+sources:
+  - titre: "FFM, Licences annuelles"
+    url: "https://pratiquer.ffmoto.org/licences-annuelles"
+    consulte: "2026-10-10"
+  - titre: "FFM, Offre primo-licencié"
+    url: "https://pratiquer.ffmoto.org/offre-primo-licencie"
+    consulte: "2026-10-10"
+  - titre: "Légifrance, code du sport, article D231-1-5 (version du 3 septembre 2023)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034417463"
+    consulte: "2026-10-10"
+  - titre: "Légifrance, code du sport, article L231-2"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045293846"
+    consulte: "2026-10-10"
+---
+
+## Certificado médico en motocross: uno por temporada para la competición
+
+La competición con vehículos terrestres a motor es una disciplina con condiciones especiales (artículo D231-1-5 del code du sport). En la FFM, la licencia de competición pide cada temporada un certificado de menos de un año.
+
+<Idee visuel="droite">
+
+En OnClub, el [justificante](/fonctionnalites/pieces-justificatives) de los pilotos de competición puede aceptar solo el certificado del médico: sin botón «Rellenar», el documento se sube en foto y se controla su fecha de caducidad.
+
+<Repli>
+
+- **Entrenamiento, adulto**: según la FFM, el certificado puede valer hasta cinco temporadas si el cuestionario de salud es negativo.
+- **Entrenamiento, menor**: el cuestionario puede sustituir al certificado si las respuestas son negativas.
+- **El justificante que falta** se reclama con un botón, sin bloquear el pago.
+- **El detalle**, en la [guía del certificado médico](/guides/certificat-medical-sport).
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su motoclub"
+  titre="Certificados · pilotos de competición"
+  sousTitre="Temporada 2027"
+  lignes={[
+    { nom: 'Lucas R.', detail: 'Válido hasta el 12/03/2027', statut: 'Revisado', ton: 'ok' },
+    { nom: 'Enzo D.', detail: 'Fecha de caducidad superada', statut: 'Caducado', ton: 'ko' },
+    { nom: 'Chloé V.', detail: 'Aún no subido', statut: 'Falta', ton: 'neutre' },
+  ]}
+  bouton="Reclamar los justificantes"
+  legende="Los certificados de los pilotos de competición, vistos por la junta directiva. Nombres y fechas ficticios."
+/>
+
+</Idee>
+
+## Inscripción en línea en el motoclub: escuela, ocio o competición
+
+El club presenta sus grupos (escuela de pilotaje, adultos en entrenamiento, pilotos de competición) con sus años de nacimiento; la familia solo ve los que le corresponden.
+
+<Repli>
+
+- **Desde los 6 años** para la licencia de competición FFM; antes, un certificado de práctica de un entrenador titulado.
+- **El CASM** es obligatorio para la competición a partir de los 12 años; se hace en la federación.
+- **Sus preguntas** (disciplina, cilindrada, talla de camiseta) se añaden al formulario.
+- **Sus archivos** del año pasado se [importan](/fonctionnalites/reprise-des-fichiers): los antiguos pilotos quedan reconocidos.
+
+</Repli>
+
+## Cuota del motoclub en varios plazos
+
+De una vez o en varios plazos según sus fórmulas, con el total exacto antes del [pago en línea](/fonctionnalites/paiement-en-ligne).
+
+<Repli>
+
+- **Dos hijos pilotos**: el descuento por hermanos se añade solo.
+- **Las ayudas** se marcan y se descuentan, con justificante.
+- **Cobrado, pendiente, con retraso**: el tesorero lo lee todo en un solo cuadro.
+
+</Repli>
+
+## Licencia FFM: del 1 de enero al 31 de diciembre, solicitada en línea
+
+En la FFM, la licencia anual va del 1 de enero al 31 de diciembre; se solicita en línea, en el espacio del federado de la federación. OnClub no introduce nada en la federación: prepara la [lista de licencias](/fonctionnalites/liste-des-licences) y su exportación.
+
+<Repli>
+
+- **La red**: la FFM anuncia 1.215 motoclubes y 1.000 circuitos homologados.
+- **Todas las disciplinas** sin distinción: solo las licencias NCO, NET, ETJ y NJ1 a NJ3C las abren, según la FFM.
+- **Un piloto que se federa por primera vez** a partir del 1 de septiembre de 2026 conserva su licencia hasta el 31 de diciembre de 2027, según la promoción federativa.
+
+</Repli>
+
+## Mayo: el entrenador reserva a los pilotos de su escuela
+
+De mayo a julio, el entrenador marca desde su página a los jóvenes pilotos que se quedan y elige su grupo del año siguiente: su plaza queda reservada antes de abrir al público.
+
+<Repli>
+
+- **Nada se marca de oficio** por la edad: decide él, o la junta directiva en su lugar.
+- **La familia confirma** con su enlace y elige su calendario de pagos; pasado el plazo fijado por el club, la plaza vuelve al público.
+- **Plan**: las [renovaciones](/fonctionnalites/reinscriptions) están en Pro.
+
+</Repli>
+
+## Convocatoria al entrenamiento en la pista del club
+
+El entrenador convoca a su grupo para el entrenamiento del sábado; cada familia responde desde el correo, y la lista se pasa a partir de esas respuestas.
+
+<Repli>
+
+- **Pista empapada**: la anulación avisa a todas las familias, con una nota si hace falta.
+- **Un enlace personal**, sin cuenta, abre la página del entrenador, sin dirección ni teléfono de las familias.
+
+</Repli>
+
+OnClub no reserva la pista, no inscribe a nadie en las pruebas y no cronometra.

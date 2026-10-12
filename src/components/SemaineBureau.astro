@@ -25,6 +25,8 @@ import Calculateur from './Calculateur.astro'
 import VersFr from './langue/VersFr.astro'
 import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES, ADHERENTS_REFERENCE, duree } from '../data/temps'
 import { INJEP } from '../data/site'
+import { i18n } from '../i18n/ui'
+import { SEMAINE_ES, MOTS_CALCUL_ES } from '../i18n/accueil-es'
 
 type Soir = { jour: string; quoiSans: string; commentSans: string; quoiAvec: string; commentAvec: string; legendeSans: string; legendeAvec: string }
 type LigneMini = { nom: string; detail?: string; statut?: string; ton?: 'ok' | 'ko' | 'neutre' }
@@ -118,16 +120,17 @@ interface Props {
   /** Mots du calculateur compact (/en, /es). */
   mots?: { avant: string; apres: string; etiquette: string }
 }
-const { t = FR, lien = '/temps-gagne', versFr, id = 'semaine', mots } = Astro.props
+const { langue, t: tr, lien: lienLocal } = i18n(Astro.url)
+const { t = langue === 'es' ? SEMAINE_ES : FR, lien = lienLocal('/temps-gagne'), versFr, id = 'semaine', mots = langue === 'es' ? MOTS_CALCUL_ES : undefined } = Astro.props
 const NB = String.fromCharCode(160)
-const fine = (s: string) => s.replace(/ ([?!:;])/g, `${NB}$1`)
+const fine = (s: string) => (langue === 'es' ? s : s.replace(/ ([?!:;])/g, `${NB}$1`))
 const nb = (s: string) => s.replace(/ /g, NB)
-const lignes = CINQ_TACHES.map((c) => ({ avant: nb(duree(TACHES[c].avantMin ?? 0)), apres: nb(duree(TACHES[c].apresMin ?? 0)) }))
+const lignes = CINQ_TACHES.map((c) => ({ avant: nb(duree(TACHES[c].avantMin ?? 0, langue)), apres: nb(duree(TACHES[c].apresMin ?? 0, langue)) }))
 const slots = await Promise.all([0, 1, 2, 3, 4].map(async (k) => (Astro.slots.has(`ecran-${k}`) ? await Astro.slots.render(`ecran-${k}`) : null)))
 const o = t.objets
 /* Le périmètre des 61 h : les quatre tâches de Mini, puis la rentrée suivante (Pro). */
 const gainDe = (offre: string) => CINQ_TACHES.filter((c) => TACHES[c].offre === offre).reduce((s, c) => s + (TACHES[c].gainMin ?? 0), 0)
-const perimetre = t.perimetre ? fine(t.perimetre(nb(TOTAL.gain), nb(duree(gainDe('mini'))), nb(duree(gainDe('pro'))))) : null
+const perimetre = t.perimetre ? fine(t.perimetre(nb(TOTAL.gain), nb(duree(gainDe('mini'), langue)), nb(duree(gainDe('pro'), langue)))) : null
 const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4L16 6"/></svg>'
 ---
 <section class="section semaine-section" id={id} aria-labelledby="t-semaine">
@@ -213,8 +216,8 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
         <summary>{t.hypotheses}</summary>
         <div class="s-hyp-corps">
           <slot name="hypotheses">
-            <p>{HYPOTHESES} Les durées sont celles d’une saison entière.</p>
-            <p><b>{INJEP.chiffre}</b> {INJEP.texte} <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a></p>
+            <p>{tr(HYPOTHESES)} {tr('Les durées sont celles d’une saison entière.')}</p>
+            <p>{langue === 'es' && 'El '}<b>{INJEP.chiffre}</b> {tr(INJEP.texte)} {langue === 'es' ? <a href={INJEP.source} target="_blank" rel="noopener" hreflang="fr"><span lang="fr">INJEP, Analyses & synthèses</span> n.º 71, octubre de 2023</a> : <a href={INJEP.source} target="_blank" rel="noopener">{INJEP.titreSource}</a>}{langue === 'es' && tr(' (en francés)')}</p>
           </slot>
         </div>
       </details>

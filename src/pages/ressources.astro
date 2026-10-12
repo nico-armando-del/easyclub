@@ -12,34 +12,44 @@ import UneMagazine from '../components/UneMagazine.astro'
 import ListeFilets, { type EntreeFilet } from '../components/ListeFilets.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
-import { liste, url } from '../lib/collections'
+import { catalogue } from '../lib/collections'
 import { MISE_EN_ROUTE } from '../data/site'
+import { i18n, SR_FR } from '../i18n/ui'
+import VersFr from '../components/langue/VersFr.astro'
 
-const fil = [{ nom: 'Ressources', url: '/ressources' }]
+/*
+  Une seule page pour les deux langues : /es/ressources l'importe. En espagnol, un guide ou un
+  article déjà traduit s'affiche en entier ; les autres gardent leur lien français (« FR »), avec
+  leur nom espagnol (src/i18n/noms.ts) et une couverture sans texte (la donnée française n'est pas reprise).
+*/
+const { langue, t, lien, locale } = i18n(Astro.url)
+const es = langue === 'es'
+const fil = [{ nom: t('Ressources'), url: lien('/ressources') }]
 const faq = [
-  { question: 'Qu’est-ce qu’OnClub ?', reponse: 'Une plateforme française pour les associations qui inscrivent des adhérents : inscriptions et cotisations en ligne, suivi de l’argent, relances d’un bouton, pièces justificatives, saison suivante, convocations, site et boutique de l’association.' },
-  { question: 'OnClub convient-il à une association qui n’est pas sportive ?', reponse: 'Oui, dès qu’il y a des inscriptions, des cours ou des groupes et des cotisations : école de musique, de danse, de théâtre, de langues, chorale, atelier. Chaque cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.' },
-  { question: 'Combien de temps faut-il pour démarrer ?', reponse: MISE_EN_ROUTE },
-  { question: 'Les données des familles sont-elles protégées ?', reponse: 'Les données sont hébergées dans l’Union européenne, ni revendues ni utilisées à des fins publicitaires. Les paiements sont traités par Stripe : OnClub ne voit ni ne conserve les numéros de carte. Le détail est dans la politique de confidentialité.' },
-  { question: 'Comment obtenir une démo ?', reponse: 'Répondez aux cinq questions de la page de démo : vous voyez le temps que votre association gagnerait, puis vous nous écrivez sur WhatsApp ou par e-mail avec un message déjà rempli.' },
+  { question: t('Qu’est-ce qu’OnClub ?'), reponse: t('Une plateforme française pour les associations qui inscrivent des adhérents : inscriptions et cotisations en ligne, suivi de l’argent, relances d’un bouton, pièces justificatives, saison suivante, convocations, site et boutique de l’association.') },
+  { question: t('OnClub convient-il à une association qui n’est pas sportive ?'), reponse: t('Oui, dès qu’il y a des inscriptions, des cours ou des groupes et des cotisations : école de musique, de danse, de théâtre, de langues, chorale, atelier. Chaque cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
+  { question: t('Combien de temps faut-il pour démarrer ?'), reponse: t(MISE_EN_ROUTE) },
+  { question: t('Les données des familles sont-elles protégées ?'), reponse: t('Les données sont hébergées dans l’Union européenne, ni revendues ni utilisées à des fins publicitaires. Les paiements sont traités par Stripe : OnClub ne voit ni ne conserve les numéros de carte. Le détail est dans la politique de confidentialité.') },
+  { question: t('Comment obtenir une démo ?'), reponse: t('Répondez aux cinq questions de la page de démo : vous voyez le temps que votre association gagnerait, puis vous nous écrivez sur WhatsApp ou par e-mail avec un message déjà rempli.') },
 ]
 
-const AUTEUR = 'L’équipe OnClub'
-const dateCourte = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
-const articles = await liste('articles')
-const guides = await liste('guides')
-const comparatifs = await liste('comparatifs')
+const AUTEUR = t('L’équipe OnClub')
+const dateCourte = (x: Date) => x.toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+const articles = await catalogue('articles', langue)
+const guides = await catalogue('guides', langue)
+const comparatifs = await catalogue('comparatifs', langue)
 
 type Edito = { c: 'guides' | 'articles'; e: any }
 const enFilet = ({ c, e }: Edito, avecCouv = false): EntreeFilet => ({
-  rubrique: c === 'articles' ? e.data.rubrique : 'Guide',
+  rubrique: c === 'articles' ? (es && !e.fr ? e.data.rubrique : t(e.data.rubrique)) : t('Guide'),
   duree: `${e.data.lecture} min`,
-  titre: e.data.titre,
-  href: url(c, e.id),
+  titre: e.fr ? e.nom : e.data.titre,
+  href: e.url,
   date: dateCourte(e.data.publie),
   auteur: AUTEUR,
-  ligne: c === 'guides' ? e.data.ligne : undefined,
-  ...(avecCouv ? { couverture: { rubrique: c, donnee: e.data.couverture?.donnee, titreCourt: e.data.nom } } : {}),
+  ligne: c === 'guides' && !e.fr ? e.data.ligne : undefined,
+  fr: e.fr || undefined,
+  ...(avecCouv ? { couverture: { rubrique: c, donnee: e.fr ? undefined : e.data.couverture?.donnee, titreCourt: e.nom } } : {}),
 })
 
 /* La une : l'entrée marquée `une: true`, sinon la plus récente des guides et articles. */
@@ -51,51 +61,54 @@ const une = tous.find((x) => x.e.data.une) ?? tous[0]
 const memeQueUne = (x: Edito) => !!une && x.c === une.c && x.e.id === une.e.id
 const entreeUne = une && {
   ...enFilet(une),
-  ligne: une.e.data.ligne,
-  couverture: {
-    rubrique: une.c,
-    donnee: une.e.data.couverture?.donnee,
-    apres: une.e.data.couverture?.apres,
-    sous: une.e.data.couverture?.sous,
-    titreCourt: une.e.data.nom,
-  },
+  ligne: une.e.fr ? une.e.ligne : une.e.data.ligne,
+  couverture: une.e.fr
+    ? { rubrique: une.c, titreCourt: une.e.nom }
+    : {
+        rubrique: une.c,
+        donnee: une.e.data.couverture?.donnee,
+        apres: une.e.data.couverture?.apres,
+        sous: une.e.data.couverture?.sous,
+        titreCourt: une.e.data.nom,
+      },
 }
 /* « À lire aussi » : les deux guides les plus récents (les articles suivent dans « Les récents »). */
 const aussi = tous.filter((x) => x.c === 'guides' && !memeQueUne(x)).slice(0, 2).map((x) => enFilet(x))
 const recents = tous.filter((x) => x.c === 'articles' && !memeQueUne(x)).slice(0, 10).map((x) => enFilet(x))
 const listeGuides = tous
   .filter((x) => x.c === 'guides' && !memeQueUne(x))
-  .map((x) => ({ ...enFilet(x, true), rubrique: `${x.e.data.lecture} min de lecture`, duree: undefined, date: undefined, auteur: undefined, ligne: undefined }))
-const listeComparatifs = comparatifs.map((e) => ({ titre: e.data.nom, href: url('comparatifs', e.id) }))
+  .map((x) => ({ ...enFilet(x, true), rubrique: t('{n} min de lecture', { n: x.e.data.lecture }), duree: undefined, date: undefined, auteur: undefined, ligne: undefined }))
+const listeComparatifs = comparatifs.map((e) => ({ titre: e.nom, href: e.url, fr: e.fr }))
 
 const RUBRIQUES = [
-  { nom: 'Tout', href: '#a-la-une' },
-  { nom: 'Guides', href: '#guides' },
-  { nom: 'Articles', href: '#articles' },
-  { nom: 'Comparatifs', href: '#comparatifs' },
-  { nom: 'Outils', href: '#outils' },
+  { nom: t('Tout'), href: '#a-la-une' },
+  { nom: t('Guides'), href: '#guides' },
+  { nom: t('Articles'), href: '#articles' },
+  { nom: t('Comparatifs'), href: '#comparatifs' },
+  { nom: t('Outils'), href: '#outils' },
 ]
 const OUTILS = [
-  { titre: 'Le calculateur du temps gagné', href: '/temps-gagne' },
-  { titre: 'Les offres et un exemple chiffré', href: '/tarifs' },
-  { titre: 'OnClub en écrans animés', href: '/presentation' },
-]
-const VIDE = 'Rien dans cette rubrique pour l’instant.'
+  { titre: t('Le calculateur du temps gagné'), href: '/temps-gagne' },
+  { titre: t('Les offres et un exemple chiffré'), href: '/tarifs' },
+  /* La présentation n'existe qu'en français : pas de lien depuis l'espagnol. */
+  ...(es ? [] : [{ titre: t('OnClub en écrans animés'), href: '/presentation' }]),
+].map((o) => ({ titre: o.titre, href: lien(o.href), fr: lien(o.href) === o.href && es }))
+const VIDE = t('Rien dans cette rubrique pour l’instant.')
 ---
 <Layout
-  titre="Guides et ressources pour gérer une association | OnClub"
-  description="Guides pratiques, articles et comparatifs pour les bénévoles d’association : cotisations, aides, inscriptions, rentrée. Sans jargon, avec les sources."
-  chemin="/ressources"
+  titre={t('Guides et ressources pour gérer une association | OnClub')}
+  description={t('Guides pratiques, articles et comparatifs pour les bénévoles d’association : cotisations, aides, inscriptions, rentrée. Sans jargon, avec les sources.')}
+  chemin={lien('/ressources')}
   fil={fil}
   faq={faq}
 >
   <HerosCompact
     fil={fil}
-    surtitre="Ressources"
-    titre="Les ressources du bureau bénévole"
-    phrase="Guides pour faire juste, articles pour gagner du temps, comparatifs pour choisir."
+    surtitre={t('Ressources')}
+    titre={t('Les ressources du bureau bénévole')}
+    phrase={es ? t('Guides pour faire juste, articles pour gagner du temps, comparatifs pour choisir.') + ' ' + t('Les pages marquées FR sont encore en français.') : t('Guides pour faire juste, articles pour gagner du temps, comparatifs pour choisir.')}
   >
-    <nav class="rubriques" aria-label="Rubriques des ressources">
+    <nav class="rubriques" aria-label={t('Rubriques des ressources')}>
       <ul>
         {RUBRIQUES.map((r, i) => <li><a href={r.href} aria-current={i === 0 ? 'true' : undefined}>{r.nom}</a></li>)}
       </ul>
@@ -107,45 +120,45 @@ const VIDE = 'Rien dans cette rubrique pour l’instant.'
       {entreeUne ? (
         <UneMagazine entree={entreeUne} aussi={aussi} />
       ) : (
-        <p class="vide">{VIDE} <a href="/ressources">Toutes les ressources</a></p>
+        <p class="vide">{VIDE} <a href={lien('/ressources')}>{t('Toutes les ressources')}</a></p>
       )}
     </div>
 
     <div class="mag-bloc">
       {recents.length > 0 ? (
-        <ListeFilets entrees={recents} titre="Les récents" niveau="h2" id="articles" />
+        <ListeFilets entrees={recents} titre={t('Les récents')} niveau="h2" id="articles" />
       ) : (
         <section id="articles" aria-labelledby="articles-titre">
-          <h2 class="mag-h2" id="articles-titre">Les récents</h2>
-          <p class="vide">{VIDE} <a href="/ressources">Toutes les ressources</a></p>
+          <h2 class="mag-h2" id="articles-titre">{t('Les récents')}</h2>
+          <p class="vide">{VIDE} <a href={lien('/ressources')}>{t('Toutes les ressources')}</a></p>
         </section>
       )}
     </div>
 
     <div class="mag-bloc">
       {listeGuides.length > 0 ? (
-        <ListeFilets entrees={listeGuides} titre="Les guides pratiques" niveau="h2" colonnes={2} id="guides" />
+        <ListeFilets entrees={listeGuides} titre={t('Les guides pratiques')} niveau="h2" colonnes={2} id="guides" />
       ) : (
         <section id="guides" aria-labelledby="guides-titre">
-          <h2 class="mag-h2" id="guides-titre">Les guides pratiques</h2>
-          <p class="vide">{VIDE} <a href="/ressources">Toutes les ressources</a></p>
+          <h2 class="mag-h2" id="guides-titre">{t('Les guides pratiques')}</h2>
+          <p class="vide">{VIDE} <a href={lien('/ressources')}>{t('Toutes les ressources')}</a></p>
         </section>
       )}
     </div>
 
-    <section class="mag-bloc outils" aria-label="Comparatifs et outils">
+    <section class="mag-bloc outils" aria-label={t('Comparatifs et outils')}>
       <div class="outils-groupe" id="comparatifs">
-        <h2 class="outils-titre">Les comparatifs</h2>
+        <h2 class="outils-titre">{t('Les comparatifs')}</h2>
         {listeComparatifs.length > 0 ? (
-          <ul>{listeComparatifs.map((o) => <li><a class="lien-fleche" href={o.href}>{o.titre} <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>)}</ul>
+          <ul>{listeComparatifs.map((o) => <li><a class="lien-fleche" href={o.href} hreflang={o.fr ? 'fr' : undefined}>{o.titre}{o.fr && <VersFr sr={SR_FR} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>)}</ul>
         ) : (
-          <p class="vide-encre">{VIDE} <a href="/ressources">Toutes les ressources</a></p>
+          <p class="vide-encre">{VIDE} <a href={lien('/ressources')}>{t('Toutes les ressources')}</a></p>
         )}
       </div>
       <div class="outils-groupe" id="outils">
-        <h2 class="outils-titre">Les outils</h2>
+        <h2 class="outils-titre">{t('Les outils')}</h2>
         <ul>
-          {OUTILS.map((o) => <li><a class="lien-fleche" href={o.href}>{o.titre} <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>)}
+          {OUTILS.map((o) => <li><a class="lien-fleche" href={o.href} hreflang={o.fr ? 'fr' : undefined}>{o.titre}{o.fr && <VersFr sr={SR_FR} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>)}
         </ul>
       </div>
     </section>

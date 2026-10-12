@@ -1,0 +1,66 @@
+<div class="ef-vue" data-forme="fenetre" data-menu="Éducateurs / Profs" data-hauteur="650" data-description="La pantalla Entrenadores / Profesores de la junta directiva de un club de fútbol, en vista Tarjetas: 9 entrenadores en activo, los 18 equipos con entrenador. En la ficha de Karim Mansouri, entrenador de los U13, la junta directiva acaba de tocar «Copiar su enlace de equipo»: el enlace está copiado, listo para enviárselo; es personal. Al lado, la ficha de Julie Moreau, entrenadora de los U9 y los U11.">
+<style>
+.ecran-fonction .eb-tete{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 16px;margin-bottom:14px}
+.ecran-fonction .eb-tete>div{display:flex;flex-direction:column;gap:4px;flex:1 1 240px;min-width:0}
+.ecran-fonction .eb-tuiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.ecran-fonction .eb-tuile{padding:12px 14px;border:1px solid var(--ef-trait);border-radius:18px;background:#fff}
+.ecran-fonction .eb-tuile b{display:block;margin:4px 0 2px;font:800 24px/1.1 var(--ef-h1)}
+.ecran-fonction .eb-tuile .ef-lib{font-size:10.5px}
+.ecran-fonction .eb-bascule{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:12px;font-size:11.5px;color:var(--ef-mu)}
+.ecran-fonction .eb-bascule .ef-bt{height:26px;font-size:11.5px}
+.ecran-fonction .eb-bascule .eb-aide{margin-left:auto}
+.ecran-fonction .eb-cartes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.ecran-fonction .eb-cartes .ef-carte{display:flex;flex-direction:column;gap:12px;margin:0}
+.ecran-fonction .eb-qui{display:flex;align-items:flex-start;gap:10px}
+.ecran-fonction .eb-qui>div{min-width:0}
+.ecran-fonction .eb-qui .ef-badge{margin-left:auto}
+.ecran-fonction .eb-vert{background:var(--ef-vert);color:var(--ef-vert-fonce)}
+.ecran-fonction .eb-puces{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.ecran-fonction .eb-puce{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:8px;background:var(--ef-creux);font-size:11.5px;font-weight:700}
+.ecran-fonction .eb-puce i{font-style:normal;color:var(--ef-mu)}
+.ecran-fonction .eb-select{display:flex;flex-direction:column;gap:4px;font-size:11.5px;font-weight:700;color:var(--ef-gris)}
+.ecran-fonction .eb-select span{display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 10px;border:1px solid #D9D6CC;border-radius:10px;background:#fff;font-weight:400;color:var(--ef-mu)}
+.ecran-fonction .eb-pied{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding-top:8px;border-top:1px solid var(--ef-trait)}
+.ecran-fonction .eb-pied .ef-danger{margin-left:auto}
+.ecran-fonction .eb-lien{display:flex;flex-direction:column;gap:6px}
+.ecran-fonction .eb-statut{font-size:11.5px;color:var(--ef-gris)}
+@container (max-width:759px){.ecran-fonction .eb-cartes{grid-template-columns:minmax(0,1fr)}.ecran-fonction .eb-bascule{display:none}}
+@container (max-width:519px){.ecran-fonction .eb-tuiles{display:none}.ecran-fonction .eb-tete .ef-bt{display:none}}
+</style>
+
+<div class="eb-tete">
+<div><div class="ef-h1">Entrenadores / Profesores</div><p class="ef-sous">2026-2027 · 9 entrenadores / profesores en activo</p></div>
+<span class="ef-bt ef-pri">Añadir</span>
+</div>
+
+<div class="eb-tuiles">
+<div class="eb-tuile"><span class="ef-lib">En activo</span><b>9</b><small class="ef-mu">0 retirados</small></div>
+<div class="eb-tuile"><span class="ef-lib">Cursos con entrenador</span><b>18</b><small class="ef-mu">de 18 cursos de la temporada</small></div>
+<div class="eb-tuile"><span class="ef-lib">Cursos sin nadie</span><b>0</b><small class="ef-mu">Cada curso tiene a alguien</small></div>
+</div>
+
+<div class="eb-bascule"><span>Vista</span><span class="ef-bt ef-quiet">Tabla</span><span class="ef-bt">Tarjetas</span><span class="eb-aide">Las asignaciones se modifican en vista Tarjetas</span></div>
+
+<div class="eb-cartes">
+<div class="ef-carte">
+<div class="eb-qui"><div><div class="ef-h3">Karim Mansouri</div><p class="ef-mu">karim.mansouri@exemple.fr · <span class="ef-nw">06 39 98 12 34</span></p></div><span class="ef-badge eb-vert">Entrenador</span></div>
+<div><span class="ef-lib">Sus cursos (1)</span><div class="eb-puces"><span class="eb-puce">U13 <i>×</i></span></div></div>
+<div class="eb-select">Asignar a un curso<span>Elegir un curso… <i aria-hidden="true">▾</i></span></div>
+<div class="eb-pied"><span class="ef-bt ef-quiet">Modificar</span><span class="ef-bt ef-quiet">Enviar su hoja</span><span class="ef-bt ef-danger">Retirar</span></div>
+<div class="eb-lien">
+<div class="ef-bts"><span class="ef-bt ef-presse">Copiar su enlace de equipo</span><span class="ef-bt ef-quiet">Renovar su enlace</span></div>
+<p class="eb-statut">Enlace copiado: envíeselo al entrenador, con él convoca a sus jugadores y pasa lista. Es personal.</p>
+</div>
+</div>
+
+<div class="ef-carte">
+<div class="eb-qui"><div><div class="ef-h3">Julie Moreau</div><p class="ef-mu">julie.moreau@exemple.fr · <span class="ef-nw">06 39 98 56 21</span></p></div><span class="ef-badge eb-vert">Entrenador</span></div>
+<div><span class="ef-lib">Sus cursos (2)</span><div class="eb-puces"><span class="eb-puce">U9 <i>×</i></span><span class="eb-puce">U11 <i>×</i></span></div></div>
+<div class="eb-select">Asignar a un curso<span>Elegir un curso… <i aria-hidden="true">▾</i></span></div>
+<div class="eb-pied"><span class="ef-bt ef-quiet">Modificar</span><span class="ef-bt ef-quiet">Enviar su hoja</span><span class="ef-bt ef-danger">Retirar</span></div>
+<div class="eb-lien">
+<div class="ef-bts"><span class="ef-bt">Copiar su enlace de equipo</span><span class="ef-bt ef-quiet">Renovar su enlace</span></div>
+</div>
+</div>
+</div>
+</div>

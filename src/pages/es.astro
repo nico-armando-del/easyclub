@@ -1,10 +1,9 @@
 ---
-/* L'accueil en espagnol : la traduction de src/pages/index.astro (textes : src/i18n/accueil.ts). */
-import LayoutLangue from '../layouts/LayoutLangue.astro'
-import AccueilLangue from '../components/langue/AccueilLangue.astro'
-import { TEXTES } from '../i18n/accueil'
-const l = TEXTES.es
+/*
+  L'ACCUEIL EN ESPAGNOL (/es) : l'accueil français src/pages/index.astro, avec les
+  mêmes composants ; ses textes passent par t() (src/i18n/ui.ts) et
+  src/i18n/accueil-es.ts. /en garde son gabarit à part (LayoutLangue).
+*/
+import Accueil from './index.astro'
 ---
-<LayoutLangue l={l} langue="es" faq={l.faq}>
-  <AccueilLangue l={l} langue="es" />
-</LayoutLangue>
+<Accueil />

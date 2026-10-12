@@ -1,0 +1,140 @@
+<style>
+.ec-terrain{--t-ink:#0E1116;--t-mint:var(--mint,#5DE88F);--t-sec:#5C5C54;--t-mut:#6E6E66;--t-bord:#E8E6DE;--t-lib:#ffb627;--t-fonce:#14211a;--t-head:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);width:100%;max-width:100%;margin:0 auto;font-family:var(--font-body,'Satoshi',system-ui,sans-serif);color:var(--t-ink);line-height:1.3;text-align:left;-webkit-font-smoothing:antialiased}
+.ec-terrain *{box-sizing:border-box}
+.ec-terrain .ec-t-cadre{position:relative;width:300px;max-width:100%;aspect-ratio:300/620;margin:0 auto}
+.ec-terrain .ec-t-tel{position:absolute;left:0;top:0;width:300px;height:620px;padding:8px;border-radius:46px;background:var(--t-ink);box-shadow:0 24px 48px -20px rgba(14,17,22,.45),inset 0 0 0 2px #2a2f37;transform-origin:0 0}
+.ec-terrain .ec-t-ecran{position:relative;width:284px;height:604px;border-radius:38px;overflow:hidden;background:#fff;isolation:isolate}
+.ec-terrain .ec-t-statut{height:36px;display:flex;align-items:center;justify-content:space-between;padding:2px 26px 0 30px;font-size:12px;font-weight:700}
+.ec-terrain .ec-t-ile{position:absolute;left:50%;top:10px;width:78px;height:22px;margin-left:-39px;border-radius:12px;background:var(--t-ink)}
+.ec-terrain .ec-t-pile{position:relative;width:22px;height:11px;border:1.5px solid var(--t-ink);border-radius:3px}
+.ec-terrain .ec-t-pile::after{content:"";position:absolute;left:1px;top:1px;bottom:1px;width:13px;border-radius:1px;background:var(--t-ink)}
+.ec-terrain .ec-t-page{display:flex;flex-direction:column;padding:2px 12px 0;transition:opacity .35s}
+.ec-terrain.ec-t-fondu .ec-t-page{opacity:0}
+.ec-terrain .ec-t-tete{display:flex;align-items:baseline;gap:8px;height:24px}
+.ec-terrain .ec-t-tete b{font:800 18px/1 var(--t-head);letter-spacing:-.02em}
+.ec-terrain .ec-t-tete span{font-size:12px;color:var(--t-sec)}
+.ec-terrain .ec-t-reg{align-self:flex-start;display:flex;align-items:center;gap:6px;height:30px;margin-top:8px;padding:0 10px;border:1px solid var(--t-bord);border-radius:12px;font-size:12px;white-space:nowrap}
+.ec-terrain .ec-t-btns{display:flex;flex-wrap:wrap;align-content:flex-start;align-items:center;gap:6px 2px;height:62px;margin-top:8px}
+.ec-terrain .ec-t-br{flex-basis:100%;height:0}
+.ec-terrain .ec-t-b{display:inline-flex;align-items:center;height:28px;padding:0 8px;border-radius:999px;font-size:12px;font-weight:700;color:var(--t-sec);white-space:nowrap;transition:opacity .25s,background-color .15s,transform .15s}
+.ec-terrain .ec-t-out{padding:0 11px;border:1.5px solid var(--t-ink);color:var(--t-ink)}
+.ec-terrain .ec-t-ann{color:#6E6E66}
+.ec-terrain.ec-t-part .ec-t-ann{color:var(--t-sec)}
+.ec-terrain .ec-t-rot{font-variant-numeric:tabular-nums}
+.ec-terrain .ec-t-rot.ec-t-appui{background:#F2F1EB;transform:scale(.95)}
+.ec-terrain .ec-t-etat{margin-left:auto;font-size:12px;color:var(--t-sec)}
+.ec-terrain .ec-t-en,.ec-terrain.ec-t-enreg .ec-t-ok,.ec-terrain .ec-t-n2,.ec-terrain.ec-t-tourne .ec-t-n1,.ec-terrain .ec-t-c1,.ec-terrain.ec-t-part .ec-t-c2{display:none}
+.ec-terrain.ec-t-enreg .ec-t-en,.ec-terrain.ec-t-tourne .ec-t-n2,.ec-terrain.ec-t-part .ec-t-c1{display:inline}
+.ec-terrain .ec-t-note{height:32px;margin:6px 0 0;font-size:12px;line-height:16px;color:var(--t-sec);opacity:0;transition:opacity .4s}
+.ec-terrain.ec-t-tourne .ec-t-note{opacity:1}
+.ec-terrain .ec-t-sol{position:relative;flex:none;height:260px;margin-top:6px;border-radius:22px;overflow:hidden;background:#c46a3c}
+.ec-terrain .ec-t-sol svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.ec-terrain .ec-t-filet{position:absolute;left:0;right:0;top:5px;text-align:center;font-size:12px;line-height:14px;color:rgba(255,255,255,.85)}
+.ec-terrain .ec-t-p{position:absolute;display:flex;flex-direction:column;align-items:center;gap:1px;transform:translate(-50%,-50%);transition:left .7s cubic-bezier(.45,0,.2,1),top .7s cubic-bezier(.45,0,.2,1)}
+.ec-terrain .ec-t-p[data-z="4"],.ec-terrain.ec-t-tourne .ec-t-p[data-z="5"]{left:20%;top:30%}
+.ec-terrain .ec-t-p[data-z="3"],.ec-terrain.ec-t-tourne .ec-t-p[data-z="4"]{left:50%;top:30%}
+.ec-terrain .ec-t-p[data-z="2"],.ec-terrain.ec-t-tourne .ec-t-p[data-z="3"]{left:80%;top:30%}
+.ec-terrain .ec-t-p[data-z="5"],.ec-terrain.ec-t-tourne .ec-t-p[data-z="6"]{left:20%;top:68%}
+.ec-terrain .ec-t-p[data-z="6"],.ec-terrain.ec-t-tourne .ec-t-p[data-z="1"]{left:50%;top:68%}
+.ec-terrain .ec-t-p[data-z="1"],.ec-terrain.ec-t-tourne .ec-t-p[data-z="2"]{left:80%;top:68%}
+.ec-terrain .ec-t-lib{left:50%;top:90%}
+.ec-terrain .ec-t-rond{position:relative;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--t-fonce);font:800 15px/1 var(--t-head);font-variant-numeric:tabular-nums;box-shadow:0 1px 3px rgba(0,0,0,.35);transition:background-color .25s,border-color .25s}
+.ec-terrain .ec-t-badge{position:absolute;top:-7px;right:-13px;min-width:18px;padding:0 4px;border-radius:8px;background:var(--t-fonce);color:#fff;font:800 12px/16px var(--t-head);font-style:normal;text-align:center;box-shadow:0 0 0 2px #fff}
+.ec-terrain .ec-t-nom{max-width:58px;overflow:hidden;padding:0 5px;border-radius:8px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;line-height:15px;white-space:nowrap;text-overflow:ellipsis}
+.ec-terrain .ec-t-lib .ec-t-rond{border:2px dashed rgba(255,255,255,.7);background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);box-shadow:none}
+.ec-terrain .ec-t-rond b{grid-area:1/1;font-weight:800}
+.ec-terrain .ec-t-pl,.ec-terrain.ec-t-pose .ec-t-v{display:none}
+.ec-terrain.ec-t-pose .ec-t-pl{display:block}
+.ec-terrain .ec-t-lib .ec-t-badge,.ec-terrain .ec-t-lib .ec-t-nom{opacity:0}
+.ec-terrain.ec-t-choix .ec-t-lib .ec-t-rond{border-color:#fff;background:rgba(255,255,255,.3)}
+.ec-terrain.ec-t-pose .ec-t-lib .ec-t-rond{border:0;background:var(--t-lib);color:var(--t-fonce);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.ec-terrain.ec-t-pose .ec-t-lib .ec-t-badge,.ec-terrain.ec-t-pose .ec-t-lib .ec-t-nom{opacity:1}
+.ec-terrain .ec-t-banc,.ec-terrain .ec-t-res{flex:none;margin-top:10px;padding:9px 10px;border:1px solid var(--t-bord);border-radius:22px;transition:border-color .2s}
+.ec-terrain .ec-t-banc{height:84px}
+.ec-terrain.ec-t-choix .ec-t-banc{border-style:dashed;border-color:var(--t-mint)}
+.ec-terrain .ec-t-bh{display:flex;align-items:baseline;justify-content:space-between}
+.ec-terrain .ec-t-bh b{font-size:14px}
+.ec-terrain .ec-t-bh span{font-size:12px;color:var(--t-mut)}
+.ec-terrain .ec-t-pions{display:flex;margin-top:8px}
+.ec-terrain .ec-t-pion{display:flex;align-items:center;gap:6px;max-width:130px;height:40px;margin-right:8px;padding:0 10px 0 5px;overflow:hidden;border:1px solid var(--t-bord);border-radius:8px;white-space:nowrap;transition:opacity .2s,max-width .35s .1s,padding .35s .1s,margin .35s .1s,border-color .2s,box-shadow .2s}
+.ec-terrain .ec-t-pion b,.ec-terrain .ec-t-pion small{display:block;font-size:12px;line-height:15px}
+.ec-terrain .ec-t-pion b{font-weight:600}
+.ec-terrain .ec-t-pion small{color:var(--t-mut)}
+.ec-terrain .ec-t-av{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#F2F1EB;font:800 12px/1 var(--t-head)}
+.ec-terrain .ec-t-av.ec-t-l{background:var(--t-lib);color:var(--t-fonce)}
+.ec-terrain.ec-t-choix .ec-t-ines{border-color:var(--t-mint);box-shadow:0 0 0 2px var(--t-mint)}
+.ec-terrain.ec-t-part .ec-t-ines{max-width:0;margin-right:0;padding:0;border-width:0;opacity:0}
+.ec-terrain .ec-t-fiche{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:10px 12px 14px;border:1px solid var(--t-mint);border-bottom:0;border-radius:22px 22px 0 0;background:#fff;box-shadow:0 -8px 24px rgba(0,0,0,.18);transform:translateY(calc(100% + 40px));transition:transform .32s cubic-bezier(.3,.7,.2,1)}
+.ec-terrain.ec-t-choix .ec-t-fiche{transform:none}
+.ec-terrain .ec-t-fl{display:flex;align-items:center;gap:10px}
+.ec-terrain .ec-t-fl .ec-t-av{width:36px;height:36px;font-size:15px}
+.ec-terrain .ec-t-fid{flex:1;min-width:0}
+.ec-terrain .ec-t-fid b{display:block;font-size:14px}
+.ec-terrain .ec-t-fid span{font-size:12px;color:var(--t-sec)}
+.ec-terrain .ec-t-fl u{font-size:12px;text-underline-offset:2px}
+.ec-terrain .ec-t-fiche p{margin:6px 0;font-size:12px;line-height:16px;color:var(--t-sec)}
+.ec-terrain .ec-t-fant{position:absolute;left:-17px;top:-17px;z-index:4;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--t-lib);color:var(--t-fonce);font:800 15px/1 var(--t-head);box-shadow:0 0 0 4px var(--t-mint),0 8px 16px rgba(0,0,0,.3);opacity:0}
+.ec-terrain .ec-t-doigt{position:absolute;left:-19px;top:-19px;z-index:5;width:38px;height:38px;opacity:0;transition:transform .7s cubic-bezier(.4,0,.2,1),opacity .3s}
+.ec-terrain .ec-t-doigt::before,.ec-terrain .ec-t-doigt::after{content:"";position:absolute;inset:0;border-radius:50%}
+.ec-terrain .ec-t-doigt::before{border:2px solid rgba(255,255,255,.95);background:rgba(14,17,22,.3);box-shadow:0 4px 12px rgba(14,17,22,.3);transition:transform .15s}
+.ec-terrain .ec-t-doigt::after{border:2px solid var(--t-mint);opacity:0}
+.ec-terrain .ec-t-doigt.ec-t-presse::before{transform:scale(.78)}
+.ec-terrain .ec-t-doigt.ec-t-onde::after{animation:ec-terrain-onde .55s ease-out}
+.ec-terrain .ec-t-home{position:absolute;left:50%;bottom:7px;z-index:4;width:96px;height:4px;margin-left:-48px;border-radius:4px;background:var(--t-ink);opacity:.8}
+.ec-terrain .ec-t-leg{margin:14px 0 0;text-align:center;font-size:12px;line-height:1.4;color:var(--gray,#6E6E66)}
+.ec-terrain.ec-t-sans *,.ec-terrain.ec-t-sans *::before,.ec-terrain.ec-t-sans *::after{transition:none!important}
+@keyframes ec-terrain-onde{from{opacity:.9;transform:scale(.6)}to{opacity:0;transform:scale(1.9)}}
+@media (prefers-reduced-motion:reduce){.ec-terrain *,.ec-terrain *::before,.ec-terrain *::after{transition:none!important;animation:none!important}}
+</style>
+<div class="ec ec-terrain" role="img" aria-label="En el móvil del entrenador, el equipo tipo de un equipo de vóley en la pista dibujada: un dedo toca a la líbero en el banquillo, y después el puesto de líbero, donde se coloca su ficha; una pulsación en «Rotación» hace girar después a las seis jugadoras un puesto.">
+  <div class="ec-t-cadre">
+    <div class="ec-t-tel">
+      <div class="ec-t-ecran">
+        <div class="ec-t-statut"><span>18:42</span><i class="ec-t-ile"></i><i class="ec-t-pile"></i></div>
+        <div class="ec-t-page">
+          <div class="ec-t-tete"><b>Sénior femenino</b><span>10 jugadoras</span></div>
+          <div class="ec-t-reg">Vóley a 6 · 5-1, colocadora en 1 <span>▾</span></div>
+          <div class="ec-t-btns">
+            <span class="ec-t-b ec-t-out">Completar por puestos</span><span class="ec-t-b">Vaciar todo</span><i class="ec-t-br"></i>
+            <span class="ec-t-b ec-t-ann">Deshacer</span><span class="ec-t-b ec-t-rot">↻ Rotación&nbsp;<span class="ec-t-n1">1</span><span class="ec-t-n2">2</span>/6</span>
+            <span class="ec-t-etat"><span class="ec-t-ok">Guardado</span><span class="ec-t-en">Guardando…</span></span>
+          </div>
+          <p class="ec-t-note">Rotación 2/6 · colocadora en zona 6 — solo una vista: la alineación guardada no cambia.</p>
+          <div class="ec-t-sol">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,.75)" stroke-width=".6"><rect x="8" y="10" width="84" height="76"/><path d="M8 35H92"/></g><path d="M4 10H96" stroke="rgba(255,255,255,.95)" stroke-width="1.6"/><path d="M8 88H92" stroke="rgba(255,255,255,.35)" stroke-width=".4" stroke-dasharray="1.5 1.5"/></svg>
+            <span class="ec-t-filet">red</span>
+            <span class="ec-t-p" data-z="4"><span class="ec-t-rond">9<i class="ec-t-badge">OP</i></span><span class="ec-t-nom">Manon</span></span>
+            <span class="ec-t-p" data-z="3"><span class="ec-t-rond">12<i class="ec-t-badge">C</i></span><span class="ec-t-nom">Jade</span></span>
+            <span class="ec-t-p" data-z="2"><span class="ec-t-rond">4<i class="ec-t-badge">R4</i></span><span class="ec-t-nom">Lou</span></span>
+            <span class="ec-t-p" data-z="5"><span class="ec-t-rond">7<i class="ec-t-badge">R4</i></span><span class="ec-t-nom">Chloé</span></span>
+            <span class="ec-t-p" data-z="6"><span class="ec-t-rond">15<i class="ec-t-badge">C</i></span><span class="ec-t-nom">Sarah</span></span>
+            <span class="ec-t-p" data-z="1"><span class="ec-t-rond">3<i class="ec-t-badge">CO</i></span><span class="ec-t-nom">Léa</span></span>
+            <span class="ec-t-p ec-t-lib"><span class="ec-t-rond"><b class="ec-t-v">L</b><b class="ec-t-pl">1</b><i class="ec-t-badge">L</i></span><span class="ec-t-nom">Inès</span></span>
+          </div>
+          <div class="ec-t-banc">
+            <div class="ec-t-bh"><b>Banquillo</b><span><span class="ec-t-c2">2</span><span class="ec-t-c1">1</span> de 6 habituales</span></div>
+            <div class="ec-t-pions">
+              <span class="ec-t-pion ec-t-ines"><span class="ec-t-av ec-t-l">1</span><span><b>Inès R.</b><small>Líbero</small></span></span>
+              <span class="ec-t-pion"><span class="ec-t-av">11</span><span><b>Clara M.</b><small>Central</small></span></span>
+            </div>
+          </div>
+          <div class="ec-t-res">
+            <div class="ec-t-bh"><b>No convocadas</b></div>
+            <div class="ec-t-pions">
+              <span class="ec-t-pion"><span class="ec-t-av">10</span><span><b>Zoé B.</b><small>Opuesta</small></span></span>
+              <span class="ec-t-pion"><span class="ec-t-av">6</span><span><b>Emma L.</b><small>Receptora-atacante</small></span></span>
+            </div>
+          </div>
+        </div>
+        <div class="ec-t-fiche">
+          <div class="ec-t-fl"><span class="ec-t-av ec-t-l">1</span><span class="ec-t-fid"><b>Inès Roussel</b><span>n.º 1 · Líbero</span></span><u>Cerrar</u></div>
+          <p>Toque un puesto, una suplente, el banquillo o «Fuera de la pista».</p>
+          <span class="ec-t-b ec-t-out">Ficha y funciones</span>
+        </div>
+        <span class="ec-t-fant">1</span>
+        <span class="ec-t-doigt"></span>
+        <i class="ec-t-home"></i>
+      </div>
+    </div>
+  </div>
+</div>

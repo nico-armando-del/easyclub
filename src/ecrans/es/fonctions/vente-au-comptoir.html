@@ -1,0 +1,72 @@
+<div class="ef-vue ef-vc" data-forme="fenetre" data-menu="Boutique" data-hauteur="640" data-description="La pestaña «Vender en el club» de la tienda de un club de fútbol, el día del partido. Una venta lista para cobrar: una camiseta de partido de 12 años y una bufanda del club, 47 euros, para Nadia Haddad. Dos botones: «Cobrado en efectivo · 47 €» y «Pagar con tarjeta».">
+<div class="ef-tete"><div class="ef-h1">Tienda</div><div class="ef-sous ef-cache-etroit">Lo que queda en estantería, los paquetes por preparar y lo que usted vende de verdad.</div></div>
+
+<div class="vc-onglets"><span class="ef-bt">Stock y pedidos</span><span class="ef-bt ef-pri">Vender en el club</span><span class="ef-bt ef-quiet ef-cache-etroit">Lo que se vende</span><span class="ef-bt ef-quiet ef-cache-etroit">Mis artículos</span></div>
+
+<div class="ef-carte vc-carte">
+<div class="ef-h3">Vender en el club</div>
+
+<div class="vc-art">
+<div class="vc-at"><b>Camiseta de partido</b><span>35&nbsp;€</span></div>
+<div class="vc-dec"><span class="vc-lib">12 años</span><span class="vc-st">5 en stock</span><span class="vc-cpt"><i>−</i><output>1</output><i>+</i></span></div>
+<div class="vc-dec"><span class="vc-lib">14 años</span><span class="vc-st">Agotado</span><span class="vc-cpt"><i class="vc-off">−</i><output>0</output><i class="vc-off">+</i></span></div>
+</div>
+
+<div class="vc-art">
+<div class="vc-at"><b>Bufanda del club</b><span>12&nbsp;€</span></div>
+<div class="vc-dec"><span class="vc-lib">Talla única</span><span class="vc-st">18 en stock</span><span class="vc-cpt"><i>−</i><output>1</output><i>+</i></span></div>
+</div>
+
+<div class="vc-pied"><span class="ef-p">1 × Camiseta de partido · 12 años, 1 × Bufanda del club · Talla única</span><b>47&nbsp;€</b></div>
+
+<div class="vc-champs">
+<div class="vc-ch"><span>Nombre del cliente <em>*</em></span><i>Nadia Haddad</i></div>
+<div class="vc-ch"><span>Correo electrónico</span><i></i></div>
+<div class="vc-ch ef-cache-etroit"><span>Teléfono</span><i></i></div>
+</div>
+
+<div class="vc-case"><i></i><div><b>El artículo se va con el cliente</b></div></div>
+
+<div class="ef-bts"><span class="ef-bt ef-pri">Cobrado en efectivo · 47&nbsp;€</span><span class="ef-bt">Pagar con tarjeta</span></div>
+</div>
+
+<style>
+.ecran-fonction .ef-vue.ef-vc{padding-bottom:30px}
+.ecran-fonction .vc-onglets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ecran-fonction .ef-vc>.ef-alerte{margin-bottom:12px}
+.ecran-fonction .vc-carte{display:flex;flex-direction:column;gap:10px;padding:16px 18px}
+.ecran-fonction .vc-carte>.ef-p{margin-top:-6px}
+.ecran-fonction .vc-art{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1px solid var(--ef-trait);border-radius:12px}
+.ecran-fonction .vc-at{display:flex;align-items:baseline;gap:10px}
+.ecran-fonction .vc-at span{font-size:12.5px;color:var(--ef-gris)}
+.ecran-fonction .vc-dec{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.ecran-fonction .vc-lib{min-width:92px}
+.ecran-fonction .vc-st{min-width:84px;font-size:11.5px;color:var(--ef-mu)}
+.ecran-fonction .vc-cpt{display:inline-flex;align-items:center;gap:3px}
+.ecran-fonction .vc-cpt i{display:grid;place-items:center;width:26px;height:26px;border:1.5px solid #D9D6CC;border-radius:99px;background:#fff;font-style:normal;font-size:15px;line-height:1;font-weight:700}
+.ecran-fonction .vc-cpt i.vc-off{opacity:.38}
+.ecran-fonction .vc-cpt output{width:24px;text-align:center;font:800 14px var(--ef-h1)}
+.ecran-fonction .vc-pied{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid var(--ef-trait)}
+.ecran-fonction .vc-pied b{flex:none;font:800 20px var(--ef-h1)}
+.ecran-fonction .vc-champs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ecran-fonction .vc-ch span{display:block;font-size:11.5px;font-weight:700;color:var(--ef-gris);margin-bottom:3px}
+.ecran-fonction .vc-ch em{font-style:normal;color:#9B2C28}
+.ecran-fonction .vc-ch i{display:block;height:30px;line-height:27px;padding:0 10px;border:1.5px solid #D9D6CC;border-radius:10px;background:#fff;font-style:normal;font-size:12.5px}
+.ecran-fonction .vc-ch small{display:block;margin-top:3px;font-size:11px;line-height:1.3;color:var(--ef-mu)}
+.ecran-fonction .vc-case{display:flex;gap:8px;align-items:flex-start;font-size:12.5px}
+.ecran-fonction .vc-case>i{flex:none;width:15px;height:15px;margin-top:1px;border-radius:4px;background:var(--ef-vert);box-shadow:inset 0 0 0 2.5px #fff;border:1.5px solid var(--ef-vert)}
+.ecran-fonction .vc-case span{display:block;margin-top:2px}
+@container (max-width:519px){
+  .ecran-fonction .vc-champs{grid-template-columns:1fr}
+  .ecran-fonction .vc-carte .ef-cache-etroit{display:none}
+  .ecran-fonction .vc-art{padding:8px 10px}
+  .ecran-fonction .vc-dec{gap:6px}
+  .ecran-fonction .vc-lib{flex:1;min-width:0}
+  .ecran-fonction .vc-st{min-width:0}
+  .ecran-fonction .vc-cpt i{width:24px;height:24px}
+  .ecran-fonction .vc-cpt output{width:18px}
+  .ecran-fonction .vc-champs{gap:8px}
+  .ecran-fonction .vc-pied .ef-p{font-size:11.5px}
+}
+</style>
+</div>

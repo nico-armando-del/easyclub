@@ -12,37 +12,46 @@ import TuileFonction from '../components/TuileFonction.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
 import Bento from '../components/Bento.astro'
-import { parFamille, url } from '../lib/collections'
+import { parFamille } from '../lib/collections'
+import { existeEcranFonctionEs } from '../lib/ecransFonction'
+import { i18n } from '../i18n/ui'
 
-const familles = await parFamille()
+/* Une seule page pour les deux langues : /es/fonctionnalites l'importe (src/pages/es/), les textes passent par t(). */
+const { langue, t, lien } = i18n(Astro.url)
+const familles = await parFamille(langue)
 const total = familles.reduce((s, f) => s + f.items.length, 0)
-const fil = [{ nom: 'Fonctionnalités', url: '/fonctionnalites' }]
+const fil = [{ nom: t('Fonctionnalités'), url: lien('/fonctionnalites') }]
 const faq = [
-  { question: 'Faut-il prendre toutes les fonctionnalités ?', reponse: 'Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances, les pièces, les convocations, l’appel et la compo du match. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.' },
-  { question: 'Où arrive l’argent payé par carte ?', reponse: 'Sur le compte de l’association, déduction faite de la part OnClub et des frais de carte. Les chèques et les espèces se notent dans le dossier, au centime, et ne passent pas par la commission.' },
-  { question: 'Peut-on reprendre nos fichiers de la saison passée ?', reponse: 'Oui. Vous déposez le tableur de la saison passée, en CSV : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription. Vous relisez ce qui a été lu avant de valider.' },
-  { question: 'Un encadrant doit-il créer un compte ?', reponse: 'Non. Le bureau lui transmet un lien personnel, sans compte ni mot de passe. Il fait l’appel et prépare la compo depuis son téléphone, sans voir ni adresse ni téléphone des familles.' },
+  { question: t('Faut-il prendre toutes les fonctionnalités ?'), reponse: t('Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances, les pièces, les convocations, l’appel et la compo du match. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.') },
+  { question: t('Où arrive l’argent payé par carte ?'), reponse: t('Sur le compte de l’association, déduction faite de la part OnClub et des frais de carte. Les chèques et les espèces se notent dans le dossier, au centime, et ne passent pas par la commission.') },
+  { question: t('Peut-on reprendre nos fichiers de la saison passée ?'), reponse: t('Oui. Vous déposez le tableur de la saison passée, en CSV : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription. Vous relisez ce qui a été lu avant de valider.') },
+  { question: t('Un encadrant doit-il créer un compte ?'), reponse: t('Non. Le bureau lui transmet un lien personnel, sans compte ni mot de passe. Il fait l’appel et prépare la compo depuis son téléphone, sans voir ni adresse ni téléphone des familles.') },
 ]
+/* La vignette d'écran d'une tuile : en espagnol, seulement si l'écran traduit existe (jamais d'écran français). */
+const vignette = (e: { id: string; data: any }) => {
+  const nom = e.data.ecranFonction === true ? e.id : e.data.ecranFonction || undefined
+  return nom && (langue === 'fr' || existeEcranFonctionEs(nom)) ? nom : undefined
+}
 ---
 <Layout
-  titre="Fonctionnalités pour gérer une association | OnClub"
-  description={`Les ${total} fonctionnalités d’OnClub en six familles : inscrire, encaisser, organiser, communiquer, vendre, piloter. Le nom, et le temps que chacune vous rend.`}
-  chemin="/fonctionnalites"
+  titre={t('Fonctionnalités pour gérer une association | OnClub')}
+  description={t('Les {n} fonctionnalités d’OnClub en six familles : inscrire, encaisser, organiser, communiquer, vendre, piloter. Le nom, et le temps que chacune vous rend.', { n: total })}
+  chemin={lien('/fonctionnalites')}
   fil={fil}
   faq={faq}
 >
   <HerosCompact
     fil={fil}
-    surtitre="Les fonctionnalités"
-    titre="Chaque soirée perdue a sa fonctionnalité"
-    phrase={`${total} fonctionnalités en six familles, chacune avec le temps qu’elle vous rend. Estimation pour 250 adhérents, pas une étude.`}
-    cta={{ texte: 'Demander une démo', href: '/demo' }}
-    lien={{ texte: 'Voir les offres', href: '/tarifs' }}
+    surtitre={t('Les fonctionnalités')}
+    titre={t('Chaque soirée perdue a sa fonctionnalité')}
+    phrase={t('{n} fonctionnalités en six familles, chacune avec le temps qu’elle vous rend. Estimation pour 250 adhérents, pas une étude.', { n: total })}
+    cta={{ texte: t('Demander une démo'), href: lien('/demo') }}
+    lien={{ texte: t('Voir les offres'), href: lien('/tarifs') }}
   />
 
   <section class="section section-bento" aria-labelledby="t-familles">
     <div class="enveloppe">
-      <Bento titre="Les six familles" niveau="h2" lienTout={false} id="t-familles" />
+      <Bento titre={t('Les six familles')} niveau="h2" lienTout={false} id="t-familles" />
     </div>
   </section>
 
@@ -50,11 +59,11 @@ const faq = [
     <section class="section famille" id={f.ancre} aria-labelledby={`t-${f.ancre}`}>
       <div class="enveloppe">
         <div class="section-tete">
-          <h2 id={`t-${f.ancre}`} class="h2-idee">{f.cle}</h2>
+          <h2 id={`t-${f.ancre}`} class="h2-idee">{t(f.cle)}</h2>
         </div>
         <ul class="tuiles">
           {f.items.map((e) => (
-            <li><TuileFonction nom={e.data.nom} ligne={e.data.ligne} href={url('fonctionnalites', e.id)} offre={e.data.offre} ecran={e.data.ecranFonction === true ? e.id : e.data.ecranFonction || undefined} /></li>
+            <li><TuileFonction nom={e.nom} ligne={e.ligne ?? ''} href={e.url} offre={e.data.offre} ecran={vignette(e)} fr={e.fr} /></li>
           ))}
         </ul>
       </div>

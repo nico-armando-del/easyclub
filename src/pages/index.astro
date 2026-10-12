@@ -24,54 +24,79 @@ import BandeAssociations from '../components/BandeAssociations.astro'
 import Offres from '../components/Offres.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
+import EcranTraduit from '../components/langue/EcranTraduit.astro'
+import VersFr from '../components/langue/VersFr.astro'
 import { cartesSports, cartesArts } from '../i18n/bande'
-import { liste, url } from '../lib/collections'
+import { catalogue } from '../lib/collections'
 import { MISE_EN_ROUTE } from '../data/site'
+import { i18n, SR_FR } from '../i18n/ui'
+import { ECRANS_ES } from '../i18n/accueil-es'
 
-const guides = await liste('guides')
-const articles = await liste('articles')
-const comparatifs = await liste('comparatifs')
+/*
+  UNE SEULE PAGE POUR LES DEUX ACCUEILS : / et /es (src/pages/es.astro l'importe).
+  Les phrases passent par t() (src/i18n/ui.ts) ; les textes en bloc du héros et de la
+  semaine viennent de src/i18n/accueil-es.ts ; sur /es, les écrans animés sont remplacés
+  par leur état final traduit (EcranTraduit), en attendant src/ecrans/es/.
+*/
+const { langue, t, lien, versFr } = i18n(Astro.url)
+const es = langue === 'es'
+/** Un lien vers une autre page : l'adresse dans la langue, et l'étiquette « FR » s'il reste en français. */
+const vers = (chemin: string) => ({ href: lien(chemin), hreflang: versFr(chemin) ? 'fr' : undefined, fr: versFr(chemin) })
+
 const ressources = [
-  ...guides.map((e) => ({ e, c: 'guides' as const })),
-  ...articles.map((e) => ({ e, c: 'articles' as const })),
-  ...comparatifs.map((e) => ({ e, c: 'comparatifs' as const })),
+  ...(await catalogue('guides', langue)).map((e) => ({ e, c: 'guides' as const })),
+  ...(await catalogue('articles', langue)).map((e) => ({ e, c: 'articles' as const })),
+  ...(await catalogue('comparatifs', langue)).map((e) => ({ e, c: 'comparatifs' as const })),
 ].slice(0, 3)
 
 /* La bande : les clubs de sport d'abord (au moins 8), puis deux activités artistiques (Nico, 10 oct.). */
-const bande = [...(await cartesSports('fr')), ...(await cartesArts())]
+const bande = [...(await cartesSports(langue)), ...(await cartesArts(langue))]
 
 /* L'inscription et la relance sont déjà dans le héros : les onglets montrent la suite. Le visiteur clique (rien ne s'enchaîne seul). */
 const ONGLETS = [
-  { id: 'rentree', libelle: 'Rentrée suivante', ecran: 'reinscription' as const, phrase: 'La rentrée suivante, sans tout refaire.', lien: { texte: 'Saison suivante', href: '/fonctionnalites/saison-suivante' } },
-  { id: 'compo', libelle: 'Compo du match', ecran: 'terrain' as const, phrase: 'Le samedi, la compo se fait d’un geste.', lien: { texte: 'Compo du match', href: '/fonctionnalites/compo-du-match' } },
-  { id: 'convocations', libelle: 'Convocations', ecran: 'terrain' as const, phrase: 'La famille répond présent ou absent depuis le mail, sans compte.', lien: { texte: 'Convocations en ligne', href: '/fonctionnalites/convocations' } },
-  { id: 'site', libelle: 'Site du club', ecran: 'site' as const, phrase: 'Le site du club se met à jour sans prestataire.', lien: { texte: 'Site de l’association', href: '/fonctionnalites/site-association' } },
-]
+  { id: 'rentree', libelle: t('Rentrée suivante'), ecran: 'reinscription' as const, phrase: t('La rentrée suivante, sans tout refaire.'), lien: { texte: t('Saison suivante'), href: '/fonctionnalites/saison-suivante' } },
+  { id: 'compo', libelle: t('Compo du match'), ecran: 'terrain' as const, phrase: t('Le samedi, la compo se fait d’un geste.'), lien: { texte: t('Compo du match'), href: '/fonctionnalites/compo-du-match' } },
+  { id: 'convocations', libelle: t('Convocations'), ecran: 'terrain' as const, phrase: t('La famille répond présent ou absent depuis le mail, sans compte.'), lien: { texte: t('Convocations en ligne'), href: '/fonctionnalites/convocations' } },
+  { id: 'site', libelle: t('Site du club'), ecran: 'site' as const, phrase: t('Le site du club se met à jour sans prestataire.'), lien: { texte: t('Site de l’association'), href: '/fonctionnalites/site-association' } },
+].map((o) => ({ ...o, lien: { texte: o.lien.texte, href: lien(o.lien.href) } }))
+/* Sur /es, un onglet dont la page n'est pas encore traduite garde son lien français : l'étiquette « FR » est posée par OngletsProduit (versFr). */
+const ongletsVersFr = es && ONGLETS.some((o) => !o.lien.href.startsWith('/es')) ? SR_FR : undefined
 
 /* La FAQ : six questions, inchangées (arbitrage 14) ; le JSON-LD est construit à partir de la même liste. */
 const faq = [
-  { question: 'OnClub, c’est pour quelles associations ?', reponse: 'Pour toutes celles qui inscrivent des adhérents, avec des équipes ou des cours et des cotisations : d’abord les clubs de sport (foot, basket, volley, judo, tennis…), aussi les écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.' },
-  { question: 'Combien coûte OnClub ?', reponse: 'Un abonnement au pourcentage des cotisations encaissées en ligne : 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA, plus 2 % sur la boutique. Rien de fixe, et rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.' },
-  { question: 'D’où viennent les 61 heures rendues ?', reponse: 'C’est une estimation OnClub pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnClub. Le calcul et les hypothèses sont sur la page du temps gagné.' },
-  { question: 'Les familles doivent-elles créer un compte ?', reponse: 'Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien. Pour une convocation, elle répond présent ou absent depuis le mail.' },
-  { question: 'En combien de temps notre association est-elle en ligne ?', reponse: `${MISE_EN_ROUTE} Vous déposez le tableur de la saison passée : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription.` },
-  { question: 'Je suis adhérent ou parent : comment proposer OnClub à mon club ?', reponse: 'Utilisez la page « Transmettre à mon club » : elle prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail, avec ce que l’association y gagne. Vous n’avez rien à installer et rien à remplir pour nous.' },
+  { question: t('OnClub, c’est pour quelles associations ?'), reponse: t('Pour toutes celles qui inscrivent des adhérents, avec des équipes ou des cours et des cotisations : d’abord les clubs de sport (foot, basket, volley, judo, tennis…), aussi les écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
+  { question: t('Combien coûte OnClub ?'), reponse: t('Un abonnement au pourcentage des cotisations encaissées en ligne : 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA, plus 2 % sur la boutique. Rien de fixe, et rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.') },
+  { question: t('D’où viennent les 61 heures rendues ?'), reponse: t('C’est une estimation OnClub pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnClub. Le calcul et les hypothèses sont sur la page du temps gagné.') },
+  { question: t('Les familles doivent-elles créer un compte ?'), reponse: t('Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien. Pour une convocation, elle répond présent ou absent depuis le mail.') },
+  { question: t('En combien de temps notre association est-elle en ligne ?'), reponse: `${t(MISE_EN_ROUTE)} ${t('Vous déposez le tableur de la saison passée : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription.')}` },
+  { question: t('Je suis adhérent ou parent : comment proposer OnClub à mon club ?'), reponse: t('Utilisez la page « Transmettre à mon club » : elle prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail, avec ce que l’association y gagne. Vous n’avez rien à installer et rien à remplir pour nous.') },
 ]
+const demo = vers('/demo')
+const temps = vers('/temps-gagne')
+const pourQui = vers('/pour-qui')
 ---
 <Layout
-  titre="Club de sport : inscriptions et cotisations en ligne | OnClub"
-  description="Club de sport ou association : OnClub met en ligne vos inscriptions, vos cotisations et vos relances. Foot, basket, volley, judo… et aussi la musique."
-  chemin="/"
+  titre={t('Club de sport : inscriptions et cotisations en ligne | OnClub')}
+  description={t('Club de sport ou association : OnClub met en ligne vos inscriptions, vos cotisations et vos relances. Foot, basket, volley, judo… et aussi la musique.')}
+  chemin={lien('/')}
   faq={faq}
-  langues={true}
 >
   <SceneAccueil
-    titre="Association sportive ou artistique ? La paperasse, c’est fini"
-    phrase="OnClub met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées."
-    cta={{ texte: 'Demander une démo', href: '/demo' }}
-  />
+    titre={t('Association sportive ou artistique ? La paperasse, c’est fini')}
+    phrase={t('OnClub met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées.')}
+    cta={{ texte: t('Demander une démo'), href: demo.href }}
+    ctaVersFr={demo.fr ? SR_FR : undefined}
+  >
+    {es && <EcranTraduit slot="ecran-tel" x={ECRANS_ES.inscription} />}
+    {es && <EcranTraduit slot="ecran-tab" x={ECRANS_ES.tableau} />}
+  </SceneAccueil>
 
-  <SemaineBureau />
+  <SemaineBureau versFr={temps.fr ? SR_FR : undefined}>
+    {es && <EcranTraduit slot="ecran-0" x={ECRANS_ES.inscription} />}
+    {es && <EcranTraduit slot="ecran-1" x={ECRANS_ES.tableau} />}
+    {es && <EcranTraduit slot="ecran-2" x={ECRANS_ES.relance} />}
+    {es && <EcranTraduit slot="ecran-4" x={ECRANS_ES.reinscription} />}
+  </SemaineBureau>
 
   <section class="section" id="fonctionnalites" aria-labelledby="t-bento">
     <div class="enveloppe"><Bento /></div>
@@ -79,7 +104,8 @@ const faq = [
 
   <section class="section" aria-labelledby="onglets-titre">
     <div class="enveloppe sur-encre">
-      <OngletsProduit titre="Voyez-le tourner" onglets={ONGLETS} legende="Noms et montants fictifs." pause={{ pause: 'Mettre en pause', reprise: 'Relancer l’animation' }}>
+      <OngletsProduit titre={t('Voyez-le tourner')} onglets={ONGLETS} legende={t('Noms et montants fictifs.')} versFr={ongletsVersFr} pause={{ pause: t('Mettre en pause'), reprise: t('Relancer l’animation') }}>
+        {es ? <EcranTraduit slot="ecran-convocations" x={ECRANS_ES.convocations} /> : (
         <MiniEcran
           slot="ecran-convocations"
           association="Votre club"
@@ -92,7 +118,10 @@ const faq = [
             { nom: 'Malo Chevalier', statut: 'Présent', ton: 'ok' },
           ]}
           bouton="Composer le match"
-        />
+        />)}
+        {es && <EcranTraduit slot="ecran-rentree" x={ECRANS_ES.reinscription} />}
+        {es && <EcranTraduit slot="ecran-compo" x={ECRANS_ES.compo} />}
+        {es && <EcranTraduit slot="ecran-site" x={ECRANS_ES.site} />}
       </OngletsProduit>
     </div>
   </section>
@@ -103,32 +132,32 @@ const faq = [
 
   <section class="section accueil-bande" aria-labelledby="t-assos">
     <BandeAssociations
-      titre="Foot, basket, judo, tennis. Et tous les autres"
-      phrase="Les clubs de sport d’abord. Aussi la musique et le théâtre : dès qu’il y a des inscriptions et des cotisations."
+      titre={t('Foot, basket, judo, tennis. Et tous les autres')}
+      phrase={t('Les clubs de sport d’abord. Aussi la musique et le théâtre : dès qu’il y a des inscriptions et des cotisations.')}
       items={bande}
-      derniere={{ texte: 'Et la vôtre ?', href: '/pour-qui', nomAccessible: 'Et la vôtre ? Toutes les associations' }}
+      derniere={{ texte: t('Et la vôtre ?'), href: pourQui.href, nomAccessible: t('Et la vôtre ? Toutes les associations') }}
     />
   </section>
 
   <section class="section fond-blanc" aria-labelledby="t-offres">
     <div class="enveloppe">
       <div class="accueil-tete">
-      <h2 class="h2-idee accueil-h2" id="t-offres">Un pourcentage. Rien de fixe</h2>
-      <p class="intro">Un pourcentage des cotisations encaissées en ligne. Rien sur les chèques ni les espèces. Frais de carte à la charge de l’association.</p>
+      <h2 class="h2-idee accueil-h2" id="t-offres">{t('Un pourcentage. Rien de fixe')}</h2>
+      <p class="intro">{t('Un pourcentage des cotisations encaissées en ligne. Rien sur les chèques ni les espèces. Frais de carte à la charge de l’association.')}</p>
       </div>
       <div class="accueil-offres"><Offres mode="accueil" /></div>
-      <a class="lien-fleche" href="/tarifs">Le détail des offres et un exemple chiffré <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+      <a class="lien-fleche" href={lien('/tarifs')}>{t('Le détail des offres et un exemple chiffré')} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
     </div>
   </section>
 
   <div class="section fond-blanc">
     <div class="enveloppe accueil-faq">
-      <Faq items={faq} titre="Les questions du bureau" disposition="deux-colonnes">
+      <Faq items={faq} titre={t('Les questions du bureau')} disposition="deux-colonnes">
         {ressources.length > 0 && (
           <p class="accueil-guides">
-            <span>Des guides pour le bureau&nbsp;:</span>
-            {ressources.map(({ e, c }) => <a href={url(c, e.id)}>{e.data.nom}</a>)}
-            <a class="lien-fleche" href="/ressources">Toutes les ressources <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+            <span>{t('Des guides pour le bureau :')}</span>
+            {ressources.map(({ e }) => <a href={e.url} hreflang={e.fr ? 'fr' : undefined}>{e.nom}{e.fr && <VersFr sr={SR_FR} />}</a>)}
+            <a class="lien-fleche" href={vers('/ressources').href} hreflang={vers('/ressources').hreflang}>{t('Toutes les ressources')}{vers('/ressources').fr && <VersFr sr={SR_FR} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
           </p>
         )}
       </Faq>

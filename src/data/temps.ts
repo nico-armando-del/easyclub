@@ -118,14 +118,14 @@ export const HYPOTHESES =
 export const HYPOTHESES_OFFRES =
   'Mini couvre les fiches, le suivi des paiements, les relances et les pièces (51 h). Pro ajoute la rentrée suivante (10 h), les messages aux familles (10 messages de 45 min ramenés à 5 min, 6 h 40), la liste d’attente (20 places de 10 min ramenées à 1 min, 3 h) et le site mis à jour sans prestataire (4 h). Pro Max IA ajoute la boutique (150 commandes de 6 min ramenées à 1 min au retrait, 12 h 30) et les événements (4 événements de 3 h ramenés à 30 min, 10 h).'
 
-/** « 12 h 30 », « 40 min », « 0 h ». */
-export function duree(min: number): string {
+/** « 12 h 30 », « 40 min », « 0 h » ; en espagnol « 12 h 30 min ». */
+export function duree(min: number, langue: 'fr' | 'es' = 'fr'): string {
   const m = Math.round(min)
   if (m === 0) return '0 h'
   if (m < 60) return `${m} min`
   const h = Math.floor(m / 60)
   const r = m % 60
-  return r ? `${h} h ${String(r).padStart(2, '0')}` : `${h} h`
+  return r ? `${h} h ${String(r).padStart(2, '0')}${langue === 'es' ? ' min' : ''}` : `${h} h`
 }
 
 /**

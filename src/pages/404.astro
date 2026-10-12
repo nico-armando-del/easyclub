@@ -13,6 +13,14 @@ import CaseVide from '../components/CaseVide.astro'
       <li><a class="lien-fleche" href="/fonctionnalites">Fonctionnalités <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
       <li><a class="lien-fleche" href="/ressources">Ressources <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
     </ul>
+    <div class="es" lang="es">
+      <p><b>¿Viene de una página en español?</b> Esta página no existe, o ya no existe. El resto de la web sigue aquí.</p>
+      <ul class="liens">
+        <li><a class="lien-fleche" href="/es" hreflang="es">Inicio en español <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
+        <li><a class="lien-fleche" href="/es/fonctionnalites" hreflang="es">Funcionalidades <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
+        <li><a class="lien-fleche" href="/es/demo" hreflang="es">Solicitar una demo <svg aria-hidden="true"><use href="#fleche"/></svg></a></li>
+      </ul>
+    </div>
   </header>
   <CaseVide compact />
 </Layout>
@@ -21,5 +29,8 @@ import CaseVide from '../components/CaseVide.astro'
 .page-404 .surtitre{color:var(--sapin)}
 .page-404 h1{font-size:var(--t-h1-produit);line-height:1.06;letter-spacing:-.02em;max-width:18ch}
 .page-404 .chapo{color:var(--gris)}
+.page-404 .es{margin-top:var(--e-6);padding-top:var(--e-5);border-top:1px solid var(--trait)}
+.page-404 .es p{color:var(--gris)}
+.page-404 .es b{color:var(--encre)}
 .liens{list-style:none;padding:0;margin:var(--e-5) 0 0;display:flex;flex-wrap:wrap;gap:4px 32px}
 </style>

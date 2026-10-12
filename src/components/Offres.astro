@@ -11,6 +11,7 @@
 */
 import { OFFRES, type CleOffre } from '../data/site'
 import { HYPOTHESES_OFFRES } from '../data/temps'
+import { i18n } from '../i18n/ui'
 
 export type TextesOffres = {
   rendues: string
@@ -36,7 +37,14 @@ const FR: TextesOffres = {
   hypotheses: HYPOTHESES_OFFRES,
   demo: (n) => `Voir ${n} en démo`,
 }
-const { titre = 'h3', mode = 'complet', t = FR } = Astro.props
+const { t: tr, lien, langue } = i18n(Astro.url)
+/* En espagnol, les mêmes mots, traduits par le dictionnaire (src/i18n/ui.ts). */
+const ES: TextesOffres = {
+  rendues: tr(FR.rendues), leg: tr(FR.leg), boutique: tr(FR.boutique), ouvre: (n) => tr('Ce que {n} ouvre', { n }),
+  note: tr(FR.note), comment: tr(FR.comment), hypotheses: tr(HYPOTHESES_OFFRES), demo: (n) => tr('Voir {n} en démo', { n }),
+  listes: Object.fromEntries(OFFRES.map((o) => [o.cle, o.ouvre.map((x) => tr(x))])),
+}
+const { titre = 'h3', mode = 'complet', t = langue === 'es' ? ES : FR } = Astro.props
 const T = titre
 const MAX = Math.max(...OFFRES.map((o) => o.heures))
 const court = (n: string) => n.replace('OnClub ', '')
@@ -59,7 +67,7 @@ const court = (n: string) => n.replace('OnClub ', '')
           <summary>{t.ouvre(court(o.nom))} <span class="num">({liste.length})</span></summary>
           <ul>{liste.map((l) => <li>{l}</li>)}</ul>
         </details>
-        {mode === 'complet' && <a class:list={['btn', o.phare ? 'btn-menthe' : 'btn-contour']} href={`/demo?offre=${o.cle}`}>{t.demo(court(o.nom))}</a>}
+        {mode === 'complet' && <a class:list={['btn', o.phare ? 'btn-menthe' : 'btn-contour']} href={lien(`/demo?offre=${o.cle}`)}>{t.demo(court(o.nom))}</a>}
       </article>
     )
   })}

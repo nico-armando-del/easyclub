@@ -4,18 +4,22 @@
   la pastille de l'offre qui l'ouvre en bas. Toute la tuile est un lien.
 */
 import { NOM_OFFRE } from '../data/site'
+import { i18n, SR_FR } from '../i18n/ui'
+import VersFr from './langue/VersFr.astro'
 import EcranFonction from './EcranFonction.astro'
 /* ecran : le nom d'un écran de src/ecrans/fonctions, montré en vignette recadrée en tête de tuile
    (décoratif : la tuile garde son nom et sa ligne pour les lecteurs d'écran). */
-interface Props { nom: string; ligne: string; href: string; offre?: 'mini' | 'pro' | 'max'; titre?: 'h3' | 'h4'; ecran?: string }
-const { nom, ligne, href, offre, titre = 'h3', ecran } = Astro.props
+/** fr : la tuile mène, depuis une page espagnole, à une page restée en français (étiquette « FR »). */
+interface Props { nom: string; ligne: string; href: string; offre?: 'mini' | 'pro' | 'max'; titre?: 'h3' | 'h4'; ecran?: string; fr?: boolean }
+const { nom, ligne, href, offre, titre = 'h3', ecran, fr = false } = Astro.props
+const { t } = i18n(Astro.url)
 const T = titre
 ---
-<a class:list={['tuile-fonction', { 'tf-avec-ecran': ecran }]} href={href}>
+<a class:list={['tuile-fonction', { 'tf-avec-ecran': ecran }]} href={href} hreflang={fr ? 'fr' : undefined}>
   {ecran && <span class="tf-vignette" aria-hidden="true" inert><EcranFonction nom={ecran} nu /></span>}
-  <T class="tf-nom">{nom}</T>
+  <T class="tf-nom">{nom}{fr && <VersFr sr={SR_FR} />}</T>
   <span class="tf-ligne">{ligne}</span>
-  {offre && <span class:list={['tf-offre', `tf-${offre}`]}>Dès {NOM_OFFRE[offre]}</span>}
+  {offre && <span class:list={['tf-offre', `tf-${offre}`]}>{t('Dès {offre}', { offre: NOM_OFFRE[offre] })}</span>}
 </a>
 <style>
 .tuile-fonction{display:flex;flex-direction:column;align-items:flex-start;gap:8px;height:100%;min-height:150px;padding:24px;background:var(--blanc);border-radius:var(--r-l);text-decoration:none;box-shadow:var(--ombre-carte);transition:box-shadow var(--d-2) var(--courbe-sortie),transform var(--d-2) var(--courbe-sortie)}

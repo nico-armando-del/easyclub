@@ -6,9 +6,11 @@
   ou que le bandeau de consentement est ouvert. Absent de /demo et /recommander
   (Layout, prop sansBoutonFixe). Sans JavaScript : toujours là sur téléphone.
 */
+import { i18n } from '../i18n/ui'
+const { t, lien } = i18n(Astro.url)
 ---
 <div class="demo-fixe" data-demo-fixe>
-  <a class="btn btn-encre" href="/demo">Demander une démo <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+  <a class="btn btn-encre" href={lien('/demo')}>{t('Demander une démo')} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
 </div>
 <script>
   const bloc = document.querySelector<HTMLElement>('[data-demo-fixe]')

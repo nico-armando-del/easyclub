@@ -1,0 +1,11 @@
+---
+/* La version espagnole des pages de src/content/profils/ : une page par fichier de src/content/es/profils/ (même slug). Même gabarit que le français. */
+import GabaritProduit from '../../../components/GabaritProduit.astro'
+import { liste } from '../../../lib/collections'
+export async function getStaticPaths() {
+  const entrees = await liste('profils', 'es')
+  return entrees.map((entree) => ({ params: { slug: entree.id }, props: { entree } }))
+}
+const { entree } = Astro.props
+---
+<GabaritProduit collection="profils" entree={entree} />

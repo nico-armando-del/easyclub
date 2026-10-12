@@ -1,0 +1,85 @@
+---
+nom: "Importación de archivos"
+ligne: "Sus hojas de cálculo importadas, sus antiguos socios reconocidos"
+famille: Piloter
+offre: mini
+ordre: 4
+titreSeo: "Importar su archivo de socios desde una hoja de cálculo"
+description: "Cambiar de herramienta sin volver a teclear a sus antiguos socios: sube su hoja de cálculo en CSV o su exportación HelloAsso, y envía a cada familia su enlace."
+titre: "Su hoja de cálculo importada, sus antiguos socios reconocidos"
+chapo: "Cambiar de herramienta da miedo: habría que volver a teclearlo todo. Usted sube su hoja de cálculo o su exportación HelloAsso, y sus socios de la temporada pasada quedan reconocidos."
+temps:
+  geste: "Usted sube su hoja de cálculo: sus antiguos socios quedan reconocidos, sin volver a teclear nada."
+ecranFonction: true
+fonctionnalites: [reinscriptions, saison-suivante, liste-des-licences]
+comparatifs: [tableur-excel]
+maj: 2026-10-12
+faq:
+  - question: "¿Tenemos que enviarles nuestra hoja de cálculo?"
+    reponse: "No. La junta directiva la sube ella misma, en la pantalla Socios, pestaña Familias, con «Importar una hoja de cálculo». Revisa la vista previa y después acepta: no se escribe nada antes."
+  - question: "Nuestro archivo es un libro de Excel: ¿funciona?"
+    reponse: "Guárdelo primero en formato CSV (Archivo y después Guardar como) y luego elíjalo. También puede copiar las filas de la hoja de cálculo, títulos incluidos, y pegarlas en la pantalla."
+  - question: "¿Las familias reciben un correo en cuanto se importa el archivo?"
+    reponse: "No. No sale nada mientras usted no haga clic en «Enviar el enlace» y lo confirme. Los enlaces salen de 40 en 40 familias, y solo cuando las inscripciones están abiertas a los antiguos socios."
+  - question: "¿Se puede anular una importación?"
+    reponse: "Sí. Bajo la lista de familias, cada archivo importado tiene su botón «Retirar»: tras la confirmación, sus nombres se borran. Una familia que ya ha vuelto conserva su expediente."
+---
+
+## Usted sube el archivo, lo revisa y lo acepta
+
+Su club llega con una hoja de cálculo del año pasado, o una exportación de HelloAsso. No hace falta enviárnosla: en la pantalla **Socios**, pestaña **Familias**, la junta directiva hace clic en «Importar una hoja de cálculo».
+
+- **Un archivo CSV**: su hoja de cálculo guardada en CSV, o la exportación de HelloAsso tal cual.
+- **O filas pegadas**: copiadas de la hoja de cálculo, con la fila de títulos.
+- **No se escribe nada** antes de su aprobación.
+
+## Una vista previa antes de escribir nada
+
+OnClub lee el archivo y muestra lo que va a importar: por ejemplo, «212 socios en 168 familias se importarán para la temporada 2025-2026».
+
+- **Las columnas leídas**: «Nombre ← Prénom adhérent», «Dirección del responsable ← Email payeur»…
+- **Las columnas descartadas**: los importes y los medios de pago de una exportación de HelloAsso.
+- **Las filas descartadas**: duplicadas en el archivo, o con pedido anulado o reembolsado.
+- **Las observaciones**: un socio sin dirección de correo se importa, pero no podrá ser reconocido.
+
+A continuación aparece una muestra de las filas. El botón dice cuántos importa: «Importar 212 socios».
+
+## Lo que se importa, y lo que no
+
+La importación conserva lo que sirve para que vuelvan sus antiguos socios: nombre, apellidos, año de nacimiento, dirección de correo, teléfono, número de licencia, y el curso o el equipo del año pasado.
+
+Solo importa a los socios de la temporada pasada. Ni expediente, ni pagos, ni historial: sus antiguos socios volverán a hacer su expediente, pero ya relleno.
+
+La importación se borra sola cuando ya no sirve: al abrir la temporada siguiente, o como muy tarde a los dieciocho meses.
+
+## Los antiguos socios, reconocidos por su dirección
+
+Una vez importados, sus antiguos socios aparecen en la pestaña Familias, familia por familia: los hijos del año pasado, el contacto y el estado «No ha vuelto», «En parte» o «Ha vuelto».
+
+<EcranFonction nom="reprise-des-fichiers-familles" legende="Las familias importadas, justo antes del envío de los enlaces. Nombres e importes ficticios." />
+
+Una familia que renueva se reconoce por su dirección de correo, y pasa a «Ha vuelto». En la [lista de licencias](/fonctionnalites/liste-des-licences), sus hijos pasan a «Renovación».
+
+## El enlace de renovación, enviado por usted
+
+El botón «Enviar el enlace a 166 familias» prepara el envío. Cada familia recibe por correo su enlace personal: su expediente del año pasado, ya relleno, donde solo queda elegir los cursos.
+
+- **40 familias por envío**: vuelva a hacer clic para continuar.
+- **«Copiar el enlace»** para una familia sin dirección, para enviárselo por mensaje.
+- **Las inscripciones deben estar abiertas a los antiguos socios**: si no, la pantalla lo dice y el botón espera.
+
+Lo siguiente ocurre en las [renovaciones](/fonctionnalites/reinscriptions) y en la [temporada siguiente](/fonctionnalites/saison-suivante).
+
+<Repli titre="El detalle">
+
+- **«Borrar estos N nombres»** retira un archivo importado por error, antes de cualquier renovación.
+- **Una familia que se fue un año** se reconoce, y un certificado todavía válido se recupera a su vuelta.
+
+</Repli>
+
+## Lo que OnClub no hace (todavía)
+
+- **Leer un libro de Excel o de Numbers** directamente: hay que guardarlo en CSV.
+- **Importar más de una temporada hacia atrás**, o los socios de la temporada en curso para un club que llega a mitad de año.
+- **Crear las fichas de jugadores** desde la importación: nacen cuando la familia vuelve.
+- **Importar los pagos** o el historial de su herramienta anterior.

@@ -1,0 +1,80 @@
+---
+nom: "Exportaciones contables"
+ligne: "Contabilidad, inscripciones y licencias en hoja de cálculo"
+famille: Piloter
+offre: mini
+ordre: 2
+titreSeo: "Exportación contable: diario e inscripciones en hoja de cálculo"
+description: "El diario de cobros del mes, la lista de inscripciones y la de licencias se descargan en hoja de cálculo, cuando usted quiera, para el tesorero."
+titre: "El diario del mes y sus listas, en hoja de cálculo"
+chapo: "El tesorero lo rehace todo en una hoja de cálculo. OnClub lleva el diario de cobros, mes a mes: se descarga en hoja de cálculo, como las inscripciones y las licencias."
+temps:
+  geste: "Un clic, y el diario del mes se descarga en hoja de cálculo."
+ecranFonction: true
+fonctionnalites: [suivi-des-paiements, liste-des-licences, paiement-en-ligne]
+profils: [tresorier]
+maj: 2026-10-12
+faq:
+  - question: "¿Se puede exportar toda la temporada de una vez?"
+    reponse: "Todavía no. El diario se descarga mes a mes: una temporada de septiembre a junio son, por tanto, diez archivos. El balance de la temporada, en cambio, cuenta la temporada entera, pero se lee en pantalla y no se exporta."
+  - question: "¿El archivo le sirve a nuestro contable?"
+    reponse: "Es un diario en hoja de cálculo: fecha, operación, familia, medio, importe, comisión, gastos y neto abonado. No tiene plan de cuentas, ni asientos por partida doble, ni fichero FEC: el contable lo traslada a su propia herramienta."
+  - question: "¿Los cheques y el efectivo están en el diario?"
+    reponse: "Sí, en cuanto la junta directiva los anota en el expediente de la familia. Llevan la fecha del día en que se anotan. Las ayudas van aparte, pendientes de cobrar del organismo."
+  - question: "¿Las exportaciones están en el plan Mini?"
+    reponse: "Sí. La pantalla Contabilidad, el diario en hoja de cálculo, la exportación de inscripciones y la de licencias están abiertas en todos los planes."
+---
+
+## Tres archivos, descargados cuando usted quiera
+
+A final de temporada, el tesorero reúne sus extractos, sus matrices de cheques y una hoja de cálculo llevada a medias. En OnClub, tres archivos se descargan en cualquier momento, sin esperar a junio:
+
+- **El diario del mes**, desde la pantalla Contabilidad.
+- **La lista de inscripciones**, desde la pantalla Inscripciones, con sus filtros.
+- **La lista de licencias**, desde la pantalla Licencias.
+
+No sale nada por correo: el archivo llega a su ordenador, y usted se lo envía a quien quiera.
+
+## El diario del mes, medio por medio
+
+La pantalla **Contabilidad** se lee mes a mes. Arriba, tres tarjetas:
+
+- **Cobrado**, desglosado por medio: tarjeta en línea, cheque, efectivo, transferencia. Las ayudas anotadas van aparte, pendientes de cobrar de los organismos.
+- **Retenido en la tarjeta**: la comisión de OnClub, las comisiones de Stripe y el neto abonado por Stripe.
+- **Devuelto a las familias**: los reembolsos del mes, incluida la comisión devuelta por OnClub.
+
+Debajo, el diario enumera cada movimiento: fecha, familia y expediente, medio, importe, retención, neto abonado. Un reembolso aparece en negativo, con su motivo.
+
+«Descargar el diario (hoja de cálculo)» da ese mes, con además el motivo y el detalle de cada retención.
+
+## Las transferencias de Stripe, línea por línea
+
+En el extracto del banco, Stripe abona un solo importe por varios pagos. Bajo el diario, cada transferencia del mes se despliega: su fecha, su estado («Recibida», «Anunciada», «En camino») y los pagos que contiene, familia por familia.
+
+Un pago que OnClub no vincula a ningún expediente se marca como «No conciliado»: pagado fuera de OnClub, o antes de la conexión del club.
+
+## La lista de inscripciones, filtrada
+
+En la pantalla Inscripciones, el botón «Exportar estas 12 inscripciones» (cuenta los expedientes mostrados) sigue sus filtros y su búsqueda. Un equipo, los impagados, los expedientes incompletos: el archivo contiene lo que usted ve.
+
+Cada fila es un expediente: referencia, participantes, responsable, correo electrónico, teléfono, curso, fecha, estado, total, pagado y pendiente. Para la lista de jugadores que hay que federar, está la [lista de licencias](/fonctionnalites/liste-des-licences).
+
+## Un archivo que se abre tal cual
+
+Los tres archivos se abren con un doble clic en una hoja de cálculo configurada en francés, acentos incluidos. Los importes se escriben con coma y se calculan como números.
+
+La cifra del día sigue en la página de inicio, en el [seguimiento de pagos](/fonctionnalites/suivi-des-paiements): la exportación sirve para guardar un registro, o para enviarlo.
+
+<Repli titre="El detalle">
+
+- **Los filtros** de la lista de inscripciones: curso, disciplina, nivel, franja de edad, entrenador, justificante que falta, ayuda, origen del expediente. Marque filas, y «Exportar la selección» saca solo esas.
+- **Del lado de la familia**, «Mi expediente» da el aviso de cuota, el recibo de cuota y el certificado de pago para la empresa.
+
+</Repli>
+
+## Lo que OnClub no hace (todavía)
+
+- **Exportar la temporada entera en un archivo**: el diario sale mes a mes.
+- **Exportar el balance de la temporada**: solo se lee en pantalla.
+- **Exportar el registro de socios**, una fila por persona con la edad, por ejemplo para una solicitud de subvención.
+- **Generar asientos contables**: ni plan de cuentas, ni partida doble, ni fichero FEC.

@@ -1,0 +1,84 @@
+---
+nom: "Venta en el mostrador"
+ligne: "El puesto del partido cobra, contado aparte"
+famille: Vendre
+offre: max
+ordre: 2
+titreSeo: "Vender en el puesto de la asociación, el día del partido"
+description: "El día del partido, el puesto vende los artículos de la tienda: en efectivo, o con tarjeta mediante un enlace de pago. Estas ventas se cuentan aparte de la web."
+titre: "El puesto vende las camisetas, el stock se actualiza en todas partes"
+chapo: "Un padre compra una camiseta en el puesto. Usted elige la talla y él paga en efectivo o con tarjeta en su móvil: el stock se actualiza, también en línea."
+temps:
+  geste: "Una venta en el puesto se paga en efectivo o con un enlace de pago, y se cuenta aparte de la web."
+ecranFonction: true
+fonctionnalites: [boutique-en-ligne, paiement-en-ligne, exports-comptables]
+sports: [football, basket, handball]
+profils: [tresorier]
+maj: 2026-10-12
+faq:
+  - question: "¿Hace falta un terminal de pago para cobrar con tarjeta?"
+    reponse: "No, y OnClub no gestiona ninguno. «Pagar con tarjeta» crea un enlace de pago: el cliente paga en la página de su pedido, desde su móvil o desde el dispositivo de la junta directiva. No hay terminal ni pago sin contacto en el móvil del voluntario."
+  - question: "¿Las ventas en efectivo entran en las exportaciones contables?"
+    reponse: "Hoy no. El diario contable recoge las ventas pagadas con tarjeta, en la línea «Boutique (carte)». Las ventas en efectivo se leen en la pestaña «Lo que se vende» de la tienda, en «Vendido en el club», y se trasladan a mano."
+  - question: "¿Puede un voluntario del puesto vender sin ver el resto del panel?"
+    reponse: "No. El mostrador está reservado a la junta directiva. Un voluntario solo accede con la clave del club, que abre todo el panel: confíela a alguien de confianza, o lleve el mostrador usted mismo."
+  - question: "¿La venta en el mostrador tiene comisión?"
+    reponse: "Una venta pagada en efectivo no paga nada. Una venta pagada con tarjeta lleva el 2 % de la tienda, más las comisiones de Stripe, como un pedido hecho en la web."
+---
+
+## Hoy: una caja de monedas y un cuaderno
+
+El día del partido, el puesto vende camisetas y bufandas. Se apunta a lápiz, se devuelve el cambio, y por la noche nadie sabe ya qué queda en talla 12 años. Mientras tanto, la tienda en línea vende las mismas tallas.
+
+## La misma estantería que en línea, talla por talla
+
+El mostrador es una pestaña de la [tienda en línea](/fonctionnalites/boutique-en-ligne): «Vender en el club». Muestra los artículos a la venta, con lo que queda de cada talla.
+
+- **Una línea por talla**: «5 en stock», o «Agotado».
+- **Un contador** − y +: se detiene en el stock que queda.
+- **El carrito abajo**: «1 × Camiseta de partido · 12 años», y el total en grande.
+
+Usted escribe el nombre del cliente. Su correo electrónico solo es obligatorio para la tarjeta: el recibo se envía a esa dirección.
+
+## En efectivo: un clic, y la venta queda pagada
+
+El cliente le da un billete. Usted hace clic en «Cobrado en efectivo · 47 €». La pantalla confirma «Venta registrada»: el stock está al día, en la web y en el puesto.
+
+- **El artículo se va con el cliente**: la casilla está marcada por defecto.
+- **¿Hay que preparar el paquete?** Desmárquela: espera en «Stock y pedidos».
+- **Una talla baja de su umbral de alerta**: la junta directiva recibe un correo electrónico, como después de una venta en línea.
+
+Si un pedido en línea se ha llevado la misma unidad mientras tanto, la pantalla lo dice: la talla «baja de cero», compruebe la estantería.
+
+## Con tarjeta: un enlace que el cliente paga en su móvil
+
+«Pagar con tarjeta» no pasa por un terminal. OnClub crea un enlace de pago, y los artículos quedan reservados 30 minutos.
+
+- **Abrir en este dispositivo**: el cliente paga en la tableta del puesto.
+- **Copiar el enlace**, **Enviar por SMS**, **Enviar por correo**: estos dos últimos abren la aplicación del móvil, OnClub no envía nada por sí mismo.
+- **Finalmente pagado en efectivo**: el cliente cambia de opinión, y la venta cambia de modo.
+
+El botón sigue desactivado mientras el [pago en línea](/fonctionnalites/paiement-en-ligne) del club no esté activo.
+
+<Repli titre="El detalle">
+
+- **Durante los 30 minutos**, la venta espera en «Stock y pedidos», donde el botón «Enlace de pago» la encuentra.
+- **Sin pago**, la reserva se anula y el artículo vuelve a estar a la venta.
+- **El cliente encuentra su venta** en su página «Mi pedido»: «Su compra en el club está pendiente de pago», con el botón «Pagar con tarjeta».
+
+</Repli>
+
+## El puesto y la web, contados aparte
+
+En la pestaña «Lo que se vende», dos indicadores separan el dinero: «Vendido en línea» y «Vendido en el club», en euros, con el número de unidades. Cada venta del puesto lleva la etiqueta «En el club».
+
+El tesorero sabe cuántas camisetas han salido en el puesto y cuántas en la web. Estas cifras cubren toda la vida de la tienda, no un solo partido.
+
+## Lo que OnClub no hace (todavía)
+
+- **Un terminal o el pago sin contacto**: la tarjeta pasa por un enlace de pago.
+- **El cheque o la transferencia en el puesto**: solo un pedido pendiente puede marcarse como «Pagado en el club».
+- **La caja del día**: ni fondo de caja, ni total de un partido, ni cierre.
+- **El bar, las entradas o un importe libre**: el mostrador solo vende los artículos de la tienda.
+- **El efectivo en las [exportaciones contables](/fonctionnalites/exports-comptables)**: solo entran las ventas con tarjeta.
+- **Un acceso reducido al puesto** para un voluntario: el mostrador está reservado a la junta directiva.

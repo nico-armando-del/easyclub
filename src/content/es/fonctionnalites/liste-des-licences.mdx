@@ -1,0 +1,88 @@
+---
+nom: "Lista de licencias"
+ligne: "A quién tramitar la licencia, listo para la plataforma federativa"
+famille: Piloter
+offre: mini
+ordre: 3
+titreSeo: "Lista de licencias para tramitar en la federación | OnClub"
+description: "OnClub prepara la lista de licencias: quién está listo, quién renueva, qué dirección introducir. Un club de voleibol compara también la exportación FFVolley."
+titre: "La lista de licencias: quién está listo, quién renueva"
+chapo: "OnClub no sustituye la herramienta de su federación. Le dice quién está listo para federarse, quién renueva y qué dirección introducir."
+temps:
+  geste: "La lista dice quién está listo y qué dirección introducir: la solicitud se hace después en su federación."
+ecranFonction: true
+fonctionnalites: [pieces-justificatives, reprise-des-fichiers, inscription-en-ligne]
+sports: [football, volley]
+maj: 2026-10-12
+faq:
+  - question: "¿OnClub envía las licencias a la federación?"
+    reponse: "No. OnClub no envía nada a ninguna federación ni tramita ninguna licencia. La lista le dice quién está listo y qué dirección introducir; la solicitud se hace siempre en la herramienta de su federación, Footclubs para el fútbol."
+  - question: "¿Cómo sabe OnClub que un jugador renueva?"
+    reponse: "Un número de licencia conocido, o un equipo en el club la temporada anterior: es una renovación. Si no, el jugador es «Nuevo en el club», siempre que el club tenga una temporada anterior en OnClub o una lista importada de su hoja de cálculo. Sin ellas, la fila dice «Por comprobar»."
+  - question: "¿La comparación con la exportación federativa funciona con Footclubs?"
+    reponse: "Solo se garantiza para la FFVolley: se diseñó y se probó con la exportación de su Espace Club. Para Footclubs u otra federación, la lista de licencias sigue siendo válida, pero la comparación no está garantizada."
+  - question: "¿La lista de licencias está en el plan Mini?"
+    reponse: "Sí. La pantalla Licencias, su exportación en hoja de cálculo y la comparación con la exportación FFVolley están abiertas desde Mini."
+---
+
+## Una fila por jugador, con su estado
+
+En septiembre, el secretario rehace la lista a mano: quién ha pagado, quién ha entregado su certificado, quién puede federarse. En OnClub, la pantalla **Licencias** la lleva para la temporada, una fila por jugador, aunque esté inscrito en dos equipos.
+
+- **Listo**: pagado, o al día en su calendario de pagos, y ningún justificante más que volver a pedir.
+- **Justificantes pendientes**: todavía falta un justificante.
+- **Pago en curso**: la cuota todavía no está pagada.
+
+Unos botones filtran la lista por estado, con su recuento. Para que un jugador pase a «Listo», reclame el justificante que falta: son los [justificantes](/fonctionnalites/pieces-justificatives).
+
+## Renovación o nuevo en el club
+
+La columna «Solicitud» dice lo que va a pedir a la federación:
+
+- **Renovación**, con el número de licencia cuando se conoce.
+- **Nuevo en el club**: ninguna licencia ni equipo en su club la temporada anterior.
+- **Por comprobar**: OnClub no puede decidirlo.
+
+Para distinguir a los nuevos, OnClub necesita la temporada anterior: o sus expedientes del año pasado, o su hoja de cálculo importada con la [importación de archivos](/fonctionnalites/reprise-des-fichiers).
+
+## La dirección que hay que introducir, y las trampas detectadas
+
+Para un club de fútbol, la pantalla lo dice en la cabecera: Footclubs no importa ningún archivo. Cada solicitud se hace en sus pantallas, y va al «Email principal» del federado.
+
+- **Email principal**: el del responsable legal para un menor.
+- **«Misma dirección que…»**: dos hermanos, una sola dirección.
+- **«Mayor de edad inscrito por…: pídale su propia dirección»**: un sénior inscrito por un padre o una madre.
+- **La categoría U**, calculada para el fútbol: U11 para un niño nacido en 2016, en 2026-2027.
+
+## La lista en hoja de cálculo
+
+«Descargar la lista (hoja de cálculo)» da un archivo que sigue el filtro elegido: todos los jugadores, o solo los que están listos.
+
+Una fila por jugador: apellidos, nombre, año de nacimiento, categoría (fútbol), equipo, solicitud, número de licencia, email principal, teléfono, responsable del expediente y estado del expediente.
+
+## Voleibol: la exportación FFVolley comparada jugador por jugador
+
+Un club de voleibol puede subir la exportación del Espace Club de la FFVolley, en XML o en CSV. Cada licencia se pone frente al expediente del jugador en su club. **No se guarda nada**: la comparación se repite tantas veces como haga falta.
+
+<EcranFonction nom="liste-des-licences-ffvolley" legende="La exportación FFVolley de un club de voleibol, comparada con sus expedientes. Nombres e importes ficticios." />
+
+- **En regla**: solo si la licencia está validada (VA y VF leídas) y el expediente completo.
+- **Licencia todavía no validada en la federación**, o **expediente incompleto en el club**.
+- **Inscrito en el club, sin licencia**, o **federado, sin expediente en el club**.
+- **Por comprobar**: un homónimo, un año que no coincide, un número dudoso.
+
+Cada fila da el número, la línea del archivo y «Abrir el expediente».
+
+<Repli titre="El detalle">
+
+- **Un libro de Excel se rechaza**: elija la exportación XML en el Espace Club, o guarde el archivo en CSV.
+- **Los números estropeados por la hoja de cálculo** (escritos «2,54E+09») se señalan: esos jugadores se encuentran por su nombre.
+- **Las columnas leídas** se indican bajo la comparación, y un archivo sin columna de validación no da ningún jugador «en regla».
+
+</Repli>
+
+## Lo que OnClub no hace (todavía)
+
+- **Tramitar o enviar una licencia** a la federación: la solicitud se hace en su herramienta.
+- **Guardar la fecha de nacimiento completa, el sexo o la nacionalidad**: el formulario solo guarda el año. Para Footclubs, la familia los completa en la solicitud que recibe.
+- **Comparar la exportación de otra federación** que no sea la FFVolley, Footclubs incluido: no se garantiza nada.

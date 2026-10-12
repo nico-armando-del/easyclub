@@ -1,0 +1,123 @@
+---
+nom: "Pesca deportiva"
+ligne: "Depredadores, carpa, mosca o mar: cada pescador se inscribe en línea en su modalidad"
+ordre: 50
+titreSeo: "Club de pesca deportiva: alta en línea | OnClub"
+description: "Club de pesca deportiva: alta en línea por modalidad (depredadores, carpa, mosca, mar), cuota en varios plazos. La licencia sigue en manos de la FFPS."
+titre: "Club de pesca deportiva: un alta por modalidad, en línea"
+chapo: "En el club, uno pesca depredadores, otro carpa o a mosca. En línea, cada uno elige su modalidad y paga: la junta directiva sabe qué trasladar a la federación."
+temps:
+  cles: [fiches, paiements]
+  titre: "Lo que recupera la junta directiva de un club de pesca deportiva, cada temporada"
+fonctionnalites: [inscription-en-ligne, liste-des-licences, paiement-en-ligne, suivi-des-paiements, pieces-justificatives, convocations]
+profils: [tresorier]
+guides: [certificat-medical-sport, assurance-association]
+maj: 2026-10-10
+faq:
+  - question: "¿Un pescador puede sacar su licencia FFPS sin pasar por un club?"
+    reponse: "No. La FFPS expide sus licencias únicamente a través de sus clubes afiliados, y cada club, o su comité departamental, transmite la parte federativa mediante la herramienta HEVA. OnClub cobra la cuota del club y prepara la lista de quién está listo; no envía nada a HEVA."
+  - question: "Licencia deportiva, de evento o ATP ocio: ¿cuál proponer?"
+    reponse: "Según la FFPS, la licencia deportiva anual abre toda la competición oficial; la de evento vale para uno o dos eventos de un año natural; la ATP ocio sirve para los socios que no compiten. La elección se pregunta en el formulario del club y después se traslada a la solicitud federativa."
+  - question: "¿OnClub expide la licencia de pesca?"
+    reponse: "No. OnClub no expide ni la carte de pêche (el permiso de pesca francés) ni la licencia FFPS. Lleva las altas del club, el dinero, los documentos pedidos y las convocatorias a las salidas y a los concursos."
+  - question: "¿Un niño puede unirse a la escuela de pesca del club?"
+    reponse: "Sí. El padre o la madre lo inscribe en el grupo abierto a su año de nacimiento, con las plazas que quedan. La FFPS publica un cuestionario de salud para los menores; en OnClub, el cuestionario oficial del menor se rellena en línea y solo la declaración llega al club."
+sources:
+  - titre: "FFPS, Adhésions et licences"
+    url: "https://www.ffpspeches.fr/vie-sportive/clubs-et-pratiques/adhesions-et-licences/"
+    consulte: "2026-10-10"
+  - titre: "FFPS, Demande de licence pêche sportive 2026 (formulaire)"
+    url: "https://www.ffpspeches.fr/wp-content/uploads/2026/02/FFPS-Formulaire-2026-demande-de-licence-2026-1.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFPS, Adhérer à la FFPS"
+    url: "https://www.ffpspeches.fr/vie-sportive/clubs-et-pratiques/adherer-a-la-ffps/"
+    consulte: "2026-10-10"
+  - titre: "FFPS, page d’accueil (840 clubs, 13 000 licenciés)"
+    url: "https://www.ffpspeches.fr/"
+    consulte: "2026-10-10"
+---
+
+## Depredadores, carpa, mosca, mar: una inscripción por modalidad
+
+La licencia deportiva de la FFPS lleva una modalidad principal: depredadores, carpa, agua dulce, mar, mosca o JFT. En el club, cada modalidad se convierte en un grupo, con sus salidas, sus plazas y su precio.
+
+<Repli>
+
+- **Dos modalidades** en el mismo club: el descuento previsto para varios grupos se aplica solo.
+- **Las opciones** de la federación (big game en el mar, trucha con cebo natural, deporte adaptado) se preguntan en el formulario.
+- **Un adulto solo** deja un contacto de emergencia; un menor se inscribe con un tutor legal mayor de edad.
+- **El fichero** de socios del año pasado se [importa](/fonctionnalites/reprise-des-fichiers): los antiguos socios se reconocen.
+
+</Repli>
+
+## Licencia FFPS: HEVA sigue siendo la herramienta, OnClub prepara la lista
+
+La FFPS expide sus licencias solo a través de sus clubes, que transmiten la parte federativa mediante HEVA. OnClub no introduce nada allí: indica quién está listo, quién espera su pago y quién debe todavía un justificante.
+
+<Idee visuel="droite">
+
+La lista se lee pescador por pescador, con su grupo, y se exporta en hoja de cálculo para introducirla en la federación.
+
+<Repli>
+
+- **Listo** quiere decir pagado, o al día en su calendario de pagos, y sin ningún documento que volver a pedir.
+- **Renovación o nuevo** en el club, con el correo que trasladar.
+- **La solicitud FFPS** pide el municipio de nacimiento y la nacionalidad: OnClub no los guarda, el pescador los da en el formulario federativo.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de pesca"
+  titre="Licencias que transmitir"
+  sousTitre="Licencia deportiva y ATP ocio"
+  lignes={[
+    { nom: 'Hugo F.', detail: 'Depredadores · renovación', statut: 'Listo', ton: 'ok' },
+    { nom: 'Martine C.', detail: 'Mosca · nueva en el club', statut: 'Pago en curso', ton: 'neutre' },
+    { nom: 'Bastien L.', detail: 'Mar · documento por volver a pedir', statut: 'Documento pendiente', ton: 'ko' },
+  ]}
+  bouton="Descargar la lista (hoja de cálculo)"
+  legende="La lista de licencias del club, vista por la junta directiva. Nombres ficticios."
+/>
+
+</Idee>
+
+La federación anuncia 840 clubes y 13.000 federados: OnClub no sustituye su herramienta, prepara lo que se transmite en ella.
+
+## Cuota del club de pesca en varios plazos
+
+El pescador paga con tarjeta al inscribirse, en un solo pago o con un anticipo y después varios pagos, con cada fecha mostrada antes de confirmar.
+
+<Repli>
+
+- **El cuadro del tesorero**: cobrado, pendiente, atrasado, al céntimo; vea [el seguimiento de pagos](/fonctionnalites/suivi-des-paiements).
+- **El cheque** entregado en el local se anota en el expediente.
+- **Un retraso** se reclama con un botón, con el mensaje revisado antes del envío.
+
+</Repli>
+
+## Escuela de pesca: la inscripción de los jóvenes por año de nacimiento
+
+El padre o la madre solo ve los grupos abiertos al año de nacimiento de su hijo, con las plazas que quedan, y paga a continuación.
+
+<Repli>
+
+- **El cuestionario de salud del menor** se rellena en línea: las respuestas se quedan en el móvil y solo llega la declaración.
+- **Dos hijos** en el mismo expediente: el descuento por hermanos se aplica solo.
+- **El Pass’Sport** se marca y se descuenta, y se pide el documento que lo justifica.
+
+</Repli>
+
+## Convocatoria a los concursos y salidas a la orilla del agua
+
+El responsable de la modalidad convoca a sus pescadores para un concurso o una salida; cada uno responde presente o ausente desde el correo, sin cuenta.
+
+<Repli>
+
+- **La cita** se rellena de antemano con el día, la hora y el lugar del horario.
+- **Una salida anulada** avisa a todo el grupo, con una nota: «crecida, salida aplazada».
+- **El pase de lista** se hace a la orilla del agua; el entrenador no ve ni direcciones ni teléfonos.
+
+</Repli>
+
+OnClub no pesa ninguna captura, no lleva ninguna clasificación y no gestiona las inscripciones en concursos federativos. Para verlo aplicado a su club, [solicite una demo](/demo?type=sport).

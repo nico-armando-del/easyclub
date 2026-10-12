@@ -1,0 +1,132 @@
+---
+nom: "Ciclismo"
+ligne: "De la escuela de ciclismo a los corredores del domingo, el inicio de temporada en línea"
+ordre: 50
+titreSeo: "Inscripción en línea en clubes de ciclismo, licencia FFC | OnClub"
+description: "Club de ciclismo: grupos por año de nacimiento, cuota en varios plazos, lista de licencias preparada para la campaña FFC del año natural."
+titre: "Club de ciclismo: inscripción en septiembre, licencia en enero"
+chapo: "La cuota se paga al inicio de temporada, y la licencia FFC sigue el año natural. La junta directiva mantiene una sola lista al día para los dos momentos."
+temps:
+  cles: [paiements, fiches]
+  titre: "Lo que recupera la junta directiva de un club de ciclismo, cada temporada"
+fonctionnalites: [liste-des-licences, inscription-en-ligne, paiement-en-ligne, pieces-justificatives, convocations, seances-essai]
+profils: [tresorier]
+guides: [certificat-medical-sport, pass-sport]
+maj: 2026-10-10
+faq:
+  - question: "¿Un joven inscrito en septiembre debe sacar otra licencia en enero?"
+    reponse: "Depende. Según la FFC, un nuevo federado que llega a partir de septiembre recibe directamente una licencia 2027, válida dieciséis meses. Un corredor ya federado en 2026 termina el 31 de diciembre y saca una licencia 2027. En OnClub, la lista de licencias separa las renovaciones de los nuevos."
+  - question: "¿Las inscripciones en las carreras pasan por OnClub?"
+    reponse: "No. La inscripción de un corredor se hace ante el organizador o la federación, y los resultados siguen en sus manos. OnClub sirve antes: el entrenador convoca a su grupo, los padres responden desde el correo, y él sabe quién rueda el domingo."
+  - question: "¿Un niño puede hacer una salida de prueba antes de hacerse socio?"
+    reponse: "Sí, si el grupo lo acepta: cada grupo elige entre sin prueba, prueba si queda sitio, o prueba incluso completo. La familia reserva desde la página del club. Por parte de la federación, la FFC ofrece un Pass Accueil Jeune a los menores de diecisiete años."
+  - question: "¿Un adulto debe aportar un certificado médico para su licencia FFC?"
+    reponse: "Para la licencia 2027, la FFC pide al adulto que rellene su módulo de salud y firme una declaración jurada. El certificado, con electrocardiograma, solo se exige si indica síntomas cardíacos en el año. El club puede pedir esa declaración firmada como un documento que subir."
+sources:
+  - titre: "FFC, Prendre une licence dans un club"
+    url: "https://velo.ffc.fr/se-licencier/licence-club/"
+    consulte: "2026-10-10"
+  - titre: "FFC, Licence Jeunesse : catégories d’âge"
+    url: "https://velo.ffc.fr/se-licencier/les-licences-ffc/licence-jeunesse/"
+    consulte: "2026-10-10"
+  - titre: "FFC, Tarifs des licences"
+    url: "https://velo.ffc.fr/se-licencier/tarifs/"
+    consulte: "2026-10-10"
+  - titre: "FFC, Demande de licence 2027 et note sur le certificat médical"
+    url: "https://ffc.fr/app/uploads/sites/2/2025/09/Demande-de-licence-2027_20260901.pdf"
+    consulte: "2026-10-10"
+---
+
+## Licencia FFC por año natural: la lista preparada para diciembre
+
+En la Fédération française de cyclisme, la licencia va del 1 de enero al 31 de diciembre, mientras que el club inscribe en septiembre. El nuevo federado que llega al inicio de temporada recibe directamente una licencia 2027, válida dieciséis meses.
+
+La solicitud de licencia se hace en el espacio de licencias de la FFC, o en el formulario en papel que valida el comité regional. OnClub no envía nada allí ni introduce ninguna licencia: prepara la [lista de licencias](/fonctionnalites/liste-des-licences) que la junta directiva traslada.
+
+<Idee visuel="droite">
+
+Cuando se abre la campaña 2027, la pantalla Licencias indica quién está listo, quién espera todavía un pago o un documento, quién renueva y quién es nuevo en el club.
+
+<Repli>
+
+- **Listo**: cuota pagada o calendario de pagos al día, sin ningún documento que volver a pedir.
+- **Una sola línea** por corredor, aunque esté inscrito en dos grupos.
+- **La exportación en hoja de cálculo** da nombre, apellido, año de nacimiento, grupo, número de licencia y contactos.
+- **Más de 2.300 clubes** están afiliados a la FFC, según la federación: cada uno hace su campaña en el mismo calendario.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club ciclista"
+  titre="Licencias 2027 · por trasladar"
+  sousTitre="Escuela de ciclismo y grupo de carretera"
+  lignes={[
+    { nom: 'Léa B.', detail: 'Escuela · renovación', statut: 'Lista', ton: 'ok' },
+    { nom: 'Hugo T.', detail: 'Escuela · nuevo en el club', statut: 'Pago en curso', ton: 'neutre' },
+    { nom: 'Samir K.', detail: 'Carretera adultos · renovación', statut: 'Faltan documentos', ton: 'ko' },
+  ]}
+  bouton="Descargar la lista (hoja de cálculo)"
+  legende="La lista que el tesorero mantiene abierta durante la campaña de licencias. Nombres ficticios."
+/>
+
+</Idee>
+
+## Inscripción en la escuela de ciclismo: el grupo según el año de nacimiento
+
+La FFC cuenta la edad a 31 de diciembre de la temporada: en 2027, un niño nacido en 2017 corre en U11. El formulario solo propone a la familia los grupos abiertos a ese año, con las plazas que quedan.
+
+OnClub no calcula la categoría federativa: el club da nombre a sus grupos y fija sus años de nacimiento, una sola vez.
+
+<Repli titre="Las categorías de jóvenes FFC 2027">
+
+- **Baby vélo**: de 2 a 4 años, nacidos de 2023 a 2025.
+- **U7**: nacidos en 2021 y 2022.
+- **U9**: nacidos en 2019 y 2020.
+- **U11**: nacidos en 2017 y 2018.
+- **U13**: nacidos en 2015 y 2016.
+- **U15**: nacidos en 2013 y 2014.
+- **U17**: nacidos en 2011 y 2012; a los diecisiete años, el corredor pasa a una licencia de adulto, Compétition o Sport.
+
+</Repli>
+
+Una [sesión de prueba](/fonctionnalites/seances-essai) se reserva desde la página del club, y la inscripción posterior queda vinculada a ella.
+
+## Cuota del club ciclista en varios plazos
+
+Un anticipo y después varios pagos: la familia ve cada importe y las fechas de inicio y fin antes de confirmar, y el descuento del segundo hijo ya está aplicado.
+
+<Repli>
+
+- **El [Pass’Sport](/guides/pass-sport)** y las ayudas locales se marcan en la inscripción y se descuentan; se pide el justificante correspondiente.
+- **Los cheques y el efectivo** se anotan en el expediente, al céntimo, sin comisión.
+- **A una familia con retraso** se le envía un recordatorio de pago con un botón: el mensaje lleva el importe correcto, y la junta directiva ve quién lo recibirá antes del envío.
+- **El recibo de la cuota** se descarga desde el expediente.
+
+</Repli>
+
+## Cuestionario del menor en línea, módulo de salud FFC para el adulto
+
+Para un menor, la familia rellena el cuestionario de salud oficial desde su móvil: las respuestas se quedan allí, y solo la declaración firmada llega al club.
+
+<Repli>
+
+- **Una respuesta positiva**: la FFC pide entonces un certificado médico de menos de seis meses.
+- **El adulto** rellena el módulo de salud de la FFC y firma una declaración jurada; el club puede reclamarla como un documento que subir en foto.
+- **El certificado con electrocardiograma** solo se exige si el adulto indica síntomas cardíacos en el año; se sigue su fecha de caducidad.
+
+</Repli>
+
+## Convocatoria para la carrera del domingo, pasar lista en el entrenamiento
+
+El entrenador convoca a su grupo para una carrera o un entrenamiento; los padres responden presente o ausente desde el correo, sin crear una cuenta.
+
+La inscripción en la prueba sigue en manos del organizador o de la federación. OnClub no cronometra nada y no publica ningún resultado.
+
+<Repli>
+
+- **El [espacio del entrenador](/fonctionnalites/espace-encadrant)** se abre con un enlace personal: primero la próxima sesión, y después pasar lista, sin ver la dirección ni el teléfono de las familias.
+- **Una salida anulada** (carretera helada, tormenta) avisa a todas las familias, con una nota si el entrenador lo desea.
+- **Un joven ausente sin avisar** tres veces en las cinco últimas listas queda señalado a la junta directiva.
+
+</Repli>

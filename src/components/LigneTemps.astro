@@ -11,10 +11,12 @@
   seulement des MOTS (les libellés courts), jamais un chiffre tapé.
 */
 import BlocTemps from './BlocTemps.astro'
+import { i18n } from '../i18n/ui'
 import { TACHES, TOTAL, CINQ_TACHES, ADHERENTS_REFERENCE, duree, type CleTemps } from '../data/temps'
 
 interface Props { cles?: CleTemps[]; geste?: string; adherents?: number; titre?: string }
 const { cles = [], geste, adherents = ADHERENTS_REFERENCE, titre } = Astro.props
+const { t, lien, langue } = i18n(Astro.url)
 
 /* Les libellés courts : la pastille, et le complément de la ligne forte. */
 const COURT: Record<CleTemps, { pastille: string; forte: string }> = {
@@ -32,32 +34,32 @@ const COURT: Record<CleTemps, { pastille: string; forte: string }> = {
 
 const cinq = cles.length === CINQ_TACHES.length && CINQ_TACHES.every((c) => cles.includes(c))
 const lignes = cles.map((c) => {
-  const t = TACHES[c]
-  const rendu = t.avantMin === null || t.apresMin === null
-  return { cle: c, ...COURT[c], rendu, avant: rendu ? '' : duree(t.avantMin!), apres: rendu ? duree(t.gainMin) : duree(t.apresMin!) }
+  const x = TACHES[c]
+  const rendu = x.avantMin === null || x.apresMin === null
+  return { cle: c, pastille: t(COURT[c].pastille), forte: t(COURT[c].forte), rendu, avant: rendu ? '' : duree(x.avantMin!, langue), apres: rendu ? duree(x.gainMin, langue) : duree(x.apresMin!, langue) }
 })
 const forte = cinq
-  ? { avant: TOTAL.avant, apres: TOTAL.apres, complement: 'd’administratif par saison', rendu: false }
+  ? { avant: TOTAL.avant, apres: TOTAL.apres, complement: t('d’administratif par saison'), rendu: false }
   : lignes.length === 1
-    ? { avant: lignes[0].avant, apres: lignes[0].apres, complement: lignes[0].rendu ? `${lignes[0].forte} rendues par saison` : `${lignes[0].forte} par saison`, rendu: lignes[0].rendu }
+    ? { avant: lignes[0].avant, apres: lignes[0].apres, complement: lignes[0].rendu ? t('{forte} rendues par saison', { forte: lignes[0].forte }) : t('{forte} par saison', { forte: lignes[0].forte }), rendu: lignes[0].rendu }
     : null
-const note = forte ? `Estimation pour ${adherents} adhérents, pas une étude.` : `Par saison, estimation pour ${adherents} adhérents, pas une étude.`
+const note = forte ? t('Estimation pour {n} adhérents, pas une étude.', { n: adherents }) : t('Par saison, estimation pour {n} adhérents, pas une étude.', { n: adherents })
 ---
 {cles.length > 0 ? (
-  <section class="ligne-temps" aria-label="Le temps rendu">
+  <section class="ligne-temps" aria-label={t('Le temps rendu')}>
     {forte ? (
       <p class="lt-forte">
-        {!forte.rendu && <><span class="lt-chiffre num">{forte.avant}</span> <svg class="lt-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg><span class="sr">devient</span> </>}
+        {!forte.rendu && <>{langue === 'es' && <span class="sr">De </span>}<span class="lt-chiffre num">{forte.avant}</span> <svg class="lt-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg><span class="sr">{t('devient')}</span> </>}
         <span class="lt-chiffre num">{forte.apres}</span> <span class="lt-complement">{forte.complement}</span>
       </p>
     ) : (
       <ul class="lt-pastilles">
         {lignes.map((l) => (
           <li>
-            <span class="lt-lib">{l.pastille}</span>
+            <span class="lt-lib">{l.pastille}</span>{langue === 'es' && !l.rendu && <span class="sr">: de </span>}
             {l.rendu
-              ? <b class="num">{l.apres} <span class="lt-rendues">rendues</span></b>
-              : <b class="num">{l.avant} <svg class="lt-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg><span class="sr">devient</span> {l.apres}</b>}
+              ? <b class="num">{l.apres} <span class="lt-rendues">{t('rendues')}</span></b>
+              : <b class="num">{l.avant} <svg class="lt-fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg><span class="sr">{t('devient')}</span> {l.apres}</b>}
           </li>
         ))}
       </ul>
@@ -65,16 +67,16 @@ const note = forte ? `Estimation pour ${adherents} adhérents, pas une étude.` 
     <div class="lt-pied">
       <p class="lt-note">{note}</p>
       <details class="lt-calcul">
-        <summary>Le calcul</summary>
+        <summary>{t('Le calcul')}</summary>
         <div class="lt-corps">
           <BlocTemps cles={cles} titre={titre} />
-          <a class="lien-fleche" href="/temps-gagne">Refaire le calcul avec vos chiffres <svg aria-hidden="true"><use href="#fleche" /></svg></a>
+          <a class="lien-fleche" href={lien('/temps-gagne')}>{t('Refaire le calcul avec vos chiffres')} <svg aria-hidden="true"><use href="#fleche" /></svg></a>
         </div>
       </details>
     </div>
   </section>
 ) : geste ? (
-  <section class="ligne-temps lt-sans-chiffre" aria-label="Le geste qui fait gagner du temps">
+  <section class="ligne-temps lt-sans-chiffre" aria-label={t('Le geste qui fait gagner du temps')}>
     <p class="lt-geste">{geste}</p>
   </section>
 ) : null}

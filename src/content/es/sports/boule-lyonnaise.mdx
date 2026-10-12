@@ -1,0 +1,120 @@
+---
+nom: "Boule lyonnaise"
+ligne: "Licencia de ocio o competición, visado médico del apartado club: la temporada en línea"
+ordre: 50
+titreSeo: "Club de boule lyonnaise: altas en línea | OnClub"
+description: "Club de boule lyonnaise: licencia de ocio o de competición elegida en el alta, certificado del apartado club cada tres años, equipos convocados. Licencia FFSB."
+titre: "Club de boule lyonnaise: la temporada arranca en línea"
+chapo: "A mediados de septiembre, la temporada de bolos vuelve a empezar. Cada socio elige en línea ocio o competición, y la junta directiva sabe quién tiene que pasar todavía por el médico."
+temps:
+  cles: [pieces, fiches]
+  titre: "El tiempo que recupera la directiva de una asociación de bolos, cada temporada"
+fonctionnalites: [inscription-en-ligne, pieces-justificatives, convocations, paiement-en-ligne, liste-des-licences, suivi-des-paiements]
+profils: [tresorier]
+guides: [certificat-medical-sport, tresorier-association]
+maj: 2026-10-10
+faq:
+  - question: "¿Se exige el certificado médico cada año para el campeonato de clubes?"
+    reponse: "No. Según el reglamento deportivo de la FFSB, el certificado para el apartado club solo se exige una vez cada tres años; los demás años, el jugador rellena el cuestionario de salud. En OnClub, el certificado enviado conserva su fecha de caducidad, y la junta directiva ve quién llega al final."
+  - question: "¿Un antiguo competidor que volvió al ocio recupera su división?"
+    reponse: "Según el reglamento deportivo, si vuelve a tramitar una licencia de competición después de una o dos temporadas de ocio, se le clasifica en la división en la que estaba categorizado el primer año de esa interrupción. OnClub no calcula ni divisiones ni puntos: registra la fórmula elegida en el alta."
+  - question: "¿La foto de carné de la licencia puede pedirse en línea?"
+    reponse: "Sí. La licencia FFSB lleva una foto reciente del jugador, sellada por la asociación. El club puede pedirla como justificante: el jugador la envía desde su móvil y la junta directiva la revisa antes de usarla."
+  - question: "¿Cuánto cuesta OnClub a una pequeña asociación de bolos?"
+    reponse: "Ninguna suscripción fija: el 2,90 % de las cuotas pagadas en línea con OnClub Mini, el 4,90 % con Pro, el 6,90 % con Pro Max IA. Las cuotas pagadas con cheque o en efectivo y anotadas por el tesorero no entran en el cálculo. Los gastos de tarjeta corren a cargo de la asociación."
+sources:
+  - titre: "FFSB, règlement sportif, saison 2026/2027"
+    url: "https://www.ffsb.fr/wa_files/rs%202026-27.pdf"
+    consulte: "2026-10-10"
+  - titre: "FFSB, la réglementation sportive"
+    url: "https://www.ffsb.fr/reglementation.html"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## Inscripción en el club de bolos: ocio o competición, desde septiembre
+
+La temporada de la FFSB va de mediados de septiembre a mediados del septiembre siguiente. En el alta, el socio elige su fórmula: cada fórmula es una clase con su precio, sus plazas y sus días de juego.
+
+<Repli>
+
+- **Ocio**: para las actividades de ocio del club.
+- **Competición**: el apartado tradicional para los concursos, el apartado club para el campeonato de clubes; el apartado club nunca se expide solo.
+- **Jóvenes**: el reglamento cuenta siete categorías, de -9 a -18 años, con chicas y chicos separados en -15 y -18; la edad se fija a 1 de enero de la temporada.
+- **Sus preguntas** se añaden al formulario: apartado club deseado, disponibilidad los sábados, coche compartido para los desplazamientos.
+
+</Repli>
+
+## Visado médico del apartado club: un certificado cada tres años
+
+Para jugar el campeonato de clubes, el apartado club exige un control médico. El certificado solo se pide una vez cada tres años; entre tanto, el jugador rellena el cuestionario de salud.
+
+<Idee visuel="droite">
+
+En OnClub, el certificado se envía en foto, la junta directiva lo revisa y su fecha de caducidad se sigue de una temporada a otra.
+
+<Repli>
+
+- **La validez se configura en meses**: treinta y seis para un certificado de tres años.
+- **Un justificante puede dirigirse solo a algunos jugadores**: al configurarlo, se limita a quienes marcan el apartado club en el formulario.
+- **Un justificante que falta se reclama con un botón**, sin bloquear el pago de la cuota.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su asociación de bolos"
+  titre="Apartado club · control médico"
+  sousTitre="Temporada 2026-2027"
+  lignes={[
+    { nom: 'Gérard P.', detail: 'Certificado válido hasta septiembre de 2029', statut: 'Al día', ton: 'ok' },
+    { nom: 'Sylvie R.', detail: 'Cuestionario de salud declarado', statut: 'Al día', ton: 'ok' },
+    { nom: 'Marc D.', detail: 'Certificado caducado', statut: 'Por enviar', ton: 'ko' },
+  ]}
+  bouton="Reclamar el certificado"
+  legende="El control médico de los jugadores del apartado club, visto por la junta directiva. Nombres ficticios."
+/>
+
+</Idee>
+
+## Licencia FFSB: el comité de bolos tiene la última palabra
+
+La licencia vale para una sola temporada y, salvo para un federado nuevo, se expide en la división fijada por la categorización. Traspasos, extensiones y declaraciones de equipos se introducen en Bouly, la herramienta federativa. OnClub no envía nada allí.
+
+Prepara la lista de los socios listos, pagados y completos, exportable en hoja de cálculo. No calcula ni divisiones, ni puntos de categorización, ni resultados.
+
+<Repli titre="Lo que lleva la licencia FFSB">
+
+- **Una foto de carné reciente**, sellada por la asociación, y la firma del federado.
+- **El apartado club** reserva un espacio para el sello del médico, fechado y firmado.
+- **Una extensión de club** en otra asociación pasa por un impreso que el propio comité introduce.
+
+</Repli>
+
+## Cuota de los socios en varios plazos
+
+La cuota se paga con tarjeta, en un solo pago o con un anticipo seguido de varios pagos; el socio ve cada importe y las fechas de inicio y fin antes de confirmar.
+
+<Repli>
+
+- **Una pareja o una familia** se inscribe en el mismo expediente, con el descuento que usted haya previsto.
+- **Los cheques y el efectivo** de las pistas del club se anotan en el expediente, al céntimo.
+- **El tesorero** ve lo cobrado, lo previsto y lo atrasado en el mismo lugar; el detalle está en la [guía del tesorero](/guides/tresorier-association).
+
+</Repli>
+
+## Campeonato de clubes: convocatoria de los equipos en cada jornada
+
+Antes de una jornada, el entrenador convoca al equipo; cada jugador responde presente o ausente desde el correo, sin cuenta.
+
+<Repli>
+
+- **El pase de lista parte de las respuestas**: una ausencia avisada queda justificada, un jugador sin respuesta queda por marcar.
+- **Una jornada anulada** se comunica a los convocados, con una nota opcional.
+- **El entrenador nunca ve** la dirección ni el teléfono de un jugador.
+
+</Repli>
+
+Para continuar, consulte los [precios](/tarifs) o [solicite una demostración](/demo?type=sport).

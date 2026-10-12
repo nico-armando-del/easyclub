@@ -17,6 +17,8 @@ import CadreNavigateur from './CadreNavigateur.astro'
 import CadreTelephone from './CadreTelephone.astro'
 import MiniEcran from './MiniEcran.astro'
 import { CLUBS, CLUBS_PAGE, LEGENDE_VITRINE, type Club, type ImageClub } from '../data/clubs'
+import { i18n, SR_FR } from '../i18n/ui'
+import VersFr from './langue/VersFr.astro'
 
 interface Props {
   titre?: string
@@ -29,15 +31,16 @@ interface Props {
   /** Les mots du cadre, pour /en et /es (français par défaut). */
   mots?: { aria: string; site: string; credit: string; onglets: Record<string, string> }
 }
+const { t, lien, versFr } = i18n(Astro.url)
 const { variante = 'accueil', niveau = 'h2', mots } = Astro.props
 const page = variante === 'page'
 const {
-  titre = page ? undefined : 'Le site du club, branché sur OnClub',
-  phrase = page ? undefined : 'Les cours, les tarifs, les places et les inscriptions viennent d’OnClub. Un cours complet s’affiche complet, sans que personne ne le mette à jour.',
+  titre = page ? undefined : t('Le site du club, branché sur OnClub'),
+  phrase = page ? undefined : t('Les cours, les tarifs, les places et les inscriptions viennent d’OnClub. Un cours complet s’affiche complet, sans que personne ne le mette à jour.'),
   clubs = page ? CLUBS_PAGE : CLUBS,
   /* Sur la page, la phrase « Les inscriptions restent dans OnClub » se fond dans la légende (tour 2, défaut 24). */
-  legende = page ? `${LEGENDE_VITRINE} Les inscriptions restent dans OnClub : le site les affiche.` : LEGENDE_VITRINE,
-  lien = page ? null : { texte: 'Le site de l’association, dès Pro', href: '/fonctionnalites/site-association' },
+  legende = page ? `${t(LEGENDE_VITRINE)} ${t('Les inscriptions restent dans OnClub : le site les affiche.')}` : t(LEGENDE_VITRINE),
+  lien: cible = page ? null : { texte: t('Le site de l’association, dès Pro'), href: '/fonctionnalites/site-association' },
 } = Astro.props
 const Titre = niveau
 const uid = `vitrine-${variante}`
@@ -48,14 +51,14 @@ const taillesTel = page ? '(min-width: 760px) 220px, 124px' : '(min-width: 760px
    (maquettes §D.3), pour ne jamais montrer un écran à moitié vide. */
 const lignesInscription = (c: Club) => c.sport === 'football'
   ? [
-      { nom: 'Nolan R.', detail: 'U11 · né en 2016', statut: 'Ouvert', ton: 'ok' as const },
-      { nom: 'Paiement', detail: 'En une fois', statut: 'Carte', ton: 'neutre' as const },
-      { nom: 'Questionnaire de santé', detail: 'Attestation signée en ligne', statut: 'Reçue', ton: 'ok' as const },
+      { nom: 'Nolan R.', detail: t('U11 · né en 2016'), statut: t('Ouvert'), ton: 'ok' as const },
+      { nom: t('Paiement'), detail: t('En une fois'), statut: t('Carte'), ton: 'neutre' as const },
+      { nom: t('Questionnaire de santé'), detail: t('Attestation signée en ligne'), statut: t('Reçue'), ton: 'ok' as const },
     ]
   : [
-      { nom: 'Léa M.', detail: 'Volley M13, mercredi', statut: '2 places', ton: 'ok' as const },
-      { nom: 'Paiement', detail: 'En une fois', statut: 'Carte', ton: 'neutre' as const },
-      { nom: 'Questionnaire de santé', detail: 'Attestation signée en ligne', statut: 'Reçue', ton: 'ok' as const },
+      { nom: 'Léa M.', detail: t('Volley M13, mercredi'), statut: t('2 places'), ton: 'ok' as const },
+      { nom: t('Paiement'), detail: t('En une fois'), statut: t('Carte'), ton: 'neutre' as const },
+      { nom: t('Questionnaire de santé'), detail: t('Attestation signée en ligne'), statut: t('Reçue'), ton: 'ok' as const },
     ]
 ---
 <div class:list={['vitrine', `vitrine-${variante}`]} data-vitrine data-vu data-champ>
@@ -66,9 +69,9 @@ const lignesInscription = (c: Club) => c.sport === 'football'
     </div>
   )}
   {clubs.length > 1 && (
-    <div class="vc-onglets" role="tablist" aria-label={mots?.aria ?? 'Sites de clubs de démonstration'} hidden>
+    <div class="vc-onglets" role="tablist" aria-label={mots?.aria ?? t('Sites de clubs de démonstration')} hidden>
       {clubs.map((c, i) => (
-        <button type="button" role="tab" id={`${uid}-onglet-${c.id}`} aria-controls={`${uid}-${c.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class="vc-onglet">{mots?.onglets[c.id] ?? c.onglet}</button>
+        <button type="button" role="tab" id={`${uid}-onglet-${c.id}`} aria-controls={`${uid}-${c.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class="vc-onglet">{mots?.onglets[c.id] ?? t(c.onglet)}</button>
       ))}
     </div>
   )}
@@ -76,19 +79,19 @@ const lignesInscription = (c: Club) => c.sport === 'football'
     {clubs.map((c) => (
       <div class="vc-panneau" role="tabpanel" id={`${uid}-${c.id}`} aria-labelledby={`${uid}-onglet-${c.id}`} tabindex="0">
         <div class="vc-compo">
-          <CadreNavigateur titre={`${c.nom} · ${mots?.site ?? 'site de démonstration'}`} class="vc-ordi">
+          <CadreNavigateur titre={`${c.nom} · ${mots?.site ?? t('site de démonstration')}`} class="vc-ordi">
             <div class="vc-defile">
               {/* La capture reste fixe : rien ne défile tout seul (consigne de Nico, WCAG 2.2.2). */}
-              <img src={c.ordi.src} srcset={srcset(c.ordi)} sizes={taillesOrdi} width={c.ordi.width} height={c.ordi.height} alt={c.alt} loading="lazy" decoding="async" />
+              <img src={c.ordi.src} srcset={srcset(c.ordi)} sizes={taillesOrdi} width={c.ordi.width} height={c.ordi.height} alt={t(c.alt)} loading="lazy" decoding="async" />
               <span class="vc-cible" aria-hidden="true" style={`left:${c.cible.x}%;top:${c.cible.y}%;width:${c.cible.l}%;height:${c.cible.h}%`}></span>
             </div>
           </CadreNavigateur>
           <div class="vc-tel">
             <CadreTelephone largeur={page ? 220 : 190}>
-              <img class="vc-tel-capture" src={c.tel.src} srcset={srcset(c.tel)} sizes={taillesTel} width={c.tel.width} height={c.tel.height} alt={c.altTel} loading="lazy" decoding="async" />
+              <img class="vc-tel-capture" src={c.tel.src} srcset={srcset(c.tel)} sizes={taillesTel} width={c.tel.width} height={c.tel.height} alt={t(c.altTel)} loading="lazy" decoding="async" />
               <div class="vc-inscription" aria-hidden="true">
                 <div class="vc-mini">
-                  <MiniEcran association={c.nom} titre="Inscription · Saison 2026-2027" lignes={lignesInscription(c)} pied={{ libelle: 'Total', valeur: '3 × 65 €' }} bouton="Valider l’inscription" />
+                  <MiniEcran association={c.nom} titre={t('Inscription · Saison 2026-2027')} lignes={lignesInscription(c)} pied={{ libelle: t('Total'), valeur: '3 × 65 €' }} bouton={t('Valider l’inscription')} />
                 </div>
               </div>
             </CadreTelephone>
@@ -98,8 +101,8 @@ const lignesInscription = (c: Club) => c.sport === 'football'
     ))}
   </div>
   <div class="vc-pied">
-    <p class="vc-legende">{legende} <a href="/credits-photos#clubs" hreflang={mots ? 'fr' : undefined}>{mots?.credit ?? 'Photos des clubs : Freepik'}</a></p>
-    {lien && <a class="lien-fleche vc-lien" href={lien.href}>{lien.texte} <svg aria-hidden="true"><use href="#fleche" /></svg></a>}
+    <p class="vc-legende">{legende} <a href={lien('/credits-photos#clubs')} hreflang={mots || versFr('/credits-photos') ? 'fr' : undefined}>{mots?.credit ?? t('Photos des clubs : Freepik')}{!mots && versFr('/credits-photos') && <VersFr sr={SR_FR} />}</a></p>
+    {cible && <a class="lien-fleche vc-lien" href={lien(cible.href)} hreflang={versFr(cible.href) ? 'fr' : undefined}>{cible.texte}{versFr(cible.href) && <VersFr sr={SR_FR} />} <svg aria-hidden="true"><use href="#fleche" /></svg></a>}
   </div>
 </div>
 <script is:inline>

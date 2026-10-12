@@ -25,6 +25,8 @@ import EcranAnime from './EcranAnime.astro'
 import EcranFige from './EcranFige.astro'
 import VersFr from './langue/VersFr.astro'
 import { TOTAL, ADHERENTS_REFERENCE, PART_RENDUE } from '../data/temps'
+import { i18n } from '../i18n/ui'
+import { SCENE_ES } from '../i18n/accueil-es'
 
 export type TextesScene = {
   legendes: [{ titre: string; phrase: string }, { titre: string; phrase: string }, { titre: string; phrase: string }]
@@ -88,14 +90,25 @@ interface Props {
   /** Où mène « Le calcul » (la semaine du bureau, juste dessous). */
   lienCalcul?: string
 }
-const { titre, phrase, cta, t = FR, noteLangue, idTitre = 'titre', ctaVersFr, lienCalcul = '#semaine' } = Astro.props
+const { langue, lien, versFr } = i18n(Astro.url)
+const { titre, phrase, cta, noteLangue, idTitre = 'titre', ctaVersFr, lienCalcul = '#semaine' } = Astro.props
+/* Sur /es : les textes de src/i18n/accueil-es.ts ; un sport n'est lien que si sa page espagnole existe. */
+const t: TextesScene = Astro.props.t ?? (langue === 'es'
+  ? { ...SCENE_ES, sports: SCENE_ES.sports && { ...SCENE_ES.sports, liste: SCENE_ES.sports.liste.map((x) => ({ texte: x.texte, href: x.href && !versFr(x.href) ? lien(x.href) : undefined })) } }
+  : FR)
+const NBESP = langue === 'es'
 const NB = String.fromCharCode(160)
-const fine = (s: string) => s.replace(/ ([?!:;€])/g, `${NB}$1`).replace(/(\d) (h|€|min)\b/g, `$1${NB}$2`)
+const fine = (s: string) => (NBESP ? s : s.replace(/ ([?!:;€])/g, `${NB}$1`)).replace(/(\d) (h|€|min)\b/g, `$1${NB}$2`)
 /* Le titre en deux temps : une ligne par phrase, aussi sur téléphone. */
 const coupe = titre.match(/^(.+?[?.!])\s+(.+)$/)
 const parties = coupe ? [fine(coupe[1]), fine(coupe[2])] : [fine(titre)]
-const telTraduit = Astro.slots.has('ecran-tel')
-const tabTraduit = Astro.slots.has('ecran-tab')
+/* Un slot passé sous condition ({es && <X slot="ecran-tel" />}) existe même vide sur la page
+   française : on regarde son rendu, pas sa présence, sinon l'accueil français perd ses écrans. */
+const rendu = async (nom: string) => (Astro.slots.has(nom) ? (await Astro.slots.render(nom)).trim() : '')
+const telHtml = await rendu('ecran-tel')
+const tabHtml = await rendu('ecran-tab')
+const telTraduit = telHtml !== ''
+const tabTraduit = tabHtml !== ''
 const sigle = t.relance.asso.split(/\s+/).filter((m) => m.length > 3 || /^[A-Z]/.test(m)).map((m) => m[0].toUpperCase()).join('').slice(0, 2)
 ---
 <script is:inline src="/js/ecrans-ctrl.js"></script>
@@ -116,7 +129,7 @@ const sigle = t.relance.asso.split(/\s+/).filter((m) => m.length > 3 || /^[A-Z]/
         <div class="c-in">
           <span class="repere" aria-hidden="true">2</span>
           {tabTraduit ? (
-            <div class="echelle traduit" data-echelle style="--l:760;--h:450"><div class="echelle-in"><slot name="ecran-tab" /></div></div>
+            <div class="echelle traduit" data-echelle style="--l:760;--h:450"><div class="echelle-in"><Fragment set:html={tabHtml} /></div></div>
           ) : (
             <div class="echelle fenetre" data-echelle style="--l:880;--h:520"><div class="echelle-in"><EcranFige nom="relance" /></div></div>
           )}
@@ -126,7 +139,7 @@ const sigle = t.relance.asso.split(/\s+/).filter((m) => m.length > 3 || /^[A-Z]/
         <div class="c-in">
           <span class="repere" aria-hidden="true">1</span>
           {telTraduit ? (
-            <div class="echelle traduit" data-echelle style="--l:420;--h:700"><div class="echelle-in"><slot name="ecran-tel" /></div></div>
+            <div class="echelle traduit" data-echelle style="--l:420;--h:700"><div class="echelle-in"><Fragment set:html={telHtml} /></div></div>
           ) : (
             <div class="echelle" data-echelle style="--l:340;--h:640"><div class="echelle-in"><EcranAnime nom="inscription" /></div></div>
           )}

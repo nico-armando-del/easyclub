@@ -5,6 +5,8 @@
   (les guides, avec leur couverture carrée). Toute la ligne mène à la page, par le lien du titre.
 */
 import Couverture from './Couverture.astro'
+import VersFr from './langue/VersFr.astro'
+import { SR_FR } from '../i18n/ui'
 
 export interface EntreeFilet {
   rubrique: string
@@ -15,6 +17,8 @@ export interface EntreeFilet {
   auteur?: string
   ligne?: string
   couverture?: { rubrique: 'guides' | 'articles' | 'comparatifs'; donnee?: string; apres?: string; titreCourt?: string }
+  /** Depuis une page espagnole, l'entrée mène à une page restée en français (étiquette « FR »). */
+  fr?: boolean
 }
 interface Props {
   entrees: EntreeFilet[]
@@ -37,7 +41,7 @@ const idTitre = id ? `${id}-titre` : undefined
         {e.couverture && <Couverture format="carre" rubrique={e.couverture.rubrique} donnee={e.couverture.donnee} titreCourt={e.couverture.titreCourt} />}
         <div class="lf-texte">
           <p class="lf-rub">{e.rubrique}{e.duree && <> · {e.duree}</>}</p>
-          <p class="lf-titre"><a href={e.href}>{e.titre}</a></p>
+          <p class="lf-titre"><a href={e.href} hreflang={e.fr ? 'fr' : undefined}>{e.titre}{e.fr && <VersFr sr={SR_FR} />}</a></p>
           {e.ligne && <p class="lf-ligne">{e.ligne}</p>}
           {(e.date || e.auteur) && <p class="lf-date">{[e.date, e.auteur].filter(Boolean).join(' · ')}</p>}
         </div>

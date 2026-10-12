@@ -1,0 +1,125 @@
+---
+nom: "Fitness"
+ligne: "Cardio, tonificación, step, pilates: un horario cargado, una cuota de socio en línea"
+ordre: 50
+titreSeo: "Cuota de socio en línea para clubes de fitness | OnClub"
+description: "Club de fitness y gimnasia: horario de clases colectivas en línea, cuota anual en varios plazos, entrenadores sin cuenta, justificante para la empresa."
+titre: "Club de fitness: el horario en línea, la cuota de socio también"
+chapo: "Tonificación el lunes a mediodía, step el martes por la tarde: el socio elige sus clases entre dos reuniones, y el entrenador encuentra su lista sin usuario."
+temps:
+  cles: [paiements, messages, site]
+  titre: "El tiempo que recupera la junta directiva de un club de fitness, cada temporada"
+fonctionnalites: [inscription-en-ligne, paiement-en-ligne, espace-encadrant, convocations, messages-familles, site-association, boutique-en-ligne, vente-au-comptoir]
+profils: [tresorier]
+guides: [certificat-medical-sport, tresorier-association]
+maj: 2026-10-10
+faq:
+  - question: "¿Un socio puede pagar en efectivo en la recepción de la sala?"
+    reponse: "Sí. Se inscribe en línea como los demás y después la junta directiva anota su pago en el expediente, al céntimo. Lo que se paga en efectivo o con cheque no pasa por la comisión de OnClub."
+  - question: "¿El entrenador tiene que crear una cuenta para pasar lista?"
+    reponse: "No. La junta directiva le envía un enlace personal y puede retirárselo en cualquier momento. El entrenador encuentra allí su próxima sesión y la lista de su clase, pasa lista y nunca ve la dirección ni el teléfono de un socio."
+  - question: "¿Se puede ofrecer una sesión de prueba antes de hacerse socio?"
+    reponse: "Sí. La persona reserva una fecha en la clase que elija desde la página del club. Cada clase decide si acepta pruebas, y después la junta directiva ve qué pruebas han terminado en una cuota de socio."
+  - question: "¿Cuánto cuesta OnClub a un club de fitness?"
+    reponse: "Un porcentaje de las cuotas cobradas en línea: el 2,90 % con OnClub Mini, el 4,90 % con Pro, el 6,90 % con Pro Max IA, sin parte fija. La tienda, reservada a Pro Max IA, añade un 2 % solo sobre sus ventas. Las comisiones de tarjeta corren a cargo de la asociación."
+sources:
+  - titre: "Ministère des Sports, Les 119 fédérations sportives et 22 groupements nationaux (mise à jour au 13 janvier 2026)"
+    url: "https://www.sports.gouv.fr/media/5951/download"
+    consulte: "2026-10-10"
+  - titre: "Comité régional EPGV, La FFEPGV devient la Fédération Française de Sport Vitalité"
+    url: "https://www.coregepgv-sport.fr/33-blog/492-la-ffepgv-devient-la-federation-francaise-de-sport-vitalite"
+    consulte: "2026-10-10"
+  - titre: "FFEPGV, Certificat médical et questionnaire de santé"
+    url: "https://support.ffepgv.fr/support/solutions/articles/44002204907-certificat-m%C3%A9dical-et-questionnaire-de-sant%C3%A9"
+    consulte: "2026-10-10"
+---
+
+## El horario de las clases colectivas, introducido una vez, correcto en todas partes
+
+<Idee visuel="droite">
+
+Cada clase lleva sus horarios de la semana, hasta seis, su sala, su entrenador, su nivel y su aforo. Un horario que pasa del martes al miércoles se corrige en un solo sitio.
+
+<Repli>
+
+- **La web del club**, con el plan Pro, muestra el horario, los precios y las plazas sin volver a introducir nada.
+- **Cada sala** tiene su ficha: la dirección, y la frase que busca el socio que llega a las 18:55, la entrada por el aparcamiento o el código de la puerta.
+- **Una clase completa** lo indica, y «completa para la temporada» se distingue de «sin plazas hoy».
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de fitness"
+  titre="Clases de la semana"
+  sousTitre="Temporada 2026-2027 · clases colectivas"
+  lignes={[
+    { nom: 'Tonificación · lunes 12:15', detail: 'Sala 1 · Nadia', statut: '6 plazas', ton: 'ok' },
+    { nom: 'Step · martes 18:30', detail: 'Sala 2 · Karim', statut: 'Completa', ton: 'ko' },
+    { nom: 'Pilates · jueves 19:00', detail: 'Sala 1 · Nadia', statut: '2 plazas', ton: 'ok' },
+  ]}
+  pied={{ libelle: 'Total', valeur: '240 €' }}
+  bouton="Elegir mis clases"
+  legende="El horario que ve un adulto antes de inscribirse, plazas restantes incluidas. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Inscripción en línea en fitness: el socio elige sus clases solo
+
+Un adulto se inscribe a sí mismo, desde su móvil: sus clases, un contacto de emergencia, sus justificantes y, a continuación, el pago.
+
+<Repli>
+
+- **Primero los socios antiguos**, con el plan Pro: los de la temporada pasada renuevan con prioridad con su enlace, y luego la inscripción se abre al público.
+- **Los archivos del año pasado**, hoja de cálculo o exportación de otra plataforma, se [importan](/fonctionnalites/reprise-des-fichiers): los socios antiguos son reconocidos.
+- **Sus preguntas** se añaden al formulario: talla de camiseta, horario preferido, cómo conoció el club.
+
+</Repli>
+
+## Cuota de fitness en varios plazos, con descuento en la segunda clase
+
+El socio elige entre sus fórmulas, al contado o en varios plazos, y ve cada fecha antes de confirmar. Tonificación el lunes y pilates el jueves: el descuento por varias clases, si usted prevé uno, se calcula solo.
+
+<Repli>
+
+- **El cuadro del tesorero**: cobrado, pendiente, atrasado, y las exportaciones contables en hoja de cálculo.
+- **A un plazo atrasado** se le envía un recordatorio de pago con un botón: el mensaje lleva el importe correcto, usted lo relee y sale.
+- **El recibo de la cuota** y el justificante de pago para la empresa se descargan desde el expediente del socio.
+
+</Repli>
+
+## Convocatoria de sesión: el entrenador pasa lista o anula desde su enlace
+
+El entrenador abre su página con un enlace personal, sin usuario: primero su próxima sesión, después la lista del día, sin ver nunca ni dirección ni teléfono.
+
+<Repli>
+
+- **Sala ocupada, sesión anulada**: la anulación avisa a los socios convocados, con una nota si hace falta.
+- **Dos clases la misma tarde**: pasa lista de las dos desde la misma página.
+- **Un mensaje a la clase correcta**, con el plan [Pro](/fonctionnalites/messages-familles): solo los inscritos del pilates del jueves, con el número de destinatarios anunciado antes del envío.
+
+</Repli>
+
+## Licencia de gimnasia voluntaria o de deporte para todos: se queda en la federación
+
+Un club de fitness puede afiliarse a una federación multideporte, de gimnasia voluntaria o de deporte para todos. La gimnasia voluntaria, convertida en marzo de 2026 en la Fédération française de Sport Vitalité, afirma tener más de 480.000 federados en 4.400 clubes.
+
+La licencia se tramita en la herramienta de la federación, I-Réseau en la gimnasia voluntaria según su soporte, no en OnClub.
+
+OnClub prepara la [lista que trasladar](/fonctionnalites/liste-des-licences) y la exporta en hoja de cálculo. En cuanto a la salud, en la gimnasia voluntaria un adulto entrega la declaración de su cuestionario o, en su defecto, un certificado de menos de seis meses.
+
+<Repli>
+
+- **El QS-SPORT** se rellena en línea: las respuestas se quedan en el móvil y solo la declaración llega al club.
+- **Un certificado** se envía en foto, la junta directiva lo revisa y sigue su fecha de caducidad. Consulte la guía del [certificado médico](/guides/certificat-medical-sport).
+
+</Repli>
+
+## Camisetas y botellas: la tienda del club y la venta en recepción
+
+Con el plan Pro Max IA, la tienda vende camisetas y botellas en línea, con el stock talla por talla y la recogida en la sala; la venta en recepción tira del mismo stock.
+
+OnClub no vende bonos de sesiones ni entradas sueltas, no reserva sesiones una a una, no gestiona tarjetas de acceso ni control de acceso, ni programas individuales, ni la nómina de los entrenadores. La cuota de socio vale para la temporada.
+
+Para ver su horario montado en OnClub, [solicite una demo](/demo?type=sport); los precios están en la página de [precios](/tarifs).

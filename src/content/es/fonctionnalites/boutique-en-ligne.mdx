@@ -1,0 +1,84 @@
+---
+nom: "Tienda en línea"
+ligne: "12 h 30 min menos de pedidos por temporada"
+famille: Vendre
+offre: max
+ordre: 1
+titreSeo: "Tienda en línea para vender las camisetas del club"
+description: "Camisetas, equipaciones, chándales: el stock por talla, el pago en línea y la recogida en el club. Las cajas del local se vacían sin un bote aparte."
+titre: "Las camisetas se venden en línea, el stock se actualiza solo"
+chapo: "Cajas de camisetas en el local, un pedido conjunto en una hoja de cálculo. Con la tienda, el padre o la madre elige su talla, paga en línea y viene a recoger al club."
+temps:
+  cles: [boutique]
+ecranFonction: true
+fonctionnalites: [vente-au-comptoir, paiement-en-ligne, exports-comptables]
+sports: [football, rugby, basket]
+maj: 2026-10-12
+faq:
+  - question: "¿Ve el padre o la madre cuántas unidades quedan de cada talla?"
+    reponse: "Ve el estado: «En stock», «Últimas unidades» o «Agotado». En la ficha del artículo, una talla muestra «Solo quedan 2 disponibles» en cuanto quedan tres o menos. La cifra exacta se queda en la junta directiva."
+  - question: "¿Se avisa al club cuando se agota una talla?"
+    reponse: "Sí. La junta directiva recibe un correo electrónico cuando una talla baja del umbral de alerta que ha elegido para el artículo, una vez cada vez que lo cruza, también después de una venta en el puesto."
+  - question: "¿Y si el club todavía no cobra en línea?"
+    reponse: "La tienda recoge el pedido igualmente. Se avisa al padre o la madre de que se paga en el club, y la junta directiva lo marca «Pagado en el club» en efectivo, con cheque o por transferencia: entonces pasa a los paquetes por preparar."
+  - question: "¿Se avisa al padre o la madre cuando su pedido está listo?"
+    reponse: "No, no sale ningún aviso de «listo para recoger». El padre o la madre conoce el lugar y el horario de recogida elegidos por el club: están en la tienda, en el correo de confirmación y en su página «Mi pedido»."
+---
+
+## Hoy: cajas y una hoja de cálculo
+
+Las camisetas llegan en cajas al local. Los padres piden por mensaje, un voluntario lleva la hoja de cálculo y otro recoge los cheques. El día del reparto faltan dos de talla 12 años y nadie sabe quién ha pagado.
+
+## El padre o la madre elige su talla y paga en línea
+
+La tienda tiene su página en la web del club. Cada artículo muestra sus fotos, o dos letras con el color del club, su precio y su estado: «En stock», «Últimas unidades» o «Agotado».
+
+- **Una línea por talla** en la ficha: «Solo quedan 2 disponibles», o «Agotado» antes de cualquier pago.
+- **El carrito** da el total estimado, y después pide el nombre, el correo electrónico y el teléfono.
+- **Los artículos se reservan 30 minutos**, el tiempo de pagar con tarjeta, en un solo pago.
+
+El padre o la madre recibe un correo de confirmación con su recibo en PDF. Su página «Mi pedido» indica en qué estado está y dónde recogerlo.
+
+<Repli titre="El detalle">
+
+- **La recogida** aparece si la junta directiva ha rellenado «Lugar de recogida» y «Horario»: «Recogida: sede social del estadio, los miércoles de 18 h a 20 h».
+- **Un club que todavía no cobra en línea** recoge el pedido igualmente: se paga en el club.
+- **El enlace «La tienda»** aparece en el menú de la web del club en cuanto hay algo que vender.
+- **«Mis artículos»**: foto con su descripción, tallas, precio, umbral de alerta, casilla «A la venta», presentación de la tienda, lugar y horario de recogida.
+
+</Repli>
+
+## El stock se actualiza solo, talla por talla
+
+Cada pedido pagado, o en curso de pago, reserva sus tallas. La junta directiva no tiene nada que descontar: la tabla «El stock» da, para cada talla, lo que se ha puesto a la venta, lo que se ha vendido o reservado, y lo que queda.
+
+- **Cuatro indicadores**: las tallas controladas, las roturas de stock, las tallas a punto de agotarse, el valor en estantería.
+- **Un umbral de alerta** por artículo: por debajo de ese umbral, la junta directiva recibe un correo electrónico.
+- **«Vendido por encima del stock»**: si dos familias han pagado la última unidad, la pantalla señala la talla en rojo.
+
+<EcranFonction nom="boutique-en-ligne-bureau" legende="El stock talla por talla y los paquetes por preparar, vistos por la junta directiva. Nombres e importes ficticios." />
+
+## La junta directiva entrega paquetes ya pagados
+
+Los pedidos pagados llegan a «Por preparar», con el detalle de las tallas, el correo electrónico y el teléfono. En la recogida, usted hace clic en «Paquete entregado».
+
+- **¿Una familia ha pagado en el club?** «Pagado en el club», y después efectivo, cheque o transferencia: el pedido pasa a los paquetes.
+- **Los carritos abandonados siguen visibles**: tras 30 minutos sin pago, devuelven sus tallas a la estantería.
+- **Un pedido anulado después del pago** queda señalado: el reembolso de una tarjeta se hace a mano, desde Stripe.
+
+La pestaña «Lo que se vende» indica lo que sale primero, lo que hay que volver a pedir y lo que no se mueve. En el puesto del partido, la [venta en el mostrador](/fonctionnalites/vente-au-comptoir) tira del mismo stock.
+
+## Desde Pro Max IA, 2 % sobre las ventas con tarjeta
+
+La tienda se abre con el plan **Pro Max IA**. Las ventas pagadas con tarjeta llevan un **2 %**, además de las comisiones de Stripe.
+
+Un pedido pagado en el club en efectivo, con cheque o por transferencia no paga nada. Las ventas con tarjeta pasan a las [exportaciones contables](/fonctionnalites/exports-comptables).
+
+## Lo que OnClub no hace (todavía)
+
+- **Avisar al padre o la madre de que su pedido está listo**: viene al lugar y en el horario indicados por el club.
+- **Vender un artículo durante la inscripción**: la tienda tiene su propia página.
+- **Imprimir una hoja de preparación**: los paquetes se leen en pantalla.
+- **Entregar a domicilio**: el pedido se recoge en el club.
+- **Reembolsar una tarjeta desde OnClub**: el reembolso se hace en Stripe.
+- **Escribir un motivo cuando la junta directiva anula** un pedido.

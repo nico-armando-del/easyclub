@@ -9,6 +9,7 @@ import CarteFamille from './CarteFamille.astro'
 import { FAMILLES, type Famille } from '../data/site'
 import { liste } from '../lib/collections'
 import VersFr from './langue/VersFr.astro'
+import { i18n } from '../i18n/ui'
 
 interface Props {
   titre?: string
@@ -21,9 +22,10 @@ interface Props {
   id?: string
   versFr?: string
 }
+const { langue: langueUrl, t, lien } = i18n(Astro.url)
 const {
-  titre = 'Tout ce qui prenait vos soirées', niveau = 'h2', lienTout = true,
-  langue = 'fr', familles, lienTexte = (n: number) => `Les ${n} fonctionnalités`, id = 't-bento', versFr,
+  titre = t('Tout ce qui prenait vos soirées'), niveau = 'h2', lienTout = true,
+  langue = langueUrl, familles, lienTexte = (n: number) => t('Les {n} fonctionnalités', { n }), id = 't-bento', versFr,
 } = Astro.props
 const n = (await liste('fonctionnalites')).length
 const H = niveau
@@ -48,7 +50,7 @@ const DISPO = {
           disposition={d.disposition}
           fond={d.fond}
           fragment={d.fragment}
-          href={`/fonctionnalites#${f.ancre}`}
+          href={lien(`/fonctionnalites#${f.ancre}`)}
           niveau={carteNiveau}
           nom={familles?.[f.cle]?.nom}
           phrase={familles?.[f.cle]?.phrase}
@@ -58,7 +60,7 @@ const DISPO = {
       )
     })}
   </div>
-  {lienTout && <a class="lien-fleche bento-tout" href="/fonctionnalites" hreflang={versFr ? 'fr' : undefined}>{lienTexte(n)}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
+  {lienTout && <a class="lien-fleche bento-tout" href={lien('/fonctionnalites')} hreflang={versFr ? 'fr' : undefined}>{lienTexte(n)}{versFr && <VersFr sr={versFr} />} <svg aria-hidden="true"><use href="#fleche"/></svg></a>}
 </div>
 <style>
 .bento-titre{font-size:var(--t-h2-idee,clamp(2rem,1.3rem + 2.6vw,3.25rem));line-height:1.05;max-width:24ch}

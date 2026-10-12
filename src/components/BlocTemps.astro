@@ -8,15 +8,17 @@
   En tête de chaque page de collection, il est rendu à partir du champ `temps`.
 */
 import { TACHES, duree, HYPOTHESES, type CleTemps } from '../data/temps'
+import { i18n } from '../i18n/ui'
 
 interface Props { cles?: CleTemps[]; geste?: string; titre?: string; sombre?: boolean }
 const { cles, geste, titre, sombre = false } = Astro.props
-const lignes = (cles ?? []).map((c) => ({ cle: c, ...TACHES[c] }))
+const { t, lien, langue } = i18n(Astro.url)
+const lignes = (cles ?? []).map((c) => ({ cle: c, ...TACHES[c], tache: t(TACHES[c].tache), calcul: t(TACHES[c].calcul), comment: t(TACHES[c].comment) }))
 const max = Math.max(1, ...lignes.map((l) => l.avantMin ?? l.gainMin))
 const pct = (m: number) => `${Math.max(1.5, (m / max) * 100).toFixed(1)}%`
 ---
-<aside class:list={['bloc-temps', { sombre }]} aria-label="Le temps gagné">
-  <p class="bt-titre">{titre ?? (geste ? 'Le geste qui fait gagner du temps' : 'Le temps rendu, chaque saison')}</p>
+<aside class:list={['bloc-temps', { sombre }]} aria-label={t('Le temps gagné')}>
+  <p class="bt-titre">{titre ?? (geste ? t('Le geste qui fait gagner du temps') : t('Le temps rendu, chaque saison'))}</p>
   {geste && <p class="bt-geste">{geste}</p>}
   {lignes.length > 0 && (
     <ul class="bt-lignes">
@@ -25,13 +27,13 @@ const pct = (m: number) => `${Math.max(1.5, (m / max) * 100).toFixed(1)}%`
           <div class="bt-tache"><b>{l.tache}</b><span>{l.calcul}</span></div>
           {l.avantMin !== null && l.apresMin !== null ? (
             <div class="bt-barres">
-              <div class="bt-barre avant"><span class="bt-lib">Aujourd’hui</span><span class="bt-piste"><i style={`width:${pct(l.avantMin)}`}></i></span><b>{duree(l.avantMin)}</b></div>
-              <div class="bt-barre apres"><span class="bt-lib">Avec OnClub</span><span class="bt-piste"><i style={`width:${pct(l.apresMin)}`}></i></span><b>{duree(l.apresMin)}</b></div>
+              <div class="bt-barre avant"><span class="bt-lib">{t('Aujourd’hui')}</span><span class="bt-piste"><i style={`width:${pct(l.avantMin)}`}></i></span><b>{duree(l.avantMin, langue)}</b></div>
+              <div class="bt-barre apres"><span class="bt-lib">{t('Avec OnClub')}</span><span class="bt-piste"><i style={`width:${pct(l.apresMin)}`}></i></span><b>{duree(l.apresMin, langue)}</b></div>
               <p class="bt-comment">{l.comment}</p>
             </div>
           ) : (
             <div class="bt-barres">
-              <div class="bt-barre apres"><span class="bt-lib">Rendues</span><span class="bt-piste"><i style={`width:${pct(l.gainMin)}`}></i></span><b>{duree(l.gainMin)}</b></div>
+              <div class="bt-barre apres"><span class="bt-lib">{t('Rendues')}</span><span class="bt-piste"><i style={`width:${pct(l.gainMin)}`}></i></span><b>{duree(l.gainMin, langue)}</b></div>
               <p class="bt-comment">{l.comment}</p>
             </div>
           )}
@@ -39,7 +41,7 @@ const pct = (m: number) => `${Math.max(1.5, (m / max) * 100).toFixed(1)}%`
       ))}
     </ul>
   )}
-  {lignes.length > 0 && <p class="bt-hyp">{HYPOTHESES} <a href="/temps-gagne#hypotheses">Voir le calcul</a></p>}
+  {lignes.length > 0 && <p class="bt-hyp">{t(HYPOTHESES)} <a href={lien('/temps-gagne#hypotheses')}>{t('Voir le calcul')}</a></p>}
 </aside>
 <style>
 .bloc-temps{background:var(--blanc);border-radius:var(--r-l);padding:24px;border:1px solid var(--trait)}

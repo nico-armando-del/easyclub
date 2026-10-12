@@ -7,10 +7,12 @@
 */
 interface Props { items?: string[] }
 const { items = [] } = Astro.props
+import { i18n } from '../i18n/ui'
+const { t, lien } = i18n(Astro.url)
 ---
 {items.length > 0 && (
   <section class="a-retenir" aria-labelledby="a-retenir-titre">
-    <h2 class="ar-titre" id="a-retenir-titre">À retenir</h2>
+    <h2 class="ar-titre" id="a-retenir-titre">{t('À retenir')}</h2>
     <ul class="ar-liste">
       {items.map((i) => (
         <li><svg class="ar-coche" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true"><path d="M3.5 9.5l3.6 3.4L14.5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{i}</span></li>

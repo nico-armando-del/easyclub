@@ -18,6 +18,9 @@
   var calc = document.getElementById('calc-demo')
   var courant = 1
   var gain = null
+  // Les mots du message, dans la langue de la page (data-textes, posé par src/pages/demo.astro).
+  var T = { bonjour: 'Bonjour, je voudrais une démo d’OnClub pour notre association.', association: 'Association : ', nonPrecise: 'non précisé', ville: 'Ville : ', adherents: 'Adhérents : environ ', pese: 'Ce qui pèse le plus : ', temps: 'Temps rendu estimé par le site : ≈ {h} h par saison', offre: 'Offre qui nous intéresse : ', resume: 'Calcul pour {n} adhérents. Estimation, pas une promesse.', sujet: 'Démo OnClub' }
+  try { var lus = JSON.parse(form.getAttribute('data-textes') || '{}'); for (var k in lus) T[k] = lus[k] } catch (x) {}
 
   // Paramètres d'adresse : ?type=musique&offre=pro
   var params = new URLSearchParams(location.search)
@@ -60,7 +63,7 @@
     champN.value = n
     if (calc && calc.calculer) calc.calculer(n)
     var resume = form.querySelector('[data-resume-n]')
-    if (resume) resume.textContent = 'Calcul pour ' + n + ' adhérents. Estimation, pas une promesse.'
+    if (resume) resume.textContent = T.resume.replace('{n}', n)
     // Les fonctionnalités qui répondent à ce qui pèse (toutes si rien n'est coché).
     var cles = pese().map(function (c) { return c.getAttribute('data-pese') })
     form.querySelectorAll('[data-pour]').forEach(function (li) {
@@ -74,14 +77,14 @@
     var type = form.querySelector('input[name="type"]:checked')
     var asso = (form.querySelector('[data-asso]').value || '').trim()
     var ville = (form.querySelector('[data-ville]').value || '').trim()
-    var lignes = ['Bonjour, je voudrais une démo d’OnClub pour notre association.', '']
-    lignes.push('Association : ' + (asso || 'non précisé') + (type ? ' (' + type.value + ')' : ''))
-    if (ville) lignes.push('Ville : ' + ville)
-    lignes.push('Adhérents : environ ' + adherents())
+    var lignes = [T.bonjour, '']
+    lignes.push(T.association + (asso || T.nonPrecise) + (type ? ' (' + type.value + ')' : ''))
+    if (ville) lignes.push(T.ville + ville)
+    lignes.push(T.adherents + adherents())
     var p = pese().map(function (c) { return c.value.toLowerCase() })
-    if (p.length) lignes.push('Ce qui pèse le plus : ' + p.join(', '))
-    if (gain !== null) lignes.push('Temps rendu estimé par le site : ≈ ' + Math.round(gain / 60) + ' h par saison')
-    if (offre) lignes.push('Offre qui nous intéresse : ' + offre)
+    if (p.length) lignes.push(T.pese + p.join(', '))
+    if (gain !== null) lignes.push(T.temps.replace('{h}', Math.round(gain / 60)))
+    if (offre) lignes.push(T.offre + offre)
     return lignes.join('\n')
   }
   function majMessage() {
@@ -90,7 +93,7 @@
     var mail = form.querySelector('[data-lien-mail]')
     var ap = form.querySelector('[data-apercu]')
     if (wa) wa.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t)
-    if (mail) mail.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Démo OnClub') + '&body=' + encodeURIComponent(t)
+    if (mail) mail.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(T.sujet) + '&body=' + encodeURIComponent(t)
     if (ap) ap.textContent = t
   }
 

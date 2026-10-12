@@ -1,0 +1,114 @@
+---
+nom: "Golf"
+ligne: "La asociación deportiva del golf: escuela de golf y equipos, en línea"
+ordre: 50
+titreSeo: "Asociación deportiva de golf: cuota de socio en línea | OnClub"
+description: "AS de golf: escuela de golf por año de nacimiento, cuota en varios plazos, convocatorias de equipos. La licencia ffgolf, en la secretaría del golf."
+titre: "AS de golf: la escuela de golf y los equipos en línea"
+chapo: "La escuela de golf de la AS acoge a los jóvenes por año de nacimiento, y sus equipos juegan las competiciones por equipos. En línea, las familias inscriben y el capitán convoca."
+temps:
+  cles: [paiements, fiches]
+  titre: "El tiempo que recupera la directiva de una AS de golf, cada temporada"
+fonctionnalites: [inscription-en-ligne, liste-attente, paiement-en-ligne, convocations, espace-encadrant, liste-des-licences]
+profils: [tresorier]
+guides: [certificat-medical-sport, prix-cotisation-association]
+maj: 2026-10-10
+faq:
+  - question: "¿OnClub reserva las salidas o cobra los green fees?"
+    reponse: "No. OnClub sirve a la asociación deportiva: la cuota de socio de la AS, la escuela de golf, sus pagos y las convocatorias de los equipos. Las salidas, los green fees y el abono al recorrido siguen en las herramientas del golf."
+  - question: "¿Un niño de la escuela de golf tiene que presentar un certificado médico?"
+    reponse: "En general, no. Según la ffgolf, un menor rellena el cuestionario de salud, tanto en ocio como en competición que cuenta para el hándicap; el certificado se reserva a las pruebas con derecho de juego federativo. En OnClub, el cuestionario oficial del menor se rellena en línea y solo la declaración llega al club."
+  - question: "¿La licencia ffgolf puede estar incluida en la cuota de la AS?"
+    reponse: "Lo decide el club: la incluye en su precio o la cobra aparte. La licencia en sí se tramita en la secretaría del golf para un miembro de la AS; OnClub no la pide, da la lista de los miembros listos para federar."
+  - question: "¿Cuánto cuesta OnClub a una asociación deportiva de golf?"
+    reponse: "Sin cuota fija: un porcentaje de las cuotas pagadas en línea, el 2,90 % con OnClub Mini, el 4,90 % con Pro, el 6,90 % con Pro Max IA. Lo que el tesorero anota con cheque o en efectivo no paga ninguna comisión."
+sources:
+  - titre: "ffgolf, commande de la licence (licence fin 2026 et 2027, membre de l’AS)"
+    url: "https://www.ffgolf.org/prendre-sa-licence/commande"
+    consulte: "2026-10-10"
+  - titre: "ffgolf, certificat médical et questionnaire de santé"
+    url: "https://www.ffgolf.org/prendre-sa-licence/certificat-medical-et-qs"
+    consulte: "2026-10-10"
+  - titre: "ffgolf, question de débutant : c’est quoi, les catégories d’âge au golf ?"
+    url: "https://www.ffgolf.org/parcours-detours/culture-golf/question-de-debutant-c-est-quoi-les-categories-d-age-au-golf"
+    consulte: "2026-10-10"
+  - titre: "Arrêté du 22 décembre 2025 accordant la délégation prévue à l’article L. 131-14 du code du sport"
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053230207"
+    consulte: "2026-10-10"
+---
+
+## La asociación deportiva del golf, no el golf en sí
+
+Según la ffgolf, el abonado o el miembro de la asociación deportiva de un golf tramita obligatoriamente su licencia en la secretaría del golf.
+
+OnClub se ocupa de la cuota de socio de la AS, de la escuela de golf y de sus pagos. No gestiona ni el abono al recorrido, ni los green fees, ni la reserva de las salidas.
+
+## Inscripción en la escuela de golf: el año de nacimiento correcto de oficio
+
+<Idee visuel="droite">
+
+En golf, las categorías de jóvenes siguen el año de nacimiento, no el cumpleaños: en 2026, un U12 ha nacido en 2014 o 2015, y un U14 en 2012 o 2013.
+
+<Repli>
+
+- **Cada grupo** lleva sus límites de años; el formulario solo muestra a la familia los grupos abiertos al año de nacimiento del niño, con las plazas restantes.
+- **Grupo completo**: con el plan Pro, la familia pasa a la [lista de espera](/fonctionnalites/liste-attente), y la plaza liberada se le ofrece con un clic.
+- **Una sesión de prueba** se reserva desde la página del club, si el grupo las acepta.
+- **Los adultos** cambian de categoría en su cumpleaños según la ffgolf; su cuota de socio de la AS no depende de ello.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su AS de golf"
+  titre="Escuela de golf · inicio de temporada 2026"
+  sousTitre="Campo de prácticas y recorrido escuela"
+  lignes={[
+    { nom: 'Grupo nacidos en 2016 y 2017', detail: 'Miércoles 14:00 · campo de prácticas', statut: '3 plazas', ton: 'ok' },
+    { nom: 'Grupo nacidos en 2014 y 2015', detail: 'Miércoles 15:30 · recorrido escuela', statut: 'Completo', ton: 'ko' },
+    { nom: 'Grupo nacidos en 2012 y 2013', detail: 'Sábado 10:00 · campo de prácticas', statut: '5 plazas', ton: 'ok' },
+  ]}
+  bouton="Abrir la lista de espera"
+  legende="Los grupos de la escuela de golf vistos por la junta directiva, por año de nacimiento. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Cuota de la AS en varios plazos, sin cheques que cobrar
+
+La cuota de socio de la AS y la escuela de golf se pagan con tarjeta, en un solo pago o con un anticipo y después varios pagos, con el total mostrado antes de confirmar.
+
+<Repli>
+
+- **Dos niños en la escuela de golf**: el descuento del segundo se aplica solo.
+- **Un padre socio y un hijo de la escuela de golf** se pagan en el mismo expediente.
+- **Los cheques y el efectivo** se anotan al céntimo; el cuadro del tesorero separa lo cobrado, lo pendiente y lo atrasado.
+- **Los recibos de cuota** y las exportaciones contables esperan al tesorero al final de la temporada.
+
+</Repli>
+
+## Licencia ffgolf: final de 2026 y 2027, tramitada en el golf
+
+Desde el 1 de septiembre de 2026, la ffgolf propone una licencia que cubre el final de 2026 y el año 2027. OnClub no la pide: la pantalla Licencias da a la junta directiva la lista de los miembros listos, exportable en hoja de cálculo.
+
+<Repli>
+
+- **Una temporada a su ritmo**: en OnClub, la temporada del club se configura libremente, de septiembre a junio para la escuela o por año natural para la AS.
+- **La salud según la ffgolf**: un mayor de edad que juega por ocio no presenta nada; un menor, o un mayor de edad en competición que cuenta para el hándicap, rellena el cuestionario de salud; una prueba con derecho de juego federativo exige un certificado.
+- **Un certificado enviado** en foto lo revisa la junta directiva, que lo sigue hasta su fecha de caducidad.
+
+</Repli>
+
+## Convocatoria de los equipos de la AS para las competiciones
+
+El capitán convoca a su equipo; cada jugador responde presente o ausente desde el correo, sin crear una cuenta, y las respuestas aparecen en su página.
+
+<Repli>
+
+- **Un enlace personal** abre la página del capitán, sin contraseña; no ve allí ni dirección ni teléfono.
+- **Un encuentro anulado** se comunica a los convocados, con una nota opcional.
+- **Los resultados, el hándicap y las clasificaciones** siguen en la ffgolf: OnClub no lleva ninguno.
+
+</Repli>
+
+Para verlo todo, [solicite una demostración](/demo?type=sport) o compare los [planes](/tarifs).

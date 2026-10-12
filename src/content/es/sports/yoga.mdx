@@ -1,0 +1,112 @@
+---
+nom: "Yoga"
+ligne: "Clases todo el año en las que cada esterilla cuenta, de la prueba a la renovación"
+ordre: 50
+titreSeo: "Inscripción en línea en clases de yoga, plazas limitadas | OnClub"
+description: "Club o sección de yoga: inscripción en línea en las clases de la semana, plazas contadas, sesión de prueba, lista de espera y cuota en varios plazos."
+titre: "Club de yoga: cada esterilla cuenta, la inscripción también"
+chapo: "El hatha del martes está completo, el vinyasa del jueves aún tiene tres esterillas: los practicantes lo ven en línea y se inscriben solos."
+temps:
+  cles: [attente, relances]
+  titre: "El tiempo que recupera la junta directiva de un club de yoga, cada temporada"
+fonctionnalites: [inscription-en-ligne, seances-essai, liste-attente, paiement-en-ligne, reinscriptions, evenements-stages, pieces-justificatives]
+profils: [tresorier]
+guides: [certificat-medical-sport, prix-cotisation-association]
+maj: 2026-10-10
+faq:
+  - question: "Nuestros practicantes son adultos: ¿hay que indicar un responsable legal?"
+    reponse: "No. Un adulto se inscribe a sí mismo y deja un contacto de emergencia. El responsable legal, que debe ser mayor de edad, solo se pide para un menor: un adolescente al que su madre inscribe en la clase del sábado, en el mismo expediente que ella."
+  - question: "¿Se puede vender un bono de diez sesiones o una clase suelta?"
+    reponse: "Hoy no. OnClub inscribe por temporada, pagadera en un solo pago o en varios plazos, o en un taller con fecha con el plan Pro Max IA. Mejor saberlo antes de enseñarnos su horario."
+  - question: "¿Una persona en prueba ocupa la esterilla de un inscrito?"
+    reponse: "Eso lo decide el club. O la prueba guarda una plaza hasta su sesión, o no ocupa ninguna. Clase por clase, la prueba también puede ofrecerse solo si queda sitio, o nunca."
+  - question: "¿Es obligatorio un certificado médico para practicar yoga?"
+    reponse: "Para una licencia, es la federación a la que está afiliado el club la que fija la regla para un mayor de edad. Sin licencia, la asociación decide lo que pide. En OnClub, el adulto puede rellenar el QS-SPORT en línea, o subir la foto de un certificado que revisa la junta directiva."
+sources:
+  - titre: "Ministère des Sports, Les 119 fédérations sportives et 22 groupements nationaux (mise à jour au 13 janvier 2026)"
+    url: "https://www.sports.gouv.fr/media/5951/download"
+    consulte: "2026-10-10"
+  - titre: "Code du sport, article L231-2 (licence et certificat médical)"
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045293846"
+    consulte: "2026-10-10"
+---
+
+## Inscripción en línea en las clases de yoga: cada clase cuenta sus esterillas
+
+<Idee visuel="droite">
+
+Una sala de yoga se llena por unas pocas esterillas. Cada clase lleva sus plazas, su nivel, su profesor y su horario, y la página del club muestra las que aún tienen sitio.
+
+<Repli>
+
+- **Clase llena**: con el plan Pro, el siguiente practicante entra en [lista de espera](/fonctionnalites/liste-attente) sin pagar nada; se libera una esterilla, la junta directiva se la ofrece y tiene 48 horas para aceptar y pagar.
+- **La sesión de prueba** se reserva en una fecha de la clase; el club elige si guarda una esterilla hasta el día.
+- **Después**, la junta directiva ve qué pruebas se han convertido en inscripciones.
+- **Una clase avanzada** puede quedar abierta solo a los antiguos socios, o por invitación.
+
+</Repli>
+
+<MiniEcran
+  slot="ecran"
+  association="Su club de yoga"
+  titre="Lista de espera"
+  sousTitre="Hatha · martes 19:00 · Completo · 18 plazas"
+  lignes={[
+    { nom: 'Sophie R.', detail: 'Puesto 1 · desde el 2 de septiembre de 2026', statut: 'En espera', ton: 'neutre' },
+    { nom: 'Thomas B.', detail: 'Puesto 2 · desde el 9 de septiembre de 2026', statut: 'En espera', ton: 'neutre' },
+    { nom: 'Nadia K.', detail: 'Puesto 3 · desde el 21 de septiembre de 2026', statut: 'En espera', ton: 'neutre' },
+  ]}
+  bouton="Ofrecer la plaza"
+  legende="La lista de espera de una clase completa, vista por la junta directiva. Nombres e importes ficticios."
+/>
+
+</Idee>
+
+## Cuota de yoga en varios plazos, certificado de pago para la empresa
+
+Una temporada de clases semanales se paga en un solo pago o en varios, según sus modalidades: un anticipo en la inscripción, y después varios pagos cuya fecha e importe aparecen antes de confirmar.
+
+<Repli>
+
+- **Dos prácticas por semana**: el descuento por una segunda clase se calcula solo, el total exacto aparece antes del pago.
+- **Un certificado de pago** para la empresa se descarga desde el expediente, emitido sobre lo realmente cobrado.
+- **El recibo de la cuota** se descarga desde el mismo expediente.
+- **El tesorero** ve lo cobrado, lo pendiente y lo atrasado; un pago atrasado se reclama con un botón, tras releer.
+
+</Repli>
+
+## Licencia y salud: el yoga no tiene federación delegada
+
+Ninguna de las 119 federaciones deportivas autorizadas por el ministerio francés es una federación de yoga. Un club afiliado a una federación multideporte gestiona su licencia en la herramienta de esa federación.
+
+OnClub no transmite nada allí: prepara la [lista que trasladar](/fonctionnalites/liste-des-licences), que se exporta en hoja de cálculo.
+
+Para un mayor de edad, el código del deporte francés deja que la federación fije lo que pide para expedir la licencia; sin licencia, es la asociación la que elige sus documentos.
+
+<Repli>
+
+- **El QS-SPORT** se rellena en línea: las respuestas se quedan en el móvil, solo la declaración llega al club.
+- **Un certificado** se sube en foto; la junta directiva lo revisa y su fecha de caducidad queda controlada.
+- **Un documento que falta** se reclama con un botón; salvo que el club decida otra cosa, no bloquea el pago. Vea la guía del [certificado médico](/guides/certificat-medical-sport).
+
+</Repli>
+
+## Mayo: los practicantes fieles conservan su esterilla para el inicio de temporada
+
+Con el plan Pro, el profesor marca desde mayo a los practicantes que conserva en su clase del año siguiente: su plaza queda reservada antes de que la inscripción se abra a los nuevos.
+
+<Repli>
+
+- **Un plazo de reserva** de dos semanas por defecto, de 1 a 90 días según su ajuste.
+- **El practicante confirma** desde su enlace y elige su calendario de pagos; pasado el plazo, la esterilla vuelve al público.
+- **Las clases de la temporada** se recuperan para la siguiente: solo queda ajustar horarios y precios.
+
+</Repli>
+
+## Talleres del domingo y cursillos de vacaciones
+
+Un taller de respiración o un día de cursillo tiene su página de inscripción, su fecha, su precio, sus plazas y su lista de espera, que se paga aparte de la cuota (plan Pro Max IA, vea [eventos y cursillos](/fonctionnalites/evenements-stages)).
+
+OnClub no tiene bonos de sesiones, ni reserva sesión por sesión, ni clases por videollamada ni vídeos: un practicante está inscrito en su clase de la semana durante toda la temporada, o en un taller con fecha.
+
+Para ver sus clases y sus esterillas en OnClub, [solicite una demo](/demo?type=sport); los precios están en la página de [precios](/tarifs).

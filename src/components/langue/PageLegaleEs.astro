@@ -1,0 +1,29 @@
+---
+/* Une page légale en espagnol : le texte traduit est dans src/legal/es/<nom>.html (jumeau de src/legal/<nom>.html). */
+import Layout from '../../layouts/Layout.astro'
+import FilAriane from '../FilAriane.astro'
+const PAGES = import.meta.glob('../../legal/es/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+interface Props { nom: string; titre: string; h1: string; description: string }
+const { nom, titre, h1, description } = Astro.props
+const html = PAGES[`../../legal/es/${nom}.html`]
+const fil = [{ nom: h1, url: `/es/${nom}` }]
+---
+<Layout titre={titre} description={description} chemin={`/es/${nom}`} fil={fil}>
+  <div class="enveloppe legale">
+    <FilAriane fil={fil} />
+    <h1>{h1}</h1>
+    <div class="prose legale-corps"><Fragment set:html={html} /></div>
+    <p class="legale-fin">¿Alguna pregunta? <a href="mailto:onclub.contact@gmail.com">onclub.contact@gmail.com</a> · <a href="/es">Inicio</a> · <a href="/es/demo">Solicitar una demo</a> · <a href="/es/mentions-legales">Aviso legal</a> · <a href="/es/confidentialite">Privacidad</a> · <a href="/es/conditions">Condiciones</a></p>
+  </div>
+</Layout>
+<style>
+.legale{padding-block:16px var(--section)}
+.legale h1{margin-top:16px;font-size:clamp(2rem,1.5rem + 2vw,3rem)}
+.legale-corps{margin-top:24px}
+.legale-corps :global(.maj){color:var(--gris);font-size:.9375rem}
+.legale-corps :global(.note){background:var(--blanc);border-left:4px solid var(--menthe);padding:16px 18px;border-radius:0 var(--r-s) var(--r-s) 0;color:var(--encre);font-size:1rem}
+.legale-corps :global(h2){font-size:clamp(1.375rem,1.2rem + .8vw,1.75rem)}
+.legale-corps :global(h3){font-size:1.1875rem}
+.legale-fin{margin-top:48px;font-size:.9375rem;max-width:var(--lecture)}
+.legale-fin a{font-weight:600}
+</style>

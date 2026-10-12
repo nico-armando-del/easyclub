@@ -8,11 +8,14 @@
   variante="cartes" : la grille de cartes d'avant (9 visibles, le reste replié).
 */
 import { voirAussi, type NomCollection } from '../lib/collections'
+import { i18n, SR_FR } from '../i18n/ui'
+import VersFr from './langue/VersFr.astro'
 interface Props { collection: NomCollection; id: string; min?: number; titre?: string; variante?: 'cartes' | 'rangee' }
 const { collection, id, min = 6, variante = 'rangee' } = Astro.props
 const rangee = variante === 'rangee'
-const titre = Astro.props.titre ?? (rangee ? 'Pour aller plus loin' : 'Voir aussi')
-const liens = await voirAussi(collection, id, min)
+const { langue, t } = i18n(Astro.url)
+const titre = Astro.props.titre ?? (rangee ? t('Pour aller plus loin') : t('Voir aussi'))
+const liens = await voirAussi(collection, id, min, langue)
 const VISIBLES = rangee ? 4 : 9
 const uid = `voir-aussi-${variante}`
 ---
@@ -22,13 +25,13 @@ const uid = `voir-aussi-${variante}`
     {rangee ? (
       <>
         <ul class="va-pilules">
-          {liens.slice(0, VISIBLES).map((l) => <li><a class="btn btn-contour btn-petit" href={l.url}>{l.nom}</a></li>)}
+          {liens.slice(0, VISIBLES).map((l) => <li><a class="btn btn-contour btn-petit" href={l.url} hreflang={l.fr ? 'fr' : undefined}>{l.nom}{l.fr && <VersFr sr={SR_FR} />}</a></li>)}
         </ul>
         {liens.length > VISIBLES && (
           <details class="va-plus">
-            <summary>{liens.length - VISIBLES === 1 ? 'Une autre page liée' : `${liens.length - VISIBLES} autres pages liées`}</summary>
+            <summary>{liens.length - VISIBLES === 1 ? t('Une autre page liée') : t('{n} autres pages liées', { n: liens.length - VISIBLES })}</summary>
             <ul class="va-pilules">
-              {liens.slice(VISIBLES).map((l) => <li><a class="btn btn-contour btn-petit" href={l.url}>{l.nom}</a></li>)}
+              {liens.slice(VISIBLES).map((l) => <li><a class="btn btn-contour btn-petit" href={l.url} hreflang={l.fr ? 'fr' : undefined}>{l.nom}{l.fr && <VersFr sr={SR_FR} />}</a></li>)}
             </ul>
           </details>
         )}
@@ -37,15 +40,15 @@ const uid = `voir-aussi-${variante}`
       <>
         <ul class="grille grille-3">
           {liens.slice(0, VISIBLES).map((l) => (
-            <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
+            <li><a class="carte-lien" href={l.url} hreflang={l.fr ? 'fr' : undefined}><small>{l.etiquette}</small><b>{l.nom}{l.fr && <VersFr sr={SR_FR} />}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
           ))}
         </ul>
         {liens.length > VISIBLES && (
           <details class="va-plus">
-            <summary>{liens.length - VISIBLES} autres pages liées</summary>
+            <summary>{t('{n} autres pages liées', { n: liens.length - VISIBLES })}</summary>
             <ul class="grille grille-3">
               {liens.slice(VISIBLES).map((l) => (
-                <li><a class="carte-lien" href={l.url}><small>{l.etiquette}</small><b>{l.nom}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
+                <li><a class="carte-lien" href={l.url} hreflang={l.fr ? 'fr' : undefined}><small>{l.etiquette}</small><b>{l.nom}{l.fr && <VersFr sr={SR_FR} />}</b>{l.ligne && <span>{l.ligne}</span>}</a></li>
               ))}
             </ul>
           </details>

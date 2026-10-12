@@ -9,17 +9,24 @@
   L'animation ne tourne que quand l'écran est visible ; sous
   prefers-reduced-motion, il affiche son état final.
 */
+import { langueDe } from '../i18n/ui'
 const ECRANS = import.meta.glob('../ecrans/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
+/* En espagnol : src/ecrans/es/<nom>.html et son script public/ecrans/es/<nom>.js (les textes qui
+   s'écrivent pendant l'animation sont dans le script). Jamais d'écran français sur une page espagnole. */
+const ECRANS_ES = import.meta.glob('../ecrans/es/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>
 interface Props { nom: 'inscription' | 'reinscription' | 'relance' | 'site' | 'boutique' | 'terrain' | 'cluby'; legende?: string; sombre?: boolean }
 const { nom, legende, sombre = false } = Astro.props
-const html = ECRANS[`../ecrans/${nom}.html`]
+const es = langueDe(Astro.url) === 'es'
+const html = es ? ECRANS_ES[`../ecrans/es/${nom}.html`] : ECRANS[`../ecrans/${nom}.html`]
+if (!html && es && ECRANS[`../ecrans/${nom}.html`]) throw new Error(`src/ecrans/es/${nom}.html n’existe pas : une page espagnole montre l’écran traduit. Copiez src/ecrans/${nom}.html et public/ecrans/${nom}.js dans les dossiers es/ et traduisez leurs textes.`)
 if (!html) throw new Error(`Écran inconnu : ${nom}`)
+const script = es ? `/ecrans/es/${nom}.js` : `/ecrans/${nom}.js`
 ---
 <figure class:list={['ecran-anime', `ecran-${nom}`, { sombre }]}>
   <Fragment set:html={html} />
   {legende && <figcaption>{legende}</figcaption>}
 </figure>
-<script is:inline defer src={`/ecrans/${nom}.js`}></script>
+<script is:inline defer src={script}></script>
 <script>
   /* Sous mouvement réduit, l'écran montre son état final : les étapes restées en opacité 0
      sont retirées de la lecture (aria-hidden) et de l'affichage (visibility), sans bouger la

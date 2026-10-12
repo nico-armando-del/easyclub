@@ -13,6 +13,7 @@
   public/js/calculateur.js. Sans JS, le champ est en lecture seule (250).
 */
 import { calculer, duree, TACHES, CINQ_TACHES, ADHERENTS_REFERENCE } from '../data/temps'
+import { i18n } from '../i18n/ui'
 interface Props {
   grand?: boolean; id?: string; entree?: boolean
   /** Version en une phrase (accueil). */
@@ -22,9 +23,10 @@ interface Props {
   /** Sur /temps-gagne : la note renvoie aux hypothèses juste en dessous, pas à la page elle-même. */
   surPageTemps?: boolean
 }
+const { t, lien, langue } = i18n(Astro.url)
 const {
   grand = false, id = 'calculateur', entree = true, compact = false, surPageTemps = false,
-  mots = { avant: 'rendues chaque saison, pour', apres: 'adhérents.', etiquette: 'Nombre d’adhérents' },
+  mots = { avant: t('rendues chaque saison, pour'), apres: t('adhérents.'), etiquette: t('Nombre d’adhérents') },
 } = Astro.props
 const r = calculer(ADHERENTS_REFERENCE)
 const h = (m: number) => `${Math.round(m / 60)} h`
@@ -43,33 +45,33 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
 <div class:list={['calculateur', { grand, 'sans-entree': !entree }]} id={id} data-calculateur={donnees}>
   <div class="calc-gauche">
   <div class="calc-entree">
-    <label for={`${id}-n`}>Nombre d’adhérents de votre association</label>
+    <label for={`${id}-n`}>{t('Nombre d’adhérents de votre association')}</label>
     <div class="calc-champs">
       <input id={`${id}-n`} type="number" inputmode="numeric" min="10" max="5000" step="1" value={ADHERENTS_REFERENCE} data-calc-n>
-      <input type="range" min="10" max="1500" step="10" value={ADHERENTS_REFERENCE} aria-label="Nombre d’adhérents, curseur" data-calc-curseur>
+      <input type="range" min="10" max="1500" step="10" value={ADHERENTS_REFERENCE} aria-label={t('Nombre d’adhérents, curseur')} data-calc-curseur>
     </div>
-    <p class="calc-sansjs">Calcul affiché pour 250 adhérents.</p>
+    <p class="calc-sansjs">{t('Calcul affiché pour {n} adhérents.', { n: ADHERENTS_REFERENCE })}</p>
   </div>
   <!-- Les trois totaux sous le curseur, dans la colonne de gauche (tour 2, défaut 14). -->
   <div class="calc-totaux" aria-live="polite">
-    <div><span>Aujourd’hui</span><b class="num" data-calc-avant>≈ {h(r.avant)}</b></div>
-    <div><span>Avec OnClub</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
-    <div class="calc-gain"><span>Rendues chaque saison</span><b class="num" data-calc-gain>≈ {h(r.gain)}</b></div>
+    <div><span>{t('Aujourd’hui')}</span><b class="num" data-calc-avant>≈ {h(r.avant)}</b></div>
+    <div><span>{t('Avec OnClub')}</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
+    <div class="calc-gain"><span>{t('Rendues chaque saison')}</span><b class="num" data-calc-gain>≈ {h(r.gain)}</b></div>
   </div>
   </div>
   <div class="calc-resultat" aria-live="polite">
     <table class="calc-table">
-      <caption class="sr">Les cinq tâches recalculées</caption>
-      <thead><tr><th scope="col">Tâche</th><th scope="col">Aujourd’hui</th><th scope="col">Avec OnClub</th></tr></thead>
+      <caption class="sr">{t('Les cinq tâches recalculées')}</caption>
+      <thead><tr><th scope="col">{t('Tâche')}</th><th scope="col">{t('Aujourd’hui')}</th><th scope="col">{t('Avec OnClub')}</th></tr></thead>
       <tbody>
         {r.lignes.map((l) => (
-          <tr data-calc-ligne={l.cle}><th scope="row">{l.tache}</th><td class="num" data-avant>{duree(l.avant)}</td><td class="num" data-apres>{duree(l.apres)}</td></tr>
+          <tr data-calc-ligne={l.cle}><th scope="row">{t(l.tache)}</th><td class="num" data-avant>{duree(l.avant, langue)}</td><td class="num" data-apres>{duree(l.apres, langue)}</td></tr>
         ))}
       </tbody>
     </table>
     {surPageTemps
-      ? <p class="calc-note">Estimation, pas une promesse : la méthode et les hypothèses sont <a href="#hypotheses">juste en dessous</a>.</p>
-      : <p class="calc-note">Estimation, pas une promesse : la méthode et les hypothèses sont sur <a href="/temps-gagne#hypotheses">la page du temps gagné</a>.</p>}
+      ? <p class="calc-note">{t('Estimation, pas une promesse : la méthode et les hypothèses sont')} <a href="#hypotheses">{t('juste en dessous')}</a>.</p>
+      : <p class="calc-note">{t('Estimation, pas une promesse : la méthode et les hypothèses sont sur')} <a href={lien('/temps-gagne#hypotheses')}>{t('la page du temps gagné')}</a>.</p>}
   </div>
 </div>
 )}

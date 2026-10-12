@@ -1,0 +1,91 @@
+---
+nom: "Eventos y campus"
+ligne: "10 h menos de organización por temporada"
+famille: Vendre
+offre: max
+ordre: 3
+titreSeo: "Inscripción en línea a campus y eventos | OnClub"
+description: "Jornada de campus, torneo, salida: cada evento tiene su página de inscripción en línea, con su fecha, su lugar, su precio, sus plazas y su lista de espera."
+titre: "Cada campus tiene su página de inscripción"
+chapo: "Una jornada de campus, un torneo: una hoja de inscripción y un bote aparte. Con OnClub, cada evento tiene su página, sus plazas, y se paga en línea."
+temps:
+  cles: [evenements]
+ecranFonction: true
+fonctionnalites: [liste-attente, paiement-en-ligne, inscription-en-ligne]
+sports: [football, tennis, handball]
+activites: [ecole-de-musique]
+maj: 2026-10-12
+faq:
+  - question: "¿Se puede crear un campus de cinco días?"
+    reponse: "No en un solo evento. Un evento tiene una fecha y un horario: un campus de lunes a viernes se crea en cinco jornadas, cada una con su página, sus plazas y su precio."
+  - question: "¿La familia tiene que tener una cuenta?"
+    reponse: "No. El padre o la madre da su nombre, sus apellidos, su correo electrónico y, si quiere, su teléfono, y después el nombre, los apellidos y el año de nacimiento de cada participante. Puede inscribir hasta 12 personas de una vez."
+  - question: "¿Puede un evento ser gratuito?"
+    reponse: "Sí. Un precio a cero aparece como «Gratuito» en la página pública: la familia se inscribe sin pagar nada, y las plazas se cuentan como las demás."
+  - question: "¿Qué ocurre si se anula el campus?"
+    reponse: "Desde la página del evento, «Anular y reembolsar» pide un motivo. Los pagos con tarjeta los reembolsa Stripe, el motivo queda escrito en cada expediente y la pantalla indica lo que queda por devolver a mano."
+---
+
+## Hoy: una hoja, un bote, mensajes
+
+Para la jornada de campus de las vacaciones, se hace circular una hoja, se cobra en efectivo y se responde a los mensajes para saber si quedan plazas. Por la noche, hay que cuadrar la hoja con el bote.
+
+## Una fecha, un lugar, un precio, plazas
+
+En la pantalla «Eventos», usted hace clic en «Crear un evento». El formulario cabe en una tarjeta: un campus, un torneo, una salida.
+
+- **Nombre, fecha, inicio y fin**: el horario es opcional.
+- **Lugar**: va en la confirmación, es lo que la familia relee esa misma mañana.
+- **Plazas y precio por persona**: cero para un evento gratuito.
+- **Descripción**: lo que hay que llevar, la hora de llegada, el desarrollo.
+
+El evento tiene enseguida su página pública, con su dirección para enviar a las familias. Aparece también en «Las próximas citas» de la web del club.
+
+## La familia se inscribe sin cuenta, hermanos incluidos
+
+En la página, la familia lee cuándo, dónde, el precio y las plazas que quedan. Rellena el formulario «Inscribirse»: sus datos de contacto y después quién participa.
+
+- **Hasta 12 personas** de una vez, con «Añadir una persona».
+- **El importe se actualiza**: «Es decir, 50 € por 2 personas, según las plazas disponibles».
+- **El pago con tarjeta** se hace en la misma página, en un solo pago.
+
+La confirmación sale por correo electrónico, con la fecha y el lugar. Si no puede salir, la página lo dice.
+
+<Repli titre="El detalle">
+
+- **Sin una cuenta de cobro activa**, la inscripción queda registrada y la página indica lo que queda por pagar con el club.
+- **El expediente** se suma a las inscripciones de la temporada, fuera de cuota, descuentos y calendario de pagos.
+- **Una vez pasado**, el evento conserva su página: «Este evento ya tuvo lugar».
+
+</Repli>
+
+## Completo: la lista de espera toma el relevo
+
+Cuando todas las plazas están ocupadas, el botón pasa a ser «Apuntarse en la lista de espera». No se le pide nada a la familia mientras no se libere una plaza.
+
+Esas solicitudes llegan a la pantalla [Lista de espera](/fonctionnalites/liste-attente), donde la junta directiva propone o asigna la plaza. La lista de espera está abierta desde la creación del club; si la junta directiva la ha desactivado, la página muestra simplemente «Completo».
+
+## La junta directiva sigue las plazas y el dinero
+
+La pantalla «Eventos» muestra los próximos eventos, las plazas ocupadas y el importe inscrito. Cada línea muestra su estado, su indicador de ocupación y el enlace de su página pública.
+
+<EcranFonction nom="evenements-stages-bureau" legende="Los eventos de un club de fútbol, vistos por la junta directiva. Nombres e importes ficticios." />
+
+Al abrir un evento, usted ve los inscritos, la lista de espera, lo cobrado neto de reembolsos y lo que queda por cobrar, familia por familia. Las plazas que quedan salen de las inscripciones reales, no de un contador introducido a mano.
+
+<Repli titre="El detalle">
+
+- **Anular y reembolsar**: un motivo obligatorio, las tarjetas reembolsadas por Stripe, el motivo escrito en cada expediente.
+- **El pago de un evento** lleva la comisión de su plan, como una cuota, más las comisiones de Stripe.
+- **Un evento creado en el Taller de inscripción** se modifica y se cierra desde el taller.
+
+</Repli>
+
+## Lo que OnClub no hace (todavía)
+
+- **Un campus de varios días**: un evento tiene una fecha y un horario, un campus de cinco días se crea en cinco jornadas.
+- **La venta de entradas**: se inscribe a participantes en una gala, no se venden entradas al público.
+- **Un justificante por evento**: no se pide ningún documento, ni siquiera un certificado de natación.
+- **Reconocer a la familia**: el formulario no recupera a los hijos ya inscritos en el club.
+- **Modificar un evento creado desde la pantalla «Eventos»**: se puede anular, no cambiar su fecha ni su precio.
+- **Una lista de espera propia de un evento**: vale la configuración del club para todos.

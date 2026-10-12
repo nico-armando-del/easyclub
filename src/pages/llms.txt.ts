@@ -18,6 +18,8 @@ ${offres}
 
 Mise en route : ${MISE_EN_ROUTE} Contact : ${EMAIL}.
 
+Version espagnole : https://onclub.app/llms-es.txt
+
 ${groupes.map((g) => `## ${g}\n\n${pages.filter((p) => p.groupe === g).map((p) => `- [${p.nom}](${p.url})${p.ligne ? ` : ${p.ligne}` : ''}`).join('\n')}`).join('\n\n')}
 `
   return new Response(txt, { headers: { 'content-type': 'text/plain; charset=utf-8' } })

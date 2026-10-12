@@ -1,0 +1,15 @@
+---
+/*
+  UN LIEN DANS LE TEXTE D'UNE PAGE ESPAGNOLE (le `a` des fichiers MDX de
+  src/content/es/). Le traducteur garde le chemin FRANÇAIS du lien
+  ([lista de espera](/fonctionnalites/liste-attente)) : il mène à la page
+  espagnole si elle existe, sinon à la page française, avec l'étiquette
+  « FR ». Les liens externes et les ancres passent tels quels.
+*/
+import VersFr from './VersFr.astro'
+import { i18n, SR_FR } from '../../i18n/ui'
+const { href = '', ...reste } = Astro.props as { href?: string; [k: string]: unknown }
+const { lien, versFr } = i18n(Astro.url)
+const fr = versFr(href)
+---
+<a href={lien(href)} hreflang={fr ? 'fr' : undefined} {...reste}><slot />{fr && <VersFr sr={SR_FR} />}</a>
