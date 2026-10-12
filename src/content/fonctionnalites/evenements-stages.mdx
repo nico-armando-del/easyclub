@@ -5,23 +5,87 @@ famille: Vendre
 offre: max
 ordre: 3
 titreSeo: "Inscription en ligne aux stages et événements | OnClub"
-description: "Stage des vacances, tournoi, gala : chaque événement a sa page d’inscription en ligne, avec sa date, son lieu, son tarif, ses places et sa liste d’attente."
+description: "Journée de stage, tournoi, sortie : chaque événement a sa page d’inscription en ligne, avec sa date, son lieu, son tarif, ses places et sa liste d’attente."
 titre: "Chaque stage a sa page d’inscription"
-chapo: "Un stage, un tournoi, un gala : une feuille d’inscription et une cagnotte à part. Avec OnClub, chaque événement s’inscrit et s’encaisse comme un cours."
+chapo: "Une journée de stage, un tournoi : une feuille d’inscription et une cagnotte à part. Avec OnClub, chaque événement a sa page, ses places, et se paie en ligne."
 temps:
   cles: [evenements]
+ecranFonction: true
+fonctionnalites: [liste-attente, paiement-en-ligne, inscription-en-ligne]
+sports: [football, tennis, handball]
 activites: [ecole-de-musique]
-maj: 2026-10-09
+maj: 2026-10-12
+faq:
+  - question: "Peut-on créer un stage de cinq jours ?"
+    reponse: "Pas en un seul événement. Un événement a une date et un créneau : un stage du lundi au vendredi se crée en cinq journées, chacune avec sa page, ses places et son tarif."
+  - question: "La famille doit-elle avoir un compte ?"
+    reponse: "Non. Le parent donne son prénom, son nom, son e-mail et, s’il le veut, son téléphone, puis le prénom, le nom et l’année de naissance de chaque participant. Il peut inscrire jusqu’à 12 personnes en une fois."
+  - question: "Un événement peut-il être gratuit ?"
+    reponse: "Oui. Un tarif à zéro s’affiche « Gratuit » sur la page publique : la famille s’inscrit sans rien payer, et les places se comptent comme les autres."
+  - question: "Que se passe-t-il si on annule le stage ?"
+    reponse: "Depuis la page de l’événement, « Annuler et rembourser » demande un motif. Les paiements par carte sont remboursés par Stripe, le motif est écrit dans chaque dossier, et l’écran dit ce qui reste à rendre à la main."
 ---
+
+## Aujourd’hui : une feuille, une cagnotte, des messages
+
+Pour la journée de stage des vacances, on fait passer une feuille, on encaisse en liquide, on répond aux messages pour savoir s’il reste de la place. Le soir, il faut rapprocher la feuille et la cagnotte.
 
 ## Une date, un lieu, un tarif, des places
 
-Un stage de Pâques, une sortie, un gala, un tournoi : un événement a **sa date**, **son lieu**, **son tarif** et **ses places**.
+Dans l’écran « Événements », vous cliquez « Créer un événement ». Le formulaire tient en une carte : un stage, un tournoi, une sortie.
 
-## La famille s’inscrit et paie au même endroit
+- **Nom, date, début et fin** : l’horaire est facultatif.
+- **Lieu** : il part dans la confirmation, c’est ce que la famille relit le matin même.
+- **Places et tarif par personne** : zéro pour un événement gratuit.
+- **Description** : ce qu’il faut apporter, l’heure d’arrivée, le déroulé.
 
-Elle s’inscrit et paie en ligne, au même endroit que pour sa cotisation. Quand c’est complet, elle rejoint la **liste d’attente**.
+L’événement a aussitôt sa page publique, avec son adresse à envoyer aux familles. Elle apparaît aussi dans « Les prochains rendez-vous » du site du club.
 
-## Plus de feuille ni de cagnotte à part
+## La famille s’inscrit sans compte, frères et sœurs compris
 
-Tenir une feuille à part, une cagnotte à part, et rapprocher les deux à la fin. L’événement vit avec le reste de l’association.
+Sur la page, la famille lit quand, où, le tarif et les places restantes. Elle remplit le formulaire « S’inscrire » : ses coordonnées, puis qui participe.
+
+- **Jusqu’à 12 personnes** en une fois, avec « Ajouter une personne ».
+- **Le montant suit** : « Soit 50 € pour 2 personnes, selon les places disponibles. »
+- **Le paiement par carte** se fait sur la même page, en une fois.
+
+La confirmation part par e-mail, avec la date et le lieu. Si elle ne peut pas partir, la page le dit.
+
+<Repli titre="Le détail">
+
+- **Sans compte de paiement actif**, l’inscription est enregistrée et la page dit ce qui reste à régler avec le club.
+- **Le dossier** rejoint les inscriptions de la saison, hors cotisation, réductions et échéancier.
+- **Une fois passé**, l’événement garde sa page : « Cet événement a eu lieu ».
+
+</Repli>
+
+## Complet : la liste d’attente prend le relais
+
+Quand toutes les places sont prises, le bouton devient « Se mettre en liste d’attente ». Rien n’est demandé à la famille tant qu’une place ne se libère pas.
+
+Ces demandes rejoignent l’écran [Liste d’attente](/fonctionnalites/liste-attente), où le bureau propose ou attribue la place. La liste d’attente est ouverte dès la création du club ; si le bureau l’a coupée, la page affiche simplement « Complet ».
+
+## Le bureau suit les places et l’argent
+
+L’écran « Événements » donne les événements à venir, les places prises et le montant inscrit. Chaque ligne montre son état, sa jauge et le lien de sa page publique.
+
+<EcranFonction nom="evenements-stages-bureau" legende="Les événements d’un club de football, vus par le bureau. Noms et montants fictifs." />
+
+En ouvrant un événement, vous voyez les inscrits, la liste d’attente, l’encaissé net des remboursements et le reste à encaisser, famille par famille. Les places restantes viennent des inscriptions réelles, pas d’un compteur saisi à la main.
+
+<Repli titre="Le détail">
+
+- **Annuler et rembourser** : un motif obligatoire, les cartes remboursées par Stripe, le motif écrit dans chaque dossier.
+- **Le paiement d’un événement** porte le taux de commission de votre formule, comme une cotisation, plus les frais Stripe.
+- **Un événement créé dans l’Atelier d’inscription** se modifie et se ferme depuis l’atelier.
+
+</Repli>
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Un stage sur plusieurs jours** : un événement a une date et un créneau, un stage de cinq jours se crée en cinq journées.
+- **La billetterie** : on inscrit des participants à un gala, on ne vend pas d’entrées au public.
+- **Un justificatif par événement** : aucune pièce n’est demandée, pas même une attestation de natation.
+- **Reconnaître la famille** : le formulaire ne reprend pas les enfants déjà inscrits au club.
+- **Modifier un événement créé depuis l’écran « Événements »** : on peut l’annuler, pas changer sa date ou son tarif.
+- **Une liste d’attente propre à un événement** : c’est le réglage du club qui vaut pour tous.

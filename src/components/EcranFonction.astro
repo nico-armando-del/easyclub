@@ -25,14 +25,21 @@ const { nom, legende, nu = false, class: classe } = Astro.props
 const e = lireEcranFonction(nom)
 
 /* Le menu d'un club de sport en offre Pro, tel que lib/dashboard/ecrans.ts le construit
-   (libellés de lib/mots.ts, vocabulaire « Cours / Équipes »). Une entrée réservée à Max n'y est pas. */
+   (libellés de lib/mots.ts, vocabulaire « Cours / Équipes »). Une entrée réservée à Max n'y est pas,
+   sauf quand l'écran allume l'une d'elles (« Événements », « Boutique ») : le menu devient celui d'un
+   club en Pro Max IA, les deux entrées à leur place de lib/dashboard/ecrans.ts. */
+const ENTREES_MAX = ['Événements', 'Boutique']
+const max = Boolean(e.menu && ENTREES_MAX.includes(e.menu))
 const MENU: { groupe?: string; entrees: string[] }[] = [
   { entrees: ['Accueil', 'Comptabilité'] },
   { groupe: 'Familles', entrees: ['Inscriptions', 'Adhérents', 'Liste d’attente', 'Cours d’essai', 'Justificatifs', 'Licences', 'Emails'] },
-  { groupe: 'Votre club', entrees: ['Cours / Équipes', 'Effectifs', 'Éducateurs / Profs', 'Salles / Terrains'] },
-  { groupe: 'Page publique', entrees: ['Atelier d’inscription', 'Site du club'] },
+  { groupe: 'Votre club', entrees: ['Cours / Équipes', 'Effectifs', 'Éducateurs / Profs', 'Salles / Terrains', ...(max ? ['Événements'] : [])] },
+  { groupe: 'Page publique', entrees: ['Atelier d’inscription', 'Site du club', ...(max ? ['Boutique'] : [])] },
 ]
-if (e.menu && !MENU.some((g) => g.entrees.includes(e.menu!))) {
+/* « Saisons » n'est pas une entrée du menu dans le produit : on y entre par le cadre des saisons,
+   en tête du menu (lib/dashboard/ecrans.ts). data-menu="Saisons" allume ce cadre. */
+const saisons = e.menu === 'Saisons'
+if (e.menu && !saisons && !MENU.some((g) => g.entrees.includes(e.menu!))) {
   throw new Error(`src/ecrans/fonctions/${nom}.html : data-menu « ${e.menu} » n’est pas une entrée du menu (${MENU.flatMap((g) => g.entrees).join(', ')}).`)
 }
 const CLUB = 'Votre club'
@@ -48,7 +55,7 @@ const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
           {e.menu && (
             <div class="ef-menu">
               <div class="ef-id"><span class="ef-sig">{SIGLE}</span>{CLUB}</div>
-              <div class="ef-sais"><span class="ef-lib">Saisons</span><span class="ef-pas">2026-2027 · se joue</span></div>
+              <div class:list={['ef-sais', { 'ef-sais-act': saisons }]}><span class="ef-lib">Saisons</span><span class="ef-pas">2026-2027 · se joue</span></div>
               {MENU.map((g) => (
                 <div>
                   {g.groupe && <span class="ef-lib">{g.groupe}</span>}
@@ -82,12 +89,11 @@ const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
   container-type:inline-size;width:100%;margin:0 auto;min-width:0;font:13px/1.4 var(--font-body,system-ui,sans-serif);font-feature-settings:"tnum";color:#0E1116;text-align:left}
 .ecran-fonction *,.ecran-fonction *::before,.ecran-fonction *::after{box-sizing:border-box;margin:0;padding:0}
 /* La largeur se pose sur le fond, pas sur la figure : une prose qui élargit ses figures ne l'étire pas. */
-.ecran-fonction.ef-fenetre .ef-fond{max-width:1040px;margin-inline:auto}
-.ecran-fonction.ef-telephone .ef-fond{max-width:440px;margin-inline:auto}
-.ecran-fonction.ef-nu .ef-fond{max-width:none}
-.ecran-fonction .ef-fond{background:#F1EFE8;border-radius:28px;padding:36px 32px 14px}
-.ecran-fonction.ef-telephone .ef-fond{display:grid;place-items:center;padding:20px 0;background:radial-gradient(60% 48% at 50% 55%,rgba(93,232,143,.22),rgba(93,232,143,0)),#FAFAF7;border:1px solid var(--ef-trait);border-radius:24px}
-.ecran-fonction.ef-nu .ef-fond{background:none;border:0;padding:0}
+/* Un seul cadre pour les seconds écrans (dans le texte) : un panneau papier bordé, au rayon du panneau
+   menthe du héros, sur toute la largeur qu'on lui donne (la grille de la section décide). */
+.ecran-fonction .ef-fond{background:var(--papier,#F5F2EA);border:1px solid var(--trait,#E2DDD0);border-radius:var(--r-panneau,24px);padding:clamp(16px,1rem + 2vw,40px) clamp(10px,.5rem + 2vw,40px)}
+.ecran-fonction.ef-telephone .ef-fond{display:grid;place-items:center}
+.ecran-fonction.ef-nu .ef-fond{max-width:none;background:none;border:0;padding:0}
 .ecran-fonction>figcaption{margin-top:14px;font-size:.875rem;color:var(--gris,#4F535B);text-align:center}
 
 /* La fenêtre de bureau (mêmes mesures que relance.html) */
@@ -101,6 +107,7 @@ const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
 .ecran-fonction .ef-sig{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--ef-vert);color:var(--ef-vert-fonce);font:800 12px var(--ef-h1)}
 .ecran-fonction .ef-sais{display:flex;flex-direction:column;align-items:flex-start;gap:6px;border:1px solid var(--ef-trait);border-radius:12px;padding:7px}
 .ecran-fonction .ef-sais .ef-pas{margin:0 8px}
+.ecran-fonction .ef-sais.ef-sais-act{background:var(--ef-creux);border-color:#CFCBBF}
 .ecran-fonction .ef-menu .ef-lib{padding:4px 10px 2px}
 .ecran-fonction .ef-ln{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:10px;color:var(--ef-gris);white-space:nowrap}
 .ecran-fonction .ef-ln::before{content:"";width:2px;height:14px;border-radius:2px}
@@ -154,6 +161,8 @@ const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
 .ecran-fonction .ef-solde.ef-succes{background:#EAFBF3}
 .ecran-fonction .ef-chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--ef-trait)}
 .ecran-fonction .ef-chiffres b{display:block;font:800 15px/1.3 var(--ef-h1)}
+/* Libellés sur une ou deux lignes : les chiffres restent alignés en bas de la rangée. */
+.ecran-fonction .ef-chiffres>div{display:flex;flex-direction:column;justify-content:space-between;gap:2px}
 /* L'en-tête d'une page publique du club (inscription, dossier de la famille, cours d'essai) */
 .ecran-fonction .ef-entete{display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--ef-trait)}
 .ecran-fonction .ef-entete b{display:block;font-family:var(--ef-h1)}
@@ -172,15 +181,19 @@ const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
 /* Large : « Attribuer » et « Retirer » tiennent sur une ligne, sous le bouton coloré (le produit replie de même). */
 @container (min-width:760px){.ecran-fonction .ef-bts-fin{min-width:212px}}
 /* Tableau */
-.ecran-fonction .ef-table{width:100%;border-collapse:collapse}
+/* display:table et 13 px : la prose (.prose table) ne doit pas changer un tableau du produit. */
+.ecran-fonction .ef-table{display:table;width:100%;border-collapse:collapse;font-size:13px;overflow:visible}
+.ecran-fonction .ef-table th{background:none}
 .ecran-fonction .ef-table th,.ecran-fonction .ef-table td{padding:8px 6px;text-align:left;vertical-align:top;border-bottom:1px solid var(--ef-trait)}
 .ecran-fonction .ef-table th{font-size:12px;font-weight:600;color:var(--ef-mu);white-space:nowrap}
-.ecran-fonction .ef-table td{color:var(--ef-gris)}
+.ecran-fonction .ef-table td{color:var(--ef-gris);font-size:13px;line-height:1.4}
 .ecran-fonction .ef-table td b{color:#0E1116}
 .ecran-fonction .ef-table td>span{display:block}
+/* Un bouton ou un badge posé seul dans une cellule garde sa taille (jamais une pilule étirée). */
+.ecran-fonction .ef-table td>span:is(.ef-bt,.ef-badge){display:inline-flex}
 .ecran-fonction .ef-table tr:last-child td{border-bottom:0}
 .ecran-fonction .ef-table .ef-n{text-align:right}
-.ecran-fonction .ef-table .ef-nw{white-space:nowrap}
+.ecran-fonction .ef-nw{white-space:nowrap}
 /* Le volet ouvert sous une ligne (fond creusé), l'alerte (titre + texte) */
 .ecran-fonction .ef-volet{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid var(--ef-trait);border-radius:12px;background:var(--ef-creux)}
 .ecran-fonction .ef-alerte{padding:10px 12px;border:1px solid;border-radius:12px;font-size:12.5px}
@@ -198,7 +211,6 @@ const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
   .ecran-fonction .ef-cache-moyen{display:none}
 }
 @container (max-width:519px){
-  .ecran-fonction.ef-fenetre .ef-fond{padding:14px 10px 8px;border-radius:20px}
   .ecran-fonction.ef-fenetre .ef-vue{padding:14px 12px}
   .ecran-fonction .ef-tit,.ecran-fonction .ef-cache-etroit{display:none}
   .ecran-fonction .ef-carte{padding:12px}

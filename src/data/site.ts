@@ -59,11 +59,12 @@ export const OFFRES: Offre[] = [
     heures: 51,
     ouvre: [
       'Inscriptions en ligne et séances d’essai',
-      'Paiement par carte, en une ou plusieurs fois',
+      'Paiement par carte, ou échéancier encaissé par le club',
       'Tableau de bord de l’argent',
       'Relance d’un bouton',
       'Pièces justificatives',
       'Exports en tableur',
+      'Convocations, appel et compo du match',
     ],
   },
   {
@@ -91,7 +92,7 @@ export const OFFRES: Offre[] = [
       'Tout Pro',
       'La boutique, en ligne et au comptoir',
       'Événements et stages',
-      'Cluby, sans limite',
+      'Cluby, sans limite par mois',
     ],
   },
 ]

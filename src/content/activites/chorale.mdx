@@ -9,7 +9,7 @@ chapo: "Une chorale vit de ses répétitions, pas de ses fiches. OnClub tient in
 temps:
   cles: [fiches, paiements, messages]
   titre: "Le temps rendu au bureau d’une chorale, chaque saison"
-fonctionnalites: [inscription-en-ligne, formulaire-sur-mesure, espace-encadrant, messages-familles, suivi-des-paiements, evenements-stages]
+fonctionnalites: [inscription-en-ligne, espace-encadrant, messages-familles, suivi-des-paiements, evenements-stages]
 activites: [ecole-de-musique, theatre, association-de-loisirs]
 profils: [tresorier]
 comparatifs: [tableur-excel]
@@ -71,8 +71,8 @@ Si vous tenez aujourd’hui la liste des choristes dans un tableur, elle est rep
     { nom: 'Ensemble vocal', detail: 'Mardi 20:30 · sur invitation', statut: 'Invitation', ton: 'neutre' },
     { nom: 'Pupitre', detail: 'Alto', statut: 'Répondu', ton: 'ok' },
   ]}
-  pied={{ libelle: 'Cotisation de la saison', valeur: '180,00 €' }}
-  bouton="Payer en 3 fois"
+  pied={{ libelle: 'Total', valeur: '180 €' }}
+  bouton="Payer et valider"
   legende="L’inscription vue par le choriste : le chœur ouvert à son année de naissance, l’ensemble vocal réservé aux invités. Noms et montants fictifs."
 />
 
@@ -84,7 +84,7 @@ Vos questions s’ajoutent à celles d’OnClub : le pupitre, l’expérience en
 
 <Repli>
 
-Vous les demandez en une phrase à l’atelier d’inscription, comme le décrit la page [formulaire sur mesure](/fonctionnalites/formulaire-sur-mesure). L’identité du choriste, elle, reste verrouillée.
+OnClub ne garde pas encore les réponses à vos propres questions : demandez-les à part, à la première répétition. L’identité du choriste, elle, arrive complète avec l’inscription.
 
 Pour un ensemble qui recrute sur audition, le chœur passe en accès « sur invitation ». Le chef écoute les candidats ; le bureau envoie ensuite le lien aux voix retenues. Les autres s’inscrivent au grand chœur, sans qu’on ait à leur expliquer pourquoi le bouton ne marche pas pour eux.
 
@@ -122,19 +122,20 @@ Il voit la prochaine répétition : qui est là, qui manque. Il ne voit ni l’a
   titre="Répétition du jeudi"
   sousTitre="Chœur adultes · salle polyvalente"
   lignes={[
-    { nom: 'Sopranos', detail: '9 présentes sur 11', statut: 'Appel fait', ton: 'ok' },
-    { nom: 'Altos', detail: '8 présentes sur 8', statut: 'Appel fait', ton: 'ok' },
-    { nom: 'Ténors', detail: '3 présents sur 5', statut: '2 absents', ton: 'ko' },
-    { nom: 'Basses', detail: '6 présents sur 6', statut: 'Appel fait', ton: 'ok' },
+    { nom: 'Camille R.', statut: 'Présent', ton: 'ok' },
+    { nom: 'Hélène D.', statut: 'Excusé', ton: 'neutre' },
+    { nom: 'Marc L.', statut: 'Présent', ton: 'ok' },
+    { nom: 'Sophie B.', statut: 'Absent', ton: 'ko' },
   ]}
-  legende="L’appel vu par le chef de chœur, regroupé ici par pupitre. Noms fictifs."
+  bouton="Enregistrer · 26 sur 30"
+  legende="L’appel vu par le chef de chœur : une ligne par choriste, Présent, Absent ou Excusé. Noms fictifs."
 />
 
 </Idee>
 
 ## Un message à tout le chœur, d’un seul envoi
 
-Avec l’offre Pro, le message part aux choristes d’un chœur, à ceux qui n’ont pas encore réglé, ou à toute la saison. Vous voyez qui l’a reçu.
+Avec l’offre Pro, le message part aux choristes d’un chœur, à ceux qui n’ont pas encore réglé, ou à toute la saison. Vous voyez à qui il est parti.
 
 <Repli>
 

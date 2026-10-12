@@ -18,10 +18,10 @@ const familles = await parFamille()
 const total = familles.reduce((s, f) => s + f.items.length, 0)
 const fil = [{ nom: 'Fonctionnalités', url: '/fonctionnalites' }]
 const faq = [
-  { question: 'Faut-il prendre toutes les fonctionnalités ?', reponse: 'Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances et les pièces. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.' },
+  { question: 'Faut-il prendre toutes les fonctionnalités ?', reponse: 'Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances, les pièces, les convocations, l’appel et la compo du match. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.' },
   { question: 'Où arrive l’argent payé par carte ?', reponse: 'Sur le compte de l’association, déduction faite de la part OnClub et des frais de carte. Les chèques et les espèces se notent dans le dossier, au centime, et ne passent pas par la commission.' },
-  { question: 'Peut-on reprendre nos fichiers de la saison passée ?', reponse: 'Oui. Vos tableurs sont repris : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription, sans rien ressaisir.' },
-  { question: 'Un encadrant doit-il créer un compte ?', reponse: 'Non. Il reçoit un lien personnel, sans compte ni mot de passe. Il fait l’appel et prépare la compo depuis son téléphone, sans voir ni adresse ni téléphone des familles.' },
+  { question: 'Peut-on reprendre nos fichiers de la saison passée ?', reponse: 'Oui. Vous déposez le tableur de la saison passée, en CSV : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription. Vous relisez ce qui a été lu avant de valider.' },
+  { question: 'Un encadrant doit-il créer un compte ?', reponse: 'Non. Le bureau lui transmet un lien personnel, sans compte ni mot de passe. Il fait l’appel et prépare la compo depuis son téléphone, sans voir ni adresse ni téléphone des familles.' },
 ]
 ---
 <Layout
@@ -54,7 +54,7 @@ const faq = [
         </div>
         <ul class="tuiles">
           {f.items.map((e) => (
-            <li><TuileFonction nom={e.data.nom} ligne={e.data.ligne} href={url('fonctionnalites', e.id)} offre={e.data.offre} /></li>
+            <li><TuileFonction nom={e.data.nom} ligne={e.data.ligne} href={url('fonctionnalites', e.id)} offre={e.data.offre} ecran={e.data.ecranFonction === true ? e.id : e.data.ecranFonction || undefined} /></li>
           ))}
         </ul>
       </div>
@@ -69,6 +69,7 @@ const faq = [
 .section-bento{padding-top:var(--e-5)}
 .famille .section-tete{margin-bottom:var(--e-6)}
 .tuiles{list-style:none;padding:0;margin:0;display:grid;gap:var(--col-gap)}
+.tuiles>li{min-width:0}
 @media (min-width:640px){.tuiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1000px){.tuiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>

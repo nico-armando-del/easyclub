@@ -64,7 +64,7 @@ const CIBLE_VOLTA = { x: 84.1, y: 1.5, l: 10.3, h: 4.9 }
 export const VOLTA: Club = {
   id: 'volta', nom: 'Volta Volley Club', sport: 'volley',
   onglet: 'Volta Volley Club · volley',
-  alt: 'Accueil du site de Volta Volley Club, club de démonstration : équipes, agenda et bouton S’inscrire relié à OnClub.',
+  alt: 'Accueil du site de Volta Volley Club, club de démonstration : ses équipes, son agenda, et le bouton S’inscrire qui mène aux inscriptions OnClub.',
   altTel: 'Le site de Volta Volley Club, club de démonstration, sur téléphone.',
   ordi: ordi('volta'), ordiLong: long('volta', 2333), tel: tel('volta'),
   cible: CIBLE_VOLTA,

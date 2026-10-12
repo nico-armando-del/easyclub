@@ -7,21 +7,78 @@ ordre: 1
 titreSeo: "Boutique en ligne pour vendre les maillots du club"
 description: "Maillots, tenues, survêtements : le stock par taille, le paiement en ligne et le retrait au club. Les cartons du local se vident sans cagnotte à part."
 titre: "Les maillots se vendent en ligne, le stock se tient seul"
-chapo: "Des cartons de maillots au local, une commande groupée sur un tableur. Avec la boutique OnClub, le parent commande, paie, et sait où retirer."
+chapo: "Des cartons de maillots au local, une commande groupée sur un tableur. Avec la boutique, le parent choisit sa taille, paie en ligne et vient retirer au club."
 temps:
   cles: [boutique]
-ecran: boutique
-maj: 2026-10-09
+ecranFonction: true
+fonctionnalites: [vente-au-comptoir, paiement-en-ligne, exports-comptables]
+sports: [football, rugby, basket]
+maj: 2026-10-12
+faq:
+  - question: "Le parent voit-il combien il reste dans chaque taille ?"
+    reponse: "Il voit l’état : « En stock », « Derniers exemplaires » ou « Épuisé ». Dans la fiche de l’article, une taille affiche « Plus que 2 disponibles » dès qu’il en reste trois ou moins. Le chiffre exact reste au bureau."
+  - question: "Le club est-il prévenu quand une taille s’épuise ?"
+    reponse: "Oui. Le bureau reçoit un e-mail quand une taille passe sous le seuil d’alerte qu’il a choisi pour l’article, une fois à chaque passage, y compris après une vente au stand."
+  - question: "Et si le club n’encaisse pas encore en ligne ?"
+    reponse: "La boutique prend quand même la commande. Le parent est prévenu qu’elle se règle auprès du club, et le bureau la note « Réglé auprès du club » en espèces, par chèque ou par virement : elle rejoint alors les paquets à préparer."
+  - question: "Le parent est-il prévenu quand sa commande est prête ?"
+    reponse: "Non, aucun avis « prête à retirer » ne part. Le parent connaît le lieu et le créneau de retrait choisis par le club : ils sont sur la boutique, dans l’e-mail de confirmation et sur sa page « Ma commande »."
 ---
 
-## Le parent voit le stock par taille, et paie
+## Aujourd’hui : des cartons et un tableur
 
-Les articles de l’association, **le stock restant par taille**, le prix. Il choisit, paie en ligne, et sait **où et quand retirer** sa commande.
+Les maillots arrivent en cartons au local. Les parents commandent par message, un bénévole tient le tableur, un autre ramasse les chèques. Le jour de la distribution, il manque deux 12 ans et personne ne sait qui a payé.
 
-## Le bureau remet des commandes déjà payées
+## Le parent choisit sa taille et paie en ligne
 
-Les commandes payées, prêtes à préparer, et ce qui reste en stock taille par taille. Au retrait, la commande est déjà payée : il ne reste qu’à la remettre.
+La boutique a sa page sur le site du club. Chaque article montre ses photos, ou deux lettres à la couleur du club, son prix et son état : « En stock », « Derniers exemplaires » ou « Épuisé ».
 
-## Dès Pro Max IA, 2 % sur les ventes
+- **Une ligne par taille** dans la fiche : « Plus que 2 disponibles », ou « Épuisé » avant tout paiement.
+- **Le panier** donne le total estimé, puis le nom, l’e-mail et le téléphone.
+- **Les articles sont réservés 30 minutes**, le temps de régler par carte, en une fois.
 
-La boutique est ouverte par l’offre **Pro Max IA**, avec **2 %** sur les ventes.
+Le parent reçoit un e-mail de confirmation avec son reçu en PDF. Sa page « Ma commande » dit où elle en est et où la retirer.
+
+<Repli titre="Le détail">
+
+- **Le retrait** s’affiche si le bureau a rempli « Lieu de retrait » et « Créneau » : « Retrait : Club-house du stade, le mercredi de 18 h à 20 h. »
+- **Un club qui n’encaisse pas encore en ligne** prend la commande quand même : elle se règle auprès du club.
+- **Le lien « La boutique »** apparaît dans le menu du site du club dès qu’il y a quelque chose à vendre.
+- **« Mes articles »** : photo avec sa description, tailles, prix, seuil d’alerte, case « En vente », accroche de la boutique, lieu et créneau de retrait.
+
+</Repli>
+
+## Le stock se tient seul, taille par taille
+
+Chaque commande payée, ou en cours de paiement, retient ses tailles. Le bureau n’a rien à décompter : le tableau « Le stock » donne, pour chaque taille, ce qui a été mis en vente, ce qui est vendu ou retenu, et ce qui reste.
+
+- **Quatre tuiles** : les tailles suivies, les ruptures, les tailles bientôt épuisées, la valeur en rayon.
+- **Un seuil d’alerte** par article : sous ce seuil, le bureau reçoit un e-mail.
+- **« Vendu au-delà du stock »** : si deux familles ont payé le dernier exemplaire, l’écran nomme la taille en rouge.
+
+<EcranFonction nom="boutique-en-ligne-bureau" legende="Le stock taille par taille et les paquets à préparer, vus par le bureau. Noms et montants fictifs." />
+
+## Le bureau remet des paquets déjà payés
+
+Les commandes payées arrivent dans « À préparer », avec le détail des tailles, l’e-mail et le téléphone. Au retrait, vous cliquez « Paquet remis ».
+
+- **Une famille a réglé au club ?** « Réglé auprès du club », puis espèces, chèque ou virement : la commande rejoint les paquets.
+- **Les paniers abandonnés restent visibles** : au bout de 30 minutes sans paiement, ils rendent leurs tailles au rayon.
+- **Une commande annulée après paiement** est signalée : le remboursement d’une carte se fait à la main, depuis Stripe.
+
+L’onglet « Ce qui se vend » dit ce qui part en premier, ce qui est à recommander et ce qui ne bouge pas. Au stand du match, la [vente au comptoir](/fonctionnalites/vente-au-comptoir) puise dans le même stock.
+
+## Dès Pro Max IA, 2 % sur les ventes par carte
+
+La boutique est ouverte par l’offre **Pro Max IA**. Les ventes payées par carte portent **2 %**, en plus des frais Stripe.
+
+Une commande réglée au club en espèces, par chèque ou par virement ne paie rien. Les ventes par carte rejoignent les [exports comptables](/fonctionnalites/exports-comptables).
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Prévenir le parent que sa commande est prête** : il vient au lieu et au créneau indiqués par le club.
+- **Vendre un article pendant l’inscription** : la boutique a sa propre page.
+- **Imprimer une feuille de préparation** : les paquets se lisent à l’écran.
+- **Livrer à domicile** : la commande se retire au club.
+- **Rembourser une carte depuis OnClub** : le remboursement se fait dans Stripe.
+- **Écrire un motif quand le bureau annule** une commande.

@@ -84,8 +84,10 @@ const heros: Heros = vitrine ? 'vitrine'
   ? 'seul'
   : collection === 'sports' && photo ? 'sport'
   : collection === 'activites' && photo ? 'activite'
-  : (ecranFonction || ecran) && forme === 'telephone' ? 'panneau' : 'seul'
-/* L'écran de téléphone va dans le héros (panneau) ; sinon juste après la ligne du temps. */
+  : ecranFonction || (ecran && forme === 'telephone') ? 'panneau' : 'seul'
+/* L'écran propre à la fonctionnalité va TOUJOURS dans le héros (test des 5 secondes), qu'il soit
+   téléphone ou fenêtre : téléphone en grand, fenêtre de bureau recadrée à droite (dès 1000 px) ;
+   sous 1000 px, juste sous le chapô. Un écran animé de bureau reste après la ligne du temps. */
 const auCorps = !vitrine && heros !== 'panneau' && Boolean(ecranFonction || ecran)
 const ecranCorps = auCorps ? ecran : undefined
 const fonctionCorps = auCorps ? ecranFonction : undefined
@@ -128,7 +130,7 @@ const composants = { BlocTemps, EcranAnime, EcranFonction, Encadre, TuileFonctio
 const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 ---
 <Layout titre={d.titreSeo} description={d.description} chemin={chemin} fil={fil} faq={d.faq}>
-  <section class:list={['gp-heros', `gp-heros-${heros}`, heros === 'sport' && 'sur-encre']} data-heros>
+  <section class:list={['gp-heros', `gp-heros-${heros}`, heros === 'panneau' && `gp-heros-${forme}`, heros === 'sport' && 'sur-encre']} data-heros>
     {heros === 'sport' && <div class="gp-photo-pleine"><Photo nom={photo!} tete priorite tailles="100vw" /></div>}
     {heros === 'activite' && <div class="gp-photo-scindee"><Photo nom={photo!} tete priorite tailles="(min-width: 1000px) 50vw, 100vw" /></div>}
     <div class="enveloppe gp-heros-grille">
@@ -211,6 +213,15 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 .gp-panneau :global(.ecran-fonction){width:100%}
 /* L'écran fixe d'un téléphone (300 px) : réduit pour tenir dans le panneau d'un petit téléphone. */
 @media (max-width:419px){.gp-panneau :global(.ef-tel){zoom:.88}}
+/* Sous 1000 px, l'écran monte juste sous le chapô : le bouton et l'offre passent dessous
+   (le bouton « Demander une démo » reste fixe en bas de l'écran du téléphone). */
+@media (max-width:999px){
+  .gp-heros-panneau .gp-heros-texte{display:contents}
+  .gp-heros-panneau .gp-heros-grille{row-gap:0}
+  .gp-heros-panneau .gp-panneau{order:2;margin-top:24px}
+  .gp-heros-panneau .gp-offre,.gp-heros-panneau .gp-actions{order:3}
+  .gp-ecran-fenetre.gp-panneau{padding:16px 12px}
+}
 .gp-panneau :global(.eci-scene){background:none;border:0;--s:1.08}
 .gp-panneau figcaption{margin-top:12px;font-size:var(--t-micro,.8125rem);text-align:center;color:var(--encre)}
 .gp-ecran-telephone :global(.ecran-anime){zoom:.68}
@@ -220,7 +231,16 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
   .gp-heros-panneau .gp-heros-grille{grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:var(--col-gap,24px);align-items:center}
   .gp-panneau{border-radius:var(--r-xl,40px)}
   .gp-ecran-telephone :global(.ecran-anime){zoom:.78}
+  /* La fenêtre de bureau dans le héros : texte à gauche (5/12), la fenêtre à droite, à l'échelle .8,
+     le panneau va jusqu'au bord de l'écran et la recadre à droite (comme la photo d'une activité). */
+  .gp-heros-fenetre{overflow-x:clip}
+  .gp-heros-fenetre .gp-heros-grille{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .gp-heros-fenetre h1{font-size:clamp(2.125rem,1.2rem + 1.6vw,2.75rem)}
+  .gp-heros-fenetre .gp-panneau{align-items:flex-start;justify-content:flex-start;margin-right:calc(-1 * (var(--g) + max(0px,(100vw - var(--max)) / 2)));padding:32px 0 20px 32px;border-radius:var(--r-xl,40px) 0 0 var(--r-xl,40px)}
+  .gp-heros-fenetre .gp-panneau :global(.ecran-fonction){flex:none;width:860px;zoom:.68}
+  .gp-heros-fenetre .gp-panneau figcaption{align-self:stretch;padding-right:32px}
 }
+@media (min-width:1200px){.gp-heros-fenetre .gp-panneau :global(.ecran-fonction){zoom:.8}}
 
 
 /* Le sport : la photo pleine largeur, le texte sur le voile (≥ 70 % encre sous tout le texte). */
@@ -327,6 +347,8 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
   .prose-grille>:global(.repli){max-width:none}
   .prose-grille>:global(h2:first-child+*){margin-top:0;padding-top:0;border-top:0}
   .prose-grille>:global(:is(.ecran-anime,.cadre,.idee,.photo,figure:not(.mini-ecran),table)){grid-column:1/-1;max-width:none}
+  /* Un second écran de téléphone se tient dans la colonne du texte (6-12), pas au milieu de la page. */
+  .prose-grille>:global(figure.ecran-fonction.ef-telephone){grid-column:6/-1}
   /* Un intertitre suivi d'une section à visuel (Idee) prend toute la largeur : jamais d'intertitre seul à gauche d'un vide. */
   .prose-grille>:global(h2:has(+ .idee)){grid-column:1/-1}
   .prose-grille>:global(div.idee){margin-block:var(--e-5,24px)}

@@ -1,0 +1,42 @@
+<div class="ef-vue" data-forme="fenetre" data-menu="Inscriptions" data-hauteur="560" data-description="La liste des inscriptions d’un club de football, saison 2026-2027, ouverte sur l’onglet Échelonnées : 47 dossiers qui paient en plusieurs fois. Pour chaque famille, le participant, le responsable, l’équipe, le statut, le payé sur le total et le reste à encaisser ; un dossier est passé En retard. Le bouton Exporter ces 47 inscriptions sort la liste en tableur.">
+<style>
+.ecran-fonction .sp-onglets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ecran-fonction .sp-onglet{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border:1px solid var(--ef-trait);border-radius:99px;font-size:12.5px;font-weight:700;color:var(--ef-gris);white-space:nowrap}
+.ecran-fonction .sp-onglet i{font-style:normal;font-weight:600;color:var(--ef-mu)}
+.ecran-fonction .sp-onglet.sp-act{background:#0E1116;border-color:#0E1116;color:#fff}
+.ecran-fonction .sp-onglet.sp-act i{color:#fff;opacity:.7}
+.ecran-fonction .sp-outils{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px}
+.ecran-fonction .sp-champ{flex:1 1 220px;max-width:340px;height:32px;display:flex;align-items:center;padding:0 12px;border:1px solid var(--ef-trait);border-radius:10px;background:#fff;color:var(--ef-mu);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ecran-fonction .sp-table{table-layout:fixed}
+.ecran-fonction .sp-table th{white-space:normal}
+.ecran-fonction .sp-case{display:inline-block;width:14px;height:14px;border:1.5px solid #B9B5AA;border-radius:4px;vertical-align:-2px}
+.ecran-fonction .sp-att{color:#92600A;font-weight:700}
+.ecran-fonction .sp-ret{color:#9B2C28;font-weight:700}
+.ecran-fonction .sp-reste{color:#0E1116;font-weight:800}
+</style>
+<div class="ef-tete"><div class="ef-ligne"><span class="ef-h1">Inscriptions</span><span class="ef-pas">2026-2027 · se joue</span></div><div class="ef-sous">152 dossiers</div></div>
+
+<div class="sp-onglets">
+<span class="sp-onglet">Toutes <i>152</i></span>
+<span class="sp-onglet">Impayées <i>3</i></span>
+<span class="sp-onglet ef-cache-etroit">Aucun versement <i>4</i></span>
+<span class="sp-onglet sp-act">Échelonnées <i>47</i></span>
+<span class="sp-onglet ef-cache-moyen">Dossier incomplet <i>6</i></span>
+</div>
+
+<div class="sp-outils"><span class="sp-champ">Rechercher un enfant, un parent, un email, un téléphone</span><span class="ef-bt">Exporter ces 47 inscriptions</span></div>
+
+<div class="ef-carte" style="padding:4px 14px">
+<table class="ef-table sp-table">
+<thead><tr><th class="ef-cache-etroit" style="width:26px"><span class="sp-case"></span></th><th>Participant(s)</th><th class="ef-cache-moyen" style="width:23%">Responsable</th><th class="ef-cache-etroit" style="width:11%">Cours</th><th style="width:15%">Statut</th><th class="ef-n" style="width:18%">Payé / total</th><th class="ef-n" style="width:11%">Reste</th></tr></thead>
+<tbody>
+<tr><td class="ef-cache-etroit"><span class="sp-case"></span></td><td><b>Léo Martin</b><span>Jade Martin</span></td><td class="ef-cache-moyen"><b>Sophie Martin</b><span class="ef-mu">06 39 98 12 40</span></td><td class="ef-cache-etroit">U11, U9</td><td><span class="sp-att">Échelonné</span></td><td class="ef-n ef-nw">120 € <span class="ef-mu">/ 360 €</span></td><td class="ef-n sp-reste">240 €</td></tr>
+<tr><td class="ef-cache-etroit"><span class="sp-case"></span></td><td><b>Inès Benali</b></td><td class="ef-cache-moyen"><b>Karim Benali</b><span class="ef-mu">06 39 98 27 15</span></td><td class="ef-cache-etroit">U13</td><td><span class="sp-ret">En retard</span></td><td class="ef-n ef-nw">60 € <span class="ef-mu">/ 180 €</span></td><td class="ef-n sp-reste">120 €</td></tr>
+<tr><td class="ef-cache-etroit"><span class="sp-case"></span></td><td><b>Hugo Arnaud</b></td><td class="ef-cache-moyen"><b>Claire Arnaud</b><span class="ef-mu">06 39 98 53 02</span></td><td class="ef-cache-etroit">U13</td><td><span class="sp-att">Échelonné</span></td><td class="ef-n ef-nw">120 € <span class="ef-mu">/ 180 €</span></td><td class="ef-n sp-reste">60 €</td></tr>
+<tr><td class="ef-cache-etroit"><span class="sp-case"></span></td><td><b>Nathan Bernard</b></td><td class="ef-cache-moyen"><b>Julie Bernard</b><span class="ef-mu">06 39 98 41 27</span></td><td class="ef-cache-etroit">U15</td><td><span class="sp-att">Échelonné</span></td><td class="ef-n ef-nw">70 € <span class="ef-mu">/ 210 €</span></td><td class="ef-n sp-reste">140 €</td></tr>
+<tr><td class="ef-cache-etroit"><span class="sp-case"></span></td><td><b>Malo Chevalier</b></td><td class="ef-cache-moyen"><b>Thomas Chevalier</b><span class="ef-mu">06 39 98 63 05</span></td><td class="ef-cache-etroit">Seniors</td><td><span class="sp-att">Échelonné</span></td><td class="ef-n ef-nw">80 € <span class="ef-mu">/ 240 €</span></td><td class="ef-n sp-reste">160 €</td></tr>
+<tr><td class="ef-cache-etroit"><span class="sp-case"></span></td><td><b>Lina Haddad</b></td><td class="ef-cache-moyen"><b>Nadia Haddad</b><span class="ef-mu">06 39 98 30 85</span></td><td class="ef-cache-etroit">U11</td><td><span class="sp-att">Échelonné</span></td><td class="ef-n ef-nw">60 € <span class="ef-mu">/ 180 €</span></td><td class="ef-n sp-reste">120 €</td></tr>
+</tbody>
+</table>
+</div>
+</div>

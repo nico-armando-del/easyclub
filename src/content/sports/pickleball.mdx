@@ -9,7 +9,7 @@ chapo: "Quatre terrains de pickleball tiennent dans un court de tennis. Le club 
 temps:
   cles: [fiches, paiements]
   titre: "Ce qu’une section pickleball épargne au bureau, chaque saison"
-fonctionnalites: [inscription-en-ligne, seances-essai, paiement-en-ligne, liste-des-licences, convocations, formulaire-sur-mesure]
+fonctionnalites: [inscription-en-ligne, seances-essai, paiement-en-ligne, liste-des-licences, convocations]
 profils: [tresorier]
 guides: [certificat-medical-sport, inscriptions-en-ligne-association]
 maj: 2026-10-10
@@ -46,7 +46,7 @@ Le pickleball se joue surtout en double, sur un terrain de 6,10 m sur 13,41 m : 
 - **Une discipline qui grandit** : selon la FFT en janvier 2026, près de 30 000 pratiquants en France pour 3 500 licences, et 850 clubs qui la proposent.
 - **Jeunes, seniors, familles** : la pratique mélange les âges ; un groupe peut ouvrir ses bornes d’années de naissance aussi large que vous le voulez.
 - **Le créneau découverte** peut accepter un essai même complet, si vous le réglez ainsi.
-- **Le prêt de raquettes** se demande par une question ajoutée au [formulaire](/fonctionnalites/formulaire-sur-mesure) ; OnClub ne gère pas le matériel du club.
+- **Le prêt de raquettes** se règle hors d’OnClub, qui ne gère pas le matériel du club.
 
 </Repli>
 
@@ -72,12 +72,12 @@ Le total s’affiche avant le paiement, ligne par ligne, sans calcul au bureau.
   titre="Dossier · saison 2026-2027"
   sousTitre="Tennis et pickleball"
   lignes={[
-    { nom: 'Tennis adulte · mardi 19:00', detail: 'Section principale', statut: '210,00 €', ton: 'neutre' },
-    { nom: 'Pickleball · jeudi 10:00', detail: 'Seconde section', statut: '90,00 €', ton: 'neutre' },
-    { nom: 'Réduction seconde section', detail: 'Appliquée seule', statut: '− 20,00 €', ton: 'ok' },
+    { nom: 'Tennis adulte · mardi 19:00', detail: 'Section principale', statut: '210 €', ton: 'neutre' },
+    { nom: 'Pickleball · jeudi 10:00', detail: 'Seconde section', statut: '90 €', ton: 'neutre' },
+    { nom: 'Réduction seconde section', detail: 'Appliquée seule', statut: '− 20 €', ton: 'ok' },
   ]}
-  pied={{ libelle: 'Total', valeur: '280,00 €' }}
-  bouton="Payer en trois fois"
+  pied={{ libelle: 'Total', valeur: '280 €' }}
+  bouton="Payer et valider"
   legende="Le dossier d’un joueur qui ajoute le pickleball au tennis. Noms et montants fictifs."
 />
 
@@ -85,7 +85,7 @@ Le total s’affiche avant le paiement, ligne par ligne, sans calcul au bureau.
 
 ## Cotisation pickleball en plusieurs fois, part de licence comprise
 
-Le joueur règle par carte, en une fois ou par un acompte puis des versements, selon les formules du club : chaque date et chaque montant s’affichent avant de valider.
+Le joueur règle par carte, en une fois ou par un acompte puis des versements, selon les formules du club : chaque montant et les dates de début et de fin s’affichent avant de valider.
 
 <Repli>
 

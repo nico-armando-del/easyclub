@@ -5,25 +5,75 @@ famille: Communiquer
 offre: pro
 ordre: 1
 titreSeo: "Envoyer un message aux familles d’un groupe | OnClub"
-description: "Un message à une équipe, aux familles en retard, aux nouveaux ou à toute la saison, sans liste à tenir à jour, avec le suivi de qui l’a reçu."
-titre: "Écrire aux bonnes familles, sans liste à jour"
+description: "Un message aux familles d’une équipe, aux nouveaux, à celles qui doivent encore de l’argent ou à toute la saison, sans liste à tenir, compté avant l’envoi."
+titre: "Écrire aux familles d’une équipe, sans chercher d’adresses"
 chapo: "Retrouver les adresses d’un groupe, copier, coller, oublier quelqu’un. Avec OnClub, les destinataires sont déjà là : il ne reste que le texte."
 temps:
   cles: [messages]
-maj: 2026-10-09
+ecranFonction: true
+fonctionnalites: [relance-un-clic, liste-attente, pieces-justificatives, reinscriptions]
+sports: [football]
+maj: 2026-10-12
+faq:
+  - question: "Sait-on qui a lu le message ?"
+    reponse: "Non. OnClub dit à qui le message est parti, famille par famille, et à qui il n’est pas parti, avec la raison : sans adresse, désabonnée, déjà servie. Il ne sait pas si le message est arrivé dans la boîte, ni s’il a été ouvert."
+  - question: "Peut-on écrire seulement aux familles en retard de paiement ?"
+    reponse: "Le choix « Les familles qui doivent encore de l’argent » prend tout reste à régler, échéancier compris : une famille qui paie en trois fois le reçoit aussi. Pour les seuls retards, la relance d’un bouton écrit le bon montant à chacun, dès Mini."
+  - question: "Combien de familles reçoivent le message d’un coup ?"
+    reponse: "50 par clic, et les messages partent un par un. Vous recliquez sur « Envoyer aux suivantes » pour le lot d’après. Une famille déjà servie par la campagne n’est jamais écrite deux fois."
+  - question: "Une famille peut-elle se désabonner ?"
+    reponse: "Oui : chaque campagne porte un lien de désabonnement, comme la loi l’exige. Il ne coupe que les campagnes. La famille reçoit toujours ses rappels de règlement, ses demandes de pièce et sa confirmation d’inscription."
 ---
 
-## Une équipe, les retards, les nouveaux, toute la saison
+## Aujourd’hui : une soirée à reconstituer une liste
 
-- À **une équipe** ou un cours.
-- Aux **familles en retard** de paiement.
-- Aux **nouveaux** de la saison.
-- À **toute la saison**.
+Le terrain est fermé mercredi, il faut prévenir les U13 filles. On retrouve le tableur, on copie les adresses en copie cachée, on oublie la famille arrivée en septembre, et on ne sait pas à qui le message est vraiment parti.
 
-## Vous savez qui a reçu le message
+## Une équipe, les nouveaux, les retardataires, toute la saison
 
-Le suivi dit **qui a reçu** le message. Une famille qui n’a rien reçu ne peut plus dire qu’elle n’était pas au courant, et vous savez qui relancer.
+Vous choisissez « À qui » dans une liste. OnClub retrouve les destinataires dans les dossiers, au moment d’écrire.
+
+- **Les inscrits d’un cours** : les familles d’une équipe, pas celles qui attendent une place.
+- **Les nouveaux inscrits** : les dossiers créés depuis moins de 30 jours.
+- **Les familles en liste d’attente**, ou celles qui ont **une pièce à fournir**.
+- **Les familles qui doivent encore de l’argent**, échéancier compris.
+- **Toutes les familles** de la saison, ou celles de **la saison passée, pas encore réinscrites**.
+
+Avant le premier clic, l’écran annonce le compte : « 18 familles dans ce choix, 17 recevront le premier lot ».
+
+## Un brouillon relu, puis l’envoi
+
+- **« Créer le brouillon »** : rien ne part, vous relisez l’objet et le message.
+- **« Envoyer »**, sur la carte de la campagne : les messages partent un par un, 50 familles par clic.
+- **Autour de votre texte**, OnClub ajoute la salutation, la signature du club et le lien de désabonnement.
+
+Pour le mot de juin, le modèle « Inscriptions bientôt » donne un premier texte à reprendre.
+
+## À qui c’est parti, et à qui non
+
+Sur chaque campagne, le repli « Qui a reçu quoi » liste les familles une à une avec leur état : « Envoyé », « Écrit, non parti » ou « Non parti ».
+
+Les familles écartées sont comptées avec leur raison : « Sans adresse », « Désabonnée », « Déjà servie ». Vous savez qui appeler.
+
+« Envoyé » veut dire accepté par le service d’envoi. OnClub ne suit ni la remise, ni l’ouverture.
+
+<Repli titre="Le détail">
+
+- **Un dossier marqué « ne pas relancer »** n’est écarté que du choix qui réclame de l’argent : une famille en difficulté reste invitée au tournoi de fin de saison.
+- **Une inscription annulée** ne reçoit rien.
+- **La liste des désabonnés** est sur le même écran. « Remettre dans la liste » est à réserver à une famille qui le demande.
+- **Dès Mini**, l’écran Adhérents écrit déjà aux anciens et aux gardés de la rentrée : « Écrire aux gardés » sur une équipe, « Écrire un message » aux familles cochées.
+- **L’écran Emails** garde le journal de chaque mail parti, montre les mails envoyés par OnClub, et vous laisse écrire votre phrase d’ouverture et votre mot de la fin.
+- **Une famille qui répond** au mail du club avec une pièce jointe : le fichier est déposé dans son dossier.
+
+</Repli>
 
 ## Plus une soirée à chercher des adresses
 
-Le changement de salle du jeudi part aussitôt écrit, au lieu d’une soirée à reconstituer une liste d’adresses.
+Le changement de terrain du mercredi tient en quatre gestes : choisir l’équipe, écrire trois lignes, relire, envoyer. Les adresses sont celles que les familles ont données en s’[inscrivant](/fonctionnalites/inscription-en-ligne).
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Savoir si le message est arrivé, ou s’il a été lu** : OnClub dit à qui il est parti.
+- **Viser les seuls retards de paiement** : pour eux, la [relance d’un bouton](/fonctionnalites/relance-un-clic).
+- **Écrire à toute la saison d’un seul clic** : l’envoi s’arrête à 50 familles, vous recliquez pour les suivantes.

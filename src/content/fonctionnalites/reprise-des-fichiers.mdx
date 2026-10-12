@@ -5,19 +5,81 @@ famille: Piloter
 offre: mini
 ordre: 4
 titreSeo: "Reprendre son fichier d’adhérents depuis un tableur"
-description: "Changer d’outil sans tout ressaisir : votre tableur ou votre export HelloAsso est repris, vos anciens adhérents sont reconnus et reçoivent leur lien."
-titre: "Vos fichiers repris, rien à ressaisir"
-chapo: "Changer d’outil, c’est tout ressaisir : c’est ce qui fait renoncer. Avec OnClub, votre tableur est repris et vos anciens adhérents sont reconnus."
+description: "Changer d’outil sans ressaisir vos anciens : vous déposez votre tableur en CSV ou votre export HelloAsso, puis vous envoyez à chaque famille son lien."
+titre: "Votre tableur repris, vos anciens reconnus"
+chapo: "Changer d’outil fait peur : tout serait à ressaisir. Vous déposez votre tableur ou votre export HelloAsso, et vos adhérents de la saison passée sont reconnus."
 temps:
-  geste: "Vous nous donnez votre tableur : vos anciens sont reconnus, sans ressaisie."
+  geste: "Vous déposez votre tableur : vos anciens sont reconnus, sans ressaisie."
+ecranFonction: true
+fonctionnalites: [reinscriptions, saison-suivante, liste-des-licences]
 comparatifs: [tableur-excel]
-maj: 2026-10-09
+maj: 2026-10-12
+faq:
+  - question: "Faut-il vous envoyer notre tableur ?"
+    reponse: "Non. Le bureau le dépose lui-même, dans l’écran Adhérents, onglet Familles, avec « Reprendre un tableur ». Il relit l’aperçu, puis accepte : rien n’est écrit avant."
+  - question: "Notre fichier est un classeur Excel : ça marche ?"
+    reponse: "Enregistrez-le d’abord au format CSV (Fichier, puis Enregistrer sous), puis choisissez-le. Vous pouvez aussi copier les lignes du tableur, titres compris, et les coller dans l’écran."
+  - question: "Les familles reçoivent-elles un mail dès la reprise ?"
+    reponse: "Non. Rien ne part tant que vous n’avez pas cliqué « Envoyer le lien », puis confirmé. Les liens partent par 40 familles à la fois, et seulement quand les inscriptions sont ouvertes aux anciens."
+  - question: "Peut-on annuler une reprise ?"
+    reponse: "Oui. Sous la liste des familles, chaque fichier repris a son bouton « Retirer » : après confirmation, ses noms sont effacés. Une famille déjà revenue garde son dossier."
 ---
 
-## Votre tableur ou votre export HelloAsso, repris
+## Vous déposez le fichier, vous relisez, vous acceptez
 
-Votre tableur, enregistré en CSV, ou un **export HelloAsso**. Les anciens adhérents sont **reconnus**, et reçoivent leur **lien de réinscription**.
+Votre club arrive avec un tableur de l’an dernier, ou un export HelloAsso. Pas besoin de nous l’envoyer : dans l’écran **Adhérents**, onglet **Familles**, le bureau clique « Reprendre un tableur ».
 
-## En ligne en quinze jours, validé ensemble
+- **Un fichier CSV** : votre tableur enregistré en CSV, ou l’export HelloAsso tel quel.
+- **Ou des lignes collées** : copiées du tableur, la ligne des titres comprise.
+- **Rien n’est écrit** avant votre accord.
 
-L’association est en ligne en quinze jours, avec une pré-livraison au dixième jour pour tout valider ensemble : vos groupes, vos tarifs, vos questions et vos anciens.
+## Un aperçu avant d’écrire quoi que ce soit
+
+OnClub lit le fichier et montre ce qu’il va reprendre : par exemple « 212 adhérents dans 168 familles seront repris pour la saison 2025-2026 ».
+
+- **Les colonnes lues** : « Prénom ← Prénom adhérent », « Adresse du responsable ← Email payeur »…
+- **Les colonnes laissées de côté** : les montants et les moyens de paiement d’un export HelloAsso.
+- **Les lignes écartées** : en double dans le fichier, ou commande annulée ou remboursée.
+- **Les remarques** : un adhérent sans adresse mail est repris, mais ne pourra pas être reconnu.
+
+Un échantillon des lignes suit. Le bouton dit combien vous reprenez : « Reprendre 212 adhérents ».
+
+## Ce qui est repris, et ce qui ne l’est pas
+
+La reprise garde ce qui sert à faire revenir vos anciens : prénom, nom, année de naissance, adresse mail, téléphone, numéro de licence, et le cours ou l’équipe de l’an dernier.
+
+Elle ne reprend que les adhérents de la saison passée. Ni dossier, ni paiement, ni historique : vos anciens referont leur dossier, mais déjà rempli.
+
+La reprise s’efface d’elle-même quand elle ne sert plus : à l’ouverture de la saison suivante, ou au plus tard au bout de dix-huit mois.
+
+## Les anciens reconnus à leur adresse
+
+Une fois repris, vos anciens apparaissent dans l’onglet Familles, famille par famille : les enfants de l’an dernier, le contact, et l’état « Pas revenue », « En partie » ou « Revenue ».
+
+<EcranFonction nom="reprise-des-fichiers-familles" legende="Les familles reprises, juste avant l’envoi des liens. Noms et montants fictifs." />
+
+Une famille qui se réinscrit est reconnue à son adresse mail, et passe en « Revenue ». Dans la [liste des licences](/fonctionnalites/liste-des-licences), ses enfants passent en « Renouvellement ».
+
+## Le lien de réinscription, envoyé par vous
+
+Le bouton « Envoyer le lien à 166 familles » prépare l’envoi. Chaque famille reçoit par mail son lien personnel : son dossier de l’an dernier, déjà rempli, où il ne reste qu’à choisir les cours.
+
+- **40 familles par envoi** : cliquez encore pour la suite.
+- **« Copier le lien »** pour une famille sans adresse, à envoyer par message.
+- **Les inscriptions doivent être ouvertes aux anciens** : sinon, l’écran le dit et le bouton attend.
+
+La suite se passe dans les [réinscriptions](/fonctionnalites/reinscriptions) et la [saison suivante](/fonctionnalites/saison-suivante).
+
+<Repli titre="Le détail">
+
+- **« Effacer ces N noms »** retire un fichier repris par erreur, avant toute réinscription.
+- **Une famille partie un an** est reconnue, et un certificat encore valable est repris à son retour.
+
+</Repli>
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Lire un classeur Excel ou Numbers** directement : il faut l’enregistrer en CSV.
+- **Reprendre plus d’une saison en arrière**, ou les adhérents de la saison en cours pour un club qui arrive en cours d’année.
+- **Créer les fiches joueurs** dès la reprise : elles naissent quand la famille revient.
+- **Reprendre les paiements** ou l’historique de votre ancien outil.

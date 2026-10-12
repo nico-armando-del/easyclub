@@ -33,7 +33,7 @@ const { variante = 'accueil', niveau = 'h2', mots } = Astro.props
 const page = variante === 'page'
 const {
   titre = page ? undefined : 'Le site du club, branché sur OnClub',
-  phrase = page ? undefined : 'Équipes, agenda et inscriptions viennent d’OnClub. Un cours complet s’affiche complet, sans que personne ne le mette à jour.',
+  phrase = page ? undefined : 'Les cours, les tarifs, les places et les inscriptions viennent d’OnClub. Un cours complet s’affiche complet, sans que personne ne le mette à jour.',
   clubs = page ? CLUBS_PAGE : CLUBS,
   /* Sur la page, la phrase « Les inscriptions restent dans OnClub » se fond dans la légende (tour 2, défaut 24). */
   legende = page ? `${LEGENDE_VITRINE} Les inscriptions restent dans OnClub : le site les affiche.` : LEGENDE_VITRINE,
@@ -49,12 +49,12 @@ const taillesTel = page ? '(min-width: 760px) 220px, 124px' : '(min-width: 760px
 const lignesInscription = (c: Club) => c.sport === 'football'
   ? [
       { nom: 'Nolan R.', detail: 'U11 · né en 2016', statut: 'Ouvert', ton: 'ok' as const },
-      { nom: 'Paiement', detail: 'En 3 fois', statut: 'Carte', ton: 'neutre' as const },
+      { nom: 'Paiement', detail: 'En une fois', statut: 'Carte', ton: 'neutre' as const },
       { nom: 'Questionnaire de santé', detail: 'Attestation signée en ligne', statut: 'Reçue', ton: 'ok' as const },
     ]
   : [
       { nom: 'Léa M.', detail: 'Volley M13, mercredi', statut: '2 places', ton: 'ok' as const },
-      { nom: 'Paiement', detail: 'En 3 fois', statut: 'Carte', ton: 'neutre' as const },
+      { nom: 'Paiement', detail: 'En une fois', statut: 'Carte', ton: 'neutre' as const },
       { nom: 'Questionnaire de santé', detail: 'Attestation signée en ligne', statut: 'Reçue', ton: 'ok' as const },
     ]
 ---

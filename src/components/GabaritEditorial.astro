@@ -22,6 +22,7 @@ import BarreTache from './BarreTache.astro'
 import Repli from './Repli.astro'
 import BlocTemps from './BlocTemps.astro'
 import EcranAnime from './EcranAnime.astro'
+import EcranFonction from './EcranFonction.astro'
 import Encadre from './Encadre.astro'
 import TuileFonction from './TuileFonction.astro'
 import Calculateur from './Calculateur.astro'
@@ -124,7 +125,11 @@ const couv = d.couverture
         <Content components={composants} />
       </article>
 
-      {d.ecran && (
+      {d.ecranFonction ? (
+        <div class="ed-ecran">
+          <EcranFonction nom={d.ecranFonction === true ? entree.id : d.ecranFonction} legende="Noms et montants fictifs." />
+        </div>
+      ) : d.ecran && (
         <div class="ed-ecran">
           <EcranAnime nom={d.ecran} />
           <p class="ed-legende">Noms et montants fictifs.</p>

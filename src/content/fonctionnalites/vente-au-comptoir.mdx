@@ -5,22 +5,80 @@ famille: Vendre
 offre: max
 ordre: 2
 titreSeo: "Vendre au stand de l’association, le jour du match"
-description: "Le jour du match ou du gala, le stand de l’association vend sur place, en espèces ou par carte ; ces ventes sont comptées à part de celles du site."
-titre: "Le stand vend sur place, et tout est compté"
-chapo: "Le jour du match ou du spectacle, le stand encaisse sur une feuille volante. Avec OnClub, la vente au comptoir rejoint le reste des comptes."
+description: "Le jour du match, le stand vend les articles de la boutique : en espèces, ou par carte avec un lien de paiement. Ces ventes sont comptées à part du site."
+titre: "Le stand vend les maillots, le stock suit partout"
+chapo: "Un parent achète un maillot au stand. Vous choisissez la taille, il règle en espèces ou par carte sur son téléphone : le stock suit, en ligne aussi."
 temps:
-  geste: "Une vente sur place se règle en espèces ou par carte, et elle est comptée à part."
-maj: 2026-10-09
+  geste: "Une vente au stand se règle en espèces ou par lien de paiement, et elle est comptée à part du site."
+ecranFonction: true
+fonctionnalites: [boutique-en-ligne, paiement-en-ligne, exports-comptables]
+sports: [football, basket, handball]
+profils: [tresorier]
+maj: 2026-10-12
+faq:
+  - question: "Faut-il un terminal de paiement pour encaisser par carte ?"
+    reponse: "Non, et OnClub n’en gère pas. « Payer par carte » crée un lien de paiement : le client règle sur la page de sa commande, depuis son téléphone ou depuis l’appareil du bureau. Il n’y a ni terminal ni paiement sans contact sur le téléphone du bénévole."
+  - question: "Les ventes en espèces entrent-elles dans les exports comptables ?"
+    reponse: "Pas aujourd’hui. Le journal comptable reprend les ventes payées par carte, sur la ligne « Boutique (carte) ». Les ventes en espèces se lisent dans l’onglet « Ce qui se vend » de la boutique, sous « Vendu au club », et se reportent à la main."
+  - question: "Un bénévole du stand peut-il vendre sans voir le reste du tableau de bord ?"
+    reponse: "Non. Le comptoir est réservé au bureau. Un bénévole n’y accède qu’avec la clé du club, qui ouvre tout le tableau de bord : confiez-la à quelqu’un de confiance, ou tenez le comptoir vous-même."
+  - question: "La vente au comptoir coûte-t-elle une commission ?"
+    reponse: "Une vente réglée en espèces ne paie rien. Une vente réglée par carte porte les 2 % de la boutique, plus les frais Stripe, comme une commande passée sur le site."
 ---
 
-## Le stand encaisse en espèces ou par carte
+## Aujourd’hui : une boîte à monnaie et un cahier
 
-Le stand de l’association fait **comptoir** : une vente sur place se règle **en espèces ou par carte**.
+Le jour du match, le stand vend des maillots et des écharpes. On note au crayon, on rend la monnaie, et le soir personne ne sait plus ce qui reste en 12 ans. Pendant ce temps, la boutique en ligne vend les mêmes tailles.
 
-## Le comptoir, compté à part du site
+## Le même rayon qu’en ligne, taille par taille
 
-Les ventes du comptoir sont **comptées à part** de celles du site : le trésorier sait ce qui s’est vendu au stand et ce qui s’est vendu en ligne, sans recompter la caisse sur un coin de table.
+Le comptoir est un onglet de la [boutique en ligne](/fonctionnalites/boutique-en-ligne) : « Vendre au club ». Il montre les articles en vente, avec ce qui reste dans chaque taille.
 
-## Dans la boutique, dès Pro Max IA
+- **Une ligne par taille** : « 5 en stock », ou « Épuisé ».
+- **Un compteur** − et + : il s’arrête au stock restant.
+- **Le panier en bas** : « 1 × Maillot de match · 12 ans », et le total en gros.
 
-La vente au comptoir fait partie de la boutique, ouverte par **Pro Max IA**.
+Vous tapez le nom du client. Son e-mail n’est obligatoire que pour la carte : le reçu part à cette adresse.
+
+## En espèces : un clic, la vente est réglée
+
+Le client tend un billet. Vous cliquez « Encaissé en espèces · 47 € ». L’écran confirme « Vente enregistrée » : le stock est à jour, sur le site comme au stand.
+
+- **L’article part avec le client** : la case est cochée par défaut.
+- **Le paquet est à préparer ?** Décochez : il attend dans « Stock et commandes ».
+- **Une taille passe sous son seuil d’alerte** : le bureau reçoit un e-mail, comme après une vente en ligne.
+
+Si une commande en ligne a pris le même exemplaire entre-temps, l’écran le dit : la taille « passe sous zéro », vérifiez l’étagère.
+
+## Par carte : un lien que le client paie sur son téléphone
+
+« Payer par carte » ne passe pas par un terminal. OnClub crée un lien de paiement, et les articles sont réservés 30 minutes.
+
+- **Ouvrir sur cet appareil** : le client paie sur la tablette du stand.
+- **Copier le lien**, **Envoyer par SMS**, **Envoyer par mail** : ces deux derniers ouvrent l’application du téléphone, OnClub n’envoie rien lui-même.
+- **Finalement réglé en espèces** : le client change d’avis, la vente bascule.
+
+Le bouton reste grisé tant que le [paiement en ligne](/fonctionnalites/paiement-en-ligne) du club n’est pas actif.
+
+<Repli titre="Le détail">
+
+- **Pendant les 30 minutes**, la vente attend dans « Stock et commandes », où le bouton « Lien de paiement » la retrouve.
+- **Sans paiement**, la réservation tombe et l’article revient en vente.
+- **Le client retrouve sa vente** sur sa page « Ma commande » : « Votre achat au club est à régler », avec le bouton « Payer par carte ».
+
+</Repli>
+
+## Le stand et le site, comptés à part
+
+Dans l’onglet « Ce qui se vend », deux tuiles séparent l’argent : « Vendu en ligne » et « Vendu au club », en euros, avec le nombre d’exemplaires. Chaque vente du stand porte le badge « Au club ».
+
+Le trésorier sait combien de maillots sont partis au stand et combien sur le site. Ces chiffres couvrent toute la vie de la boutique, pas un seul match.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Un terminal ou le paiement sans contact** : la carte passe par un lien de paiement.
+- **Le chèque ou le virement au stand** : seule une commande en attente peut être notée « Réglé auprès du club ».
+- **La caisse du jour** : ni fond de caisse, ni total d’un match, ni clôture.
+- **La buvette, les entrées ou un montant libre** : le comptoir ne vend que les articles de la boutique.
+- **Les espèces dans les [exports comptables](/fonctionnalites/exports-comptables)** : seules les ventes par carte y entrent.
+- **Un accès réduit au stand** pour un bénévole : le comptoir est réservé au bureau.

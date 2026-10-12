@@ -4,22 +4,77 @@ ligne: "Comptabilité, inscriptions et licences en tableur"
 famille: Piloter
 offre: mini
 ordre: 2
-titreSeo: "Exports comptables et listes d’adhérents en tableur"
-description: "La comptabilité, les inscriptions et les licences s’exportent en tableur, quand vous voulez, pour le trésorier, le comptable ou l’assemblée générale."
-titre: "Les exports pour le trésorier et le comptable"
-chapo: "Le trésorier refait tout dans un tableur en fin de saison. Avec OnClub, les chiffres sont déjà justes : il ne reste qu’à les exporter."
+titreSeo: "Exports comptables : journal et inscriptions en tableur"
+description: "Le journal des encaissements du mois, la liste des inscriptions et celle des licences se téléchargent en tableur, quand vous voulez, pour le trésorier."
+titre: "Le journal du mois et vos listes, en tableur"
+chapo: "Le trésorier refait tout dans un tableur. OnClub tient le journal des encaissements, mois par mois : il se télécharge en tableur, comme les inscriptions et les licences."
 temps:
-  geste: "Un clic, et la liste part en tableur pour le comptable."
+  geste: "Un clic, et le journal du mois se télécharge en tableur."
+ecranFonction: true
+fonctionnalites: [suivi-des-paiements, liste-des-licences, paiement-en-ligne]
 profils: [tresorier]
-maj: 2026-10-09
+maj: 2026-10-12
+faq:
+  - question: "Peut-on exporter toute la saison d’un coup ?"
+    reponse: "Pas encore. Le journal se télécharge mois par mois : une saison de septembre à juin fait donc dix fichiers. Le bilan de la saison, lui, compte la saison entière, mais il se lit à l’écran et ne s’exporte pas."
+  - question: "Le fichier convient-il à notre comptable ?"
+    reponse: "C’est un journal en tableur : date, opération, famille, moyen, montant, commission, frais et net versé. Il n’a ni plan de comptes, ni écritures en partie double, ni fichier FEC : le comptable le reprend dans son propre outil."
+  - question: "Les chèques et les espèces sont-ils dans le journal ?"
+    reponse: "Oui, dès que le bureau les note sur le dossier de la famille. Ils sont datés du jour où ils sont notés. Les aides sont mises à part, à recevoir de l’organisme."
+  - question: "Les exports sont-ils dans l’offre Mini ?"
+    reponse: "Oui. L’écran Comptabilité, le journal en tableur, l’export des inscriptions et celui des licences sont ouverts dans toutes les formules."
 ---
 
-## Comptabilité, inscriptions et licences, en tableur
+## Trois fichiers, téléchargés quand vous voulez
 
-- **La comptabilité** : les encaissements, carte, chèques et espèces.
-- **Les inscriptions** : qui est inscrit, dans quel groupe.
-- **Les licences** : qui est à déclarer à la fédération.
+En fin de saison, le trésorier rassemble ses relevés, ses talons de chèques et un tableur à moitié tenu. Dans OnClub, trois fichiers se téléchargent à tout moment, sans attendre juin :
 
-## À tout moment, pas seulement en juin
+- **Le journal du mois**, depuis l’écran Comptabilité.
+- **La liste des inscriptions**, depuis l’écran Inscriptions, avec vos filtres.
+- **La liste des licences**, depuis l’écran Licences.
 
-Pour l’assemblée générale, une demande de subvention, le comptable ou le bilan de fin de saison : l’export se fait à tout moment, pas seulement en juin.
+Rien ne part par mail : le fichier arrive sur votre ordinateur, vous le transmettez à qui vous voulez.
+
+## Le journal du mois, moyen par moyen
+
+L’écran **Comptabilité** se lit mois par mois. En tête, trois cartes :
+
+- **Encaissé**, détaillé par moyen : carte en ligne, chèque, espèces, virement. Les aides notées sont à part, à recevoir des organismes.
+- **Retenu sur la carte** : la commission OnClub, les frais Stripe, et le net versé par Stripe.
+- **Rendu aux familles** : les remboursements du mois, dont la commission rendue par OnClub.
+
+Dessous, le journal liste chaque mouvement : date, famille et dossier, moyen, montant, retenue, net versé. Un remboursement apparaît en négatif, avec son motif.
+
+« Télécharger le journal (tableur) » donne ce mois-là, avec en plus le motif et le détail de chaque retenue.
+
+## Les virements Stripe, ligne par ligne
+
+Sur le relevé de banque, Stripe verse un seul montant pour plusieurs paiements. Sous le journal, chaque virement du mois se déplie : sa date, son état (« Reçu », « Annoncé », « En route ») et les paiements qu’il contient, famille par famille.
+
+Un paiement qu’OnClub ne relie à aucun dossier est marqué « Non rapproché » : payé hors d’OnClub, ou avant le branchement du club.
+
+## La liste des inscriptions, filtrée
+
+Dans l’écran Inscriptions, le bouton « Exporter ces 12 inscriptions » (il compte les dossiers affichés) suit vos filtres et votre recherche. Une équipe, les impayés, les dossiers incomplets : le fichier contient ce que vous voyez.
+
+Chaque ligne est un dossier : référence, participants, responsable, e-mail, téléphone, cours, date, statut, total, payé et reste. Pour la liste des joueurs à licencier, c’est la [liste des licences](/fonctionnalites/liste-des-licences).
+
+## Un fichier qui s’ouvre tel quel
+
+Les trois fichiers s’ouvrent d’un double clic dans un tableur en français, accents compris. Les montants sont écrits avec une virgule et se calculent comme des nombres.
+
+Le chiffre du jour reste sur l’accueil, dans le [suivi des paiements](/fonctionnalites/suivi-des-paiements) : l’export sert à garder une trace, ou à la transmettre.
+
+<Repli titre="Le détail">
+
+- **Les filtres** de la liste des inscriptions : cours, discipline, niveau, tranche d’âge, intervenant, pièce manquante, aide, origine du dossier. Cochez des lignes, et « Exporter la sélection » sort seulement celles-là.
+- **Côté famille**, « Mon dossier » donne l’appel de cotisation, le reçu de cotisation et l’attestation de paiement pour l’employeur.
+
+</Repli>
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Exporter la saison entière en un fichier** : le journal sort mois par mois.
+- **Exporter le bilan de la saison** : il se lit à l’écran seulement.
+- **Exporter le registre des adhérents**, une ligne par personne avec l’âge, par exemple pour une demande de subvention.
+- **Produire des écritures comptables** : ni plan de comptes, ni partie double, ni fichier FEC.

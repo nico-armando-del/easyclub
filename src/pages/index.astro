@@ -54,7 +54,7 @@ const faq = [
   { question: 'Combien coûte OnClub ?', reponse: 'Un abonnement au pourcentage des cotisations encaissées en ligne : 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA, plus 2 % sur la boutique. Rien de fixe, et rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.' },
   { question: 'D’où viennent les 61 heures rendues ?', reponse: 'C’est une estimation OnClub pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnClub. Le calcul et les hypothèses sont sur la page du temps gagné.' },
   { question: 'Les familles doivent-elles créer un compte ?', reponse: 'Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien. Pour une convocation, elle répond présent ou absent depuis le mail.' },
-  { question: 'En combien de temps notre association est-elle en ligne ?', reponse: `${MISE_EN_ROUTE} Vos tableurs de la saison passée sont repris : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription.` },
+  { question: 'En combien de temps notre association est-elle en ligne ?', reponse: `${MISE_EN_ROUTE} Vous déposez le tableur de la saison passée : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription.` },
   { question: 'Je suis adhérent ou parent : comment proposer OnClub à mon club ?', reponse: 'Utilisez la page « Transmettre à mon club » : elle prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail, avec ce que l’association y gagne. Vous n’avez rien à installer et rien à remplir pour nous.' },
 ]
 ---
@@ -82,17 +82,16 @@ const faq = [
       <OngletsProduit titre="Voyez-le tourner" onglets={ONGLETS} legende="Noms et montants fictifs." pause={{ pause: 'Mettre en pause', reprise: 'Relancer l’animation' }}>
         <MiniEcran
           slot="ecran-convocations"
-          association="Volley Club Démo"
-          titre="Convocation : match de samedi"
-          sousTitre="M15 filles · réponses depuis le mail"
+          association="Votre club"
+          titre="Match · samedi 17 octobre à 14 h"
+          sousTitre="U13 · 11 présents · 2 absents · 1 sans réponse"
           lignes={[
-            { nom: 'Léa', detail: 'Réceptionneuse-attaquante', statut: 'Présente', ton: 'ok' },
-            { nom: 'Inès', detail: 'Passeuse', statut: 'Présente', ton: 'ok' },
-            { nom: 'Chloé', detail: 'Centrale', statut: 'Absente', ton: 'ko' },
-            { nom: 'Maëlys', detail: 'Libéro', statut: 'Pas encore répondu', ton: 'neutre' },
+            { nom: 'Nathan Bernard', statut: 'Présent', ton: 'ok' },
+            { nom: 'Hugo Arnaud', statut: 'Absent', ton: 'ko' },
+            { nom: 'Enzo Garcia', statut: 'Sans réponse', ton: 'neutre' },
+            { nom: 'Malo Chevalier', statut: 'Présent', ton: 'ok' },
           ]}
-          pied={{ libelle: 'Réponses', valeur: '9 sur 10' }}
-          bouton="Faire la compo"
+          bouton="Composer le match"
         />
       </OngletsProduit>
     </div>

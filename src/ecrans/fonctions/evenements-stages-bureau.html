@@ -1,0 +1,68 @@
+<div class="ef-vue ef-ev" data-forme="fenetre" data-menu="Événements" data-hauteur="640" data-description="L’écran Événements d’un club de football : 3 à venir, 2 passés, et le bouton « Créer un événement ». Trois tuiles : 3 événements à venir, 106 places dont 96 prises, 1 175 euros d’inscriptions. Le tableau donne la journée de stage U11 du samedi 24 octobre, ouverte, 7 places libres, 25 euros ; la sortie au stade du 21 novembre, complète avec liste d’attente, 15 euros ; le tournoi de Noël U9 du 19 décembre, gratuit, plus que 3 places. Dessous, deux événements passés, complets. Chacun a sa page publique.">
+<div class="ev-titre"><div><div class="ef-h1">Événements</div><div class="ef-sous">3 à venir, 2 passés</div></div><span class="ef-bt ef-pri">Créer un événement</span></div>
+
+<div class="ev-tuiles">
+<div class="ef-carte"><span class="ef-lib">Événements à venir</span><b>3</b><span class="ef-mu">2 déjà passés</span></div>
+<div class="ef-carte"><span class="ef-lib">Places à venir</span><b>106</b><span class="ef-mu">96 prises</span></div>
+<div class="ef-carte"><span class="ef-lib">Inscriptions à venir</span><b>1&nbsp;175&nbsp;€</b><span class="ef-mu">Montant inscrit, encaissé ou non</span></div>
+</div>
+
+<div class="ef-carte">
+<table class="ef-table ev-table">
+<thead><tr><th style="width:29%">Événement</th><th class="ef-cache-etroit" style="width:22%">Quand</th><th class="ef-cache-moyen" style="width:15%">Où</th><th style="width:17%">Remplissage</th><th class="ef-n" style="width:7%">Tarif</th><th class="ef-n ef-cache-moyen" style="width:10%">Lien</th></tr></thead>
+<tbody>
+<tr><td><b class="ev-nom">Journée de stage U11</b> <span class="ef-badge ev-accent">Ouvert</span></td><td class="ef-cache-etroit">samedi 24 octobre 2026<span class="ef-mu">10:00 à 17:00</span></td><td class="ef-cache-moyen">Stade municipal</td><td><div class="ev-jauge"><i style="--w:71%"></i><span>7 places libres</span></div></td><td class="ef-n"><b>25&nbsp;€</b></td><td class="ef-n ef-cache-moyen"><u>Page publique</u></td></tr>
+<tr><td><b class="ev-nom">Sortie au stade</b> <span class="ef-badge ef-attention">Liste d’attente</span></td><td class="ef-cache-etroit">samedi 21 novembre 2026<span class="ef-mu">14:00 à 19:00</span></td><td class="ef-cache-moyen">Départ du stade</td><td><div class="ev-jauge ev-complet"><i style="--w:100%"></i><span>Complet</span></div></td><td class="ef-n"><b>15&nbsp;€</b></td><td class="ef-n ef-cache-moyen"><u>Page publique</u></td></tr>
+<tr><td><b class="ev-nom">Tournoi de Noël U9</b> <span class="ef-badge ev-accent">Ouvert</span></td><td class="ef-cache-etroit">samedi 19 décembre 2026<span class="ef-mu">13:30 à 18:00</span></td><td class="ef-cache-moyen">Gymnase Jean-Moulin</td><td><div class="ev-jauge ev-presque"><i style="--w:91%"></i><span>Plus que 3 places</span></div></td><td class="ef-n"><b>0&nbsp;€</b></td><td class="ef-n ef-cache-moyen"><u>Page publique</u></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ef-h3 ev-passes">Passés</div>
+<div class="ef-carte">
+<table class="ef-table ev-table">
+<thead><tr><th style="width:29%">Événement</th><th class="ef-cache-etroit" style="width:22%">Quand</th><th class="ef-cache-moyen" style="width:15%">Où</th><th style="width:17%">Remplissage</th><th class="ef-n" style="width:7%">Tarif</th><th class="ef-n ef-cache-moyen" style="width:10%">Lien</th></tr></thead>
+<tbody>
+<tr><td><b class="ev-nom">Journée portes ouvertes</b> <span class="ef-badge">Passé</span></td><td class="ef-cache-etroit">samedi 5 septembre 2026<span class="ef-mu">10:00 à 13:00</span></td><td class="ef-cache-moyen">Stade municipal</td><td><div class="ev-jauge ev-complet"><i style="--w:100%"></i><span>Complet</span></div></td><td class="ef-n"><b>0&nbsp;€</b></td><td class="ef-n ef-cache-moyen"><u>Page publique</u></td></tr>
+<tr><td><b class="ev-nom">Stage de rentrée U13</b> <span class="ef-badge">Passé</span></td><td class="ef-cache-etroit">samedi 29 août 2026<span class="ef-mu">09:30 à 16:30</span></td><td class="ef-cache-moyen">Stade municipal</td><td><div class="ev-jauge ev-complet"><i style="--w:100%"></i><span>Complet</span></div></td><td class="ef-n"><b>30&nbsp;€</b></td><td class="ef-n ef-cache-moyen"><u>Page publique</u></td></tr>
+</tbody>
+</table>
+</div>
+
+<style>
+.ecran-fonction .ev-titre{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.ecran-fonction .ev-titre .ef-sous{margin-top:4px}
+.ecran-fonction .ev-tuiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.ecran-fonction .ev-tuiles .ef-carte{margin:0;padding:10px 12px}
+.ecran-fonction .ev-tuiles b{display:block;margin-top:4px;font:800 22px/1.1 var(--ef-h1);white-space:nowrap}
+.ecran-fonction .ev-tuiles .ef-mu{display:block;margin-top:2px;font-size:11px}
+.ecran-fonction .ev-tuiles .ef-lib{font-size:10px}
+.ecran-fonction .ev-table{table-layout:fixed}
+.ecran-fonction .ev-table th{white-space:normal}
+.ecran-fonction .ev-table td{vertical-align:middle;overflow-wrap:anywhere}
+.ecran-fonction .ev-table td .ef-mu{display:block}
+.ecran-fonction .ev-nom{display:block;margin-bottom:3px}
+.ecran-fonction .ev-table td>.ef-badge{display:inline-flex}
+.ecran-fonction .ev-table td .ef-badge{height:19px;font-size:11px;padding:0 7px}
+.ecran-fonction .ev-table u{font-size:11.5px;font-weight:700;text-decoration:none;color:var(--ef-gris)}
+.ecran-fonction .ev-jauge{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.ecran-fonction .ev-jauge i{flex:1;min-width:40px;height:5px;border-radius:9px;background:linear-gradient(#1F9D63,#1F9D63) no-repeat 0 0/var(--w) 100%,var(--ef-creux)}
+.ecran-fonction .ev-jauge span{font-size:11.5px;font-weight:700;color:var(--ef-gris);white-space:nowrap}
+.ecran-fonction .ev-presque i{background:linear-gradient(#C98A12,#C98A12) no-repeat 0 0/var(--w) 100%,var(--ef-creux)}
+.ecran-fonction .ev-presque span{color:#92600A}
+.ecran-fonction .ev-complet i{background:linear-gradient(#B23A35,#B23A35) no-repeat 0 0/var(--w) 100%,var(--ef-creux)}
+.ecran-fonction .ev-complet span{color:#9B2C28}
+.ecran-fonction .ev-accent{background:var(--ef-vert);color:var(--ef-vert-fonce)}
+.ecran-fonction .ev-passes{margin:14px 0 8px;font-size:14px}
+.ecran-fonction .ev-passes+.ef-carte{margin-top:0}
+@container (max-width:519px){
+  .ecran-fonction .ev-tuiles{grid-template-columns:1fr 1fr}
+  .ecran-fonction .ev-tuiles .ef-carte:last-child{grid-column:1/-1}
+  .ecran-fonction .ev-jauge{min-width:0;gap:6px}
+  .ecran-fonction .ev-jauge i{min-width:26px}
+  .ecran-fonction .ev-jauge span{font-size:11px}
+  .ecran-fonction .ev-nom{white-space:normal}
+  .ecran-fonction .ev-titre .ef-bt{padding:0 10px}
+}
+</style>
+</div>

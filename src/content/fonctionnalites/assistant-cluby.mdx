@@ -5,27 +5,78 @@ famille: Communiquer
 offre: pro
 ordre: 3
 titreSeo: "Cluby, l’assistant IA du bureau de l’association"
-description: "« Ouvre des places chez les M15 », « relance l’équipe des seniors » : Cluby prépare, vous validez. 100 questions par mois avec Pro, sans limite avec Pro Max IA."
+description: "« Ouvre des places chez les U13 », « prépare la liste des retards » : Cluby prépare, vous validez. 100 questions par mois avec Pro, sans limite avec Pro Max IA."
 titre: "Cluby prépare, vous validez"
-chapo: "Chercher le bon menu, ou attendre que quelqu’un soit disponible : avec Cluby, vous demandez en une phrase, comme à quelqu’un qui connaît votre association."
+chapo: "Chercher le bon écran, ou attendre que le trésorier réponde : avec Cluby, vous demandez en une phrase, comme à quelqu’un qui connaît votre club."
 temps:
   geste: "Vous le demandez en une phrase ; il prépare ; rien ne change sans votre clic."
-ecran: cluby
-maj: 2026-10-09
+ecranFonction: true
+fonctionnalites: [relance-un-clic, messages-familles, pieces-justificatives, site-association]
+sports: [volley]
+maj: 2026-10-12
+faq:
+  - question: "Cluby envoie-t-il des messages aux familles tout seul ?"
+    reponse: "Non. La relance d’une famille, ou la relance groupée des pièces manquantes, attend votre clic sur « Appliquer ». La liste des familles en retard arrive en tableur : vous envoyez les relances depuis l’écran des inscriptions."
+  - question: "Cluby lit-il les dossiers des familles ?"
+    reponse: "Non. Il lit votre club : cours, places, encadrants, chiffres du jour. Les noms et les adresses des dossiers ne passent pas par lui. Seul le nom que vous tapez pour chercher une famille part avec votre demande ; l’écran vous donne ensuite le lien du dossier."
+  - question: "Combien de questions peut-on lui poser ?"
+    reponse: "Cluby n’est pas dans Mini. Avec Pro, 100 questions par mois. Avec Pro Max IA, pas de limite par mois. Dans les deux cas, un plafond d’appels par heure s’applique, le même que pour l’atelier du site."
+  - question: "Que peut-il modifier dans le club ?"
+    reponse: "Ouvrir un cours ou des places, déclarer un cours complet ou le rouvrir, rattacher ou remplacer un encadrant, sortir une famille des relances. Chaque geste passe par « Appliquer », et une même demande en compte 5 au plus."
 ---
+
+## Aujourd’hui : chercher le bon écran, ou attendre quelqu’un
+
+« Combien de familles doivent encore de l’argent ? » « Quels cours n’ont personne pour les encadrer ? » La réponse est dans le club, mais le président ne sait pas où la trouver, et le trésorier ne répond que le soir.
 
 ## Vous demandez en une phrase, il prépare
 
-- « Ouvre quatre places chez les M15 filles. »
-- « Ajoute un cours le jeudi. »
-- « Relance les familles des M13 en retard. »
+- « Ouvre quatre places chez les U13. »
+- « Ajoute un cours le jeudi. » Cluby redemande ce qui manque : horaires, lieu, tarif, encadrant.
+- « Prépare la liste des familles en retard. »
 
-Cluby prépare la modification ou le message. Vous relisez, vous cliquez sur « Appliquer ». Rien ne change, rien ne part, sans votre clic.
+Pour une modification, Cluby montre une carte « À valider » : « Rien n’est encore modifié. » Vous relisez l’aperçu, vous cliquez sur « Appliquer ». Rien ne change sans votre clic.
 
-## Il voit le catalogue, jamais les familles
+## Il répond avec les chiffres du club
 
-Votre catalogue, vos tarifs et vos compteurs. Aucun nom, aucune adresse et aucun téléphone de famille ne part avec votre demande.
+- **Qui doit encore de l’argent**, et combien.
+- **Les cours sans encadrant**, et l’encadrant qui a le plus de créneaux.
+- **Les pièces manquantes**, comptées par type de pièce.
+- **Un dossier** : vous tapez le nom de la famille, l’écran vous en donne le lien.
+- **Le stock de la boutique**, taille par taille, avec Pro Max IA.
+
+## Les listes arrivent en tableur, les relances partent de chez vous
+
+« Prépare la liste des familles des U13 en retard » : Cluby prépare un tableur, avec la référence, le responsable, l’e-mail, le retard, le reste dû et l’objet du message.
+
+Rien n’est parti : vous relisez, puis vous envoyez depuis l’écran des inscriptions, avec la [relance d’un bouton](/fonctionnalites/relance-un-clic).
+
+- **Une seule famille** : Cluby propose sa relance, vous cliquez « Appliquer ».
+- **Les [pièces manquantes](/fonctionnalites/pieces-justificatives)** : une relance groupée, 20 familles par clic sur « Appliquer », le reste au clic suivant.
+
+## Il connaît le club, pas les familles
+
+À chaque message, Cluby lit votre club tel qu’il est à l’instant : cours, encadrants, places, chiffres du jour. Les noms et les adresses des dossiers ne passent pas par lui : le tableur qu’il prépare est rempli par OnClub, pas par Cluby.
+
+Une seule exception : le nom que vous tapez pour chercher une famille part avec votre demande.
+
+<Repli titre="Le détail">
+
+- **La bulle « Cluby »** s’ouvre en bas à droite de chaque page du tableau de bord. « Ouvrir en grand » mène à ses conversations gardées.
+- **Le journal** « Ce qui est passé par Cluby » garde la trace de chaque geste appliqué.
+- **Chaque réponse** est marquée « Réponse de Cluby » : le compte rendu qui suit « Appliquer », lui, dit ce qui a vraiment changé.
+- **Ses listes en tableur** : une question en français, un fichier filtré de 14 colonnes, 500 lignes au plus.
+- **La bulle sert aussi d’aide** sur chaque page, avec l’équipe OnClub joignable sur WhatsApp.
+
+</Repli>
 
 ## Dès Pro, sans limite en Pro Max IA
 
-Cluby n’est pas dans Mini. Avec **Pro**, il répond à 100 questions par mois ; avec **Pro Max IA**, sans limite.
+Cluby n’est pas dans Mini. Avec **Pro**, il répond à 100 questions par mois ; avec **Pro Max IA**, sans limite par mois. Un plafond d’appels par heure s’applique dans les deux cas, partagé avec l’[atelier du site](/fonctionnalites/site-association).
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Envoyer d’un clic le lot de relances** que Cluby a préparé : le tableur se relit, les relances partent de l’écran des inscriptions.
+- **Écrire un message libre à une équipe** : ce sont les [messages aux familles](/fonctionnalites/messages-familles).
+- **Plus de 5 gestes** dans une même demande.
+- **Créer la fiche d’un encadrant** : elle se crée dans l’écran des éducateurs.

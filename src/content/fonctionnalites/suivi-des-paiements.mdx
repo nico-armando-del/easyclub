@@ -5,27 +5,87 @@ famille: Piloter
 offre: mini
 ordre: 1
 titreSeo: "Suivi des paiements de cotisation sans tableur | OnClub"
-description: "Encaissé, à venir, en retard, rien versé : le tableau de bord tient l’argent de la saison à jour, chèques et espèces compris, au centime."
-titre: "L’argent de la saison, à jour sans tableur"
-chapo: "Personne ne sait vraiment où en est l’argent de l’association. Le tableau de bord d’OnClub le dit d’un coup d’œil, à jour tout seul."
+description: "Encaissé, à venir, en retard, sans aucun versement : l’accueil montre l’argent de la saison. La carte s’y inscrit seule, le chèque se note au dossier."
+titre: "L’argent de la saison d’un coup d’œil, sans tableur"
+chapo: "Le trésorier ne tient plus de tableur. L’accueil dit ce qui est encaissé, ce qui est en retard et les dossiers sans aucun versement ; la carte s’y inscrit seule."
 temps:
   cles: [paiements]
+ecranFonction: true
+fonctionnalites: [relance-un-clic, paiement-en-ligne, exports-comptables]
 profils: [tresorier]
 comparatifs: [tableur-excel]
-maj: 2026-10-09
+maj: 2026-10-12
+faq:
+  - question: "Les paiements par carte sont-ils comptés tout seuls ?"
+    reponse: "Oui. Un paiement par carte compte dès que Stripe le confirme : le dossier de la famille, la liste des inscriptions et l’accueil changent ensemble, sans rien recopier."
+  - question: "Et les chèques, les espèces, les virements ?"
+    reponse: "Le bureau les note sur le dossier de la famille, avec « Encaisser un chèque » : le montant reçu et le moyen (chèque, espèces, virement, aide ou bon). Tant qu’un chèque n’est pas noté, OnClub ne peut pas savoir qu’il est arrivé : la famille reste dans les impayées."
+  - question: "Le suivi des paiements est-il dans l’offre Mini ?"
+    reponse: "Oui. L’accueil et son bloc Argent sont ouverts dans toutes les formules, comme la liste des inscriptions, le dossier de chaque famille et la relance d’un bouton."
+  - question: "Peut-on sortir la liste des impayés en tableur ?"
+    reponse: "Oui. Ouvrez l’onglet « Impayées » de la liste des inscriptions, puis « Exporter ces 3 inscriptions » (le bouton compte les dossiers affichés) : le fichier suit le filtre, avec pour chaque dossier le total, le payé et le reste."
 ---
 
-## Quatre chiffres, toujours justes
+## Aujourd’hui : un tableur toujours en retard
 
-- **Encaissé** : ce qui est arrivé.
-- **À venir** : les échéances prévues.
-- **En retard** : ce qui aurait dû arriver.
-- **Rien versé** : les dossiers sans aucun paiement.
+Le relevé de banque d’un côté, une enveloppe de chèques de l’autre, et un tableur qu’on met à jour quand on a le temps. Au bord du terrain, personne ne sait vraiment qui a payé sa cotisation.
 
-## Les chèques et les espèces aussi
+## Encaissé sur attendu, en une barre
 
-Le bureau note un chèque ou des espèces dans le dossier de la famille, **au centime**. Le tableau de bord compte tout, même ce qui ne passe pas par la carte.
+L’accueil du tableau de bord ouvre sur la saison qui se joue. Le bloc **Argent** donne un grand chiffre : par exemple « 28 640 € encaissés sur 40 360 € attendus · 71 % ».
 
-## Le trésorier ne recopie plus les relevés
+<EcranFonction nom="suivi-des-paiements-accueil" legende="L’accueil du tableau de bord : l’argent de la saison, les joueurs, les places et ce qui reste à faire. Noms et montants fictifs." />
 
-Il ne recopie plus les relevés dans un tableur. Il ouvre l’écran, voit qui doit quoi, et relance d’un bouton.
+Dessous, une barre en quatre couleurs range chaque euro attendu :
+
+- **Encaissé** : ce qui est déjà entré, carte et chèques notés.
+- **À venir** : les échéances des familles qui paient en plusieurs fois, à encaisser à la main, à leur date.
+- **En retard** : une échéance dépassée et pas réglée.
+- **Sans aucun versement** : les dossiers où rien n’est encore entré.
+
+## Deux lignes qui mènent droit aux familles
+
+Sous la barre, des lignes cliquables disent qui regarder, avec la somme en jeu :
+
+- **« 3 familles en retard de paiement · 330 € »** ouvre la liste des inscriptions sur l’onglet « Impayées ».
+- **« 4 dossiers sans aucun versement · 1 520 € »** ouvre l’onglet « Aucun versement ».
+- **« 9 870 € à encaisser à la main, à leur date »**, avec le nombre de familles échelonnées, ouvre l’onglet « Échelonnées ».
+
+Dans la liste, les colonnes « Payé / total » et « Reste » donnent le détail. Sélectionnez les familles en retard, puis « Relancer la sélection » : c’est la [relance d’un clic](/fonctionnalites/relance-un-clic).
+
+## La carte s’inscrit seule, le chèque se note
+
+Une famille qui règle par carte avec le [paiement en ligne](/fonctionnalites/paiement-en-ligne) est comptée dès que Stripe confirme. Personne ne recopie rien.
+
+Le chèque remis au bord du terrain, les espèces d’un stage, le virement d’un parent : le bureau les note sur le dossier, avec « Encaisser un chèque ».
+
+<EcranFonction nom="suivi-des-paiements-cheque" legende="Un chèque noté sur le dossier d’une famille. Noms et montants fictifs." />
+
+- **Le montant reçu** : le reste dû est proposé, vous le corrigez si besoin.
+- **Le moyen** : chèque, espèces, virement, ou aide ou bon.
+- **Aucune commission** sur un chèque ou des espèces.
+
+Le payé du dossier change, le statut se recalcule, et la famille sort des impayées si le solde est atteint.
+
+## Le dossier d’une famille, au centime
+
+Chaque dossier montre trois tuiles : **Total dû**, **Déjà payé** avec les moyens utilisés, et **Reste**, avec le nombre de relances déjà envoyées.
+
+Pour une famille qui paie en plusieurs fois, la carte « Échéancier » liste les tranches et leurs dates. Le trésorier lit tout au même endroit, sans ouvrir le relevé.
+
+<Repli titre="Le détail">
+
+- **L’accueil est réservé au bureau** : une famille ne voit que son propre dossier.
+- **Les points à traiter** sont comptés en tête de l’accueil : familles en retard, dossiers sans versement, dossiers incomplets, cours sans encadrant.
+- **La saison d’avant** reste lisible dans son bilan, avec le lien « Bilan de 2025-2026 » en bas de l’accueil.
+- **La comptabilité du mois**, avec la commission et les frais de la carte, se lit à part : ce sont les [exports comptables](/fonctionnalites/exports-comptables).
+- **L’accueil parle aussi du club** : qui revient sur les anciens joueurs, les joueurs face à la saison d’avant, le remplissage des places, et en fin de saison le bouton « Préparer la rentrée ».
+
+</Repli>
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Encaisser les échéances à votre place** : aujourd’hui, les tranches d’un échéancier s’encaissent à la main, à leur date.
+- **Savoir qu’un chèque est arrivé** tant que le bureau ne l’a pas noté sur le dossier.
+- **Noter la date de remise en banque** d’un chèque depuis le dossier.
+- **Compter les aides de la même façon partout** : l’accueil range une aide notée « Aide ou bon » dans l’encaissé, l’écran Comptabilité la met à part, à recevoir de l’organisme.

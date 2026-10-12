@@ -44,7 +44,7 @@ const { items, titre = 'Questions fréquentes', id = 'questions', disposition = 
 @keyframes faq-fondu{from{opacity:0}to{opacity:1}}
 @media (min-width:1000px){
   .faq[data-disposition="deux-colonnes"]{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 var(--col-gap);align-items:start}
-  .faq[data-disposition="deux-colonnes"] h2{grid-column:1 / span 4;font-size:var(--t-h2-idee);line-height:1.06;letter-spacing:-.02em;position:sticky;top:calc(var(--entete-h) + 24px)}
+  .faq[data-disposition="deux-colonnes"] h2{grid-column:1 / span 4;align-self:start;font-size:var(--t-h2-idee);line-height:1.06;letter-spacing:-.02em}
   .faq[data-disposition="deux-colonnes"] .faq-corps{grid-column:6 / span 7}
   .faq[data-disposition="deux-colonnes"] .faq-liste{margin-top:0}
 }

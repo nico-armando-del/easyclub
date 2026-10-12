@@ -1,0 +1,46 @@
+<div class="ef-vue cy-vue" data-forme="fenetre" data-menu="Accueil" data-hauteur="580" data-description="Le tableau de bord d’un club de football avec Cluby ouvert à droite. Le bureau a écrit « Ouvre quatre places chez les U13 ». Cluby répond, puis montre une carte À valider : rien n’est encore modifié, les U13 passeraient de 20 à 24 places, avec les boutons Appliquer et Abandonner.">
+<style>
+.ecran-fonction .cy-vue{position:relative}
+.ecran-fonction .cy-fond{opacity:.45}
+.ecran-fonction .cy-volet{position:absolute;top:12px;right:14px;bottom:12px;width:min(400px,calc(100% - 28px));display:flex;flex-direction:column;background:#fff;border:1px solid var(--ef-trait);border-radius:18px;box-shadow:0 18px 40px -16px #0E111640;overflow:hidden}
+.ecran-fonction .cy-tete{flex:none;display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--ef-trait)}
+.ecran-fonction .cy-ico{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--ef-vert);color:var(--ef-vert-fonce)}
+.ecran-fonction .cy-ico svg{width:16px;height:16px}
+.ecran-fonction .cy-tete b{display:block;font:800 14px/1.2 var(--ef-h1)}
+.ecran-fonction .cy-tete .cy-grand{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--ef-gris);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.ecran-fonction .cy-x{font-size:15px;color:var(--ef-gris);padding:0 4px}
+.ecran-fonction .cy-fil{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px;overflow:hidden}
+.ecran-fonction .cy-moi{align-self:flex-end;max-width:85%;padding:8px 12px;border-radius:14px 14px 4px 14px;background:var(--ef-creux);font-size:12.5px;color:#0E1116}
+.ecran-fonction .cy-rep{max-width:90%;display:flex;flex-direction:column;gap:4px;padding-left:10px;border-left:2px solid var(--ef-trait);font-size:12.5px;color:#0E1116}
+.ecran-fonction .cy-prop{padding:10px 0 0 10px;border-left:2px solid var(--ef-vert);font-size:12.5px;color:#0E1116}
+.ecran-fonction .cy-saisie{flex:none;display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--ef-trait)}
+.ecran-fonction .cy-champ{flex:1;min-width:0;height:34px;display:flex;align-items:center;padding:0 12px;border:1px solid var(--ef-trait);border-radius:10px;color:var(--ef-mu);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<div class="cy-fond" aria-hidden="true">
+<div class="ef-tete"><div class="ef-h1">Accueil</div><div class="ef-sous">Lundi 12 octobre · <b style="color:#0E1116">4 points à traiter</b></div></div>
+<div class="ef-carte">
+<div class="ef-ligne" style="margin-bottom:12px"><span class="ef-pas">2026-2027 · se joue</span></div>
+<span class="ef-lib" style="font-size:10.5px">Argent</span>
+<div class="ef-ligne" style="align-items:baseline;margin-top:6px"><span style="font:800 26px/1 var(--ef-h1)">28&#8239;640&nbsp;€</span><span class="ef-p">encaissés sur 40&#8239;360&nbsp;€ attendus · 71&nbsp;%</span></div>
+<div style="display:flex;gap:3px;height:12px;margin-top:10px"><span style="flex:28640 1 0;border-radius:3px;background:#3DDC97"></span><span style="flex:9870 1 0;border-radius:3px;background:#E8B13A"></span><span style="flex:330 1 0;min-width:8px;border-radius:3px;background:#E0544F"></span><span style="flex:1520 1 0;border-radius:3px;border:1.5px solid #8A8A80"></span></div>
+<p class="ef-p" style="margin-top:12px">3 familles en retard de paiement · 330&nbsp;€</p>
+<p class="ef-p" style="margin-top:6px">4 dossiers sans aucun versement · 1&#8239;520&nbsp;€</p>
+<span class="ef-lib" style="font-size:10.5px;margin-top:16px">Places</span>
+<p class="ef-p" style="margin-top:6px">152 sur 180 · 2 équipes complètes : U11, U13</p>
+</div>
+</div>
+
+<div class="cy-volet">
+<div class="cy-tete"><span class="cy-ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h12v8H9l-4 3v-3H4z" stroke-linejoin="round"/></svg></span><div><b>Cluby</b><span class="ef-mu">L’aide du bureau</span></div><span class="cy-grand">Ouvrir en grand</span><span class="cy-x" aria-hidden="true">✕</span></div>
+<div class="cy-fil">
+<div class="cy-moi">Ouvre quatre places chez les U13, la liste d’attente déborde.</div>
+<div class="cy-rep"><span class="ef-mu" style="font-size:11.5px">Réponse de Cluby</span><span>Les U13 ont 20 places, toutes prises, et 4 familles attendent. Je vous propose de passer à 24 places : relisez, puis appliquez.</span></div>
+<div class="ef-carte" style="padding:12px 14px">
+<div class="ef-ligne"><span class="ef-badge ef-attention">À valider</span><span class="ef-mu">Rien n’est encore modifié.</span></div>
+<div class="cy-prop" style="margin-top:10px">« U13 » passerait de 20 à 24 places (20 inscrits aujourd’hui). Motif : 4 familles en liste d’attente</div>
+<div class="ef-bts" style="margin-top:12px"><span class="ef-bt ef-pri">Appliquer</span><span class="ef-bt ef-quiet">Abandonner</span></div>
+</div>
+</div>
+<div class="cy-saisie"><span class="cy-champ">Continuez la conversation…</span><span class="ef-bt ef-pri">Envoyer</span></div>
+</div>
+</div>

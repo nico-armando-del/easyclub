@@ -47,6 +47,10 @@ export function lireEcranFonction(nom: string): EcranFonctionLu {
   if (description.length < 40) throw new Error(`${ou} : data-description décrit l’écran pour un lecteur d’écran (40 caractères au moins).`)
   const interdit = html.replace(/@exemple\.fr/g, '').match(/\b(exemple|logiciel)\b/i)
   if (interdit) throw new Error(`${ou} : le mot « ${interdit[1]} » est interdit dans un écran.`)
+  /* Un numéro de téléphone fictif reste dans la tranche réservée à la fiction (06 39 98 xx xx, Arcep) :
+     tout autre numéro peut appartenir à quelqu'un. */
+  const numero = html.match(/(?<!\d)0[1-9](?:[ .\u00a0\u202f]?\d{2}){4}(?!\d)/g)?.find((n) => !n.replace(/\D/g, '').startsWith('063998'))
+  if (numero) throw new Error(`${ou} : le numéro « ${numero} » n’est pas dans la tranche de fiction 06 39 98 xx xx.`)
   const h = attr('data-hauteur')
   return { nom, html, forme, description, menu: attr('data-menu') || undefined, hauteur: h ? Number(h) : undefined }
 }

@@ -18,13 +18,13 @@ faq:
   - question: "Comment limiter un atelier théâtre à douze élèves ?"
     reponse: "Chaque atelier a son nombre de places. Le formulaire affiche les places qui restent et ne propose plus l’atelier quand il est plein. Avec l’offre Pro, les suivants s’inscrivent sur la liste d’attente, et une place libérée leur est proposée d’un clic."
   - question: "Peut-on proposer une séance d’essai en septembre ?"
-    reponse: "Oui, atelier par atelier : essai fermé, ouvert tant qu’il reste de la place, ou toujours ouvert. La famille choisit sa date parmi les prochaines séances, et l’intervenant sait qui vient. Le bureau note ensuite qui est venu et qui s’est inscrit."
+    reponse: "Oui, atelier par atelier : essai fermé, ouvert tant qu’il reste de la place, ou toujours ouvert. La famille choisit sa date parmi les prochaines séances, et le bureau sait qui vient, pour prévenir l’intervenant. Il note ensuite qui est venu et qui s’est inscrit."
   - question: "La troupe adulte peut-elle recruter sur audition ?"
     reponse: "Oui. Un atelier peut être réservé aux anciens ou accessible sur invitation seulement. Après l’audition, le bureau envoie le lien d’inscription aux comédiens retenus ; les autres ne voient pas de bouton qui ne mène nulle part."
   - question: "Comment demander l’autorisation parentale ?"
     reponse: "Vous choisissez les pièces demandées à l’inscription. La famille les dépose en photo, le bureau les contrôle, et une pièce manquante se réclame d’un bouton. Elle n’empêche ni l’inscription ni le paiement : la famille peut la déposer plus tard."
   - question: "OnClub vend-il les places du spectacle de fin d’année ?"
-    reponse: "Non, pas au public. Avec l’offre Pro Max IA, un stage ou une journée de répétition a sa page d’inscription pour vos adhérents, avec ses places et son tarif. La billetterie grand public, les costumes et les décors restent hors d’OnClub."
+    reponse: "Non, pas au public. Avec l’offre Pro Max IA, un stage ou une journée de répétition a sa page d’inscription publique, avec ses places et son tarif. La billetterie grand public et les décors restent hors d’OnClub ; un costume à acheter peut passer par la boutique."
 ---
 
 ## Septembre : le carnet, les appels, les chèques
@@ -75,8 +75,8 @@ Un atelier de théâtre se remplit vite et se vide en octobre : un déménagemen
     { nom: 'Improvisation', detail: 'Vendredi 18:00 · salle des fêtes', statut: 'Complet', ton: 'ko' },
     { nom: 'Liste d’attente', detail: 'Improvisation · rang 2', statut: 'Inscrit', ton: 'neutre' },
   ]}
-  pied={{ libelle: 'Total de la saison', valeur: '240,00 €' }}
-  bouton="Valider et payer"
+  pied={{ libelle: 'Total', valeur: '240 €' }}
+  bouton="Payer et valider"
   legende="L’inscription vue par la famille : un atelier avec ses places, un autre complet qui ouvre la liste d’attente. Noms et montants fictifs."
 />
 
@@ -86,7 +86,7 @@ Un atelier de théâtre se remplit vite et se vide en octobre : un déménagemen
 
 ### La séance d’essai, réservée en ligne
 
-La famille choisit sa date parmi les prochaines séances, et l’intervenant sait qui vient.
+La famille choisit sa date parmi les prochaines séances, et le bureau sait qui vient : à lui de prévenir l’intervenant.
 
 <Repli>
 
@@ -142,7 +142,7 @@ Le stage des vacances ou la journée de répétition générale a sa page : la d
     { nom: 'Payé en ligne', detail: '16 inscrits', statut: 'Encaissé', ton: 'ok' },
     { nom: 'Liste d’attente', detail: '2 familles', statut: 'En attente', ton: 'neutre' },
   ]}
-  pied={{ libelle: 'Tarif du stage', valeur: '45,00 €' }}
+  pied={{ libelle: 'Total', valeur: '45 €' }}
   legende="Un stage vu par le bureau, avec l’offre Pro Max IA. Noms et montants fictifs."
 />
 

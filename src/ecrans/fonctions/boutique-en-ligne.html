@@ -1,0 +1,44 @@
+<div class="ef-vue ef-bq" data-forme="telephone" data-description="La boutique en ligne d’un club de football, sur le téléphone d’un parent. Le retrait se fait au club-house du stade, le mercredi de 18 h à 20 h. Quatre articles : le maillot de match à 35 euros, en stock, un au panier ; le short d’entraînement à 18 euros, derniers exemplaires ; l’écharpe du club à 12 euros ; la gourde à 8 euros. En bas, le total estimé de 35 euros et le bouton « Continuer ».">
+<div class="ef-entete"><span class="ef-sig">VC</span><div><b>Votre club</b><span class="ef-mu ef-nw bq-sais">Saison 2026 · 2027</span></div><span class="ef-lien">Le club et ses cours</span></div>
+
+<div class="bq-h1">Boutique</div>
+<p class="bq-acc">Les tenues du club, à commander avant le premier match.</p>
+<p class="bq-ret"><b>Retrait :</b> Club-house du stade, le mercredi de 18 h à 20 h.</p>
+
+<ul class="bq-grille">
+<li class="bq-carte"><span class="bq-vis"><svg viewBox="0 0 64 48" aria-hidden="true"><path d="M24 8l-10 5-6 10 7 4 3-5v20h28V22l3 5 7-4-6-10-10-5c-1 4-4 6-8 6s-7-2-8-6z" fill="#3DDC97" stroke="#0F3D2A" stroke-width="1.6" stroke-linejoin="round"/><path d="M28 24h8M32 20v10" stroke="#0F3D2A" stroke-width="1.6"/></svg></span><div><b>Maillot de match</b><strong>35&nbsp;€</strong><span class="bq-bdg"><span class="ef-badge ef-succes">En stock</span><span class="ef-badge bq-pan">1 au panier</span></span></div></li>
+<li class="bq-carte"><span class="bq-vis"><svg viewBox="0 0 64 48" aria-hidden="true"><path d="M18 10h28l3 28H36l-4-14-4 14H15z" fill="#0E1116" stroke="#0E1116" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 15h28" stroke="#3DDC97" stroke-width="2.4"/></svg></span><div><b>Short d’entraînement</b><strong>18&nbsp;€</strong><span class="bq-bdg"><span class="ef-badge ef-attention">Derniers exemplaires</span></span></div></li>
+<li class="bq-carte"><span class="bq-vis"><svg viewBox="0 0 64 48" aria-hidden="true"><path d="M14 12c8 4 28 4 36 0v8c-8 4-28 4-36 0z" fill="#3DDC97" stroke="#0F3D2A" stroke-width="1.6"/><path d="M38 18v20h8V16" fill="#3DDC97" stroke="#0F3D2A" stroke-width="1.6" stroke-linejoin="round"/><path d="M40 22h4M40 27h4M40 32h4" stroke="#0F3D2A" stroke-width="1.6"/><path d="M38 38l-1 4M42 38v4M46 38l1 4" stroke="#0F3D2A" stroke-width="1.4"/></svg></span><div><b>Écharpe du club</b><strong>12&nbsp;€</strong><span class="bq-bdg"><span class="ef-badge ef-succes">En stock</span></span></div></li>
+<li class="bq-carte"><span class="bq-vis"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="28" y="6" width="8" height="5" rx="1.5" fill="#0E1116"/><path d="M26 11h12l2 6v23a3 3 0 0 1-3 3H27a3 3 0 0 1-3-3V17z" fill="#FAFAF7" stroke="#0E1116" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 24h16v8H24z" fill="#3DDC97"/></svg></span><div><b>Gourde</b><strong>8&nbsp;€</strong><span class="bq-bdg"><span class="ef-badge ef-succes">En stock</span></span></div></li>
+</ul>
+
+<div class="bq-barre">
+<div><span class="ef-lib">Total estimé</span><b>35&nbsp;€</b><u>1 article · voir le détail</u></div>
+<span class="ef-bt ef-pri">Continuer</span>
+</div>
+
+<style>
+.ecran-fonction .bq-sais{display:block;font-size:11px}
+.ecran-fonction .ef-vue .ef-entete .ef-lien{font-size:11px}
+.ecran-fonction .ef-vue.ef-bq{padding:10px 12px 110px}
+.ecran-fonction .bq-h1{margin-top:12px;font:800 26px/1.1 var(--ef-h1);letter-spacing:-.02em}
+.ecran-fonction .bq-acc{margin-top:5px;font-size:11.5px;line-height:1.4;color:var(--ef-gris)}
+.ecran-fonction .bq-ret{margin-top:5px;font-size:11px;line-height:1.4;color:var(--ef-gris)}
+.ecran-fonction .bq-ret b{color:#0E1116}
+.ecran-fonction .bq-grille{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ecran-fonction .bq-carte{display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid var(--ef-trait);border-radius:14px}
+.ecran-fonction .bq-vis{display:grid;place-items:center;aspect-ratio:4/3;background:#F1EFE8}
+.ecran-fonction .bq-vis svg{width:70%;height:auto}
+.ecran-fonction .bq-carte>div{display:flex;flex-direction:column;gap:2px;padding:7px 8px 8px}
+.ecran-fonction .bq-carte b{font:700 12px/1.2 var(--ef-h1)}
+.ecran-fonction .bq-carte strong{font:800 12px var(--ef-h1)}
+.ecran-fonction .bq-bdg{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.ecran-fonction .bq-bdg .ef-badge{height:auto;min-height:18px;padding:2px 6px;white-space:normal;line-height:1.25;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em}
+.ecran-fonction .bq-pan{background:#0E1116;color:#fff}
+.ecran-fonction .bq-barre{position:absolute;left:8px;right:8px;bottom:10px;display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:1px solid var(--ef-trait);border-radius:18px;box-shadow:0 10px 26px -8px #0E111640}
+.ecran-fonction .bq-barre .ef-lib{font-size:9.5px}
+.ecran-fonction .bq-barre b{display:block;font:800 18px/1.15 var(--ef-h1)}
+.ecran-fonction .bq-barre u{display:block;font-size:10.5px;color:var(--ef-gris);text-underline-offset:2px}
+.ecran-fonction .bq-barre .ef-bt{margin-left:auto;height:34px;padding:0 16px;font-size:13px}
+</style>
+</div>

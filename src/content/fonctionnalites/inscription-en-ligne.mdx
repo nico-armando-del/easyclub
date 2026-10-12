@@ -7,60 +7,87 @@ ordre: 1
 titreSeo: "Inscription en ligne pour association et club | OnClub"
 description: "Un seul formulaire pour toute la famille, depuis le téléphone : les bons groupes proposés, le paiement dans la foulée, et plus aucune fiche à recopier."
 titre: "Inscription en ligne : plus aucune fiche à recopier"
-chapo: "La famille inscrit tous ses membres depuis son téléphone et paie dans la foulée. Le dossier arrive au bureau, complet."
+chapo: "La famille inscrit tous ses membres depuis son téléphone et voit le total exact avant de valider. Le bureau reçoit l’identité, les cours, le total et les pièces."
 temps:
   cles: [fiches]
 ecranFonction: true
+fonctionnalites: [paiement-en-ligne, pieces-justificatives, aides-deduites, liste-attente]
 sports: [football]
 activites: [ecole-de-musique]
 profils: [tresorier]
 comparatifs: [tableur-excel]
 articles: [soirees-du-tresorier]
-maj: 2026-10-09
+maj: 2026-10-12
 faq:
   - question: "Les familles doivent-elles créer un compte pour s’inscrire ?"
-    reponse: "Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone ou son ordinateur. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien."
+    reponse: "Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone ou son ordinateur. Elle reçoit un récapitulatif par mail et rouvre ensuite son dossier par son lien personnel, sans mot de passe."
   - question: "Comment éviter qu’un enfant s’inscrive dans le mauvais groupe ?"
     reponse: "Chaque cours ou équipe est borné par années de naissance. Le formulaire ne propose que les groupes ouverts à l’année de naissance saisie, avec les places qui restent : la catégorie se calcule sur l’année, jamais sur l’âge du jour."
   - question: "Peut-on inscrire plusieurs enfants, ou un enfant à plusieurs cours ?"
-    reponse: "Oui, dans le même formulaire. Les réductions de l’association pour un deuxième enfant ou un cours en plus s’appliquent toutes seules, et la famille voit le total exact avant de valider."
+    reponse: "Oui, dans le même formulaire, avec « Ajouter un autre participant ». Les réductions de l’association pour un deuxième enfant ou un cours en plus se règlent avec OnClub à l’ouverture ; ensuite, elles s’appliquent seules et la famille voit le total exact avant de valider."
   - question: "Que se passe-t-il si une pièce manque au moment de l’inscription ?"
-    reponse: "La famille s’inscrit et paie quand même : une pièce manquante n’empêche ni l’un ni l’autre. Elle la dépose plus tard en photo, et le bureau la relance d’un clic si elle tarde."
+    reponse: "La famille s’inscrit et paie quand même : une pièce manquante n’empêche ni l’un ni l’autre. Elle la dépose plus tard en photo depuis son dossier, et le bureau la relance d’un clic si elle tarde."
 ---
 
 ## Fini les fiches recopiées le soir
 
-Des fiches en papier, par mail ou en photo floue : on recopie, on vérifie l’âge, on rappelle.
+Des fiches en papier, par mail ou en photo floue. On recopie, on vérifie l’âge, on rappelle la famille pour le chèque qui manque.
 
-## Ce que fait la famille, depuis son téléphone
+Avec OnClub, la famille saisit elle-même, une fois, et le bureau lit.
 
-1. **Elle saisit chaque membre** : prénom, nom, date de naissance.
-2. **Elle ne voit que les groupes ouverts** à l’année de naissance saisie.
-3. **Elle répond à vos questions** : tenue, allergies, droit à l’image.
-4. **Elle paie le total exact**, en une ou plusieurs fois.
-5. **Elle valide** et reçoit son récapitulatif par mail.
+## Un seul formulaire pour toute la famille
 
-<Repli titre="Pour toutes les associations qui inscrivent">
+Un parent inscrit ses deux enfants au foot, et lui-même chez les vétérans, sur le même écran.
 
-- **Le formulaire suit votre catalogue** : vos cours ou vos équipes, vos créneaux, vos salles, vos tarifs, avec les places qui restent.
-- **Un club de football** inscrit des joueurs par catégorie, une école de musique des élèves par cours et par niveau, une école de danse plusieurs cours par élève.
+1. **Elle saisit chaque participant** : prénom, nom, date de naissance.
+2. **Elle coche ses cours** parmi ceux ouverts à son année de naissance.
+3. **Elle choisit ses options** et coche les aides auxquelles elle a droit.
+4. **Elle finit** par les cases obligatoires « Pour finir » et signe en ligne, si le club le demande.
+5. **Elle paie le total exact en ligne**, ou choisit un échéancier que le club encaisse, et reçoit son récapitulatif par mail.
+
+Pour un enfant de plus : « Ajouter un autre participant ». Le panier suit chaque choix.
+
+## Le bon groupe, avec les places qui restent
+
+Un enfant né en 2016 ne voit que les équipes qui accueillent 2016. Chaque carte de cours dit son créneau, son lieu, son tarif et sa jauge : « 4 places libres », « Plus que 2 places » ou « Complet ».
+
+- **Équipes filles et garçons** : la question n’est posée que si l’âge a des équipes séparées.
+- **Cours complet** : la famille peut s’inscrire en [liste d’attente](/fonctionnalites/liste-attente), sans rien payer.
+- **Place gardée** pour un ancien : elle est déjà cochée quand la famille revient par son lien de [réinscription](/fonctionnalites/reinscriptions).
+
+## Le total exact, puis le paiement
+
+Le panier montre une ligne par participant, les aides déduites, et le total.
+
+- **En une fois** : la famille paie par carte, et le bouton dit « Payer et valider ». Il faut pour cela le compte de paiement du club, relié à la mise en place.
+- **En trois fois, sans frais** : proposé par défaut. Le bouton dit alors « Valider ma demande », et le club encaisse lui-même les échéances. Si OnClub a activé pour votre club l’étalement par carte, seule la première tranche passe par carte.
+- **Le Pass’Sport** et les aides du club se cochent et se déduisent avant le paiement : voir les [aides déduites](/fonctionnalites/aides-deduites).
+
+<Repli titre="Le détail du panier">
+
+- **Options** par participant, que la famille choisit : rien n’est coché par défaut.
+- **Contributions facultatives**, comptées une fois pour la famille.
+- **Pièces déjà fournies** l’an dernier et encore valables : elles sont reprises, rien à redéposer.
+- **Après validation** : « Merci, c’est validé », un reçu de cotisation numéroté, et le bouton « Voir mon dossier ».
+- **La signature** : la famille écrit le nom du signataire et coche « Vous signez en qualité de » ; elle retrouve ensuite « Vos signatures » dans son dossier.
+- **Son dossier, par un lien sans mot de passe** : reçus, solde, et « Un autre enfant, un autre cours » pour revenir inscrire quelqu’un.
 
 </Repli>
 
-## Septembre se passe sur le terrain
+## Le bureau reçoit, il ne ressaisit plus
 
-Les soirées de septembre reviennent à l’entraînement, à la répétition, au premier match.
+Le dossier arrive avec l’identité, les cours, le total et les pièces, sans passer par une fiche à recopier.
 
 <Encadre titre="Rien à ressaisir">
-Le dossier arrive tel que la famille l’a rempli. Le bureau ne recopie plus de fiche, ne recalcule plus de catégorie, et sait, groupe par groupe, combien de places il reste.
+Le bureau ne recopie plus de fiche, ne recalcule plus de catégorie, et sait, groupe par groupe, combien de places il reste.
 </Encadre>
 
-<Repli titre="Plus de catégorie ni de réduction à calculer">
+Une pièce manquante ne bloque rien : le dossier est ouvert, la famille complète depuis son lien. Le suivi se fait dans l’écran des [pièces justificatives](/fonctionnalites/pieces-justificatives).
 
-- **Plus de calcul de catégorie à la main** : un enfant né en décembre n’atterrit pas chez les plus jeunes parce que quelqu’un a compté sur ses doigts.
-- **Plus de réduction oubliée** : deuxième enfant, deuxième cours, aide du Pass’Sport, tout est appliqué avant le paiement.
-- **Plus de dossier sans paiement** : le paiement fait partie de l’inscription quand l’association encaisse en ligne.
+Les soirées de septembre reviennent à l’entraînement et au premier match.
 
-<BlocTemps cles={['fiches', 'pieces']} titre="Avec les pièces en photo, le temps rendu s’additionne" />
+## Ce qu’OnClub ne fait pas (encore)
 
-</Repli>
+- **Régler vous-même les réductions famille** (deuxième enfant, cours en plus) : elles se posent avec l’équipe OnClub à l’ouverture.
+- **Prélever les échéances par carte** sans mise en place : sans elle, le club encaisse les échéances lui-même.
+- **Délivrer la licence fédérale** : elle se prend toujours dans l’outil de votre fédération.

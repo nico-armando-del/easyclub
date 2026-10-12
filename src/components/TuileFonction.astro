@@ -4,11 +4,15 @@
   la pastille de l'offre qui l'ouvre en bas. Toute la tuile est un lien.
 */
 import { NOM_OFFRE } from '../data/site'
-interface Props { nom: string; ligne: string; href: string; offre?: 'mini' | 'pro' | 'max'; titre?: 'h3' | 'h4' }
-const { nom, ligne, href, offre, titre = 'h3' } = Astro.props
+import EcranFonction from './EcranFonction.astro'
+/* ecran : le nom d'un écran de src/ecrans/fonctions, montré en vignette recadrée en tête de tuile
+   (décoratif : la tuile garde son nom et sa ligne pour les lecteurs d'écran). */
+interface Props { nom: string; ligne: string; href: string; offre?: 'mini' | 'pro' | 'max'; titre?: 'h3' | 'h4'; ecran?: string }
+const { nom, ligne, href, offre, titre = 'h3', ecran } = Astro.props
 const T = titre
 ---
-<a class="tuile-fonction" href={href}>
+<a class:list={['tuile-fonction', { 'tf-avec-ecran': ecran }]} href={href}>
+  {ecran && <span class="tf-vignette" aria-hidden="true" inert><EcranFonction nom={ecran} nu /></span>}
   <T class="tf-nom">{nom}</T>
   <span class="tf-ligne">{ligne}</span>
   {offre && <span class:list={['tf-offre', `tf-${offre}`]}>Dès {NOM_OFFRE[offre]}</span>}
@@ -21,4 +25,10 @@ const T = titre
 .tf-offre{margin-top:auto;display:inline-flex;align-items:center;min-height:26px;padding:2px 10px;border-radius:8px;background:var(--menthe-pale);color:var(--sapin);font:700 var(--t-micro)/1.2 var(--f-texte)}
 .tf-offre.tf-pro{background:var(--lilas-pale);color:var(--encre)}
 .tf-offre.tf-max{background:var(--encre);color:var(--menthe)}
+.tf-avec-ecran{min-width:0;overflow:hidden}
+.tf-vignette{position:relative;display:block;align-self:stretch;height:150px;margin:-24px -24px 8px;overflow:hidden;border-radius:var(--r-l) var(--r-l) 0 0;background:var(--papier-2,#EDE8DC);pointer-events:none}
+.tf-vignette::after{content:"";position:absolute;inset:auto 0 0;height:36px;background:linear-gradient(rgba(237,232,220,0),var(--papier-2,#EDE8DC))}
+.tf-vignette :global(.ecran-fonction.ef-fenetre){width:840px;margin:18px 0 0 18px;zoom:.5}
+.tf-vignette :global(.ecran-fonction.ef-telephone){margin-top:14px;zoom:.5}
+.tf-vignette :global(.ecran-fonction .ef-fen){box-shadow:0 0 0 1px #0E111617}
 </style>

@@ -1,31 +1,80 @@
 ---
 nom: "Liste d’attente"
-ligne: "La place libérée, proposée au suivant d’un clic"
+ligne: "La place libérée, proposée au suivant de la file"
 famille: Inscrire
 offre: pro
 ordre: 6
 titreSeo: "Liste d’attente en ligne pour cours et équipes | OnClub"
-description: "Un groupe complet, une place qui se libère : d’un clic, OnClub la propose au suivant de la liste d’attente, qui a 48 heures pour l’accepter."
-titre: "La liste d’attente se gère d’un clic"
-chapo: "Un cours plein, une place qui se libère, et personne ne sait à qui la donner. Avec OnClub, la place part au suivant d’un clic."
+description: "Un groupe complet, une place qui se libère : le bureau la propose au suivant de la liste d’attente, qui a 48 heures pour l’accepter."
+titre: "Une place libérée, proposée au suivant en deux clics"
+chapo: "Une place se libère dans un cours plein. La file est rangée par ordre d’arrivée : vous proposez la place au suivant, sa famille a 48 heures."
 temps:
   cles: [attente]
 ecranFonction: true
-maj: 2026-10-09
+fonctionnalites: [inscription-en-ligne, reinscriptions, seances-essai]
+sports: [football]
+maj: 2026-10-12
+faq:
+  - question: "La famille paie-t-elle en s’inscrivant sur la liste d’attente ?"
+    reponse: "Non. La place en attente est marquée « non facturé » dans son panier. Le tarif ne s’ajoute à son dossier que si elle accepte la place qu’on lui propose, et elle règle ensuite depuis sa page."
+  - question: "OnClub propose-t-il la place tout seul quand quelqu’un part ?"
+    reponse: "Non. OnClub ne sait pas qu’une place s’est libérée : c’est le bureau qui le sait, et qui clique sur « Proposer la place ». Le message à la famille part à ce moment-là, pas avant."
+  - question: "Que se passe-t-il si la famille ne répond pas ?"
+    reponse: "Elle a 48 heures pour accepter ou céder depuis son dossier. Passé ce délai, la place redevient libre et le bureau peut la proposer à la famille suivante."
+  - question: "Peut-on inscrire directement une famille de la liste ?"
+    reponse: "Oui, avec « Attribuer la place » : l’enfant est inscrit tout de suite et le tarif s’ajoute à son dossier, sans attendre de réponse. C’est utile quand la famille a déjà dit oui au téléphone."
 ---
 
 ## Aujourd’hui : un carnet et des appels
 
-La liste d’attente vit dans un carnet ou dans les messages du président. Quand une place se libère, il faut retrouver qui attendait en premier, l’appeler, attendre sa réponse, rappeler le suivant.
+La liste d’attente vit dans un carnet ou dans les messages du président. Quand une place se libère en U11, il faut retrouver qui attendait en premier, l’appeler, attendre sa réponse, rappeler le suivant.
 
-## La liste se tient seule, dans l’ordre d’arrivée
+## La file se remplit seule, dans l’ordre d’arrivée
 
-- Quand un cours ou une équipe est complet, la famille **s’inscrit en liste d’attente**, dans l’ordre d’arrivée.
-- Une place se libère : le bureau la **propose au suivant d’un clic**.
-- La famille a **48 heures** pour la confirmer. Sans réponse, la place peut aller au suivant.
+Quand une équipe est complète, la famille s’inscrit en liste d’attente depuis le [formulaire d’inscription](/fonctionnalites/inscription-en-ligne), sans rien payer.
+
+- **Une carte par équipe** : combien attendent, combien de places sont libres, le tarif.
+- **Le rang suit la date d’arrivée** : le premier inscrit en attente est en haut.
+- **Chaque ligne** donne l’enfant, le parent responsable, son e-mail et la date de sa demande.
+
+## Proposer la place : deux clics, une famille prévenue
+
+Un joueur déménage, une place se libère en U11. Vous cliquez « Proposer la place » sur la première ligne, vous relisez, puis « Proposer et prévenir la famille ».
+
+- **La place est réservée 48 heures** à cette famille.
+- **Rien n’est facturé** avant sa réponse.
+- **Sans réponse**, la place redevient libre et vous la proposez à la famille suivante.
+
+C’est vous qui savez qu’une place s’est libérée : OnClub ne la propose pas tout seul.
 
 <EcranFonction nom="liste-attente-famille" legende="La place proposée, vue par la famille dans son dossier. Noms et montants fictifs." />
 
+## La famille répond depuis son dossier
+
+Dans son dossier, la famille voit « Une place se libère en U11 », le temps qui lui reste et le montant qui s’ajoutera. Deux boutons : « J’accepte cette place » ou « Je la cède ».
+
+Si elle accepte, le tarif s’ajoute à son dossier et elle règle depuis la même page.
+
+## Attribuer, ou retirer de la file
+
+- **Attribuer la place** : la famille a dit oui au téléphone, l’enfant est inscrit tout de suite.
+- **Retirer de la file** : avec un motif obligatoire, par exemple « La famille a décliné la place » ou « Déjà inscrit dans un autre cours ». Les rangs suivants remontent d’un cran.
+
+<Repli titre="Le détail">
+
+- **Le motif** reste écrit sur la demande et dans l’historique du dossier. La famille ne le voit pas.
+- **Sans service d’envoi** branché sur votre club, le message est écrit mais ne part pas : l’écran vous demande de prévenir la famille vous-même.
+- **Ouvrir des places** sur une équipe pleine se fait depuis l’écran Cours, avec « Changer le nombre de places ».
+- **Les événements** : la liste d’attente d’un stage ou d’un tournoi arrive dans le même écran, avec les mêmes boutons.
+
+</Repli>
+
 ## Une place vide, c’est une cotisation perdue
 
-Une place qui reste vide toute la saison, c’est une cotisation qui ne rentre pas. Proposée vite, elle est prise.
+Une place qui reste vide toute la saison, c’est une cotisation qui ne rentre pas. Proposée vite, elle est prise. À la [réinscription](/fonctionnalites/reinscriptions), les anciens gardent la leur avant que la file ne serve.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Repérer seul une place libérée** et la proposer : le bureau décide, toujours.
+- **Changer vous-même le délai de 48 heures** : il se règle avec l’équipe OnClub.
+- **Reclasser la file** selon une priorité (frères et sœurs, anciens) : le rang suit la date d’arrivée.

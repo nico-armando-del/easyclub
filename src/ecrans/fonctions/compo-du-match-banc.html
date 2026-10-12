@@ -1,20 +1,13 @@
 <div class="ef-vue" data-forme="telephone" data-description="Sous le terrain de la compo du match des U13 : la phrase orange « Hors poste : Théo (milieu) joue défenseur gauche ». Au banc, 4 sur 4 habituels, dont Enzo, défenseur sans réponse, toujours proposé. Pas sur la feuille : Hugo, absent, et Yanis, blessé. Rôles : Sami capitaine, Rayan tireur de penalty.">
 <style>
 .ecran-fonction .cb-pile{display:flex;flex-direction:column;gap:10px}
-.ecran-fonction .cb-carte{padding:0 12px 12px;overflow:hidden}
-.ecran-fonction .cb-bas{position:relative;height:140px;margin:0 -12px;overflow:hidden;border-radius:0 0 14px 14px;background:#2f6d43}
-.ecran-fonction .cb-bas svg{position:absolute;left:0;bottom:0;width:100%;height:384px}
-.ecran-fonction .cb-p{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px}
-.ecran-fonction .cb-rond{position:relative;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#fff;color:#14211a;font:800 13px/1 var(--ef-h1);box-shadow:0 1px 3px rgba(0,0,0,.35)}
-.ecran-fonction .cb-poste{position:absolute;top:-5px;right:-9px;min-width:15px;padding:0 3px;border-radius:6px;background:#14211a;color:#fff;font:800 8.5px/13px var(--ef-h1);text-align:center;box-shadow:0 0 0 1.5px #fff}
-.ecran-fonction .cb-poste.cb-hors{background:#ff7a00}
-.ecran-fonction .cb-nom{padding:0 5px;border-radius:6px;background:rgba(0,0,0,.6);color:#fff;font-size:9.5px;font-weight:600;line-height:13px}
+.ecran-fonction .cb-carte{padding:12px;overflow:hidden}
 .ecran-fonction .cb-horsposte{font-size:11.5px;color:#b25600}
-.ecran-fonction .cb-section{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid var(--ef-trait);border-radius:14px;background:#fff}
+.ecran-fonction .cb-section{display:flex;flex-direction:column;gap:7px;padding:9px 10px;border:1px solid var(--ef-trait);border-radius:14px;background:#fff}
 .ecran-fonction .cb-titre{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .ecran-fonction .cb-titre b{font-size:13px}
 .ecran-fonction .cb-pions{display:flex;flex-wrap:wrap;gap:6px}
-.ecran-fonction .cb-pion{display:flex;align-items:center;gap:7px;min-height:38px;padding:3px 10px 3px 4px;border:1px solid var(--ef-trait);border-radius:12px;background:#fff}
+.ecran-fonction .cb-pion{display:flex;align-items:center;gap:7px;min-height:36px;padding:2px 10px 2px 4px;border:1px solid var(--ef-trait);border-radius:12px;background:#fff}
 .ecran-fonction .cb-num{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ef-creux);font:800 11.5px/1 var(--ef-h1)}
 .ecran-fonction .cb-pion b{display:block;font-size:12px;line-height:1.2}
 .ecran-fonction .cb-pion small{display:block;font-size:10px;line-height:1.2;color:var(--ef-mu)}
@@ -23,14 +16,6 @@
 </style>
 
 <div class="ef-carte cb-carte cb-pile">
-<div class="cb-bas" aria-hidden="true">
-<svg viewBox="0 0 100 150" preserveAspectRatio="none"><g fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="0.6"><rect x="4" y="4" width="92" height="142"/><line x1="4" y1="75" x2="96" y2="75"/><circle cx="50" cy="75" r="11"/><rect x="22" y="124" width="56" height="22"/><rect x="36" y="138" width="28" height="8"/><rect x="43" y="146" width="14" height="2.5"/></g></svg>
-<span class="cb-p" style="left:22%;top:23%"><span class="cb-rond">7<span class="cb-poste cb-hors">M</span></span><span class="cb-nom">Théo</span></span>
-<span class="cb-p" style="left:50%;top:34%"><span class="cb-rond">4<span class="cb-poste">D</span></span><span class="cb-nom">Nathan</span></span>
-<span class="cb-p" style="left:78%;top:23%"><span class="cb-rond">5<span class="cb-poste">D</span></span><span class="cb-nom">Lucas</span></span>
-<span class="cb-p" style="left:50%;top:75%"><span class="cb-rond">1<span class="cb-poste">GB</span></span><span class="cb-nom">Mathis</span></span>
-</div>
-
 <p class="cb-horsposte">Hors poste : Théo (milieu) joue défenseur gauche.</p>
 
 <div class="cb-section">

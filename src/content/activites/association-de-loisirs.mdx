@@ -9,7 +9,7 @@ chapo: "Couture, cuisine, marche, sortie au théâtre : quelques bénévoles fon
 temps:
   cles: [fiches, paiements, relances, evenements]
   titre: "Le temps rendu au bureau d’une association de loisirs, chaque saison"
-fonctionnalites: [inscription-en-ligne, suivi-des-paiements, relance-un-clic, evenements-stages, reprise-des-fichiers, formulaire-sur-mesure]
+fonctionnalites: [inscription-en-ligne, suivi-des-paiements, relance-un-clic, evenements-stages, reprise-des-fichiers]
 activites: [chorale, club-d-echecs, mjc-centre-social, arts-plastiques]
 profils: [tresorier]
 comparatifs: [tableur-excel]
@@ -23,9 +23,9 @@ faq:
   - question: "Comment organiser une sortie ou un voyage avec un nombre de places limité ?"
     reponse: "Avec l’offre Pro Max IA, la sortie a sa page d’inscription : sa date, son lieu, son tarif, ses places et sa liste d’attente. Les adhérents s’inscrivent et paient en ligne, en une fois ; le bureau voit la liste à jour."
   - question: "Quelle offre choisir pour une petite association ?"
-    reponse: "OnClub Mini couvre l’essentiel : inscriptions en ligne, suivi des paiements, relances d’un bouton, pièces, exports. Pro ajoute la saison suivante, les messages et la liste d’attente ; Pro Max IA ajoute les sorties et les événements. Rien de fixe : 2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne."
+    reponse: "OnClub Mini couvre l’essentiel : inscriptions en ligne, suivi des paiements, relances d’un bouton, pièces, exports, et l’appel de chaque activité par l’animateur. Pro ajoute la saison suivante, les messages et la liste d’attente ; Pro Max IA ajoute les sorties et les événements. Rien de fixe : 2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne."
   - question: "Nous avons nos adhérents dans un tableur, faut-il tout ressaisir ?"
-    reponse: "Non. Votre tableur est repris : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription. La saison commence avec la liste que vous avez déjà."
+    reponse: "Non. Vous déposez votre tableur : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription. La saison commence avec la liste que vous avez déjà."
 ---
 
 ## Plus de permanence au foyer pour prendre les adhésions
@@ -60,13 +60,13 @@ Dans OnClub, chaque activité est un « cours » : « Couture », « Jeux de soc
   titre="Adhésion 2026-2027"
   sousTitre="Adhérent : Gérard, né en 1953"
   lignes={[
-    { nom: 'Adhésion annuelle', detail: 'Par personne', statut: '25,00 €', ton: 'neutre' },
+    { nom: 'Adhésion annuelle', detail: 'Par personne', statut: '25 €', ton: 'neutre' },
     { nom: 'Jeux de société', detail: 'Mardi 14:00 · salle du foyer', statut: 'Compris', ton: 'ok' },
     { nom: 'Atelier cuisine', detail: 'Jeudi 9:30 · cuisine du foyer', statut: '2 places', ton: 'ok' },
     { nom: 'Contact d’urgence', detail: 'Renseigné', statut: 'Complet', ton: 'ok' },
   ]}
-  pied={{ libelle: 'Total de la saison', valeur: '85,00 €' }}
-  bouton="Valider et payer"
+  pied={{ libelle: 'Total', valeur: '85 €' }}
+  bouton="Payer et valider"
   legende="L’adhésion vue par un adulte qui s’inscrit seul : l’adhésion, une activité comprise, une activité payante. Noms et montants fictifs."
 />
 
@@ -84,9 +84,9 @@ Une cotisation oubliée se relance d’un bouton, avec l’aperçu du message av
 
 </Repli>
 
-## Vos questions, ajoutées au formulaire
+## Ce que l’adhérent coche avant de payer
 
-Régime alimentaire pour le repas de fin d’année, covoiturage pour la marche, droit d’utiliser une photo dans le bulletin : vos questions s’ajoutent en une phrase, grâce au [formulaire sur mesure](/fonctionnalites/formulaire-sur-mesure). Les réponses se retrouvent dans chaque dossier.
+Le droit d’utiliser une photo dans le bulletin ou le règlement intérieur lu se cochent à la fin du formulaire, avant le paiement : ces cases sont obligatoires, posées avec OnClub à la mise en place. Les questions libres (régime alimentaire, covoiturage) ne se gardent pas encore dans le dossier : demandez-les à part.
 
 ## Sorties, voyages et repas de l’association
 
@@ -110,7 +110,7 @@ Une sortie au théâtre, une journée à la mer, le repas de fin d’année : ch
     { nom: 'Payé en ligne', detail: '47 inscrits', statut: 'Encaissé', ton: 'ok' },
     { nom: 'Liste d’attente', detail: 'S’ouvre quand c’est complet', statut: 'Prête', ton: 'neutre' },
   ]}
-  pied={{ libelle: 'Tarif de la sortie', valeur: '38,00 €' }}
+  pied={{ libelle: 'Total', valeur: '38 €' }}
   legende="Une sortie vue par le bureau, avec l’offre Pro Max IA. Noms et montants fictifs."
 />
 

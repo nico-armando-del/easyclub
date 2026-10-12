@@ -32,17 +32,17 @@ const H = niveau
 
 const MOTS = {
   fr: { inscription: 'Inscription', prenom: 'Prénom', cours: 'Équipe', coursV: 'U9 mixte, mercredi', paiement: 'Paiement', paiementV: 'En 3 fois', total: 'Total',
-    encaisse: 'Encaissé', avenir: 'À venir', retard: 'En retard', rien: 'Rien versé',
-    g1: 'Foot U11', g2: 'Basket U13', g3: 'Judo poussins', places: 'places', place: 'place', complet: 'Complet',
-    a: 'À', bulle: 'Entraînement décalé samedi, même terrain.', produit: 'Maillot domicile · M', retrait: 'Retrait au club', fichier: 'export_saison.csv' },
+    encaisse: 'Encaissé', avenir: 'À venir', retard: 'En retard', rien: 'Aucun versement',
+    g1: 'Nathan B.', g2: 'Hugo A.', g3: 'Enzo G.', present: 'Présent', absent: 'Absent', sans: 'Sans réponse',
+    a: 'À', bulle: 'Entraînement décalé samedi, même terrain.', produit: 'Maillot domicile · M', retrait: 'Retrait au club', fichier: 'inscriptions-votre-club.csv' },
   en: { inscription: 'Registration', prenom: 'First name', cours: 'Team', coursV: 'U9 mixed, Wednesday', paiement: 'Payment', paiementV: 'In 3 instalments', total: 'Total',
-    encaisse: 'Collected', avenir: 'Upcoming', retard: 'Late', rien: 'Nothing paid',
-    g1: 'Football U11', g2: 'Basketball U13', g3: 'Judo U9', places: 'places', place: 'place', complet: 'Full',
-    a: 'To', bulle: 'Training moved to Saturday, same pitch.', produit: 'Home shirt · M', retrait: 'Collect at the club', fichier: 'export_season.csv' },
+    encaisse: 'Collected', avenir: 'Upcoming', retard: 'Late', rien: 'No payment',
+    g1: 'Nathan B.', g2: 'Hugo A.', g3: 'Enzo G.', present: 'Present', absent: 'Absent', sans: 'No answer',
+    a: 'To', bulle: 'Training moved to Saturday, same pitch.', produit: 'Home shirt · M', retrait: 'Collect at the club', fichier: 'registrations-your-club.csv' },
   es: { inscription: 'Inscripción', prenom: 'Nombre', cours: 'Equipo', coursV: 'U9 mixto, miércoles', paiement: 'Pago', paiementV: 'En 3 plazos', total: 'Total',
-    encaisse: 'Cobrado', avenir: 'Por venir', retard: 'Con retraso', rien: 'Sin pagar',
-    g1: 'Fútbol U11', g2: 'Baloncesto U13', g3: 'Judo U9', places: 'plazas', place: 'plaza', complet: 'Completo',
-    a: 'Para', bulle: 'Entrenamiento movido al sábado, mismo campo.', produit: 'Camiseta local · M', retrait: 'Recogida en el club', fichier: 'export_temporada.csv' },
+    encaisse: 'Cobrado', avenir: 'Por venir', retard: 'Con retraso', rien: 'Ningún pago',
+    g1: 'Nathan B.', g2: 'Hugo A.', g3: 'Enzo G.', present: 'Presente', absent: 'Ausente', sans: 'Sin respuesta',
+    a: 'Para', bulle: 'Entrenamiento movido al sábado, mismo campo.', produit: 'Camiseta local · M', retrait: 'Recogida en el club', fichier: 'inscripciones-tu-club.csv' },
 }[langue]
 ---
 <article class:list={['carte', `carte-${disposition}`, `carte-${fond}`, `frag-${fragment}`, { 'sur-encre': fond === 'encre' }]} data-vu>
@@ -72,9 +72,9 @@ const MOTS = {
     )}
     {fragment === 'groupes' && (
       <ul class="groupes">
-        <li><span>{MOTS.g1}</span><em class="num">2 {MOTS.places}</em></li>
-        <li><span>{MOTS.g2}</span><em class="num">1 {MOTS.place}</em></li>
-        <li><span>{MOTS.g3}</span><em class="bascule complet" data-avant={`1 ${MOTS.place}`}><span>{MOTS.complet}</span></em></li>
+        <li><span>{MOTS.g1}</span><em>{MOTS.present}</em></li>
+        <li><span>{MOTS.g2}</span><em class="complet">{MOTS.absent}</em></li>
+        <li><span>{MOTS.g3}</span><em class="bascule" data-avant={MOTS.sans}><span>{MOTS.present}</span></em></li>
       </ul>
     )}
     {fragment === 'bulle' && (

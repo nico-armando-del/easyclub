@@ -1,4 +1,4 @@
-<div class="ef-vue" data-forme="fenetre" data-hauteur="600" data-description="L’écran Saisons du bureau d’un club de football, juste après l’ouverture de la saison suivante : un message vert dit que « Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants. Dessous, la frise des trois années et une carte par saison : 2027-2028 se prépare, vide ; 2026-2027 se joue, 212 joueurs et 168 dossiers, en hausse de 14 ; 2025-2026 est terminée, en lecture seule, avec 81 % de joueurs revus l’année suivante.">
+<div class="ef-vue" data-forme="fenetre" data-menu="Saisons" data-hauteur="600" data-description="L’écran Saisons du bureau d’un club de football, juste après l’ouverture de la saison suivante : un message vert dit que « Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants. Dessous, la frise des trois années et une carte par saison : 2027-2028 se prépare, vide ; 2026-2027 se joue, 212 joueurs et 168 dossiers, en hausse de 14 ; 2025-2026 est terminée, en lecture seule, avec 81 % de joueurs revus l’année suivante.">
 <style>
 .ecran-fonction .ss-tete{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 16px;margin-bottom:14px}
 .ecran-fonction .ss-tete>div{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 280px}
@@ -38,7 +38,7 @@
 .ecran-fonction .ss-ok{color:var(--ef-ok);font-weight:700}
 .ecran-fonction .ss-bts{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:2px}
 @container (max-width:860px){.ecran-fonction .ss-cartes{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@container (max-width:519px){.ecran-fonction .ss-cartes{grid-template-columns:minmax(0,1fr)}.ecran-fonction .ss-mois b{display:none}.ecran-fonction .ss-tete .ef-bt{width:100%;justify-content:center}}
+@container (max-width:519px){.ecran-fonction .ss-cartes{grid-template-columns:minmax(0,1fr)}.ecran-fonction .ss-c-joue{order:-1}.ecran-fonction .ss-mois b{display:none}.ecran-fonction .ss-tete .ef-bt{width:100%;justify-content:center}}
 @container (min-width:520px){.ecran-fonction .ss-mois i{display:none}}
 </style>
 
@@ -47,7 +47,7 @@
 <span class="ef-bt ef-pri">Ouvrir la saison suivante</span>
 </div>
 
-<div class="ef-alerte ef-succes">« Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants. Le tunnel d’inscription écrit désormais dedans.</div>
+<div class="ef-alerte ef-succes">« Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants. Les inscriptions s’y enregistrent désormais.</div>
 
 <div class="ss-frise">
 <div class="ss-grille">
