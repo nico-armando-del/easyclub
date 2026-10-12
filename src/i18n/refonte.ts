@@ -46,11 +46,11 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       groupe: 'What the scene shows',
       tableau: 'The club’s dashboard: €28,640 collected out of €40,395 expected, the rest upcoming or late. Fictitious amounts.',
       relance: {
-        asso: 'Demo Volley Club', quand: 'now', objet: '€110 overdue',
+        asso: 'Your club', quand: 'now', objet: '€110 overdue',
         texte: 'Hello Sophie, €110 is missing on Léa’s registration: the 28 September 2026 instalment has not arrived.',
         aria: 'The reminder the family receives: Demo Volley Club, €110 overdue. Fictitious data.',
       },
-      temps: { avant: 'of admin per season', rendu: 'given back to the board', note: `Estimate for ${N} members, not a study.`, lien: 'The calculation' },
+      temps: { avant: 'of admin per season', rendu: 'given back to the board', part: 'that’s 80–90% less admin', note: `Estimate for ${N} members, not a study.`, lien: 'The calculation' },
       pause: 'Pause', reprise: 'Play the animation',
       sports: { liste: [{ texte: 'Football' }, { texte: 'basketball' }, { texte: 'volleyball' }, { texte: 'handball' }, { texte: 'judo' }, { texte: 'tennis' }], aussi: 'and music and drama too.' },
     },
@@ -83,7 +83,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       tableau: 'The club’s dashboard: €28,640 collected out of €40,395 expected, the rest upcoming or late. Fictitious amounts.',
       pieces: {
-        asso: 'Demo Volley Club', titre: 'Documents', sous: 'Season 2026–2027 · sent by photo by families',
+        asso: 'Your club', titre: 'Documents', sous: 'Season 2026–2027 · sent by photo by families',
         lignes: [
           { nom: 'Léa Martin', detail: 'Medical certificate', statut: 'Accepted', ton: 'ok' },
           { nom: 'Hugo Roux', detail: 'Health declaration', statut: 'To check', ton: 'neutre' },
@@ -100,7 +100,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
     ecrans: {
       tableau: {
         famille: 'Collect', titre: '', texte: '', lien: '/fonctionnalites/suivi-des-paiements', lienNom: 'Payment tracking', legende: '',
-        asso: 'Demo Volley Club', ecranTitre: 'Home', ecranSous: 'Season 2026–2027 · in progress',
+        asso: 'Your club', ecranTitre: 'Home', ecranSous: 'Season 2026–2027 · in progress',
         lignes: [
           { nom: 'Collected', detail: 'out of €40,395 expected', statut: '€28,640', ton: 'ok' },
           { nom: 'Upcoming', detail: 'scheduled instalments', statut: '€9,870', ton: 'neutre' },
@@ -110,22 +110,22 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       convocations: {
         famille: 'Organise', titre: 'Families answer present or absent from the email, with no account.', texte: '', lien: '/fonctionnalites/convocations', lienNom: 'Online call-ups', legende: '',
-        asso: 'Demo Volley Club', ecranTitre: 'Call-up: Saturday match', ecranSous: 'Under-15 girls · answers from the email',
+        asso: 'Your club', ecranTitre: 'Match · Saturday 17 October, 2 pm', ecranSous: 'U13 · 11 present · 2 absent · 1 no answer',
         lignes: [
-          { nom: 'Léa', detail: 'Outside hitter', statut: 'Present', ton: 'ok' },
-          { nom: 'Inès', detail: 'Setter', statut: 'Present', ton: 'ok' },
-          { nom: 'Chloé', detail: 'Middle blocker', statut: 'Absent', ton: 'ko' },
-          { nom: 'Maëlys', detail: 'Libero', statut: 'Not answered yet', ton: 'neutre' },
+          { nom: 'Nathan Bernard', statut: 'Present', ton: 'ok' },
+          { nom: 'Hugo Arnaud', statut: 'Absent', ton: 'ko' },
+          { nom: 'Enzo Garcia', statut: 'No answer', ton: 'neutre' },
+          { nom: 'Malo Chevalier', statut: 'Present', ton: 'ok' },
         ],
-        pied: { libelle: 'Answered', valeur: '9 of 10' }, bouton: 'Make the line-up',
+        bouton: 'Pick the match line-up',
       },
       site: {
         famille: 'Show', titre: 'The club website stays up to date, with no web agency.', texte: '', lien: '/fonctionnalites/site-association', lienNom: 'Association website', legende: '',
-        asso: 'Demo Volley Club', ecranTitre: 'Club website', ecranSous: 'Teams, calendar and registrations come from OnClub',
+        asso: 'Your club', ecranTitre: 'Club website', ecranSous: 'Schedule, prices and places come from OnClub',
         lignes: [
-          { nom: 'Teams', detail: 'from OnClub', statut: 'Up to date', ton: 'ok' },
-          { nom: 'Calendar', detail: 'Saturday matches', statut: 'Up to date', ton: 'ok' },
-          { nom: 'Under-15 girls', detail: 'Registrations', statut: 'Full', ton: 'neutre' },
+          { nom: 'Courses and teams', detail: 'from OnClub', statut: 'Up to date', ton: 'ok' },
+          { nom: 'Prices and places', detail: 'read from registrations', statut: 'Up to date', ton: 'ok' },
+          { nom: 'U13', detail: 'Registrations', statut: 'Full', ton: 'neutre' },
         ],
         bouton: 'Publish',
       },
@@ -140,7 +140,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
     onglets: { titre: 'Watch it run', libelles: ['Next season', 'Match line-up', 'Call-ups', 'Club website'], legende: 'Names and amounts are fictitious.', pause: 'Pause', reprise: 'Play the animation' },
     vitrine: {
       titre: 'The club website, plugged into OnClub',
-      phrase: 'Teams, calendar and registrations come from OnClub. A full class shows as full, without anyone updating it.',
+      phrase: 'Classes, prices, places and registrations come from OnClub. A full class shows as full, without anyone updating it.',
       legende: 'Two demonstration clubs, invented to show what your association can have.',
       mots: { aria: 'Demonstration club websites', site: 'demonstration website', credit: 'Club photos: Freepik', onglets: { volta: 'Volta Volley Club · volleyball', montclar: 'AS Montclar · football' } },
       lien: 'The association website, from Pro',
@@ -183,11 +183,11 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       groupe: 'Lo que muestra la escena',
       tableau: 'El panel del club: 28.640 € cobrados de 40.395 € esperados, el resto pendiente o atrasado. Importes ficticios.',
       relance: {
-        asso: 'Club de Vóley Demo', quand: 'ahora', objet: '110 € de pago atrasado',
+        asso: 'Tu club', quand: 'ahora', objet: '110 € de pago atrasado',
         texte: 'Hola Sophie, faltan 110 € en la inscripción de Léa: el plazo del 28 de septiembre de 2026 no ha llegado.',
         aria: 'El recordatorio que recibe la familia: Club de Vóley Demo, 110 € de pago atrasado. Datos ficticios.',
       },
-      temps: { avant: 'de papeleo por temporada', rendu: 'recuperadas por la directiva', note: `Estimación para ${N} socios, no un estudio.`, lien: 'El cálculo' },
+      temps: { avant: 'de papeleo por temporada', rendu: 'recuperadas por la directiva', part: 'es decir, un 80 a 90 % menos de papeleo', note: `Estimación para ${N} socios, no un estudio.`, lien: 'El cálculo' },
       pause: 'Pausar', reprise: 'Reanudar la animación',
       sports: { liste: [{ texte: 'Fútbol' }, { texte: 'baloncesto' }, { texte: 'voleibol' }, { texte: 'balonmano' }, { texte: 'judo' }, { texte: 'tenis' }], aussi: 'y también la música y el teatro.' },
     },
@@ -220,7 +220,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       tableau: 'El panel del club: 28.640 € cobrados de 40.395 € esperados, el resto pendiente o atrasado. Importes ficticios.',
       pieces: {
-        asso: 'Club de Vóley Demo', titre: 'Justificantes', sous: 'Temporada 2026-2027 · enviados en foto por las familias',
+        asso: 'Tu club', titre: 'Justificantes', sous: 'Temporada 2026-2027 · enviados en foto por las familias',
         lignes: [
           { nom: 'Léa Martin', detail: 'Certificado médico', statut: 'Aceptado', ton: 'ok' },
           { nom: 'Hugo Roux', detail: 'Declaración de salud', statut: 'Por revisar', ton: 'neutre' },
@@ -237,7 +237,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
     ecrans: {
       tableau: {
         famille: 'Cobrar', titre: '', texte: '', lien: '/fonctionnalites/suivi-des-paiements', lienNom: 'Seguimiento de pagos', legende: '',
-        asso: 'Club de Vóley Demo', ecranTitre: 'Inicio', ecranSous: 'Temporada 2026-2027 · en curso',
+        asso: 'Tu club', ecranTitre: 'Inicio', ecranSous: 'Temporada 2026-2027 · en curso',
         lignes: [
           { nom: 'Cobrado', detail: 'de 40.395 € esperados', statut: '28.640 €', ton: 'ok' },
           { nom: 'Pendiente', detail: 'plazos programados', statut: '9.870 €', ton: 'neutre' },
@@ -247,22 +247,22 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       convocations: {
         famille: 'Organizar', titre: 'La familia responde presente o ausente desde el correo, sin cuenta.', texte: '', lien: '/fonctionnalites/convocations', lienNom: 'Convocatorias en línea', legende: '',
-        asso: 'Club de Vóley Demo', ecranTitre: 'Convocatoria: partido del sábado', ecranSous: 'Sub-15 femenino · respuestas desde el correo',
+        asso: 'Tu club', ecranTitre: 'Partido · sábado 17 de octubre, 14 h', ecranSous: 'Sub-13 · 11 presentes · 2 ausentes · 1 sin respuesta',
         lignes: [
-          { nom: 'Léa', detail: 'Receptora-atacante', statut: 'Presente', ton: 'ok' },
-          { nom: 'Inès', detail: 'Colocadora', statut: 'Presente', ton: 'ok' },
-          { nom: 'Chloé', detail: 'Central', statut: 'Ausente', ton: 'ko' },
-          { nom: 'Maëlys', detail: 'Líbero', statut: 'Sin respuesta', ton: 'neutre' },
+          { nom: 'Nathan Bernard', statut: 'Presente', ton: 'ok' },
+          { nom: 'Hugo Arnaud', statut: 'Ausente', ton: 'ko' },
+          { nom: 'Enzo Garcia', statut: 'Sin respuesta', ton: 'neutre' },
+          { nom: 'Malo Chevalier', statut: 'Presente', ton: 'ok' },
         ],
-        pied: { libelle: 'Respuestas', valeur: '9 de 10' }, bouton: 'Hacer la alineación',
+        bouton: 'Componer el partido',
       },
       site: {
         famille: 'Mostrar', titre: 'La web del club se mantiene al día, sin agencia.', texte: '', lien: '/fonctionnalites/site-association', lienNom: 'Web de la asociación', legende: '',
-        asso: 'Club de Vóley Demo', ecranTitre: 'Web del club', ecranSous: 'Equipos, agenda e inscripciones vienen de OnClub',
+        asso: 'Tu club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnClub',
         lignes: [
-          { nom: 'Equipos', detail: 'desde OnClub', statut: 'Al día', ton: 'ok' },
-          { nom: 'Agenda', detail: 'partidos del sábado', statut: 'Al día', ton: 'ok' },
-          { nom: 'Sub-15 femenino', detail: 'Inscripciones', statut: 'Completo', ton: 'neutre' },
+          { nom: 'Cursos y equipos', detail: 'desde OnClub', statut: 'Al día', ton: 'ok' },
+          { nom: 'Precios y plazas', detail: 'leídos de las inscripciones', statut: 'Al día', ton: 'ok' },
+          { nom: 'Sub-13', detail: 'Inscripciones', statut: 'Completo', ton: 'neutre' },
         ],
         bouton: 'Publicar',
       },
@@ -277,7 +277,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
     onglets: { titre: 'Míralo funcionar', libelles: ['Próxima temporada', 'Alineación del partido', 'Convocatorias', 'Web del club'], legende: 'Nombres e importes ficticios.', pause: 'Pausar', reprise: 'Reanudar la animación' },
     vitrine: {
       titre: 'La web del club, conectada a OnClub',
-      phrase: 'Equipos, agenda e inscripciones vienen de OnClub. Una clase completa aparece completa, sin que nadie la actualice.',
+      phrase: 'Los cursos, los precios, las plazas y las inscripciones vienen de OnClub. Una clase completa aparece completa, sin que nadie la actualice.',
       legende: 'Dos clubes de demostración, inventados para mostrar lo que tu asociación puede tener.',
       mots: { aria: 'Webs de clubes de demostración', site: 'web de demostración', credit: 'Fotos de los clubes: Freepik', onglets: { volta: 'Volta Volley Club · voleibol', montclar: 'AS Montclar · fútbol' } },
       lien: 'La web de la asociación, desde Pro',

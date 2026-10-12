@@ -12,7 +12,7 @@ import BlocTemps from '../components/BlocTemps.astro'
 import Repli from '../components/Repli.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
-import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES_OFFRES, duree } from '../data/temps'
+import { TACHES, CINQ_TACHES, TOTAL, HYPOTHESES_OFFRES, PART_RENDUE, duree } from '../data/temps'
 import { INJEP, OFFRES, PHRASE_BUT } from '../data/site'
 
 const fil = [{ nom: 'Le temps gagné', url: '/temps-gagne' }]
@@ -31,6 +31,7 @@ const faq = [
 >
   <HerosCompact fil={fil} surtitre="Le temps gagné" titre="Combien de temps votre association va gagner ?">
     <p class="chiffre num"><span>{TOTAL.avant}<span class="sr"> aujourd’hui,</span></span><span class="fleche" aria-hidden="true">→</span><span class="apres"><span class="sr">environ </span>{TOTAL.apres}<span class="sr"> avec OnClub</span></span></p>
+    <p class="chiffre-part">{PART_RENDUE.fr} de l’administratif en moins</p>
     <p class="chiffre-note">Par saison, pour 250 adhérents. Estimation OnClub, pas une étude.</p>
     <div class="hc-actions-temps"><a class="btn btn-encre" href="/demo">Demander une démo</a></div>
   </HerosCompact>
@@ -139,4 +140,5 @@ const faq = [
 .injep-chiffre{display:block;font-size:clamp(4rem,3rem + 4vw,6.5rem);line-height:1;color:var(--menthe);margin-bottom:8px}
 .injep .note a{color:var(--blanc)}
 .injep-phrase{font:700 clamp(1.25rem,1.1rem + .6vw,1.625rem)/1.3 var(--f-titre);color:var(--menthe)}
+.chiffre-part{margin-top:10px;font:700 1.25rem/1.25 var(--f-titre);color:var(--sapin)}
 </style>

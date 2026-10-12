@@ -24,14 +24,14 @@
 import EcranAnime from './EcranAnime.astro'
 import EcranFige from './EcranFige.astro'
 import VersFr from './langue/VersFr.astro'
-import { TOTAL, ADHERENTS_REFERENCE } from '../data/temps'
+import { TOTAL, ADHERENTS_REFERENCE, PART_RENDUE } from '../data/temps'
 
 export type TextesScene = {
   legendes: [{ titre: string; phrase: string }, { titre: string; phrase: string }, { titre: string; phrase: string }]
   groupe: string
   tableau: string
   relance: { asso: string; quand: string; objet: string; texte: string; aria: string }
-  temps: { avant: string; rendu: string; note: string; lien: string }
+  temps: { avant: string; rendu: string; part?: string; note: string; lien: string }
   pause: string
   reprise: string
   /** La ligne des sports sous le titre : les clubs de sport d'abord (Nico, 10 oct., 14 h 22). */
@@ -40,7 +40,7 @@ export type TextesScene = {
 
 const FR: TextesScene = {
   legendes: [
-    { titre: 'La famille s’inscrit', phrase: 'Depuis son téléphone : chaque enfant, son équipe ou son cours, la cotisation en une ou plusieurs fois.' },
+    { titre: 'La famille s’inscrit', phrase: 'Depuis son téléphone : chaque enfant, son équipe ou son cours, la cotisation par carte, ou étalée.' },
     { titre: 'Le trésorier voit tout', phrase: 'Ce qui est encaissé, à venir ou en retard, sans tableur à tenir.' },
     { titre: 'Un retard, une relance', phrase: 'Le message est prêt : vous le relisez, il part d’un clic.' },
   ],
@@ -50,12 +50,13 @@ const FR: TextesScene = {
     asso: 'Volley Club Démo',
     quand: 'maintenant',
     objet: '110 € en retard de règlement',
-    texte: 'Bonjour Sophie, il manque 110 € sur l’inscription de Léa : la tranche du 28 septembre 2026 n’est pas arrivée.',
+    texte: 'Bonjour Sophie, il manque 110 € sur l’inscription de Léna : la tranche du 28 septembre 2026 n’est pas arrivée.',
     aria: 'La relance reçue par la famille : Volley Club Démo, 110 euros en retard de règlement. Données fictives.',
   },
   temps: {
     avant: 'd’administratif par saison',
     rendu: 'rendues au bureau',
+    part: `soit ${PART_RENDUE.fr} de l’administratif en moins`,
     note: `Estimation pour ${ADHERENTS_REFERENCE} adhérents, pas une étude.`,
     lien: 'Le calcul',
   },
@@ -145,6 +146,7 @@ const sigle = t.relance.asso.split(/\s+/).filter((m) => m.length > 3 || /^[A-Z]/
         <div class="c-in temps">
           <p class="t-avant"><b>{TOTAL.avant}&nbsp;→ {TOTAL.apres}</b> {fine(t.temps.avant)}</p>
           <p class="t-gros"><b class="num">{TOTAL.gain}</b><span>{t.temps.rendu}</span></p>
+          {t.temps.part && <p class="t-part">{fine(t.temps.part)}</p>}
           <span class="t-barre" aria-hidden="true"><i></i></span>
           <p class="t-note">{fine(t.temps.note)} <a href={lienCalcul}>{t.temps.lien}</a></p>
         </div>
@@ -309,6 +311,7 @@ h1{font-size:clamp(2.125rem,1.15rem + 4.4vw,4.6875rem);line-height:1;font-weight
 .t-gros span{font:700 .9375rem/1.2 var(--f-titre)}
 .t-barre{display:block;height:6px;margin-top:10px;background:#E7E2D6;border-radius:999px;overflow:hidden}
 .t-barre i{display:block;height:100%;width:92%;background:var(--menthe);border-radius:inherit}
+.t-part{margin-top:6px;font:700 .9375rem/1.25 var(--f-titre);color:var(--encre)}
 .t-note{margin-top:8px;font-size:.8125rem;line-height:1.35;color:var(--gris)}
 .t-note a{display:inline-block;padding-block:4px;font-weight:700;color:var(--encre)}
 @media (min-width:760px){.temps{padding:18px 20px}.t-gros b{font-size:3.5rem}.t-gros span{font-size:1.0625rem}.t-avant{font-size:.875rem}}

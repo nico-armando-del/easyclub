@@ -41,7 +41,7 @@ export const TACHES = {
     tache: 'Suivre les paiements dans un tableur',
     calcul: '250 dossiers × 3 min',
     avantMin: 750, apresMin: 60, gainMin: 690,
-    comment: 'le tableau de bord le tient à jour',
+    comment: 'la carte s’y inscrit seule, le chèque se note au dossier',
     offre: 'mini', proportionnelle: true,
   },
   relances: {
@@ -108,6 +108,8 @@ export const CLES_TEMPS = Object.keys(TACHES) as [CleTemps, ...CleTemps[]]
 /** Les cinq tâches de l'estimation principale (66 h → 5 h). */
 export const CINQ_TACHES: CleTemps[] = ['fiches', 'paiements', 'relances', 'pieces', 'rentree']
 
+/* Décision de Nico (12 oct. 2026) : la part rendue se dit « 80 à 90 % », arrondi prudent (le calcul détaillé donne 61 h sur 66 h). */
+export const PART_RENDUE = { fr: '80 à 90 %', en: '80–90%', es: '80 a 90 %' }
 export const TOTAL = { avant: '66 h', apres: '5 h', gain: '61 h', avantMin: 3970, apresMin: 310 }
 
 export const HYPOTHESES =
