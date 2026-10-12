@@ -51,6 +51,7 @@ temps:                       # OBLIGATOIRE : la ligne du temps gagné, sous le h
 # temps:
 #   geste: "La famille répond depuis le mail, en un clic."
 ecran: inscription           # facultatif : inscription | reinscription | relance | site | boutique | terrain | cluby
+ecranFonction: true          # facultatif, PRIORITAIRE : l'écran fixe de src/ecrans/fonctions/<nom de la page>.html (ou un nom de fichier)
 maj: 2026-10-09              # date de la dernière mise à jour du contenu
 faq:                         # facultatif, 8 au plus ; affichée ET balisée en JSON-LD
   - question: "10 à 160 caractères, une vraie question"
@@ -169,7 +170,9 @@ Une pièce manquante n'empêche ni l'inscription ni le paiement.
 - `Cadre` : l'écran en grand, `type` fenetre, telephone ou panneau ; `fond` menthe, lilas, encre ou papier ; une seule ligne de légende sous le cadre.
 - `MiniEcran` : `association="Votre club"`, « Votre école », « Votre compagnie »… jamais un nom réel, jamais le mot « exemple ». La légende dit ce qu'on voit, puis « Noms et montants fictifs. ».
 
-Écrans animés disponibles (repris de /presentation, données fictives, sans étiquette) : `inscription`, `reinscription`, `relance`, `site`, `boutique`, `terrain`, `cluby`. **Chaque page de fonctionnalité, de sport, d'activité et de profil montre au moins un écran** (champ `ecran` ou `<EcranAnime>`).
+Écrans animés disponibles (repris de /presentation, données fictives, sans étiquette) : `inscription`, `reinscription`, `relance`, `site`, `boutique`, `terrain`, `cluby`. **Chaque page de fonctionnalité, de sport, d'activité et de profil montre au moins un écran** (champ `ecranFonction` ou `ecran`, `<EcranFonction>` ou `<EcranAnime>`).
+
+Écrans par fonctionnalité (`src/ecrans/fonctions/<nom>.html`, composant `EcranFonction`) : l'écran FIXE de cette fonctionnalité, fidèle au vrai produit (mêmes libellés, colonnes, états), données fictives. Champ `ecranFonction: true` : il remplace l'écran de famille, au même endroit. Dans le texte : `<EcranFonction nom="liste-attente-famille" legende="Ce qu'on voit. Noms et montants fictifs." />`. Comment en écrire un : réglages en tête de `src/lib/ecransFonction.ts`, modèle `liste-attente.html`.
 
 ## 6. Longueur et forme
 

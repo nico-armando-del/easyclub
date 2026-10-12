@@ -10,22 +10,63 @@ titre: "Une cotisation en retard se relance d’un bouton"
 chapo: "Fini de courir après les parents. La relance s’écrit avec le bon montant : vous la relisez, elle part."
 temps:
   cles: [relances]
-ecran: relance
+ecranFonction: true
+fonctionnalites: [suivi-des-paiements, paiement-en-ligne, messages-familles]
 profils: [tresorier]
 comparatifs: [tableur-excel]
-maj: 2026-10-09
+articles: [relancer-sans-se-facher]
+maj: 2026-10-10
+faq:
+  - question: "Que reçoit la famille relancée ?"
+    reponse: "Un mail au nom du club : la somme en retard ou restant à régler, le lien vers son dossier, et la possibilité de régler auprès du club. Il se termine par une phrase pour la famille qui a déjà payé : le message n’a alors plus lieu d’être."
+  - question: "Peut-on relancer toute une équipe d’un coup ?"
+    reponse: "Oui. Filtrez l’équipe dans la liste des inscriptions, sélectionnez les familles, puis « Relancer la sélection ». Le plan nomme chaque famille, son adresse et la somme réclamée, et rien ne part avant « Confirmer l’envoi ». Une relance groupée compte 50 dossiers au plus."
+  - question: "OnClub relance-t-il les familles à ma place ?"
+    reponse: "Non. Chaque relance part d’un geste du bureau, après relecture. Un dossier peut aussi être mis en réserve, avec un motif : la famille ne reçoit alors plus aucune relance, ni depuis sa fiche ni depuis une sélection."
+  - question: "Et la famille qui a payé par chèque ?"
+    reponse: "Notez le chèque dans le dossier avec « Encaisser un chèque » : la famille sort des impayées. OnClub ne peut pas savoir qu’un chèque est arrivé au bureau sans être saisi, et le rappelle avant chaque relance groupée."
 ---
 
 ## Qui doit quoi, sans chercher
 
-Encaissé, à venir, en retard, rien versé : le tableau de bord dit, sans chercher, qui doit quoi. Un dossier en retard ressort de lui-même.
+L’accueil du tableau de bord montre l’argent de la saison : ce qui est encaissé sur ce qui est attendu, puis deux lignes qui mènent droit aux dossiers.
 
-## Une relance relue, puis envoyée d’un bouton
+- **« 3 familles en retard de paiement · 330 € »** : une échéance est dépassée.
+- **« 4 dossiers sans aucun versement · 1 520 € »** : rien n’est encore entré.
+- **Les échéances à venir**, à encaisser à la main, à leur date.
 
-- **Relancer la famille** : le mail s’écrit tout seul, avec le bon montant et le bon lien de paiement.
-- **Relancer l’équipe** ou le groupe entier d’un coup, quand plusieurs familles sont en retard.
-- Vous voyez **l’aperçu avant l’envoi**. Rien ne part sans vous.
+Dans la liste des inscriptions, l’onglet « Impayées » rassemble les retards. Le détail est dans le [suivi des paiements](/fonctionnalites/suivi-des-paiements).
 
-## Les dimanches soir ne servent plus aux relances
+## Une famille : le message relu, puis envoyé
 
-Le trésorier ne passe plus ses dimanches soir à écrire le même message quarante fois. Et la relance part au bon moment, pas trois semaines trop tard parce que personne n’avait le temps.
+Sur la fiche du dossier, « Relancer la famille » ouvre le message tel qu’il partira, au-dessus de deux boutons.
+
+- **L’adresse exacte** du responsable, et l’objet du mail.
+- **Le bon montant** : la tranche en retard, et le reste dû si d’autres échéances suivent.
+- **Le lien vers son dossier**, et la possibilité de régler auprès du club.
+- **« Envoyer ce message »** : rien ne part avant.
+
+Le message finit par une phrase pour la famille qui vient de payer : « Si votre règlement est déjà parti, ce message n’a plus lieu d’être ». Un chèque glissé dans la boîte du club ne fâche personne.
+
+## Une équipe : un plan d’envoi, puis une confirmation
+
+Le lundi qui suit la date d’échéance, le trésorier du club de football filtre l’équipe U13, coche les familles en retard, puis « Relancer la sélection ».
+
+<EcranFonction nom="relance-un-clic-equipe" legende="La relance d’une équipe : trois familles cochées, et le plan de ce qui part. Noms et montants fictifs." />
+
+Le plan nomme chaque famille, son adresse exacte et ce que le message réclame. « Confirmer l’envoi » : un message par famille, jamais un par enfant, et 50 dossiers au plus par envoi.
+
+## Le bureau garde la main
+
+- **Rien ne part tout seul** : chaque relance est un geste du bureau, après relecture.
+- **Mettre le dossier en réserve**, avec un motif obligatoire : plus aucune relance ne part vers cette famille, le temps d’un arrangement.
+- **Encaisser un chèque** dès qu’il arrive : la famille sort des impayées, et la relance suivante ne la vise plus.
+
+Pour un message libre à toutes les familles qui doivent encore de l’argent, les [messages aux familles](/fonctionnalites/messages-familles) de l’offre Pro prennent le relais.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Faire payer une échéance en retard depuis le lien** : le dossier ne se paie par carte qu’en une fois, sans rien de versé. En plusieurs fois, la famille règle avec le club.
+- **Montrer le texte de chaque mail dans une relance groupée** : le plan dit qui reçoit quoi, pas le message.
+- **Relancer plus de 50 dossiers d’un coup**.
+- **Savoir qu’un chèque est arrivé** tant qu’il n’est pas saisi dans le dossier.

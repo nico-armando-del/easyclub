@@ -7,24 +7,71 @@ ordre: 1
 titreSeo: "Préparer la saison suivante de l’association | OnClub"
 description: "Ouvrez la saison suivante en reprenant vos cours, vos tarifs et vos encadrants : il ne reste qu’à ajuster, au lieu de refaire toute la rentrée."
 titre: "La saison suivante s’ouvre sans tout refaire"
-chapo: "Chaque rentrée se refait de zéro : groupes, créneaux, places. Avec OnClub, la saison suivante reprend la précédente ; vous n’ajustez que ce qui change."
+chapo: "Chaque rentrée se refait de zéro : équipes, créneaux, places. Ici, la saison suivante reprend vos équipes, vos tarifs et vos encadrants ; vous corrigez ce qui change."
 temps:
   cles: [rentree]
+ecranFonction: true
 sports: [football]
-maj: 2026-10-09
+fonctionnalites: [reinscriptions, liste-attente, espace-encadrant]
+guides: [rentree-association]
+maj: 2026-10-10
+faq:
+  - question: "Les inscriptions de l’an dernier sont-elles recopiées ?"
+    reponse: "Non, et c’est voulu. La saison neuve part vide : ce sont les réinscriptions des anciens, puis les inscriptions ouvertes à tous, qui la remplissent. L’an dernier reste consultable, en lecture seule une fois fermé."
+  - question: "Les années de naissance des équipes avancent-elles toutes seules ?"
+    reponse: "Pas encore. Les bornes sont recopiées telles quelles : une équipe U11 « 2016-2017 » reste « 2016-2017 » dans la saison neuve. Vous la passez en « 2017-2018 », équipe par équipe."
+  - question: "Peut-on préparer la saison prochaine pendant que l’actuelle se joue ?"
+    reponse: "Oui. Les deux saisons vivent côte à côte : l’une « se joue », avec ses paiements et ses convocations, l’autre « se prépare », avec ses réinscriptions. Chaque écran dit de laquelle il parle."
+  - question: "Quelle offre faut-il ?"
+    reponse: "Ouvrir, modifier et fermer une saison demandent l’offre Pro. En Mini, l’écran Saisons se consulte quand même : chaque année avec ses joueurs, ses dossiers et son bilan."
 ---
 
 ## Aujourd’hui, le tableur de l’an dernier recopié
 
-En juin, on rouvre le tableur de l’an dernier, on copie les onglets, on change les années, on oublie un tarif. En septembre, on découvre l’erreur.
+En juin, on rouvre le tableur de l’an dernier, on copie les onglets, on oublie un tarif. En septembre, une famille paie l’ancien prix, et personne ne sait plus quel créneau est le bon.
 
-## Tout est repris, vous ajustez
+## Un bouton, et l’année prochaine existe
 
-- Vous **ouvrez la saison suivante** : vos cours, vos équipes, vos tarifs et vos encadrants sont **repris**.
-- Vous **ajustez** ce qui change : un créneau, un prix, un groupe en plus.
-- Les groupes sont bornés par **année de naissance**, jamais par l’âge du jour : à la réinscription, seuls les groupes ouverts à son année sont proposés.
-- Les anciens se réinscrivent d’abord, puis l’inscription s’ouvre au public.
+Dans l’écran Saisons, le bureau touche « Ouvrir la saison suivante ». Le formulaire arrive rempli : le nom de la saison, l’année de rentrée, le premier et le dernier jour. Puis « Ouvrir cette saison ».
 
-## Deux saisons à la fois
+L’écran confirme : « Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants.
 
-La saison qui se joue continue pendant que la suivante se prépare : les paiements en cours, les convocations du week-end, et à côté les réinscriptions de l’an prochain.
+<Repli titre="Ce qui est repris">
+
+- **Chaque équipe ou cours** : son nom, sa discipline, son niveau, ses années de naissance, sa salle, ses créneaux, ses places et son tarif.
+- **Ses réglages** : ouvert ou fermé, réservé aux anciens ou non, sa description.
+- **Ses encadrants** : ceux qui l’encadrent encore la suivent dans la saison neuve. Le 1er septembre, leur page d’équipe est prête.
+
+</Repli>
+
+Vous corrigez ensuite ce qui change, équipe par équipe : un créneau, un prix, une équipe en plus. Aucune inscription n’est recopiée : la saison neuve part vide.
+
+## Les anciens d’abord, puis tout le monde
+
+La saison neuve se remplit par vagues. Les [réinscriptions](/fonctionnalites/reinscriptions) ouvrent d’abord aux anciens, puis l’inscription s’ouvre à tous. Une équipe réservée aux anciens le reste d’une année sur l’autre.
+
+Dans le formulaire, la famille ne voit que les équipes ouvertes à l’année de naissance de son enfant. Le bureau, lui, peut placer un joueur plus haut : la liste propose les « Autres équipes (surclassement) ».
+
+<Repli titre="L’encadrant garde ses joueurs">
+
+Tant que la saison qui se joue n’est pas fermée, l’[encadrant](/fonctionnalites/espace-encadrant) voit ses joueurs depuis son lien. Il choisit leur équipe de l’an prochain et leur réserve une place. Le bureau envoie ensuite à chaque famille son lien de réinscription.
+
+</Repli>
+
+## Deux saisons à la fois, sans les confondre
+
+Entre l’ouverture de la saison suivante et la fermeture de celle qui se joue, les deux vivent ensemble.
+
+L’écran Saisons les montre côte à côte : un trait plein pour celle qui se joue, un pointillé pour celle qui se prépare, du gris pour celles qui sont terminées.
+
+Chaque saison a sa carte : ses joueurs face à l’année d’avant, ses dossiers, l’argent encaissé sur l’attendu, la part des joueurs revus l’année suivante. « Bilan et dossiers » ouvre le détail, utile à l’assemblée générale. Une saison fermée se relit, sans se modifier.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Les années de naissance n’avancent pas d’un an.** Elles sont recopiées telles quelles : vous décalez chaque équipe à la main.
+- **Les événements ne sont pas repris** : un stage ou un gala a une date, il se recrée.
+- **Les places ajoutées en cours d’année ne sont pas reprises** : la saison neuve repart des places de l’équipe.
+- **L’équipe type n’est pas reprise.** La compo de chaque équipe est à refaire ; le numéro et le poste de chaque joueur, eux, le suivent.
+- **La saison neuve ne se remplit pas toute seule** : il faut ouvrir les réinscriptions.
+
+Quand une équipe de la saison neuve est complète, la [liste d’attente](/fonctionnalites/liste-attente) prend le relais.

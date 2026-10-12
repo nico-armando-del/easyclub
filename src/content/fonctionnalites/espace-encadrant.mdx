@@ -7,22 +7,75 @@ ordre: 2
 titreSeo: "Espace entraîneur et professeur sans compte | OnClub"
 description: "L’entraîneur ou le professeur ouvre sa page par un lien personnel, sans mot de passe : il fait l’appel sans voir l’adresse ni le téléphone des familles."
 titre: "L’encadrant a son espace, sans mot de passe"
-chapo: "L’encadrant n’a accès à rien, ou à tout, même aux coordonnées des familles. Avec OnClub, il a ce qu’il lui faut, par un lien."
+chapo: "L’entraîneur n’a accès à rien, ou à tout, jusqu’aux coordonnées des familles. Ici, le bureau lui transmet un lien : sa séance, son appel, ses convocations."
 temps:
-  geste: "L’encadrant ouvre son lien et fait l’appel en touchant les prénoms."
-maj: 2026-10-09
+  geste: "À l’entraînement, tout le monde arrive coché « Présent » : l’encadrant ne touche que les absents."
+ecranFonction: true
+sports: [football]
+fonctionnalites: [convocations, compo-du-match, saison-suivante]
+maj: 2026-10-10
+faq:
+  - question: "L’encadrant doit-il créer un compte ?"
+    reponse: "Non. Il ouvre sa page d’équipe par un lien personnel, sur son téléphone, sans mot de passe. Le même lien sert toute la saison ; le bureau peut le renouveler à tout moment."
+  - question: "Comment l’encadrant reçoit-il son lien ?"
+    reponse: "Par le bureau. Dans l’écran Intervenants, le bureau touche « Copier son lien d’équipe » sur la fiche de l’encadrant, puis le lui envoie lui-même, par message ou par mail. OnClub ne l’envoie pas."
+  - question: "Que voit l’encadrant des familles ?"
+    reponse: "Les prénoms et les noms de ses joueurs, les réponses aux convocations et son appel. Ni l’adresse, ni le téléphone, ni le dossier d’une famille."
+  - question: "Et si l’encadrant perd son téléphone ?"
+    reponse: "Le bureau touche « Renouveler son lien », puis confirme : les anciens liens ne s’ouvrent plus. Il copie le nouveau lien et le transmet à l’encadrant."
 ---
 
 ## Un lien, pas un compte
 
-Chaque encadrant, entraîneur ou professeur, reçoit un **lien personnel**. Il l’ouvre sur son téléphone, sans compte ni mot de passe à retenir.
+Dans l’écran Intervenants, le bureau touche « Copier son lien d’équipe » sur la fiche de l’entraîneur, puis le lui transmet lui-même. L’entraîneur l’ouvre sur son téléphone : ni compte, ni mot de passe.
 
-## La séance, l’appel et sa feuille de groupe
+Sa page ne montre que son équipe : les prénoms et les noms, les réponses aux convocations, son appel. Ni l’adresse ni le téléphone d’une famille.
 
-- La **prochaine séance**, tirée des créneaux de ses groupes.
-- **L’appel** : présent, absent, excusé, en touchant les prénoms.
-- Sa **feuille de groupe**, envoyée par mail quand le bureau a bouclé le planning, avec les prénoms et les noms seulement.
+<Repli titre="Le détail">
 
-## Ni l’adresse ni le téléphone d’une famille
+- **Un lien qui a fui**, un téléphone perdu : « Renouveler son lien », et les anciens ne s’ouvrent plus.
+- **Un encadrant qui s’en va** : le bureau le retire, et ses liens meurent avec.
+- **Sa feuille de groupe** : le bureau touche « Envoyer sa feuille » quand son planning est bouclé. L’encadrant reçoit par mail les prénoms et les noms de ses groupes. Le lien d’équipe, lui, se transmet à part.
 
-Ni l’adresse ni le téléphone d’une famille. Le bureau garde les données personnelles, l’encadrant garde son temps pour la séance.
+</Repli>
+
+## La séance du soir, en tête de page
+
+La page s’ouvre sur la prochaine séance, tirée des créneaux de ses équipes : « Ce soir », « 18 h 30 – 20 h », « U13 · Stade des Peupliers · 14 joueurs ».
+
+- **Le jour même**, un bouton « Faire l’appel ». Aucun mail ne part aux familles pour un entraînement.
+- **Les autres jours**, « Prévenir les familles » ouvre une convocation déjà remplie : le jour, l’heure et le lieu du créneau.
+
+## L’appel à trois boutons
+
+Chaque joueur a sa ligne et trois boutons : « Présent », « Absent », « Excusé ». L’appel part de ce que l’encadrant sait déjà :
+
+- **à un entraînement**, tout le monde arrive coché présent ;
+- **un absent annoncé** par sa famille arrive « excusé » ;
+- **à un match**, un joueur sans réponse reste à cocher.
+
+Le bouton compte en direct : « Enregistrer · 12 sur 14 ». Puis « Appel enregistré : 12 présents sur 14. » Au bureau, l’écran Effectifs signale l’enfant absent sans prévenir à trois des cinq derniers appels. Les absences excusées ne comptent pas.
+
+## Convoquer, composer, annuler
+
+Sous la séance, la carte de l’équipe porte tout le reste :
+
+- **« Convoquer l’équipe »** pour un match ou un entraînement : les familles répondent depuis leur mail. Voir les [convocations](/fonctionnalites/convocations).
+- **« Composer le match »**, depuis la convocation d’un match : la [compo](/fonctionnalites/compo-du-match) part des réponses.
+- **« Annuler ce rendez-vous »**, avec un mot : les familles convoquées sont prévenues par mail.
+- **« Équipe type sur le terrain »**, pour les sports au terrain dessiné.
+
+## En Pro : garder ses joueurs pour la saison prochaine
+
+Quand le bureau a ouvert la [saison suivante](/fonctionnalites/saison-suivante), une carte s’ajoute à la page, jusqu’à la fermeture de la saison qui se joue.
+
+L’encadrant y voit ses joueurs, chacun avec son état : « À réinscrire », « Place réservée », « Réinscrit », « En liste d’attente », « Ne revient pas ».
+
+Il choisit leur équipe de la saison prochaine et réserve leurs places. Le bureau envoie ensuite à chaque famille son lien de réinscription, l’équipe déjà choisie. Ouvrir la saison suivante demande l’offre Pro.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **OnClub n’envoie pas le lien à l’encadrant.** Le bureau le copie et le transmet lui-même.
+- **Pas de préparation de séance** : ni exercices, ni contenu d’entraînement.
+- **Pas de message aux seules familles silencieuses** : l’encadrant voit qui n’a pas répondu, sans leurs coordonnées.
+- **Pas d’application** à installer : c’est une page web, qui s’ouvre dans le navigateur du téléphone.

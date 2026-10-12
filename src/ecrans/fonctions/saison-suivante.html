@@ -1,0 +1,91 @@
+<div class="ef-vue" data-forme="fenetre" data-hauteur="600" data-description="L’écran Saisons du bureau d’un club de football, juste après l’ouverture de la saison suivante : un message vert dit que « Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants. Dessous, la frise des trois années et une carte par saison : 2027-2028 se prépare, vide ; 2026-2027 se joue, 212 joueurs et 168 dossiers, en hausse de 14 ; 2025-2026 est terminée, en lecture seule, avec 81 % de joueurs revus l’année suivante.">
+<style>
+.ecran-fonction .ss-tete{display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 16px;margin-bottom:14px}
+.ecran-fonction .ss-tete>div{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 280px}
+.ecran-fonction .ss-tete .ef-bt{flex:none}
+.ecran-fonction .ss-frise{margin:12px 0;padding:12px 16px;border:1px solid var(--ef-trait);border-radius:18px;background:#fff}
+.ecran-fonction .ss-grille{display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:12px}
+.ecran-fonction .ss-noms{display:flex;flex-direction:column;gap:12px;padding-top:24px;font-size:11.5px;font-weight:700}
+.ecran-fonction .ss-noms span{display:flex;align-items:center;gap:6px;height:14px;white-space:nowrap}
+.ecran-fonction .ss-noms i,.ecran-fonction .ss-pastille i{display:inline-block;flex:none;width:10px;height:10px;border-radius:50%}
+.ecran-fonction .ss-plein{background:#0E1116}
+.ecran-fonction .ss-tiret{border:1.5px dashed #0E1116}
+.ecran-fonction .ss-gris{background:#C9C6BC}
+.ecran-fonction .ss-fini{color:var(--ef-mu)}
+.ecran-fonction .ss-axe{position:relative;height:102px}
+.ecran-fonction .ss-mois{position:absolute;top:0;font-size:10.5px;font-weight:600;color:var(--ef-mu);white-space:nowrap}
+.ecran-fonction .ss-mois.ss-courant{color:#0E1116}
+.ecran-fonction .ss-seg{position:absolute;height:14px;border-radius:4px;box-sizing:border-box}
+.ecran-fonction .ss-seg.ss-s-plein{background:#0E1116}
+.ecran-fonction .ss-seg.ss-s-clair,.ecran-fonction .ss-seg.ss-s-gris{background:#D6D3CA}
+.ecran-fonction .ss-seg.ss-s-pointille{border:1.5px dashed #0E1116}
+.ecran-fonction .ss-seg.ss-s-contour{border:1.5px solid #0E1116}
+.ecran-fonction .ss-ici{position:absolute;top:16px;width:2px;height:88px;margin-left:-1px;border-radius:2px;background:var(--ef-vert)}
+.ecran-fonction .ss-cartes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ecran-fonction .ss-carte{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:#fff}
+.ecran-fonction .ss-c-joue{border:1.5px solid #0E1116}
+.ecran-fonction .ss-c-prepare{border:1.5px dashed #0E1116}
+.ecran-fonction .ss-c-fini{border:1px solid var(--ef-trait)}
+.ecran-fonction .ss-pastille{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:99px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.ecran-fonction .ss-p-joue{border:1.5px solid #0E1116}
+.ecran-fonction .ss-p-prepare{border:1.5px dashed #0E1116}
+.ecran-fonction .ss-p-fini{background:var(--ef-creux);color:var(--ef-mu)}
+.ecran-fonction .ss-dates{display:block;margin-top:4px;font-size:11.5px;color:var(--ef-mu)}
+.ecran-fonction .ss-chiffre{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px}
+.ecran-fonction .ss-chiffre b{font:800 22px/1.1 var(--ef-h1)}
+.ecran-fonction .ss-barre{display:flex;height:8px;border-radius:99px;overflow:hidden;background:#E4E1D8}
+.ecran-fonction .ss-barre span{background:#3DDC97}
+.ecran-fonction .ss-ok{color:var(--ef-ok);font-weight:700}
+.ecran-fonction .ss-bts{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:2px}
+@container (max-width:860px){.ecran-fonction .ss-cartes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container (max-width:519px){.ecran-fonction .ss-cartes{grid-template-columns:minmax(0,1fr)}.ecran-fonction .ss-mois b{display:none}.ecran-fonction .ss-tete .ef-bt{width:100%;justify-content:center}}
+@container (min-width:520px){.ecran-fonction .ss-mois i{display:none}}
+</style>
+
+<div class="ss-tete">
+<div><div class="ef-h1">Saisons</div><p class="ef-sous">2026-2027 se joue jusqu’au 30 juin · 2027-2028 se prépare · rentrée le 1er septembre · 3 saisons avec OnClub</p></div>
+<span class="ef-bt ef-pri">Ouvrir la saison suivante</span>
+</div>
+
+<div class="ef-alerte ef-succes">« Saison 2027 · 2028 » est ouverte, avec 18 cours repris de « Saison 2026 · 2027 » et leurs 9 encadrants. Le tunnel d’inscription écrit désormais dedans.</div>
+
+<div class="ss-frise">
+<div class="ss-grille">
+<div class="ss-noms"><span class="ss-fini"><i class="ss-gris"></i>2025-2026</span><span><i class="ss-plein"></i>2026-2027</span><span><i class="ss-tiret"></i>2027-2028</span></div>
+<div class="ss-axe">
+<span class="ss-mois" style="left:0%"><b>sept. 2025</b><i>2025</i></span>
+<span class="ss-mois ss-courant" style="left:35.3%"><b>sept. 2026</b><i>2026</i></span>
+<span class="ss-mois" style="left:70.6%"><b>sept. 2027</b><i>2027</i></span>
+<span class="ss-seg ss-s-gris" style="top:24px;left:0%;width:29.2%"></span>
+<span class="ss-seg ss-s-plein" style="top:50px;left:35.3%;width:25%"></span>
+<span class="ss-seg ss-s-clair" style="top:50px;left:60.3%;width:4.2%"></span>
+<span class="ss-seg ss-s-pointille" style="top:76px;left:60.3%;width:10.3%"></span>
+<span class="ss-seg ss-s-contour" style="top:76px;left:70.6%;width:29.3%"></span>
+<span class="ss-ici" style="left:60.3%"></span>
+</div>
+</div>
+</div>
+
+<div class="ss-cartes">
+<div class="ss-carte ss-c-prepare">
+<div><span class="ss-pastille ss-p-prepare"><i class="ss-tiret"></i>2027-2028 · se prépare</span><span class="ss-dates">1 septembre 2027 → 30 juin 2028</span></div>
+<div class="ss-chiffre"><b>0</b><span class="ef-p">joueurs · 0 dossier</span></div>
+<div class="ss-bts"><span class="ef-bt">Bilan et dossiers</span><span class="ef-bt ef-quiet">Modifier</span></div>
+</div>
+
+<div class="ss-carte ss-c-joue">
+<div><span class="ss-pastille ss-p-joue"><i class="ss-plein"></i>2026-2027 · se joue</span><span class="ss-dates">1 septembre 2026 → 30 juin 2027</span></div>
+<div class="ss-chiffre"><b>212</b><span class="ef-p">joueurs · 168 dossiers</span><b class="ef-p" style="font:700 12.5px var(--font-body)">▲ 14</b></div>
+<div><div class="ss-barre"><span style="width:96%"></span></div><p class="ef-mu" style="margin-top:5px"><span class="ss-ok">39 600&nbsp;€</span> sur 41 200&nbsp;€</p></div>
+<div class="ss-bts"><span class="ef-bt">Bilan et dossiers</span><span class="ef-bt ef-quiet">Modifier</span></div>
+</div>
+
+<div class="ss-carte ss-c-fini">
+<div><span class="ss-pastille ss-p-fini"><i class="ss-gris"></i>2025-2026 · terminée</span><span class="ss-dates">1 septembre 2025 → 30 juin 2026 · lecture seule</span></div>
+<div class="ss-chiffre"><b>198</b><span class="ef-p">joueurs · 157 dossiers</span></div>
+<div><div class="ss-barre"><span style="width:100%"></span></div><p class="ef-mu" style="margin-top:5px"><span class="ss-ok">37 800&nbsp;€</span> sur 37 800&nbsp;€</p></div>
+<p class="ef-p"><b style="color:#0E1116">81 %</b> revus l’année suivante, à ce jour</p>
+<div class="ss-bts"><span class="ef-bt">Bilan et dossiers</span><span class="ef-bt ef-quiet">Modifier</span></div>
+</div>
+</div>
+</div>

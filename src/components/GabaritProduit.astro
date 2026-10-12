@@ -25,6 +25,7 @@ import Layout from '../layouts/Layout.astro'
 import FilAriane from './FilAriane.astro'
 import BlocTemps from './BlocTemps.astro'
 import EcranAnime from './EcranAnime.astro'
+import EcranFonction from './EcranFonction.astro'
 import Faq from './Faq.astro'
 import VoirAussi from './VoirAussi.astro'
 import CaseVide from './CaseVide.astro'
@@ -43,6 +44,7 @@ import { photoDe } from '../data/photos'
 import { PAGES_VITRINE } from '../data/clubs'
 import { HUB, ETIQUETTE, url, type NomCollection } from '../lib/collections'
 import { NOM_OFFRE } from '../data/site'
+import { lireEcranFonction } from '../lib/ecransFonction'
 
 interface Props { collection: Exclude<NomCollection, 'guides' | 'articles'>; entree: any }
 const { collection, entree } = Astro.props
@@ -56,16 +58,25 @@ const fil = [HUB[collection], { nom: d.nom, url: chemin }]
   activité ou un profil montre au moins un écran. Sans champ `ecran`, une
   fonctionnalité prend l'écran de sa famille ; les autres doivent déclarer
   `ecran` ou poser <EcranAnime> ou <MiniEcran> dans le texte, sinon le build s'arrête.
+
+  L'ÉCRAN DE LA FONCTIONNALITÉ (champ `ecranFonction`) passe avant tout le reste :
+  l'écran fixe de src/ecrans/fonctions/<nom>.html, au même endroit et au même format
+  qu'un écran animé (téléphone dans le héros, fenêtre de bureau sous la ligne du temps).
+  L'écran de famille n'est qu'un repli, en attendant l'écran propre à la page.
 */
 const ECRAN_FAMILLE: Record<string, string> = { Inscrire: 'inscription', Encaisser: 'relance', Organiser: 'terrain', Communiquer: 'site', Vendre: 'boutique', Piloter: 'relance' }
-const ecran = d.ecran ?? (collection === 'fonctionnalites' ? ECRAN_FAMILLE[d.famille] : undefined)
-if (['fonctionnalites', 'sports', 'activites', 'profils'].includes(collection) && !ecran && !/<(EcranAnime|MiniEcran)\b/.test(entree.body ?? '')) {
-  throw new Error(`${collection}/${entree.id} : ajoutez un écran (champ « ecran », <EcranAnime> ou <MiniEcran> dans le texte). Voir REDIGER.md.`)
+const nomFonction: string | undefined = d.ecranFonction === true ? entree.id : d.ecranFonction
+const ecranFonction = nomFonction ? lireEcranFonction(nomFonction) : undefined
+const ecran: string | undefined = ecranFonction ? undefined : d.ecran ?? (collection === 'fonctionnalites' ? ECRAN_FAMILLE[d.famille] : undefined)
+if (['fonctionnalites', 'sports', 'activites', 'profils'].includes(collection) && !ecranFonction && !ecran && !/<(EcranAnime|EcranFonction|MiniEcran)\b/.test(entree.body ?? '')) {
+  throw new Error(`${collection}/${entree.id} : ajoutez un écran (champ « ecranFonction » ou « ecran », <EcranFonction>, <EcranAnime> ou <MiniEcran> dans le texte). Voir REDIGER.md.`)
 }
 
 const vitrine = collection === 'fonctionnalites' && PAGES_VITRINE.includes(entree.id)
 const TELEPHONES = ['inscription', 'terrain', 'boutique']
 const formeEcran = (nom?: string) => (nom && TELEPHONES.includes(nom) ? 'telephone' : 'fenetre')
+/* La forme du visuel principal : celle que déclare l'écran de la fonctionnalité, sinon celle de l'écran animé. */
+const forme = ecranFonction ? ecranFonction.forme : formeEcran(ecran)
 const photo = (collection === 'sports' || collection === 'activites') && photoDe(entree.id) ? entree.id : undefined
 type Heros = 'panneau' | 'sport' | 'activite' | 'vitrine' | 'seul'
 const heros: Heros = vitrine ? 'vitrine'
@@ -73,19 +84,21 @@ const heros: Heros = vitrine ? 'vitrine'
   ? 'seul'
   : collection === 'sports' && photo ? 'sport'
   : collection === 'activites' && photo ? 'activite'
-  : ecran && formeEcran(ecran) === 'telephone' ? 'panneau' : 'seul'
+  : (ecranFonction || ecran) && forme === 'telephone' ? 'panneau' : 'seul'
 /* L'écran de téléphone va dans le héros (panneau) ; sinon juste après la ligne du temps. */
-const ecranCorps = !vitrine && heros !== 'panneau' ? ecran : undefined
+const auCorps = !vitrine && heros !== 'panneau' && Boolean(ecranFonction || ecran)
+const ecranCorps = auCorps ? ecran : undefined
+const fonctionCorps = auCorps ? ecranFonction : undefined
 /* Un écran de bureau se montre en pleine largeur, jamais réduit à 6 px dans une colonne. */
-const ecranLarge = Boolean(ecranCorps) && formeEcran(ecranCorps) === 'fenetre'
+const ecranLarge = auCorps && forme === 'fenetre'
 
 const surtitre = collection === 'fonctionnalites' ? `${d.famille} · ${ETIQUETTE[collection]}` : ETIQUETTE[collection]
 const offre = collection === 'fonctionnalites' ? NOM_OFFRE[d.offre as 'mini' | 'pro' | 'max'] : undefined
 /* L'écran « terrain » (src/ecrans/, gelé) montre une compo de VOLLEY : le décor et le libellé
    « du samedi » sont réservés à la page du même sport, jamais au football ni au handball. */
-const SPORT_DE_L_ECRAN: Record<string, string> = { terrain: 'volley-ball' }
+const SPORT_DE_L_ECRAN: Record<string, string> = { terrain: 'volley' }
 const ecranDuSport = collection === 'sports' && !!ecranCorps && SPORT_DE_L_ECRAN[ecranCorps] === entree.id
-const lienEcran = ecranCorps ? { texte: ecranDuSport ? 'Voir l’écran du samedi' : 'Voir l’écran', href: '#ecran' } : undefined
+const lienEcran = auCorps ? { texte: ecranDuSport ? 'Voir l’écran du samedi' : 'Voir l’écran', href: '#ecran' } : undefined
 
 /* La fin de page : la phrase du récit pour quelques pages, sinon le titre par défaut de la case vide. */
 const FIN_DE_PAGE: Record<string, string> = {
@@ -109,9 +122,9 @@ const samedi = ecranDuSport && ecranCorps === 'terrain' && photoDe('terrain')
 const titreFin = FIN_DE_PAGE[`${collection}/${entree.id}`]
 /* Dès 1000 px, l'écran du corps se tient à droite du texte (collant) au lieu d'un bloc pleine
    largeur au-dessus : sauf si le texte porte déjà ses propres écrans (Idee). */
-const duo = Boolean(ecranCorps) && !ecranLarge && !/<Idee\b/.test(entree.body ?? '')
+const duo = auCorps && !ecranLarge && !/<Idee\b/.test(entree.body ?? '')
 const date = (x: Date) => x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-const composants = { BlocTemps, EcranAnime, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, Idee, Cadre }
+const composants = { BlocTemps, EcranAnime, EcranFonction, Encadre, TuileFonction, Calculateur, MiniEcran, Photo, Repli, Idee, Cadre }
 const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 ---
 <Layout titre={d.titreSeo} description={d.description} chemin={chemin} fil={fil} faq={d.faq}>
@@ -132,8 +145,8 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
       </div>
       {heros === 'vitrine' && <div class="gp-vitrine"><VitrineClubs variante="page" /></div>}
       {heros === 'panneau' && (
-        <figure class:list={['gp-panneau', `gp-ecran-${formeEcran(ecran)}`]}>
-          <EcranAnime nom={ecran} />
+        <figure class:list={['gp-panneau', `gp-ecran-${forme}`]}>
+          {ecranFonction ? <EcranFonction nom={ecranFonction.nom} nu /> : <EcranAnime nom={ecran!} />}
           <figcaption>Noms et montants fictifs.</figcaption>
         </figure>
       )}
@@ -147,13 +160,18 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
   <div class="enveloppe gp-corps">
     {frise.length > 0 && <FriseSaison etapes={frise} />}
     <div class:list={['gp-bloc', duo && 'gp-duo']}>
+      {fonctionCorps && (
+        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label="L’écran d’OnClub">
+          <Cadre type="panneau" fond="menthe" legende="Noms et montants fictifs."><EcranFonction nom={fonctionCorps.nom} nu /></Cadre>
+        </section>
+      )}
       {ecranCorps && (samedi ? (
         <section class="gp-visuel gp-samedi sur-encre" id="ecran" aria-label="L’écran du samedi">
           <div class="gp-samedi-photo"><Photo nom="terrain" tailles="(min-width: 1000px) 980px, 100vw" /></div>
           <figure class="gp-samedi-ecran"><EcranAnime nom={ecranCorps} sombre /><figcaption>Noms et montants fictifs.</figcaption></figure>
         </section>
       ) : (
-        <section class:list={['gp-visuel', `gp-ecran-${formeEcran(ecranCorps)}`, ecranLarge && 'gp-large']} id="ecran" aria-label="L’écran d’OnClub">
+        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label="L’écran d’OnClub">
           <Cadre type="panneau" fond="menthe" legende="Noms et montants fictifs."><EcranAnime nom={ecranCorps} /></Cadre>
         </section>
       ))}
@@ -190,6 +208,9 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
 .gp-heros-grille{display:grid;gap:var(--e-6,32px)}
 .gp-panneau{position:relative;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;border-radius:var(--r-panneau,24px);background:var(--menthe);overflow:hidden}
 .gp-panneau :global(.ecran-anime){width:100%}
+.gp-panneau :global(.ecran-fonction){width:100%}
+/* L'écran fixe d'un téléphone (300 px) : réduit pour tenir dans le panneau d'un petit téléphone. */
+@media (max-width:419px){.gp-panneau :global(.ef-tel){zoom:.88}}
 .gp-panneau :global(.eci-scene){background:none;border:0;--s:1.08}
 .gp-panneau figcaption{margin-top:12px;font-size:var(--t-micro,.8125rem);text-align:center;color:var(--encre)}
 .gp-ecran-telephone :global(.ecran-anime){zoom:.68}

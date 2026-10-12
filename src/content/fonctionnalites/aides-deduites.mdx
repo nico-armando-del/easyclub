@@ -1,31 +1,68 @@
 ---
 nom: "Aides déduites"
-ligne: "Pass’Sport déduit à l’inscription, justificatif suivi"
+ligne: "Pass’Sport déduit à l’inscription, son code au dossier"
 famille: Encaisser
 offre: mini
 ordre: 3
 titreSeo: "Pass’Sport et aides déduites à l’inscription | OnClub"
-description: "Le Pass’Sport et les aides de l’association se cochent à l’inscription et se déduisent du total ; si le justificatif est refusé, le montant revient à réclamer."
+description: "Le Pass’Sport et les aides de l’association se cochent à l’inscription, avec leur code, et se déduisent du total avant le paiement. Le bureau contrôle."
 titre: "Les aides déduites dès l’inscription"
-chapo: "Pass’Sport, aide de la commune, réduction sociale : chaque aide se coche à l’inscription, se déduit, et son justificatif est suivi jusqu’au bout."
+chapo: "Pass’Sport, aide de la commune, bon CAF : la famille coche son aide, tape son code, et le total baisse avant le paiement."
 temps:
   geste: "La famille coche son aide en s’inscrivant : le total se recalcule tout seul."
+ecranFonction: true
+fonctionnalites: [paiement-en-ligne, pieces-justificatives, inscription-en-ligne]
 profils: [tresorier]
 guides: [pass-sport]
-maj: 2026-10-09
+maj: 2026-10-10
+faq:
+  - question: "La famille doit-elle déposer un document pour son aide ?"
+    reponse: "Elle tape toujours son justificatif dans un champ obligatoire : le code du Pass’Sport, ou le numéro de son bon. Un fichier en plus n’est demandé que si une pièce est prévue pour l’aide. Sans le code, rien n’est déduit et le paiement attend."
+  - question: "Peut-on proposer plusieurs aides ?"
+    reponse: "Oui, autant que l’association en propose : Pass’Sport, aide de la commune, bon CAF. Le bureau les crée lui-même, avec leur montant, leur condition et la pièce attendue. La famille en retient une par participant."
+  - question: "Que se passe-t-il si l’enfant n’a pas l’âge de l’aide ?"
+    reponse: "Si l’aide est bornée par années de naissance, la case se grise pour un enfant hors tranche, et la raison s’écrit à côté. Une aide déjà cochée qui ne s’applique plus bloque le paiement tant qu’elle n’est pas retirée."
+  - question: "L’aide est-elle déduite si la famille paie en plusieurs fois ?"
+    reponse: "Oui. L’aide est retirée du total d’abord, puis le reste est réparti en échéances : la famille ne paie que ce qui reste à sa charge, et chaque montant s’affiche avant de valider."
 ---
 
 ## Aujourd’hui, l’aide se soustrait à la main
 
-Le bureau soustrait l’aide à la main, garde le justificatif dans une pochette, et oublie parfois de réclamer le montant quand l’aide est finalement refusée.
+Le bureau retire l’aide du prix sur un coin de fiche, note le code quelque part, et le cherche en décembre pour se faire rembourser. Avec OnClub, l’aide se règle dans le formulaire d’inscription, code compris.
 
-## L’aide se coche, se déduit, se justifie
+## La famille coche, tape son code, le total baisse
 
-- La famille **coche l’aide** au moment de l’inscription, et le montant se **déduit** du total.
-- Si l’année de naissance de l’enfant n’y donne pas droit, l’aide est **refusée avec sa raison**, avant le paiement.
-- La **pièce qui la justifie** est demandée, puis contrôlée par le bureau.
-- Si le justificatif est refusé, le montant **réapparaît à réclamer**, au lieu de se perdre.
+Dans le formulaire, chaque participant a sa rubrique « Aides publiques ».
 
-## En plusieurs fois, l’aide est déduite d’abord
+- **Une case par aide** proposée par le club : son montant, sa condition et ce qu’il faut fournir.
+- **Une seule aide par participant** : en cocher une grise les autres.
+- **Le code est obligatoire** : sans lui, rien n’est déduit et le paiement attend.
+- **Au panier**, la ligne « Pass’Sport, K7M2Q9X4T −50 € » porte le code à côté du montant, et le total est recalculé.
 
-Avec le paiement en plusieurs fois, l’aide est déduite du total, puis le reste est réparti en échéances : la famille ne paie que ce qui reste à sa charge.
+## L’année de naissance est vérifiée avant le paiement
+
+Quand le club borne une aide par années de naissance, la case se grise pour un enfant hors tranche. La raison s’écrit à sa place : « L’aide « Pass’Sport » n’est pas ouverte à une naissance en 2021, celle de Jade : elle va de 2009 à 2020. »
+
+En plusieurs fois, l’aide est déduite d’abord, puis le reste est réparti : voir le [paiement en ligne](/fonctionnalites/paiement-en-ligne).
+
+## Le bureau règle ses aides et contrôle les pièces
+
+- **Ses aides, lui-même** : dans l’atelier d’inscription, le bureau ajoute, modifie ou retire une aide, avec son montant, sa condition, la pièce attendue et les années de naissance.
+- **Le filtre « Aide »** de la liste des inscriptions dit qui a demandé quelle aide.
+- **La fiche du dossier** rappelle l’aide appliquée, la condition retenue et la pièce attendue.
+- **Les justificatifs déposés** se contrôlent dans l’écran Justificatifs : « Marquer conforme », ou un refus avec son motif. Voir les [pièces justificatives](/fonctionnalites/pieces-justificatives).
+
+## Un justificatif refusé laisse une trace
+
+Quand la pièce de l’aide est déclarée comme telle, son refus fait apparaître sur la fiche la pastille « 50 € à réclamer », avec le code de l’aide. Le montant payé n’est pas retouché : le club décide s’il réclame. Revalider la pièce efface la ligne.
+
+<EcranFonction nom="aides-deduites-bureau" legende="La fiche d’un dossier après le refus du justificatif d’aide : les 50 € déduits reviennent à réclamer. Noms et montants fictifs." />
+
+Ce lien entre une pièce et une aide se pose aujourd’hui avec l’équipe OnClub, à la mise en place. Pour le Pass’Sport, le [guide Pass’Sport](/guides/pass-sport) détaille qui y a droit et comment l’association se fait rembourser.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Cumuler deux aides** pour un même participant : le formulaire n’en retient qu’une.
+- **Lier soi-même une pièce à une aide** : ce lien se pose avec l’équipe OnClub. Sans lui, la famille donne son code, mais un refus ne crée rien à réclamer.
+- **Compter les montants à réclamer** ailleurs que sur la fiche : ni l’accueil, ni l’onglet « Impayées », ni la relance ne les reprennent.
+- **Suivre le remboursement de l’aide** par l’organisme qui la verse : le bureau le suit à part.

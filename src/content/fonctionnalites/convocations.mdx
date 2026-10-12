@@ -1,27 +1,78 @@
 ---
 nom: "Convocations en ligne"
-ligne: "Les familles répondent en un clic, sans compte"
+ligne: "Les familles répondent présent ou absent, sans compte"
 famille: Organiser
 offre: mini
 ordre: 3
 titreSeo: "Convocations de match en ligne pour club sportif | OnClub"
 description: "Convoquez pour un match ou un entraînement : les familles répondent présent ou absent depuis le mail, sans compte, et la compo part de leurs réponses."
 titre: "La convocation part, les réponses reviennent"
-chapo: "Les absents découverts le samedi matin, les messages perdus dans le groupe WhatsApp : la convocation en ligne règle ça d’un geste par famille."
+chapo: "Les absents découverts le samedi matin, les pouces perdus dans le groupe de discussion. Ici, chaque famille répond depuis son mail, et l’encadrant voit qui vient."
 temps:
-  geste: "Le parent répond présent ou absent depuis le mail, en un clic, sans compte."
+  geste: "La famille ouvre le lien de son mail et touche « Présent » ou « Absent », sans compte."
+ecranFonction: true
 sports: [football]
-maj: 2026-10-09
+fonctionnalites: [compo-du-match, espace-encadrant, messages-familles]
+maj: 2026-10-10
+faq:
+  - question: "Les familles doivent-elles installer une application ?"
+    reponse: "Non. Elles reçoivent un mail avec un lien propre à leur enfant. Le lien ouvre une page avec deux boutons, Présent et Absent : ni compte, ni mot de passe, ni application."
+  - question: "Une famille peut-elle changer sa réponse ?"
+    reponse: "Oui, jusqu’au jour du rendez-vous. Elle rouvre le même lien et touche l’autre bouton. Le lendemain, la réponse ne se change plus : c’est l’appel de l’encadrant qui compte."
+  - question: "Et une famille sans adresse mail ?"
+    reponse: "Après l’envoi, l’encadrant lit la liste des familles « à prévenir vous-même » : celles qui n’ont pas d’adresse chez le club, ou dont le mail a été refusé. Il les prévient de vive voix ou par message."
+  - question: "Le bureau voit-il les réponses de chaque équipe ?"
+    reponse: "Pas encore dans un écran à lui. Les réponses vivent sur la page de l’encadrant. Le bureau voit en revanche, dans l’écran Effectifs, les joueurs absents sans prévenir à trois des cinq derniers appels."
 ---
 
-## L’encadrant convoque pour un match ou un entraînement
+## Fini le décompte des pouces dans le groupe
 
-Il convoque son équipe pour un **match** ou un **entraînement**. Chaque famille reçoit un mail avec un lien propre à son enfant.
+Le jeudi, l’entraîneur écrit dans le groupe de l’équipe. Le vendredi, il relit quarante messages pour savoir qui vient. Le samedi matin, deux absents qu’il n’attendait pas.
 
-## La famille répond d’un geste, sans compte
+## L’encadrant convoque depuis sa page
 
-Elle répond **présent** ou **absent** en un geste, sans créer de compte, sans application à installer.
+Depuis sa [page d’équipe](/fonctionnalites/espace-encadrant), ouverte sans compte, l’encadrant touche « Convoquer l’équipe » et remplit :
 
-## Qui vient, à jour, et la compo qui suit
+- **pour** un entraînement ou un match ;
+- **le jour** et **l’heure du rendez-vous** ;
+- **le lieu**, s’il le souhaite (« Gymnase Pagnol, terrain 2 ») ;
+- **un mot aux familles**, s’il le souhaite (« Tenue du club, gourde, arrivée 30 minutes avant »).
 
-La liste de qui vient, à jour, et une **compo du match qui part de ces réponses**. Plus besoin de compter les pouces levés dans un groupe de quarante messages.
+Il touche « Envoyer la convocation ». L’écran dit ce qui s’est passé : « 14 joueurs convoqués. 13 mails partis. » Les familles sans adresse, ou dont le mail a été refusé, sont nommées : à prévenir lui-même.
+
+## La famille répond depuis le mail, sans compte
+
+Chaque famille reçoit un mail avec un lien propre à son enfant, qui ne vaut que pour cette convocation. Le mail donne le jour, l’heure, le lieu et le mot de l’encadrant. Si la famille répond au mail, sa réponse part à l’adresse du club.
+
+Le lien ouvre une page avec deux boutons, « Présent » et « Absent ». La famille en touche un : « Réponse enregistrée pour Malo : présent. Vous pouvez la changer jusqu’au jour même. »
+
+<Repli titre="Le détail">
+
+- **Le jour passé**, la page rappelle la réponse donnée, ou dit que l’appel de l’encadrant compte désormais.
+- **Une convocation annulée** affiche « Rien à répondre : ce rendez-vous n’a plus lieu ».
+- **Un lien qui n’ouvre plus rien** renvoie vers l’encadrant, ou vers une réponse au mail.
+
+</Repli>
+
+## Qui vient, compté pour l’encadrant
+
+Sous chaque convocation, l’encadrant lit le compte à jour : « 11 présents · 2 absents · 1 sans réponse ». « Voir les réponses » déplie la liste, joueur par joueur.
+
+<EcranFonction nom="convocations-encadrant" legende="La page de l’encadrant : la convocation du samedi, le compte des réponses et la liste dépliée. Noms fictifs." />
+
+Pour un match, « Composer le match » ouvre la [compo](/fonctionnalites/compo-du-match) : elle écarte les absents et garde les joueurs sans réponse. Le jour venu, « Faire l’appel » part des réponses : un absent annoncé arrive « excusé ».
+
+## Un rendez-vous annulé, les familles prévenues
+
+Terrain impraticable ? L’encadrant touche « Annuler ce rendez-vous », ajoute un mot s’il le souhaite, puis « Confirmer l’annulation ». Les familles convoquées reçoivent un mail « annulé », sauf celles qui avaient déjà répondu absent.
+
+L’annulation reste possible jusqu’au jour même, tant que l’appel n’est pas fait. Un enfant inscrit après l’envoi rejoint tout seul l’appel des rendez-vous à venir.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **Pas de relance des seules familles silencieuses.** L’encadrant voit qui n’a pas répondu, mais n’a ni leur adresse ni leur téléphone : il leur parle à l’entraînement, ou passe par le bureau.
+- **Pas d’écran des convocations au bureau.** Les réponses vivent sur la page de chaque encadrant.
+- **Pas de SMS ni de notification** : la convocation part par mail.
+- **Pas de convocation pour la saison prochaine** avant sa rentrée.
+
+Pour écrire à toute une équipe hors convocation, le bureau passe par les [messages aux familles](/fonctionnalites/messages-familles).

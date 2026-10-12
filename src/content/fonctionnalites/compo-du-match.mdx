@@ -6,23 +6,84 @@ offre: mini
 ordre: 4
 titreSeo: "Composition d’équipe sur le terrain, au téléphone | OnClub"
 description: "L’entraîneur touche un joueur, touche un poste : la place est prise. Plusieurs configurations par équipe, les rotations, la compo partagée en un geste."
-titre: "La compo se fait au bord du terrain, sur le téléphone"
-chapo: "La composition griffonnée sur un coin de feuille, perdue avant la mi-temps. Avec OnClub, l’entraîneur place ses joueurs sur un terrain dessiné, d’un doigt."
+titre: "La compo du match se fait au bord du terrain"
+chapo: "La compo griffonnée sur un coin de feuille se perd avant la mi-temps. Ici, elle part des réponses aux convocations, et l’entraîneur place ses joueurs d’un doigt."
 temps:
   geste: "L’entraîneur touche un joueur, touche un poste : c’est placé."
-ecran: terrain
-sports: [football]
-maj: 2026-10-09
+ecranFonction: true
+sports: [football, volley, handball]
+fonctionnalites: [convocations, espace-encadrant]
+maj: 2026-10-10
+faq:
+  - question: "L’entraîneur doit-il créer un compte pour faire la compo ?"
+    reponse: "Non. Il ouvre sa page d’équipe par le lien que le bureau lui a transmis, sur son téléphone. La compo d’un match s’ouvre depuis la convocation de ce match, avec « Composer le match »."
+  - question: "Un joueur absent peut-il se retrouver dans la compo ?"
+    reponse: "Non. Un joueur dont la famille a répondu absent, ou que sa fiche dit blessé ou suspendu, reste dans « Pas sur la feuille » et ne va pas sur le terrain. Un joueur sans réponse, lui, reste proposé : l’entraîneur décide."
+  - question: "Quels sports ont un terrain dessiné ?"
+    reponse: "Le football (à 11, à 8, à 5 et futsal), le volley, le handball, le basket, le rugby, le hockey sur glace ou roller et sur gazon, le water-polo, et la danse avec sa salle de cours et sa scène de gala. Le sport se lit dans le nom de la discipline de l’équipe."
+  - question: "Les familles reçoivent-elles la compo ?"
+    reponse: "Pas d’elles-mêmes. Le bouton « Partager la compo » ouvre la feuille de partage du téléphone, ou copie la compo pour que l’entraîneur la colle dans le groupe de l’équipe. C’est lui qui choisit où elle part."
 ---
 
-## Un joueur, un poste, d’un doigt
+## Fini la compo griffonnée sur un coin de feuille
 
-L’entraîneur ouvre son espace, sans compte. Il touche un joueur, puis un poste : la place est prise. Au volley, un appui sur « Rotation » fait tourner les six joueuses d’un cran.
-
-## Une configuration par façon de jouer
-
-Chaque équipe garde **plusieurs configurations**, une par façon de jouer, rangées en onglets. Au football, le terrain est dessiné à 11, à 8, à 5 et en futsal.
+Le vendredi soir, l’entraîneur compte ses joueurs dans le groupe de discussion, refait sa feuille trois fois, oublie que le gardien est blessé. Le samedi, la feuille est restée dans la voiture.
 
 ## La compo part des réponses aux convocations
 
-Chaque joueur garde son numéro de maillot, son poste et son statut. La compo part des réponses aux convocations : un absent n’est pas proposé.
+Depuis la convocation du match, l’entraîneur touche « Composer le match ». Le terrain arrive déjà rempli :
+
+- **l’équipe type d’abord**, ou une autre configuration choisie dans « Partir de » ;
+- **les absents écartés** : une famille qui a répondu absent, un joueur blessé ou suspendu ne sont pas proposés ;
+- **les joueurs sans réponse gardés** : ils restent proposés, l’entraîneur tranche.
+
+Chaque geste s’enregistre tout seul : l’écran affiche « Enregistré ».
+
+## Un joueur, une place, d’un doigt
+
+Il touche un joueur, puis une place : c’est fait. Si la place est prise, les deux joueurs échangent. À la souris, on glisse le joueur.
+
+<EcranFonction nom="compo-du-match-banc" legende="Sous le terrain : le hors-poste écrit en clair, le banc, ceux qui ne sont pas sur la feuille et les rôles. Noms fictifs." />
+
+<Repli titre="Le détail">
+
+- **Hors poste** : un milieu placé en défense porte un badge orange, et la phrase « Hors poste : Théo (milieu) joue défenseur gauche » s’écrit sous le terrain.
+- **Le banc** affiche un repère, « 4 sur 4 habituels » en foot à 8. Ce n’est pas une règle de compétition.
+- **Les outils** : « Compléter par les postes » remplit les places vides d’après la fiche de chacun, « Tout vider » repart de zéro, « Annuler » défait le dernier geste.
+
+</Repli>
+
+## Rôles, fiche du joueur et partage
+
+En touchant un joueur, l’entraîneur lui donne un rôle : au football, capitaine, vice-capitaine, tireur de penalty, coups francs ou corners. Le capitaine porte la pastille « Cap » sur le terrain.
+
+La fiche du joueur se corrige au même endroit : son numéro, son poste, son statut (titulaire, sur le banc, à l’essai, blessure). La suspension, elle, se pose au bureau.
+
+Le numéro et le poste suivent le joueur dans ses autres équipes et d’une saison à l’autre.
+
+Enfin, « Partager la compo » envoie le texte de la compo par la feuille de partage du téléphone, ou le copie pour le groupe de l’équipe.
+
+## Un terrain par sport, un format par âge
+
+Au football, le terrain est dessiné à 11, à 8, à 5 et en futsal. Le format proposé suit l’âge de l’équipe : foot à 5 jusqu’à 9 ans, foot à 8 jusqu’à 13 ans, foot à 11 au-delà. L’entraîneur le change d’un menu.
+
+<Repli titre="Les autres sports">
+
+- **Volley** : à 6, un appui sur « Rotation » fait tourner les joueuses d’un cran. C’est une vue : la compo enregistrée ne bouge pas. Une équipe de 13 ans ou moins démarre en volley à 4, sans rotation.
+- **Handball, basket (à 5 et 3x3), rugby (XV, XIII, à 7), hockey, water-polo** : chacun son terrain, ses postes et ses rôles.
+- **Danse** : la salle de cours et la scène du gala, en lignes, en quinconce, en cercle, en demi-cercle ou en V, avec des rôles de soliste ou de premier rang.
+
+</Repli>
+
+Chaque équipe garde aussi plusieurs configurations, rangées en onglets : « Config 1 », puis « + Nouvelle configuration », à partir d’une copie ou d’un terrain vide.
+
+Le bureau prépare l’équipe type dans l’écran Effectifs ; l’entraîneur la retrouve et la retouche depuis sa page.
+
+## Ce qu’OnClub ne fait pas (encore)
+
+- **La compo d’un match se fait depuis la page de l’encadrant.** Le bureau prépare l’équipe type, pas la compo d’un match.
+- **Pas de terrain pour tous les sports.** Tennis, judo, natation ou athlétisme ont les convocations et l’appel, sans terrain dessiné.
+- **Pas de format sous le foot à 5** pour les plateaux des plus petits.
+- **Pas de feuille de match officielle.** La compo ne remplit pas la feuille de la fédération.
+
+Pour la suite, voyez les [convocations](/fonctionnalites/convocations), d’où part la compo, et [l’espace encadrant](/fonctionnalites/espace-encadrant), où elle se fait.

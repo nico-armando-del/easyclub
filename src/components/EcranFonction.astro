@@ -1,0 +1,208 @@
+---
+/*
+  L'ÉCRAN D'UNE FONCTIONNALITÉ : un écran FIXE, fidèle au vrai produit (mêmes
+  libellés, mêmes colonnes, mêmes états), données fictives, sans étiquette.
+  <EcranFonction nom="liste-attente" />
+  <EcranFonction nom="liste-attente-famille" legende="La place proposée, vue par la famille. Noms et montants fictifs." />
+
+  Le contenu vient de src/ecrans/fonctions/<nom>.html (réglages sur sa racine :
+  voir src/lib/ecransFonction.ts). Ce composant pose le cadre :
+    - fenetre : la fenêtre de bureau, le menu du club (l'entrée data-menu
+      allumée), la barre de téléphone du tableau de bord sous 760 px ;
+    - telephone : l'appareil, l'île, l'heure.
+  Le style reprend les jetons des écrans de /presentation (src/ecrans/relance.html,
+  inscription.html) : mêmes gris, même vert, mêmes rayons, mêmes polices.
+
+  Props : nom ; legende (facultative, sous le cadre) ; nu (sans le fond beige,
+  quand un Cadre ou un panneau l'entoure déjà) ; class.
+  Accessible : role="img" et l'aria-label tiré de data-description. Rien n'est
+  animé : l'écran est un état, pas une démonstration.
+*/
+import { lireEcranFonction } from '../lib/ecransFonction'
+
+interface Props { nom: string; legende?: string; nu?: boolean; class?: string }
+const { nom, legende, nu = false, class: classe } = Astro.props
+const e = lireEcranFonction(nom)
+
+/* Le menu d'un club de sport en offre Pro, tel que lib/dashboard/ecrans.ts le construit
+   (libellés de lib/mots.ts, vocabulaire « Cours / Équipes »). Une entrée réservée à Max n'y est pas. */
+const MENU: { groupe?: string; entrees: string[] }[] = [
+  { entrees: ['Accueil', 'Comptabilité'] },
+  { groupe: 'Familles', entrees: ['Inscriptions', 'Adhérents', 'Liste d’attente', 'Cours d’essai', 'Justificatifs', 'Licences', 'Emails'] },
+  { groupe: 'Votre club', entrees: ['Cours / Équipes', 'Effectifs', 'Éducateurs / Profs', 'Salles / Terrains'] },
+  { groupe: 'Page publique', entrees: ['Atelier d’inscription', 'Site du club'] },
+]
+if (e.menu && !MENU.some((g) => g.entrees.includes(e.menu!))) {
+  throw new Error(`src/ecrans/fonctions/${nom}.html : data-menu « ${e.menu} » n’est pas une entrée du menu (${MENU.flatMap((g) => g.entrees).join(', ')}).`)
+}
+const CLUB = 'Votre club'
+const SIGLE = 'VC'
+const hauteur = e.hauteur ? `--ef-h:${e.hauteur}px` : undefined
+---
+<figure class:list={['ecran-fonction', `ef-${e.forme}`, { 'ef-nu': nu }, classe]} data-ecran-fonction={nom} style={hauteur}>
+  <div class="ef-fond">
+    {e.forme === 'fenetre' ? (
+      <div class="ef-fen" role="img" aria-label={e.description}>
+        <div class="ef-chr" aria-hidden="true"><i></i><span class="ef-tit">{e.menu ? `${e.menu} — ${CLUB}` : CLUB}</span></div>
+        <div class="ef-app">
+          {e.menu && (
+            <div class="ef-menu">
+              <div class="ef-id"><span class="ef-sig">{SIGLE}</span>{CLUB}</div>
+              <div class="ef-sais"><span class="ef-lib">Saisons</span><span class="ef-pas">2026-2027 · se joue</span></div>
+              {MENU.map((g) => (
+                <div>
+                  {g.groupe && <span class="ef-lib">{g.groupe}</span>}
+                  {g.entrees.map((x) => <div class:list={['ef-ln', { 'ef-act': x === e.menu }]}>{x}</div>)}
+                </div>
+              ))}
+            </div>
+          )}
+          <div class="ef-cadre-vue">
+            {e.menu && <div class="ef-mob"><span class="ef-sig">{SIGLE}</span>{CLUB}<span class="ef-burger"></span></div>}
+            <Fragment set:html={e.html} />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div class="ef-tel" role="img" aria-label={e.description}>
+        <div class="ef-ecran">
+          <div class="ef-ile" aria-hidden="true"></div>
+          <div class="ef-statut" aria-hidden="true"><span>9:41</span><span class="ef-pile"></span></div>
+          <div class="ef-tel-vue"><Fragment set:html={e.html} /></div>
+        </div>
+      </div>
+    )}
+  </div>
+  {legende && <figcaption>{legende}</figcaption>}
+</figure>
+
+<style is:global>
+/* ===== Le cadre ===== */
+.ecran-fonction{--ef-h1:var(--font-head,'Bricolage Grotesque',system-ui,sans-serif);--ef-vert:#3DDC97;--ef-vert-fonce:#0F3D2A;--ef-ok:#0F6B47;--ef-trait:#E8E6DE;--ef-gris:#5C5C54;--ef-mu:#6E6E66;--ef-creux:#F2F1EB;--ef-blanc:#FAFAF7;
+  container-type:inline-size;width:100%;margin:0 auto;min-width:0;font:13px/1.4 var(--font-body,system-ui,sans-serif);font-feature-settings:"tnum";color:#0E1116;text-align:left}
+.ecran-fonction *,.ecran-fonction *::before,.ecran-fonction *::after{box-sizing:border-box;margin:0;padding:0}
+/* La largeur se pose sur le fond, pas sur la figure : une prose qui élargit ses figures ne l'étire pas. */
+.ecran-fonction.ef-fenetre .ef-fond{max-width:1040px;margin-inline:auto}
+.ecran-fonction.ef-telephone .ef-fond{max-width:440px;margin-inline:auto}
+.ecran-fonction.ef-nu .ef-fond{max-width:none}
+.ecran-fonction .ef-fond{background:#F1EFE8;border-radius:28px;padding:36px 32px 14px}
+.ecran-fonction.ef-telephone .ef-fond{display:grid;place-items:center;padding:20px 0;background:radial-gradient(60% 48% at 50% 55%,rgba(93,232,143,.22),rgba(93,232,143,0)),#FAFAF7;border:1px solid var(--ef-trait);border-radius:24px}
+.ecran-fonction.ef-nu .ef-fond{background:none;border:0;padding:0}
+.ecran-fonction>figcaption{margin-top:14px;font-size:.875rem;color:var(--gris,#4F535B);text-align:center}
+
+/* La fenêtre de bureau (mêmes mesures que relance.html) */
+.ecran-fonction .ef-fen{position:relative;max-width:960px;height:var(--ef-h,540px);margin:0 auto;background:var(--ef-blanc);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px #0E111617,0 28px 60px -18px #0E11164d}
+.ecran-fonction .ef-chr{flex:none;height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#ECEAE3;border-bottom:1px solid #E0DDD3}
+.ecran-fonction .ef-chr i{width:11px;height:11px;margin-right:36px;border-radius:50%;background:#F0918C;box-shadow:18px 0 #E8C46A,36px 0 #7FD6A4}
+.ecran-fonction .ef-tit{margin:0 auto;min-width:0;padding:2px 14px;border-radius:8px;background:var(--ef-blanc);color:var(--ef-mu);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ecran-fonction .ef-app{flex:1;display:flex;min-height:0}
+.ecran-fonction .ef-menu{flex:none;width:200px;background:#fff;border-right:1px solid var(--ef-trait);padding:14px 10px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.ecran-fonction .ef-id,.ecran-fonction .ef-mob{display:flex;align-items:center;gap:9px;font-weight:700;white-space:nowrap}
+.ecran-fonction .ef-sig{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--ef-vert);color:var(--ef-vert-fonce);font:800 12px var(--ef-h1)}
+.ecran-fonction .ef-sais{display:flex;flex-direction:column;align-items:flex-start;gap:6px;border:1px solid var(--ef-trait);border-radius:12px;padding:7px}
+.ecran-fonction .ef-sais .ef-pas{margin:0 8px}
+.ecran-fonction .ef-menu .ef-lib{padding:4px 10px 2px}
+.ecran-fonction .ef-ln{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:10px;color:var(--ef-gris);white-space:nowrap}
+.ecran-fonction .ef-ln::before{content:"";width:2px;height:14px;border-radius:2px}
+.ecran-fonction .ef-ln.ef-act{background:var(--ef-creux);color:#0E1116;font-weight:700}
+.ecran-fonction .ef-ln.ef-act::before{background:var(--ef-vert)}
+.ecran-fonction .ef-mob{display:none;flex:none;height:44px;padding:0 14px;background:#fff;border-bottom:1px solid var(--ef-trait)}
+.ecran-fonction .ef-burger{margin-left:auto;width:16px;height:12px;border-block:2px solid var(--ef-gris);background:linear-gradient(var(--ef-gris),var(--ef-gris)) center/100% 2px no-repeat}
+.ecran-fonction .ef-cadre-vue{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+/* La page continue sous le bord : un fondu, pas une coupe nette. */
+.ecran-fonction .ef-cadre-vue::after{content:"";position:absolute;inset:auto 0 0;height:28px;background:linear-gradient(#FAFAF700,var(--ef-blanc));pointer-events:none}
+.ecran-fonction.ef-fenetre .ef-vue{flex:1;min-height:0;overflow:hidden;padding:20px 22px}
+
+/* Le téléphone (mêmes mesures que inscription.html) */
+.ecran-fonction .ef-tel{position:relative;width:300px;height:600px;background:#0E1116;border-radius:46px;padding:10px;box-shadow:0 28px 50px -18px rgba(14,17,22,.45),inset 0 0 0 2px #2B313B}
+.ecran-fonction .ef-ecran{position:relative;width:280px;height:580px;border-radius:36px;overflow:hidden;background:#F5F4EF}
+.ecran-fonction .ef-ile{position:absolute;top:9px;left:50%;width:82px;height:22px;margin-left:-41px;border-radius:12px;background:#0E1116;z-index:3}
+.ecran-fonction .ef-statut{position:absolute;inset:0 0 auto;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 30px;font-weight:700;background:#F5F4EF;z-index:2}
+.ecran-fonction .ef-pile{position:relative;width:22px;height:11px;border:1.5px solid #0E1116;border-radius:3px}
+.ecran-fonction .ef-pile::before{content:"";position:absolute;inset:1.5px 5px 1.5px 1.5px;background:#0E1116;border-radius:1px}
+.ecran-fonction .ef-tel-vue{position:absolute;inset:38px 0 0;overflow:hidden}
+.ecran-fonction.ef-telephone .ef-vue{padding:10px 12px 24px}
+.ecran-fonction.ef-telephone .ef-chiffres{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ecran-fonction.ef-telephone .ef-chiffres .ef-lib{font-size:10px;letter-spacing:.03em}
+
+/* ===== Les pièces du produit (components/ui du produit, traduites) ===== */
+.ecran-fonction .ef-h1{font:800 22px/1.15 var(--ef-h1);letter-spacing:-.02em}
+.ecran-fonction .ef-h2{font:800 17px/1.2 var(--ef-h1)}
+.ecran-fonction .ef-h3{font:800 16px/1.25 var(--ef-h1)}
+.ecran-fonction .ef-tete{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.ecran-fonction .ef-sous,.ecran-fonction .ef-p{color:var(--ef-gris)}
+.ecran-fonction .ef-p{font-size:12.5px}
+.ecran-fonction .ef-mu{color:var(--ef-mu);font-size:12px}
+.ecran-fonction .ef-lib{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ef-mu)}
+.ecran-fonction .ef-pile-v{display:flex;flex-direction:column;gap:12px}
+.ecran-fonction .ef-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.ecran-fonction .ef-droite{margin-left:auto}
+.ecran-fonction .ef-carte{background:#fff;border:1px solid var(--ef-trait);border-radius:18px;padding:14px 16px}
+.ecran-fonction .ef-carte+.ef-carte{margin-top:12px}
+.ecran-fonction .ef-carte .ef-h3+.ef-p{margin-top:4px}
+.ecran-fonction .ef-pas{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border:1.5px solid;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+.ecran-fonction .ef-pas::before{content:"";width:7px;height:7px;border-radius:50%;background:#0E1116}
+/* Badges : neutre, succes, erreur, attention, info (les tons du produit) */
+.ecran-fonction .ef-badge{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:8px;font-size:12px;font-weight:700;white-space:nowrap;background:var(--ef-creux);color:var(--ef-gris)}
+.ecran-fonction .ef-succes{background:#EAFBF3;color:var(--ef-ok)}
+.ecran-fonction .ef-erreur{background:#FDECEC;color:#9B2C28}
+.ecran-fonction .ef-attention{background:#FDF3DC;color:#92600A}
+.ecran-fonction .ef-info{background:#EEF3F8;color:#25466B}
+.ecran-fonction .ef-montant{font:800 15px var(--ef-h1);white-space:nowrap}
+/* Le gros montant d'un dossier (Montant du produit) et la rangée de chiffres sous un filet */
+.ecran-fonction .ef-solde{display:inline-block;margin-top:6px;padding:6px 14px;border-radius:12px;background:var(--ef-creux);font:800 26px/1.1 var(--ef-h1);white-space:nowrap}
+.ecran-fonction .ef-solde.ef-succes{background:#EAFBF3}
+.ecran-fonction .ef-chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--ef-trait)}
+.ecran-fonction .ef-chiffres b{display:block;font:800 15px/1.3 var(--ef-h1)}
+/* L'en-tête d'une page publique du club (inscription, dossier de la famille, cours d'essai) */
+.ecran-fonction .ef-entete{display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--ef-trait)}
+.ecran-fonction .ef-entete b{display:block;font-family:var(--ef-h1)}
+.ecran-fonction .ef-entete .ef-lien{margin-left:auto;font-size:12px;font-weight:700;color:var(--ef-gris);text-decoration:underline;white-space:nowrap}
+/* La tête d'une carte : nom, badges, montant à droite */
+.ecran-fonction .ef-carte>.ef-ligne:first-child{margin-bottom:10px}
+.ecran-fonction .ef-espace{margin-top:12px}
+/* Boutons : ef-pri (le seul coloré), ef-quiet, ef-danger */
+.ecran-fonction .ef-bt{display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1.5px solid #D9D6CC;border-radius:99px;font-size:12.5px;font-weight:700;white-space:nowrap;background:#fff;color:#0E1116}
+.ecran-fonction .ef-pri{background:var(--ef-vert);border-color:var(--ef-vert);color:var(--ef-vert-fonce)}
+.ecran-fonction .ef-quiet{border-color:transparent;background:none;color:var(--ef-gris);padding:0 8px}
+.ecran-fonction .ef-danger{background:#9B2C28;border-color:#9B2C28;color:#fff}
+.ecran-fonction .ef-presse{box-shadow:0 0 0 3px #3DDC9759}
+.ecran-fonction .ef-bts{display:flex;flex-wrap:wrap;gap:6px}
+.ecran-fonction .ef-bts-fin{justify-content:flex-end;gap:4px 2px}
+/* Large : « Attribuer » et « Retirer » tiennent sur une ligne, sous le bouton coloré (le produit replie de même). */
+@container (min-width:760px){.ecran-fonction .ef-bts-fin{min-width:212px}}
+/* Tableau */
+.ecran-fonction .ef-table{width:100%;border-collapse:collapse}
+.ecran-fonction .ef-table th,.ecran-fonction .ef-table td{padding:8px 6px;text-align:left;vertical-align:top;border-bottom:1px solid var(--ef-trait)}
+.ecran-fonction .ef-table th{font-size:12px;font-weight:600;color:var(--ef-mu);white-space:nowrap}
+.ecran-fonction .ef-table td{color:var(--ef-gris)}
+.ecran-fonction .ef-table td b{color:#0E1116}
+.ecran-fonction .ef-table td>span{display:block}
+.ecran-fonction .ef-table tr:last-child td{border-bottom:0}
+.ecran-fonction .ef-table .ef-n{text-align:right}
+.ecran-fonction .ef-table .ef-nw{white-space:nowrap}
+/* Le volet ouvert sous une ligne (fond creusé), l'alerte (titre + texte) */
+.ecran-fonction .ef-volet{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid var(--ef-trait);border-radius:12px;background:var(--ef-creux)}
+.ecran-fonction .ef-alerte{padding:10px 12px;border:1px solid;border-radius:12px;font-size:12.5px}
+.ecran-fonction .ef-alerte>b:first-child{display:block;margin-bottom:3px;font-size:13px}
+.ecran-fonction .ef-alerte.ef-succes{border-color:#9BDDB6}
+.ecran-fonction .ef-alerte.ef-attention{border-color:#EDD08F}
+.ecran-fonction .ef-alerte.ef-info{border-color:#C7D5E5}
+.ecran-fonction .ef-alerte.ef-erreur{border-color:#EBB0AD}
+.ecran-fonction .ef-alerte .ef-bts{margin-top:10px}
+
+/* ===== Largeurs : le tableau de bord tel qu'il se replie ===== */
+@container (max-width:759px){
+  .ecran-fonction .ef-menu{display:none}
+  .ecran-fonction .ef-mob{display:flex}
+  .ecran-fonction .ef-cache-moyen{display:none}
+}
+@container (max-width:519px){
+  .ecran-fonction.ef-fenetre .ef-fond{padding:14px 10px 8px;border-radius:20px}
+  .ecran-fonction.ef-fenetre .ef-vue{padding:14px 12px}
+  .ecran-fonction .ef-tit,.ecran-fonction .ef-cache-etroit{display:none}
+  .ecran-fonction .ef-carte{padding:12px}
+  .ecran-fonction .ef-table th,.ecran-fonction .ef-table td{padding:8px 4px}
+  .ecran-fonction .ef-bt{padding:0 10px;font-size:12px}
+}
+</style>

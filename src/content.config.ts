@@ -55,6 +55,14 @@ const base = {
   maj: z.coerce.date(),
   /** Un écran animé repris de /presentation, affiché sous le bloc temps. */
   ecran: z.enum(ECRANS).optional(),
+  /**
+   * L'écran FIXE de cette page, fidèle au vrai produit (src/ecrans/fonctions/<nom>.html,
+   * réglages : src/lib/ecransFonction.ts). `true` : le fichier qui porte le nom de la page ;
+   * un nom : un autre fichier du dossier (une page sport peut reprendre l'écran d'une fonctionnalité).
+   * Il passe AVANT `ecran` et avant l'écran de famille, au même endroit et au même format
+   * (fenêtre de bureau sous la ligne du temps, téléphone dans le héros). Fichier absent : le build s'arrête.
+   */
+  ecranFonction: z.union([z.literal(true), z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'Le nom d’un fichier de src/ecrans/fonctions/, sans .html')]).optional(),
   /** Liens croisés déclarés ; les liens inverses se calculent tout seuls. */
   fonctionnalites: z.array(reference('fonctionnalites')).default([]),
   sports: z.array(reference('sports')).default([]),
