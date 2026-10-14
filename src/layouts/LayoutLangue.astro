@@ -14,6 +14,7 @@
   consentement, la ville et les menus fonctionnent sans autre script.
   Tout lien vers une page française porte hreflang="fr" et l'étiquette FR.
 */
+import fs from 'node:fs'
 import '../styles/global.css'
 import Sprite from '../components/Sprite.astro'
 import VersFr from '../components/langue/VersFr.astro'
@@ -25,7 +26,8 @@ const { l, langue, faq } = Astro.props
 
 const chemin = `/${langue}`
 const adresse = `${SITE}${chemin}`
-const image = `${SITE}/img/og.jpg`
+// L'image de partage de la page (scripts/og.mjs), sinon le logo.
+const image = `${SITE}${fs.existsSync(`public/og/${langue}.jpg`) ? `/og/${langue}.jpg` : '/img/og.jpg'}`
 const ORG = `${SITE}/#organisation`
 const WEB = `${SITE}/#site`
 

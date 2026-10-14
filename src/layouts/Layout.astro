@@ -8,6 +8,7 @@
   JSON-LD et la FAQ visible viennent de la MÊME donnée : elles ne peuvent pas
   diverger.
 */
+import fs from 'node:fs'
 import '../styles/global.css'
 import Sprite from '../components/Sprite.astro'
 import EnTete from '../components/EnTete.astro'
@@ -40,9 +41,17 @@ interface Props {
 
 const {
   titre, description, chemin, fil, faq, article,
-  image = '/img/og.jpg', imageAlt = 'Le logo OnClub sur fond menthe',
+  image: imageDonnee, imageAlt: imageAltDonne,
   sansBoutonFixe = false, noindex = false, fond = 'papier',
 } = Astro.props
+/*
+  L'IMAGE DE PARTAGE. Chaque page a la sienne dans public/og/ (titre, photo,
+  couleurs du site), dessinée par scripts/og.mjs ; sinon le logo.
+*/
+const imageCarte = `/og/${chemin === '/' ? 'index' : chemin.replace(/^\//, '')}.jpg`
+const aSaCarte = !imageDonnee && fs.existsSync(`public${imageCarte}`)
+const image = imageDonnee ?? (aSaCarte ? imageCarte : '/img/og.jpg')
+const imageAlt = imageAltDonne ?? (aSaCarte ? titre : 'Le logo OnClub sur fond menthe')
 const { langue, t, lien } = i18n(Astro.url)
 const imageAltLangue = imageAlt === 'Le logo OnClub sur fond menthe' ? t(imageAlt) : imageAlt
 
