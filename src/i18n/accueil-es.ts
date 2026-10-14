@@ -1,7 +1,7 @@
 /*
   L'ACCUEIL ESPAGNOL (/es) : LES TEXTES EN BLOC DES COMPOSANTS DU HÉROS ET DE
   LA SEMAINE, traduction fidèle des objets FR de src/components/SceneAccueil.astro
-  et SemaineBureau.astro (mêmes clés, mêmes faits, « usted »). Les composants
+  et SemaineBureau.astro (mêmes clés, mêmes faits, « tú »). Les composants
   les prennent d'eux-mêmes sur une page espagnole. Les phrases isolées de
   l'accueil passent par t() (src/i18n/ui.ts).
 
@@ -22,7 +22,7 @@ export const SCENE_ES: TextesScene = {
   legendes: [
     { titre: 'La familia se inscribe', phrase: 'Desde su móvil: cada hijo, su equipo o su curso, la cuota con tarjeta o fraccionada.' },
     { titre: 'El tesorero lo ve todo', phrase: 'Lo cobrado, lo pendiente y lo atrasado, sin hoja de cálculo que mantener.' },
-    { titre: 'Un retraso, un recordatorio', phrase: 'El mensaje está listo: usted lo revisa y sale con un clic.' },
+    { titre: 'Un retraso, un recordatorio', phrase: 'El mensaje está listo: tú lo revisas y sale con un clic.' },
   ],
   groupe: 'Lo que muestra la escena',
   tableau: 'El panel del club: 28.640 euros cobrados de 40.395 previstos, el resto pendiente o atrasado. Importes ficticios.',
@@ -56,24 +56,24 @@ export const SCENE_ES: TextesScene = {
 }
 
 export const SEMAINE_ES: TextesSemaine = {
-  titre: 'Su semana, con o sin OnClub',
+  titre: 'Tu semana, con o sin OnClub',
   sans: 'Sin OnClub',
   avec: 'Con OnClub',
-  indice: '<b>Accione el interruptor</b> para ver la misma semana con OnClub.',
+  indice: '<b>Acciona el interruptor</b> para ver la misma semana con OnClub.',
   compteur: 'de papeleo por temporada',
   pour: `para ${N} socios`,
   rendu: 'que recupera la junta directiva',
-  tete: 'Sus noches de la semana',
-  toucher: 'Toque una noche',
+  tete: 'Tus noches de la semana',
+  toucher: 'Toca una noche',
   parSaison: 'Por temporada',
-  groupe: 'Las noches de la junta directiva: elija una para ver el detalle',
+  groupe: 'Las noches de la junta directiva: elige una para ver el detalle',
   soirs: [
     { jour: 'Lunes por la noche', quoiSans: 'Copiar las fichas', commentSans: 'Una a una, a mano', quoiAvec: 'El entrenamiento del lunes', commentAvec: 'La familia las rellena ella misma',
       legendeSans: 'Las fichas llegan en papel; <b>un voluntario copia cada expediente.</b>', legendeAvec: '<b>La familia inscribe a su hijo desde el móvil</b>: su equipo, la cuota con tarjeta o fraccionada.' },
     { jour: 'Martes por la noche', quoiSans: 'Cuadrar los pagos', commentSans: 'Cheques y transferencias, en la hoja de cálculo', quoiAvec: 'Noche libre', commentAvec: 'La tarjeta se registra sola',
       legendeSans: 'Los cheques con fecha diferida esperan en un cajón; <b>cada pago se marca a mano.</b>', legendeAvec: '<b>Los pagos con tarjeta se registran solos</b>; un cheque se anota en el expediente con un clic.' },
     { jour: 'Miércoles por la noche', quoiSans: 'Reclamar los pagos atrasados', commentSans: 'El mismo mensaje, familia por familia', quoiAvec: 'Noche libre', commentAvec: 'Un recordatorio con un clic',
-      legendeSans: 'Averiguar quién debe qué, <b>escribir el mismo mensaje, tres veces.</b>', legendeAvec: '<b>El mensaje ya está escrito</b>: usted lo revisa y sale con un clic.' },
+      legendeSans: 'Averiguar quién debe qué, <b>escribir el mismo mensaje, tres veces.</b>', legendeAvec: '<b>El mensaje ya está escrito</b>: tú lo revisas y sale con un clic.' },
     { jour: 'Jueves por la noche', quoiSans: 'Reclamar los justificantes', commentSans: 'Certificados, autorizaciones', quoiAvec: 'El ensayo del jueves', commentAvec: 'En foto, reclamados con un clic',
       legendeSans: 'El certificado que falta, <b>descubierto en el peor momento.</b>', legendeAvec: '<b>Los justificantes llegan en foto</b>; los que faltan se reclaman con un clic.' },
     { jour: 'Viernes por la noche', quoiSans: 'Preparar el inicio de temporada', commentSans: 'Listas, equipos, plazas', quoiAvec: 'La noche en familia', commentAvec: 'Los equipos se conservan',
@@ -114,7 +114,7 @@ const ecran = (x: Omit<Ecran, 'famille' | 'titre' | 'texte' | 'lien' | 'lienNom'
 /** Les écrans de l'accueil, dans leur état final, traduits (noms et montants fictifs). */
 export const ECRANS_ES = {
   inscription: ecran({
-    asso: 'Su club', ecranTitre: 'Inscripción 2026-2027', ecranSous: 'Un solo formulario para toda la familia',
+    asso: 'Tu club', ecranTitre: 'Inscripción 2026-2027', ecranSous: 'Un solo formulario para toda la familia',
     lignes: [
       { nom: 'Léa Martin, nacida en 2013', detail: 'M15 femenino · lunes 18:00', statut: '4 plazas', ton: 'ok' },
       { nom: 'Pago', detail: 'En un solo pago', statut: 'Tarjeta', ton: 'neutre' },
@@ -123,7 +123,7 @@ export const ECRANS_ES = {
     pied: { libelle: 'Total', valeur: '180 €' }, bouton: 'Confirmar mi solicitud',
   }),
   tableau: ecran({
-    asso: 'Su club', ecranTitre: 'Inicio', ecranSous: 'Temporada 2026-2027 · en curso',
+    asso: 'Tu club', ecranTitre: 'Inicio', ecranSous: 'Temporada 2026-2027 · en curso',
     lignes: [
       { nom: 'Cobrado', detail: 'de 40.395 € previstos', statut: '28.640 €', ton: 'ok' },
       { nom: 'Pendiente', detail: 'plazos programados', statut: '9.870 €', ton: 'neutre' },
@@ -132,7 +132,7 @@ export const ECRANS_ES = {
     bouton: 'Ver los pagos atrasados',
   }),
   relance: ecran({
-    asso: 'Su club', ecranTitre: '3 familias con pagos atrasados', ecranSous: 'Temporada 2026-2027 · en curso',
+    asso: 'Tu club', ecranTitre: '3 familias con pagos atrasados', ecranSous: 'Temporada 2026-2027 · en curso',
     lignes: [
       { nom: 'Familia Roux', detail: 'M13 masculino · pagado 160 € de 480 €', statut: 'Atrasado', ton: 'ko' },
       { nom: 'Familia Lambert', detail: 'M15 femenino · pagado 110 € de 330 €', statut: 'Atrasado', ton: 'ko' },
@@ -141,7 +141,7 @@ export const ECRANS_ES = {
     pied: { libelle: 'Pendiente de cobro', valeur: '730 €' }, bouton: 'Enviar el recordatorio a la familia Lambert',
   }),
   reinscription: ecran({
-    asso: 'Su club', ecranTitre: '2027-2028 · en preparación', ecranSous: 'Vuelven 14 de 31 antiguos jugadores · 3 plazas guardadas',
+    asso: 'Tu club', ecranTitre: '2027-2028 · en preparación', ecranSous: 'Vuelven 14 de 31 antiguos jugadores · 3 plazas guardadas',
     lignes: [
       { nom: 'M15 femenino', detail: '9 de 12 · 3 antiguas sin respuesta', statut: '3 plazas libres', ton: 'neutre' },
       { nom: 'M13 femenino', detail: '8 de 12 · 4 antiguas sin respuesta', statut: '4 plazas libres', ton: 'neutre' },
@@ -150,7 +150,7 @@ export const ECRANS_ES = {
     bouton: 'Avisar a 9 familias',
   }),
   compo: ecran({
-    asso: 'Su club', ecranTitre: 'Sénior femenino · partido del sábado', ecranSous: 'Respuestas a la convocatoria',
+    asso: 'Tu club', ecranTitre: 'Sénior femenino · partido del sábado', ecranSous: 'Respuestas a la convocatoria',
     lignes: [
       { nom: 'Manon', detail: 'Colocadora', statut: 'Presente', ton: 'ok' },
       { nom: 'Jade', detail: 'Central', statut: 'Presente', ton: 'ok' },
@@ -160,7 +160,7 @@ export const ECRANS_ES = {
     pied: { libelle: 'Han respondido', valeur: '9 de 10' }, bouton: 'Guardar la alineación',
   }),
   convocations: ecran({
-    asso: 'Su club', ecranTitre: 'Partido · sábado 17 de octubre, 14 h', ecranSous: 'U13 · 11 presentes · 2 ausentes · 1 sin respuesta',
+    asso: 'Tu club', ecranTitre: 'Partido · sábado 17 de octubre, 14 h', ecranSous: 'U13 · 11 presentes · 2 ausentes · 1 sin respuesta',
     lignes: [
       { nom: 'Nathan Bernard', statut: 'Presente', ton: 'ok' },
       { nom: 'Hugo Arnaud', statut: 'Ausente', ton: 'ko' },
@@ -170,7 +170,7 @@ export const ECRANS_ES = {
     bouton: 'Preparar la alineación',
   }),
   site: ecran({
-    asso: 'Su club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnClub',
+    asso: 'Tu club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnClub',
     lignes: [
       { nom: 'Cursos y equipos', detail: 'desde OnClub', statut: 'Al día', ton: 'ok' },
       { nom: 'Precios y plazas', detail: 'leídos de las inscripciones', statut: 'Al día', ton: 'ok' },
