@@ -417,7 +417,7 @@ export const ES: Record<string, string> = {
   "Oui. Le changement vaut pour les encaissements suivants, sans effet rétroactif. En passant de Pro à Mini, l’association perd ce que Pro ouvre, Cluby compris.": "Sí. El cambio se aplica a los cobros siguientes, sin efecto retroactivo. Al pasar de Pro a Mini, la asociación pierde lo que incluye Pro, Cluby incluido.",
   "Quand l’association est-elle en ligne ?": "¿Cuándo está en línea la asociación?",
   /* — Accueil (src/pages/index.astro et ses composants) — */
-  "Club de sport : inscriptions et cotisations en ligne | OnClub": "Club deportivo: inscripciones y cuotas en línea | OnClub",
+  "OnClub : inscriptions et cotisations en ligne des clubs": "OnClub: inscripciones y cuotas en línea de los clubes",
   "Club de sport ou association : OnClub met en ligne vos inscriptions, vos cotisations et vos relances. Foot, basket, volley, judo… et aussi la musique.": "Club deportivo o asociación: OnClub pone en línea tus inscripciones, tus cuotas y tus recordatorios. Fútbol, baloncesto, voleibol, judo… y también la música.",
   "Association sportive ou artistique ? La paperasse, c’est fini": "¿Asociación deportiva o artística? Se acabó el papeleo",
   "OnClub met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées.": "OnClub pone en línea las inscripciones y las cuotas de tu club. Tus voluntarios recuperan sus noches.",
