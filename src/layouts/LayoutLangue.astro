@@ -18,7 +18,7 @@ import fs from 'node:fs'
 import '../styles/global.css'
 import Sprite from '../components/Sprite.astro'
 import VersFr from '../components/langue/VersFr.astro'
-import { SITE, NOM, EMAIL, lienWhatsApp } from '../data/site'
+import { SITE, NOM, EMAIL, INSTAGRAM, lienWhatsApp } from '../data/site'
 import type { Textes, Langue } from '../i18n/accueil'
 
 interface Props { l: Textes; langue: Langue; faq: { question: string; reponse: string }[] }
@@ -37,6 +37,8 @@ const graphe = [
     logo: { '@type': 'ImageObject', url: `${SITE}/img/logo-512.png`, width: 512, height: 512 },
     email: EMAIL, description: l.orgDescription,
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: ['fr'] },
+    // Les profils officiels : c'est ce qui relie la recherche « onclub » à ce site plutôt qu'à une homonyme.
+    sameAs: [INSTAGRAM],
   },
   { '@type': 'WebSite', '@id': WEB, url: `${SITE}/`, name: NOM, inLanguage: ['fr-FR', 'en', 'es'], publisher: { '@id': ORG } },
   {

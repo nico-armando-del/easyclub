@@ -10,6 +10,7 @@
 export const SITE = 'https://onclub.app'
 export const NOM = 'OnClub'
 export const EMAIL = 'onclub.contact@gmail.com'
+export const INSTAGRAM = 'https://www.instagram.com/onclub.app/'
 export const WHATSAPP = '33645049227'
 export const WHATSAPP_AFFICHE = '+33 6 45 04 92 27'
 export const ACCROCHE = 'Votre club, tout en un.'

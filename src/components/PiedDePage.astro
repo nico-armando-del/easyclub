@@ -7,7 +7,7 @@
   Chaque colonne est un <details open> : sans JavaScript, tout est ouvert ; sous
   760 px, un script les referme (accordéons du téléphone).
 */
-import { FAMILLES, EMAIL, lienWhatsApp, ACCROCHE, MESSAGE_DEMO } from '../data/site'
+import { FAMILLES, EMAIL, INSTAGRAM, lienWhatsApp, ACCROCHE, MESSAGE_DEMO } from '../data/site'
 import { catalogue } from '../lib/collections'
 import { i18n, SR_FR } from '../i18n/ui'
 import { jumelles } from '../i18n/liens'
@@ -83,6 +83,7 @@ const annee = new Date().getFullYear()
             <li><a href={lignes.demo.href} hreflang={lignes.demo.hreflang}>{t('Demander une démo')}{lignes.demo.fr && <VersFr sr={SR_FR} />}</a></li>
             <li><a href={lignes.recommander.href} hreflang={lignes.recommander.hreflang}>{t('Transmettre à mon club')}{lignes.recommander.fr && <VersFr sr={SR_FR} />}</a></li>
             <li><a href={lienWhatsApp(t(MESSAGE_DEMO))} rel="noopener" target="_blank">WhatsApp</a></li>
+            <li><a href={INSTAGRAM} rel="me noopener" target="_blank">Instagram</a></li>
             <li><a href={`mailto:${EMAIL}`}>{t('Écrire un e-mail')}</a></li>
           </ul>
         </details>

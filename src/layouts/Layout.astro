@@ -15,7 +15,7 @@ import EnTete from '../components/EnTete.astro'
 import PiedDePage from '../components/PiedDePage.astro'
 import BoutonDemoFixe from '../components/BoutonDemoFixe.astro'
 import Consentement from '../components/Consentement.astro'
-import { SITE, NOM, EMAIL } from '../data/site'
+import { SITE, NOM, EMAIL, INSTAGRAM } from '../data/site'
 import { i18n, LOCALE, OG_LOCALE } from '../i18n/ui'
 import { jumelles } from '../i18n/liens'
 
@@ -86,6 +86,8 @@ const graphe: Record<string, unknown>[] = [
     email: EMAIL,
     description: t('Plateforme française pour les associations qui inscrivent des adhérents : inscriptions en ligne, cotisations, relances, saisons, site et boutique.'),
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: EMAIL, availableLanguage: ['fr'] },
+    // Les profils officiels : c'est ce qui relie la recherche « onclub » à ce site plutôt qu'à une homonyme.
+    sameAs: [INSTAGRAM],
   },
   { '@type': 'WebSite', '@id': WEB, url: `${SITE}/`, name: NOM, inLanguage: ['fr-FR', 'es-ES', 'en'], publisher: { '@id': ORG } },
   {
