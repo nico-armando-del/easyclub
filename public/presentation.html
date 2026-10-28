@@ -254,17 +254,21 @@ footer a{text-decoration:none;margin-right:16px}
 .sim-champ output{font:700 1.7rem/1 var(--font-head);color:var(--cream);letter-spacing:-.02em}
 .sim-champ small{font-size:.8rem;color:var(--soft);line-height:1.4}
 .sim-champ input[type=range]{width:100%;accent-color:var(--mint);height:28px;cursor:pointer}
-.seg.stripe{background:#635BFF;color:#fff}
+.seg.banque{background:#3B82F6;color:#fff}
+.sim-bloc{margin-top:18px}
+.sim-titre{display:block;font:700 1.05rem var(--font-head);color:var(--cream);margin-bottom:-6px}
+.sim-legende i.perdu{background:var(--amber)}
 .seg[data-vide]{display:none}
 .piste .seg{min-width:0;overflow:hidden;text-overflow:ellipsis}
 .sim-legende{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 0 208px;font-size:.88rem;color:var(--soft)}
 .sim-legende i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:8px;vertical-align:-1px}
-.sim-legende i.cout{background:#2A2F38;outline:1px solid rgba(255,255,255,.25)}.sim-legende i.stripe{background:#635BFF}.sim-legende i.garde{background:var(--mint)}
+.sim-legende i.cout{background:#2A2F38;outline:1px solid rgba(255,255,255,.25)}.sim-legende i.banque{background:#3B82F6}.sim-legende i.garde{background:var(--mint)}
 .sim-tableau{margin-top:26px;overflow-x:auto}
 .sim-tableau table{width:100%;border-collapse:collapse;font-size:.95rem;font-variant-numeric:tabular-nums;color:var(--cream)}
 .sim-tableau th,.sim-tableau td{padding:12px 14px;text-align:right;border-bottom:1px solid rgba(255,255,255,.1);white-space:nowrap}
 .sim-tableau th:first-child,.sim-tableau td:first-child{text-align:left}
 .sim-tableau thead th{font-size:.82rem;color:var(--soft);font-weight:600}
+.sim-tableau tr.reste td{font-weight:700;color:var(--cream)}
 .sim-tableau tr.net td{font-weight:700;color:var(--mint);font-family:var(--font-head);font-size:1.05rem}
 .sim-tableau td.neg{color:var(--amber)!important}
 @media (max-width:700px){.ligne-barre{grid-template-columns:1fr;gap:8px}.sim-legende{margin-left:0}.piste{height:54px}.seg{padding:0 10px;font-size:.85rem}}
@@ -2672,20 +2676,20 @@ new IntersectionObserver(function(x){x.forEach(function(y){vois(y.isIntersecting
         <h3>OnClub Mini</h3>
         <p class="taux">2,9 %<small>des paiements encaissés</small></p>
         <ul><li>Inscriptions et paiements en ligne</li><li>Relances et suivi de l’argent</li><li>Pièces justificatives</li><li>Tableau de bord et exports</li><li>Sans l’assistant</li></ul>
-        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b data-sim-gain="mini">+ 3 550 €</b><p data-sim-detail="mini">5 000 € récupérés, 1 450 € pour OnClub.</p></div><div class="temps"><b>+ 51 h</b><p>rendues au bureau par saison.</p></div></div></div>
+        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b data-sim-gain="mini">+ 3 550 €</b><p data-sim-detail="mini">5 000 € récupérés, 1 450 € pour OnClub.</p></div><div class="temps"><b>+ 51 h</b><p>rendues au bureau par saison, soit 17 soirs de bénévole de 3 h.</p></div></div></div>
       </div>
       <div class="offre">
         <h3>OnClub Pro</h3>
         <p class="taux">4,9 %<small>des paiements encaissés</small></p>
         <ul><li>Tout Mini</li><li>Les saisons, la suivante ouverte en un clic</li><li>Le site du club</li><li>Liste d’attente et messages aux familles</li><li>Cluby, 100 questions par mois</li></ul>
-        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b data-sim-gain="pro">+ 2 550 €</b><p data-sim-detail="pro">5 000 € récupérés, 2 450 € pour OnClub.</p></div><div class="temps"><b>+ 75 h</b><p>rendues au bureau par saison.</p></div></div></div>
+        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b data-sim-gain="pro">+ 2 550 €</b><p data-sim-detail="pro">5 000 € récupérés, 2 450 € pour OnClub.</p></div><div class="temps"><b>+ 75 h</b><p>rendues au bureau par saison, soit 25 soirs de bénévole de 3 h.</p></div></div></div>
       </div>
       <div class="offre phare">
         <p class="tag">Avec la boutique</p>
         <h3>OnClub Pro Max IA</h3>
         <p class="taux">6,9 %<small>des paiements encaissés</small></p>
         <ul><li>Tout Pro</li><li>La boutique en ligne, 2 % sur les ventes</li><li>Événements et stages</li><li>Cluby, sans limite</li></ul>
-        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b data-sim-gain="max">+ 1 550 €</b><p data-sim-detail="max">5 000 € récupérés, 3 450 € pour OnClub.</p></div><div class="temps"><b>+ 97 h</b><p>rendues au bureau par saison.</p></div></div></div>
+        <div class="gain"><span>Comparé à aujourd’hui</span><div class="gain-duo"><div><b data-sim-gain="max">+ 1 550 €</b><p data-sim-detail="max">5 000 € récupérés, 3 450 € pour OnClub.</p></div><div class="temps"><b>+ 97 h</b><p>rendues au bureau par saison, soit 32 soirs de bénévole de 3 h.</p></div></div></div>
       </div>
     </div>
   </div>
@@ -2699,25 +2703,33 @@ new IntersectionObserver(function(x){x.forEach(function(y){vois(y.isIntersecting
     <div class="perte monte">
       <div class="sim" id="simulateur" aria-label="Simulateur pour votre club">
         <p class="groupe-barres">Simulez avec les chiffres de votre club</p>
+        <div class="sim-bloc"><span class="sim-titre">Aujourd’hui</span>
         <div class="sim-reglages">
-          <label class="sim-champ"><span>Cotisations encaissées par saison</span><output data-sim-out="ca">50 000 €</output><input type="range" min="10000" max="500000" step="5000" value="50000" data-sim="ca" aria-label="Cotisations encaissées par saison"></label>
-          <label class="sim-champ"><span>Payées par carte ou virement</span><output data-sim-out="carte">100 %</output><input type="range" min="0" max="100" step="5" value="100" data-sim="carte" aria-label="Part payée par carte ou virement"><small data-sim-out="cash">0 % en espèces ou chèque, non commissionnés</small></label>
-          <label class="sim-champ"><span>Perdu aujourd’hui</span><output data-sim-out="perte">10 %</output><input type="range" min="0" max="25" step="1" value="10" data-sim="perte" aria-label="Part des cotisations perdue aujourd’hui"><small>impayés, chèques qui traînent, relances abandonnées</small></label>
-          <label class="sim-champ"><span>Paiement moyen</span><output data-sim-out="moyen">250 €</output><input type="range" min="50" max="800" step="10" value="250" data-sim="moyen" aria-label="Montant moyen d’un paiement"><small>pour les frais fixes de carte, 0,25 € par paiement</small></label>
-        </div>
+          <label class="sim-champ"><span>Cotisations par saison</span><output data-sim-out="ca"></output><input type="range" min="10000" max="500000" step="5000" value="50000" data-sim="ca" aria-label="Cotisations encaissées par saison"></label>
+          <label class="sim-champ"><span>Perdu chaque saison</span><output data-sim-out="perte"></output><input type="range" min="0" max="25" step="1" value="10" data-sim="perte" aria-label="Part des cotisations perdue aujourd’hui"><small>impayés, chèques qui traînent, relances abandonnées</small></label>
+          <label class="sim-champ"><span>Payé par carte aujourd’hui</span><output data-sim-out="carteAvant"></output><input type="range" min="0" max="100" step="5" value="50" data-sim="carteAvant" aria-label="Part payée par carte aujourd’hui"><small>au terminal de la banque</small></label>
+          <label class="sim-champ"><span>Frais de votre banque</span><output data-sim-out="banque"></output><input type="range" min="0" max="4" step="0.05" value="1.75" data-sim="banque" aria-label="Frais bancaires actuels sur la carte"><small>sur chaque paiement par carte</small></label>
+        </div></div>
+        <div class="sim-bloc"><span class="sim-titre">Avec OnClub</span>
+        <div class="sim-reglages">
+          <label class="sim-champ"><span>Par carte</span><output data-sim-out="carte"></output><input type="range" min="0" max="100" step="5" value="100" data-sim="carte" aria-label="Part payée par carte avec OnClub"><small>Stripe : 1,5 % + 0,25 € par paiement</small></label>
+          <label class="sim-champ"><span>Par virement</span><output data-sim-out="virement"></output><input type="range" min="0" max="100" step="5" value="0" data-sim="virement" aria-label="Part payée par virement avec OnClub"></label>
+          <div class="sim-champ"><span>Espèces ou chèque</span><output data-sim-out="cash"></output><small>notés par le bureau, sans commission ni suivi du paiement en ligne</small></div>
+          <label class="sim-champ"><span>Paiement moyen</span><output data-sim-out="moyen"></output><input type="range" min="10" max="800" step="5" value="50" data-sim="moyen" aria-label="Montant moyen d’un paiement par carte"><small data-sim-out="nbPaiements"></small></label>
+        </div></div>
         <p class="groupe-barres">L’argent, sur une saison</p>
-        <div class="ligne-barre"><b>Aujourd’hui</b><div class="piste"><div class="seg perdu" style="width:100%" data-sim-perdu>5 000 € perdus</div></div></div>
-        <div class="ligne-barre" data-sim-ligne="mini"><b>Avec Mini</b><div class="piste"><div class="seg cout"></div><div class="seg stripe"></div><div class="seg garde"></div></div></div>
-        <div class="ligne-barre" data-sim-ligne="pro"><b>Avec Pro</b><div class="piste"><div class="seg cout"></div><div class="seg stripe"></div><div class="seg garde"></div></div></div>
-        <div class="ligne-barre" data-sim-ligne="max"><b>Avec Pro Max IA</b><div class="piste"><div class="seg cout"></div><div class="seg stripe"></div><div class="seg garde"></div></div></div>
-        <div class="sim-legende"><span><i class="cout"></i>OnClub</span><span><i class="stripe"></i>Stripe, frais de carte</span><span><i class="garde"></i>Gagné par le club</span></div>
+        <div class="ligne-barre" data-sim-ligne="avant"><b>Aujourd’hui</b><div class="piste"><div class="seg perdu"></div><div class="seg banque"></div></div></div>
+        <div class="ligne-barre" data-sim-ligne="mini"><b>Avec Mini</b><div class="piste"><div class="seg cout"></div><div class="seg banque"></div><div class="seg garde"></div></div></div>
+        <div class="ligne-barre" data-sim-ligne="pro"><b>Avec Pro</b><div class="piste"><div class="seg cout"></div><div class="seg banque"></div><div class="seg garde"></div></div></div>
+        <div class="ligne-barre" data-sim-ligne="max"><b>Avec Pro Max IA</b><div class="piste"><div class="seg cout"></div><div class="seg banque"></div><div class="seg garde"></div></div></div>
+        <div class="sim-legende"><span><i class="perdu"></i>Perdu</span><span><i class="banque"></i>Frais bancaires (votre banque, puis Stripe)</span><span><i class="cout"></i>OnClub</span><span><i class="garde"></i>Gagné par le club</span></div>
         <div class="sim-tableau" data-sim-tableau></div>
       </div>
       <p class="groupe-barres">Le temps rendu au bureau, sur une saison</p>
-      <div class="ligne-barre"><b>Avec Mini</b><div class="piste"><div class="seg heures" style="width:51%">51 heures</div></div></div>
-      <div class="ligne-barre"><b>Avec Pro</b><div class="piste"><div class="seg heures" style="width:75%">75 heures</div></div></div>
-      <div class="ligne-barre"><b>Avec Pro Max IA</b><div class="piste"><div class="seg heures" style="width:97%">97 heures</div></div></div>
-      <p class="note">Le gain compare à aujourd’hui : l’argent qui ne se perd plus, moins ce que prennent OnClub (un pourcentage de ce qui est payé par carte ou virement) et Stripe (1,5 % + 0,25 € par paiement par carte). Les chèques et les espèces notés par le bureau ne sont commissionnés ni par l’un ni par l’autre. Exemple à refaire avec les chiffres de votre club, pas une promesse. Plus l’offre est complète, moins il reste d’argent, mais plus le bureau récupère de temps. Le temps, notre estimation pour 250 licenciés : Mini couvre les fiches, le suivi des paiements, les relances et les pièces (51 h) ; Pro ajoute la rentrée suivante (10 h), les messages aux familles (10 messages de 45 min → 5 min, 6 h 40), la liste d’attente (20 places de 10 min → 1 min, 3 h) et le site mis à jour sans prestataire (4 h) ; Pro Max IA ajoute la boutique (150 commandes de 6 min → 1 min au retrait, 12 h 30) et les événements (4 événements de 3 h → 30 min, 10 h).</p>
+      <div class="ligne-barre"><b>Avec Mini</b><div class="piste"><div class="seg heures" style="width:51%">51 h · 17 soirs · 3 semaines et demie</div></div></div>
+      <div class="ligne-barre"><b>Avec Pro</b><div class="piste"><div class="seg heures" style="width:75%">75 h · 25 soirs · 5 semaines</div></div></div>
+      <div class="ligne-barre"><b>Avec Pro Max IA</b><div class="piste"><div class="seg heures" style="width:97%">97 h · 32 soirs · 6 semaines et demie</div></div></div>
+      <p class="note">Le gain compare ce qui reste au club aujourd’hui (les cotisations, moins ce qui se perd et les frais de sa banque sur la carte) à ce qui lui reste avec OnClub (moins le pourcentage OnClub sur la carte et le virement, et les frais Stripe sur la carte : 1,5 % + 0,25 € par paiement). Plus le club passe à la carte, plus il récupère d’argent et de suivi. Les chèques et les espèces notés par le bureau ne sont commissionnés ni par OnClub ni par Stripe. Exemple à refaire avec les chiffres de votre club, pas une promesse. Plus l’offre est complète, moins il reste d’argent, mais plus le bureau récupère de temps. Un soir de bénévole, c’est 3 h au club après le travail, du lundi au vendredi : 97 h, ce sont 32 soirs, plus de six semaines. Le temps, notre estimation pour 250 licenciés : Mini couvre les fiches, le suivi des paiements, les relances et les pièces (51 h) ; Pro ajoute la rentrée suivante (10 h), les messages aux familles (10 messages de 45 min → 5 min, 6 h 40), la liste d’attente (20 places de 10 min → 1 min, 3 h) et le site mis à jour sans prestataire (4 h) ; Pro Max IA ajoute la boutique (150 commandes de 6 min → 1 min au retrait, 12 h 30) et les événements (4 événements de 3 h → 30 min, 10 h).</p>
     </div>
   </div>
 </section>
@@ -2773,58 +2785,75 @@ new IntersectionObserver(function(x){x.forEach(function(y){vois(y.isIntersecting
 <script defer src="/_vercel/insights/script.js"></script>
 
 <script>
-/* LE SIMULATEUR : un seul calcul, pour les barres, le tableau et les trois offres. */
+/* LE SIMULATEUR : un seul calcul, pour les barres, le tableau et les trois offres.
+   Patrick, 28 octobre : comparer ce qui reste au club AUJOURD'HUI (cotisations −
+   ce qui se perd − les frais de sa banque sur la carte) à ce qui reste AVEC
+   OnClub (cotisations − OnClub − Stripe), les frais bancaires en bleu. */
 (() => {
   const OFFRES = { mini: { nom: 'Mini', taux: 0.029 }, pro: { nom: 'Pro', taux: 0.049 }, max: { nom: 'Pro Max IA', taux: 0.069 } }
   const STRIPE = { pct: 0.015, fixe: 0.25 }
   const q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)]
   const eur = (n) => `${n < 0 ? '− ' : ''}${Math.round(Math.abs(n)).toLocaleString('fr-FR')} €`
-  const lire = () => Object.fromEntries(qa('[data-sim]').map((i) => [i.dataset.sim, Number(i.value)]))
+  const pct = (n) => `${String(Math.round(n * 100) / 100).replace('.', ',')} %`
+  const val = (k) => Number(q(`[data-sim="${k}"]`).value)
+  function lire() {
+    // La carte et le virement ne dépassent pas 100 % à eux deux : le reste est en espèces ou chèque.
+    const carte = val('carte')
+    const vir = q('[data-sim="virement"]')
+    if (carte + Number(vir.value) > 100) vir.value = String(100 - carte)
+    return { ca: val('ca'), perte: val('perte'), carteAvant: val('carteAvant'), banque: val('banque'), carte, virement: Number(vir.value), moyen: val('moyen') }
+  }
   function calcul(v) {
-    const enLigne = v.ca * v.carte / 100
-    const paiements = v.moyen > 0 ? Math.round(enLigne / v.moyen) : 0
-    const stripe = enLigne * STRIPE.pct + paiements * STRIPE.fixe
     const perdu = v.ca * v.perte / 100
+    const fraisBanque = v.ca * v.carteAvant / 100 * v.banque / 100
+    const resteAvant = v.ca - perdu - fraisBanque
+    const parCarte = v.ca * v.carte / 100
+    const enLigne = v.ca * (v.carte + v.virement) / 100
+    const paiements = v.moyen > 0 ? Math.round(parCarte / v.moyen) : 0
+    const stripe = parCarte * STRIPE.pct + paiements * STRIPE.fixe
     const offres = Object.fromEntries(Object.entries(OFFRES).map(([k, o]) => {
       const onclub = enLigne * o.taux
-      return [k, { ...o, onclub, stripe, gain: perdu - onclub - stripe }]
+      const reste = v.ca - onclub - stripe
+      return [k, { ...o, onclub, stripe, reste, gain: reste - resteAvant }]
     }))
-    return { ...v, enLigne, paiements, stripe, perdu, offres }
+    return { ...v, perdu, fraisBanque, resteAvant, parCarte, enLigne, paiements, stripe, offres }
   }
   function pinta() {
     const r = calcul(lire())
-    q('[data-sim-out="ca"]').textContent = eur(r.ca)
-    q('[data-sim-out="carte"]').textContent = `${r.carte} %`
-    q('[data-sim-out="cash"]').textContent = `${100 - r.carte} % en espèces ou chèque, non commissionnés`
-    q('[data-sim-out="perte"]').textContent = `${r.perte} %`
-    q('[data-sim-out="moyen"]').textContent = eur(r.moyen)
-    q('[data-sim-perdu]').textContent = r.perdu > 0 ? `${eur(r.perdu)} perdus` : 'Rien de perdu'
-    // Les barres : l'échelle est la plus grande des deux, l'argent perdu ou les frais.
-    const echelle = Math.max(r.perdu, ...Object.values(r.offres).map((o) => o.onclub + o.stripe), 1)
-    q('[data-sim-perdu]').style.width = `${Math.max(r.perdu / echelle * 100, 0)}%`
+    const out = (k, t) => { const e = q(`[data-sim-out="${k}"]`); if (e) e.textContent = t }
+    out('ca', eur(r.ca)); out('perte', `${r.perte} %  ·  ${eur(r.perdu)}`); out('carteAvant', `${r.carteAvant} %`); out('banque', pct(r.banque))
+    out('carte', `${r.carte} %`); out('virement', `${r.virement} %`); out('cash', `${100 - r.carte - r.virement} %`)
+    out('moyen', eur(r.moyen)); out('nbPaiements', `${r.paiements.toLocaleString('fr-FR')} paiements par carte sur la saison`)
+    // L'échelle : ce que coûte la situation la plus chère.
+    const couts = { avant: r.perdu + r.fraisBanque, ...Object.fromEntries(Object.entries(r.offres).map(([k, o]) => [k, o.onclub + o.stripe + Math.max(o.gain, 0)])) }
+    const echelle = Math.max(...Object.values(couts), 1)
+    const pose = (el, n, texte, seuil = 0.09) => {
+      el.toggleAttribute('data-vide', n <= 0)
+      el.style.width = `${Math.max(n / echelle * 100, 0)}%`
+      el.textContent = n >= echelle * seuil ? texte : ''
+      el.title = eur(n)
+    }
+    const [perdu, banqueAvant] = qa('[data-sim-ligne="avant"] .seg')
+    pose(perdu, r.perdu, `${eur(r.perdu)} perdus`, 0.2); pose(banqueAvant, r.fraisBanque, eur(r.fraisBanque))
     for (const [k, o] of Object.entries(r.offres)) {
       const [cout, stripe, garde] = qa(`[data-sim-ligne="${k}"] .seg`)
-      const larg = (n) => `${Math.max(n / echelle * 100, 0)}%`
-      cout.style.width = larg(o.onclub); cout.textContent = o.onclub >= echelle * 0.09 ? eur(o.onclub) : ''
-      stripe.style.width = larg(o.stripe); stripe.textContent = o.stripe >= echelle * 0.09 ? eur(o.stripe) : ''
-      garde.style.width = larg(Math.max(o.gain, 0)); garde.textContent = o.gain > echelle * 0.3 ? `${eur(o.gain)} gagnés` : o.gain > echelle * 0.08 ? eur(o.gain) : ''
-      for (const [el, n] of [[cout, o.onclub], [stripe, o.stripe], [garde, Math.max(o.gain, 0)]]) {
-        el.toggleAttribute('data-vide', n <= 0)
-        el.title = eur(n)
-      }
+      pose(cout, o.onclub, eur(o.onclub)); pose(stripe, o.stripe, eur(o.stripe))
+      pose(garde, Math.max(o.gain, 0), o.gain > echelle * 0.3 ? `${eur(o.gain)} gagnés` : eur(o.gain))
       const g = q(`[data-sim-gain="${k}"]`), d = q(`[data-sim-detail="${k}"]`)
       if (g) g.textContent = `${o.gain >= 0 ? '+ ' : ''}${eur(o.gain)}`
-      if (d) d.textContent = `${eur(r.perdu)} récupérés, ${eur(o.onclub)} pour OnClub, ${eur(o.stripe)} de frais de carte.`
+      if (d) d.textContent = `${eur(r.perdu)} récupérés et ${eur(r.fraisBanque)} de frais de banque en moins ; ${eur(o.onclub)} pour OnClub, ${eur(o.stripe)} pour Stripe.`
     }
-    const lignes = [
-      ['Payé par carte ou virement', ...Object.keys(OFFRES).map(() => eur(r.enLigne))],
-      ['Argent récupéré', ...Object.keys(OFFRES).map(() => eur(r.perdu))],
-      ['OnClub', ...Object.values(r.offres).map((o) => `− ${eur(o.onclub)}`)],
-      [`Stripe (${r.paiements.toLocaleString('fr-FR')} paiements)`, ...Object.values(r.offres).map((o) => `− ${eur(o.stripe)}`)],
-    ]
-    q('[data-sim-tableau]').innerHTML = `<table><thead><tr><th></th>${Object.values(OFFRES).map((o) => `<th>${o.nom}</th>`).join('')}</tr></thead><tbody>${
-      lignes.map((l) => `<tr>${l.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')
-    }<tr class="net"><td>Gagné par le club</td>${Object.values(r.offres).map((o) => `<td class="${o.gain < 0 ? 'neg' : ''}">${o.gain >= 0 ? '+ ' : ''}${eur(o.gain)}</td>`).join('')}</tr></tbody></table>`
+    const cols = Object.values(r.offres)
+    const ligne = (titre, avant, f, cls = '') => `<tr class="${cls}"><td>${titre}</td><td>${avant}</td>${cols.map((o) => `<td class="${cls === 'net' && o.gain < 0 ? 'neg' : ''}">${f(o)}</td>`).join('')}</tr>`
+    q('[data-sim-tableau]').innerHTML = `<table><thead><tr><th></th><th>Aujourd’hui</th>${cols.map((o) => `<th>${o.nom}</th>`).join('')}</tr></thead><tbody>
+      ${ligne('Cotisations', eur(r.ca), () => eur(r.ca))}
+      ${ligne('Perdu', `− ${eur(r.perdu)}`, () => '0 €')}
+      ${ligne('Frais de votre banque', `− ${eur(r.fraisBanque)}`, () => '0 €')}
+      ${ligne(`Stripe (${r.paiements.toLocaleString('fr-FR')} paiements)`, '0 €', (o) => `− ${eur(o.stripe)}`)}
+      ${ligne('OnClub', '0 €', (o) => `− ${eur(o.onclub)}`)}
+      ${ligne('Reste au club', eur(r.resteAvant), (o) => eur(o.reste), 'reste')}
+      ${ligne('Gagné par rapport à aujourd’hui', '', (o) => `${o.gain >= 0 ? '+ ' : ''}${eur(o.gain)}`, 'net')}
+    </tbody></table>`
     const intro = q('[data-sim-intro]')
     if (intro) intro.textContent = `Sur votre exemple, un club de ${eur(r.ca)} de cotisations qui perd ${r.perte} % aujourd’hui.`
   }
