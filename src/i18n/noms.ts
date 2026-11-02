@@ -35,7 +35,7 @@ export const NOMS_ES: Record<Collection, Record<string, Nom>> = {
     'seances-essai': { nom: 'Sesiones de prueba', ligne: 'Los nuevos reservan solos, tú sabes quién viene' },
     'site-association': { nom: 'Web de la asociación', ligne: '4 h de actualizaciones sin proveedor externo' },
     'suivi-des-paiements': { nom: 'Seguimiento de pagos', ligne: '12 h 30 de hoja de cálculo reducidas a 1 h' },
-    'vente-au-comptoir': { nom: 'Venta en mostrador', ligne: 'El puesto del partido cobra, contado aparte' },
+    'vente-au-comptoir': { nom: 'Venta en mostrador', ligne: 'Una camiseta vendida en el puesto, el stock online se actualiza' },
   },
   sports: {
     aeroclub: { nom: 'Aeroclub' }, aeromodelisme: { nom: 'Aeromodelismo' }, aikido: { nom: 'Aikido' },
