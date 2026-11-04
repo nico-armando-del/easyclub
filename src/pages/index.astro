@@ -65,7 +65,7 @@ const ongletsVersFr = es && ONGLETS.some((o) => !o.lien.href.startsWith('/es')) 
 /* La FAQ : six questions, inchangées (arbitrage 14) ; le JSON-LD est construit à partir de la même liste. */
 const faq = [
   { question: t('OnClub, c’est pour quelles associations ?'), reponse: t('Pour toutes celles qui inscrivent des adhérents, avec des équipes ou des cours et des cotisations : d’abord les clubs de sport (foot, basket, volley, judo, tennis…), aussi les écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
-  { question: t('Combien coûte OnClub ?'), reponse: t('Un abonnement au pourcentage des cotisations encaissées en ligne : 2,90 % avec OnClub Mini, 4,90 % avec Pro, 6,90 % avec Pro Max IA, plus 2 % sur la boutique. Rien de fixe, et rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.') },
+  { question: t('Combien coûte OnClub ?'), reponse: t('Le tarif dépend de votre club et de l’offre choisie : pour le connaître, il faut nous consulter. Rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.') },
   { question: t('D’où viennent les 61 heures rendues ?'), reponse: t('C’est une estimation OnClub pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnClub. Le calcul et les hypothèses sont sur la page du temps gagné.') },
   { question: t('Les familles doivent-elles créer un compte ?'), reponse: t('Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien. Pour une convocation, elle répond présent ou absent depuis le mail.') },
   { question: t('En combien de temps notre association est-elle en ligne ?'), reponse: `${t(MISE_EN_ROUTE)} ${t('Vous déposez le tableur de la saison passée : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription.')}` },
@@ -142,11 +142,11 @@ const pourQui = vers('/pour-qui')
   <section class="section fond-blanc" aria-labelledby="t-offres">
     <div class="enveloppe">
       <div class="accueil-tete">
-      <h2 class="h2-idee accueil-h2" id="t-offres">{t('Un pourcentage. Rien de fixe')}</h2>
-      <p class="intro">{t('Un pourcentage des cotisations encaissées en ligne. Rien sur les chèques ni les espèces. Frais de carte à la charge de l’association.')}</p>
+      <h2 class="h2-idee accueil-h2" id="t-offres">{t('Trois offres. Le tarif, sur devis')}</h2>
+      <p class="intro">{t('Le tarif dépend de votre club : il faut nous consulter. Rien sur les chèques ni les espèces. Frais de carte à la charge de l’association.')}</p>
       </div>
       <div class="accueil-offres"><Offres mode="accueil" /></div>
-      <a class="lien-fleche" href={lien('/tarifs')}>{t('Le détail des offres et un exemple chiffré')} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
+      <a class="lien-fleche" href={lien('/tarifs')}>{t('Le détail des offres')} <svg aria-hidden="true"><use href="#fleche"/></svg></a>
     </div>
   </section>
 

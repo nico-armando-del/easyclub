@@ -69,15 +69,13 @@ const bande = [...(await cartesSports(langue)), ...arts]
 /* ---- Les offres : les mots et les listes traduits ; les hypothèses sans leur préfixe « * Estimation… ». */
 const offres: TextesOffres = {
   rendues: r.offres.rendues,
-  leg: '',
-  boutique: r.offres.boutique,
+  tarif: l.offres.tarif,
   ouvre: r.offres.ouvre,
   note: r.offres.note,
   comment: r.offres.comment,
   hypotheses: l.offres.note.replace(/^\*\s*[^.]*\.\s*/, ''),
   listes: l.offres.ouvre,
   demo: l.offres.voir,
-  taux: l.offres.taux,
 }
 
 /* ---- Les ressources (en français). */

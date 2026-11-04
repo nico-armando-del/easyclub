@@ -1,12 +1,11 @@
 ---
 /*
-  LES TARIFS. Les taux et ce que chaque offre ouvre viennent de src/data/site.ts
+  LES TARIFS, SUR DEVIS. Aucun taux n'est publié (Nico, 4 novembre 2026) : « il
+  faut nous consulter ». Ce que chaque offre ouvre vient de src/data/site.ts
   (OFFRES) ; le tableau « fonctionnalité par offre » est construit à partir du
-  champ `offre` de chaque fonctionnalité. L'exemple chiffré est CALCULÉ ici à
-  partir des mêmes constantes (taux, frais de carte) : rien n'est tapé à la main.
-  Ordre (maquettes §B.4) : héros compact, les offres (listes ouvertes), l'exemple
-  chiffré en tableau à filets, les frais de carte, les replis (fonctionnalité par
-  offre, hypothèses), la FAQ, la case vide compacte.
+  champ `offre` de chaque fonctionnalité.
+  Ordre : héros compact, les offres (listes ouvertes), les replis (fonctionnalité
+  par offre, hypothèses), la FAQ, la case vide compacte.
 */
 import Layout from '../layouts/Layout.astro'
 import HerosCompact from '../components/HerosCompact.astro'
@@ -14,43 +13,31 @@ import Offres from '../components/Offres.astro'
 import Repli from '../components/Repli.astro'
 import Faq from '../components/Faq.astro'
 import CaseVide from '../components/CaseVide.astro'
-import { OFFRES, FRAIS_CARTE, NOM_OFFRE, MISE_EN_ROUTE } from '../data/site'
+import { NOM_OFFRE, MISE_EN_ROUTE, TARIF_PHRASE } from '../data/site'
 import { HYPOTHESES, HYPOTHESES_OFFRES } from '../data/temps'
 import VersFr from '../components/langue/VersFr.astro'
 import { catalogue } from '../lib/collections'
 import { i18n, SR_FR } from '../i18n/ui'
 
 /* Une seule page pour les deux langues : /es/tarifs l'importe, les textes passent par t(). */
-const { langue, t, lien, euros: eurosL } = i18n(Astro.url)
+const { langue, t, lien } = i18n(Astro.url)
 const fonctions = await catalogue('fonctionnalites', langue)
 const RANG = { mini: 0, pro: 1, max: 2 } as const
 const cles = ['mini', 'pro', 'max'] as const
 
-const euros = (c: number) => eurosL(c)
-const pro = OFFRES.find((o) => o.cle === 'pro')!
-const tauxPro = parseFloat(pro.taux.replace(',', '.')) / 100
-function exemple(prixCents: number) {
-  const commission = Math.round(prixCents * tauxPro)
-  const carte = Math.round(prixCents * FRAIS_CARTE.pourcentage) + FRAIS_CARTE.fixeCents
-  return { prix: prixCents, commission, carte, recu: prixCents - commission - carte }
-}
-const COTISATION = 20000
-const DOSSIER = 1000
-const a = exemple(COTISATION)
-const b = exemple(COTISATION + DOSSIER)
-
 const fil = [{ nom: t('Tarifs'), url: lien('/tarifs') }]
 const faq = [
+  { question: t('Combien coûte OnClub ?'), reponse: t('Le tarif dépend de votre club et de l’offre choisie. Pour le connaître, il faut nous consulter : demandez une démo ou écrivez-nous, on vous répond avec le tarif de votre association.') },
   { question: t('Y a-t-il un abonnement fixe ou des frais d’installation ?'), reponse: t('Non. L’abonnement est un pourcentage des cotisations encaissées en ligne, et rien d’autre : ni frais fixe, ni frais d’installation, ni coût par adhérent, ni minimum.') },
   { question: t('Les chèques et les espèces sont-ils comptés ?'), reponse: t('Non. Ce que le bureau note lui-même, en chèque ou en espèces, ne passe pas par la commission. Seul ce qui est payé en ligne compte.') },
-  { question: t('Qui paie les frais de carte bancaire ?'), reponse: t('L’association. Beaucoup les couvrent par des frais de dossier inclus dans le prix d’inscription, appliqués à toutes les familles quel que soit le moyen de paiement. L’exemple chiffré de cette page montre les deux cas.') },
+  { question: t('Qui paie les frais de carte bancaire ?'), reponse: t('L’association. Beaucoup les couvrent par des frais de dossier inclus dans le prix d’inscription, appliqués à toutes les familles quel que soit le moyen de paiement.') },
   { question: t('Peut-on changer d’offre en cours de saison ?'), reponse: t('Oui. Le changement vaut pour les encaissements suivants, sans effet rétroactif. En passant de Pro à Mini, l’association perd ce que Pro ouvre, Cluby compris.') },
   { question: t('Quand l’association est-elle en ligne ?'), reponse: t(MISE_EN_ROUTE) },
 ]
 ---
 <Layout
-  titre={t('Tarifs OnClub : un pourcentage, rien de fixe')}
-  description={t('Les tarifs d’OnClub : 2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne, rien de fixe. Ce que chaque offre ouvre, le temps rendu, un exemple chiffré.')}
+  titre={t('Tarifs OnClub : sur devis, selon votre club')}
+  description={t('Les offres d’OnClub, Mini, Pro et Pro Max IA : ce que chacune ouvre et le temps qu’elle rend. Le tarif dépend de votre club : il faut nous consulter.')}
   chemin={lien('/tarifs')}
   fil={fil}
   faq={faq}
@@ -58,10 +45,10 @@ const faq = [
   <HerosCompact
     fil={fil}
     surtitre={t('Tarifs')}
-    titre={t('Un abonnement au pourcentage. Rien de fixe')}
-    phrase={t('Une part de ce que l’association encaisse en ligne. Rien sur les chèques ni les espèces. Plus l’offre est complète, plus elle rend de temps.')}
-    cta={{ texte: t('Demander une démo'), href: lien('/demo') }}
-    lien={{ texte: t('L’exemple chiffré'), href: '#exemple' }}
+    titre={t('Le tarif, sur devis')}
+    phrase={t(TARIF_PHRASE) + ' ' + t('Plus l’offre est complète, plus elle rend de temps.')}
+    cta={{ texte: t('Demander le tarif'), href: lien('/demo') }}
+    lien={{ texte: t('Ce que chaque offre ouvre'), href: '#t-offres' }}
   />
 
   <section class="section section-offres" aria-labelledby="t-offres">
@@ -94,31 +81,6 @@ const faq = [
     </div>
   </section>
 
-  <section class="section fond-blanc" id="exemple" aria-labelledby="t-exemple">
-    <div class="enveloppe exemple-chiffre">
-      <div class="section-tete">
-        <h2 id="t-exemple" class="h2-idee">{t('Un exemple chiffré, au centime')}</h2>
-        <p>{t('Une cotisation de {montant} payée par carte, avec OnClub Pro. Les frais de carte sont à la charge de l’association.', { montant: euros(COTISATION) })}</p>
-      </div>
-      <div class="tableau-defile" data-defile-x>
-        <table class="tableau-exemple">
-          <caption class="sr">{t('Ce que l’association reçoit d’une cotisation de {montant} payée par carte, sans puis avec des frais de dossier', { montant: euros(COTISATION) })}</caption>
-          <thead><tr><td></td><th scope="col">{t('Sans frais de dossier')}</th><th scope="col">{t('Avec {montant} de frais de dossier', { montant: euros(DOSSIER) })}</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">{t('La famille paie')}</th><td class="num">{euros(a.prix)}</td><td class="num">{euros(b.prix)}</td></tr>
-            <tr><th scope="row">OnClub Pro, {pro.taux}</th><td class="num">− {euros(a.commission)}</td><td class="num">− {euros(b.commission)}</td></tr>
-            <tr><th scope="row">{t('Frais de carte, {texte}', { texte: t(FRAIS_CARTE.texte) })}</th><td class="num">− {euros(a.carte)}</td><td class="num">− {euros(b.carte)}</td></tr>
-            <tr class="total"><th scope="row">{t('L’association reçoit')}</th><td class="num">{euros(a.recu)}</td><td class="num">{euros(b.recu)}</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="frais">
-        <h3>{t('Les frais de carte')}</h3>
-        <p>{t('Dans la seconde colonne, l’association ajoute {dossier} de frais de dossier au prix d’inscription, pour toutes les familles, quel que soit le moyen de paiement. Une famille qui paie par chèque règle aussi {total}, sans commission ni frais de carte.', { dossier: euros(DOSSIER), total: euros(b.prix) })}</p>
-        <p class="note">{t('Exemple, pas un devis. Frais de carte : tarif standard de Stripe pour les cartes de l’Espace économique européen,')} <a href={FRAIS_CARTE.source} target="_blank" rel="noopener">{t('grille tarifaire Stripe')}</a>{t(', consultée le {date}. Les cotisations payées en plusieurs fois suivent la même règle, échéance par échéance.', { date: t(FRAIS_CARTE.consulte) })}</p>
-      </div>
-    </div>
-  </section>
 
   <div class="section"><div class="enveloppe"><Faq items={faq} disposition="deux-colonnes" /></div></div>
   <CaseVide compact />
@@ -139,18 +101,4 @@ const faq = [
 .tableau-offres thead th:first-child{text-align:left}
 .oui svg{width:20px;height:20px;margin:0 auto;color:var(--sapin)}
 .non{color:var(--gris)}
-.exemple-chiffre .section-tete{margin-bottom:var(--e-6)}
-.tableau-exemple{width:100%;max-width:820px;border-collapse:collapse;font-size:var(--t-petit)}
-.tableau-exemple th,.tableau-exemple td{padding:14px 12px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:top}
-.tableau-exemple thead th{font:700 1rem/1.25 var(--f-titre);border-bottom:2px solid var(--encre)}
-.tableau-exemple thead td{border-bottom:2px solid var(--encre)}
-.tableau-exemple tbody th{font-weight:500;color:var(--gris)}
-.tableau-exemple td{font-weight:700;white-space:nowrap;text-align:right}
-.tableau-exemple thead th:not(:first-child){text-align:right}
-.tableau-exemple .total th{color:var(--encre);font-weight:700;border-bottom:0}
-.tableau-exemple .total td{font:800 1.375rem/1 var(--f-titre);border-bottom:0;padding-top:18px}
-@media (max-width:520px){.tableau-exemple th,.tableau-exemple td{padding:12px 6px}.tableau-exemple{font-size:.875rem}}
-.frais{margin-top:var(--e-6);max-width:var(--lecture)}
-.frais h3{font-size:1.25rem}
-.frais p{margin-top:var(--e-3)}
 </style>

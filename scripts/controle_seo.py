@@ -18,7 +18,7 @@ Ce qui est vérifié, page par page :
     chaque page mène à /demo ;
   - images : alt, dimensions, poids ; aucune police tierce ;
   - mots interdits dans le texte visible ;
-  - taux de commission identiques partout (2,90 / 4,90 / 6,90 %) ;
+  - aucun taux de commission publié (prix sur devis) ;
   - le sitemap contient chaque page publique et rien d'autre ; robots.txt ; llms.txt ;
   - le calculateur de l'accueil redonne 66 h → 5 h pour 250 adhérents.
 
@@ -56,7 +56,8 @@ MOTS_INTERDITS_ES = [
 ]
 # Des mots-outils français qui n'existent pas en espagnol : leur présence signale une phrase non traduite.
 MOTS_FRANCAIS = re.compile(r"\b(avec|vous|votre|vos|une|des|aux|sont|être|cette|leurs?|nous|dans|chez|déjà|très|aussi|mais|où)\b", re.I)
-TAUX_AUTORISES = {"2,90", "4,90", "6,90"}
+# Les prix ne sont plus publiés (4 novembre 2026) : tout taux affiché est une erreur.
+TAUX_AUTORISES: set[str] = set()
 # Adresses du site d'avant qui doivent exister avant la mise en ligne : un avertissement tant qu'elles manquent.
 HERITEES = ["/sport/" + s for s in ("football", "danse", "judo", "basket", "yoga", "fitness", "volley", "handball", "tennis")]
 BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User",

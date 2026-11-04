@@ -89,7 +89,7 @@ const RUBRIQUES = [
 ]
 const OUTILS = [
   { titre: t('Le calculateur du temps gagné'), href: '/temps-gagne' },
-  { titre: t('Les offres et un exemple chiffré'), href: '/tarifs' },
+  { titre: t('Les offres, sur devis'), href: '/tarifs' },
   /* La présentation n'existe qu'en français : pas de lien depuis l'espagnol. */
   ...(es ? [] : [{ titre: t('OnClub en écrans animés'), href: '/presentation' }]),
 ].map((o) => ({ titre: o.titre, href: lien(o.href), fr: lien(o.href) === o.href && es }))

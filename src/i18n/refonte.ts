@@ -26,7 +26,7 @@ export type TextesRefonte = {
   onglets: { titre: string; libelles: [string, string, string, string]; legende: string; pause: string; reprise: string }
   vitrine: { titre: string; phrase: string; legende: string; lien: string; mots: { aria: string; site: string; credit: string; onglets: Record<string, string> } }
   bande: { titre: string; phrase: string; derniere: string; derniereNom: string; precedent: string; suivant: string }
-  offres: { h2: string; intro: string; rendues: string; ouvre: (n: string) => string; note: string; comment: string; boutique: string; detail: string }
+  offres: { h2: string; intro: string; rendues: string; ouvre: (n: string) => string; note: string; comment: string; detail: string }
   faq: { titre: string; guides: string; toutes: string }
   appel: { titre: string; phrase: string; bouton: string; membre: string }
 }
@@ -152,14 +152,13 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       precedent: 'Previous', suivant: 'Next',
     },
     offres: {
-      h2: 'A percentage. Nothing fixed',
-      intro: 'A percentage of fees collected online. Nothing on cheques or cash. Card fees are paid by the association.',
+      h2: 'Three plans. The price, on request',
+      intro: 'The price depends on your club: get in touch to find out. Nothing on cheques or cash. Card fees are paid by the association.',
       rendues: 'given back per season',
       ouvre: (n) => `What ${n} includes`,
       note: 'OnClub estimate for 250 members, not a study.',
       comment: 'How we count these hours',
-      boutique: 'on the shop',
-      detail: 'Plan details and a worked example',
+      detail: 'Plan details',
     },
     faq: { titre: 'The board’s questions', guides: 'Guides for the board:', toutes: 'All resources' },
     appel: {
@@ -289,14 +288,13 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       precedent: 'Anterior', suivant: 'Siguiente',
     },
     offres: {
-      h2: 'Un porcentaje. Sin cuota fija',
-      intro: 'Un porcentaje de las cuotas cobradas en línea. Nada sobre cheques ni efectivo. Las comisiones de tarjeta corren a cargo de la asociación.',
+      h2: 'Tres planes. El precio, bajo presupuesto',
+      intro: 'El precio depende de tu club: consúltanos para conocerlo. Nada sobre cheques ni efectivo. Las comisiones de tarjeta corren a cargo de la asociación.',
       rendues: 'recuperadas por temporada',
       ouvre: (n) => `Lo que incluye ${n}`,
       note: 'Estimación de OnClub para 250 socios, no un estudio.',
       comment: 'Cómo contamos estas horas',
-      boutique: 'sobre la tienda',
-      detail: 'El detalle de las ofertas y un ejemplo con cifras',
+      detail: 'El detalle de los planes',
     },
     faq: { titre: 'Las preguntas de la directiva', guides: 'Guías para la directiva:', toutes: 'Todos los recursos' },
     appel: {

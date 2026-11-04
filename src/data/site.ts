@@ -1,9 +1,10 @@
 /*
   LES FAITS COMMUNS DU SITE, ÉCRITS UNE SEULE FOIS.
 
-  Un taux, une adresse, un numéro : s'il apparaît sur plusieurs pages, il vient
-  d'ici. Le contrôle (scripts/controle_seo.py) vérifie que les taux sont les
-  mêmes partout. Source des droits par offre : /Users/bertone/Dev/onclub/
+  Une adresse, un numéro : s'il apparaît sur plusieurs pages, il vient d'ici.
+  Les prix ne sont plus affichés (décision de Nico, 4 novembre 2026) : « il faut
+  nous consulter ». Le contrôle (scripts/controle_seo.py) refuse tout taux publié.
+  Source des droits par offre : /Users/bertone/Dev/onclub/
   lib/entitlements/index.ts (FORMULE_MINIMALE), lue le 9 octobre 2026.
 */
 
@@ -35,13 +36,15 @@ export const lienEmail = (sujet: string, corps: string) =>
 /** Mise en route, telle que vendue par la présentation. */
 export const MISE_EN_ROUTE = 'En ligne en quinze jours, avec une pré-livraison au dixième jour pour tout valider ensemble.'
 
+/** À la place des prix : l'association nous demande son tarif. */
+export const TARIF = 'Sur devis'
+export const TARIF_PHRASE = 'Le tarif dépend de votre club. Pour le connaître, il faut nous consulter.'
+
 export type CleOffre = 'mini' | 'pro' | 'max'
 
 export type Offre = {
   cle: CleOffre
   nom: string
-  taux: string
-  tauxBoutique?: string
   heures: number
   ouvre: string[]
   phare?: boolean
@@ -56,7 +59,6 @@ export const OFFRES: Offre[] = [
   {
     cle: 'mini',
     nom: 'OnClub Mini',
-    taux: '2,90 %',
     heures: 51,
     ouvre: [
       'Inscriptions en ligne et séances d’essai',
@@ -71,7 +73,6 @@ export const OFFRES: Offre[] = [
   {
     cle: 'pro',
     nom: 'OnClub Pro',
-    taux: '4,90 %',
     heures: 75,
     phare: true,
     ouvre: [
@@ -86,8 +87,6 @@ export const OFFRES: Offre[] = [
   {
     cle: 'max',
     nom: 'OnClub Pro Max IA',
-    taux: '6,90 %',
-    tauxBoutique: '2 %',
     heures: 97,
     ouvre: [
       'Tout Pro',

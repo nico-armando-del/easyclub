@@ -73,8 +73,8 @@ export type Textes = {
     cartes: { etiquette: string; nom: string; ligne: string; cle: 'sports' | 'musique' | 'activites' | 'tresorier' | 'toutes' }[]
   }
   offres: {
-    surtitre: string; h2: string; intro: string; rendues: string; leg: (boutique?: string) => string
-    taux: Record<CleOffre, string>; ouvre: Record<CleOffre, string[]>; voir: (nom: string) => string
+    surtitre: string; h2: string; intro: string; rendues: string
+    tarif: string; ouvre: Record<CleOffre, string[]>; voir: (nom: string) => string
     note: string; noteLien: string; detail: string
   }
   ressources: { surtitre: string; h2: string; intro: string; tout: string; etiquettes: Record<'guides' | 'articles' | 'comparatifs', string> }
@@ -317,20 +317,19 @@ export const TEXTES: Record<Langue, Textes> = {
     },
     offres: {
       surtitre: 'Pricing',
-      h2: 'A percentage-based subscription. The more you hand over, the more time you save.',
-      intro: 'A percentage of the membership fees collected online, nothing fixed. Nothing on cheques or cash.',
+      h2: 'Three plans. The more you hand over, the more time you save.',
+      intro: 'The price depends on your club: get in touch to find out. Nothing on cheques or cash.',
       rendues: 'given back per season*',
-      leg: (b) => `of membership fees collected online${b ? `, + ${b} on the shop` : ''}. Nothing fixed.`,
-      taux: { mini: '2.90%', pro: '4.90%', max: '6.90%' },
+      tarif: 'On request',
       ouvre: {
         mini: ['Online registration and trial sessions', 'Card payment, or an instalment plan collected by the club', 'Money dashboard', 'Reminders at the push of a button', 'Supporting documents', 'Spreadsheet exports'],
         pro: ['Everything in Mini', 'Next season and re-registration', 'Waiting list', 'Messages to families', 'The association’s website', 'Cluby, the assistant: 100 questions a month'],
         max: ['Everything in Pro', 'The shop, online and at the counter', 'Events and workshops', 'Cluby, no monthly limit'],
       },
-      voir: (nom) => `See ${nom} in a demo`,
-      note: '* OnClub estimate for an association of 250 members, not a study. Mini covers the forms, payment tracking, reminders and documents (51 h). Pro adds next season (10 h), messages to families (10 messages cut from 45 to 5 minutes, 6 h 40), the waiting list (20 places cut from 10 minutes to 1, 3 h) and the website updated without an agency (4 h). Pro Max IA adds the shop (150 orders cut from 6 minutes to 1 at collection, 12 h 30) and events (4 events cut from 3 hours to 30 minutes, 10 h). Nothing is taken on cheques or cash. Card fees are paid by the association:',
-      noteLien: 'see the worked example',
-      detail: 'Plan details and a worked example',
+      voir: (nom) => `Ask for the ${nom} price`,
+      note: '* OnClub estimate for an association of 250 members, not a study. Mini covers the forms, payment tracking, reminders and documents (51 h). Pro adds next season (10 h), messages to families (10 messages cut from 45 to 5 minutes, 6 h 40), the waiting list (20 places cut from 10 minutes to 1, 3 h) and the website updated without an agency (4 h). Pro Max IA adds the shop (150 orders cut from 6 minutes to 1 at collection, 12 h 30) and events (4 events cut from 3 hours to 30 minutes, 10 h). Nothing is taken on cheques or cash. Card fees are paid by the association.',
+      noteLien: 'see the plans',
+      detail: 'Plan details',
     },
     ressources: {
       surtitre: 'Resources',
@@ -342,7 +341,7 @@ export const TEXTES: Record<Langue, Textes> = {
     faqTitre: 'Frequently asked questions',
     faq: [
       { question: 'Which associations is OnClub for?', reponse: 'For every association that registers members, with classes or teams and membership fees: sports clubs, music, dance, theatre and language schools, choirs, workshops. In OnClub, each class or team has its discipline, level, coaches or teachers, room, time slots, places and price. OnClub is a French platform: the interface, the forms families fill in and the emails are in French, and payments are in euros.' },
-      { question: 'How much does OnClub cost?', reponse: 'A percentage-based subscription on the membership fees collected online: 2.90% with OnClub Mini, 4.90% with Pro, 6.90% with Pro Max IA, plus 2% on the shop. Nothing fixed, and nothing on cheques or cash. Card fees are paid by the association.' },
+      { question: 'How much does OnClub cost?', reponse: 'The price depends on your club and the plan you choose: to find out, get in touch. Nothing on cheques or cash. Card fees are paid by the association.' },
       { question: 'Where do the 61 hours given back come from?', reponse: 'It is an OnClub estimate for an association of 250 members, not a study: 66 hours a season today to re-type forms, track payments, chase late payers, collect documents and prepare next season, against about 5 hours with OnClub. The calculation and the assumptions are on the time-saved page.' },
       { question: 'Do families need to create an account?', reponse: 'No. The family fills in a single form for all its members, from their phone. They receive a summary by email and can then find their file again through their link. For a call-up, they answer present or absent straight from the email.' },
       { question: 'How quickly is our association up and running?', reponse: 'Online in fifteen days, with a pre-delivery on day ten so we can check everything together. Your spreadsheets from last season are imported: returning members are recognised and receive their re-registration link.' },
@@ -607,20 +606,19 @@ export const TEXTES: Record<Langue, Textes> = {
     },
     offres: {
       surtitre: 'Precios',
-      h2: 'Una suscripción en porcentaje. Cuanto más confías, más tiempo ganas.',
-      intro: 'Un porcentaje de las cuotas cobradas en línea, sin cuota fija. Nada sobre los cheques ni el efectivo.',
+      h2: 'Tres planes. Cuanto más confías, más tiempo ganas.',
+      intro: 'El precio depende de tu club: consúltanos para conocerlo. Nada sobre los cheques ni el efectivo.',
       rendues: 'recuperadas por temporada*',
-      leg: (b) => `de las cuotas cobradas en línea${b ? `, + ${b} sobre la tienda` : ''}. Sin cuota fija.`,
-      taux: { mini: '2,90 %', pro: '4,90 %', max: '6,90 %' },
+      tarif: 'Bajo presupuesto',
       ouvre: {
         mini: ['Inscripciones en línea y sesiones de prueba', 'Pago con tarjeta, o plan de plazos cobrado por el club', 'Panel de cobros', 'Recordatorios con un botón', 'Justificantes', 'Exportaciones en hoja de cálculo'],
         pro: ['Todo Mini', 'Temporada siguiente y reinscripciones', 'Lista de espera', 'Mensajes a las familias', 'La web de la asociación', 'Cluby, el asistente: 100 preguntas al mes'],
         max: ['Todo Pro', 'La tienda, en línea y en el mostrador', 'Eventos y cursillos', 'Cluby, sin límite mensual'],
       },
-      voir: (nom) => `Ver ${nom} en una demo`,
-      note: '* Estimación de OnClub para una asociación de 250 socios, no un estudio. Mini cubre las fichas, el seguimiento de pagos, los recordatorios y los justificantes (51 h). Pro añade la nueva temporada (10 h), los mensajes a las familias (10 mensajes que pasan de 45 a 5 minutos, 6 h 40), la lista de espera (20 plazas que pasan de 10 minutos a 1, 3 h) y la web actualizada sin proveedor externo (4 h). Pro Max IA añade la tienda (150 pedidos que pasan de 6 minutos a 1 en la recogida, 12 h 30) y los eventos (4 eventos que pasan de 3 horas a 30 minutos, 10 h). No se cobra nada sobre los cheques ni el efectivo. Las comisiones de tarjeta corren a cargo de la asociación:',
-      noteLien: 'ver el ejemplo con cifras',
-      detail: 'El detalle de las ofertas y un ejemplo con cifras',
+      voir: (nom) => `Pedir el precio de ${nom}`,
+      note: '* Estimación de OnClub para una asociación de 250 socios, no un estudio. Mini cubre las fichas, el seguimiento de pagos, los recordatorios y los justificantes (51 h). Pro añade la nueva temporada (10 h), los mensajes a las familias (10 mensajes que pasan de 45 a 5 minutos, 6 h 40), la lista de espera (20 plazas que pasan de 10 minutos a 1, 3 h) y la web actualizada sin proveedor externo (4 h). Pro Max IA añade la tienda (150 pedidos que pasan de 6 minutos a 1 en la recogida, 12 h 30) y los eventos (4 eventos que pasan de 3 horas a 30 minutos, 10 h). No se cobra nada sobre los cheques ni el efectivo. Las comisiones de tarjeta corren a cargo de la asociación.',
+      noteLien: 'ver los planes',
+      detail: 'El detalle de los planes',
     },
     ressources: {
       surtitre: 'Recursos',
@@ -632,7 +630,7 @@ export const TEXTES: Record<Langue, Textes> = {
     faqTitre: 'Preguntas frecuentes',
     faq: [
       { question: '¿Para qué asociaciones es OnClub?', reponse: 'Para todas las que inscriben socios, con cursos o equipos y cuotas: clubes deportivos, escuelas de música, danza, teatro e idiomas, coros, talleres. En OnClub, cada curso o equipo tiene su disciplina, su nivel, sus entrenadores o profesores, su sala, sus horarios, sus plazas y su precio. OnClub es una plataforma francesa: la interfaz, los formularios que rellenan las familias y los e-mails están en francés, y los pagos se hacen en euros.' },
-      { question: '¿Cuánto cuesta OnClub?', reponse: 'Una suscripción en porcentaje de las cuotas cobradas en línea: 2,90 % con OnClub Mini, 4,90 % con Pro, 6,90 % con Pro Max IA, más un 2 % sobre la tienda. Sin cuota fija, y nada sobre los cheques ni el efectivo. Las comisiones de tarjeta corren a cargo de la asociación.' },
+      { question: '¿Cuánto cuesta OnClub?', reponse: 'El precio depende de tu club y del plan elegido: para conocerlo, consúltanos. Nada sobre los cheques ni el efectivo. Las comisiones de tarjeta corren a cargo de la asociación.' },
       { question: '¿De dónde salen las 61 horas recuperadas?', reponse: 'Es una estimación de OnClub para una asociación de 250 socios, no un estudio: hoy, 66 horas por temporada para copiar las fichas, seguir los pagos, reclamar los pagos atrasados, pedir los justificantes y preparar la nueva temporada, frente a unas 5 horas con OnClub. El cálculo y las hipótesis están en la página del tiempo ganado.' },
       { question: '¿Las familias tienen que crear una cuenta?', reponse: 'No. La familia rellena un solo formulario para todos sus miembros, desde su móvil. Recibe un resumen por e-mail y después encuentra su expediente con su enlace. Para una convocatoria, responde presente o ausente desde el propio e-mail.' },
       { question: '¿En cuánto tiempo está en línea nuestra asociación?', reponse: 'En línea en quince días, con una entrega previa el décimo día para validarlo todo juntos. Tus hojas de cálculo de la temporada pasada se importan: los antiguos socios son reconocidos y reciben su enlace de reinscripción.' },

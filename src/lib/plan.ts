@@ -15,7 +15,7 @@ const AUJOURDHUI = new Date().toISOString().slice(0, 10)
 export const PAGES_FIXES: { chemin: string; nom: string; ligne: string; groupe: string }[] = [
   { chemin: '/', nom: 'Accueil', ligne: 'Ce que fait OnClub, le temps rendu aux bénévoles, les offres.', groupe: 'Essentiel' },
   { chemin: '/fonctionnalites', nom: 'Fonctionnalités', ligne: 'Toutes les fonctionnalités, en six familles.', groupe: 'Essentiel' },
-  { chemin: '/tarifs', nom: 'Tarifs', ligne: '2,90 %, 4,90 % ou 6,90 % des cotisations encaissées en ligne, rien de fixe ; exemple chiffré.', groupe: 'Essentiel' },
+  { chemin: '/tarifs', nom: 'Tarifs', ligne: 'Sur devis : le tarif dépend du club. Ce que chaque offre ouvre.', groupe: 'Essentiel' },
   { chemin: '/temps-gagne', nom: 'Le temps gagné', ligne: 'Le calculateur, la méthode et les hypothèses de l’estimation.', groupe: 'Essentiel' },
   { chemin: '/pour-qui', nom: 'Pour qui', ligne: 'Sports, autres activités, rôles dans l’association.', groupe: 'Essentiel' },
   { chemin: '/ressources', nom: 'Ressources', ligne: 'Guides, articles et comparatifs pour le bureau.', groupe: 'Essentiel' },
