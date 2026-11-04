@@ -14,7 +14,7 @@ export async function GET() {
   const es = await planEs()
   const aujourdhui = new Date().toISOString().slice(0, 10)
   const alternates = (url: string) => {
-    const chemin = url.replace('https://onclub.app', '') || '/'
+    const chemin = url.replace('https://oncluby.com', '') || '/'
     /* /en est une traduction de l'accueil : ses alternates sont ceux de l'accueil. */
     const p = paireDe(chemin === '/en' ? '/' : cheminFr(chemin))
     if (!p.es) return ''

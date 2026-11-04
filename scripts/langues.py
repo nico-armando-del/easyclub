@@ -29,7 +29,7 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 SITE = RACINE / 'site'
-LANGUES = {'en': ('en_GB', 'https://onclub.app/en'), 'es': ('es_ES', 'https://onclub.app/es')}
+LANGUES = {'en': ('en_GB', 'https://oncluby.com/en'), 'es': ('es_ES', 'https://oncluby.com/es')}
 VIDES = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
          'param', 'source', 'track', 'wbr'}
 AVIS = '<!-- Page générée par scripts/langues.py depuis index.html et i18n.js : ne pas la modifier à la main. -->\n'
@@ -171,9 +171,9 @@ def page(source, t, langue):
 
     sortie = une_fois(sortie, '<html lang="fr">', f'<html lang="{langue}">', 'html lang')
     sortie = re.sub(r'<title>.*?</title>', lambda m: f'<title>{texte(t["meta_title"])}</title>', sortie, count=1)
-    sortie = une_fois(sortie, '<link rel="canonical" href="https://onclub.app/">',
+    sortie = une_fois(sortie, '<link rel="canonical" href="https://oncluby.com/">',
                       f'<link rel="canonical" href="{adresse}">', 'canonical')
-    sortie = une_fois(sortie, '<meta property="og:url" content="https://onclub.app/">',
+    sortie = une_fois(sortie, '<meta property="og:url" content="https://oncluby.com/">',
                       f'<meta property="og:url" content="{adresse}">', 'og:url')
     sortie = une_fois(sortie, '<meta property="og:locale" content="fr_FR">',
                       f'<meta property="og:locale" content="{locale}">', 'og:locale')

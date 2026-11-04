@@ -19,14 +19,14 @@ export async function GET() {
 
 > ${t(ACCROCHE)} OnClub es una plataforma francesa para las asociaciones que inscriben socios: clubes deportivos, escuelas de música, de danza, de teatro y de idiomas. Inscripciones y cuotas en línea, seguimiento del dinero, recordatorio de pago con un botón, justificantes, temporada siguiente, convocatorias, web y tienda de la asociación.
 
-El tiempo: estimación de OnClub (no un estudio) para una asociación de ${ADHERENTS_REFERENCE} socios, unas ${TOTAL.avant} de papeleo por temporada hoy frente a unas ${TOTAL.apres} con OnClub, es decir, unas ${TOTAL.gain} que recuperan los voluntarios. Método: https://onclub.app${local('/temps-gagne', 'es')}
+El tiempo: estimación de OnClub (no un estudio) para una asociación de ${ADHERENTS_REFERENCE} socios, unas ${TOTAL.avant} de papeleo por temporada hoy frente a unas ${TOTAL.apres} con OnClub, es decir, unas ${TOTAL.gain} que recuperan los voluntarios. Método: https://oncluby.com${local('/temps-gagne', 'es')}
 
 Los planes (precio bajo presupuesto: depende del club, consúltanos; nada sobre los cheques ni el efectivo; las comisiones de tarjeta corren a cargo de la asociación):
 ${offres}
 
 Puesta en marcha: ${t(MISE_EN_ROUTE)} Contacto: ${EMAIL}.
 
-Las páginas que siguen están en español. El resto del sitio, en francés: https://onclub.app/llms.txt
+Las páginas que siguen están en español. El resto del sitio, en francés: https://oncluby.com/llms.txt
 
 ${groupes.map((g) => `## ${g}\n\n${pages.filter((p) => p.groupe === g).map((p) => `- [${p.nom}](${p.url})${p.ligne ? `: ${p.ligne}` : ''}`).join('\n')}`).join('\n\n')}
 `

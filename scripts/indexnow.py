@@ -8,7 +8,7 @@ Copilot et de DuckDuckGo. Un domaine jeune attend sinon des semaines qu'un robot
 repasse.
 
 La clé est le fichier public/<clé>.txt, publié à la racine du site : il prouve
-que c'est bien nous qui parlons pour onclub.app.
+que c'est bien nous qui parlons pour oncluby.com.
 
 À LANCER APRÈS CHAQUE MISE EN LIGNE (une fois le déploiement terminé) :
 
@@ -25,7 +25,7 @@ from pathlib import Path
 DEPOT = Path(__file__).resolve().parent.parent
 RACINE = DEPOT / 'public'
 SITEMAP = DEPOT / 'dist' / 'sitemap.xml'
-HOTE = 'onclub.app'
+HOTE = 'oncluby.com'
 
 
 def cle() -> str:

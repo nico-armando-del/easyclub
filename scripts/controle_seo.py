@@ -40,7 +40,7 @@ from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "dist"
-BASE = "https://onclub.app"
+BASE = "https://oncluby.com"
 NOINDEX_ATTENDU = {"404.html"}
 ANCIENNES = {"presentation.html"}
 MOTS_INTERDITS = [
@@ -181,7 +181,7 @@ for rel, p in sorted(pages.items()):
     for h in p.a + p.scripts:
         u = urljoin(url, h)
         pu = urlparse(u)
-        if pu.netloc != "onclub.app": continue
+        if pu.netloc != "oncluby.com": continue
         if pu.path.startswith("/_vercel/") or pu.path.startswith("/api/"): continue
         f = file_of(u.split("#")[0].split("?")[0])
         if not f and pu.path in REDIRIGEES: continue
@@ -289,7 +289,7 @@ for taux, r in faits.items():
 
 # robots.txt / llms.txt
 rb = open(os.path.join(ROOT, "robots.txt"), encoding="utf-8").read()
-if "Sitemap: https://onclub.app/sitemap.xml" not in rb: err("robots.txt", "ROBOTS", "ligne Sitemap absente")
+if "Sitemap: https://oncluby.com/sitemap.xml" not in rb: err("robots.txt", "ROBOTS", "ligne Sitemap absente")
 for bloc in re.split(r"(?im)^user-agent:", rb)[1:]:
     agents = bloc.splitlines()[0].strip()
     if re.search(r"(?im)^disallow:\s*/\s*$", bloc) and (agents == "*" or any(b.lower() in agents.lower() for b in BOTS)):
@@ -300,7 +300,7 @@ lles = open(lles_f, encoding="utf-8").read() if os.path.isfile(lles_f) else ""
 est_es = lambda u: urlparse(u).path == "/es" or urlparse(u).path.startswith("/es/")
 for nom, contenu in (("llms.txt", ll), ("llms-es.txt", lles)):
     for u in re.findall(r"https://onclub\.app[^\s)]*", contenu):
-        if u not in smap and u not in ("https://onclub.app/llms.txt", "https://onclub.app/llms-es.txt"): err(nom, "LLMS", f"{u} hors sitemap")
+        if u not in smap and u not in ("https://oncluby.com/llms.txt", "https://oncluby.com/llms-es.txt"): err(nom, "LLMS", f"{u} hors sitemap")
     for taux in re.findall(r"(\d,\d0)\s?%", contenu):
         if taux not in TAUX_AUTORISES: err(nom, "TAUX", f"taux {taux} % inconnu")
     for mot in MOTS_INTERDITS + (MOTS_INTERDITS_ES if nom == "llms-es.txt" else []):

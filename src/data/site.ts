@@ -8,8 +8,8 @@
   lib/entitlements/index.ts (FORMULE_MINIMALE), lue le 9 octobre 2026.
 */
 
-export const SITE = 'https://onclub.app'
-export const NOM = 'OnClub'
+export const SITE = 'https://oncluby.com'
+export const NOM = 'OnCluby'
 export const EMAIL = 'onclub.contact@gmail.com'
 export const INSTAGRAM = 'https://www.instagram.com/onclub.app/'
 export const WHATSAPP = '33645049227'

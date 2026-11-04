@@ -63,7 +63,7 @@ const typographie = () => ({
 })
 
 export default defineConfig({
-  site: 'https://onclub.app',
+  site: 'https://oncluby.com',
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'file', inlineStylesheets: 'auto' },

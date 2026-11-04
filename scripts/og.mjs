@@ -101,10 +101,10 @@ h1{margin-top:14px;font:800 ${taille}px/1.04 "Bricolage Grotesque";letter-spacin
 .panneau span{margin-top:12px;font:600 26px/1.25 "Instrument Sans"}
 </style></head><body>
 <div class="gauche">
-  <div class="marque">${logo}OnClub</div>
+  <div class="marque">${logo}OnCluby</div>
   <div class="sur">${echapper(surtitre)}</div>
   <h1>${echapper(titre)}</h1>
-  <div class="pied"><b>onclub.app</b><span>${PIED[langue]}</span></div>
+  <div class="pied"><b>oncluby.com</b><span>${PIED[langue]}</span></div>
 </div>${droite}</body></html>`
 }
 

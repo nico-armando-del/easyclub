@@ -13,7 +13,7 @@
           "value": "www.onclub.app"
         }
       ],
-      "destination": "https://onclub.app/",
+      "destination": "https://oncluby.com/",
       "permanent": true
     },
     {
@@ -24,7 +24,7 @@
           "value": "www.onclub.app"
         }
       ],
-      "destination": "https://onclub.app/:path*",
+      "destination": "https://oncluby.com/:path*",
       "permanent": true
     },
     {

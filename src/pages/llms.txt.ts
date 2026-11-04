@@ -11,14 +11,14 @@ export async function GET() {
 
 > ${ACCROCHE} OnClub est une plateforme française pour les associations qui inscrivent des adhérents : clubs de sport, écoles de musique, de danse, de théâtre, de langues. Inscriptions et cotisations en ligne, suivi de l’argent, relance d’un bouton, pièces justificatives, saison suivante, convocations, site et boutique de l’association.
 
-Le temps : estimation OnClub (pas une étude) pour une association de 250 adhérents, environ ${TOTAL.avant} d’administratif par saison aujourd’hui contre environ ${TOTAL.apres} avec OnClub, soit environ ${TOTAL.gain} rendues aux bénévoles. Méthode : https://onclub.app/temps-gagne
+Le temps : estimation OnClub (pas une étude) pour une association de 250 adhérents, environ ${TOTAL.avant} d’administratif par saison aujourd’hui contre environ ${TOTAL.apres} avec OnClub, soit environ ${TOTAL.gain} rendues aux bénévoles. Méthode : https://oncluby.com/temps-gagne
 
 Les offres (tarif sur devis : il dépend du club, il faut nous consulter ; rien sur les chèques et les espèces ; frais de carte bancaire à la charge de l’association) :
 ${offres}
 
 Mise en route : ${MISE_EN_ROUTE} Contact : ${EMAIL}.
 
-Version espagnole : https://onclub.app/llms-es.txt
+Version espagnole : https://oncluby.com/llms-es.txt
 
 ${groupes.map((g) => `## ${g}\n\n${pages.filter((p) => p.groupe === g).map((p) => `- [${p.nom}](${p.url})${p.ligne ? ` : ${p.ligne}` : ''}`).join('\n')}`).join('\n\n')}
 `

@@ -300,7 +300,7 @@ export const TEXTES: Record<Langue, Textes> = {
       whatsapp: 'Send on WhatsApp',
       email: 'Send an email',
       sujet: 'A tool to save the board time: OnClub',
-      message: 'Hello, I came across OnClub, a French platform for associations: families register and pay online, the money stays up to date and reminders go out at the push of a button. By their estimate, about 61 hours a season are given back for an association of 250 members. Have a look: https://onclub.app/en',
+      message: 'Hello, I came across OnClub, a French platform for associations: families register and pay online, the money stays up to date and reminders go out at the push of a button. By their estimate, about 61 hours a season are given back for an association of 250 members. Have a look: https://oncluby.com/en',
       outil: 'The full tool, in French',
     },
     assos: {
@@ -589,7 +589,7 @@ export const TEXTES: Record<Langue, Textes> = {
       whatsapp: 'Enviar por WhatsApp',
       email: 'Enviar un e-mail',
       sujet: 'Una herramienta para que la directiva gane tiempo: OnClub',
-      message: 'Hola, he descubierto OnClub, una plataforma francesa para asociaciones: las familias se inscriben y pagan en línea, el dinero está siempre al día y los recordatorios salen con un botón. Según su estimación, una asociación de 250 socios recupera unas 61 horas por temporada. Échale un vistazo: https://onclub.app/es',
+      message: 'Hola, he descubierto OnClub, una plataforma francesa para asociaciones: las familias se inscriben y pagan en línea, el dinero está siempre al día y los recordatorios salen con un botón. Según su estimación, una asociación de 250 socios recupera unas 61 horas por temporada. Échale un vistazo: https://oncluby.com/es',
       outil: 'La herramienta completa, en francés',
     },
     assos: {

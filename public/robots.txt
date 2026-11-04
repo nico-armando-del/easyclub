@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://onclub.app/sitemap.xml
+Sitemap: https://oncluby.com/sitemap.xml
