@@ -1,7 +1,7 @@
 ---
 /*
   LA VITRINE DES SITES DE CLUB (« faut montrer nos exemples »), maquettes
-  §A5, §D.3 et §E. Deux clubs INVENTÉS, branchés sur OnClub : la légende le
+  §A5, §D.3 et §E. Deux clubs INVENTÉS, branchés sur OnCluby : la légende le
   dit, sans badge « Exemple », sans lien vers ces sites, sans URL dans le cadre.
 
   <VitrineClubs />                    accueil : Volta et Montclar, titre et texte
@@ -9,7 +9,7 @@
 
   Ce qui bouge (une fois, quand la vitrine est à l'écran) : le bouton
   « S'inscrire » du club s'allume, puis le téléphone glisse vers le
-  formulaire d'inscription OnClub et revient au bout de 4 s. La capture du site
+  formulaire d'inscription OnCluby et revient au bout de 4 s. La capture du site
   reste fixe (rien ne défile seul, 10 oct.).
   Sans JavaScript : les clubs s'affichent les uns sous les autres, immobiles.
 */
@@ -35,11 +35,11 @@ const { t, lien, versFr } = i18n(Astro.url)
 const { variante = 'accueil', niveau = 'h2', mots } = Astro.props
 const page = variante === 'page'
 const {
-  titre = page ? undefined : t('Le site du club, branché sur OnClub'),
-  phrase = page ? undefined : t('Les cours, les tarifs, les places et les inscriptions viennent d’OnClub. Un cours complet s’affiche complet, sans que personne ne le mette à jour.'),
+  titre = page ? undefined : t('Le site du club, branché sur OnCluby'),
+  phrase = page ? undefined : t('Les cours, les tarifs, les places et les inscriptions viennent d’OnCluby. Un cours complet s’affiche complet, sans que personne ne le mette à jour.'),
   clubs = page ? CLUBS_PAGE : CLUBS,
-  /* Sur la page, la phrase « Les inscriptions restent dans OnClub » se fond dans la légende (tour 2, défaut 24). */
-  legende = page ? `${t(LEGENDE_VITRINE)} ${t('Les inscriptions restent dans OnClub : le site les affiche.')}` : t(LEGENDE_VITRINE),
+  /* Sur la page, la phrase « Les inscriptions restent dans OnCluby » se fond dans la légende (tour 2, défaut 24). */
+  legende = page ? `${t(LEGENDE_VITRINE)} ${t('Les inscriptions restent dans OnCluby : le site les affiche.')}` : t(LEGENDE_VITRINE),
   lien: cible = page ? null : { texte: t('Le site de l’association, dès Pro'), href: '/fonctionnalites/site-association' },
 } = Astro.props
 const Titre = niveau
@@ -47,7 +47,7 @@ const uid = `vitrine-${variante}`
 const srcset = (i: ImageClub) => i.tailles.map((t) => `${t.src} ${t.w}w`).join(', ')
 const taillesOrdi = page ? '(min-width: 1000px) 900px, 92vw' : '(min-width: 1000px) 680px, 92vw'
 const taillesTel = page ? '(min-width: 760px) 220px, 124px' : '(min-width: 760px) 190px, 124px'
-/* Le formulaire d'inscription OnClub dans le téléphone : trois champs fictifs et le total
+/* Le formulaire d'inscription OnCluby dans le téléphone : trois champs fictifs et le total
    (maquettes §D.3), pour ne jamais montrer un écran à moitié vide. */
 const lignesInscription = (c: Club) => c.sport === 'football'
   ? [

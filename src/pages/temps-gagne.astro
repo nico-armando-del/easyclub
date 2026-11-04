@@ -20,22 +20,22 @@ import { i18n } from '../i18n/ui'
 const { langue, t, lien } = i18n(Astro.url)
 const fil = [{ nom: t('Le temps gagné'), url: lien('/temps-gagne') }]
 const faq = [
-  { question: t('Ces chiffres sont-ils une promesse ?'), reponse: t('Non. C’est une estimation OnClub pour une association de 250 adhérents, pas une étude. Chaque hypothèse est écrite sur cette page : changez le nombre d’adhérents dans le calculateur, ou refaites le compte avec vos propres durées.') },
-  { question: t('Pourquoi la rentrée suivante ne dépend-elle pas du nombre d’adhérents ?'), reponse: t('Parce que le travail de la rentrée tient surtout aux groupes, aux créneaux et aux places à rouvrir, pas au nombre de dossiers. Le calculateur la garde donc fixe : 12 heures aujourd’hui, 2 heures avec OnClub.') },
+  { question: t('Ces chiffres sont-ils une promesse ?'), reponse: t('Non. C’est une estimation OnCluby pour une association de 250 adhérents, pas une étude. Chaque hypothèse est écrite sur cette page : changez le nombre d’adhérents dans le calculateur, ou refaites le compte avec vos propres durées.') },
+  { question: t('Pourquoi la rentrée suivante ne dépend-elle pas du nombre d’adhérents ?'), reponse: t('Parce que le travail de la rentrée tient surtout aux groupes, aux créneaux et aux places à rouvrir, pas au nombre de dossiers. Le calculateur la garde donc fixe : 12 heures aujourd’hui, 2 heures avec OnCluby.') },
   { question: t('Pourquoi le temps rendu change-t-il avec l’offre ?'), reponse: t('Parce que chaque offre prend en charge plus de tâches. Mini couvre les fiches, les paiements, les relances et les pièces. Pro ajoute la rentrée, les messages, la liste d’attente et le site. Pro Max IA ajoute la boutique et les événements.') },
 ]
 ---
 <Layout
-  titre={t('Temps gagné par les bénévoles d’une association | OnClub')}
-  description={t('Combien de temps votre association va gagner avec OnClub : le calculateur, la méthode, les hypothèses tâche par tâche, et ce que disent les bénévoles (INJEP).')}
+  titre={t('Temps gagné par les bénévoles d’une association | OnCluby')}
+  description={t('Combien de temps votre association va gagner avec OnCluby : le calculateur, la méthode, les hypothèses tâche par tâche, et ce que disent les bénévoles (INJEP).')}
   chemin={lien('/temps-gagne')}
   fil={fil}
   faq={faq}
 >
   <HerosCompact fil={fil} surtitre={t('Le temps gagné')} titre={t('Combien de temps votre association va gagner ?')}>
-    <p class="chiffre num"><span>{TOTAL.avant}<span class="sr">{t(' aujourd’hui,')}</span></span><span class="fleche" aria-hidden="true">→</span><span class="apres"><span class="sr">{t('environ ')}</span>{TOTAL.apres}<span class="sr">{t(' avec OnClub')}</span></span></p>
+    <p class="chiffre num"><span>{TOTAL.avant}<span class="sr">{t(' aujourd’hui,')}</span></span><span class="fleche" aria-hidden="true">→</span><span class="apres"><span class="sr">{t('environ ')}</span>{TOTAL.apres}<span class="sr">{t(' avec OnCluby')}</span></span></p>
     <p class="chiffre-part">{t('{part} de l’administratif en moins', { part: PART_RENDUE[langue] })}</p>
-    <p class="chiffre-note">{t('Par saison, pour 250 adhérents. Estimation OnClub, pas une étude.')}</p>
+    <p class="chiffre-note">{t('Par saison, pour 250 adhérents. Estimation OnCluby, pas une étude.')}</p>
     <div class="hc-actions-temps"><a class="btn btn-encre" href={lien('/demo')}>{t('Demander une démo')}</a></div>
   </HerosCompact>
 
@@ -63,7 +63,7 @@ const faq = [
         <div class="tableau-defile" data-defile-x>
           <table class="tableau-hyp">
             <caption class="sr">{t('Les cinq tâches de l’estimation, pour 250 adhérents')}</caption>
-            <thead><tr><th scope="col">{t('Tâche')}</th><th scope="col">{t('Le calcul')}</th><th scope="col">{t('Aujourd’hui')}</th><th scope="col">{t('Avec OnClub')}</th><th scope="col">{t('Ce qui change')}</th></tr></thead>
+            <thead><tr><th scope="col">{t('Tâche')}</th><th scope="col">{t('Le calcul')}</th><th scope="col">{t('Aujourd’hui')}</th><th scope="col">{t('Avec OnCluby')}</th><th scope="col">{t('Ce qui change')}</th></tr></thead>
             <tbody>
               {CINQ_TACHES.map((c) => { const x = TACHES[c]; return (
                 <tr><th scope="row">{t(x.tache)}</th><td>{t(x.calcul)}</td><td class="num">{duree(x.avantMin ?? 0, langue)}</td><td class="num">{duree(x.apresMin ?? 0, langue)}</td><td>{t(x.comment)}</td></tr>
@@ -84,7 +84,7 @@ const faq = [
       <ul class="par-offre">
         {OFFRES.map((o) => <li><b class="num">≈ {o.heures} h</b><span>{o.nom}</span></li>)}
       </ul>
-      <p class="note">{t('Estimation OnClub pour 250 adhérents, pas une étude.')}</p>
+      <p class="note">{t('Estimation OnCluby pour 250 adhérents, pas une étude.')}</p>
       <Repli titre={t('Comment on arrive à 51, 75 et 97 h')}>
         <ul>{t(HYPOTHESES_OFFRES).split(/(?<=\))\.\s+/).map((phrase) => <li>{phrase.replace(/\.$/, '')}.</li>)}</ul>
       </Repli>

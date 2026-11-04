@@ -25,7 +25,7 @@ export const HEURE_DU_SOIR = false
 export const PHRASE_BUT = 'Le but d’un club, c’est de créer des moments. Pas de subir l’administratif.'
 
 /** Message par défaut d'une demande de démo. */
-export const MESSAGE_DEMO = 'Bonjour, je voudrais une démo d’OnClub pour notre association.'
+export const MESSAGE_DEMO = 'Bonjour, je voudrais une démo d’OnCluby pour notre association.'
 
 export const lienWhatsApp = (texte: string = MESSAGE_DEMO) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texte)}`
@@ -58,7 +58,7 @@ export type Offre = {
 export const OFFRES: Offre[] = [
   {
     cle: 'mini',
-    nom: 'OnClub Mini',
+    nom: 'OnCluby Mini',
     heures: 51,
     ouvre: [
       'Inscriptions en ligne et séances d’essai',
@@ -72,7 +72,7 @@ export const OFFRES: Offre[] = [
   },
   {
     cle: 'pro',
-    nom: 'OnClub Pro',
+    nom: 'OnCluby Pro',
     heures: 75,
     phare: true,
     ouvre: [
@@ -86,7 +86,7 @@ export const OFFRES: Offre[] = [
   },
   {
     cle: 'max',
-    nom: 'OnClub Pro Max IA',
+    nom: 'OnCluby Pro Max IA',
     heures: 97,
     ouvre: [
       'Tout Pro',

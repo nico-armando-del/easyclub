@@ -15,11 +15,11 @@ export async function GET() {
   const pages = await planEs()
   const groupes = [...new Set(pages.map((p) => p.groupe))]
   const offres = OFFRES.map((o) => `- ${o.nom}: unas ${o.heures} h recuperadas por temporada (estimación para ${ADHERENTS_REFERENCE} socios).`).join('\n')
-  const txt = `# OnClub
+  const txt = `# OnCluby
 
-> ${t(ACCROCHE)} OnClub es una plataforma francesa para las asociaciones que inscriben socios: clubes deportivos, escuelas de música, de danza, de teatro y de idiomas. Inscripciones y cuotas en línea, seguimiento del dinero, recordatorio de pago con un botón, justificantes, temporada siguiente, convocatorias, web y tienda de la asociación.
+> ${t(ACCROCHE)} OnCluby es una plataforma francesa para las asociaciones que inscriben socios: clubes deportivos, escuelas de música, de danza, de teatro y de idiomas. Inscripciones y cuotas en línea, seguimiento del dinero, recordatorio de pago con un botón, justificantes, temporada siguiente, convocatorias, web y tienda de la asociación.
 
-El tiempo: estimación de OnClub (no un estudio) para una asociación de ${ADHERENTS_REFERENCE} socios, unas ${TOTAL.avant} de papeleo por temporada hoy frente a unas ${TOTAL.apres} con OnClub, es decir, unas ${TOTAL.gain} que recuperan los voluntarios. Método: https://oncluby.com${local('/temps-gagne', 'es')}
+El tiempo: estimación de OnCluby (no un estudio) para una asociación de ${ADHERENTS_REFERENCE} socios, unas ${TOTAL.avant} de papeleo por temporada hoy frente a unas ${TOTAL.apres} con OnCluby, es decir, unas ${TOTAL.gain} que recuperan los voluntarios. Método: https://oncluby.com${local('/temps-gagne', 'es')}
 
 Los planes (precio bajo presupuesto: depende del club, consúltanos; nada sobre los cheques ni el efectivo; las comisiones de tarjeta corren a cargo de la asociación):
 ${offres}

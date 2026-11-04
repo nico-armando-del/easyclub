@@ -28,7 +28,7 @@ const pct = (m: number) => `${Math.max(1.5, (m / max) * 100).toFixed(1)}%`
           {l.avantMin !== null && l.apresMin !== null ? (
             <div class="bt-barres">
               <div class="bt-barre avant"><span class="bt-lib">{t('Aujourd’hui')}</span><span class="bt-piste"><i style={`width:${pct(l.avantMin)}`}></i></span><b>{duree(l.avantMin, langue)}</b></div>
-              <div class="bt-barre apres"><span class="bt-lib">{t('Avec OnClub')}</span><span class="bt-piste"><i style={`width:${pct(l.apresMin)}`}></i></span><b>{duree(l.apresMin, langue)}</b></div>
+              <div class="bt-barre apres"><span class="bt-lib">{t('Avec OnCluby')}</span><span class="bt-piste"><i style={`width:${pct(l.apresMin)}`}></i></span><b>{duree(l.apresMin, langue)}</b></div>
               <p class="bt-comment">{l.comment}</p>
             </div>
           ) : (

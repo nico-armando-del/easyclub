@@ -56,7 +56,7 @@ const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
       <svg class="couv-fleche"><use href="#fleche" /></svg>
       <span class="couv-apres">{apres}</span>
       <span class="couv-lib couv-lib-avant">{t('aujourd’hui')}</span>
-      <span class="couv-lib couv-lib-apres">{t('avec OnClub')}</span>
+      <span class="couv-lib couv-lib-apres">{t('avec OnCluby')}</span>
       <span class="couv-pistes"><span class="couv-piste couv-piste-avant"><i></i></span><span class="couv-piste"><i></i></span></span>
     </span>
   ) : donneeVue ? (
@@ -67,7 +67,7 @@ const palier = n <= 3 ? 'p1' : n <= 5 ? 'p2' : 'p3'
   {sous && format !== 'carre' && <span class="couv-sous">{sous}</span>}
 </div>
 {compteur && format !== 'carre' && (
-  <p class="couv-note">{deTotal && !/adhérents|socios/.test(sous ?? '') ? t('Estimation OnClub pour {n} adhérents, par saison, pas une étude.', { n: ADHERENTS_REFERENCE }) : t('Estimation OnClub, pas une étude.')}</p>
+  <p class="couv-note">{deTotal && !/adhérents|socios/.test(sous ?? '') ? t('Estimation OnCluby pour {n} adhérents, par saison, pas une étude.', { n: ADHERENTS_REFERENCE }) : t('Estimation OnCluby, pas une étude.')}</p>
 )}
 <style>
 .couv{container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:var(--encre);background:var(--menthe);overflow:hidden;font-family:var(--f-titre)}

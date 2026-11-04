@@ -170,7 +170,7 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
     {frise.length > 0 && <FriseSaison etapes={frise} />}
     <div class:list={['gp-bloc', duo && 'gp-duo']}>
       {fonctionCorps && (
-        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label={t('L’écran d’OnClub')}>
+        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label={t('L’écran d’OnCluby')}>
           <Cadre type="panneau" fond="menthe" legende={fictifs}><EcranFonction nom={fonctionCorps.nom} nu /></Cadre>
         </section>
       )}
@@ -180,7 +180,7 @@ const btnClasse = heros === 'sport' ? 'btn btn-menthe' : 'btn btn-encre'
           <figure class="gp-samedi-ecran"><EcranAnime nom={ecranCorps} sombre /><figcaption>{fictifs}</figcaption></figure>
         </section>
       ) : (
-        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label={t('L’écran d’OnClub')}>
+        <section class:list={['gp-visuel', `gp-ecran-${forme}`, ecranLarge && 'gp-large']} id="ecran" aria-label={t('L’écran d’OnCluby')}>
           <Cadre type="panneau" fond="menthe" legende={fictifs}><EcranAnime nom={ecranCorps} /></Cadre>
         </section>
       ))}

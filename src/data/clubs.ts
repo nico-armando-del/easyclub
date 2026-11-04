@@ -2,7 +2,7 @@
   LES SITES DE CLUB DE DÉMONSTRATION (la vitrine « faut montrer nos exemples »).
 
   Volta Volley Club et AS Montclar sont deux clubs INVENTÉS, branchés sur
-  OnClub, pour montrer ce qu'une association peut avoir. On les présente comme
+  OnCluby, pour montrer ce qu'une association peut avoir. On les présente comme
   « clubs de démonstration » : pas de badge « Exemple », pas de lien vers ces
   sites (ils ne sont pas déployés), pas d'URL dans le cadre.
 
@@ -64,7 +64,7 @@ const CIBLE_VOLTA = { x: 84.1, y: 1.5, l: 10.3, h: 4.9 }
 export const VOLTA: Club = {
   id: 'volta', nom: 'Volta Volley Club', sport: 'volley',
   onglet: 'Volta Volley Club · volley',
-  alt: 'Accueil du site de Volta Volley Club, club de démonstration : ses équipes, son agenda, et le bouton S’inscrire qui mène aux inscriptions OnClub.',
+  alt: 'Accueil du site de Volta Volley Club, club de démonstration : ses équipes, son agenda, et le bouton S’inscrire qui mène aux inscriptions OnCluby.',
   altTel: 'Le site de Volta Volley Club, club de démonstration, sur téléphone.',
   ordi: ordi('volta'), ordiLong: long('volta', 2333), tel: tel('volta'),
   cible: CIBLE_VOLTA,

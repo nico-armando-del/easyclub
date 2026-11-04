@@ -2,7 +2,7 @@
   LES SEULS CHIFFRES DE TEMPS DU SITE.
 
   Ils viennent tous de /presentation (public/presentation.html, sections « Le
-  temps » et « Est-ce vraiment rentable ? ») : une ESTIMATION OnClub pour une
+  temps » et « Est-ce vraiment rentable ? ») : une ESTIMATION OnCluby pour une
   association de 250 adhérents, pas une étude. Un rédacteur ne tape jamais un
   chiffre de temps : il choisit une clé ci-dessous (champ `temps.cles` d'une
   page, ou <BlocTemps cles={[...]} /> dans le texte), et le chiffre, son calcul
@@ -16,7 +16,7 @@ export type Tache = {
   tache: string
   /** Le calcul, tel qu'affiché. */
   calcul: string
-  /** Minutes par saison, aujourd'hui et avec OnClub (null si seul le gain est publié). */
+  /** Minutes par saison, aujourd'hui et avec OnCluby (null si seul le gain est publié). */
   avantMin: number | null
   apresMin: number | null
   /** Minutes rendues par saison. */
@@ -113,7 +113,7 @@ export const PART_RENDUE = { fr: '80 à 90 %', en: '80–90%', es: '80 a 90 %' }
 export const TOTAL = { avant: '66 h', apres: '5 h', gain: '61 h', avantMin: 3970, apresMin: 310 }
 
 export const HYPOTHESES =
-  'Estimation OnClub, pas une étude : 250 adhérents, 6 minutes pour recopier une fiche, 3 minutes de suivi par dossier, 40 familles relancées trois fois, 80 pièces à réclamer, 12 heures pour préparer la rentrée.'
+  'Estimation OnCluby, pas une étude : 250 adhérents, 6 minutes pour recopier une fiche, 3 minutes de suivi par dossier, 40 familles relancées trois fois, 80 pièces à réclamer, 12 heures pour préparer la rentrée.'
 
 export const HYPOTHESES_OFFRES =
   'Mini couvre les fiches, le suivi des paiements, les relances et les pièces (51 h). Pro ajoute la rentrée suivante (10 h), les messages aux familles (10 messages de 45 min ramenés à 5 min, 6 h 40), la liste d’attente (20 places de 10 min ramenées à 1 min, 3 h) et le site mis à jour sans prestataire (4 h). Pro Max IA ajoute la boutique (150 commandes de 6 min ramenées à 1 min au retrait, 12 h 30) et les événements (4 événements de 3 h ramenés à 30 min, 10 h).'

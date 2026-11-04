@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""LE CONTRÔLE SEO BLOQUANT du site OnClub (bibliothèque standard seule).
+"""LE CONTRÔLE SEO BLOQUANT du site OnCluby (bibliothèque standard seule).
 
 Lancé par « npm run build » juste après « astro build », sur dist/ :
     python3 scripts/controle_seo.py dist

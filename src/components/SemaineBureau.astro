@@ -5,7 +5,7 @@
 
   Cinq soirées de la semaine, chacune prise par une des cinq tâches de
   src/data/temps.ts (les durées viennent de là, jamais tapées). Le VISITEUR
-  bascule lui-même l'interrupteur « Sans OnClub / Avec OnClub » : les soirées se
+  bascule lui-même l'interrupteur « Sans OnCluby / Avec OnCluby » : les soirées se
   libèrent (d'abord celles du club de sport : l'entraînement, puis la répétition,
   la soirée en famille), le compteur passe de 66 h à 5 h. La soirée choisie
   montre le papier (sans) ou le vrai écran qui fait le travail (avec).
@@ -62,10 +62,10 @@ export type TextesSemaine = {
 }
 
 const FR: TextesSemaine = {
-  titre: 'Votre semaine, avec ou sans OnClub',
-  sans: 'Sans OnClub',
-  avec: 'Avec OnClub',
-  indice: '<b>Basculez</b> pour voir la même semaine avec OnClub.',
+  titre: 'Votre semaine, avec ou sans OnCluby',
+  sans: 'Sans OnCluby',
+  avec: 'Avec OnCluby',
+  indice: '<b>Basculez</b> pour voir la même semaine avec OnCluby.',
   compteur: 'd’administratif par saison',
   pour: `pour ${ADHERENTS_REFERENCE} adhérents`,
   rendu: 'rendues au bureau',
@@ -245,7 +245,7 @@ const coche = '<svg class="coche" viewBox="0 0 20 20" aria-hidden="true"><path d
     if (window.ecransRafraichir) window.ecransRafraichir()
   }
   /* Téléphone : lundi est ouvert d'emblée, comme sur ordinateur (le papier se voit sans rien toucher) ; on referme une soirée en la retouchant.
-     En basculant sur « Avec OnClub » sans soirée ouverte, la première s'ouvre : l'écran qui fait le travail apparaît. */
+     En basculant sur « Avec OnCluby » sans soirée ouverte, la première s'ouvre : l'écran qui fait le travail apparaît. */
   var tel = window.matchMedia && window.matchMedia('(max-width: 899px)')
   radios.forEach(function (r) {
     r.closest('label').addEventListener('click', function (e) {
@@ -396,7 +396,7 @@ figcaption :global(b){color:var(--blanc)}
 @media (min-width:760px){.s-pied{padding:0 40px 28px}}
 /* Téléphone : la barre de l'interrupteur, collante, finit sa course en bas du panneau ; elle ne recouvre pas le pied. */
 @media (max-width:759px){.s-pied{padding-bottom:92px}}
-/* Le bouton pause ne sert que lorsqu'un écran animé est visible (« Avec OnClub ») ; le papier ne bouge pas. */
+/* Le bouton pause ne sert que lorsqu'un écran animé est visible (« Avec OnCluby ») ; le papier ne bouge pas. */
 .semaine:not(:has(#semaine-avec:checked)) .s-pied .pause{display:none}
 .s-hyp summary{display:inline-flex;align-items:center;min-height:44px;cursor:pointer;font-weight:700;color:var(--blanc)}
 .s-hyp[open]{flex-basis:100%}

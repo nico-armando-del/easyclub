@@ -27,7 +27,7 @@ const cles = ['mini', 'pro', 'max'] as const
 
 const fil = [{ nom: t('Tarifs'), url: lien('/tarifs') }]
 const faq = [
-  { question: t('Combien coûte OnClub ?'), reponse: t('Le tarif dépend de votre club et de l’offre choisie. Pour le connaître, il faut nous consulter : demandez une démo ou écrivez-nous, on vous répond avec le tarif de votre association.') },
+  { question: t('Combien coûte OnCluby ?'), reponse: t('Le tarif dépend de votre club et de l’offre choisie. Pour le connaître, il faut nous consulter : demandez une démo ou écrivez-nous, on vous répond avec le tarif de votre association.') },
   { question: t('Y a-t-il un abonnement fixe ou des frais d’installation ?'), reponse: t('Non. L’abonnement est un pourcentage des cotisations encaissées en ligne, et rien d’autre : ni frais fixe, ni frais d’installation, ni coût par adhérent, ni minimum.') },
   { question: t('Les chèques et les espèces sont-ils comptés ?'), reponse: t('Non. Ce que le bureau note lui-même, en chèque ou en espèces, ne passe pas par la commission. Seul ce qui est payé en ligne compte.') },
   { question: t('Qui paie les frais de carte bancaire ?'), reponse: t('L’association. Beaucoup les couvrent par des frais de dossier inclus dans le prix d’inscription, appliqués à toutes les familles quel que soit le moyen de paiement.') },
@@ -36,8 +36,8 @@ const faq = [
 ]
 ---
 <Layout
-  titre={t('Tarifs OnClub : sur devis, selon votre club')}
-  description={t('Les offres d’OnClub, Mini, Pro et Pro Max IA : ce que chacune ouvre et le temps qu’elle rend. Le tarif dépend de votre club : il faut nous consulter.')}
+  titre={t('Tarifs OnCluby : sur devis, selon votre club')}
+  description={t('Les offres d’OnCluby, Mini, Pro et Pro Max IA : ce que chacune ouvre et le temps qu’elle rend. Le tarif dépend de votre club : il faut nous consulter.')}
   chemin={lien('/tarifs')}
   fil={fil}
   faq={faq}

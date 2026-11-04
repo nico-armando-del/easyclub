@@ -26,14 +26,14 @@ const { langue, t, lien, locale } = i18n(Astro.url)
 const es = langue === 'es'
 const fil = [{ nom: t('Ressources'), url: lien('/ressources') }]
 const faq = [
-  { question: t('Qu’est-ce qu’OnClub ?'), reponse: t('Une plateforme française pour les associations qui inscrivent des adhérents : inscriptions et cotisations en ligne, suivi de l’argent, relances d’un bouton, pièces justificatives, saison suivante, convocations, site et boutique de l’association.') },
-  { question: t('OnClub convient-il à une association qui n’est pas sportive ?'), reponse: t('Oui, dès qu’il y a des inscriptions, des cours ou des groupes et des cotisations : école de musique, de danse, de théâtre, de langues, chorale, atelier. Chaque cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
+  { question: t('Qu’est-ce qu’OnCluby ?'), reponse: t('Une plateforme française pour les associations qui inscrivent des adhérents : inscriptions et cotisations en ligne, suivi de l’argent, relances d’un bouton, pièces justificatives, saison suivante, convocations, site et boutique de l’association.') },
+  { question: t('OnCluby convient-il à une association qui n’est pas sportive ?'), reponse: t('Oui, dès qu’il y a des inscriptions, des cours ou des groupes et des cotisations : école de musique, de danse, de théâtre, de langues, chorale, atelier. Chaque cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
   { question: t('Combien de temps faut-il pour démarrer ?'), reponse: t(MISE_EN_ROUTE) },
-  { question: t('Les données des familles sont-elles protégées ?'), reponse: t('Les données sont hébergées dans l’Union européenne, ni revendues ni utilisées à des fins publicitaires. Les paiements sont traités par Stripe : OnClub ne voit ni ne conserve les numéros de carte. Le détail est dans la politique de confidentialité.') },
+  { question: t('Les données des familles sont-elles protégées ?'), reponse: t('Les données sont hébergées dans l’Union européenne, ni revendues ni utilisées à des fins publicitaires. Les paiements sont traités par Stripe : OnCluby ne voit ni ne conserve les numéros de carte. Le détail est dans la politique de confidentialité.') },
   { question: t('Comment obtenir une démo ?'), reponse: t('Répondez aux cinq questions de la page de démo : vous voyez le temps que votre association gagnerait, puis vous nous écrivez sur WhatsApp ou par e-mail avec un message déjà rempli.') },
 ]
 
-const AUTEUR = t('L’équipe OnClub')
+const AUTEUR = t('L’équipe OnCluby')
 const dateCourte = (x: Date) => x.toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 const articles = await catalogue('articles', langue)
 const guides = await catalogue('guides', langue)
@@ -91,12 +91,12 @@ const OUTILS = [
   { titre: t('Le calculateur du temps gagné'), href: '/temps-gagne' },
   { titre: t('Les offres, sur devis'), href: '/tarifs' },
   /* La présentation n'existe qu'en français : pas de lien depuis l'espagnol. */
-  ...(es ? [] : [{ titre: t('OnClub en écrans animés'), href: '/presentation' }]),
+  ...(es ? [] : [{ titre: t('OnCluby en écrans animés'), href: '/presentation' }]),
 ].map((o) => ({ titre: o.titre, href: lien(o.href), fr: lien(o.href) === o.href && es }))
 const VIDE = t('Rien dans cette rubrique pour l’instant.')
 ---
 <Layout
-  titre={t('Guides et ressources pour gérer une association | OnClub')}
+  titre={t('Guides et ressources pour gérer une association | OnCluby')}
   description={t('Guides pratiques, articles et comparatifs pour les bénévoles d’association : cotisations, aides, inscriptions, rentrée. Sans jargon, avec les sources.')}
   chemin={lien('/ressources')}
   fil={fil}

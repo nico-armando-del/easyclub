@@ -51,9 +51,9 @@ const {
 const imageCarte = `/og/${chemin === '/' ? 'index' : chemin.replace(/^\//, '')}.jpg`
 const aSaCarte = !imageDonnee && fs.existsSync(`public${imageCarte}`)
 const image = imageDonnee ?? (aSaCarte ? imageCarte : '/img/og.jpg')
-const imageAlt = imageAltDonne ?? (aSaCarte ? titre : 'Le logo OnClub sur fond menthe')
+const imageAlt = imageAltDonne ?? (aSaCarte ? titre : 'Le logo OnCluby sur fond menthe')
 const { langue, t, lien } = i18n(Astro.url)
-const imageAltLangue = imageAlt === 'Le logo OnClub sur fond menthe' ? t(imageAlt) : imageAlt
+const imageAltLangue = imageAlt === 'Le logo OnCluby sur fond menthe' ? t(imageAlt) : imageAlt
 
 /*
   LES DEUX LANGUES. Une page a une jumelle quand l'autre version existe

@@ -3,7 +3,7 @@
   « TRANSMETTRE À MON CLUB » : pour l'adhérent, l'élève ou le parent. Pas
   d'annuaire, pas de recherche de club : un message prêt à envoyer au bureau,
   par WhatsApp (la personne choisit le contact), par e-mail ou par le partage
-  du téléphone. Rien n'est envoyé à OnClub, rien n'est stocké.
+  du téléphone. Rien n'est envoyé à OnCluby, rien n'est stocké.
   Si la localisation a été acceptée, la ville entre dans le message.
   Logique : public/js/recommander.js (inchangée).
   Mise en page (maquettes §B.7) : un écran. À gauche le titre, le champ, le bouton ;
@@ -21,25 +21,25 @@ import { i18n, SR_FR } from '../i18n/ui'
 /* Une seule page pour les deux langues : /es/recommander l'importe. Le message et les mots que
    public/js/recommander.js y ajoute (nom du club, ville) passent par t() ; le lien mène à l'accueil de la langue. */
 const { t, lien, versFr } = i18n(Astro.url)
-const message = t('Bonjour, je suis adhérent du club. J’ai vu OnClub, une plateforme pour les associations : les familles s’inscrivent et paient en ligne, le bureau relance d’un bouton et ne recopie plus de fiches. Leur estimation, pas une étude : environ 61 heures rendues aux bénévoles chaque saison pour 250 adhérents. Ça pourrait nous aider ? {site}', { site: `${SITE}${lien('/') === '/' ? '' : lien('/')}` })
+const message = t('Bonjour, je suis adhérent du club. J’ai vu OnCluby, une plateforme pour les associations : les familles s’inscrivent et paient en ligne, le bureau relance d’un bouton et ne recopie plus de fiches. Leur estimation, pas une étude : environ 61 heures rendues aux bénévoles chaque saison pour 250 adhérents. Ça pourrait nous aider ? {site}', { site: `${SITE}${lien('/') === '/' ? '' : lien('/')}` })
 const surligne = t('61 heures')
 const morceaux = message.split(surligne)
 const textes = JSON.stringify({
   duClub: t('adhérent du club'), deClub: t('adhérent de {club}'), aVille: t(', à {ville}'),
-  sujet: t('Une idée pour le club : OnClub'), villeNote: t('Votre ville ({ville}) est ajoutée au message. Vous pouvez la retirer en modifiant le texte.'),
+  sujet: t('Une idée pour le club : OnCluby'), villeNote: t('Votre ville ({ville}) est ajoutée au message. Vous pouvez la retirer en modifiant le texte.'),
   copie: t('Message copié. Collez-le où vous voulez.'),
 })
 const fil = [{ nom: t('Transmettre à mon club'), url: lien('/recommander') }]
 const faq = [
-  { question: t('Est-ce que mon club saura que le message vient d’OnClub ?'), reponse: t('Le message part de votre téléphone ou de votre messagerie, à votre nom, vers la personne que vous choisissez. OnClub ne reçoit rien et ne contacte pas votre club de lui-même.') },
+  { question: t('Est-ce que mon club saura que le message vient d’OnCluby ?'), reponse: t('Le message part de votre téléphone ou de votre messagerie, à votre nom, vers la personne que vous choisissez. OnCluby ne reçoit rien et ne contacte pas votre club de lui-même.') },
   { question: t('Qu’est-ce que ça change pour moi, adhérent ou parent ?'), reponse: t('Vous vous inscrivez depuis votre téléphone, toute la famille dans un seul formulaire, vous payez par carte, ou en plusieurs fois selon l’échéancier du club, vous déposez le certificat en photo et vous répondez aux convocations en un clic, sans créer de compte.') },
   { question: t('Combien ça coûte au club ?'), reponse: t('Le tarif dépend du club et de l’offre choisie : pour le connaître, le bureau nous consulte. Rien sur les chèques ni les espèces.') },
 ]
 const L = (chemin: string) => ({ href: lien(chemin), hreflang: versFr(chemin) ? 'fr' : undefined, fr: versFr(chemin) })
 ---
 <Layout
-  titre={t('Proposer OnClub à son club ou son association')}
-  description={t('Adhérent, élève ou parent : envoyez au bureau de votre association un message prêt à partir, avec le temps que les bénévoles gagneraient avec OnClub.')}
+  titre={t('Proposer OnCluby à son club ou son association')}
+  description={t('Adhérent, élève ou parent : envoyez au bureau de votre association un message prêt à partir, avec le temps que les bénévoles gagneraient avec OnCluby.')}
   chemin={lien('/recommander')}
   fil={fil}
   faq={faq}
@@ -61,13 +61,13 @@ const L = (chemin: string) => ({ href: lien(chemin), hreflang: versFr(chemin) ? 
           <div class="bulle" data-bulle>{morceaux[0]}{morceaux.length > 1 && <><mark>{surligne}</mark>{morceaux.slice(1).join(surligne)}</>}</div>
         </div>
       </div>
-      <p class="bulle-legende">{t('Le message tel qu’il partira. 61 h : estimation OnClub pour 250 adhérents, pas une étude.')}</p>
+      <p class="bulle-legende">{t('Le message tel qu’il partira. 61 h : estimation OnCluby pour 250 adhérents, pas une étude.')}</p>
     </div>
 
     <div class="ecran-actions">
       <div class="partager">
         <a class="btn btn-encre" href={`https://wa.me/?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener" data-wa data-envoi><svg aria-hidden="true"><use href="#wa"/></svg>{t('Envoyer sur WhatsApp')}</a>
-        <a class="lien-fleche" href={`mailto:?subject=${encodeURIComponent(t('Une idée pour le club : OnClub'))}&body=${encodeURIComponent(message)}`} data-mail data-envoi><svg aria-hidden="true"><use href="#courriel"/></svg>{t('Envoyer par e-mail')}</a>
+        <a class="lien-fleche" href={`mailto:?subject=${encodeURIComponent(t('Une idée pour le club : OnCluby'))}&body=${encodeURIComponent(message)}`} data-mail data-envoi><svg aria-hidden="true"><use href="#courriel"/></svg>{t('Envoyer par e-mail')}</a>
         <button type="button" class="action-texte" data-partage hidden><svg aria-hidden="true"><use href="#partage"/></svg>{t('Partager')}</button>
         <button type="button" class="action-texte" data-copier hidden>{t('Copier le message')}</button>
       </div>
@@ -75,7 +75,7 @@ const L = (chemin: string) => ({ href: lien(chemin), hreflang: versFr(chemin) ? 
         <label class="champ"><span>{t('Le message')}</span><textarea rows="7" data-message data-base={message}>{message}</textarea></label>
       </Repli>
       <p class="message-ville" hidden data-ville-note></p>
-      <p class="note" aria-live="polite" data-etat data-merci={t('Merci. Le bureau vous devra peut-être quelques soirées.')}>{t('Rien n’est envoyé à OnClub : WhatsApp ou votre messagerie s’ouvre, vous choisissez le destinataire.')}</p>
+      <p class="note" aria-live="polite" data-etat data-merci={t('Merci. Le bureau vous devra peut-être quelques soirées.')}>{t('Rien n’est envoyé à OnCluby : WhatsApp ou votre messagerie s’ouvre, vous choisissez le destinataire.')}</p>
     </div>
   </div>
 

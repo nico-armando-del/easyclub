@@ -17,7 +17,7 @@ export type TextesRefonte = {
   noteLangue: string
   /** Le héros (concept A, 10 oct.) : légendes, relance reçue, carte du temps. */
   scene: TextesScene
-  /** Avec ou sans OnClub (concept C). */
+  /** Avec ou sans OnCluby (concept C). */
   semaine: TextesSemaine
   /** Les écrans traduits propres à la refonte : le tableau de bord, les convocations, le site du club. */
   ecrans: { tableau: Ecran; convocations: Ecran; site: Ecran }
@@ -34,9 +34,9 @@ export type TextesRefonte = {
 export const REFONTE: Record<Langue, TextesRefonte> = {
   en: {
     h1: 'Sports club or association? Paperwork is over',
-    phrase: 'OnClub puts your club’s registrations and fees online. Your volunteers get their evenings back.',
+    phrase: 'OnCluby puts your club’s registrations and fees online. Your volunteers get their evenings back.',
     bouton: 'Book a demo',
-    noteLangue: 'OnClub is a French platform: the product is in French and takes payments in euros.',
+    noteLangue: 'OnCluby is a French platform: the product is in French and takes payments in euros.',
     scene: {
       legendes: [
         { titre: 'The family registers', phrase: 'From their phone: each child, their team or class, the fee in one or several payments.' },
@@ -55,9 +55,9 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       sports: { liste: [{ texte: 'Football' }, { texte: 'basketball' }, { texte: 'volleyball' }, { texte: 'handball' }, { texte: 'judo' }, { texte: 'tennis' }], aussi: 'and music and drama too.' },
     },
     semaine: {
-      titre: 'Your week, with or without OnClub',
-      sans: 'Without OnClub', avec: 'With OnClub',
-      indice: '<b>Flip the switch</b> to see the same week with OnClub.',
+      titre: 'Your week, with or without OnCluby',
+      sans: 'Without OnCluby', avec: 'With OnCluby',
+      indice: '<b>Flip the switch</b> to see the same week with OnCluby.',
       compteur: 'of admin per season', pour: `for ${N} members`, rendu: 'given back to the board',
       tete: 'Your evenings this week', toucher: 'Tap an evening', parSaison: 'Per season',
       groupe: 'The board’s evenings: choose one to see the detail',
@@ -121,9 +121,9 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       site: {
         famille: 'Show', titre: 'The club website stays up to date, with no web agency.', texte: '', lien: '/fonctionnalites/site-association', lienNom: 'Association website', legende: '',
-        asso: 'Your club', ecranTitre: 'Club website', ecranSous: 'Schedule, prices and places come from OnClub',
+        asso: 'Your club', ecranTitre: 'Club website', ecranSous: 'Schedule, prices and places come from OnCluby',
         lignes: [
-          { nom: 'Courses and teams', detail: 'from OnClub', statut: 'Up to date', ton: 'ok' },
+          { nom: 'Courses and teams', detail: 'from OnCluby', statut: 'Up to date', ton: 'ok' },
           { nom: 'Prices and places', detail: 'read from registrations', statut: 'Up to date', ton: 'ok' },
           { nom: 'U13', detail: 'Registrations', statut: 'Full', ton: 'neutre' },
         ],
@@ -132,15 +132,15 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
     },
     temps: {
       titre: 'And yours?',
-      note: 'Change the number: the calculation follows. OnClub estimate, not a study.',
+      note: 'Change the number: the calculation follows. OnCluby estimate, not a study.',
       lien: 'The full calculation',
       mots: { avant: 'given back each season, for', apres: 'members.', etiquette: 'Number of members' },
     },
     bento: { titre: 'Everything that ate your evenings', lien: (n) => `All ${n} features` },
     onglets: { titre: 'Watch it run', libelles: ['Next season', 'Match line-up', 'Call-ups', 'Club website'], legende: 'Names and amounts are fictitious.', pause: 'Pause', reprise: 'Play the animation' },
     vitrine: {
-      titre: 'The club website, plugged into OnClub',
-      phrase: 'Classes, prices, places and registrations come from OnClub. A full class shows as full, without anyone updating it.',
+      titre: 'The club website, plugged into OnCluby',
+      phrase: 'Classes, prices, places and registrations come from OnCluby. A full class shows as full, without anyone updating it.',
       legende: 'Two demonstration clubs, invented to show what your association can have.',
       mots: { aria: 'Demonstration club websites', site: 'demonstration website', credit: 'Club photos: Freepik', onglets: { volta: 'Volta Volley Club · volleyball', montclar: 'AS Montclar · football' } },
       lien: 'The association website, from Pro',
@@ -156,7 +156,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       intro: 'The price depends on your club: get in touch to find out. Nothing on cheques or cash. Card fees are paid by the association.',
       rendues: 'given back per season',
       ouvre: (n) => `What ${n} includes`,
-      note: 'OnClub estimate for 250 members, not a study.',
+      note: 'OnCluby estimate for 250 members, not a study.',
       comment: 'How we count these hours',
       detail: 'Plan details',
     },
@@ -170,9 +170,9 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
   },
   es: {
     h1: '¿Club deportivo o asociación? Se acabó el papeleo',
-    phrase: 'OnClub pone en línea las inscripciones y las cuotas de tu club. Tus voluntarios recuperan sus noches.',
+    phrase: 'OnCluby pone en línea las inscripciones y las cuotas de tu club. Tus voluntarios recuperan sus noches.',
     bouton: 'Solicitar una demo',
-    noteLangue: 'OnClub es una plataforma francesa: el producto está en francés y cobra en euros.',
+    noteLangue: 'OnCluby es una plataforma francesa: el producto está en francés y cobra en euros.',
     scene: {
       legendes: [
         { titre: 'La familia se inscribe', phrase: 'Desde el móvil: cada hijo, su equipo o su clase, la cuota en uno o varios pagos.' },
@@ -191,9 +191,9 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       sports: { liste: [{ texte: 'Fútbol' }, { texte: 'baloncesto' }, { texte: 'voleibol' }, { texte: 'balonmano' }, { texte: 'judo' }, { texte: 'tenis' }], aussi: 'y también la música y el teatro.' },
     },
     semaine: {
-      titre: 'Tu semana, con o sin OnClub',
-      sans: 'Sin OnClub', avec: 'Con OnClub',
-      indice: '<b>Cambia el interruptor</b> para ver la misma semana con OnClub.',
+      titre: 'Tu semana, con o sin OnCluby',
+      sans: 'Sin OnCluby', avec: 'Con OnCluby',
+      indice: '<b>Cambia el interruptor</b> para ver la misma semana con OnCluby.',
       compteur: 'de papeleo por temporada', pour: `para ${N} socios`, rendu: 'recuperadas por la directiva',
       tete: 'Tus noches de la semana', toucher: 'Toca una noche', parSaison: 'Por temporada',
       groupe: 'Las noches de la directiva: elige una para ver el detalle',
@@ -257,9 +257,9 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       },
       site: {
         famille: 'Mostrar', titre: 'La web del club se mantiene al día, sin agencia.', texte: '', lien: '/fonctionnalites/site-association', lienNom: 'Web de la asociación', legende: '',
-        asso: 'Tu club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnClub',
+        asso: 'Tu club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnCluby',
         lignes: [
-          { nom: 'Cursos y equipos', detail: 'desde OnClub', statut: 'Al día', ton: 'ok' },
+          { nom: 'Cursos y equipos', detail: 'desde OnCluby', statut: 'Al día', ton: 'ok' },
           { nom: 'Precios y plazas', detail: 'leídos de las inscripciones', statut: 'Al día', ton: 'ok' },
           { nom: 'Sub-13', detail: 'Inscripciones', statut: 'Completo', ton: 'neutre' },
         ],
@@ -268,15 +268,15 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
     },
     temps: {
       titre: '¿Y en tu caso?',
-      note: 'Cambia el número: el cálculo se actualiza. Estimación de OnClub, no un estudio.',
+      note: 'Cambia el número: el cálculo se actualiza. Estimación de OnCluby, no un estudio.',
       lien: 'El cálculo completo',
       mots: { avant: 'recuperadas cada temporada, para', apres: 'socios.', etiquette: 'Número de socios' },
     },
     bento: { titre: 'Todo lo que se comía tus noches', lien: (n) => `Las ${n} funcionalidades` },
     onglets: { titre: 'Míralo funcionar', libelles: ['Próxima temporada', 'Alineación del partido', 'Convocatorias', 'Web del club'], legende: 'Nombres e importes ficticios.', pause: 'Pausar', reprise: 'Reanudar la animación' },
     vitrine: {
-      titre: 'La web del club, conectada a OnClub',
-      phrase: 'Los cursos, los precios, las plazas y las inscripciones vienen de OnClub. Una clase completa aparece completa, sin que nadie la actualice.',
+      titre: 'La web del club, conectada a OnCluby',
+      phrase: 'Los cursos, los precios, las plazas y las inscripciones vienen de OnCluby. Una clase completa aparece completa, sin que nadie la actualice.',
       legende: 'Dos clubes de demostración, inventados para mostrar lo que tu asociación puede tener.',
       mots: { aria: 'Webs de clubes de demostración', site: 'web de demostración', credit: 'Fotos de los clubes: Freepik', onglets: { volta: 'Volta Volley Club · voleibol', montclar: 'AS Montclar · fútbol' } },
       lien: 'La web de la asociación, desde Pro',
@@ -292,7 +292,7 @@ export const REFONTE: Record<Langue, TextesRefonte> = {
       intro: 'El precio depende de tu club: consúltanos para conocerlo. Nada sobre cheques ni efectivo. Las comisiones de tarjeta corren a cargo de la asociación.',
       rendues: 'recuperadas por temporada',
       ouvre: (n) => `Lo que incluye ${n}`,
-      note: 'Estimación de OnClub para 250 socios, no un estudio.',
+      note: 'Estimación de OnCluby para 250 socios, no un estudio.',
       comment: 'Cómo contamos estas horas',
       detail: 'El detalle de los planes',
     },

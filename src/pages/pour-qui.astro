@@ -33,15 +33,15 @@ const aPage = (href: string) => /^(\/es)?\/sport\//.test(href)
 
 const fil = [{ nom: t('Pour qui'), url: lien('/pour-qui') }]
 const faq = [
-  { question: t('Mon sport ou mon activité n’est pas dans la liste : OnClub peut-il convenir ?'), reponse: t('Probablement, s’il y a des inscriptions, des équipes, des cours ou des groupes, et des cotisations. Chaque équipe ou cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.') },
+  { question: t('Mon sport ou mon activité n’est pas dans la liste : OnCluby peut-il convenir ?'), reponse: t('Probablement, s’il y a des inscriptions, des équipes, des cours ou des groupes, et des cotisations. Chaque équipe ou cours a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif : le formulaire d’inscription suit votre catalogue. Le plus simple est d’en parler en démo.') },
   { question: t('Les adultes peuvent-ils s’inscrire seuls ?'), reponse: t('Oui. Chaque cours est borné par années de naissance : un cours pour adultes s’ouvre aux années qui conviennent. Un adulte qui s’inscrit seul indique un contact d’urgence.') },
-  { question: t('Je suis adhérent, pas au bureau : que puis-je faire ?'), reponse: t('Transmettre OnClub à votre club : la page dédiée prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail.') },
+  { question: t('Je suis adhérent, pas au bureau : que puis-je faire ?'), reponse: t('Transmettre OnCluby à votre club : la page dédiée prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail.') },
 ]
 const fr = (x: { fr?: boolean }) => (x.fr ? 'fr' : undefined)
 ---
 <Layout
-  titre={t('Clubs de sport et associations qui inscrivent | OnClub')}
-  description={t('OnClub sert d’abord les clubs de sport (foot, basket, volley, judo, danse…), aussi les écoles de musique, de théâtre, de langues. Et chaque rôle du bureau.')}
+  titre={t('Clubs de sport et associations qui inscrivent | OnCluby')}
+  description={t('OnCluby sert d’abord les clubs de sport (foot, basket, volley, judo, danse…), aussi les écoles de musique, de théâtre, de langues. Et chaque rôle du bureau.')}
   chemin={lien('/pour-qui')}
   fil={fil}
   faq={faq}

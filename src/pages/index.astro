@@ -3,7 +3,7 @@
   L'ACCUEIL, ÉCRAN PAR ÉCRAN (maquettes §B.2, récit §1, arbitrages du plan).
   1. Le héros : le titre, une phrase, un bouton ; le produit en scène (trois
      vrais écrans, trois légendes cliquables, le temps rendu). Rien d'épinglé.
-  2. Avec ou sans OnClub : la semaine du bureau, l'interrupteur que le visiteur
+  2. Avec ou sans OnCluby : la semaine du bureau, l'interrupteur que le visiteur
      bascule lui-même ; « Calculer pour mon association ».
   3. Les fonctionnalités en bento (une carte par famille).
   4. Le produit qui tourne : onglets verticaux et écran.
@@ -64,26 +64,26 @@ const ongletsVersFr = es && ONGLETS.some((o) => !o.lien.href.startsWith('/es')) 
 
 /* La FAQ : six questions, inchangées (arbitrage 14) ; le JSON-LD est construit à partir de la même liste. */
 const faq = [
-  { question: t('OnClub, c’est pour quelles associations ?'), reponse: t('Pour toutes celles qui inscrivent des adhérents, avec des équipes ou des cours et des cotisations : d’abord les clubs de sport (foot, basket, volley, judo, tennis…), aussi les écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnClub, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
-  { question: t('Combien coûte OnClub ?'), reponse: t('Le tarif dépend de votre club et de l’offre choisie : pour le connaître, il faut nous consulter. Rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.') },
-  { question: t('D’où viennent les 61 heures rendues ?'), reponse: t('C’est une estimation OnClub pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnClub. Le calcul et les hypothèses sont sur la page du temps gagné.') },
+  { question: t('OnCluby, c’est pour quelles associations ?'), reponse: t('Pour toutes celles qui inscrivent des adhérents, avec des équipes ou des cours et des cotisations : d’abord les clubs de sport (foot, basket, volley, judo, tennis…), aussi les écoles de musique, de danse, de théâtre, de langues, chorales, ateliers. Dans OnCluby, chaque cours ou équipe a sa discipline, son niveau, ses encadrants, sa salle, ses créneaux, ses places et son tarif.') },
+  { question: t('Combien coûte OnCluby ?'), reponse: t('Le tarif dépend de votre club et de l’offre choisie : pour le connaître, il faut nous consulter. Rien sur les chèques ni les espèces. Les frais de carte bancaire restent à la charge de l’association.') },
+  { question: t('D’où viennent les 61 heures rendues ?'), reponse: t('C’est une estimation OnCluby pour une association de 250 adhérents, pas une étude : 66 heures par saison aujourd’hui pour recopier les fiches, suivre les paiements, relancer, réclamer les pièces et préparer la rentrée, contre environ 5 heures avec OnCluby. Le calcul et les hypothèses sont sur la page du temps gagné.') },
   { question: t('Les familles doivent-elles créer un compte ?'), reponse: t('Non. La famille remplit un seul formulaire pour tous ses membres, depuis son téléphone. Elle reçoit un récapitulatif par mail et retrouve ensuite son dossier par son lien. Pour une convocation, elle répond présent ou absent depuis le mail.') },
   { question: t('En combien de temps notre association est-elle en ligne ?'), reponse: `${t(MISE_EN_ROUTE)} ${t('Vous déposez le tableur de la saison passée : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription.')}` },
-  { question: t('Je suis adhérent ou parent : comment proposer OnClub à mon club ?'), reponse: t('Utilisez la page « Transmettre à mon club » : elle prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail, avec ce que l’association y gagne. Vous n’avez rien à installer et rien à remplir pour nous.') },
+  { question: t('Je suis adhérent ou parent : comment proposer OnCluby à mon club ?'), reponse: t('Utilisez la page « Transmettre à mon club » : elle prépare un message court pour le bureau, à envoyer par WhatsApp ou par e-mail, avec ce que l’association y gagne. Vous n’avez rien à installer et rien à remplir pour nous.') },
 ]
 const demo = vers('/demo')
 const temps = vers('/temps-gagne')
 const pourQui = vers('/pour-qui')
 ---
 <Layout
-  titre={t('OnClub : inscriptions et cotisations en ligne des clubs')}
-  description={t('Club de sport ou association : OnClub met en ligne vos inscriptions, vos cotisations et vos relances. Foot, basket, volley, judo… et aussi la musique.')}
+  titre={t('OnCluby : inscriptions et cotisations en ligne des clubs')}
+  description={t('Club de sport ou association : OnCluby met en ligne vos inscriptions, vos cotisations et vos relances. Foot, basket, volley, judo… et aussi la musique.')}
   chemin={lien('/')}
   faq={faq}
 >
   <SceneAccueil
     titre={t('Association sportive ou artistique ? La paperasse, c’est fini')}
-    phrase={t('OnClub met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées.')}
+    phrase={t('OnCluby met les inscriptions et les cotisations de votre club en ligne. Vos bénévoles reprennent leurs soirées.')}
     cta={{ texte: t('Demander une démo'), href: demo.href }}
     ctaVersFr={demo.fr ? SR_FR : undefined}
   >

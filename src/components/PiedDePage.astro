@@ -1,7 +1,7 @@
 ---
 /*
   LE PIED DE PAGE (maquettes §B.1 et §F). Fond encre. La marque et ACCROCHE, puis
-  cinq colonnes : Fonctionnalités · Sports · Activités · Ressources · OnClub.
+  cinq colonnes : Fonctionnalités · Sports · Activités · Ressources · OnCluby.
   Sports et activités : les 10 premiers (ordre, puis nom), puis « Tous… (N) » vers
   /pour-qui, qui lie TOUTES les pages : le pied ne grandit plus avec le catalogue.
   Chaque colonne est un <details open> : sans JavaScript, tout est ouvert ; sous
@@ -35,7 +35,7 @@ const annee = new Date().getFullYear()
   <div class="enveloppe">
     <div class="pied-haut">
       <div class="pied-marque">
-        <a class="marque" href={lien('/')} aria-label={t('OnClub, accueil')}><svg aria-hidden="true"><use href="#boucle"/></svg>OnCluby</a>
+        <a class="marque" href={lien('/')} aria-label={t('OnCluby, accueil')}><svg aria-hidden="true"><use href="#boucle"/></svg>OnCluby</a>
         <p class="pied-accroche">{t(ACCROCHE)}</p>
         <a class="btn btn-menthe btn-petit pied-demo" href={lignes.demo.href}>{t('Demander une démo')}</a>
       </div>
@@ -77,7 +77,7 @@ const annee = new Date().getFullYear()
           </>}
         </details>
         <details open class="pied-col">
-          <summary><h2>OnClub</h2></summary>
+          <summary><h2>OnCluby</h2></summary>
           <ul>
             <li><a href={lignes.tarifs.href} hreflang={lignes.tarifs.hreflang}>{t('Tarifs')}{lignes.tarifs.fr && <VersFr sr={SR_FR} />}</a></li>
             <li><a href={lignes.demo.href} hreflang={lignes.demo.hreflang}>{t('Demander une démo')}{lignes.demo.fr && <VersFr sr={SR_FR} />}</a></li>
@@ -90,7 +90,7 @@ const annee = new Date().getFullYear()
       </nav>
     </div>
     <div class="pied-bas">
-      <span>© {annee} OnClub</span>
+      <span>© {annee} OnCluby</span>
       <a href={lignes.mentions.href} hreflang={lignes.mentions.hreflang}>{t('Mentions légales')}{lignes.mentions.fr && <VersFr sr={SR_FR} />}</a>
       <a href={lignes.confidentialite.href} hreflang={lignes.confidentialite.hreflang}>{t('Confidentialité')}{lignes.confidentialite.fr && <VersFr sr={SR_FR} />}</a>
       <a href={lignes.conditions.href} hreflang={lignes.conditions.hreflang}>{t('Conditions')}{lignes.conditions.fr && <VersFr sr={SR_FR} />}</a>
@@ -153,7 +153,7 @@ const annee = new Date().getFullYear()
 .pied-langue-active{color:var(--blanc);font-weight:700}
 @media (min-width:1000px){.pied-langues{margin-left:auto}}
 /* Sur téléphone (tour 2, défaut 2) : le bouton du pied double la case vide juste au-dessus
-   et la colonne OnClub (« Demander une démo ») : il n'est dessiné qu'à partir de 760 px.
+   et la colonne OnCluby (« Demander une démo ») : il n'est dessiné qu'à partir de 760 px.
    Les liens légaux, plus serrés, tiennent sur moins de lignes. */
 @media (max-width:759px){
   .pied-demo{display:none}

@@ -13,7 +13,7 @@ export type PagePlan = { url: string; nom: string; ligne?: string; maj: string; 
 const AUJOURDHUI = new Date().toISOString().slice(0, 10)
 
 export const PAGES_FIXES: { chemin: string; nom: string; ligne: string; groupe: string }[] = [
-  { chemin: '/', nom: 'Accueil', ligne: 'Ce que fait OnClub, le temps rendu aux bénévoles, les offres.', groupe: 'Essentiel' },
+  { chemin: '/', nom: 'Accueil', ligne: 'Ce que fait OnCluby, le temps rendu aux bénévoles, les offres.', groupe: 'Essentiel' },
   { chemin: '/fonctionnalites', nom: 'Fonctionnalités', ligne: 'Toutes les fonctionnalités, en six familles.', groupe: 'Essentiel' },
   { chemin: '/tarifs', nom: 'Tarifs', ligne: 'Sur devis : le tarif dépend du club. Ce que chaque offre ouvre.', groupe: 'Essentiel' },
   { chemin: '/temps-gagne', nom: 'Le temps gagné', ligne: 'Le calculateur, la méthode et les hypothèses de l’estimation.', groupe: 'Essentiel' },
@@ -21,7 +21,7 @@ export const PAGES_FIXES: { chemin: string; nom: string; ligne: string; groupe: 
   { chemin: '/ressources', nom: 'Ressources', ligne: 'Guides, articles et comparatifs pour le bureau.', groupe: 'Essentiel' },
   { chemin: '/demo', nom: 'Demander une démo', ligne: 'Cinq questions, puis WhatsApp ou e-mail.', groupe: 'Essentiel' },
   { chemin: '/recommander', nom: 'Transmettre à mon club', ligne: 'Pour l’adhérent ou le parent : un message prêt pour le bureau.', groupe: 'Essentiel' },
-  { chemin: '/presentation', nom: 'Présentation', ligne: 'OnClub en écrans animés.', groupe: 'Essentiel' },
+  { chemin: '/presentation', nom: 'Présentation', ligne: 'OnCluby en écrans animés.', groupe: 'Essentiel' },
   { chemin: '/mentions-legales', nom: 'Mentions légales', ligne: 'Éditeur, hébergeur, contact.', groupe: 'Informations légales' },
   { chemin: '/confidentialite', nom: 'Confidentialité', ligne: 'Données, localisation avec consentement, droits.', groupe: 'Informations légales' },
   { chemin: '/conditions', nom: 'Conditions', ligne: 'Conditions d’utilisation et de service.', groupe: 'Informations légales' },

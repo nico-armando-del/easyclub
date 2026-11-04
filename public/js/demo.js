@@ -11,7 +11,7 @@
   if (!form) return
   var EMAIL = 'onclub.contact@gmail.com'
   var WA = '33645049227'
-  var OFFRES = { mini: 'OnClub Mini', pro: 'OnClub Pro', max: 'OnClub Pro Max IA' }
+  var OFFRES = { mini: 'OnCluby Mini', pro: 'OnCluby Pro', max: 'OnCluby Pro Max IA' }
   var etapes = Array.prototype.slice.call(form.querySelectorAll('[data-etape]'))
   var fil = Array.prototype.slice.call(form.querySelectorAll('[data-etapes-fil] li'))
   var champN = form.querySelector('[data-adherents]')
@@ -19,7 +19,7 @@
   var courant = 1
   var gain = null
   // Les mots du message, dans la langue de la page (data-textes, posé par src/pages/demo.astro).
-  var T = { bonjour: 'Bonjour, je voudrais une démo d’OnClub pour notre association.', association: 'Association : ', nonPrecise: 'non précisé', ville: 'Ville : ', adherents: 'Adhérents : environ ', pese: 'Ce qui pèse le plus : ', temps: 'Temps rendu estimé par le site : ≈ {h} h par saison', offre: 'Offre qui nous intéresse : ', resume: 'Calcul pour {n} adhérents. Estimation, pas une promesse.', sujet: 'Démo OnClub' }
+  var T = { bonjour: 'Bonjour, je voudrais une démo d’OnCluby pour notre association.', association: 'Association : ', nonPrecise: 'non précisé', ville: 'Ville : ', adherents: 'Adhérents : environ ', pese: 'Ce qui pèse le plus : ', temps: 'Temps rendu estimé par le site : ≈ {h} h par saison', offre: 'Offre qui nous intéresse : ', resume: 'Calcul pour {n} adhérents. Estimation, pas une promesse.', sujet: 'Démo OnCluby' }
   try { var lus = JSON.parse(form.getAttribute('data-textes') || '{}'); for (var k in lus) T[k] = lus[k] } catch (x) {}
 
   // Paramètres d'adresse : ?type=musique&offre=pro

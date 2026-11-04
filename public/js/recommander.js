@@ -2,7 +2,7 @@
   « Transmettre à mon club » (/recommander). Le message se met à jour avec le
   nom du club et, si la localisation a été acceptée, la ville. Les liens
   WhatsApp (sans numéro : la personne choisit le contact) et e-mail (sans
-  destinataire) reprennent le texte. Rien n'est envoyé à OnClub.
+  destinataire) reprennent le texte. Rien n'est envoyé à OnCluby.
 */
 (function () {
   'use strict'
@@ -16,7 +16,7 @@
   var modifie = false
   var ville = window.onclubVille || null
   // Les mots ajoutés au message, dans la langue de la page (data-textes, posé par src/pages/recommander.astro).
-  var T = { duClub: 'adhérent du club', deClub: 'adhérent de {club}', aVille: ', à {ville}', sujet: 'Une idée pour le club : OnClub', villeNote: 'Votre ville ({ville}) est ajoutée au message. Vous pouvez la retirer en modifiant le texte.', copie: 'Message copié. Collez-le où vous voulez.' }
+  var T = { duClub: 'adhérent du club', deClub: 'adhérent de {club}', aVille: ', à {ville}', sujet: 'Une idée pour le club : OnCluby', villeNote: 'Votre ville ({ville}) est ajoutée au message. Vous pouvez la retirer en modifiant le texte.', copie: 'Message copié. Collez-le où vous voulez.' }
   try { var lus = JSON.parse(boite.getAttribute('data-textes') || '{}'); for (var k in lus) T[k] = lus[k] } catch (x) {}
 
   function compose() {
@@ -47,7 +47,7 @@
   if (navigator.share && partage) {
     partage.hidden = false
     partage.addEventListener('click', function () {
-      navigator.share({ title: 'OnClub', text: zone.value }).catch(function () {})
+      navigator.share({ title: 'OnCluby', text: zone.value }).catch(function () {})
     })
   }
   var copier = boite.querySelector('[data-copier]')

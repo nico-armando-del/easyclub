@@ -30,7 +30,7 @@ const FR: TextesOffres = {
   rendues: 'rendues par saison',
   tarif: TARIF,
   ouvre: (n) => `Ce que ${n} ouvre`,
-  note: 'Estimation OnClub pour 250 adhérents, pas une étude.',
+  note: 'Estimation OnCluby pour 250 adhérents, pas une étude.',
   comment: 'Comment on compte ces heures',
   hypotheses: HYPOTHESES_OFFRES,
   demo: (n) => `Demander le tarif de ${n}`,
@@ -45,7 +45,7 @@ const ES: TextesOffres = {
 const { titre = 'h3', mode = 'complet', t = langue === 'es' ? ES : FR } = Astro.props
 const T = titre
 const MAX = Math.max(...OFFRES.map((o) => o.heures))
-const court = (n: string) => n.replace('OnClub ', '')
+const court = (n: string) => n.replace('OnCluby ', '')
 ---
 <div class:list={['offres', `offres-${mode}`]}>
   {OFFRES.map((o) => {

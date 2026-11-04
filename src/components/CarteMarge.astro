@@ -10,7 +10,7 @@ import { i18n } from '../i18n/ui'
 const { t, lien: lienLocal } = i18n(Astro.url)
 const { phrase, lien: cible = { texte: t('Demander une démo'), href: lienLocal('/demo') } } = Astro.props
 ---
-<aside class="carte-marge" aria-label="OnClub" data-carte-marge>
+<aside class="carte-marge" aria-label="OnCluby" data-carte-marge>
   <p class="cm-marque"><svg aria-hidden="true" width="22" height="22"><use href="#boucle"/></svg>OnCluby</p>
   <p class="cm-phrase">{phrase}</p>
   <a class="lien-fleche cm-lien" href={cible.href}>{cible.texte} <svg aria-hidden="true"><use href="#fleche"/></svg></a>

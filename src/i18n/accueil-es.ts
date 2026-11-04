@@ -56,10 +56,10 @@ export const SCENE_ES: TextesScene = {
 }
 
 export const SEMAINE_ES: TextesSemaine = {
-  titre: 'Tu semana, con o sin OnClub',
-  sans: 'Sin OnClub',
-  avec: 'Con OnClub',
-  indice: '<b>Acciona el interruptor</b> para ver la misma semana con OnClub.',
+  titre: 'Tu semana, con o sin OnCluby',
+  sans: 'Sin OnCluby',
+  avec: 'Con OnCluby',
+  indice: '<b>Acciona el interruptor</b> para ver la misma semana con OnCluby.',
   compteur: 'de papeleo por temporada',
   pour: `para ${N} socios`,
   rendu: 'que recupera la junta directiva',
@@ -170,9 +170,9 @@ export const ECRANS_ES = {
     bouton: 'Preparar la alineación',
   }),
   site: ecran({
-    asso: 'Tu club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnClub',
+    asso: 'Tu club', ecranTitre: 'Web del club', ecranSous: 'Horarios, precios y plazas vienen de OnCluby',
     lignes: [
-      { nom: 'Cursos y equipos', detail: 'desde OnClub', statut: 'Al día', ton: 'ok' },
+      { nom: 'Cursos y equipos', detail: 'desde OnCluby', statut: 'Al día', ton: 'ok' },
       { nom: 'Precios y plazas', detail: 'leídos de las inscripciones', statut: 'Al día', ton: 'ok' },
       { nom: 'U13', detail: 'Inscripciones', statut: 'Completo', ton: 'neutre' },
     ],

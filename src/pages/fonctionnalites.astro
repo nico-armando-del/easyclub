@@ -22,8 +22,8 @@ const familles = await parFamille(langue)
 const total = familles.reduce((s, f) => s + f.items.length, 0)
 const fil = [{ nom: t('Fonctionnalités'), url: lien('/fonctionnalites') }]
 const faq = [
-  { question: t('Faut-il prendre toutes les fonctionnalités ?'), reponse: t('Non. OnClub Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances, les pièces, les convocations, l’appel et la compo du match. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.') },
-  { question: t('Où arrive l’argent payé par carte ?'), reponse: t('Sur le compte de l’association, déduction faite de la part OnClub et des frais de carte. Les chèques et les espèces se notent dans le dossier, au centime, et ne passent pas par la commission.') },
+  { question: t('Faut-il prendre toutes les fonctionnalités ?'), reponse: t('Non. OnCluby Mini couvre les inscriptions, le paiement, le suivi de l’argent, les relances, les pièces, les convocations, l’appel et la compo du match. Pro ajoute la saison suivante, la liste d’attente, les messages, le site et Cluby. Pro Max IA ajoute la boutique et les événements. Chaque page indique l’offre qui l’ouvre.') },
+  { question: t('Où arrive l’argent payé par carte ?'), reponse: t('Sur le compte de l’association, déduction faite de la part OnCluby et des frais de carte. Les chèques et les espèces se notent dans le dossier, au centime, et ne passent pas par la commission.') },
   { question: t('Peut-on reprendre nos fichiers de la saison passée ?'), reponse: t('Oui. Vous déposez le tableur de la saison passée, en CSV : les anciens adhérents sont reconnus et reçoivent leur lien de réinscription. Vous relisez ce qui a été lu avant de valider.') },
   { question: t('Un encadrant doit-il créer un compte ?'), reponse: t('Non. Le bureau lui transmet un lien personnel, sans compte ni mot de passe. Il fait l’appel et prépare la compo depuis son téléphone, sans voir ni adresse ni téléphone des familles.') },
 ]
@@ -34,8 +34,8 @@ const vignette = (e: { id: string; data: any }) => {
 }
 ---
 <Layout
-  titre={t('Fonctionnalités pour gérer une association | OnClub')}
-  description={t('Les {n} fonctionnalités d’OnClub en six familles : inscrire, encaisser, organiser, communiquer, vendre, piloter. Le nom, et le temps que chacune vous rend.', { n: total })}
+  titre={t('Fonctionnalités pour gérer une association | OnCluby')}
+  description={t('Les {n} fonctionnalités d’OnCluby en six familles : inscrire, encaisser, organiser, communiquer, vendre, piloter. Le nom, et le temps que chacune vous rend.', { n: total })}
   chemin={lien('/fonctionnalites')}
   fil={fil}
   faq={faq}

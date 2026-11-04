@@ -52,7 +52,7 @@ const tuilesUniques = tuiles.filter((t) => (vus.has(t.f.id) ? false : (vus.add(t
 const cles = (id: string) => tuiles.filter((t) => t.f.id === id).map((t) => t.cle).join(' ')
 const fil = [{ nom: t('Demander une démo'), url: lien('/demo') }]
 const message = t(MESSAGE_DEMO)
-const sujet = t('Démo OnClub')
+const sujet = t('Démo OnCluby')
 /* Les mots du message que demo.js écrit avec les réponses. */
 const textes = JSON.stringify({
   bonjour: message,
@@ -64,8 +64,8 @@ const textes = JSON.stringify({
 const L = (chemin: string) => ({ href: lien(chemin), fr: versFr(chemin) })
 ---
 <Layout
-  titre={t('Demander une démo d’OnClub pour votre association')}
-  description={t('Cinq questions pour préparer votre démo d’OnClub : type d’association, nombre d’adhérents, ce qui pèse, le temps gagné, puis WhatsApp ou e-mail.')}
+  titre={t('Demander une démo d’OnCluby pour votre association')}
+  description={t('Cinq questions pour préparer votre démo d’OnCluby : type d’association, nombre d’adhérents, ce qui pèse, le temps gagné, puis WhatsApp ou e-mail.')}
   chemin={lien('/demo')}
   fil={fil}
   sansBoutonFixe={true}
@@ -115,10 +115,10 @@ const L = (chemin: string) => ({ href: lien(chemin), fr: versFr(chemin) })
       <fieldset class="etape" data-etape="4" id="etape-4">
         <legend><span class="etape-num">{t('Étape {n} sur 5', { n: 4 })}</span>{t('Le temps que votre association gagnerait')}</legend>
         <div class="compteur-boite" data-compteur-demo>
-          <CompteurHeures deMin={TOTAL.avantMin} aMin={TOTAL.apresMin} libelleAvant={t('d’administratif aujourd’hui, par saison')} libelleApres={t('d’administratif avec OnClub, par saison')} declencheur="visible" />
+          <CompteurHeures deMin={TOTAL.avantMin} aMin={TOTAL.apresMin} libelleAvant={t('d’administratif aujourd’hui, par saison')} libelleApres={t('d’administratif avec OnCluby, par saison')} declencheur="visible" />
         </div>
         <p class="etape-aide" data-resume-n>{t('Calcul pour {n} adhérents.', { n: ADHERENTS_REFERENCE })}</p>
-        <p class="etape-note">{t('Estimation OnClub, pas une étude.')}</p>
+        <p class="etape-note">{t('Estimation OnCluby, pas une étude.')}</p>
         <Repli titre={t('Le détail du calcul')}>
           <Calculateur id="calc-demo" entree={false} grand />
         </Repli>

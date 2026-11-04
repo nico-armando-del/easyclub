@@ -1,8 +1,8 @@
 ---
 /*
   LA BARRE D'UNE TÂCHE, sous un h3 d'article (« Recopier les fiches : 25 heures ») — maquettes §B.5.
-  Une seule ligne : deux pistes de 6 px (aujourd'hui en --trait ; avec OnClub en menthe sur --papier-2)
-  et les libellés « Aujourd'hui 25 h · Avec OnClub 0 h ». Chiffres de src/data/temps.ts seulement.
+  Une seule ligne : deux pistes de 6 px (aujourd'hui en --trait ; avec OnCluby en menthe sur --papier-2)
+  et les libellés « Aujourd'hui 25 h · Avec OnCluby 0 h ». Chiffres de src/data/temps.ts seulement.
   Usage MDX : <BarreTache cle="fiches" />
 */
 import { TACHES, duree, type CleTemps } from '../data/temps'
@@ -24,7 +24,7 @@ const pct = (m: number, max: number) => `${Math.max(1.5, (m / max) * 100).toFixe
         <span class="bta-piste bta-avant"><i style="width:100%"></i></span>
         <span class="bta-piste bta-apres"><i style={`width:${pct(apres, avant)}`}></i></span>
       </span>
-      <span class="bta-lib">{tr('Aujourd’hui')} <b>{duree(avant, langue)}</b> · {tr('Avec OnClub')} <b>{duree(apres, langue)}</b></span>
+      <span class="bta-lib">{tr('Aujourd’hui')} <b>{duree(avant, langue)}</b> · {tr('Avec OnCluby')} <b>{duree(apres, langue)}</b></span>
     </>
   ) : (
     <>

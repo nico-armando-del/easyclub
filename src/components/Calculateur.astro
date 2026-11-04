@@ -55,14 +55,14 @@ const donnees = JSON.stringify(CINQ_TACHES.map((c) => ({ cle: c, avant: TACHES[c
   <!-- Les trois totaux sous le curseur, dans la colonne de gauche (tour 2, défaut 14). -->
   <div class="calc-totaux" aria-live="polite">
     <div><span>{t('Aujourd’hui')}</span><b class="num" data-calc-avant>≈ {h(r.avant)}</b></div>
-    <div><span>{t('Avec OnClub')}</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
+    <div><span>{t('Avec OnCluby')}</span><b class="num" data-calc-apres>≈ {h(r.apres)}</b></div>
     <div class="calc-gain"><span>{t('Rendues chaque saison')}</span><b class="num" data-calc-gain>≈ {h(r.gain)}</b></div>
   </div>
   </div>
   <div class="calc-resultat" aria-live="polite">
     <table class="calc-table">
       <caption class="sr">{t('Les cinq tâches recalculées')}</caption>
-      <thead><tr><th scope="col">{t('Tâche')}</th><th scope="col">{t('Aujourd’hui')}</th><th scope="col">{t('Avec OnClub')}</th></tr></thead>
+      <thead><tr><th scope="col">{t('Tâche')}</th><th scope="col">{t('Aujourd’hui')}</th><th scope="col">{t('Avec OnCluby')}</th></tr></thead>
       <tbody>
         {r.lignes.map((l) => (
           <tr data-calc-ligne={l.cle}><th scope="row">{t(l.tache)}</th><td class="num" data-avant>{duree(l.avant, langue)}</td><td class="num" data-apres>{duree(l.apres, langue)}</td></tr>

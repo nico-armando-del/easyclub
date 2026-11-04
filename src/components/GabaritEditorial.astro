@@ -3,9 +3,9 @@
   LE GABARIT ÉDITORIAL des guides et des articles (maquettes §B.5, récit §5).
   « On entre dans une autre pièce : on lit. » Fond blanc, aucun aplat, aucun bouton,
   aucun tableau du temps en tête. Ordre :
-    en-tête (fil, « rubrique · n min de lecture », h1, chapô, « Publié le … · L'équipe OnClub »)
+    en-tête (fil, « rubrique · n min de lecture », h1, chapô, « Publié le … · L'équipe OnCluby »)
     → couverture en bande
-    → [marge : sommaire collant + carte OnClub] [texte : À retenir, MDX, écran, sources, FAQ]
+    → [marge : sommaire collant + carte OnCluby] [texte : À retenir, MDX, écran, sources, FAQ]
     → À lire ensuite (3 filets) · Pour aller plus loin → bande « Et chez vous, combien ? ».
   Le JSON-LD (BlogPosting, FAQ, fil) est construit par Layout avec les MÊMES props qu'avant.
 */
@@ -54,7 +54,7 @@ const rubriqueDe = (c: 'guides' | 'articles', e: any) => (c === 'articles' ? e.d
 /* Le sommaire : les h2 du texte MDX seulement (« À retenir » n'en fait pas partie). */
 const titres = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }))
 
-/* La carte OnClub : la ligne de la première fonctionnalité liée, si elle ne porte pas un chiffre de temps. */
+/* La carte OnCluby : la ligne de la première fonctionnalité liée, si elle ne porte pas un chiffre de temps. */
 const fonctions = await catalogue('fonctionnalites', langue)
 const premiere = (d.fonctionnalites ?? []).map((r: { id: string }) => fonctions.find((f) => f.id === r.id)).find(Boolean) as any
 const PHRASE_PAR_DEFAUT = t('Les familles s’inscrivent et paient seules.')
@@ -79,7 +79,7 @@ for (const x of editoriales.filter((x) => x.c === collection).concat(editoriales
 }
 const ensuite: EntreeFilet[] = choisis.map(({ c, e }) => ({
   rubrique: rubriqueDe(c, e), duree: `${e.data.lecture} min`, titre: e.data.titre, href: url(c, e.id, langue),
-  date: dateCourte(e.data.publie), auteur: t('L’équipe OnClub'),
+  date: dateCourte(e.data.publie), auteur: t('L’équipe OnCluby'),
 }))
 /* « Pour aller plus loin » : les pages produit liées, en une rangée de noms (textes c). */
 const plusLoin = liens.filter((l) => !parUrl.has(l.url)).slice(0, 6)
@@ -103,7 +103,7 @@ const couv = d.couverture
       <p class="surtitre ed-rub">{surtitre}</p>
       <h1 class="ed-h1">{d.titre}</h1>
       <p class="chapo">{d.chapo}</p>
-      <p class="ed-meta">{t('Publié le')} <time datetime={iso(d.publie)}>{date(d.publie)}</time>{d.maj > d.publie && <>{t(', mis à jour le')} <time datetime={iso(d.maj)}>{date(d.maj)}</time></>} · {t('L’équipe OnClub')}</p>
+      <p class="ed-meta">{t('Publié le')} <time datetime={iso(d.publie)}>{date(d.publie)}</time>{d.maj > d.publie && <>{t(', mis à jour le')} <time datetime={iso(d.maj)}>{date(d.maj)}</time></>} · {t('L’équipe OnCluby')}</p>
     </header>
 
     <div class="enveloppe ed-couv">
@@ -172,7 +172,7 @@ const couv = d.couverture
 </Layout>
 
 <script>
-  /* Sous 1000 px, la carte OnClub quitte la marge et se pose dans le texte, après la 2e section. */
+  /* Sous 1000 px, la carte OnCluby quitte la marge et se pose dans le texte, après la 2e section. */
   const carte = document.querySelector<HTMLElement>('[data-carte-marge]')
   const texte = document.querySelector<HTMLElement>('.article-texte')
   const marge = carte?.parentElement

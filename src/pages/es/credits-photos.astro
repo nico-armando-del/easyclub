@@ -10,11 +10,11 @@ const t = traducteur('es')
 const fil = [{ nom: 'Créditos de las fotos', url: '/es/credits-photos' }]
 const creditees = Object.values(PHOTOS).filter((p) => p.auteur).map((p) => ({ ...p, alt: t(p.alt) })).sort((a, b) => a.alt.localeCompare(b.alt, 'es'))
 ---
-<Layout titre="Créditos de las fotos del sitio OnClub: fotógrafos y licencia" description="Los fotógrafos cuyas imágenes ilustran onclub.app, con el enlace a cada foto, publicada en Unsplash con la licencia de Unsplash." chemin="/es/credits-photos" fil={fil}>
+<Layout titre="Créditos de las fotos del sitio OnCluby: fotógrafos y licencia" description="Los fotógrafos cuyas imágenes ilustran onclub.app, con el enlace a cada foto, publicada en Unsplash con la licencia de Unsplash." chemin="/es/credits-photos" fil={fil}>
   <div class="enveloppe legale">
     <FilAriane fil={fil} />
     <h1>Créditos de las fotos</h1>
-    <p class="chapo">Las fotos de deporte y de actividades de este sitio proceden de <a href="https://unsplash.com" rel="noopener" target="_blank">Unsplash</a>, con la <a href="https://unsplash.com/license" rel="noopener" target="_blank">licencia de Unsplash</a>. Gracias a sus autores. Ilustran una actividad: las personas y los lugares no tienen ninguna relación con OnClub ni con ningún club cliente.</p>
+    <p class="chapo">Las fotos de deporte y de actividades de este sitio proceden de <a href="https://unsplash.com" rel="noopener" target="_blank">Unsplash</a>, con la <a href="https://unsplash.com/license" rel="noopener" target="_blank">licencia de Unsplash</a>. Gracias a sus autores. Ilustran una actividad: las personas y los lugares no tienen ninguna relación con OnCluby ni con ningún club cliente.</p>
     <ul class="credits">
       {creditees.map((p) => (
         <li><span>{p.alt}</span><span><a href={p.page} rel="noopener" target="_blank">Foto</a> de <a href={p.profil} rel="noopener" target="_blank">{p.auteur}</a></span></li>
@@ -22,7 +22,7 @@ const creditees = Object.values(PHOTOS).filter((p) => p.auteur).map((p) => ({ ..
     </ul>
     <section class="clubs" id="clubs" aria-labelledby="clubs-titre">
       <h2 id="clubs-titre">Webs de clubes de demostración</h2>
-      <p class="clubs-phrase">El Volta Volley Club y el AS Montclar son clubes inventados para mostrar una web conectada a OnClub. Las fotos del Volta Volley Club proceden de Freepik:</p>
+      <p class="clubs-phrase">El Volta Volley Club y el AS Montclar son clubes inventados para mostrar una web conectada a OnCluby. Las fotos del Volta Volley Club proceden de Freepik:</p>
       <ul class="credits">
         {FREEPIK_VOLTA.map((lien, i) => (
           <li><span>Foto {i + 1} del Volta Volley Club</span><span><a href={lien} rel="noopener" target="_blank">Imagen de Freepik<span class="sr"> {i + 1}</span></a></span></li>

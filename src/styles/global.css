@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OnClub — direction artistique « A retravaillée »
+   OnCluby — direction artistique « A retravaillée »
    Menthe en aplats, encre, lilas, papier. Titres Bricolage Grotesque (88 %),
    texte Instrument Sans. Aucune forme ronde décorative, rien qui masque le texte.
    « Il faut que ça respire » : marges ≥ 24 px au téléphone, sections ≥ 72 px
@@ -38,7 +38,7 @@
   /* ===== Refonte de forme (maquettes §A.2) : jetons ajoutés, aucun retiré ===== */
   /* — Scène sombre et lueur menthe (héros immersif, onglets produit, appel final) — */
   --scene:#0B0F14;            /* = encre : fond des panneaux */
-  --scene-2:#121821;          /* surfaces posées sur la scène : fenêtre OnClub, cartes */
+  --scene-2:#121821;          /* surfaces posées sur la scène : fenêtre OnCluby, cartes */
   --scene-3:#1A212B;          /* = nuit : survol, piste des barres */
   --trait-scene:rgba(255,255,255,.10);
   --texte-scene:#D7DBE1;      /* 13,8:1 sur encre */
