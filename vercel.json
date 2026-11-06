@@ -28,6 +28,28 @@
       "permanent": true
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "onclub.app"
+        }
+      ],
+      "destination": "https://oncluby.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "onclub.app"
+        }
+      ],
+      "destination": "https://oncluby.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/blog/cotisation-en-plusieurs-fois",
       "destination": "/articles/cotisation-en-plusieurs-fois",
       "permanent": true
