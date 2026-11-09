@@ -7,16 +7,16 @@ ordre: 3
 titreSeo: "Convocations de match en ligne pour club sportif | OnCluby"
 description: "Convoquez pour un match ou un entraînement : les familles répondent présent ou absent depuis le mail, sans compte, et la compo part de leurs réponses."
 titre: "La convocation part, les réponses reviennent"
-chapo: "Les absents découverts le samedi matin, les pouces perdus dans le groupe de discussion. Ici, chaque famille répond depuis son mail, et l’encadrant voit qui vient."
+chapo: "Les absents découverts le samedi matin, les pouces perdus dans le groupe de discussion. Ici, chaque famille répond d’un geste, par mail ou WhatsApp, et l’encadrant voit qui vient."
 temps:
-  geste: "La famille ouvre le lien de son mail et touche « Présent » ou « Absent », sans compte."
+  geste: "La famille ouvre son lien et touche « Présent » ou « Absent », sans compte."
 ecranFonction: true
 sports: [football]
 fonctionnalites: [compo-du-match, espace-encadrant, messages-familles]
-maj: 2026-10-10
+maj: 2026-11-09
 faq:
   - question: "Les familles doivent-elles installer une application ?"
-    reponse: "Non. Elles reçoivent un mail avec un lien propre à leur enfant. Le lien ouvre une page avec deux boutons, Présent et Absent : ni compte, ni mot de passe, ni application."
+    reponse: "Non. Elles reçoivent un mail ou un message WhatsApp avec un lien propre à leur enfant. Le lien ouvre une page avec deux boutons, Présent et Absent : ni compte, ni mot de passe, ni application."
   - question: "Une famille peut-elle changer sa réponse ?"
     reponse: "Oui, jusqu’au jour du rendez-vous. Elle rouvre le même lien et touche l’autre bouton. Le lendemain, la réponse ne se change plus : c’est l’appel de l’encadrant qui compte."
   - question: "Et une famille sans adresse mail ?"
@@ -40,7 +40,13 @@ Depuis sa [page d’équipe](/fonctionnalites/espace-encadrant), ouverte sans co
 
 Il touche « Envoyer la convocation ». L’écran dit ce qui s’est passé : « 14 joueurs convoqués. 13 mails partis. » Les familles sans adresse, ou dont le mail a été refusé, sont nommées : à prévenir lui-même.
 
-## La famille répond depuis le mail, sans compte
+## Par mail, par WhatsApp, ou les deux
+
+Le club choisit son canal dans ses réglages : WhatsApp, Mail ou Les deux.
+
+Sur WhatsApp, le message est déjà écrit : l’encadrant touche « Envoyer sur WhatsApp » et le poste lui-même dans le groupe de l’équipe. Les liens sont courts, et il y a un lien d’itinéraire quand le lieu a une adresse.
+
+## La famille répond depuis son lien, sans compte
 
 Chaque famille reçoit un mail avec un lien propre à son enfant, qui ne vaut que pour cette convocation. Le mail donne le jour, l’heure, le lieu et le mot de l’encadrant. Si la famille répond au mail, sa réponse part à l’adresse du club.
 
@@ -51,6 +57,7 @@ Le lien ouvre une page avec deux boutons, « Présent » et « Absent ». La fam
 - **Le jour passé**, la page rappelle la réponse donnée, ou dit que l’appel de l’encadrant compte désormais.
 - **Une convocation annulée** affiche « Rien à répondre : ce rendez-vous n’a plus lieu ».
 - **Un lien qui n’ouvre plus rien** renvoie vers l’encadrant, ou vers une réponse au mail.
+- **Une inscription non réglée** : si le club l’a choisi dans ses réglages, l’enfant ne peut pas être convoqué. Sa case est fermée, avec la mention « Inscription non réglée », jusqu’au paiement.
 - **Les absences répétées** : un joueur absent sans prévenir trois fois sur ses cinq derniers appels est signalé au bureau, dans l’écran Effectifs. Une absence excusée ne compte pas.
 
 </Repli>
@@ -63,6 +70,12 @@ Sous chaque convocation, l’encadrant lit le compte à jour : « 11 présents �
 
 Pour un match, « Composer le match » ouvre la [compo](/fonctionnalites/compo-du-match) : elle écarte les absents et garde les joueurs sans réponse. Le jour venu, « Faire l’appel » part des réponses : un absent annoncé arrive « excusé ».
 
+## Le rendez-vous change, les réponses restent
+
+Le jour, l’heure ou le lieu bougent : l’encadrant modifie le rendez-vous sans l’annuler. Les réponses déjà données sont gardées, et les familles qui viennent reçoivent la convocation à jour.
+
+Il peut aussi poser lui-même la réponse d’un enfant quand une famille l’a prévenu de vive voix.
+
 ## Un rendez-vous annulé, les familles prévenues
 
 Terrain impraticable ? L’encadrant touche « Annuler ce rendez-vous », ajoute un mot s’il le souhaite, puis « Confirmer l’annulation ». Les familles convoquées reçoivent un mail « annulé », sauf celles qui avaient déjà répondu absent.
@@ -73,7 +86,7 @@ L’annulation reste possible jusqu’au jour même, tant que l’appel n’est 
 
 - **Pas de relance des seules familles silencieuses.** L’encadrant voit qui n’a pas répondu, mais n’a ni leur adresse ni leur téléphone : il leur parle à l’entraînement, ou passe par le bureau.
 - **Pas d’écran des convocations au bureau.** Les réponses vivent sur la page de chaque encadrant.
-- **Pas de SMS ni de notification** : la convocation part par mail.
+- **Pas de SMS ni de notification** : la convocation part par mail, ou par le message WhatsApp que l’encadrant envoie.
 - **Pas de convocation pour la saison prochaine** avant sa rentrée.
 
 Pour écrire à toute une équipe hors convocation, le bureau passe par les [messages aux familles](/fonctionnalites/messages-familles).

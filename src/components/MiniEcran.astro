@@ -28,7 +28,7 @@ const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[
     {sousTitre && <p class="me-sous">{sousTitre}</p>}
     <ul class="me-lignes">
       {lignes.map((l, i) => (
-        <li style={`--i:${i}`}><span class="me-nom"><b>{l.nom}</b>{l.detail && <span>{l.detail}</span>}</span>{l.statut && <span class:list={['statut', l.ton ?? 'neutre']}>{l.statut}</span>}</li>
+        <li style={`--i:${i}`}><span class="me-nom"><b>{l.nom}</b>{l.detail && <span>{l.detail}</span>}</span>{l.statut && <span class:list={['statut', l.ton ?? 'neutre', l.statut.length <= 18 && 'me-court']}>{l.statut}</span>}</li>
       ))}
     </ul>
     {pied && <p class="me-pied"><span>{pied.libelle}</span><b class="num">{pied.valeur}</b></p>}
@@ -49,17 +49,19 @@ const sigle = association.split(/\s+/).filter((m) => m.length > 3).map((m) => m[
 </script>
 <style>
 .mini-ecran{margin:0;max-width:420px}
-.me-cadre{background:var(--blanc);color:var(--encre);border:1px solid var(--trait);border-radius:28px;padding:20px;box-shadow:0 18px 40px -26px rgba(11,15,20,.38)}
+.me-cadre{background:var(--blanc);color:var(--encre);border:1px solid var(--trait);border-radius:20px;padding:20px}
 .me-tete{display:flex;align-items:center;gap:10px;font-size:.875rem;color:var(--gris)}
 .me-sigle{width:32px;height:32px;border-radius:9px;background:var(--sapin);color:var(--menthe);display:grid;place-items:center;font:700 .8125rem var(--f-titre);flex:none}
 .me-asso{flex:1;min-width:0}
 .me-titre{margin-top:14px;font:700 1.375rem/1.15 var(--f-titre)}
 .me-sous{margin-top:4px;font-size:.875rem;color:var(--gris)}
-.me-lignes{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
-.me-lignes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--trait);border-radius:14px;background:var(--papier)}
-.me-nom{display:grid;gap:2px;min-width:0}
-/* Un statut long (« Licence pas encore validée à la fédération ») passe à la ligne au lieu de déborder à 390 px. */
-.me-lignes .statut{white-space:normal;text-align:right;min-width:0;max-width:62%}
+.me-lignes{list-style:none;padding:0;margin:10px 0 0}
+.me-lignes li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--trait)}
+.me-lignes li:first-child{border-top:0}
+.me-nom{display:grid;gap:2px;flex:1 1 auto;min-width:0}
+/* Le statut est un simple texte de couleur : pas de pastille, donc rien à casser ni à faire déborder. Un statut long passe à la ligne, aligné à droite. */
+.me-lignes .statut{display:block;flex:0 1 auto;max-width:45%;padding:0;border-radius:0;background:none;font:600 .8125rem/1.3 var(--f-texte);white-space:normal;text-align:right}
+.me-lignes .statut.me-court{flex:none;max-width:none;white-space:nowrap}
 .me-nom b{font-size:.9375rem;line-height:1.25;color:var(--encre)}
 .me-nom span{font-size:.8125rem;color:var(--gris)}
 .me-pied{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--trait)}

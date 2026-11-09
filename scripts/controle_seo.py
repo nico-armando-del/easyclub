@@ -168,6 +168,8 @@ for rel, p in sorted(pages.items()):
     lg = langue_de(rel)
     # mots interdits : partout, anciennes pages comprises ; les espagnols en plus sur une page espagnole
     for mot in MOTS_INTERDITS + (MOTS_INTERDITS_ES if lg == "es" else []):
+        # Une seule exception, décidée par Nico le 9/11/2026 : la page qui vise la recherche « logiciel d'inscription en ligne ».
+        if mot == r"logiciel" and rel == "fonctionnalites/inscription-en-ligne.html": continue
         r = re.search(mot, texte, re.I)
         if r: err(rel, "MOT_INTERDIT", f"« {texte[max(0, r.start() - 30):r.end() + 30]} »")
     if lg == "es":

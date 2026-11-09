@@ -5,40 +5,40 @@ famille: Organiser
 offre: mini
 ordre: 2
 titreSeo: "Espace entraîneur et professeur sans compte | OnCluby"
-description: "L’entraîneur ou le professeur ouvre sa page par un lien personnel, sans mot de passe : il fait l’appel sans voir l’adresse ni le téléphone des familles."
-titre: "L’encadrant a son espace, sans mot de passe"
-chapo: "L’entraîneur n’a accès à rien, ou à tout, jusqu’aux coordonnées des familles. Ici, le bureau lui transmet un lien : sa séance, son appel, ses convocations."
+description: "L’entraîneur ou le professeur entre avec un code personnel : ses équipes, ses matchs, son appel, sans voir l’adresse ni le téléphone des familles."
+titre: "L’encadrant a son espace, avec un simple code"
+chapo: "L’entraîneur n’a accès à rien, ou à tout, jusqu’aux coordonnées des familles. Ici, un code personnel : ses équipes, son appel, ses convocations."
 temps:
   geste: "À l’entraînement, tout le monde arrive coché « Présent » : l’encadrant ne touche que les absents."
 ecranFonction: true
 sports: [football]
 fonctionnalites: [convocations, compo-du-match, saison-suivante]
-maj: 2026-10-10
+maj: 2026-11-09
 faq:
   - question: "L’encadrant doit-il créer un compte ?"
-    reponse: "Non. Il ouvre sa page d’équipe par un lien personnel, sur son téléphone, sans mot de passe. Le même lien sert toute la saison ; le bureau peut le renouveler à tout moment."
-  - question: "Comment l’encadrant reçoit-il son lien ?"
-    reponse: "Par le bureau. Dans l’écran « Éducateurs / Profs », le bureau touche « Copier son lien d’équipe » sur la fiche de l’encadrant, puis le lui envoie lui-même, par message ou par mail. OnCluby ne l’envoie pas."
+    reponse: "Non. Il tape une fois son code personnel de 8 caractères sur la page entraîneur du club, et son téléphone reste connecté. Ni compte à créer, ni application à installer."
+  - question: "Comment l’encadrant reçoit-il son code ?"
+    reponse: "Par le bureau. Sur la fiche de l’encadrant, le bureau touche « Créer son code » : le code s’affiche une seule fois, et le bureau l’envoie par WhatsApp ou le copie."
   - question: "Que voit l’encadrant des familles ?"
     reponse: "Les prénoms et les noms de ses joueurs, les réponses aux convocations et son appel. Ni l’adresse, ni le téléphone, ni le dossier d’une famille."
   - question: "Et si l’encadrant perd son téléphone ?"
-    reponse: "Le bureau touche « Renouveler son lien », puis confirme : les anciens liens ne s’ouvrent plus. Il copie le nouveau lien et le transmet à l’encadrant."
+    reponse: "Le bureau touche « Nouveau code (perdu) », puis confirme : l’ancien code, ses liens et les téléphones déjà connectés ne marchent plus."
 ---
 
-## Un lien, pas un compte
+## Un code, pas un compte
 
-Dans l’écran « Éducateurs / Profs », le bureau touche « Copier son lien d’équipe » sur la fiche de l’entraîneur, puis le lui transmet lui-même. L’entraîneur l’ouvre sur son téléphone : ni compte, ni mot de passe.
+Dans l’écran « Éducateurs / Profs », le bureau touche « Créer son code » sur la fiche de l’entraîneur et le lui envoie par WhatsApp. L’entraîneur le tape une fois, et son téléphone reste connecté.
 
-Sa page ne montre que son équipe : les prénoms et les noms, les réponses aux convocations, son appel. Ni l’adresse ni le téléphone d’une famille.
+Sa page ne montre que ses équipes, avec un menu simple (Aujourd’hui, une entrée par équipe, Saison prochaine) : les prénoms et les noms, les réponses aux convocations, son appel. Ni l’adresse ni le téléphone d’une famille.
 
-<EcranFonction nom="espace-encadrant-bureau" legende="Au bureau, la fiche de l’entraîneur : son lien d’équipe vient d’être copié, à lui transmettre. Noms fictifs." />
+<EcranFonction nom="espace-encadrant-bureau" legende="Au bureau, la fiche de l’entraîneur : son code vient d’être créé, à lui envoyer. Noms fictifs." />
 
 <Repli titre="Le détail">
 
-- **Un lien qui a fui**, un téléphone perdu : « Renouveler son lien », et les anciens ne s’ouvrent plus.
-- **Un encadrant qui s’en va** : le bureau le retire, et ses liens meurent avec.
-- **Sa feuille de groupe** : le bureau touche « Envoyer sa feuille » quand son planning est bouclé. L’encadrant reçoit par mail les prénoms et les noms de ses groupes. Le lien d’équipe, lui, se transmet à part.
-- **L’écran Éducateurs du bureau** : la fiche de chacun, ses cours, « Copier son lien d’équipe », « Renouveler son lien », « Envoyer sa feuille », « Retirer ».
+- **Un code qui a fui**, un téléphone perdu : « Nouveau code (perdu) », et l’ancien code ne marche plus.
+- **Un encadrant qui s’en va** : le bureau le retire, et son accès s’arrête avec.
+- **Sa feuille de groupe** : le bureau touche « Envoyer sa feuille » quand son planning est bouclé. L’encadrant reçoit par mail les prénoms et les noms de ses groupes. Le code, lui, se transmet à part.
+- **L’écran Éducateurs du bureau** : la fiche de chacun, ses cours, « Créer son code », « Nouveau code (perdu) », « Envoyer sa feuille », « Retirer ».
 - **Un enfant inscrit après une convocation** rejoint l’appel des rendez-vous à venir.
 
 </Repli>
@@ -60,6 +60,8 @@ Chaque joueur a sa ligne et trois boutons : « Présent », « Absent », « Exc
 
 Le bouton compte en direct : « Enregistrer · 12 sur 14 ». Puis « Appel enregistré : 12 présents sur 14. » Au bureau, l’écran Effectifs signale l’enfant absent sans prévenir à trois des cinq derniers appels. Les absences excusées ne comptent pas.
 
+Un enfant noté absent sans avoir prévenu : ses parents reçoivent un mail le jour même, si le club a laissé cette case cochée dans ses réglages. Jamais pour un adhérent majeur.
+
 ## Convoquer, composer, annuler
 
 Sous la séance, la carte de l’équipe porte tout le reste :
@@ -68,6 +70,16 @@ Sous la séance, la carte de l’équipe porte tout le reste :
 - **« Composer le match »**, depuis la convocation d’un match : la [compo](/fonctionnalites/compo-du-match) part des réponses.
 - **« Annuler ce rendez-vous »**, avec un mot : les familles convoquées sont prévenues par mail.
 - **« Équipe type sur le terrain »**, pour les sports au terrain dessiné.
+
+## Les matchs de la saison, posés une fois
+
+Dans chaque équipe, « Ajouter un match » : le jour, le coup d’envoi, l’adversaire, à domicile ou à l’extérieur. Le formulaire reste ouvert, pour poser la saison d’affilée.
+
+Le jour venu, « Convoquer » remplit déjà la convocation. Le calendrier de la fédération peut aussi être relié, par son lien de calendrier.
+
+## Avec Pro, Cluby aide aussi l’entraîneur
+
+Une capture du calendrier, un fichier ou une phrase dictée : Cluby propose les matchs, l’entraîneur relit et ajoute d’un geste. Il ne voit que ses équipes, ses joueurs en prénom et initiale, ses convocations. Rien ne s’écrit sans sa validation.
 
 ## En Pro : garder ses joueurs pour la saison prochaine
 
@@ -79,7 +91,7 @@ Il choisit leur équipe de la saison prochaine et réserve leurs places. Le bure
 
 ## Ce qu’OnCluby ne fait pas (encore)
 
-- **OnCluby n’envoie pas le lien à l’encadrant.** Le bureau le copie et le transmet lui-même.
+- **OnCluby n’envoie pas le code tout seul.** Le bureau l’envoie par WhatsApp ou le copie.
 - **Pas de préparation de séance** : ni exercices, ni contenu d’entraînement.
 - **Pas de message aux seules familles silencieuses** : l’encadrant voit qui n’a pas répondu, sans leurs coordonnées.
 - **Pas d’application** à installer : c’est une page web, qui s’ouvre dans le navigateur du téléphone.

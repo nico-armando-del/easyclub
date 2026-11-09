@@ -90,6 +90,12 @@ const graphe: Record<string, unknown>[] = [
     sameAs: [INSTAGRAM],
   },
   { '@type': 'WebSite', '@id': WEB, url: `${SITE}/`, name: NOM, inLanguage: ['fr-FR', 'es-ES', 'en'], publisher: { '@id': ORG } },
+  // Dit aux moteurs et aux IA ce qu'est le produit. Ni prix ni avis : le tarif est sur devis, et on n'invente aucune note.
+  {
+    '@type': 'SoftwareApplication', '@id': `${SITE}/#application`, name: NOM, url: `${SITE}/`,
+    applicationCategory: 'BusinessApplication', operatingSystem: 'Web', publisher: { '@id': ORG },
+    description: t('Plateforme française pour les associations qui inscrivent des adhérents : inscriptions en ligne, cotisations, relances, saisons, site et boutique.'),
+  },
   {
     '@type': 'WebPage', '@id': `${adresse}#page`, url: adresse, name: titre, description,
     inLanguage, isPartOf: { '@id': WEB }, about: { '@id': ORG },
