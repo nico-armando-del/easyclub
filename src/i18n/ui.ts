@@ -126,6 +126,7 @@ export const ES: Record<string, string> = {
   "Article": "Artículo",
   "Comparatif": "Comparativa",
   "Transmettre à mon club": "Proponerlo a mi club",
+  "Se connecter": "Iniciar sesión",
   "Demander une démo": "Solicitar una demo",
   "Voir les offres": "Ver los planes",
   "Votre club, tout en un.": "Tu club, todo en uno.",

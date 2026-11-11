@@ -20,6 +20,8 @@ import VersFr from './langue/VersFr.astro'
 interface Props { chemin: string; fond?: 'papier' | 'blanc' }
 const { chemin, fond = 'papier' } = Astro.props
 const { langue, t, lien } = i18n(Astro.url)
+/** L'adresse de l'espace pro (l'appli OnCluby), sur son propre sous-domaine. */
+const ESPACE_PRO = 'https://app.oncluby.com'
 const LIMITE = 10
 const familles = await parFamille(langue)
 const totalFonctions = familles.reduce((s, f) => s + f.items.length, 0)
@@ -91,6 +93,8 @@ const fr = (x: { fr: boolean }) => (x.fr ? 'fr' : undefined)
           ? <><span class="langue-active" lang="fr" aria-current="true">FR</span><a href={versEs} hreflang="es" lang="es" aria-label="Español">ES</a></>
           : <><a href={versFrancais} hreflang="fr" lang="fr" aria-label="Français">FR</a><span class="langue-active" lang="es" aria-current="true">ES</span></>}
       </span>
+      {/* L'espace pro : l'appli, sur son propre domaine. Les clubs y entrent avec leur adresse mail. */}
+      <a class="nav-lien" href={langue === 'es' ? `${ESPACE_PRO}/?langue=es` : ESPACE_PRO} rel="nofollow">{t('Se connecter')}</a>
       <a class="btn btn-encre btn-petit nav-btn" href={lien('/demo')}>{t('Demander une démo')}</a>
     </nav>
   </div>
@@ -175,6 +179,10 @@ const fr = (x: { fr: boolean }) => (x.fr ? 'fr' : undefined)
 .nav-lien:hover,.deroulant>summary:hover{text-decoration:underline;text-decoration-thickness:2px}
 .nav [aria-current="page"]{text-decoration:underline;text-decoration-color:var(--sapin);text-decoration-thickness:2px}
 .nav-discret{color:var(--gris)}
+/* Le lien « Se connecter » a pris la place qui restait : entre 1080 et 1280 px, les intitulés ne se coupent plus
+   sur deux lignes, et « Transmettre à mon club » (aussi dans le pied de page) cède sa place à la barre. */
+.nav-lien,.nav .nav-btn,.deroulant summary{white-space:nowrap}
+@media (min-width:1080px) and (max-width:1279px){.nav{gap:0 20px}.nav .nav-discret{display:none}}
 .nav .nav-btn{margin-left:4px}
 /* Le sélecteur de langue : FR / ES, la langue de la page en gras, l'autre mène à la page jumelle. */
 .nav-langues{display:inline-flex;align-items:center;gap:2px;font:600 .8125rem/1 var(--f-texte);letter-spacing:.04em}
